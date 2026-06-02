@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plemmo — Absolute Peak Performance</title>
-  <link rel="icon" type="image/png" href="images/logo.png">
   
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="mobile.css">
   
   <!-- Iconify for beautiful, crisp icons instead of emojis -->
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
@@ -31,31 +29,6 @@
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
-<!-- DEMO BANNER -->
-<div class="demo-banner">
-  <div class="demo-marquee">
-    <div class="demo-track">
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-    </div>
-    <div class="demo-track">
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-    </div>
-  </div>
-</div>
 
 <!-- CUSTOM CURSOR -->
 <div class="cursor-dot"></div>
@@ -64,7 +37,7 @@
 <nav class="site-nav glass-nav">
   <div class="nav-container">
     <div class="nav-logo">
-      <img src="images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
+      <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="28" style="color: var(--accent)"></iconify-icon>
       Plemmo
     </div>
     <div class="nav-links">
@@ -74,42 +47,13 @@
       <a href="#signage" class="magnetic" data-strength="20">Signage</a>
     </div>
     <div class="nav-actions">
-      <a href="tel:07842088092" class="btn-glass magnetic" data-strength="20">07842 088092</a>
+      <a href="tel:07842088092" class="btn-text magnetic" data-strength="20">
+        <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon> 07842 088092
+      </a>
       <a href="#quote" class="btn-solid magnetic" data-strength="40">Get a Free Quote</a>
     </div>
-    
-    <button class="hamburger-btn" aria-label="Open Mobile Menu" aria-expanded="false" aria-controls="mobile-menu">
-      <iconify-icon icon="solar:hamburger-menu-bold-duotone"></iconify-icon>
-    </button>
   </div>
 </nav>
-
-<!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-  <div class="mobile-menu-backdrop"></div>
-  <div class="mobile-menu-panel">
-    <div class="mobile-menu-header">
-      <div class="nav-logo">
-        <img src="images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
-        Plemmo
-      </div>
-      <button class="close-menu-btn" aria-label="Close Mobile Menu">
-        <iconify-icon icon="solar:close-circle-bold-duotone"></iconify-icon>
-      </button>
-    </div>
-    <div class="mobile-menu-content">
-      <a href="#card-machines">Card Machines</a>
-      <a href="#epos">EPOS Systems</a>
-      <a href="#funding">Business Funding</a>
-      <a href="#signage">Signage</a>
-      
-      <div class="mobile-menu-actions">
-        <a href="tel:07842088092" class="btn-outline" style="width: 100%; justify-content: center; margin-bottom: 16px;">07842 088092</a>
-        <a href="#quote" class="btn-solid" style="width: 100%; justify-content: center;">Get a Free Quote</a>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- HERO SECTION (WEBGL CINEMATIC) -->
 <header class="hero-section">
@@ -124,7 +68,7 @@
       
       <div class="hero-buttons reveal-text">
         <a href="#quote" class="btn-solid btn-large magnetic" data-strength="50">Get My Free Quote</a>
-        <a href="#solutions" class="btn-outline btn-large magnetic" data-strength="50">See What We Offer <iconify-icon icon="solar:alt-arrow-down-bold-duotone"></iconify-icon></a>
+        <a href="#solutions" class="btn-outline btn-large magnetic" data-strength="50">See What We Offer <iconify-icon icon="solar:alt-arrow-down-linear"></iconify-icon></a>
       </div>
     </div>
 
@@ -182,7 +126,7 @@
       <p class="highlight-text">We built Plemmo to fix that. One trusted partner. Honest pricing. Real people picking up the phone.</p>
     </div>
     <div class="split-visual reveal-right parallax-obj" data-speed="1.1">
-       <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" alt="Stop Overpaying" style="width: 100%; border-radius: var(--radius-xl); object-fit: cover; aspect-ratio: 4/5;" class="tilt-element shadow-heavy">
+       <img src="https://static.vecteezy.com/system/resources/previews/009/384/393/original/money-bag-clipart-design-illustration-free-png.png" alt="Stop Overpaying" style="width: 100%; max-width: 400px; filter: drop-shadow(0 20px 40px rgba(198,255,0,0.2)); margin: 0 auto; display: block;" class="tilt-element">
     </div>
   </div>
 </section>
@@ -242,9 +186,8 @@
 
       <!-- Business Funding (Span 1x1) -->
       <a href="#funding" class="bento-creative-card reveal-up" style="grid-column: span 1; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #fff; border: 1px solid #e2e8f0;">
-        <img src="https://images.unsplash.com/photo-1611095787946-fea5e865f1c5?auto=format&fit=crop&q=80&w=600" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.4; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <img src="https://images.unsplash.com/photo-1611095787946-fea5e865f1c5?auto=format&fit=crop&q=80&w=600" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.1; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s; filter: grayscale(100%);" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:wallet-money-bold-duotone" style="font-size: 40px; color: var(--bg-dark); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #0f172a; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Business Funding</h3>
           <p style="color: #64748b; font-size: 15px; font-weight: 500;">Access £10k to £500k+.</p>
         </div>
@@ -254,7 +197,6 @@
       <a href="#signage" class="bento-creative-card reveal-up delay-1" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #000;">
         <img src="https://images.unsplash.com/photo-1563242042-4f3957eb03cd?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:screencast-2-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #fff; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Digital Signage</h3>
           <p style="color: #cbd5e1; font-size: 15px; font-weight: 500;">Menu boards, shop fronts, neon signs.</p>
         </div>
@@ -262,9 +204,7 @@
       
       <!-- Call Centre (Span 2x1) -->
       <a href="#callcentre" class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: var(--accent);">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; mix-blend-mode: multiply; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:phone-calling-bold-duotone" style="font-size: 40px; color: #000; margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #000; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Call Centre Services</h3>
           <p style="color: #000; font-size: 15px; font-weight: 600;">Professional call handling partners.</p>
         </div>
@@ -272,9 +212,7 @@
 
       <!-- Utilities (Span 1x1) -->
       <a href="#utilities" class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #0f172a;">
-        <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=600" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:bolt-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #fff; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Utilities</h3>
           <p style="color: #94a3b8; font-size: 15px; font-weight: 500;">Stop overpaying on energy.</p>
         </div>
@@ -319,26 +257,26 @@
   <div class="container sticky-container">
     <div class="sticky-text-col">
       <div class="scroll-block sticky-step" data-index="0">
-        <div class="scroll-icon"><iconify-icon icon="solar:box-minimalistic-bold-duotone"></iconify-icon></div>
-        <h3>Pre-Configured Delivery</h3>
-        <p>No tedious setup or instruction manuals. Your card machines and EPOS software are meticulously programmed at our UK headquarters. They arrive at your door plug-and-play ready for your exact menu and stock lists.</p>
+        <div class="scroll-icon"><iconify-icon icon="solar:shield-check-bold-duotone"></iconify-icon></div>
+        <h3>Bank-Grade Security</h3>
+        <p>Your transactions are shielded by multi-layered encryption. We partner exclusively with Tier-1 acquirers to ensure maximum compliance and uptime, protecting your revenue stream 24/7/365.</p>
       </div>
       <div class="scroll-block sticky-step" data-index="1">
-        <div class="scroll-icon"><iconify-icon icon="solar:banknotes-bold-duotone"></iconify-icon></div>
-        <h3>Next-Day Settlements</h3>
-        <p>Cash flow is the lifeblood of your business. Stop waiting 3-5 working days for your own money. Plemmo ensures every transaction is cleared and settled into your business account by the very next morning.</p>
+        <div class="scroll-icon"><iconify-icon icon="solar:chart-square-bold-duotone"></iconify-icon></div>
+        <h3>Live Analytics Hub</h3>
+        <p>Stop flying blind. Our unified dashboard pulls data from your card machines, EPOS, and funding lines into one breathtaking interface. See your business health in real time.</p>
       </div>
       <div class="scroll-block sticky-step" data-index="2">
-        <div class="scroll-icon"><iconify-icon icon="solar:shield-user-bold-duotone"></iconify-icon></div>
-        <h3>Dedicated Account Director</h3>
-        <p>Forget automated bots and offshore call centers. You get a direct WhatsApp line and phone number for your personal UK-based Account Director. When you need us, we're 10 seconds away.</p>
+        <div class="scroll-icon"><iconify-icon icon="solar:call-dropped-bold-duotone"></iconify-icon></div>
+        <h3>UK Support, 10 Seconds Away</h3>
+        <p>No bots. No endless phone menus. When you need help, you speak to a real human in our UK-based operations center within seconds. We treat your business like it's ours.</p>
       </div>
     </div>
     <div class="sticky-visual-col perspective-container">
       <div class="sticky-image-overlay"></div>
-      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1000" class="sticky-image s-img-0" alt="Pre-configured delivery">
-      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=1000" class="sticky-image s-img-1" alt="Next day settlement">
-      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=1000" class="sticky-image s-img-2" alt="Dedicated Support">
+      <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1000" class="sticky-image s-img-0" alt="Security">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" class="sticky-image s-img-1" alt="Analytics">
+      <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1000" class="sticky-image s-img-2" alt="Support">
     </div>
   </div>
 </section>
@@ -382,177 +320,89 @@
   </div>
 </section>
 
-<!-- SLEEK PRODUCT GALLERY (HORIZONTAL SCROLL) -->
-<section class="sleek-gallery-section dark-section" id="products-motion">
-  <div class="gallery-track">
+<!-- THE PLEMmo ECOSYSTEM (HORIZONTAL SCROLL) -->
+<section class="horizontal-scroll-section dark-section">
+  <div class="horizontal-container">
+    <div class="h-panel">
+      <div class="h-content">
+        <span class="highlight-label">01 / The Problem</span>
+        <h2>FRAGMENTED<br>FINANCE</h2>
+        <p>Using 5 different providers means 5 different contracts, 5 different support lines, and bleeding money on overlapping fees.</p>
+      </div>
+      <div class="h-visual">
+        <div class="floating-blocks">
+          <div class="block b1">Payment Co.</div>
+          <div class="block b2">Funding Broker</div>
+          <div class="block b3">EPOS Vendor</div>
+        </div>
+      </div>
+    </div>
     
-    <!-- Intro Panel -->
-    <div class="gallery-panel intro-panel">
-      <h2 class="ultra-sleek-title">
-        <span class="outline-text">THE</span><br>
-        <span>ARSENAL</span>
-      </h2>
-      <p class="sleek-desc">Precision-engineered tools to run your entire operation. Scroll to explore.</p>
-    </div>
-
-    <!-- Product 1 -->
-    <div class="gallery-panel product-panel">
-      <div class="product-card-sleek">
-        <div class="product-img-box">
-          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=1200" alt="Card Machines" class="sleek-img">
-        </div>
-        <div class="product-meta">
-          <div class="meta-left">
-            <span class="p-num">01</span>
-            <h3 class="p-title">Card Machines</h3>
-          </div>
-          <div class="meta-right">
-            <p>0.5s processing speed.<br>Next day settlements.</p>
-          </div>
+    <div class="h-panel">
+      <div class="h-content">
+        <span class="highlight-label">02 / The Solution</span>
+        <h2>THE UNIFIED<br>ECOSYSTEM</h2>
+        <p>Plemmo connects your payments, point-of-sale, and capital lines into one seamless, aggressively priced network.</p>
+      </div>
+      <div class="h-visual">
+        <div class="unified-core">
+          <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="core-icon"></iconify-icon>
+          <div class="orbit-ring"></div>
         </div>
       </div>
     </div>
 
-    <!-- Product 2 -->
-    <div class="gallery-panel product-panel">
-      <div class="product-card-sleek">
-        <div class="product-img-box">
-          <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=1200" alt="EPOS" class="sleek-img">
-        </div>
-        <div class="product-meta">
-          <div class="meta-left">
-            <span class="p-num">02</span>
-            <h3 class="p-title">EPOS Systems</h3>
-          </div>
-          <div class="meta-right">
-            <p>Cloud-sync analytics.<br>Live inventory.</p>
-          </div>
-        </div>
+    <div class="h-panel">
+      <div class="h-content">
+        <span class="highlight-label">03 / The Result</span>
+        <h2>EFFICIENCY AT<br>SCALE</h2>
+        <p>You stop worrying about the tech and the fees. You get back to doing what you do best: running your business.</p>
+      </div>
+      <div class="h-visual">
+        <h3 class="massive-text">GROWTH</h3>
       </div>
     </div>
-
-    <!-- Product 3 -->
-    <div class="gallery-panel product-panel">
-      <div class="product-card-sleek">
-        <div class="product-img-box">
-          <img src="https://images.unsplash.com/photo-1611095787946-fea5e865f1c5?auto=format&fit=crop&q=80&w=1200" alt="Funding" class="sleek-img">
-        </div>
-        <div class="product-meta">
-          <div class="meta-left">
-            <span class="p-num">03</span>
-            <h3 class="p-title">Business Funding</h3>
-          </div>
-          <div class="meta-right">
-            <p>£10k to £500k limits.<br>Unsecured capital.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Product 4 -->
-    <div class="gallery-panel product-panel last-panel">
-      <div class="product-card-sleek">
-        <div class="product-img-box">
-          <img src="https://images.unsplash.com/photo-1563242042-4f3957eb03cd?auto=format&fit=crop&q=80&w=1200" alt="Signage" class="sleek-img">
-        </div>
-        <div class="product-meta">
-          <div class="meta-left">
-            <span class="p-num">04</span>
-            <h3 class="p-title">Digital Signage</h3>
-          </div>
-          <div class="meta-right">
-            <p>4K UHD displays.<br>Remote management.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- LIVE ROI CALCULATOR (ULTRA-SLEEK OVERHAUL) -->
+<!-- LIVE ROI CALCULATOR (INTERACTIVE ENGINE) -->
 <section id="calculator" class="calculator-section dark-section section-padding relative-section">
-  <div class="container reveal-up">
+  <div class="container align-center reveal-up">
+    <h2>CALCULATE YOUR <span class="accent-text">REAL SAVINGS</span></h2>
+    <p class="subtitle">Most businesses overpay by 30-40% on standard card processing rates. Drag the slider to see what you could be saving.</p>
     
-    <div class="section-header align-center" style="margin-bottom: 64px;">
-      <h2>CALCULATE YOUR <span class="accent-text">REAL SAVINGS</span></h2>
-      <p style="font-size: 20px; color: var(--text-dark-muted); max-width: 600px; margin: 20px auto 0; line-height: 1.6;">Most businesses overpay by 30-40% on standard card processing rates. Drag the slider to see what you could be saving.</p>
-    </div>
-
-    <div class="calc-animation-container">
-      
-      <!-- Calculator Main Body -->
-      <div class="calc-sleek-wrapper" id="calc-main">
-        <div class="calc-sleek-glass shadow-heavy tilt-element">
-          
-          <div class="calc-slider-area">
-            <div class="calc-val-header">
-              <label>Monthly Card Turnover</label>
-              <h3 id="turnover-display">£50,000</h3>
-            </div>
-            <div class="range-wrapper">
-               <input type="range" id="turnover-slider" class="sleek-slider" min="5000" max="250000" step="5000" value="50000">
-               <div class="slider-fill" id="slider-fill"></div>
-            </div>
-            <div class="range-labels">
-              <span>£5k</span>
-              <span>£250k+</span>
-            </div>
-          </div>
-
-          <div class="calc-comparison-grid">
-            <div class="calc-box old-provider">
-              <div class="calc-box-head">
-                <iconify-icon icon="solar:card-send-bold-duotone" class="calc-icon"></iconify-icon>
-                <span>Average Provider</span>
-              </div>
-              <h4 id="old-fee">£750</h4>
-              <div class="sleek-bar-bg"><div class="sleek-bar old-bar"></div></div>
-            </div>
-            
-            <div class="calc-box plemmo-provider">
-              <div class="calc-box-head">
-                <iconify-icon icon="solar:shield-check-bold-duotone" class="calc-icon accent-text"></iconify-icon>
-                <span class="accent-text">Plemmo Rate</span>
-              </div>
-              <h4 id="plemmo-fee">£450</h4>
-              <div class="sleek-bar-bg"><div class="sleek-bar plemmo-bar"></div></div>
-            </div>
-          </div>
-
-          <div class="calc-footer">
-            <div class="calc-savings">
-               <span class="savings-label">Your Monthly Savings</span>
-               <h2 id="total-savings" class="accent-text">£300</h2>
-            </div>
-            <button id="claim-savings-btn" class="btn-solid btn-large magnetic" data-strength="40" style="border:none; cursor:pointer; font-family:var(--font-body);">Claim Savings <iconify-icon icon="solar:round-arrow-right-bold-duotone"></iconify-icon></button>
-          </div>
-
+    <div class="calc-engine">
+      <div class="calc-card shadow-heavy">
+        
+        <div class="calc-top">
+          <label>Your Monthly Card Turnover</label>
+          <h3 id="turnover-display">£50,000</h3>
+          <input type="range" id="turnover-slider" class="custom-slider" min="5000" max="250000" step="5000" value="50000">
         </div>
-      </div>
 
-      <!-- Recommendation Panel (Hidden initially) -->
-      <div class="recommendation-panel" id="recommendation-panel">
-        <div class="rec-card glass-panel-dark shadow-heavy tilt-element">
-          <div class="rec-badge">Recommended Setup</div>
-          <div class="rec-img-box">
-             <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=600" class="rec-img" alt="Plemmo Pro Terminal">
+        <div class="calc-results dual-grid">
+          <div class="result-box old-way">
+            <span>Average Provider Fees</span>
+            <h4 id="old-fee">£750</h4>
+            <div class="mini-bar old-bar"></div>
           </div>
-          <div class="rec-content">
-            <h3 class="font-heading" style="font-size:32px; color:#fff; margin-bottom:8px;">Plemmo Pro Terminal</h3>
-            <p style="color:var(--text-dark-muted); font-size:16px; margin-bottom:24px; line-height:1.6;">Perfect for your <span id="rec-turnover" class="accent-text" style="font-weight:700;">£50,000</span> turnover. Blazing fast 4G, built-in receipt printer, and tipped automatically.</p>
-            <ul class="rec-specs">
-               <li><iconify-icon icon="solar:check-circle-bold-duotone" class="accent-text"></iconify-icon> Next Day Payouts</li>
-               <li><iconify-icon icon="solar:check-circle-bold-duotone" class="accent-text"></iconify-icon> 0.5s Processing Speed</li>
-               <li><iconify-icon icon="solar:check-circle-bold-duotone" class="accent-text"></iconify-icon> EPOS Integrated</li>
-            </ul>
-            <a href="#quote" class="btn-solid magnetic" data-strength="20" style="width:100%; justify-content:center; margin-top:32px;">Begin Onboarding</a>
+          <div class="result-box plemmo-way">
+            <span>Plemmo Blended Rate</span>
+            <h4 id="plemmo-fee">£450</h4>
+            <div class="mini-bar plemmo-bar"></div>
           </div>
         </div>
+
+        <div class="calc-bottom">
+          <div class="savings-highlight">
+            <span>Monthly Savings</span>
+            <h2 id="total-savings" class="accent-text">£300</h2>
+          </div>
+          <a href="#quote" class="btn-solid btn-large magnetic" data-strength="40">Claim These Savings <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+        </div>
+
       </div>
-
     </div>
-
   </div>
 </section>
 
@@ -631,16 +481,13 @@
         <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 2 of 3</span>
         <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">What's your primary goal?</h3>
         <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-          <div class="wizard-option row-option" onclick="nextStep(3)" style="display: flex; align-items: center; gap: 16px;">
-             <iconify-icon icon="solar:card-send-bold-duotone" style="font-size: 32px; color: var(--accent);"></iconify-icon>
+          <div class="wizard-option row-option" onclick="nextStep(3)">
              <span style="font-weight: 700; font-size: 18px;">Reduce Card Fees</span>
           </div>
-          <div class="wizard-option row-option" onclick="nextStep(3)" style="display: flex; align-items: center; gap: 16px;">
-             <iconify-icon icon="solar:monitor-smartphone-bold-duotone" style="font-size: 32px; color: var(--accent);"></iconify-icon>
+          <div class="wizard-option row-option" onclick="nextStep(3)">
              <span style="font-weight: 700; font-size: 18px;">Upgrade EPOS/Hardware</span>
           </div>
-          <div class="wizard-option row-option" onclick="nextStep(3)" style="display: flex; align-items: center; gap: 16px;">
-             <iconify-icon icon="solar:wallet-money-bold-duotone" style="font-size: 32px; color: var(--accent);"></iconify-icon>
+          <div class="wizard-option row-option" onclick="nextStep(3)">
              <span style="font-weight: 700; font-size: 18px;">Secure Business Funding</span>
           </div>
         </div>
@@ -675,7 +522,7 @@
     <div class="refer-box glass-panel-dark tilt-element shadow-heavy">
       <h2>KNOW ANOTHER<br>BUSINESS OWNER?</h2>
       <p>Refer them to Plemmo and earn up to £250. No catch. Just a thank you for spreading the word.</p>
-      <a href="#refer" class="btn-solid btn-large magnetic" data-strength="30">See the Referral Programme <iconify-icon icon="solar:round-arrow-right-bold-duotone"></iconify-icon></a>
+      <a href="#refer" class="btn-solid btn-large magnetic" data-strength="30">See the Referral Programme <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
     </div>
   </div>
 </section>
@@ -694,7 +541,7 @@
   <div class="container footer-grid">
     <div class="footer-brand">
       <div class="nav-logo">
-        <img src="images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
+        <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="28" style="color: var(--accent)"></iconify-icon>
         Plemmo
       </div>
       <p class="tagline">"We provide for and care about local businesses."</p>

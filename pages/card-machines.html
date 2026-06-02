@@ -3,266 +3,814 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Card Machines — Plemmo</title>
-  <link rel="icon" type="image/png" href="../images/logo.png">
-  
-  <link rel="stylesheet" href="../styles.css">
+  <title>Card Machines — Smart Card Solutions That Work For You | Plemmo</title>
+  <meta name="description" content="Compare the UK's leading card machine providers side by side. Lower fees, quick setup, trusted by 10,000+ UK businesses. Get your free quote in 60 seconds.">
+
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080a08;
+      --bg-2: #0d100d;
+      --card: #12150f;
+      --card-2: #171b14;
+      --line: rgba(255,255,255,0.08);
+      --line-2: rgba(255,255,255,0.15);
+      --accent: #c6ff00;
+      --accent-2: #9ed600;
+      --accent-dim: rgba(198,255,0,0.12);
+      --text: #f4f6f4;
+      --muted: #9aa39a;
+      --muted-2: #6e766e;
+      --radius: 16px;
+      --radius-lg: 22px;
+      --radius-pill: 100px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text);
+      line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3, h4 { font-weight: 800; line-height: 1.08; letter-spacing: -0.025em; }
+    .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .accent { color: var(--accent); }
+
+    /* reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px;
+      border-radius: var(--radius-pill); padding: 14px 24px; cursor: pointer; border: 1px solid transparent;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease, border-color .2s ease; white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-solid { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0a0c0a; }
+    .btn-solid:hover { box-shadow: 0 14px 34px rgba(198,255,0,0.32); }
+    .btn-ghost { background: rgba(255,255,255,0.04); color: var(--text); border-color: var(--line-2); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+    /* ── NAV ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(16px);
+      background: rgba(8,10,8,0.6); border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; }
+    .nav.scrolled { border-color: var(--line); background: rgba(8,10,8,0.92); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { font-size: 24px; font-weight: 900; letter-spacing: -0.04em; }
+    .logo .dot { color: var(--accent); }
+    .nav-links { display: flex; gap: 30px; }
+    .nav-links a { font-size: 14.5px; color: var(--muted); font-weight: 500; display: inline-flex; align-items: center; gap: 5px; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a.active { text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--accent); }
+    .nav-cta { display: flex; align-items: center; gap: 14px; }
+    .burger { display: none; font-size: 26px; color: var(--text); background: none; border: none; cursor: pointer; }
+
+    /* ── HERO ── */
+    .hero { position: relative; padding: 132px 0 50px; overflow: hidden; }
+    .hero::before { content:''; position:absolute; inset:0; background:
+      radial-gradient(900px 500px at 78% 32%, rgba(198,255,0,0.10), transparent 60%),
+      linear-gradient(180deg, rgba(198,255,0,0.03), transparent 30%);
+      pointer-events:none; }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line); padding: 7px 14px; border-radius: var(--radius-pill); margin-bottom: 26px; }
+    .eyebrow .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(198,255,0,0.5);} 70%{box-shadow:0 0 0 8px rgba(198,255,0,0);} 100%{box-shadow:0 0 0 0 rgba(198,255,0,0);} }
+    .hero h1 { font-size: clamp(44px, 6vw, 78px); font-weight: 900; letter-spacing: -0.04em; }
+    .hero h1 .accent { display: block; }
+    .hero-sub { color: var(--muted); font-size: 18px; max-width: 460px; margin: 22px 0 30px; }
+    .hero-features { display: flex; gap: 30px; margin: 28px 0 32px; flex-wrap: wrap; }
+    .hf { display: flex; align-items: center; gap: 12px; }
+    .hf .hf-ic { width: 38px; height: 38px; border-radius: 11px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; }
+    .hf .hf-ic iconify-icon { color: var(--accent); font-size: 22px; }
+    .hf strong { display: block; font-size: 15px; font-weight: 700; }
+    .hf span { font-size: 13px; color: var(--muted); }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; min-height: 480px; }
+    .glow-ring { position: absolute; width: 460px; height: 460px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(198,255,0,0.40) 0%, rgba(198,255,0,0.06) 45%, transparent 70%);
+      filter: blur(8px); animation: float 7s ease-in-out infinite alternate; }
+    .glow-ring::after { content: ''; position: absolute; inset: 70px; border-radius: 50%;
+      border: 1px solid rgba(198,255,0,0.45); box-shadow: 0 0 70px rgba(198,255,0,0.28); }
+    @keyframes float { from { transform: translateY(-12px); } to { transform: translateY(12px); } }
+    .hero-device { position: relative; z-index: 2; width: 80%; max-width: 400px;
+      filter: drop-shadow(0 46px 64px rgba(0,0,0,0.65)); animation: float 6s ease-in-out infinite alternate; }
+    .rating-badge { position: absolute; right: 2%; bottom: 12%; z-index: 3; background: rgba(15,18,15,0.85);
+      backdrop-filter: blur(10px); border: 1px solid var(--line-2); border-radius: 14px; padding: 14px 18px; text-align: left; }
+    .rating-badge .score { font-size: 22px; font-weight: 900; }
+    .rating-badge .score small { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .rating-badge .stars { color: var(--accent); font-size: 13px; letter-spacing: 2px; }
+    .rating-badge .from { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── MARQUEE ── */
+    .marquee-sec { padding: 30px 0 10px; }
+    .marquee-sec .label { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+    .marquee { overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      mask: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+    .marquee-track { display: flex; align-items: center; gap: 62px; width: max-content; animation: scroll 40s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+    .mq-logo { flex: 0 0 auto; height: 30px; display: flex; align-items: center; color: rgba(255,255,255,0.55);
+      filter: grayscale(1); opacity: 0.85; transition: color .35s, filter .35s, transform .35s, opacity .35s; cursor: pointer; }
+    .mq-logo svg { height: 30px; width: auto; }
+    .mq-logo:hover { color: var(--bc, #fff); filter: none; opacity: 1; transform: scale(1.16); }
+
+    /* sections */
+    section { position: relative; }
+    .sec-pad { padding: 66px 0; }
+    .sec-head { margin-bottom: 34px; }
+    .sec-head h2 { font-size: clamp(28px, 3.4vw, 40px); }
+    .sec-head .sub { color: var(--muted); font-size: 16px; margin-top: 8px; max-width: 540px; }
+    .sec-head .link { float: right; font-size: 14px; color: var(--accent); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .sec-head .link:hover { gap: 10px; }
+
+    /* ── FINDER ── */
+    .finder { background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line);
+      border-radius: var(--radius-lg); padding: 34px; }
+    .finder-top { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
+    .finder-top .step-no { font-size: 14px; color: var(--muted); font-weight: 700; white-space: nowrap; }
+    .finder-top .step-title { font-size: 14px; font-weight: 500; white-space: nowrap; }
+    .progress { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+    .progress .bar { height: 100%; width: 16.6%; background: linear-gradient(90deg, var(--accent-2), var(--accent)); border-radius: 4px; transition: width .5s cubic-bezier(.16,1,.3,1); }
+    .finder-body { display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: center; }
+    .finder-q h3 { font-size: 26px; margin-bottom: 10px; }
+    .finder-q p { font-size: 14px; color: var(--muted); }
+    .options-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .opt { position: relative; background: var(--card-2); border: 1px solid var(--line); border-radius: 14px;
+      padding: 22px 10px; text-align: center; cursor: pointer; transition: border-color .2s, background .2s, transform .2s; }
+    .opt:hover { border-color: var(--line-2); transform: translateY(-3px); background: #1c2118; }
+    .opt.selected { border-color: var(--accent); background: rgba(198,255,0,0.07); }
+    .opt iconify-icon { font-size: 28px; color: var(--text); margin-bottom: 10px; }
+    .opt.selected iconify-icon { color: var(--accent); }
+    .opt span { display: block; font-size: 13px; font-weight: 600; }
+    .opt .check { position: absolute; top: 8px; right: 8px; color: var(--accent); font-size: 16px; opacity: 0; transition: opacity .2s; }
+    .opt.selected .check { opacity: 1; }
+    .finder-done { text-align: center; padding: 12px 0; }
+    .finder-done .big-ic { width: 64px; height: 64px; margin: 0 auto 14px; border-radius: 50%; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; }
+    .finder-done .big-ic iconify-icon { font-size: 36px; color: var(--accent); }
+    .finder-done h3 { font-size: 24px; margin-bottom: 8px; }
+    .finder-done p { color: var(--muted); margin-bottom: 12px; }
+    .rec-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 22px; }
+    .rec-chip { background: var(--card-2); border: 1px solid var(--line-2); border-radius: var(--radius-pill); padding: 8px 16px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+    .rec-chip iconify-icon { color: var(--accent); }
+
+    /* ── PROVIDER COMPARISON ── */
+    .prov-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .prov { position: relative; background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; cursor: pointer;
+      transition: border-color .25s, box-shadow .25s, transform .25s; }
+    .prov:hover { transform: translateY(-4px); border-color: var(--line-2); box-shadow: 0 24px 50px rgba(0,0,0,0.4); }
+    .prov.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 24px 50px rgba(198,255,0,0.10); }
+    .prov-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 18px; }
+    .prov-logo { height: 30px; display: flex; align-items: center; }
+    .prov-logo svg { height: 26px; width: auto; }
+    .prov-badge { font-size: 10.5px; font-weight: 700; background: var(--accent-dim); color: var(--accent); padding: 5px 10px; border-radius: var(--radius-pill); white-space: nowrap; }
+    .prov ul { list-style: none; display: grid; gap: 11px; margin-bottom: 20px; }
+    .prov li { display: flex; align-items: center; gap: 9px; font-size: 14px; }
+    .prov li iconify-icon { color: var(--accent); font-size: 17px; flex-shrink: 0; }
+    .prov-rate { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); display: flex; align-items: flex-end; justify-content: space-between; }
+    .prov-rate .from { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .prov-rate .pct { font-size: 30px; font-weight: 900; color: var(--accent); line-height: 1; }
+    .prov-rate .blended { font-size: 11px; color: var(--muted); }
+    .prov-rate .btn { padding: 9px 16px; font-size: 13px; pointer-events: none; }
+    .prov.selected .prov-rate .btn { background: var(--accent); color: #0a0c0a; border-color: var(--accent); }
+    .sel-tag { position: absolute; top: -10px; left: 22px; background: var(--accent); color: #0a0c0a; font-size: 10.5px; font-weight: 800; padding: 4px 10px; border-radius: var(--radius-pill); opacity: 0; transform: translateY(4px); transition: .25s; text-transform: uppercase; letter-spacing: .04em; }
+    .prov.selected .sel-tag { opacity: 1; transform: none; }
+
+    /* ── TERMINALS ── */
+    .term-wrap { display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: stretch;
+      background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 30px; }
+    .term-intro h2 { font-size: 30px; margin-bottom: 16px; }
+    .term-intro p { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+    .term-intro a { color: var(--accent); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; }
+    .term-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .term { position: relative; background: var(--card-2); border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px; cursor: pointer; transition: border-color .2s, transform .2s, box-shadow .2s; }
+    .term:hover { transform: translateY(-4px); border-color: var(--line-2); box-shadow: 0 18px 38px rgba(0,0,0,0.4); }
+    .term.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+    .term .check { position: absolute; top: 12px; right: 12px; z-index: 3; color: var(--accent); font-size: 18px; opacity: 0; transition: opacity .2s; }
+    .term.selected .check { opacity: 1; }
+    .term-img { position: relative; aspect-ratio: 4/3; border-radius: 10px; overflow: hidden; margin-bottom: 14px;
+      background: radial-gradient(circle at 50% 30%, #233414, #0c0e0c 72%); display: flex; align-items: center; justify-content: center; }
+    .term-img img { width: 74%; height: 84%; object-fit: contain; filter: drop-shadow(0 18px 26px rgba(0,0,0,0.55)); transition: transform .5s cubic-bezier(.16,1,.3,1); }
+    .term:hover .term-img img { transform: scale(1.08) translateY(-4px); }
+    .term-price { position: absolute; top: 10px; left: 10px; background: rgba(8,10,8,0.7); backdrop-filter: blur(6px); border: 1px solid var(--line); font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: var(--radius-pill); }
+    .term h4 { font-size: 16px; margin-bottom: 4px; }
+    .term p { font-size: 13px; color: var(--muted); }
+
+    /* ── CALCULATOR ── */
+    .calc { display: grid; grid-template-columns: 200px 1.2fr 1fr; gap: 30px; align-items: center;
+      background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 34px; }
+    .calc-intro h2 { font-size: 26px; margin-bottom: 14px; }
+    .calc-intro p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+    .calc-intro .time { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: 13px; font-weight: 600; }
+    .slider-row { margin-bottom: 26px; }
+    .slider-row .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .slider-row .top label { font-size: 14px; color: var(--muted); }
+    .slider-row .top .val { font-size: 18px; font-weight: 700; background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 8px; border: 1px solid var(--line); }
+    input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 4px; outline: none; cursor: pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); cursor: grab; box-shadow: 0 0 14px rgba(198,255,0,0.5); border: 3px solid #0c0e0c; }
+    input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border: 3px solid #0c0e0c; border-radius: 50%; background: var(--accent); cursor: grab; box-shadow: 0 0 14px rgba(198,255,0,0.5); }
+    .save-line { font-size: 13px; color: var(--muted); margin-top: 8px; }
+    .save-amount { font-size: 42px; font-weight: 900; color: var(--accent); line-height: 1; }
+    .save-amount small { font-size: 16px; color: var(--muted); font-weight: 500; }
+    .save-pill { display: inline-flex; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 8px 16px; font-size: 13px; font-weight: 600; }
+    .calc-result { background: #0a0d08; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .calc-result .top-row { display: flex; align-items: center; gap: 22px; }
+    .donut { position: relative; width: 110px; height: 110px; flex-shrink: 0; }
+    .donut svg { transform: rotate(-90deg); }
+    .donut .ctr { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .donut .ctr b { font-size: 20px; font-weight: 900; color: var(--accent); }
+    .donut .ctr span { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .donut .ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 12; }
+    .donut .ring-fg { fill: none; stroke: var(--accent); stroke-width: 12; stroke-linecap: round; transition: stroke-dashoffset .6s cubic-bezier(.16,1,.3,1); }
+    .res-rows { display: grid; gap: 14px; flex: 1; }
+    .res-rows .r .k { font-size: 12px; color: var(--muted); }
+    .res-rows .r .v { font-size: 20px; font-weight: 700; }
+    .res-rows .r.save .v { color: var(--accent); }
+    .calc-prov-note { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .calc-prov-note b { color: var(--text); }
+
+    /* ── STATS ── */
+    .stats { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 22px; background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+    .stat { display: flex; align-items: center; gap: 12px; }
+    .stat .st-ic { width: 40px; height: 40px; border-radius: 11px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; }
+    .stat .st-ic iconify-icon { font-size: 22px; color: var(--accent); }
+    .stat strong { font-size: 19px; font-weight: 900; display: block; }
+    .stat span { font-size: 12.5px; color: var(--muted); }
+
+    /* ── TESTIMONIALS ── */
+    .test-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .test-nav { display: flex; gap: 10px; }
+    .test-nav button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-2); background: rgba(255,255,255,0.03); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: background .2s, border-color .2s; }
+    .test-nav button:hover { background: var(--accent); color: #0a0c0a; border-color: var(--accent); }
+    .test-viewport { overflow: hidden; }
+    .test-track { display: flex; gap: 18px; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+    .test-card { flex: 0 0 calc((100% - 36px) / 3); background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .test-card .t-stars { color: var(--accent); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+    .test-card p { font-size: 15px; margin-bottom: 22px; }
+    .test-author { display: flex; align-items: center; gap: 12px; }
+    .test-author .av { width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: #0a0c0a; }
+    .test-author h5 { font-size: 14px; font-weight: 700; }
+    .test-author span { font-size: 12.5px; color: var(--muted); }
+    .test-dots { display: flex; gap: 8px; justify-content: center; margin-top: 26px; }
+    .test-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; background: rgba(255,255,255,0.2); cursor: pointer; transition: width .3s, background .3s; }
+    .test-dots button.active { width: 22px; border-radius: 5px; background: var(--accent); }
+
+    /* ── FAQ ── */
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+    .faq-item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; align-self: start; transition: border-color .2s; }
+    .faq-item.open { border-color: var(--line-2); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; cursor: pointer; font-size: 15px; font-weight: 600; }
+    .faq-q iconify-icon { color: var(--accent); font-size: 20px; transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-q iconify-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-a p { padding: 0 20px 18px; font-size: 14px; color: var(--muted); }
+
+    /* ── FINAL CTA ── */
+    .final-cta { position: relative; overflow: hidden; background: linear-gradient(135deg, #141a0e, #0c0e0c);
+      border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 56px; display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 30px; }
+    .final-cta .glow-ring { width: 380px; height: 380px; right: -70px; bottom: -130px; left: auto; }
+    .final-cta h2 { font-size: clamp(30px, 4vw, 46px); font-weight: 900; position: relative; z-index: 2; }
+    .final-cta p { color: var(--muted); margin: 16px 0 26px; max-width: 420px; position: relative; z-index: 2; }
+    .final-cta .cta-btns { display: flex; gap: 14px; flex-wrap: wrap; position: relative; z-index: 2; }
+    .final-cta .mini { display: flex; gap: 26px; margin-top: 26px; position: relative; z-index: 2; flex-wrap: wrap; }
+    .final-cta .mini span { font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 7px; }
+    .final-cta .mini iconify-icon { color: var(--accent); }
+    .cta-device { position: relative; z-index: 2; justify-self: center; }
+    .cta-device img { width: 260px; filter: drop-shadow(0 34px 54px rgba(0,0,0,0.6)); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--line); padding: 50px 0 30px; margin-top: 66px; }
+    .foot-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 30px; }
+    .foot-brand .logo { margin-bottom: 14px; }
+    .foot-brand p { font-size: 14px; color: var(--muted); max-width: 280px; }
+    .foot-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 16px; font-weight: 700; }
+    .foot-col a { display: block; font-size: 14px; margin-bottom: 10px; transition: color .2s; }
+    .foot-col a:hover { color: var(--accent); }
+    .foot-bottom { display: flex; justify-content: space-between; gap: 16px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted-2); flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 980px) {
+      .nav-links { display: none; } .burger { display: block; }
+      .hero-grid { grid-template-columns: 1fr; } .hero-visual { min-height: 380px; margin-top: 20px; }
+      .finder-body { grid-template-columns: 1fr; gap: 24px; } .options-grid { grid-template-columns: repeat(3, 1fr); }
+      .prov-grid { grid-template-columns: repeat(2, 1fr); }
+      .term-wrap { grid-template-columns: 1fr; } .term-grid { grid-template-columns: repeat(2, 1fr); }
+      .calc { grid-template-columns: 1fr; }
+      .test-card { flex: 0 0 calc((100% - 18px) / 2); }
+      .faq-grid { grid-template-columns: 1fr; }
+      .final-cta { grid-template-columns: 1fr; } .cta-device { display: none; }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: repeat(2, 1fr); }
+      .prov-grid { grid-template-columns: 1fr; } .term-grid { grid-template-columns: 1fr; }
+      .test-card { flex: 0 0 100%; }
+      .stat { flex: 0 0 calc(50% - 9px); }
+      .foot-grid { grid-template-columns: 1fr; } .final-cta { padding: 34px; }
+      .hero-features { gap: 18px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
-<div class="cursor-dot"></div>
-
-<!-- STICKY NAVIGATION -->
-<nav class="site-nav glass-nav">
-  <div class="nav-container">
-    <div class="nav-logo">
-      <img src="../images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
-      <a href="../index.html" style="color:#fff; text-decoration:none;">Plemmo</a>
-    </div>
+<!-- ── NAV ── -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="logo">plemmo<span class="dot">.</span></a>
     <div class="nav-links">
-      <a href="card-machines.html" class="magnetic" data-strength="20" style="color:#fff">Card Machines</a>
-      <a href="epos.html" class="magnetic" data-strength="20">EPOS Systems</a>
-      <a href="../index.html#funding" class="magnetic" data-strength="20">Business Funding</a>
+      <a href="card-machines.html" class="active">Card Machines</a>
+      <a href="#providers">Services <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon></a>
+      <a href="#finder">Business Types <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon></a>
+      <a href="../index.html">About Us</a>
+      <a href="#quote">Contact Us</a>
     </div>
-    <div class="nav-actions">
-      <a href="tel:07842088092" class="btn-glass magnetic" data-strength="20">07842 088092</a>
-      <a href="../index.html#quote" class="btn-solid magnetic" data-strength="40">Get a Free Quote</a>
+    <div class="nav-cta">
+      <a href="#quote" class="btn btn-solid">Get a Free Quote</a>
+      <button class="burger" aria-label="menu"><iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon></button>
     </div>
   </div>
 </nav>
 
-<!-- PRODUCT HERO -->
-<header class="hero-section" style="padding-top:200px; padding-bottom: 100px;">
-  <div class="hero-bg-grid"></div>
-  <div class="bg-orb orb-1"></div>
-  
-  <div class="container dual-grid align-center-mobile">
-    <div class="hero-content perspective-container">
-      <span class="trust-label highlight-label">Plemmo Hardware</span>
-      <h1 class="hero-title reveal-up" style="font-size: clamp(64px, 8vw, 120px)">FLAWLESS<br><span class="accent-text">PAYMENTS.</span></h1>
-      <p class="hero-desc reveal-up delay-1">Lightning-fast 4G & Wi-Fi terminals. Transparent blended rates. Next-day settlements. Because you shouldn't have to wait for the money you've already earned.</p>
-      
-      <div class="hero-buttons reveal-up delay-2">
-        <a href="../index.html#calculator" class="btn-solid btn-large magnetic" data-strength="30">Calculate Savings</a>
-        <a href="#features" class="btn-outline btn-large magnetic" data-strength="30">Tech Specs</a>
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow"><span class="pulse"></span> Card Machine Solutions For UK Businesses</span>
+      <h1>Smart card<br>solutions that<br><span class="accent">work for you.</span></h1>
+      <p class="hero-sub">Compare the UK's leading providers, find your perfect terminal, and start saving on every transaction — all in one place.</p>
+      <div class="hero-features">
+        <div class="hf"><div class="hf-ic"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><div><strong>Lower fees</strong><span>Save more</span></div></div>
+        <div class="hf"><div class="hf-ic"><iconify-icon icon="solar:bolt-bold-duotone"></iconify-icon></div><div><strong>Quick setup</strong><span>Up and running fast</span></div></div>
+        <div class="hf"><div class="hf-ic"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><div><strong>Trusted by 10k+</strong><span>UK businesses</span></div></div>
+      </div>
+      <div class="hero-btns">
+        <a href="#calculator" class="btn btn-solid">Find My Best Deal <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+        <a href="tel:07842088092" class="btn btn-ghost">Talk to an Expert <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
       </div>
     </div>
-
-    <!-- Massive 3D Product Float -->
-    <div class="hero-visual perspective-container">
-      <img src="../images/Card machine no bg.webp" onerror="this.src='https://cdn.prod.website-files.com/641031309f3ed1b9978db3ef/641031309f3ed1d7468db481_teya-terminal.png'" alt="Card Machine" class="tilt-element float-anim-1" style="width: 120%; filter: drop-shadow(0 50px 80px rgba(0,0,0,0.5)); transform: translateZ(100px); margin-left: -10%;">
+    <div class="hero-visual">
+      <div class="glow-ring"></div>
+      <img class="hero-device" src="../images/Card machine no bg.webp"
+           onerror="this.onerror=null;this.src='https://cdn.prod.website-files.com/641031309f3ed1b9978db3ef/641031309f3ed1d7468db481_teya-terminal.png'"
+           alt="Plemmo card machine">
+      <div class="rating-badge">
+        <div class="score">4.9<small>/5</small></div>
+        <div class="stars">★★★★★</div>
+        <div class="from">From 250+ reviews</div>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- FEATURES BENTO -->
-<section id="features" class="section-padding light-bg relative-section">
+<!-- ── PARTNER MARQUEE ── -->
+<section class="marquee-sec">
+  <div class="container"><div class="label">We work with the UK's leading providers &amp; card networks</div></div>
+  <div class="marquee"><div class="marquee-track" id="marquee-track"></div></div>
+</section>
+
+<!-- ── FINDER ── -->
+<section class="sec-pad" id="finder">
   <div class="container">
-    <h2 class="dark-heading align-center" style="margin-bottom: 80px; font-size: clamp(48px, 6vw, 80px);">ENGINEERED FOR <span class="accent-text">SPEED.</span></h2>
-    
-    <div class="bento-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 350px; gap: 20px;">
-      
-      <!-- Next Day Settlement (Span 2x1) -->
-      <div class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #000;">
-        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.4; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:flash-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Next-Day Settlement</h3>
-          <p style="color: #cbd5e1; font-size: 18px; max-width: 400px; font-weight: 500;">Your money hits your account by 10 AM the next business day. No holding periods.</p>
-        </div>
+    <div class="finder reveal">
+      <div class="finder-top">
+        <span class="step-no" id="step-no">1 / 6</span>
+        <span class="step-title">Let's find your perfect card machine</span>
+        <div class="progress"><div class="bar" id="finder-bar"></div></div>
       </div>
-
-      <!-- Always Connected (Span 1x2) -->
-      <div class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 2; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #121824;">
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:global-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Always Connected</h3>
-          <p style="color: #cbd5e1; font-size: 18px; font-weight: 500;">Seamlessly switches between Wi-Fi and 4G so you never drop a transaction.</p>
+      <div class="finder-body" id="finder-body">
+        <div class="finder-q">
+          <h3>What type of<br>business are you?</h3>
+          <p>Select the option that best describes your business.</p>
         </div>
-      </div>
-
-      <!-- Zero Hidden Fees (Span 2x1) -->
-      <div class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #fff; border: 1px solid #e2e8f0;">
-        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.1; filter: grayscale(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:bill-check-bold-duotone" style="font-size: 40px; color: #10b981; margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #000; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Zero Hidden Fees</h3>
-          <p style="color: var(--text-light-muted); font-size: 18px; max-width: 400px; font-weight: 500;">No PCI fees. No auth fees. Just a single, aggressively priced blended rate.</p>
-        </div>
-      </div>
-
-      <!-- Security (Span 3x1) -->
-      <div class="bento-creative-card reveal-up" style="grid-column: span 3; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #000;">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.3; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:shield-keyhole-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Bank-Grade Encryption</h3>
-          <p style="color: #cbd5e1; font-size: 18px; max-width: 600px; font-weight: 500;">Locked down with P2PE encryption, keeping you entirely out of PCI scope.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TECH SPECS & HARDWARE BREAKDOWN -->
-<section class="section-padding dark-section">
-  <div class="container dual-grid align-center-mobile">
-    <div class="split-visual reveal-left perspective-container">
-       <img src="../images/Card machine no bg.webp" alt="Plemmo Terminal" class="tilt-element" style="width: 100%; filter: drop-shadow(0 20px 50px rgba(198,255,0,0.15)); transform: translateZ(40px);">
-    </div>
-    <div class="split-content reveal-right">
-      <span class="highlight-label">Technical Specifications</span>
-      <h2>THE ONLY TERMINAL<br>YOU WILL EVER NEED.</h2>
-      
-      <div class="specs-list" style="margin-top: 48px; display: grid; gap: 24px;">
-        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:battery-charge-bold-duotone" style="color: var(--accent);"></iconify-icon> All-Day Battery Life</h4>
-          <p style="color: var(--text-dark-muted);">Process over 800 transactions on a single charge. Drops perfectly into the charging dock overnight.</p>
-        </div>
-        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:printer-minimalistic-bold-duotone" style="color: var(--accent);"></iconify-icon> Integrated Receipt Printer</h4>
-          <p style="color: var(--text-dark-muted);">Lightning-fast thermal printer built directly into the head of the terminal. No external bulky hardware required.</p>
-        </div>
-        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:card-2-bold-duotone" style="color: var(--accent);"></iconify-icon> Omnichannel Acceptance</h4>
-          <p style="color: var(--text-dark-muted);">Contactless, Chip & PIN, Apple Pay, Google Pay, Amex. If they want to spend it, you can accept it.</p>
+        <div class="options-grid" id="biz-options">
+          <div class="opt" data-biz="Retail"><iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon><iconify-icon icon="solar:bag-4-bold-duotone"></iconify-icon><span>Retail Store</span></div>
+          <div class="opt" data-biz="Hospitality"><iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon><iconify-icon icon="solar:cup-hot-bold-duotone"></iconify-icon><span>Hospitality</span></div>
+          <div class="opt" data-biz="Services"><iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon><iconify-icon icon="solar:case-bold-duotone"></iconify-icon><span>Services</span></div>
+          <div class="opt" data-biz="Healthcare"><iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon><iconify-icon icon="solar:heart-pulse-bold-duotone"></iconify-icon><span>Healthcare</span></div>
+          <div class="opt" data-biz="Transport"><iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon><iconify-icon icon="solar:bus-bold-duotone"></iconify-icon><span>Transport</span></div>
+          <div class="opt" data-biz="Other"><iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon><iconify-icon icon="solar:widget-5-bold-duotone"></iconify-icon><span>Other</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INTEGRATIONS MARQUEE -->
-<section class="marquee-section light-bg" style="border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 40px 0;">
-  <div class="container align-center" style="margin-bottom: 24px;">
-    <h4 style="color: var(--text-light-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Integrates Seamlessly With Over 40+ Major EPOS Systems</h4>
-  </div>
-  <div class="marquee-container" style="background: transparent;">
-    <div class="marquee-track" style="display: flex; gap: 80px; align-items: center;">
-      <!-- Simulated Logos -->
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">SQUARE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">ZETTLE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">LIGHTSPEED</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">EPOS NOW</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">TOUCHBISTRO</h3>
-      <!-- Repeat -->
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">SQUARE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">ZETTLE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">LIGHTSPEED</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">EPOS NOW</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">TOUCHBISTRO</h3>
+<!-- ── PROVIDER COMPARISON ── -->
+<section class="sec-pad" id="providers">
+  <div class="container">
+    <div class="sec-head reveal">
+      <a href="#calculator" class="link">View full comparison <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon></a>
+      <h2>Top providers. Side by side.</h2>
+      <p class="sub">Tap a provider to instantly see how much you could save with them in the calculator below.</p>
+    </div>
+    <div class="prov-grid reveal" id="prov-grid">
+      <div class="prov selected" data-prov="teya" data-rate="0.0055" data-name="Teya">
+        <span class="sel-tag">Selected</span>
+        <div class="prov-head"><div class="prov-logo" data-logo="teya"></div><span class="prov-badge">Best for growth</span></div>
+        <ul>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Fast payouts</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Competitive rates</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Great for scaling</li>
+        </ul>
+        <div class="prov-rate"><div><div class="from">From</div><div class="pct">0.55%</div><div class="blended">Blended Rate</div></div><span class="btn btn-ghost">View Details</span></div>
+      </div>
+      <div class="prov" data-prov="shift4" data-rate="0.0070" data-name="Shift4">
+        <span class="sel-tag">Selected</span>
+        <div class="prov-head"><div class="prov-logo" data-logo="shift4"></div><span class="prov-badge">Best for reliability</span></div>
+        <ul>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Reliable &amp; secure</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> No monthly fees</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> 24/7 support</li>
+        </ul>
+        <div class="prov-rate"><div><div class="from">From</div><div class="pct">0.70%</div><div class="blended">Blended Rate</div></div><span class="btn btn-ghost">View Details</span></div>
+      </div>
+      <div class="prov" data-prov="sumup" data-rate="0.0065" data-name="SumUp">
+        <span class="sel-tag">Selected</span>
+        <div class="prov-head"><div class="prov-logo" data-logo="sumup"></div><span class="prov-badge">Best for simplicity</span></div>
+        <ul>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Easy to set up</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> No contract</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Affordable rates</li>
+        </ul>
+        <div class="prov-rate"><div><div class="from">From</div><div class="pct">0.65%</div><div class="blended">Blended Rate</div></div><span class="btn btn-ghost">View Details</span></div>
+      </div>
+      <div class="prov" data-prov="worldpay" data-rate="0.0030" data-name="Worldpay">
+        <span class="sel-tag">Selected</span>
+        <div class="prov-head"><div class="prov-logo" data-logo="worldpay"></div><span class="prov-badge">Best for enterprise</span></div>
+        <ul>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Enterprise solutions</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Advanced reporting</li>
+          <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Global reach</li>
+        </ul>
+        <div class="prov-rate"><div><div class="from">From</div><div class="pct">0.30%</div><div class="blended">Blended Rate</div></div><span class="btn btn-ghost">View Details</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- INTERACTIVE ONBOARDING WIZARD (LEAD CAPTURE) -->
-<section id="quote" class="section-padding accent-section">
-  <div class="container align-center">
-    <h2 class="dark-heading" style="font-size: clamp(48px, 6vw, 80px);">UPGRADE YOUR<br>TERMINALS TODAY.</h2>
-    <p style="font-size: 20px; font-weight: 500; margin-bottom: 24px; color: #111;">Free hardware replacement. Zero setup fees. Answer 3 questions to get your rate.</p>
-    
-    <div class="wizard-container shadow-heavy" style="background: #fff; border-radius: var(--radius-xl); max-width: 700px; margin: 40px auto 0; padding: 48px; text-align: left;">
-      <div class="wizard-step" id="step-1">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 1 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">How many terminals do you need?</h3>
-        
-        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-          <div class="wizard-option row-option" onclick="nextStep(2)">
-             <span style="font-weight: 700; font-size: 18px;">1 - 2 Terminals</span>
-          </div>
-          <div class="wizard-option row-option" onclick="nextStep(2)">
-             <span style="font-weight: 700; font-size: 18px;">3 - 5 Terminals</span>
-          </div>
-          <div class="wizard-option row-option" onclick="nextStep(2)">
-             <span style="font-weight: 700; font-size: 18px;">6+ Terminals (Multi-Site)</span>
-          </div>
+<!-- ── TERMINALS ── -->
+<section class="sec-pad">
+  <div class="container">
+    <div class="term-wrap reveal">
+      <div class="term-intro">
+        <h2>Choose your ideal terminal</h2>
+        <p>From portable to countertop, we've got the right hardware for the way you sell.</p>
+        <p style="color:var(--text);font-weight:600;">Need help deciding?</p>
+        <a href="#quote">Compare all terminals <iconify-icon icon="solar:arrow-right-linear" width="15"></iconify-icon></a>
+      </div>
+      <div class="term-grid" id="term-grid">
+        <div class="term selected" data-term="0">
+          <iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon>
+          <div class="term-img"><span class="term-price">From £19/mo</span><img src="https://cdn.prod.website-files.com/641031309f3ed1b9978db3ef/641031309f3ed1d7468db481_teya-terminal.png" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Portable card machine"></div>
+          <h4>Portable</h4><p>Take payments anywhere</p>
+        </div>
+        <div class="term" data-term="1">
+          <iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon>
+          <div class="term-img"><span class="term-price">From £25/mo</span><img src="../images/Card machine no bg.webp" alt="Smart portable terminal"></div>
+          <h4>Smart Portable</h4><p>All-in-one with smart features</p>
+        </div>
+        <div class="term" data-term="2">
+          <iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon>
+          <div class="term-img"><span class="term-price">From £29/mo</span><img src="../images/EPOS no bg.png" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Countertop terminal"></div>
+          <h4>Countertop</h4><p>Powerful &amp; reliable</p>
+        </div>
+        <div class="term" data-term="3">
+          <iconify-icon class="check" icon="solar:check-circle-bold"></iconify-icon>
+          <div class="term-img"><span class="term-price">Free app</span><img src="https://cdn.prod.website-files.com/641031309f3ed1b9978db3ef/641031309f3ed1d7468db481_teya-terminal.png" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Mobile POS" style="width:60%;"></div>
+          <h4>Mobile POS</h4><p>Turn your phone into a terminal</p>
         </div>
       </div>
-      
-      <div class="wizard-step" id="step-2" style="display: none;">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 2 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">Do you need EPOS integration?</h3>
-        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-          <div class="wizard-option row-option" onclick="nextStep(3)">
-             <span style="font-weight: 700; font-size: 18px;">Yes, I need them to sync</span>
-          </div>
-          <div class="wizard-option row-option" onclick="nextStep(3)">
-             <span style="font-weight: 700; font-size: 18px;">No, standalone is fine</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="wizard-step" id="step-3" style="display: none;">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 3 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">Where should we send your custom rate?</h3>
-        <div class="form-group" style="margin-bottom: 16px;">
-          <input type="text" placeholder="Full Name" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
-        </div>
-        <div class="form-group" style="margin-bottom: 24px;">
-          <input type="email" placeholder="Work Email" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
-        </div>
-        <button class="btn-solid-dark btn-large" style="width: 100%; justify-content: center; border: none; cursor: pointer;">Get My Hardware & Rates</button>
-      </div>
-
     </div>
   </div>
 </section>
 
-<script>
-  function nextStep(step) {
-    document.querySelectorAll('.wizard-step').forEach(s => s.style.display = 'none');
-    document.getElementById('step-' + step).style.display = 'block';
-  }
-</script>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <img src="../images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
-        Plemmo
+<!-- ── CALCULATOR ── -->
+<section class="sec-pad" id="calculator">
+  <div class="container">
+    <div class="calc reveal">
+      <div class="calc-intro">
+        <h2>Estimate your potential savings</h2>
+        <p>See how much you could save with the right card machine solution.</p>
+        <span class="time"><iconify-icon icon="solar:clock-circle-bold-duotone"></iconify-icon> It takes 30 seconds</span>
       </div>
-      <p class="tagline">"We provide for and care about local businesses."</p>
-    </div>
-
-    <div class="footer-links">
-      <div class="link-col">
-        <h4>Navigation</h4>
-        <a href="../index.html">Home</a>
-        <a href="#">About</a>
-        <a href="#">Refer & Earn</a>
+      <div class="calc-controls">
+        <div class="slider-row">
+          <div class="top"><label>Monthly card turnover</label><span class="val" id="turnover-val">£25,000</span></div>
+          <input type="range" id="turnover" min="2000" max="150000" step="1000" value="25000">
+        </div>
+        <div class="slider-row">
+          <div class="top"><label>Average ticket size</label><span class="val" id="ticket-val">£45</span></div>
+          <input type="range" id="ticket" min="5" max="200" step="1" value="45">
+        </div>
+        <div class="save-line">Based on your inputs, you could save:</div>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px;">
+          <div class="save-amount"><span id="save-year">£1,248</span> <small>/year</small></div>
+          <div class="save-pill">That's&nbsp;<span style="color:var(--accent)" id="save-month">£104</span>&nbsp;/month</div>
+        </div>
       </div>
-      <div class="link-col">
-        <h4>Solutions</h4>
-        <a href="card-machines.html">Card Machines</a>
-        <a href="epos.html">EPOS Systems</a>
-        <a href="../index.html#funding">Business Funding</a>
-        <a href="../index.html#signage">Signage</a>
-      </div>
-      <div class="link-col">
-        <h4>More</h4>
-        <a href="#">Call Centre</a>
-        <a href="#">Utilities</a>
+      <div class="calc-result">
+        <div class="top-row">
+          <div class="donut">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <circle class="ring-bg" cx="55" cy="55" r="46"></circle>
+              <circle class="ring-fg" id="donut-ring" cx="55" cy="55" r="46" stroke-dasharray="289" stroke-dashoffset="115"></circle>
+            </svg>
+            <div class="ctr"><b id="donut-pct">59%</b><span>saved</span></div>
+          </div>
+          <div class="res-rows">
+            <div class="r"><div class="k">Current costs</div><div class="v" id="current-cost">£2,100 <span style="font-size:12px;color:var(--muted);font-weight:500;">/yr</span></div></div>
+            <div class="r"><div class="k" id="plemmo-label">With Teya</div><div class="v" id="plemmo-cost">£852 <span style="font-size:12px;color:var(--muted);font-weight:500;">/yr</span></div></div>
+            <div class="r save"><div class="k">Est. savings</div><div class="v"><span id="save-year-2">£1,248</span> <span style="font-size:12px;color:var(--muted);font-weight:500;">/yr</span></div></div>
+          </div>
+        </div>
+        <div class="calc-prov-note"><iconify-icon icon="solar:info-circle-bold-duotone"></iconify-icon> Comparing against <b id="calc-prov-name">Teya</b> — tap another provider above to recalculate.</div>
       </div>
     </div>
   </div>
-  
-  <div class="container footer-bottom">
-    <div class="disclaimer">
-      Plemmo is a trading name of [Registered Company Name]. All hardware remains the property of the acquiring bank unless explicitly purchased. Rates subject to underwriting.
+</section>
+
+<!-- ── STATS ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="stats reveal">
+      <div class="stat"><div class="st-ic"><iconify-icon icon="solar:shop-2-bold-duotone"></iconify-icon></div><div><strong>10,000+</strong><span>Businesses trust us</span></div></div>
+      <div class="stat"><div class="st-ic"><iconify-icon icon="solar:star-bold-duotone"></iconify-icon></div><div><strong>4.9/5</strong><span>Customer rating</span></div></div>
+      <div class="stat"><div class="st-ic"><iconify-icon icon="solar:like-bold-duotone"></iconify-icon></div><div><strong>7+</strong><span>Top providers</span></div></div>
+      <div class="stat"><div class="st-ic"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon></div><div><strong>98%</strong><span>Setup satisfaction</span></div></div>
+      <div class="stat"><div class="st-ic"><iconify-icon icon="solar:map-point-bold-duotone"></iconify-icon></div><div><strong>UK based</strong><span>Local support</span></div></div>
     </div>
-    <div class="copyright">Copyright © 2026 Plemmo. All Rights Reserved</div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="sec-pad">
+  <div class="container">
+    <div class="test-head reveal">
+      <h2 style="font-size:clamp(26px,3vw,34px);">What our customers say</h2>
+      <div class="test-nav">
+        <button id="test-prev" aria-label="previous"><iconify-icon icon="solar:alt-arrow-left-linear"></iconify-icon></button>
+        <button id="test-next" aria-label="next"><iconify-icon icon="solar:alt-arrow-right-linear"></iconify-icon></button>
+      </div>
+    </div>
+    <div class="test-viewport">
+      <div class="test-track" id="test-track">
+        <div class="test-card"><div class="t-stars">★★★★★</div><p>"Plemmo helped us cut our fees in half. Setup was seamless and support is top notch."</p><div class="test-author"><div class="av" style="background:#c6ff00">SJ</div><div><h5>Sarah J.</h5><span>Retail Owner</span></div></div></div>
+        <div class="test-card"><div class="t-stars">★★★★★</div><p>"The comparison tool made it so easy to find the right solution for our café."</p><div class="test-author"><div class="av" style="background:#8fd14f">JL</div><div><h5>James L.</h5><span>Café Owner</span></div></div></div>
+        <div class="test-card"><div class="t-stars">★★★★★</div><p>"Saved us over £2k a year. The switch was quick and completely stress-free."</p><div class="test-author"><div class="av" style="background:#5fd0c5">PK</div><div><h5>Priya K.</h5><span>Salon Owner</span></div></div></div>
+        <div class="test-card"><div class="t-stars">★★★★★</div><p>"Next-day settlements have transformed our cash flow. Couldn't recommend them more."</p><div class="test-author"><div class="av" style="background:#7fb0ff">TR</div><div><h5>Tom R.</h5><span>Restaurant Owner</span></div></div></div>
+        <div class="test-card"><div class="t-stars">★★★★★</div><p>"Honest advice, no pushy sales. They found us a better rate than we ever expected."</p><div class="test-author"><div class="av" style="background:#f0b66b">AM</div><div><h5>Aisha M.</h5><span>Pharmacy Owner</span></div></div></div>
+      </div>
+    </div>
+    <div class="test-dots" id="test-dots"></div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="sec-pad">
+  <div class="container">
+    <div class="sec-head reveal"><h2>Frequently asked questions</h2></div>
+    <div class="faq-grid reveal" id="faq">
+      <div class="faq-item"><div class="faq-q">How quickly can I get a card machine? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Most terminals are dispatched within 24 hours and arrive ready to use. Many businesses are taking payments within 1–3 working days of signing up.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Which provider is right for my business? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>It depends on your turnover, average transaction value and the features you need. Use our finder and savings calculator above, or talk to an expert for a tailored recommendation.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Are there any hidden fees? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>No. We believe in transparent, blended pricing — no PCI fees, no auth fees and no surprise charges. Everything is laid out clearly before you commit.</p></div></div>
+      <div class="faq-item"><div class="faq-q">What if I need support? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>You get UK-based local support whenever you need it. Our team is available by phone and email, and most providers offer 24/7 technical assistance.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Can I keep my existing merchant account? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>In many cases yes. We'll review your current setup and let you know the best route — whether that's keeping your account or switching to a better deal.</p></div></div>
+      <div class="faq-item"><div class="faq-q">How do payouts work? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Most providers offer next-day settlement, meaning the money you take today lands in your bank account by the next business morning. No lengthy holding periods.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="sec-pad" id="quote">
+  <div class="container">
+    <div class="final-cta reveal">
+      <div class="glow-ring"></div>
+      <div>
+        <h2>Ready to save on your card processing fees?</h2>
+        <p>Get your personalised quote in under 60 seconds. No commitment, no jargon — just a better deal.</p>
+        <div class="cta-btns">
+          <a href="#calculator" class="btn btn-solid">Get My Free Quote <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a href="tel:07842088092" class="btn btn-ghost">Talk to an Expert <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
+        </div>
+        <div class="mini">
+          <span><iconify-icon icon="solar:check-circle-bold"></iconify-icon> No commitment</span>
+          <span><iconify-icon icon="solar:clock-circle-bold"></iconify-icon> Takes 60 seconds</span>
+          <span><iconify-icon icon="solar:tag-price-bold"></iconify-icon> Save up to 40%</span>
+        </div>
+      </div>
+      <div class="cta-device">
+        <img src="../images/Card machine no bg.webp"
+             onerror="this.onerror=null;this.src='https://cdn.prod.website-files.com/641031309f3ed1b9978db3ef/641031309f3ed1d7468db481_teya-terminal.png'"
+             alt="Plemmo card machine">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">plemmo<span class="dot">.</span></div>
+        <p>Smart card solutions that work for UK businesses. Compare, save and grow — all in one place.</p>
+      </div>
+      <div class="foot-col"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="epos.html">EPOS Systems</a><a href="../index.html#funding">Business Funding</a><a href="../index.html#signage">Signage</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="../index.html">Home</a><a href="../index.html">About Us</a><a href="#quote">Contact Us</a><a href="#">Refer &amp; Earn</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="tel:07842088092">07842 088092</a><a href="#faq">FAQs</a><a href="#quote">Get a Quote</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>Plemmo is a trading name. Rates shown are illustrative and subject to underwriting.</span>
+      <span>© 2026 Plemmo. All Rights Reserved.</span>
+    </div>
   </div>
 </footer>
 
-<script src="../main.js"></script>
+<script>
+  /* ── Brand logos (inline SVG, crisp & reliable) ── */
+  const LOGOS = {
+    visa:      {bc:'#1434CB', svg:`<svg viewBox="0 0 80 28"><text x="0" y="23" font-family="Arial,Inter" font-size="26" font-style="italic" font-weight="900" fill="#1434CB" letter-spacing="-1">VISA</text></svg>`},
+    mastercard:{bc:'#EB001B', svg:`<svg viewBox="0 0 60 36"><circle cx="23" cy="18" r="15" fill="#EB001B"/><circle cx="37" cy="18" r="15" fill="#F79E1B"/><path d="M30 6a15 15 0 000 24 15 15 0 000-24z" fill="#FF5F00"/></svg>`},
+    amex:      {bc:'#006FCF', svg:`<svg viewBox="0 0 74 28"><rect width="74" height="28" rx="4" fill="#006FCF"/><text x="37" y="19" text-anchor="middle" font-family="Arial,Inter" font-size="12.5" font-weight="800" fill="#fff">AMEX</text></svg>`},
+    applepay:  {bc:'#ffffff', svg:`<svg viewBox="0 0 96 30"><g fill="currentColor"><path d="M16.6 8.2c-.9 1.1-2.3 1.9-3.7 1.8-.2-1.4.5-2.9 1.3-3.8.9-1.1 2.4-1.9 3.6-1.9.2 1.5-.4 2.9-1.2 3.9zm1.2 1.9c-2-.1-3.7 1.1-4.7 1.1-1 0-2.5-1.1-4.1-1-2.1 0-4 1.2-5.1 3.1-2.2 3.8-.6 9.3 1.5 12.4 1 1.5 2.3 3.1 3.9 3 1.5-.1 2.1-1 4-1s2.3 1 4 .9c1.7 0 2.7-1.5 3.8-3 1.2-1.7 1.7-3.3 1.7-3.4-.0-.1-3.3-1.3-3.3-5 0-3.1 2.5-4.6 2.6-4.7-1.4-2.1-3.6-2.3-4.4-2.4z"/></g><text x="30" y="22" font-family="Arial,Inter" font-size="19" font-weight="600" fill="currentColor">Pay</text></svg>`},
+    googlepay: {bc:'#ffffff', svg:`<svg viewBox="0 0 110 30"><text x="0" y="22" font-family="Arial,Inter" font-size="20" font-weight="700" fill="currentColor">G&#8202;Pay</text></svg>`},
+    teya:      {bc:'#ff5c39', svg:`<svg viewBox="0 0 78 30"><text x="0" y="24" font-family="Inter,Arial" font-size="28" font-weight="800" fill="currentColor" letter-spacing="-1.5">teya</text></svg>`},
+    sumup:     {bc:'#1ba7ec', svg:`<svg viewBox="0 0 92 30"><text x="0" y="24" font-family="Inter,Arial" font-size="26" font-weight="800" fill="currentColor" letter-spacing="-1">sum</text><text x="50" y="24" font-family="Inter,Arial" font-size="26" font-weight="800" fill="currentColor" letter-spacing="-1">up</text></svg>`},
+    worldpay:  {bc:'#e3000f', svg:`<svg viewBox="0 0 132 30"><text x="0" y="23" font-family="Inter,Arial" font-size="23" font-weight="800" fill="currentColor" letter-spacing="-1">worldpay</text></svg>`},
+    shift4:    {bc:'#ffffff', svg:`<svg viewBox="0 0 88 30"><text x="0" y="23" font-family="Inter,Arial" font-size="23" font-weight="800" fill="currentColor" letter-spacing="-1">Shift</text><circle cx="76" cy="15" r="13" fill="currentColor"/><text x="76" y="21" text-anchor="middle" font-family="Inter,Arial" font-size="16" font-weight="900" fill="#0a0c0a">4</text></svg>`},
+    elavon:    {bc:'#0a9b8e', svg:`<svg viewBox="0 0 92 30"><text x="0" y="23" font-family="Inter,Arial" font-size="24" font-weight="800" fill="currentColor" letter-spacing="-1">Elavon</text></svg>`},
+    mypos:     {bc:'#00a98f', svg:`<svg viewBox="0 0 86 30"><text x="0" y="23" font-family="Inter,Arial" font-size="24" font-weight="800" fill="currentColor" letter-spacing="-1">myPOS</text></svg>`}
+  };
+
+  /* marquee: build duplicated track */
+  const order = ['visa','mastercard','amex','teya','sumup','worldpay','shift4','elavon','mypos','applepay','googlepay'];
+  const track = document.getElementById('marquee-track');
+  const buildLogo = k => `<div class="mq-logo" style="--bc:${LOGOS[k].bc}" title="${k}">${LOGOS[k].svg}</div>`;
+  track.innerHTML = (order.map(buildLogo).join('') ).repeat(2);
+
+  /* provider card logos */
+  document.querySelectorAll('[data-logo]').forEach(el => {
+    const l = LOGOS[el.dataset.logo];
+    if (l) { el.innerHTML = l.svg; el.style.color = l.bc; }
+  });
+
+  /* ── nav scroll ── */
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20));
+
+  /* ── reveal on scroll ── */
+  const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── helpers ── */
+  const gbp = n => '£' + Math.round(n).toLocaleString('en-GB');
+  function animateNum(el, to, suffix='') {
+    const from = +(el.dataset.v || 0); el.dataset.v = to;
+    const t0 = performance.now(), dur = 600;
+    (function step(t){ const p = Math.min(1,(t-t0)/dur); const e = 1-Math.pow(1-p,3);
+      el.textContent = gbp(from+(to-from)*e)+suffix; if(p<1) requestAnimationFrame(step); })(t0);
+  }
+
+  /* ── Calculator ── */
+  const turnover = document.getElementById('turnover');
+  const ticket = document.getElementById('ticket');
+  const RING = 289;
+  let provRate = 0.0055, provName = 'Teya';
+  // paint slider fill
+  function paint(el){ const p=(el.value-el.min)/(el.max-el.min)*100; el.style.background=`linear-gradient(90deg, var(--accent) ${p}%, rgba(255,255,255,.1) ${p}%)`; }
+
+  function calc(animate){
+    const monthly=+turnover.value, avg=+ticket.value, txns=monthly/avg;
+    const currentMonthly = monthly*0.016 + txns*0.05;
+    const provMonthly = monthly*provRate + txns*0.03;
+    const saveMonth = Math.max(0, currentMonthly-provMonthly);
+    const saveYear = saveMonth*12;
+    const pct = currentMonthly>0 ? saveMonth/currentMonthly : 0;
+    document.getElementById('turnover-val').textContent = gbp(monthly);
+    document.getElementById('ticket-val').textContent = gbp(avg);
+    paint(turnover); paint(ticket);
+    const setY=(id,v)=>document.getElementById(id).innerHTML = gbp(v)+' <span style="font-size:12px;color:var(--muted);font-weight:500;">/yr</span>';
+    if(animate){
+      animateNum(document.getElementById('save-year'), saveYear);
+      animateNum(document.getElementById('save-year-2'), saveYear);
+      animateNum(document.getElementById('save-month'), saveMonth);
+    } else {
+      document.getElementById('save-year').textContent = gbp(saveYear);
+      document.getElementById('save-year-2').textContent = gbp(saveYear);
+      document.getElementById('save-month').textContent = gbp(saveMonth);
+    }
+    setY('current-cost', currentMonthly*12);
+    setY('plemmo-cost', provMonthly*12);
+    document.getElementById('plemmo-label').textContent = 'With '+provName;
+    document.getElementById('calc-prov-name').textContent = provName;
+    document.getElementById('donut-pct').textContent = Math.round(pct*100)+'%';
+    document.getElementById('donut-ring').style.strokeDashoffset = RING*(1-pct);
+  }
+  turnover.addEventListener('input', ()=>calc(false));
+  ticket.addEventListener('input', ()=>calc(false));
+
+  /* ── Provider selection drives calculator ── */
+  function selectProvider(card, animate=true){
+    document.querySelectorAll('#prov-grid .prov').forEach(p=>p.classList.remove('selected'));
+    card.classList.add('selected');
+    provRate = +card.dataset.rate; provName = card.dataset.name;
+    calc(animate);
+  }
+  document.querySelectorAll('#prov-grid .prov').forEach(card =>
+    card.addEventListener('click', ()=>selectProvider(card)));
+
+  /* ── Terminal selector ── */
+  function selectTerminal(i){
+    document.querySelectorAll('#term-grid .term').forEach(x=>x.classList.remove('selected'));
+    const t = document.querySelector(`#term-grid .term[data-term="${i}"]`); if(t) t.classList.add('selected');
+  }
+  document.querySelectorAll('#term-grid .term').forEach(t =>
+    t.addEventListener('click', ()=>selectTerminal(+t.dataset.term)));
+
+  calc(false);
+
+  /* ── Finder with recommendations ── */
+  const REC = {
+    Retail:{prov:'teya', term:2, termName:'Countertop'},
+    Hospitality:{prov:'shift4', term:1, termName:'Smart Portable'},
+    Services:{prov:'sumup', term:3, termName:'Mobile POS'},
+    Healthcare:{prov:'worldpay', term:2, termName:'Countertop'},
+    Transport:{prov:'teya', term:0, termName:'Portable'},
+    Other:{prov:'sumup', term:0, termName:'Portable'}
+  };
+  document.querySelectorAll('#biz-options .opt').forEach(opt => opt.addEventListener('click', () => {
+    document.querySelectorAll('#biz-options .opt').forEach(o=>o.classList.remove('selected'));
+    opt.classList.add('selected');
+    document.getElementById('finder-bar').style.width = '33.2%';
+    document.getElementById('step-no').textContent = '2 / 6';
+    const biz = opt.dataset.biz, rec = REC[biz];
+    const provCard = document.querySelector(`#prov-grid .prov[data-prov="${rec.prov}"]`);
+    if(provCard) selectProvider(provCard);
+    selectTerminal(rec.term);
+    setTimeout(() => {
+      document.getElementById('finder-body').innerHTML = `<div class="finder-done" style="grid-column:1/-1;">
+        <div class="big-ic"><iconify-icon icon="solar:check-circle-bold"></iconify-icon></div>
+        <h3>Perfect — here's our match for your ${biz.toLowerCase()} business</h3>
+        <p>Based on thousands of similar UK businesses, we recommend:</p>
+        <div class="rec-chips">
+          <span class="rec-chip"><iconify-icon icon="solar:medal-ribbon-star-bold-duotone"></iconify-icon> ${provCard.dataset.name} &middot; from ${provCard.querySelector('.pct').textContent}</span>
+          <span class="rec-chip"><iconify-icon icon="solar:devices-bold-duotone"></iconify-icon> ${rec.termName} terminal</span>
+        </div>
+        <a href="#calculator" class="btn btn-solid">See your savings <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+      </div>`;
+    }, 380);
+  }));
+
+  /* ── Testimonials carousel (autoplay + dots) ── */
+  const tTrack = document.getElementById('test-track');
+  const tCount = tTrack.children.length;
+  const dotsWrap = document.getElementById('test-dots');
+  let tIdx = 0, timer;
+  const perView = () => innerWidth<=600?1:innerWidth<=980?2:3;
+  function maxIdx(){ return Math.max(0, tCount-perView()); }
+  function renderDots(){
+    dotsWrap.innerHTML='';
+    for(let i=0;i<=maxIdx();i++){ const b=document.createElement('button'); if(i===tIdx)b.className='active';
+      b.onclick=()=>{tIdx=i;slide();reset();}; dotsWrap.appendChild(b); }
+  }
+  function slide(){
+    tIdx=Math.min(tIdx,maxIdx());
+    const w=tTrack.children[0].getBoundingClientRect().width+18;
+    tTrack.style.transform=`translateX(${-tIdx*w}px)`;
+    renderDots();
+  }
+  function next(){ tIdx = tIdx>=maxIdx()?0:tIdx+1; slide(); }
+  function prev(){ tIdx = tIdx<=0?maxIdx():tIdx-1; slide(); }
+  function reset(){ clearInterval(timer); timer=setInterval(next,5000); }
+  document.getElementById('test-next').onclick=()=>{next();reset();};
+  document.getElementById('test-prev').onclick=()=>{prev();reset();};
+  document.querySelector('.test-viewport').addEventListener('mouseenter',()=>clearInterval(timer));
+  document.querySelector('.test-viewport').addEventListener('mouseleave',reset);
+  addEventListener('resize', slide);
+  slide(); reset();
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('#faq .faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const open=item.classList.contains('open');
+      document.querySelectorAll('#faq .faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null;});
+      if(!open){ item.classList.add('open'); const a=item.querySelector('.faq-a'); a.style.maxHeight=a.scrollHeight+'px'; }
+    });
+  });
+
+  /* mobile menu */
+  document.querySelector('.burger').addEventListener('click', ()=> location.hash='#finder');
+</script>
+
 </body>
 </html>
