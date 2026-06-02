@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Machines — Plemmo</title>
+  <link rel="icon" type="image/png" href="../images/logo.png">
+  
+  <link rel="stylesheet" href="../styles.css">
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot"></div>
+
+<!-- STICKY NAVIGATION -->
+<nav class="site-nav glass-nav">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <img src="../images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
+      <a href="../index.html" style="color:#fff; text-decoration:none;">Plemmo</a>
+    </div>
+    <div class="nav-links">
+      <a href="card-machines.html" class="magnetic" data-strength="20" style="color:#fff">Card Machines</a>
+      <a href="epos.html" class="magnetic" data-strength="20">EPOS Systems</a>
+      <a href="../index.html#funding" class="magnetic" data-strength="20">Business Funding</a>
+    </div>
+    <div class="nav-actions">
+      <a href="tel:07842088092" class="btn-glass magnetic" data-strength="20">07842 088092</a>
+      <a href="../index.html#quote" class="btn-solid magnetic" data-strength="40">Get a Free Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PRODUCT HERO -->
+<header class="hero-section" style="padding-top:200px; padding-bottom: 100px;">
+  <div class="hero-bg-grid"></div>
+  <div class="bg-orb orb-1"></div>
+  
+  <div class="container dual-grid align-center-mobile">
+    <div class="hero-content perspective-container">
+      <span class="trust-label highlight-label">Plemmo Hardware</span>
+      <h1 class="hero-title reveal-up" style="font-size: clamp(64px, 8vw, 120px)">FLAWLESS<br><span class="accent-text">PAYMENTS.</span></h1>
+      <p class="hero-desc reveal-up delay-1">Lightning-fast 4G & Wi-Fi terminals. Transparent blended rates. Next-day settlements. Because you shouldn't have to wait for the money you've already earned.</p>
+      
+      <div class="hero-buttons reveal-up delay-2">
+        <a href="../index.html#calculator" class="btn-solid btn-large magnetic" data-strength="30">Calculate Savings</a>
+        <a href="#features" class="btn-outline btn-large magnetic" data-strength="30">Tech Specs</a>
+      </div>
+    </div>
+
+    <!-- Massive 3D Product Float -->
+    <div class="hero-visual perspective-container">
+      <img src="../images/Card machine no bg.webp" onerror="this.src='https://cdn.prod.website-files.com/641031309f3ed1b9978db3ef/641031309f3ed1d7468db481_teya-terminal.png'" alt="Card Machine" class="tilt-element float-anim-1" style="width: 120%; filter: drop-shadow(0 50px 80px rgba(0,0,0,0.5)); transform: translateZ(100px); margin-left: -10%;">
+    </div>
+  </div>
+</header>
+
+<!-- FEATURES BENTO -->
+<section id="features" class="section-padding light-bg relative-section">
+  <div class="container">
+    <h2 class="dark-heading align-center" style="margin-bottom: 80px; font-size: clamp(48px, 6vw, 80px);">ENGINEERED FOR <span class="accent-text">SPEED.</span></h2>
+    
+    <div class="bento-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 350px; gap: 20px;">
+      
+      <!-- Next Day Settlement (Span 2x1) -->
+      <div class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #000;">
+        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.4; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <div style="position: relative; z-index: 10;">
+          <iconify-icon icon="solar:flash-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
+          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Next-Day Settlement</h3>
+          <p style="color: #cbd5e1; font-size: 18px; max-width: 400px; font-weight: 500;">Your money hits your account by 10 AM the next business day. No holding periods.</p>
+        </div>
+      </div>
+
+      <!-- Always Connected (Span 1x2) -->
+      <div class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 2; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #121824;">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <div style="position: relative; z-index: 10;">
+          <iconify-icon icon="solar:global-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
+          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Always Connected</h3>
+          <p style="color: #cbd5e1; font-size: 18px; font-weight: 500;">Seamlessly switches between Wi-Fi and 4G so you never drop a transaction.</p>
+        </div>
+      </div>
+
+      <!-- Zero Hidden Fees (Span 2x1) -->
+      <div class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #fff; border: 1px solid #e2e8f0;">
+        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.1; filter: grayscale(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <div style="position: relative; z-index: 10;">
+          <iconify-icon icon="solar:bill-check-bold-duotone" style="font-size: 40px; color: #10b981; margin-bottom: 16px;"></iconify-icon>
+          <h3 style="font-size: 40px; color: #000; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Zero Hidden Fees</h3>
+          <p style="color: var(--text-light-muted); font-size: 18px; max-width: 400px; font-weight: 500;">No PCI fees. No auth fees. Just a single, aggressively priced blended rate.</p>
+        </div>
+      </div>
+
+      <!-- Security (Span 3x1) -->
+      <div class="bento-creative-card reveal-up" style="grid-column: span 3; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #000;">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.3; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <div style="position: relative; z-index: 10;">
+          <iconify-icon icon="solar:shield-keyhole-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
+          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Bank-Grade Encryption</h3>
+          <p style="color: #cbd5e1; font-size: 18px; max-width: 600px; font-weight: 500;">Locked down with P2PE encryption, keeping you entirely out of PCI scope.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECH SPECS & HARDWARE BREAKDOWN -->
+<section class="section-padding dark-section">
+  <div class="container dual-grid align-center-mobile">
+    <div class="split-visual reveal-left perspective-container">
+       <img src="../images/Card machine no bg.webp" alt="Plemmo Terminal" class="tilt-element" style="width: 100%; filter: drop-shadow(0 20px 50px rgba(198,255,0,0.15)); transform: translateZ(40px);">
+    </div>
+    <div class="split-content reveal-right">
+      <span class="highlight-label">Technical Specifications</span>
+      <h2>THE ONLY TERMINAL<br>YOU WILL EVER NEED.</h2>
+      
+      <div class="specs-list" style="margin-top: 48px; display: grid; gap: 24px;">
+        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
+          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:battery-charge-bold-duotone" style="color: var(--accent);"></iconify-icon> All-Day Battery Life</h4>
+          <p style="color: var(--text-dark-muted);">Process over 800 transactions on a single charge. Drops perfectly into the charging dock overnight.</p>
+        </div>
+        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
+          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:printer-minimalistic-bold-duotone" style="color: var(--accent);"></iconify-icon> Integrated Receipt Printer</h4>
+          <p style="color: var(--text-dark-muted);">Lightning-fast thermal printer built directly into the head of the terminal. No external bulky hardware required.</p>
+        </div>
+        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
+          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:card-2-bold-duotone" style="color: var(--accent);"></iconify-icon> Omnichannel Acceptance</h4>
+          <p style="color: var(--text-dark-muted);">Contactless, Chip & PIN, Apple Pay, Google Pay, Amex. If they want to spend it, you can accept it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS MARQUEE -->
+<section class="marquee-section light-bg" style="border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 40px 0;">
+  <div class="container align-center" style="margin-bottom: 24px;">
+    <h4 style="color: var(--text-light-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Integrates Seamlessly With Over 40+ Major EPOS Systems</h4>
+  </div>
+  <div class="marquee-container" style="background: transparent;">
+    <div class="marquee-track" style="display: flex; gap: 80px; align-items: center;">
+      <!-- Simulated Logos -->
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">SQUARE</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">ZETTLE</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">LIGHTSPEED</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">EPOS NOW</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">TOUCHBISTRO</h3>
+      <!-- Repeat -->
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">SQUARE</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">ZETTLE</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">LIGHTSPEED</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">EPOS NOW</h3>
+      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">TOUCHBISTRO</h3>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE ONBOARDING WIZARD (LEAD CAPTURE) -->
+<section id="quote" class="section-padding accent-section">
+  <div class="container align-center">
+    <h2 class="dark-heading" style="font-size: clamp(48px, 6vw, 80px);">UPGRADE YOUR<br>TERMINALS TODAY.</h2>
+    <p style="font-size: 20px; font-weight: 500; margin-bottom: 24px; color: #111;">Free hardware replacement. Zero setup fees. Answer 3 questions to get your rate.</p>
+    
+    <div class="wizard-container shadow-heavy" style="background: #fff; border-radius: var(--radius-xl); max-width: 700px; margin: 40px auto 0; padding: 48px; text-align: left;">
+      <div class="wizard-step" id="step-1">
+        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 1 of 3</span>
+        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">How many terminals do you need?</h3>
+        
+        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+          <div class="wizard-option row-option" onclick="nextStep(2)">
+             <span style="font-weight: 700; font-size: 18px;">1 - 2 Terminals</span>
+          </div>
+          <div class="wizard-option row-option" onclick="nextStep(2)">
+             <span style="font-weight: 700; font-size: 18px;">3 - 5 Terminals</span>
+          </div>
+          <div class="wizard-option row-option" onclick="nextStep(2)">
+             <span style="font-weight: 700; font-size: 18px;">6+ Terminals (Multi-Site)</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="wizard-step" id="step-2" style="display: none;">
+        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 2 of 3</span>
+        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">Do you need EPOS integration?</h3>
+        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+          <div class="wizard-option row-option" onclick="nextStep(3)">
+             <span style="font-weight: 700; font-size: 18px;">Yes, I need them to sync</span>
+          </div>
+          <div class="wizard-option row-option" onclick="nextStep(3)">
+             <span style="font-weight: 700; font-size: 18px;">No, standalone is fine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-step" id="step-3" style="display: none;">
+        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 3 of 3</span>
+        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">Where should we send your custom rate?</h3>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <input type="text" placeholder="Full Name" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
+        </div>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <input type="email" placeholder="Work Email" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
+        </div>
+        <button class="btn-solid-dark btn-large" style="width: 100%; justify-content: center; border: none; cursor: pointer;">Get My Hardware & Rates</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function nextStep(step) {
+    document.querySelectorAll('.wizard-step').forEach(s => s.style.display = 'none');
+    document.getElementById('step-' + step).style.display = 'block';
+  }
+</script>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <img src="../images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
+        Plemmo
+      </div>
+      <p class="tagline">"We provide for and care about local businesses."</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="link-col">
+        <h4>Navigation</h4>
+        <a href="../index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Refer & Earn</a>
+      </div>
+      <div class="link-col">
+        <h4>Solutions</h4>
+        <a href="card-machines.html">Card Machines</a>
+        <a href="epos.html">EPOS Systems</a>
+        <a href="../index.html#funding">Business Funding</a>
+        <a href="../index.html#signage">Signage</a>
+      </div>
+      <div class="link-col">
+        <h4>More</h4>
+        <a href="#">Call Centre</a>
+        <a href="#">Utilities</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container footer-bottom">
+    <div class="disclaimer">
+      Plemmo is a trading name of [Registered Company Name]. All hardware remains the property of the acquiring bank unless explicitly purchased. Rates subject to underwriting.
+    </div>
+    <div class="copyright">Copyright © 2026 Plemmo. All Rights Reserved</div>
+  </div>
+</footer>
+
+<script src="../main.js"></script>
+</body>
+</html>
