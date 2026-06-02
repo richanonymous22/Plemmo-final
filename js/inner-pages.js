@@ -265,6 +265,139 @@
   }
 
   /* ---------------------------------------------------------------------- *
+   * 8. DIGITAL SIGNAGE PAGE (scoped — only runs on that page)
+   *    - signage type selector updates the recommendation panel
+   *    - quote triggers prefill service/product into the modal
+   *    - quote form shows a success state
+   * ---------------------------------------------------------------------- */
+  function initSignage() {
+    var page = $('.digital-signage-page');
+    if (!page) return;
+
+    /* Recommendation data keyed by signage type */
+    var recs = {
+      'digital-menu-boards': {
+        icon: 'solar:clipboard-list-linear', title: 'For cafés & takeaways',
+        text: 'Digital Menu Boards are perfect for showcasing your menu, promotions and prices with style and clarity.',
+        list: ['Boost impulse orders', 'Easy to update anytime', 'Increase average spend'],
+        best: '32” Digital Menu Board Package', price: '£350', unit: '/screen', size: '32"',
+        service: 'Digital Menu Boards', btn: 'View Menu Board Packages'
+      },
+      'window-displays': {
+        icon: 'solar:window-frame-linear', title: 'For high-street visibility',
+        text: 'Window displays help your storefront stand out in direct sunlight and attract passing customers.',
+        list: ['Visible from outside', 'Promote offers 24/7', 'Built for high-footfall locations'],
+        best: 'High Brightness Window Display', price: 'From £1,770', unit: '', size: '43"',
+        service: 'Window Displays', btn: 'View Window Displays'
+      },
+      'advertising-screens': {
+        icon: 'solar:monitor-linear', title: 'For offers and promotions',
+        text: 'Advertising screens help promote campaigns, products and seasonal messages inside your business.',
+        list: ['Dynamic promotions', 'Professional visuals', 'Flexible content updates'],
+        best: 'Professional Advertising Display', price: 'From £650', unit: '', size: '32"',
+        service: 'Advertising Screens', btn: 'View Advertising Screens'
+      },
+      'shopfront-signs': {
+        icon: 'solar:shop-2-linear', title: 'For brand presence',
+        text: 'Custom shopfront signs help your business look professional and easy to recognise.',
+        list: ['Built around your brand', 'Material and lighting options', 'Site survey recommended'],
+        best: 'Custom Shopfront Signage', price: 'Quote based', unit: '', size: 'Custom',
+        service: 'Shopfront Signs', btn: 'Enquire About Shopfront Signs'
+      },
+      'neon-signs': {
+        icon: 'solar:bolt-linear', title: 'For atmosphere and attention',
+        text: 'LED neon signs add personality, atmosphere and memorable visual moments to your space.',
+        list: ['Custom colours', 'Logo and text options', 'Great for social media appeal'],
+        best: 'Custom LED Neon Sign', price: 'Quote based', unit: '', size: 'Custom',
+        service: 'LED Neon Signs', btn: 'Enquire About Neon Signs'
+      },
+      'outdoor-displays': {
+        icon: 'solar:cloud-sun-linear', title: 'For all-weather visibility',
+        text: 'Outdoor screens help businesses advertise in high-impact locations, day and night.',
+        list: ['Weather-resistant options', 'High visibility', 'Built for outdoor environments'],
+        best: 'Outdoor Digital Advertising Display', price: 'From £2,960', unit: '', size: '43"',
+        service: 'Outdoor Displays', btn: 'View Outdoor Displays'
+      },
+      'touch-kiosks': {
+        icon: 'solar:cursor-square-linear', title: 'For interactive customer experiences',
+        text: 'Touch kiosks help customers browse, order, check in or interact with your business independently.',
+        list: ['Interactive experience', 'Self-service options', 'Ideal for hospitality and retail'],
+        best: 'Android Touch Screen Kiosk', price: 'From £2,290', unit: '', size: '43"',
+        service: 'Touch Kiosks', btn: 'View Touch Kiosks'
+      }
+    };
+
+    var picks = $all('.ds-pick', page);
+    var elIcon = $('#ds-rec-icon');
+    var elTitle = $('#ds-rec-title');
+    var elText = $('#ds-rec-text');
+    var elList = $('#ds-rec-list');
+    var elBest = $('#ds-rec-best');
+    var elPrice = $('#ds-rec-price');
+    var elUnit = $('#ds-rec-unit');
+    var elSize = $('#ds-rec-thumb-size');
+    var elBtn = $('#ds-rec-btn');
+
+    function applyRec(type) {
+      var r = recs[type];
+      if (!r) return;
+      if (elIcon) elIcon.setAttribute('icon', r.icon);
+      if (elTitle) elTitle.textContent = r.title;
+      if (elText) elText.textContent = r.text;
+      if (elList) {
+        elList.innerHTML = r.list.map(function (item) {
+          return '<li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> ' + item + '</li>';
+        }).join('');
+      }
+      if (elBest) elBest.textContent = r.best;
+      if (elPrice) elPrice.textContent = r.price;
+      if (elUnit) elUnit.textContent = r.unit;
+      if (elSize) elSize.textContent = r.size;
+      if (elBtn) {
+        elBtn.setAttribute('data-service', r.service);
+        elBtn.innerHTML = r.btn + ' <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>';
+      }
+    }
+
+    picks.forEach(function (pick) {
+      on(pick, 'click', function () {
+        picks.forEach(function (p) { p.classList.remove('is-selected'); p.setAttribute('aria-pressed', 'false'); });
+        pick.classList.add('is-selected');
+        pick.setAttribute('aria-pressed', 'true');
+        applyRec(pick.getAttribute('data-type'));
+      });
+    });
+
+    /* Prefill the signage quote modal from any trigger's data-service / data-product */
+    var serviceField = $('#ds-service');
+    var productField = $('#ds-product');
+    $all('[data-modal-open="signage-quote"]').forEach(function (trigger) {
+      on(trigger, 'click', function () {
+        var svc = trigger.getAttribute('data-service');
+        var prod = trigger.getAttribute('data-product');
+        if (svc && serviceField) {
+          Array.prototype.forEach.call(serviceField.options, function (o) {
+            if (o.value === svc || o.text === svc) serviceField.value = o.value;
+          });
+        }
+        if (productField) productField.value = prod || '';
+      });
+    });
+
+    /* Quote form -> success state */
+    var form = $('#ds-quote-form');
+    var success = $('#ds-quote-success');
+    if (form && success) {
+      on(form, 'submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        form.classList.add('ip-hide');
+        success.classList.remove('ip-hide');
+      });
+    }
+  }
+
+  /* ---------------------------------------------------------------------- *
    * BOOT
    * ---------------------------------------------------------------------- */
   function init() {
@@ -275,6 +408,7 @@
     initCheckers();
     initModals();
     initReveal();
+    initSignage();
   }
 
   if (document.readyState === 'loading') {
