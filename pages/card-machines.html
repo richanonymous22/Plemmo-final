@@ -2,267 +2,820 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Card Machines — Plemmo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Card Machines — Compare UK Providers & Rates | Plemmo</title>
+  <meta name="description" content="Compare leading UK card machine providers with Plemmo. Find the right terminal and rates for your shop, takeaway, restaurant, café or salon. Free, no-obligation quotes.">
   <link rel="icon" type="image/png" href="../images/logo.png">
-  
-  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Inner-page design system (this page uses ONLY these two files) -->
+  <link rel="stylesheet" href="../css/inner-pages.css">
+
+  <!-- Inter typeface -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Clean line icons -->
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
-<body>
+<body class="inner ip-page card-machines-page">
 
-<!-- CUSTOM CURSOR -->
-<div class="cursor-dot"></div>
+<!-- ============================ SECTION 1 — HEADER ====================== -->
+<header class="ip-header">
+  <div class="ip-container ip-header__inner">
+    <a href="../index.html" class="ip-logo" aria-label="Plemmo home">
+      <img src="../images/logo.png" alt="">
+      Plemmo
+    </a>
 
-<!-- STICKY NAVIGATION -->
-<nav class="site-nav glass-nav">
-  <div class="nav-container">
-    <div class="nav-logo">
-      <img src="../images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
-      <a href="../index.html" style="color:#fff; text-decoration:none;">Plemmo</a>
-    </div>
-    <div class="nav-links">
-      <a href="card-machines.html" class="magnetic" data-strength="20" style="color:#fff">Card Machines</a>
-      <a href="epos.html" class="magnetic" data-strength="20">EPOS Systems</a>
-      <a href="../index.html#funding" class="magnetic" data-strength="20">Business Funding</a>
-    </div>
-    <div class="nav-actions">
-      <a href="tel:07842088092" class="btn-glass magnetic" data-strength="20">07842 088092</a>
-      <a href="../index.html#quote" class="btn-solid magnetic" data-strength="40">Get a Free Quote</a>
-    </div>
-  </div>
-</nav>
+    <nav class="ip-nav" aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="card-machines.html" class="is-active" aria-current="page">Card Machines</a>
+      <a href="business-funding.html">Business Funding</a>
+      <a href="epos-systems.html">EPOS Systems</a>
+      <a href="digital-signage.html">Digital Signage</a>
+      <a href="about-us.html">About Us</a>
+      <a href="contact-us.html">Contact Us</a>
+    </nav>
 
-<!-- PRODUCT HERO -->
-<header class="hero-section" style="padding-top:200px; padding-bottom: 100px;">
-  <div class="hero-bg-grid"></div>
-  <div class="bg-orb orb-1"></div>
-  
-  <div class="container dual-grid align-center-mobile">
-    <div class="hero-content perspective-container">
-      <span class="trust-label highlight-label">Plemmo Hardware</span>
-      <h1 class="hero-title reveal-up" style="font-size: clamp(64px, 8vw, 120px)">FLAWLESS<br><span class="accent-text">PAYMENTS.</span></h1>
-      <p class="hero-desc reveal-up delay-1">Lightning-fast 4G & Wi-Fi terminals. Transparent blended rates. Next-day settlements. Because you shouldn't have to wait for the money you've already earned.</p>
-      
-      <div class="hero-buttons reveal-up delay-2">
-        <a href="../index.html#calculator" class="btn-solid btn-large magnetic" data-strength="30">Calculate Savings</a>
-        <a href="#features" class="btn-outline btn-large magnetic" data-strength="30">Tech Specs</a>
-      </div>
+    <div class="ip-header__actions">
+      <a href="tel:02079460958" class="ip-btn ip-btn--outline ip-btn--sm">
+        <iconify-icon icon="solar:phone-linear"></iconify-icon> 020 7946 0958
+      </a>
+      <a href="#quote-modal" class="ip-btn ip-btn--primary ip-btn--sm" data-modal-open="quote-modal">Get a Free Quote</a>
     </div>
 
-    <!-- Massive 3D Product Float -->
-    <div class="hero-visual perspective-container">
-      <img src="../images/Card machine no bg.webp" onerror="this.src='https://cdn.prod.website-files.com/641031309f3ed1b9978db3ef/641031309f3ed1d7468db481_teya-terminal.png'" alt="Card Machine" class="tilt-element float-anim-1" style="width: 120%; filter: drop-shadow(0 50px 80px rgba(0,0,0,0.5)); transform: translateZ(100px); margin-left: -10%;">
-    </div>
+    <button class="ip-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
-<!-- FEATURES BENTO -->
-<section id="features" class="section-padding light-bg relative-section">
-  <div class="container">
-    <h2 class="dark-heading align-center" style="margin-bottom: 80px; font-size: clamp(48px, 6vw, 80px);">ENGINEERED FOR <span class="accent-text">SPEED.</span></h2>
-    
-    <div class="bento-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 350px; gap: 20px;">
-      
-      <!-- Next Day Settlement (Span 2x1) -->
-      <div class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #000;">
-        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.4; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:flash-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Next-Day Settlement</h3>
-          <p style="color: #cbd5e1; font-size: 18px; max-width: 400px; font-weight: 500;">Your money hits your account by 10 AM the next business day. No holding periods.</p>
-        </div>
-      </div>
-
-      <!-- Always Connected (Span 1x2) -->
-      <div class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 2; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #121824;">
-        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=600" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:global-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Always Connected</h3>
-          <p style="color: #cbd5e1; font-size: 18px; font-weight: 500;">Seamlessly switches between Wi-Fi and 4G so you never drop a transaction.</p>
-        </div>
-      </div>
-
-      <!-- Zero Hidden Fees (Span 2x1) -->
-      <div class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #fff; border: 1px solid #e2e8f0;">
-        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.1; filter: grayscale(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:bill-check-bold-duotone" style="font-size: 40px; color: #10b981; margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #000; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Zero Hidden Fees</h3>
-          <p style="color: var(--text-light-muted); font-size: 18px; max-width: 400px; font-weight: 500;">No PCI fees. No auth fees. Just a single, aggressively priced blended rate.</p>
-        </div>
-      </div>
-
-      <!-- Security (Span 3x1) -->
-      <div class="bento-creative-card reveal-up" style="grid-column: span 3; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); padding: 48px; display: flex; flex-direction: column; justify-content: flex-end; background: #000;">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.3; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
-        <div style="position: relative; z-index: 10;">
-          <iconify-icon icon="solar:shield-keyhole-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></iconify-icon>
-          <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Bank-Grade Encryption</h3>
-          <p style="color: #cbd5e1; font-size: 18px; max-width: 600px; font-weight: 500;">Locked down with P2PE encryption, keeping you entirely out of PCI scope.</p>
-        </div>
-      </div>
-
+<!-- Mobile navigation -->
+<div class="ip-mobile-nav" id="mobile-nav" aria-label="Mobile">
+  <div class="ip-mobile-nav__top">
+    <a href="../index.html" class="ip-logo"><img src="../images/logo.png" alt="">Plemmo</a>
+    <button class="ip-modal__close" data-mobile-close aria-label="Close menu">
+      <iconify-icon icon="solar:close-circle-linear"></iconify-icon>
+    </button>
+  </div>
+  <div class="ip-mobile-nav__links">
+    <a href="../index.html">Home <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+    <a href="card-machines.html">Card Machines <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+    <a href="business-funding.html">Business Funding <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+    <a href="epos-systems.html">EPOS Systems <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+    <a href="digital-signage.html">Digital Signage <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+    <a href="about-us.html">About Us <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+    <a href="contact-us.html">Contact Us <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon></a>
+    <div class="ip-mobile-nav__actions">
+      <a href="tel:02079460958" class="ip-btn ip-btn--outline">
+        <iconify-icon icon="solar:phone-linear"></iconify-icon> 020 7946 0958
+      </a>
+      <a href="#quote-modal" class="ip-btn ip-btn--primary" data-modal-open="quote-modal">Get a Free Quote</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- TECH SPECS & HARDWARE BREAKDOWN -->
-<section class="section-padding dark-section">
-  <div class="container dual-grid align-center-mobile">
-    <div class="split-visual reveal-left perspective-container">
-       <img src="../images/Card machine no bg.webp" alt="Plemmo Terminal" class="tilt-element" style="width: 100%; filter: drop-shadow(0 20px 50px rgba(198,255,0,0.15)); transform: translateZ(40px);">
-    </div>
-    <div class="split-content reveal-right">
-      <span class="highlight-label">Technical Specifications</span>
-      <h2>THE ONLY TERMINAL<br>YOU WILL EVER NEED.</h2>
-      
-      <div class="specs-list" style="margin-top: 48px; display: grid; gap: 24px;">
-        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:battery-charge-bold-duotone" style="color: var(--accent);"></iconify-icon> All-Day Battery Life</h4>
-          <p style="color: var(--text-dark-muted);">Process over 800 transactions on a single charge. Drops perfectly into the charging dock overnight.</p>
+<!-- ============================ SECTION 2 — HERO ======================== -->
+<section class="ip-hero ip-hero--light">
+  <div class="ip-hero__blob ip-hero__blob--1"></div>
+  <div class="ip-container">
+    <div class="ip-hero__grid">
+      <div class="ip-hero__content ip-reveal">
+        <span class="ip-eyebrow ip-eyebrow--pill">Card Machines</span>
+        <h1 class="ip-h1">Find the right card machine for <span class="ip-accent">your business</span></h1>
+        <p class="ip-lead">Compare leading providers, get better rates and start accepting payments with confidence.</p>
+
+        <ul class="ip-hero__trust">
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Compare top providers</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Fast approval options</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> UK business support</li>
+        </ul>
+
+        <div class="ip-btn-row" style="margin-top:32px;">
+          <a href="#finder" class="ip-btn ip-btn--primary ip-btn--lg">
+            Find My Card Machine <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+          </a>
+          <a href="tel:02079460958" class="ip-btn ip-btn--outline ip-btn--lg">Speak to an Expert</a>
         </div>
-        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:printer-minimalistic-bold-duotone" style="color: var(--accent);"></iconify-icon> Integrated Receipt Printer</h4>
-          <p style="color: var(--text-dark-muted);">Lightning-fast thermal printer built directly into the head of the terminal. No external bulky hardware required.</p>
-        </div>
-        <div class="spec-item" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-          <h4 style="font-size: 20px; color: #fff; margin-bottom: 8px;"><iconify-icon icon="solar:card-2-bold-duotone" style="color: var(--accent);"></iconify-icon> Omnichannel Acceptance</h4>
-          <p style="color: var(--text-dark-muted);">Contactless, Chip & PIN, Apple Pay, Google Pay, Amex. If they want to spend it, you can accept it.</p>
+      </div>
+
+      <div class="ip-hero__content ip-reveal" data-delay="1">
+        <div class="ip-hero__media ip-hero__media--bare cm-hero-visual">
+          <img src="../images/Card machine no bg.webp" alt="Portable card payment terminal"
+               onerror="this.closest('.cm-hero-visual').classList.add('cm-hero-visual--fallback'); this.remove();">
+          <div class="cm-hero-visual__fallback" aria-hidden="true">
+            <iconify-icon icon="solar:card-transfer-linear"></iconify-icon>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INTEGRATIONS MARQUEE -->
-<section class="marquee-section light-bg" style="border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 40px 0;">
-  <div class="container align-center" style="margin-bottom: 24px;">
-    <h4 style="color: var(--text-light-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;">Integrates Seamlessly With Over 40+ Major EPOS Systems</h4>
-  </div>
-  <div class="marquee-container" style="background: transparent;">
-    <div class="marquee-track" style="display: flex; gap: 80px; align-items: center;">
-      <!-- Simulated Logos -->
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">SQUARE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">ZETTLE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">LIGHTSPEED</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">EPOS NOW</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">TOUCHBISTRO</h3>
-      <!-- Repeat -->
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">SQUARE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">ZETTLE</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">LIGHTSPEED</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">EPOS NOW</h3>
-      <h3 style="font-family: var(--font-heading); color: #94a3b8; font-size: 32px;">TOUCHBISTRO</h3>
+<!-- Provider logo strip -->
+<section class="ip-logos ip-bg-white" style="border-block:1px solid var(--border);">
+  <div class="ip-container">
+    <p class="ip-logos__label">We compare selected UK payment partners</p>
+    <div class="ip-logos__row">
+      <span>Teya</span><span>SumUp</span><span>Shift4</span><span>Worldpay</span><span>Barclaycard</span>
     </div>
   </div>
 </section>
 
-<!-- INTERACTIVE ONBOARDING WIZARD (LEAD CAPTURE) -->
-<section id="quote" class="section-padding accent-section">
-  <div class="container align-center">
-    <h2 class="dark-heading" style="font-size: clamp(48px, 6vw, 80px);">UPGRADE YOUR<br>TERMINALS TODAY.</h2>
-    <p style="font-size: 20px; font-weight: 500; margin-bottom: 24px; color: #111;">Free hardware replacement. Zero setup fees. Answer 3 questions to get your rate.</p>
-    
-    <div class="wizard-container shadow-heavy" style="background: #fff; border-radius: var(--radius-xl); max-width: 700px; margin: 40px auto 0; padding: 48px; text-align: left;">
-      <div class="wizard-step" id="step-1">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 1 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">How many terminals do you need?</h3>
-        
-        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-          <div class="wizard-option row-option" onclick="nextStep(2)">
-             <span style="font-weight: 700; font-size: 18px;">1 - 2 Terminals</span>
-          </div>
-          <div class="wizard-option row-option" onclick="nextStep(2)">
-             <span style="font-weight: 700; font-size: 18px;">3 - 5 Terminals</span>
-          </div>
-          <div class="wizard-option row-option" onclick="nextStep(2)">
-             <span style="font-weight: 700; font-size: 18px;">6+ Terminals (Multi-Site)</span>
+<!-- ===================== SECTION 3 & 4 — FINDER + RECOMMENDATION ======== -->
+<section class="ip-section ip-bg-offwhite" id="finder">
+  <div class="ip-container">
+    <div class="ip-section-head ip-section-head--center ip-reveal">
+      <span class="ip-eyebrow">Card machine finder</span>
+      <h2 class="ip-h2">Find your perfect card machine in 30 seconds</h2>
+      <p class="ip-lead">Answer a few quick questions and we'll recommend suitable options.</p>
+    </div>
+
+    <div class="ip-grid" style="grid-template-columns:1.1fr 0.9fr; align-items:start; gap:28px;">
+      <!-- Quiz -->
+      <div class="ip-checker ip-reveal" data-checker style="max-width:none; margin:0;">
+        <div class="ip-checker__progress">
+          <span class="ip-checker__step-label">Step 1 of 4</span>
+          <div class="ip-checker__bar"><i></i></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="ip-checker__step is-active">
+          <h3>What's your monthly card turnover?</h3>
+          <div class="ip-checker__options">
+            <button class="ip-option" data-q="turnover" data-val="under5k"><iconify-icon icon="solar:wallet-linear"></iconify-icon> Under £5k</button>
+            <button class="ip-option" data-q="turnover" data-val="5-10k"><iconify-icon icon="solar:wallet-linear"></iconify-icon> £5k–£10k</button>
+            <button class="ip-option" data-q="turnover" data-val="10-25k"><iconify-icon icon="solar:wallet-linear"></iconify-icon> £10k–£25k</button>
+            <button class="ip-option" data-q="turnover" data-val="25-50k"><iconify-icon icon="solar:wallet-linear"></iconify-icon> £25k–£50k</button>
+            <button class="ip-option" data-q="turnover" data-val="50k"><iconify-icon icon="solar:wallet-linear"></iconify-icon> £50k+</button>
           </div>
         </div>
-      </div>
-      
-      <div class="wizard-step" id="step-2" style="display: none;">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 2 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">Do you need EPOS integration?</h3>
-        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-          <div class="wizard-option row-option" onclick="nextStep(3)">
-             <span style="font-weight: 700; font-size: 18px;">Yes, I need them to sync</span>
+
+        <!-- Step 2 -->
+        <div class="ip-checker__step">
+          <h3>What type of business are you?</h3>
+          <div class="ip-checker__options ip-checker__options--2">
+            <button class="ip-option" data-q="type" data-val="retail"><iconify-icon icon="solar:shop-linear"></iconify-icon> Retail</button>
+            <button class="ip-option" data-q="type" data-val="restaurant"><iconify-icon icon="solar:chef-hat-linear"></iconify-icon> Restaurant / Takeaway</button>
+            <button class="ip-option" data-q="type" data-val="cafe"><iconify-icon icon="solar:cup-hot-linear"></iconify-icon> Café</button>
+            <button class="ip-option" data-q="type" data-val="salon"><iconify-icon icon="solar:scissors-linear"></iconify-icon> Salon / Barber</button>
+            <button class="ip-option" data-q="type" data-val="mobile"><iconify-icon icon="solar:delivery-linear"></iconify-icon> Mobile / Delivery</button>
+            <button class="ip-option" data-q="type" data-val="other"><iconify-icon icon="solar:widget-linear"></iconify-icon> Other</button>
           </div>
-          <div class="wizard-option row-option" onclick="nextStep(3)">
-             <span style="font-weight: 700; font-size: 18px;">No, standalone is fine</span>
+          <div class="ip-btn-row" style="margin-top:20px;">
+            <button class="ip-btn ip-btn--outline ip-btn--sm" data-prev><iconify-icon icon="solar:arrow-left-linear"></iconify-icon> Back</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="ip-checker__step">
+          <h3>What matters most to you?</h3>
+          <div class="ip-checker__options ip-checker__options--2">
+            <button class="ip-option" data-q="priority" data-val="lowest-rates"><iconify-icon icon="solar:tag-price-linear"></iconify-icon> Lowest rates</button>
+            <button class="ip-option" data-q="priority" data-val="no-contract"><iconify-icon icon="solar:document-linear"></iconify-icon> No contract</button>
+            <button class="ip-option" data-q="priority" data-val="fast-payouts"><iconify-icon icon="solar:bolt-linear"></iconify-icon> Fast payouts</button>
+            <button class="ip-option" data-q="priority" data-val="simple-setup"><iconify-icon icon="solar:cursor-linear"></iconify-icon> Simple setup</button>
+            <button class="ip-option" data-q="priority" data-val="not-sure"><iconify-icon icon="solar:question-circle-linear"></iconify-icon> Not sure</button>
+          </div>
+          <div class="ip-btn-row" style="margin-top:20px;">
+            <button class="ip-btn ip-btn--outline ip-btn--sm" data-prev><iconify-icon icon="solar:arrow-left-linear"></iconify-icon> Back</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="ip-checker__step">
+          <h3>Who's your current provider?</h3>
+          <div class="ip-checker__options ip-checker__options--2">
+            <button class="ip-option" data-q="current" data-val="new"><iconify-icon icon="solar:star-linear"></iconify-icon> New to card payments</button>
+            <button class="ip-option" data-q="current" data-val="teya"><iconify-icon icon="solar:card-linear"></iconify-icon> Teya</button>
+            <button class="ip-option" data-q="current" data-val="sumup"><iconify-icon icon="solar:card-linear"></iconify-icon> SumUp</button>
+            <button class="ip-option" data-q="current" data-val="worldpay"><iconify-icon icon="solar:card-linear"></iconify-icon> Worldpay</button>
+            <button class="ip-option" data-q="current" data-val="barclaycard"><iconify-icon icon="solar:card-linear"></iconify-icon> Barclaycard</button>
+            <button class="ip-option" data-q="current" data-val="other"><iconify-icon icon="solar:card-linear"></iconify-icon> Other</button>
+          </div>
+          <div class="ip-btn-row" style="margin-top:20px;">
+            <button class="ip-btn ip-btn--outline ip-btn--sm" data-prev><iconify-icon icon="solar:arrow-left-linear"></iconify-icon> Back</button>
           </div>
         </div>
       </div>
 
-      <div class="wizard-step" id="step-3" style="display: none;">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 3 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">Where should we send your custom rate?</h3>
-        <div class="form-group" style="margin-bottom: 16px;">
-          <input type="text" placeholder="Full Name" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
-        </div>
-        <div class="form-group" style="margin-bottom: 24px;">
-          <input type="email" placeholder="Work Email" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
-        </div>
-        <button class="btn-solid-dark btn-large" style="width: 100%; justify-content: center; border: none; cursor: pointer;">Get My Hardware & Rates</button>
-      </div>
+      <!-- Recommendation panel -->
+      <aside class="ip-card ip-reveal" data-delay="1" id="recommendation" style="position:sticky; top:96px;">
+        <span class="ip-eyebrow ip-eyebrow--pill" id="rec-tag">Recommended for your business</span>
+        <h3 class="ip-h3" id="rec-title" style="margin-top:16px;">Recommended for your business</h3>
+        <p class="ip-text" id="rec-intro" style="margin-top:8px;">Answer the quick questions to see suitable card machine options.</p>
 
+        <div id="rec-detail" class="ip-hide" style="margin-top:18px;">
+          <div style="display:grid; gap:14px;">
+            <div>
+              <div class="ip-eyebrow" style="margin-bottom:4px;">Why it fits</div>
+              <p class="ip-text" id="rec-why"></p>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+              <span class="ip-eyebrow--pill ip-eyebrow" id="rec-rate"></span>
+              <span class="ip-eyebrow--pill ip-eyebrow" id="rec-setup"></span>
+            </div>
+          </div>
+          <div class="ip-btn-row" style="margin-top:22px;">
+            <a href="#quote-modal" class="ip-btn ip-btn--primary" data-modal-open="quote-modal">Get This Quote</a>
+            <a href="#providers" class="ip-btn ip-btn--outline">Compare Options</a>
+          </div>
+          <p class="ip-form-note" style="margin-top:16px;">Indicative recommendation only. Subject to provider approval. Rates may vary based on business profile.</p>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
 
-<script>
-  function nextStep(step) {
-    document.querySelectorAll('.wizard-step').forEach(s => s.style.display = 'none');
-    document.getElementById('step-' + step).style.display = 'block';
-  }
-</script>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <img src="../images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
-        Plemmo
-      </div>
-      <p class="tagline">"We provide for and care about local businesses."</p>
+<!-- ===================== SECTION 5 — TOP PROVIDERS ===================== -->
+<section class="ip-section ip-bg-white" id="providers">
+  <div class="ip-container">
+    <div class="ip-section-head ip-reveal">
+      <span class="ip-eyebrow">Compare</span>
+      <h2 class="ip-h2">Top card machine providers</h2>
+      <p class="ip-lead">A snapshot of leading UK options. The right fit depends on your turnover, business type and priorities.</p>
     </div>
 
-    <div class="footer-links">
-      <div class="link-col">
-        <h4>Navigation</h4>
-        <a href="../index.html">Home</a>
-        <a href="#">About</a>
-        <a href="#">Refer & Earn</a>
+    <div class="ip-grid ip-grid--2">
+      <!-- Teya -->
+      <article class="ip-card ip-card--hover ip-reveal">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;">
+          <h3 class="ip-h3">Teya</h3>
+          <span class="ip-eyebrow--pill ip-eyebrow">Best for established businesses</span>
+        </div>
+        <ul class="ip-ticks">
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Competitive rates from 0.55%</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Next-day settlement options</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Business account options</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> No PCI / non-compliance fee mentioned</li>
+        </ul>
+        <p class="ip-text" style="margin-top:16px; font-size:0.88rem;">From £15 + VAT/month rental, or terminal options where eligible.</p>
+        <div class="ip-btn-row" style="margin-top:18px;">
+          <a href="#quote-modal" class="ip-btn ip-btn--dark ip-btn--sm" data-modal-open="quote-modal">Get This Quote</a>
+        </div>
+      </article>
+
+      <!-- SumUp -->
+      <article class="ip-card ip-card--hover ip-reveal" data-delay="1">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;">
+          <h3 class="ip-h3">SumUp</h3>
+          <span class="ip-eyebrow--pill ip-eyebrow">Simple setup</span>
+        </div>
+        <ul class="ip-ticks">
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> One-off terminal purchase</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> No monthly terminal fee</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Instant payout options</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Good for new / smaller businesses</li>
+        </ul>
+        <p class="ip-text" style="margin-top:16px; font-size:0.88rem;">Terminal from £162 inc VAT, where eligible.</p>
+        <div class="ip-btn-row" style="margin-top:18px;">
+          <a href="#quote-modal" class="ip-btn ip-btn--dark ip-btn--sm" data-modal-open="quote-modal">Get This Quote</a>
+        </div>
+      </article>
+
+      <!-- Shift4 -->
+      <article class="ip-card ip-card--hover ip-reveal">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;">
+          <h3 class="ip-h3">Shift4</h3>
+          <span class="ip-eyebrow--pill ip-eyebrow">Flexible option</span>
+        </div>
+        <ul class="ip-ticks">
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Blended rates available</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> First terminal may be available</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Next-working-day settlement option</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Good for lower turnover / riskier merchants</li>
+        </ul>
+        <p class="ip-text" style="margin-top:16px; font-size:0.88rem;">Rates from 1.25% below £10k, 0.7% above £10k where eligible.</p>
+        <div class="ip-btn-row" style="margin-top:18px;">
+          <a href="#quote-modal" class="ip-btn ip-btn--dark ip-btn--sm" data-modal-open="quote-modal">Get This Quote</a>
+        </div>
+      </article>
+
+      <!-- Worldpay -->
+      <article class="ip-card ip-card--hover ip-reveal" data-delay="1">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;">
+          <h3 class="ip-h3">Worldpay</h3>
+          <span class="ip-eyebrow--pill ip-eyebrow">Best for larger businesses</span>
+        </div>
+        <ul class="ip-ticks">
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Split debit / credit pricing options</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Next-day settlement</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Established provider</li>
+          <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Contract options</li>
+        </ul>
+        <p class="ip-text" style="margin-top:16px; font-size:0.88rem;">Example debit from 0.30% and credit from 0.65% above £25k, where eligible.</p>
+        <div class="ip-btn-row" style="margin-top:18px;">
+          <a href="#quote-modal" class="ip-btn ip-btn--dark ip-btn--sm" data-modal-open="quote-modal">Get This Quote</a>
+        </div>
+      </article>
+    </div>
+    <p class="ip-form-note ip-text-center" style="margin-top:24px;">Pricing shown is indicative and "from" only. Availability, rates and approval are subject to provider terms and eligibility.</p>
+  </div>
+</section>
+
+<!-- ===================== SECTION 6 — POPULAR CARD MACHINES ============= -->
+<section class="ip-section ip-bg-cream">
+  <div class="ip-container">
+    <div class="ip-section-head ip-reveal">
+      <span class="ip-eyebrow">Hardware</span>
+      <h2 class="ip-h2">Popular card machines</h2>
+    </div>
+
+    <div class="ip-grid ip-grid--3">
+      <!-- PAX A920 Pro -->
+      <article class="ip-product-card ip-reveal">
+        <div class="ip-product-card__media cm-mockup">
+          <span class="ip-product-card__tag">Popular</span>
+          <iconify-icon icon="solar:smartphone-2-linear"></iconify-icon>
+        </div>
+        <div class="ip-product-card__body">
+          <h3>PAX A920 Pro</h3>
+          <p>Used with suitable provider options.</p>
+          <ul class="ip-ticks" style="gap:8px; margin:6px 0;">
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Touchscreen terminal</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Portable</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Receipt printer</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Fast performance</li>
+          </ul>
+          <div class="ip-product-card__foot">
+            <a href="#quote-modal" class="ip-link" data-modal-open="quote-modal">View Details <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- SumUp Solo -->
+      <article class="ip-product-card ip-reveal" data-delay="1">
+        <div class="ip-product-card__media cm-mockup">
+          <iconify-icon icon="solar:card-linear"></iconify-icon>
+        </div>
+        <div class="ip-product-card__body">
+          <h3>SumUp Solo</h3>
+          <p>Simple portable card reader.</p>
+          <ul class="ip-ticks" style="gap:8px; margin:6px 0;">
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Compact</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> One-off purchase</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Easy setup</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Good for small businesses</li>
+          </ul>
+          <div class="ip-product-card__foot">
+            <a href="#quote-modal" class="ip-link" data-modal-open="quote-modal">View Details <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Smart Android Terminal -->
+      <article class="ip-product-card ip-reveal" data-delay="2">
+        <div class="ip-product-card__media cm-mockup">
+          <iconify-icon icon="solar:tablet-linear"></iconify-icon>
+        </div>
+        <div class="ip-product-card__body">
+          <h3>Smart Android Terminal</h3>
+          <p>Modern payment terminal.</p>
+          <ul class="ip-ticks" style="gap:8px; margin:6px 0;">
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Touchscreen</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> WiFi / Bluetooth</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Portable</li>
+            <li><iconify-icon icon="solar:check-circle-linear"></iconify-icon> Contactless ready</li>
+          </ul>
+          <div class="ip-product-card__foot">
+            <a href="#quote-modal" class="ip-link" data-modal-open="quote-modal">View Details <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 7 — TRANSPARENT PRICING =============== -->
+<section class="ip-section ip-bg-white">
+  <div class="ip-container">
+    <div class="ip-section-head ip-reveal">
+      <span class="ip-eyebrow">Pricing</span>
+      <h2 class="ip-h2">Transparent pricing. No hidden surprises.</h2>
+    </div>
+
+    <div class="ip-grid ip-grid--4" style="margin-bottom:40px;">
+      <div class="ip-card ip-reveal" style="display:flex; gap:14px; align-items:flex-start;">
+        <span class="ip-service-card__icon" style="width:44px;height:44px;font-size:22px;flex-shrink:0;"><iconify-icon icon="solar:tag-linear"></iconify-icon></span>
+        <div><h4 class="ip-h4">No setup fee options</h4></div>
       </div>
-      <div class="link-col">
+      <div class="ip-card ip-reveal" data-delay="1" style="display:flex; gap:14px; align-items:flex-start;">
+        <span class="ip-service-card__icon" style="width:44px;height:44px;font-size:22px;flex-shrink:0;"><iconify-icon icon="solar:shield-check-linear"></iconify-icon></span>
+        <div><h4 class="ip-h4">No PCI fee options</h4></div>
+      </div>
+      <div class="ip-card ip-reveal" data-delay="2" style="display:flex; gap:14px; align-items:flex-start;">
+        <span class="ip-service-card__icon" style="width:44px;height:44px;font-size:22px;flex-shrink:0;"><iconify-icon icon="solar:eye-linear"></iconify-icon></span>
+        <div><h4 class="ip-h4">Clear provider pricing</h4></div>
+      </div>
+      <div class="ip-card ip-reveal" data-delay="3" style="display:flex; gap:14px; align-items:flex-start;">
+        <span class="ip-service-card__icon" style="width:44px;height:44px;font-size:22px;flex-shrink:0;"><iconify-icon icon="solar:headphones-round-linear"></iconify-icon></span>
+        <div><h4 class="ip-h4">Support from enquiry to setup</h4></div>
+      </div>
+    </div>
+
+    <div class="ip-card ip-reveal" style="padding:0; overflow:hidden;">
+      <div style="padding:24px 28px; border-bottom:1px solid var(--border);">
+        <h3 class="ip-h4" style="margin:0;">Example rates — Teya</h3>
+        <p class="ip-text" style="font-size:0.88rem; margin-top:4px;">Indicative blended rates by monthly card turnover.</p>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="cm-rate-table">
+          <thead>
+            <tr><th>Monthly turnover</th><th>Indicative Teya rate</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>£8,000–£10,000</td><td>1.25%–1.20%</td></tr>
+            <tr><td>£10,001–£20,000</td><td>1.10%–0.85%</td></tr>
+            <tr><td>£20,001–£35,000</td><td>0.80%</td></tr>
+            <tr><td>£35,001–£80,000</td><td>0.77%–0.67%</td></tr>
+            <tr><td>£80,001–£100,000</td><td>0.63%–0.61%</td></tr>
+            <tr><td>£100,000+</td><td>From 0.60% / 0.55% depending on turnover</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="ip-form-note" style="margin-top:18px;">Rates are indicative and subject to provider approval, transaction mix, business profile, eligibility and provider terms.</p>
+  </div>
+</section>
+
+<!-- ===================== SECTION 8 — WHY SWITCH (DARK) ================= -->
+<section class="ip-section ip-bg-dark">
+  <div class="ip-container">
+    <div class="ip-section-head ip-section-head--center ip-reveal">
+      <span class="ip-eyebrow">The Plemmo difference</span>
+      <h2 class="ip-h2">Why businesses switch to Plemmo</h2>
+    </div>
+
+    <div class="ip-grid ip-grid--4">
+      <div class="cm-dark-card ip-reveal">
+        <span class="cm-dark-card__icon"><iconify-icon icon="solar:tag-price-linear"></iconify-icon></span>
+        <h4 class="ip-h4">Lower Rates</h4>
+        <p>We compare options to help you find a better fit.</p>
+      </div>
+      <div class="cm-dark-card ip-reveal" data-delay="1">
+        <span class="cm-dark-card__icon"><iconify-icon icon="solar:clock-circle-linear"></iconify-icon></span>
+        <h4 class="ip-h4">Save Time</h4>
+        <p>We do the provider comparison work for you.</p>
+      </div>
+      <div class="cm-dark-card ip-reveal" data-delay="2">
+        <span class="cm-dark-card__icon"><iconify-icon icon="solar:shield-check-linear"></iconify-icon></span>
+        <h4 class="ip-h4">Trusted Providers</h4>
+        <p>We work with selected UK payment partners.</p>
+      </div>
+      <div class="cm-dark-card ip-reveal" data-delay="3">
+        <span class="cm-dark-card__icon"><iconify-icon icon="solar:headphones-round-linear"></iconify-icon></span>
+        <h4 class="ip-h4">Ongoing Support</h4>
+        <p>We help from enquiry to setup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 9 — BUSINESS TYPES =================== -->
+<section class="ip-section ip-bg-offwhite">
+  <div class="ip-container">
+    <div class="ip-section-head ip-reveal">
+      <span class="ip-eyebrow">Built for you</span>
+      <h2 class="ip-h2">Solutions for every business type</h2>
+    </div>
+
+    <div class="ip-grid ip-grid--3">
+      <article class="ip-card ip-card--hover ip-service-card ip-reveal">
+        <span class="ip-service-card__icon"><iconify-icon icon="solar:shop-linear"></iconify-icon></span>
+        <h3>Retail Stores</h3>
+        <p>Fast countertop and portable terminals to keep queues moving at the till.</p>
+      </article>
+      <article class="ip-card ip-card--hover ip-service-card ip-reveal" data-delay="1">
+        <span class="ip-service-card__icon"><iconify-icon icon="solar:chef-hat-linear"></iconify-icon></span>
+        <h3>Hospitality</h3>
+        <p>Pay-at-table options and tipping built for pubs, bars and restaurants.</p>
+      </article>
+      <article class="ip-card ip-card--hover ip-service-card ip-reveal" data-delay="2">
+        <span class="ip-service-card__icon"><iconify-icon icon="solar:bag-4-linear"></iconify-icon></span>
+        <h3>Takeaways</h3>
+        <p>Quick contactless payments for busy counters and delivery handoffs.</p>
+      </article>
+      <article class="ip-card ip-card--hover ip-service-card ip-reveal">
+        <span class="ip-service-card__icon"><iconify-icon icon="solar:cup-hot-linear"></iconify-icon></span>
+        <h3>Cafés</h3>
+        <p>Compact readers that suit small counters and high transaction volumes.</p>
+      </article>
+      <article class="ip-card ip-card--hover ip-service-card ip-reveal" data-delay="1">
+        <span class="ip-service-card__icon"><iconify-icon icon="solar:scissors-linear"></iconify-icon></span>
+        <h3>Salons &amp; Barbers</h3>
+        <p>Simple, reliable terminals with tipping for appointment-based services.</p>
+      </article>
+      <article class="ip-card ip-card--hover ip-service-card ip-reveal" data-delay="2">
+        <span class="ip-service-card__icon"><iconify-icon icon="solar:delivery-linear"></iconify-icon></span>
+        <h3>Mobile Businesses</h3>
+        <p>4G-ready portable readers that take payments wherever you trade.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 10 — HOW IT WORKS ==================== -->
+<section class="ip-section ip-bg-white">
+  <div class="ip-container">
+    <div class="ip-section-head ip-section-head--center ip-reveal">
+      <span class="ip-eyebrow">Simple process</span>
+      <h2 class="ip-h2">How it works</h2>
+    </div>
+
+    <div class="ip-steps ip-steps--row">
+      <div class="ip-step ip-reveal">
+        <span class="ip-step__num"></span>
+        <h4>Tell us about your business</h4>
+        <p>Share your turnover, business type and what matters most to you.</p>
+      </div>
+      <div class="ip-step ip-reveal" data-delay="1">
+        <span class="ip-step__num"></span>
+        <h4>We compare suitable providers</h4>
+        <p>We match you with options from our selected payment partners.</p>
+      </div>
+      <div class="ip-step ip-reveal" data-delay="2">
+        <span class="ip-step__num"></span>
+        <h4>You choose the best option</h4>
+        <p>Review clear pricing and pick the terminal that fits your business.</p>
+      </div>
+      <div class="ip-step ip-reveal" data-delay="3">
+        <span class="ip-step__num"></span>
+        <h4>Start taking payments</h4>
+        <p>Once approved by the provider, you're ready to accept payments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 11 — FAQ ============================= -->
+<section class="ip-section ip-bg-cream">
+  <div class="ip-container">
+    <div class="ip-section-head ip-section-head--center ip-reveal">
+      <span class="ip-eyebrow">FAQs</span>
+      <h2 class="ip-h2">Card machine questions, answered</h2>
+    </div>
+
+    <div class="ip-faq ip-reveal">
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">Which card machine is best for my business? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">It depends on your turnover, business type and priorities. Use the finder above for an indicative recommendation, then we'll compare suitable options with you.</div></div>
+      </div>
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">How quickly can I start taking payments? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">Timescales vary by provider. Many businesses can be set up within a few working days once approved, subject to provider checks and eligibility.</div></div>
+      </div>
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">Are there hidden fees? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">We aim to show clear provider pricing upfront. Some providers offer no setup or PCI fee options. Exact charges depend on the provider and your agreement.</div></div>
+      </div>
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">What is the contract length? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">Contract terms vary by provider — some offer no-contract or pay-as-you-go options, others have fixed terms. We'll explain the options before you decide.</div></div>
+      </div>
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">Can I keep my existing merchant account? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">In some cases, yes. It depends on your current setup and the provider you choose. Let us know your existing arrangement and we'll advise on suitable options.</div></div>
+      </div>
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">How do settlements work? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">Settlement is handled by the provider. Many offer next-day or fast-payout options, but timings depend on the provider's terms and your account.</div></div>
+      </div>
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">Is approval guaranteed? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">No. Approval is decided by the provider and depends on their checks, your business profile and eligibility. We can't guarantee acceptance.</div></div>
+      </div>
+      <div class="ip-faq__item">
+        <button class="ip-faq__q">Does Plemmo process payments directly? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></button>
+        <div class="ip-faq__a"><div class="ip-faq__a-inner">No. Plemmo is an introducer, not a payment processor or acquiring bank. We help you compare and access card machine solutions through selected third-party providers.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 12 — FINAL CTA ======================= -->
+<section class="ip-section">
+  <div class="ip-container">
+    <div class="ip-cta ip-cta--lime ip-reveal">
+      <h2 class="ip-h2">Ready to find your perfect card machine?</h2>
+      <p>Get a free, no-obligation quote and compare suitable options for your business.</p>
+      <div class="ip-btn-row">
+        <a href="#quote-modal" class="ip-btn ip-btn--dark ip-btn--lg" data-modal-open="quote-modal">Get a Free Quote</a>
+        <a href="tel:02079460958" class="ip-btn ip-btn--outline ip-btn--lg" style="background:rgba(255,255,255,0.5);">Speak to an Expert</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SECTION 13 — FOOTER ========================== -->
+<footer class="ip-footer">
+  <div class="ip-container">
+    <div class="ip-footer__grid">
+      <div class="ip-footer__brand">
+        <a href="../index.html" class="ip-logo"><img src="../images/logo.png" alt="">Plemmo</a>
+        <p>Helping UK businesses compare and access card machines, funding and business technology through selected providers.</p>
+      </div>
+      <div class="ip-footer__col">
         <h4>Solutions</h4>
         <a href="card-machines.html">Card Machines</a>
-        <a href="epos.html">EPOS Systems</a>
-        <a href="../index.html#funding">Business Funding</a>
-        <a href="../index.html#signage">Signage</a>
+        <a href="business-funding.html">Business Funding</a>
+        <a href="epos-systems.html">EPOS Systems</a>
+        <a href="digital-signage.html">Digital Signage</a>
       </div>
-      <div class="link-col">
-        <h4>More</h4>
-        <a href="#">Call Centre</a>
-        <a href="#">Utilities</a>
+      <div class="ip-footer__col">
+        <h4>Company</h4>
+        <a href="../index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+      <div class="ip-footer__col">
+        <h4>Get in touch</h4>
+        <a href="tel:02079460958">020 7946 0958</a>
+        <a href="#quote-modal" data-modal-open="quote-modal">Get a Free Quote</a>
       </div>
     </div>
-  </div>
-  
-  <div class="container footer-bottom">
-    <div class="disclaimer">
-      Plemmo is a trading name of [Registered Company Name]. All hardware remains the property of the acquiring bank unless explicitly purchased. Rates subject to underwriting.
+
+    <p class="ip-footer__disclaimer">
+      Plemmo is an introducer and is not a payment processor, acquiring bank or lender. Card machine products, pricing, settlement times, rates and approval are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.
+    </p>
+
+    <div class="ip-footer__bottom">
+      <span>Copyright © 2026 Plemmo. All rights reserved.</span>
+      <span>Compare. Choose. Get supported.</span>
     </div>
-    <div class="copyright">Copyright © 2026 Plemmo. All Rights Reserved</div>
   </div>
 </footer>
 
-<script src="../main.js"></script>
+<!-- ===================== QUOTE MODAL ================================== -->
+<div class="ip-modal" id="quote-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title">
+  <div class="ip-modal__dialog">
+    <div class="ip-modal__head">
+      <div>
+        <span class="ip-eyebrow">Free, no-obligation</span>
+        <h3 class="ip-h3" id="quote-modal-title" style="margin-top:6px;">Get your free quote</h3>
+      </div>
+      <button class="ip-modal__close" data-modal-close aria-label="Close"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></button>
+    </div>
+
+    <form id="quote-form" novalidate>
+      <div class="ip-field">
+        <label for="qf-name">Full name</label>
+        <input class="ip-input" id="qf-name" name="name" type="text" placeholder="Jane Smith" required>
+      </div>
+      <div class="ip-field">
+        <label for="qf-business">Business name</label>
+        <input class="ip-input" id="qf-business" name="business" type="text" placeholder="Smith &amp; Co.">
+      </div>
+      <div class="ip-field">
+        <label for="qf-email">Email</label>
+        <input class="ip-input" id="qf-email" name="email" type="email" placeholder="you@business.co.uk" required>
+      </div>
+      <div class="ip-field">
+        <label for="qf-phone">Phone</label>
+        <input class="ip-input" id="qf-phone" name="phone" type="tel" placeholder="07123 456789">
+      </div>
+      <div class="ip-field">
+        <label for="qf-type">Business type</label>
+        <select class="ip-select" id="qf-type" name="type">
+          <option value="">Select…</option>
+          <option>Retail</option>
+          <option>Restaurant / Takeaway</option>
+          <option>Café</option>
+          <option>Salon / Barber</option>
+          <option>Mobile / Delivery</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button type="submit" class="ip-btn ip-btn--primary ip-btn--lg" style="width:100%;">Get My Free Quote</button>
+      <p class="ip-form-note" style="margin-top:14px;">By submitting you agree to be contacted about suitable options. Plemmo is an introducer; quotes and approval are subject to provider terms and eligibility.</p>
+    </form>
+
+    <div id="quote-success" class="ip-hide ip-text-center" style="padding:16px 0;">
+      <span class="ip-service-card__icon" style="margin:0 auto 16px;"><iconify-icon icon="solar:check-circle-linear"></iconify-icon></span>
+      <h3 class="ip-h3">Thanks — we've got your details</h3>
+      <p class="ip-text" style="margin-top:8px;">A member of our UK team will be in touch shortly to compare suitable options for your business.</p>
+      <button class="ip-btn ip-btn--outline" data-modal-close style="margin-top:20px;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Page-specific styles that extend (not override) the design system -->
+<style>
+  /* Hero product visual */
+  .cm-hero-visual { display:flex; align-items:center; justify-content:center; padding:24px; }
+  .cm-hero-visual img { max-width:78%; margin-inline:auto; }
+  .cm-hero-visual__fallback { display:none; }
+  .cm-hero-visual--fallback { aspect-ratio:4/3; border-radius:var(--radius-xl);
+    background:radial-gradient(120% 120% at 70% 30%, var(--lime-soft), var(--cream)); }
+  .cm-hero-visual--fallback .cm-hero-visual__fallback { display:grid; place-items:center;
+    width:100%; height:100%; font-size:120px; color:var(--charcoal); }
+
+  /* Product mockups (no external images, never broken) */
+  .cm-mockup { display:grid; place-items:center;
+    background:radial-gradient(130% 130% at 70% 20%, var(--lime-soft), var(--cream)); }
+  .cm-mockup iconify-icon { font-size:96px; color:var(--charcoal); }
+
+  /* Example-rate table */
+  .cm-rate-table { width:100%; border-collapse:collapse; min-width:420px; }
+  .cm-rate-table th, .cm-rate-table td { text-align:left; padding:14px 28px; font-size:0.95rem; }
+  .cm-rate-table thead th { font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--muted); background:var(--cream); }
+  .cm-rate-table tbody tr { border-top:1px solid var(--border); }
+  .cm-rate-table tbody td:last-child { font-weight:700; color:var(--charcoal); }
+
+  /* Dark contrast cards (Why switch) */
+  .cm-dark-card { background:rgba(255,255,255,0.04); border:1px solid var(--border-dark);
+    border-radius:var(--radius-lg); padding:28px 24px;
+    transition:transform var(--t-base) var(--ease), background var(--t-base) ease; }
+  .cm-dark-card:hover { transform:translateY(-6px); background:rgba(255,255,255,0.07); }
+  .cm-dark-card__icon { display:inline-flex; align-items:center; justify-content:center;
+    width:52px; height:52px; border-radius:var(--radius-md);
+    background:var(--lime-soft); color:var(--lime); font-size:26px; margin-bottom:16px; }
+  .cm-dark-card h4 { color:var(--white); margin-bottom:8px; }
+  .cm-dark-card p { color:var(--muted-dark); font-size:0.92rem; }
+
+  @media (max-width:640px){ .cm-hero-visual img { max-width:60%; } }
+</style>
+
+<!-- Inner-page design-system behaviour -->
+<script src="../js/inner-pages.js"></script>
+
+<!-- Page-specific: finder recommendation logic + modal form -->
+<script>
+  (function () {
+    var answers = {};
+    var providers = {
+      teya: {
+        name: 'Teya',
+        why: 'Competitive rates and next-day settlement options that scale well as your card turnover grows.',
+        rate: 'Indicative from 0.55%–1.25%',
+        setup: 'From £15 + VAT/month'
+      },
+      sumup: {
+        name: 'SumUp',
+        why: 'Simple, contract-free setup with a one-off terminal cost — ideal for newer or smaller businesses.',
+        rate: 'Terminal from £162 inc VAT',
+        setup: 'No monthly terminal fee'
+      },
+      shift4: {
+        name: 'Shift4',
+        why: 'Flexible blended pricing that works well for lower turnover or growing businesses.',
+        rate: 'From 1.25% under £10k / 0.7% above',
+        setup: 'First terminal may be available'
+      },
+      worldpay: {
+        name: 'Worldpay',
+        why: 'Split debit/credit pricing and established infrastructure suited to higher-turnover businesses.',
+        rate: 'Debit from 0.30%, credit from 0.65%',
+        setup: 'Next-day settlement · contract options'
+      }
+    };
+
+    function resolve(a) {
+      var t = a.turnover, p = a.priority;
+      if (p === 'no-contract' || p === 'simple-setup') return 'sumup';
+      if (t === '50k' || t === '25-50k') return (p === 'lowest-rates') ? 'worldpay' : 'teya';
+      if (t === '10-25k') return 'teya';
+      if (t === '5-10k') return (p === 'lowest-rates') ? 'teya' : 'shift4';
+      if (t === 'under5k') return (p === 'lowest-rates') ? 'shift4' : 'sumup';
+      if (p === 'fast-payouts') return 'teya';
+      return 'teya';
+    }
+
+    function render() {
+      var key = resolve(answers);
+      var prov = providers[key];
+      document.getElementById('rec-tag').textContent = 'Indicative recommendation';
+      document.getElementById('rec-title').textContent = prov.name;
+      document.getElementById('rec-intro').textContent = 'Based on your answers, ' + prov.name + ' looks like a strong fit.';
+      document.getElementById('rec-why').textContent = prov.why;
+      document.getElementById('rec-rate').textContent = prov.rate;
+      document.getElementById('rec-setup').textContent = prov.setup;
+      var detail = document.getElementById('rec-detail');
+      detail.classList.remove('ip-hide');
+    }
+
+    // Record answers as options are chosen; render once the final question is answered.
+    document.querySelectorAll('.ip-checker .ip-option').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        var q = opt.getAttribute('data-q');
+        if (q) answers[q] = opt.getAttribute('data-val');
+        if (q === 'current') render();
+      });
+    });
+
+    // Modal form -> success state
+    var form = document.getElementById('quote-form');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        form.classList.add('ip-hide');
+        document.getElementById('quote-success').classList.remove('ip-hide');
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>
