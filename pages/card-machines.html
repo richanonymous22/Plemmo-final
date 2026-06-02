@@ -301,6 +301,8 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 980px) {
       .nav-links { display: none; } .burger { display: block; }
+      .nav.open .nav-links { display: flex; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; gap: 4px; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 14px 24px 20px; }
+      .nav.open .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
       .hero-grid { grid-template-columns: 1fr; } .hero-visual { min-height: 380px; margin-top: 20px; }
       .finder-body { grid-template-columns: 1fr; gap: 24px; } .options-grid { grid-template-columns: repeat(3, 1fr); }
       .prov-grid { grid-template-columns: repeat(2, 1fr); }
@@ -328,11 +330,13 @@
   <div class="container nav-inner">
     <a href="../index.html" class="logo">plemmo<span class="dot">.</span></a>
     <div class="nav-links">
+      <a href="../index.html">Home</a>
       <a href="card-machines.html" class="active">Card Machines</a>
-      <a href="#providers">Services <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon></a>
-      <a href="#finder">Business Types <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon></a>
-      <a href="../index.html">About Us</a>
-      <a href="#quote">Contact Us</a>
+      <a href="business-funding.html">Business Funding</a>
+      <a href="epos-systems.html">EPOS Systems</a>
+      <a href="digital-signage.html">Digital Signage</a>
+      <a href="about-us.html">About Us</a>
+      <a href="contact-us.html">Contact Us</a>
     </div>
     <div class="nav-cta">
       <a href="#quote" class="btn btn-solid">Get a Free Quote</a>
@@ -355,7 +359,7 @@
       </div>
       <div class="hero-btns">
         <a href="#calculator" class="btn btn-solid">Find My Best Deal <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
-        <a href="tel:07842088092" class="btn btn-ghost">Talk to an Expert <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
+        <a href="tel:02079460958" class="btn btn-ghost">Talk to an Expert <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
       </div>
     </div>
     <div class="hero-visual">
@@ -600,7 +604,7 @@
         <p>Get your personalised quote in under 60 seconds. No commitment, no jargon — just a better deal.</p>
         <div class="cta-btns">
           <a href="#calculator" class="btn btn-solid">Get My Free Quote <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
-          <a href="tel:07842088092" class="btn btn-ghost">Talk to an Expert <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
+          <a href="tel:02079460958" class="btn btn-ghost">Talk to an Expert <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
         </div>
         <div class="mini">
           <span><iconify-icon icon="solar:check-circle-bold"></iconify-icon> No commitment</span>
@@ -625,12 +629,12 @@
         <div class="logo">plemmo<span class="dot">.</span></div>
         <p>Smart card solutions that work for UK businesses. Compare, save and grow — all in one place.</p>
       </div>
-      <div class="foot-col"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="epos.html">EPOS Systems</a><a href="../index.html#funding">Business Funding</a><a href="../index.html#signage">Signage</a></div>
-      <div class="foot-col"><h4>Company</h4><a href="../index.html">Home</a><a href="../index.html">About Us</a><a href="#quote">Contact Us</a><a href="#">Refer &amp; Earn</a></div>
-      <div class="foot-col"><h4>Support</h4><a href="tel:07842088092">07842 088092</a><a href="#faq">FAQs</a><a href="#quote">Get a Quote</a></div>
+      <div class="foot-col"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="../index.html">Home</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
+      <div class="foot-col"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#faq">FAQs</a></div>
     </div>
-    <div class="foot-bottom">
-      <span>Plemmo is a trading name. Rates shown are illustrative and subject to underwriting.</span>
+    <div class="foot-bottom" style="flex-direction:column;align-items:flex-start;gap:10px;">
+      <span style="line-height:1.6;">Plemmo is an introducer and is not a payment processor, acquiring bank or lender. Card machine products, pricing, settlement times, rates and approval are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.</span>
       <span>© 2026 Plemmo. All Rights Reserved.</span>
     </div>
   </div>
@@ -809,7 +813,8 @@
   });
 
   /* mobile menu */
-  document.querySelector('.burger').addEventListener('click', ()=> location.hash='#finder');
+  document.querySelector('.burger').addEventListener('click', ()=> nav.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', ()=> nav.classList.remove('open')));
 </script>
 
 </body>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Plemmo | Speak to a Business Solutions Specialist</title>
+  <meta name="description" content="Tell us what you need help with and a Plemmo specialist will get back to you. Card machines, funding, EPOS, signage, utilities — contact Plemmo today.">
+
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="inner.css">
+  <style>
+    .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 30px; align-items: start; }
+    .router { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .route { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 16px; cursor: pointer; text-align: left; transition: border-color .2s, background .2s, transform .2s; font: inherit; color: var(--text); }
+    .route:hover { border-color: var(--line-2); transform: translateY(-3px); }
+    .route.active { border-color: var(--accent); background: rgba(198,255,0,0.07); }
+    .route iconify-icon { font-size: 24px; color: var(--accent); }
+    .route span { font-size: 13.5px; font-weight: 600; }
+    .form-card { background: linear-gradient(180deg, var(--card-2), var(--card)); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 32px; }
+    .contact-cards { display: grid; gap: 14px; }
+    @media (max-width:980px){ .contact-grid{grid-template-columns:1fr;} }
+    @media (max-width:600px){ .router{grid-template-columns:1fr 1fr;} }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="logo">plemmo<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="card-machines.html">Card Machines</a>
+      <a href="business-funding.html">Business Funding</a>
+      <a href="epos-systems.html">EPOS Systems</a>
+      <a href="digital-signage.html">Digital Signage</a>
+      <a href="about-us.html">About Us</a>
+      <a href="contact-us.html" class="active">Contact Us</a>
+    </div>
+    <div class="nav-cta">
+      <a href="tel:02079460958" class="btn btn-ghost">020 7946 0958</a>
+      <button class="burger" aria-label="Open menu"><iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mm-backdrop"></div>
+  <div class="mm-panel">
+    <div class="mm-top"><span class="logo">plemmo<span class="dot">.</span></span><button class="mm-close" aria-label="Close menu"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></button></div>
+    <a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a>
+    <a href="tel:02079460958" class="btn btn-solid">Call 020 7946 0958</a>
+  </div>
+</div>
+
+<!-- ── HERO + CONTACT ── -->
+<header class="hero" style="padding-bottom:30px;">
+  <div class="container">
+    <div class="hero-text" style="max-width:680px;">
+      <span class="eyebrow"><span class="pulse"></span> Contact Plemmo</span>
+      <h1 style="font-size:clamp(36px,5vw,60px);">Let's find the right solution<br><span class="accent">for your business.</span></h1>
+      <p class="hero-sub" style="max-width:560px;">Tell us what you need help with and a Plemmo specialist will get back to you.</p>
+    </div>
+  </div>
+</header>
+
+<section class="sec-pad" style="padding-top:20px;" id="enquiry">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- form + router -->
+      <div class="form-card reveal">
+        <h2 style="font-size:24px;margin-bottom:6px;">Send an enquiry</h2>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:22px;">What can we help you with?</p>
+        <div class="router" id="router">
+          <button type="button" class="route active" data-route="Card Machines"><iconify-icon icon="solar:card-bold-duotone"></iconify-icon><span>Card Machines</span></button>
+          <button type="button" class="route" data-route="Business Funding"><iconify-icon icon="solar:hand-money-bold-duotone"></iconify-icon><span>Business Funding</span></button>
+          <button type="button" class="route" data-route="EPOS Systems"><iconify-icon icon="solar:tablet-bold-duotone"></iconify-icon><span>EPOS Systems</span></button>
+          <button type="button" class="route" data-route="Digital Signage"><iconify-icon icon="solar:display-bold-duotone"></iconify-icon><span>Digital Signage</span></button>
+          <button type="button" class="route" data-route="Utilities &amp; Broadband"><iconify-icon icon="solar:bolt-circle-bold-duotone"></iconify-icon><span>Utilities &amp; Broadband</span></button>
+          <button type="button" class="route" data-route="General Enquiry"><iconify-icon icon="solar:chat-round-line-bold-duotone"></iconify-icon><span>General Enquiry</span></button>
+        </div>
+        <form id="contact-form">
+          <div class="form-row two">
+            <div><label>Full Name <span class="req">*</span></label><input class="input" type="text" required></div>
+            <div><label>Business Name</label><input class="input" type="text"></div>
+          </div>
+          <div class="form-row two">
+            <div><label>Phone Number <span class="req">*</span></label><input class="input" type="tel" required></div>
+            <div><label>Email Address <span class="req">*</span></label><input class="input" type="email" required></div>
+          </div>
+          <div class="form-row"><label>Service Interested In</label>
+            <select class="select" id="contact-service">
+              <option>Card Machines</option><option>Business Funding</option><option>EPOS Systems</option><option>Digital Signage</option><option>Utilities &amp; Broadband</option><option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-row"><label>Message</label><textarea class="textarea" placeholder="Tell us a little about what you need…"></textarea></div>
+          <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Send Enquiry <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></button>
+        </form>
+        <div id="contact-success" class="modal-success" style="display:none;padding-top:8px;">
+          <div class="big-ic"><iconify-icon icon="solar:check-circle-bold"></iconify-icon></div>
+          <h3>Thanks — enquiry received</h3>
+          <p>Your enquiry has been received. A Plemmo specialist will contact you shortly.</p>
+        </div>
+      </div>
+
+      <!-- contact cards + next -->
+      <div class="reveal">
+        <div class="contact-cards">
+          <a href="tel:02079460958" class="contact-card"><div class="ic"><iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></div><div><h4>Call us</h4><span style="color:var(--muted);font-size:14px;">020 7946 0958</span></div></a>
+          <a href="mailto:hello@plemmo.com" class="contact-card"><div class="ic"><iconify-icon icon="solar:letter-bold-duotone"></iconify-icon></div><div><h4>Email us</h4><span style="color:var(--muted);font-size:14px;">hello@plemmo.com</span></div></a>
+          <div class="contact-card"><div class="ic"><iconify-icon icon="solar:document-add-bold-duotone"></iconify-icon></div><div><h4>Business enquiries</h4><p>Use the form and we'll route it to the right specialist.</p></div></div>
+          <div class="contact-card"><div class="ic"><iconify-icon icon="solar:headphones-round-bold-duotone"></iconify-icon></div><div><h4>Support</h4><p>Existing customers can contact support for help with their service.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT HAPPENS NEXT ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head reveal"><h2>What happens next</h2><p class="sub">A simple, no-obligation process.</p></div>
+    <div class="steps reveal">
+      <div class="step"><div class="num">1</div><h4>Send enquiry</h4><p>Tell us what you need help with.</p></div>
+      <div class="step"><div class="num">2</div><h4>We review your needs</h4><p>We make sure it reaches the right specialist.</p></div>
+      <div class="step"><div class="num">3</div><h4>A specialist contacts you</h4><p>We'll get in touch as soon as possible.</p></div>
+      <div class="step"><div class="num">4</div><h4>We compare options</h4><p>Together we find suitable options for you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head reveal"><h2>Frequently asked questions</h2></div>
+    <div class="faq-grid reveal">
+      <div class="faq-item"><div class="faq-q">How quickly will you respond? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>A specialist will contact you as soon as possible.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Can I enquire about multiple services? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Yes — just let us know in your message and we'll help with everything you need.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Is the quote free? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Yes — your initial enquiry or quote request is free unless otherwise stated.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Do you work with all business types? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Plemmo supports many UK small and medium businesses across different industries.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Do I have to proceed? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>No — enquiries are no-obligation unless you enter an agreement with a provider.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="sec-pad" id="quote" style="padding-top:0;">
+  <div class="container">
+    <div class="final-cta reveal">
+      <div class="glow-ring"></div>
+      <div>
+        <h2>Prefer to talk it through?</h2>
+        <p>Speak to a Plemmo specialist and we'll help you find the right solution for your business.</p>
+        <div class="cta-btns">
+          <a href="tel:02079460958" class="btn btn-solid">Call 020 7946 0958 <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
+          <a href="#enquiry" class="btn btn-ghost">Send Enquiry <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+        </div>
+        <div class="mini">
+          <span><iconify-icon icon="solar:check-circle-bold"></iconify-icon> No obligation</span>
+          <span><iconify-icon icon="solar:letter-bold"></iconify-icon> hello@plemmo.com</span>
+          <span><iconify-icon icon="solar:map-point-bold"></iconify-icon> UK based</span>
+        </div>
+      </div>
+      <div class="cta-visual"><div class="big-ic"><iconify-icon icon="solar:chat-round-call-bold-duotone"></iconify-icon></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">plemmo<span class="dot">.</span></div>
+        <p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
+      </div>
+      <div class="foot-col"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="#">Utilities &amp; Broadband</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
+      <div class="foot-col"><h4>Resources</h4><a href="#">FAQs</a><a href="#">Compare Options</a><a href="#">Guides</a></div>
+      <div class="foot-col"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#enquiry">Get a Free Quote</a></div>
+    </div>
+    <div class="foot-disclaimer">Plemmo introduces businesses to selected third-party providers. Products, pricing, approvals, funding, availability and services are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.</div>
+    <div class="foot-bottom"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+  </div>
+</footer>
+
+<script>
+  /* enquiry router updates the service dropdown */
+  var serviceSel = document.getElementById('contact-service');
+  document.querySelectorAll('#router .route').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('#router .route').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var val = btn.getAttribute('data-route').replace('&amp;','&');
+      for (var i=0;i<serviceSel.options.length;i++){ if(serviceSel.options[i].text===val){ serviceSel.selectedIndex=i; break; } }
+    });
+  });
+  /* keep router in sync if dropdown changed directly */
+  serviceSel.addEventListener('change', function(){
+    var val = serviceSel.value;
+    document.querySelectorAll('#router .route').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-route').replace('&amp;','&')===val);
+    });
+  });
+  /* submit */
+  document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault(); this.style.display='none'; document.getElementById('contact-success').style.display='block';
+    document.getElementById('contact-success').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+</script>
+<script src="inner.js"></script>
+</body>
+</html>

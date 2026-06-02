@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Screens &amp; Signage for UK Businesses | Plemmo</title>
+  <meta name="description" content="High-impact digital screens and signage for UK businesses — menu boards, window displays, advertising screens, neon and custom shopfront signs. Get a signage quote from Plemmo.">
+
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="inner.css">
+  <style>
+    /* cinematic hero */
+    .hero.cine::before { background:
+      radial-gradient(800px 480px at 70% 28%, rgba(198,255,0,0.14), transparent 60%),
+      radial-gradient(600px 400px at 20% 70%, rgba(95,208,197,0.10), transparent 60%); }
+    .screen-mock { position: relative; z-index: 2; width: 86%; max-width: 440px; aspect-ratio: 16/10;
+      border-radius: 14px; overflow: hidden; border: 6px solid #1a1f15; box-shadow: 0 40px 80px rgba(0,0,0,0.65), 0 0 60px rgba(198,255,0,0.15);
+      background: #000; }
+    .screen-mock img { width: 100%; height: 100%; object-fit: cover; }
+    .screen-mock .badge { position: absolute; bottom: 12px; left: 12px; background: rgba(8,10,8,0.75); backdrop-filter: blur(6px);
+      border: 1px solid var(--line-2); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; }
+    /* recommendation panel image */
+    .rec-panel.sig { grid-template-columns: 1fr 360px; }
+    /* pricing tabs */
+    .price-cat { display: none; }
+    .price-cat.active { display: block; }
+    /* before/after */
+    .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ba .col { border-radius: var(--radius); overflow: hidden; position: relative; border: 1px solid var(--line); aspect-ratio: 4/3; }
+    .ba .col img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+    .ba .col:hover img { transform: scale(1.05); }
+    .ba .col .lbl { position: absolute; top: 12px; left: 12px; background: rgba(8,10,8,0.8); border: 1px solid var(--line-2); border-radius: var(--radius-pill); padding: 6px 14px; font-size: 12px; font-weight: 700; }
+    .ba .col.after .lbl { background: var(--accent); color: #0a0c0a; border-color: var(--accent); }
+    /* custom signage dark band */
+    .custom-band { background: radial-gradient(700px 360px at 80% 20%, rgba(198,255,0,0.12), transparent 60%), linear-gradient(135deg,#0c0e0c,#10130d); border:1px solid var(--line); border-radius: var(--radius-lg); padding: 44px; }
+    .custom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 26px; }
+    .neon-text { font-weight: 900; color: var(--accent); text-shadow: 0 0 10px rgba(198,255,0,0.7), 0 0 30px rgba(198,255,0,0.4); }
+    @media (max-width:980px){ .rec-panel.sig{grid-template-columns:1fr;} .custom-grid{grid-template-columns:1fr;} }
+    @media (max-width:600px){ .ba{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="logo">plemmo<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="card-machines.html">Card Machines</a>
+      <a href="business-funding.html">Business Funding</a>
+      <a href="epos-systems.html">EPOS Systems</a>
+      <a href="digital-signage.html" class="active">Digital Signage</a>
+      <a href="about-us.html">About Us</a>
+      <a href="contact-us.html">Contact Us</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-solid" data-enquiry data-service="Digital Signage">Get a Free Quote</a>
+      <button class="burger" aria-label="Open menu"><iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mm-backdrop"></div>
+  <div class="mm-panel">
+    <div class="mm-top"><span class="logo">plemmo<span class="dot">.</span></span><button class="mm-close" aria-label="Close menu"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></button></div>
+    <a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a>
+    <a href="#" class="btn btn-solid" data-enquiry data-service="Digital Signage">Get a Free Quote</a>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<header class="hero cine">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow"><span class="pulse"></span> Digital Screens &amp; Signage</span>
+      <h1>Make your business<br><span class="accent">impossible to ignore.</span></h1>
+      <p class="hero-sub">High-impact digital screens and signage solutions that attract more customers, showcase your brand and drive real results.</p>
+      <div class="hero-btns">
+        <a href="#selector" class="btn btn-solid">Get a Signage Quote <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+        <a href="#" class="btn btn-ghost" data-enquiry data-service="Digital Signage">Book Free Consultation <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>
+      </div>
+      <div class="trust-strip" style="justify-content:flex-start;margin-top:30px;">
+        <span class="trust-pill"><iconify-icon icon="solar:star-bold"></iconify-icon> 5.0 Rated</span>
+        <span class="trust-pill"><iconify-icon icon="solar:shield-check-bold"></iconify-icon> 2 Year Warranty</span>
+        <span class="trust-pill"><iconify-icon icon="solar:map-point-bold"></iconify-icon> UK Based Support</span>
+        <span class="trust-pill"><iconify-icon icon="solar:palette-bold"></iconify-icon> Design Support</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="glow-ring"></div>
+      <div class="screen-mock">
+        <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=800" alt="Digital menu board display in a café">
+        <span class="badge">Digital Menu Board · Live</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── SIGNAGE TYPE SELECTOR ── -->
+<section class="sec-pad" id="selector">
+  <div class="container">
+    <div class="sec-head center reveal"><h2>Find the right signage for your business</h2><p class="sub">Pick what you're after and we'll show you a great place to start.</p></div>
+    <div class="tabs reveal" id="sig-tabs" style="justify-content:center;flex-wrap:wrap;">
+      <div class="tab active" data-sig="menu"><iconify-icon icon="solar:dish-bold-duotone"></iconify-icon> Digital Menu Boards</div>
+      <div class="tab" data-sig="window"><iconify-icon icon="solar:siderbar-bold-duotone"></iconify-icon> Window Displays</div>
+      <div class="tab" data-sig="advertising"><iconify-icon icon="solar:slider-horizontal-bold-duotone"></iconify-icon> Advertising Screens</div>
+      <div class="tab" data-sig="shopfront"><iconify-icon icon="solar:shop-2-bold-duotone"></iconify-icon> Shopfront Signs</div>
+      <div class="tab" data-sig="neon"><iconify-icon icon="solar:lightbulb-bolt-bold-duotone"></iconify-icon> Neon Signs</div>
+      <div class="tab" data-sig="outdoor"><iconify-icon icon="solar:cloud-sun-bold-duotone"></iconify-icon> Outdoor Displays</div>
+      <div class="tab" data-sig="kiosk"><iconify-icon icon="solar:tablet-bold-duotone"></iconify-icon> Touch Kiosks</div>
+    </div>
+    <div class="rec-panel sig reveal" id="sig-panel">
+      <div class="rec-info">
+        <div class="rec-title" id="sig-title">For cafés &amp; takeaways</div>
+        <h3 id="sig-match">32" Digital Menu Board Package</h3>
+        <p id="sig-text">Digital Menu Boards are perfect for showcasing your menu, promotions and prices with style and clarity.</p>
+        <ul id="sig-checks"></ul>
+      </div>
+      <div class="rec-price">
+        <div class="from">Best match</div>
+        <div class="amount" id="sig-price">£350</div>
+        <div class="unit" id="sig-unit">per screen</div>
+        <a href="#" class="btn btn-solid" id="sig-cta" data-enquiry data-service="Digital Signage" data-product="32&quot; Digital Menu Board Package">Get a Signage Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU BOARD PACKAGES ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head reveal"><h2>Digital menu board packages</h2><p class="sub">Everything you need to launch a polished digital menu — screen, setup and design.</p></div>
+    <div class="card-grid cols-3 reveal">
+      <div class="s-card"><span class="card-tag">Most popular</span><div class="ic"><iconify-icon icon="solar:dish-bold-duotone"></iconify-icon></div><h3>32" Commercial Screen</h3><div class="price">£350 <small>per screen</small></div>
+        <ul><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Commercial-grade monitor</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> USB media setup</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Professional animated designs</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Free design changes within 3 months</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> 2-year warranty included</li></ul>
+        <a href="#" class="btn btn-solid card-btn" data-enquiry data-service="Digital Signage" data-product='32" Menu Board Package'>Get a Signage Quote</a></div>
+      <div class="s-card"><div class="ic"><iconify-icon icon="solar:dish-bold-duotone"></iconify-icon></div><h3>40" Commercial Screen</h3><div class="price">£400 <small>per screen</small></div>
+        <ul><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Commercial-grade monitor</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> USB media setup</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Professional animated designs</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Free design changes within 3 months</li><li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> 2-year warranty included</li></ul>
+        <a href="#" class="btn btn-ghost card-btn" data-enquiry data-service="Digital Signage" data-product='40" Menu Board Package'>Get a Signage Quote</a></div>
+      <div class="s-card" style="background:linear-gradient(135deg,#1a2110,#12150f);border-color:var(--line-2);"><div class="ic"><iconify-icon icon="solar:settings-bold-duotone"></iconify-icon></div><h3>Custom menu board setup</h3><div class="price" style="font-size:20px;">Custom quote</div>
+        <p style="margin-top:8px;">For larger screens, multi-screen layouts, bespoke designs and installation options.</p>
+        <a href="#" class="btn btn-solid card-btn" data-enquiry data-service="Digital Signage" data-product="Custom menu board setup">Get Custom Quote</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BEFORE / AFTER ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head reveal"><h2>The difference a screen makes</h2><p class="sub">From easy-to-miss to impossible to ignore.</p></div>
+    <div class="ba reveal">
+      <div class="col before"><span class="lbl">Before</span><img src="https://images.unsplash.com/photo-1481437156560-3205f6a55735?auto=format&fit=crop&q=80&w=800" alt="Plain shopfront before signage"></div>
+      <div class="col after"><span class="lbl">After</span><img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=800" alt="Bright digital signage after install"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMMERCIAL DISPLAY PRICING ── -->
+<section class="sec-pad" id="pricing" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head reveal"><h2>Commercial display screens</h2><p class="sub">Browse indicative pricing across our most popular ranges.</p></div>
+    <div class="tabs reveal" id="price-tabs">
+      <div class="tab active" data-cat="adv">Advertising Displays</div>
+      <div class="tab" data-cat="vibrant">4K Vibrant</div>
+      <div class="tab" data-cat="poster">Freestanding Posters</div>
+      <div class="tab" data-cat="window">Window Displays</div>
+      <div class="tab" data-cat="kiosk">Touch Kiosks</div>
+      <div class="tab" data-cat="outdoor">Outdoor</div>
+      <div class="tab" data-cat="touch">Interactive Touch</div>
+      <div class="tab" data-cat="pos">POS &amp; Counter</div>
+    </div>
+    <div class="reveal" style="margin-top:20px;">
+      <div class="ptable-wrap">
+        <div class="price-cat active" data-cat="adv"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>32" Slimline Pro Advertising Display</td><td>£650</td></tr><tr><td>43" Slimline Pro Advertising Display</td><td>£890</td></tr><tr><td>50" Slimline Pro Advertising Display</td><td>£1,035</td></tr><tr><td>55" Slimline Pro Advertising Display</td><td>£1,350</td></tr></tbody></table></div>
+        <div class="price-cat" data-cat="vibrant"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>32" Vibrant Professional Display</td><td>£499</td></tr><tr><td>43" 4K Vibrant Professional Display</td><td>£715</td></tr><tr><td>50" 4K Vibrant Professional Display</td><td>£810</td></tr><tr><td>55" 4K Vibrant Professional Display</td><td>£1,140</td></tr></tbody></table></div>
+        <div class="price-cat" data-cat="poster"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>50" Android Freestanding Digital Poster</td><td>£1,915</td></tr><tr><td>55" Android Freestanding Digital Poster</td><td>£2,190</td></tr><tr><td>65" 4K Freestanding Digital Poster</td><td>£3,575</td></tr></tbody></table></div>
+        <div class="price-cat" data-cat="window"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>43" Ultra High Brightness Window Display</td><td>£1,770</td></tr><tr><td>55" Ultra High Brightness Window Display</td><td>£2,220</td></tr><tr><td>65" Ultra High Brightness Window Display</td><td>£3,240</td></tr></tbody></table></div>
+        <div class="price-cat" data-cat="kiosk"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>43" Android Touch Screen Kiosk</td><td>£2,290</td></tr><tr><td>50" Android Touch Screen Kiosk</td><td>£2,565</td></tr><tr><td>55" Android Touch Screen Kiosk</td><td>£2,745</td></tr></tbody></table></div>
+        <div class="price-cat" data-cat="outdoor"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>43" Outdoor Digital Advertising Display</td><td>£2,960</td></tr><tr><td>55" Outdoor Digital Advertising Display</td><td>£5,455</td></tr><tr><td>43" Outdoor Digital A-Board</td><td>£2,370</td></tr></tbody></table></div>
+        <div class="price-cat" data-cat="touch"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>55" 4K Interactive Touch Display</td><td>£1,139</td></tr><tr><td>65" 4K Interactive Touch Display</td><td>£1,230</td></tr><tr><td>75" 4K Interactive Touch Display</td><td>£1,770</td></tr></tbody></table></div>
+        <div class="price-cat" data-cat="pos"><table class="ptable"><thead><tr><th>Product</th><th>Price</th></tr></thead><tbody>
+          <tr><td>10" POS Android Advertising Display</td><td>£230</td></tr><tr><td>15" POS Android Advertising Display</td><td>£360</td></tr></tbody></table></div>
+      </div>
+    </div>
+    <p class="disclaimer-note">Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability.</p>
+  </div>
+</section>
+
+<!-- ── CUSTOM SIGNAGE ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="custom-band reveal">
+      <span class="eyebrow" style="margin-bottom:18px;"><iconify-icon icon="solar:magic-stick-3-bold-duotone" style="color:var(--accent);"></iconify-icon> Bespoke &amp; quoted individually</span>
+      <h2 style="font-size:clamp(28px,3.4vw,40px);max-width:640px;">Custom shopfront &amp; <span class="neon-text">neon</span> signage</h2>
+      <p style="color:var(--muted);max-width:580px;margin-top:12px;">Stand out with signage built around your brand. We design, supply and arrange — then quote it individually.</p>
+      <div class="custom-grid">
+        <div class="s-card"><div class="ic"><iconify-icon icon="solar:shop-2-bold-duotone"></iconify-icon></div><h3>Shopfront signage</h3><p>Quoted based on size, materials, lighting, design complexity, site survey, quantity and installation.</p><a href="#" class="btn btn-ghost card-btn" data-enquiry data-service="Digital Signage" data-product="Custom shopfront signage">Get Custom Quote</a></div>
+        <div class="s-card"><div class="ic"><iconify-icon icon="solar:lightbulb-bolt-bold-duotone"></iconify-icon></div><h3>LED neon signs</h3><p>Quoted based on size, colour, logo complexity, indoor/outdoor use and quantity.</p><a href="#" class="btn btn-ghost card-btn" data-enquiry data-service="Digital Signage" data-product="Custom LED neon sign">Get Custom Quote</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BUSINESS TYPES ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head reveal"><h2>Loved by high-street businesses</h2><p class="sub">From takeaways to salons, signage that works for your space.</p></div>
+    <div class="feat-grid reveal">
+      <div class="feat"><iconify-icon icon="solar:bag-smile-bold-duotone"></iconify-icon> Takeaways</div>
+      <div class="feat"><iconify-icon icon="solar:wineglass-bold-duotone"></iconify-icon> Restaurants</div>
+      <div class="feat"><iconify-icon icon="solar:cup-hot-bold-duotone"></iconify-icon> Cafés</div>
+      <div class="feat"><iconify-icon icon="solar:donut-bold-duotone"></iconify-icon> Dessert shops</div>
+      <div class="feat"><iconify-icon icon="solar:bag-4-bold-duotone"></iconify-icon> Retail stores</div>
+      <div class="feat"><iconify-icon icon="solar:scissors-bold-duotone"></iconify-icon> Salons</div>
+      <div class="feat"><iconify-icon icon="solar:user-hand-up-bold-duotone"></iconify-icon> Barbers</div>
+      <div class="feat"><iconify-icon icon="solar:buildings-2-bold-duotone"></iconify-icon> Offices</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="sec-head reveal"><h2>Frequently asked questions</h2></div>
+    <div class="faq-grid reveal">
+      <div class="faq-item"><div class="faq-q">How long does installation take? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>It depends on product type, site requirements, delivery and installation scope.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Can I update my content easily? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Many screen solutions allow content updates. The method depends on your setup.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Do you offer nationwide installation? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Installation availability depends on your area and the scope of the project — just ask and we'll check.</p></div></div>
+      <div class="faq-item"><div class="faq-q">What warranty is included? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>The menu board package includes a 2-year warranty. Other products may depend on supplier and product terms.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Can you design my menu/content? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Yes — menu board packages can include professional animated menu designs and design changes for 3 months.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Do you provide custom quotes? <iconify-icon icon="solar:add-circle-linear"></iconify-icon></div><div class="faq-a"><p>Yes — custom signage, shopfront signs, neon signs, installation and larger display setups are quoted individually.</p></div></div>
+    </div>
+    <p class="disclaimer-note">Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability. Custom signage, shopfront signage and neon signs are quoted individually.</p>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="sec-pad" id="quote" style="padding-top:0;">
+  <div class="container">
+    <div class="final-cta reveal">
+      <div class="glow-ring"></div>
+      <div>
+        <h2>Ready to make your business impossible to ignore?</h2>
+        <p>Get a signage quote or book a free design consultation. We'll help you stand out.</p>
+        <div class="cta-btns">
+          <a href="#" class="btn btn-solid" data-enquiry data-service="Digital Signage">Get a Signage Quote <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a href="#" class="btn btn-ghost" data-enquiry data-service="Digital Signage">Book Free Design Consultation <iconify-icon icon="solar:palette-bold-duotone"></iconify-icon></a>
+        </div>
+        <div class="mini">
+          <span><iconify-icon icon="solar:star-bold"></iconify-icon> 5.0 Rated</span>
+          <span><iconify-icon icon="solar:shield-check-bold"></iconify-icon> 2 Year Warranty</span>
+          <span><iconify-icon icon="solar:map-point-bold"></iconify-icon> UK Based Support</span>
+        </div>
+      </div>
+      <div class="cta-visual"><div class="big-ic"><iconify-icon icon="solar:display-bold-duotone"></iconify-icon></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">plemmo<span class="dot">.</span></div>
+        <p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
+      </div>
+      <div class="foot-col"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="#">Utilities &amp; Broadband</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
+      <div class="foot-col"><h4>Resources</h4><a href="#selector">FAQs</a><a href="#pricing">Compare Options</a><a href="#">Guides</a></div>
+      <div class="foot-col"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#" data-enquiry data-service="Digital Signage">Get a Free Quote</a></div>
+    </div>
+    <div class="foot-disclaimer">Plemmo introduces businesses to selected third-party providers. Products, pricing, approvals, funding, availability and services are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.</div>
+    <div class="foot-bottom"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+  </div>
+</footer>
+
+<!-- ── ENQUIRY MODAL ── -->
+<div class="modal" id="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="enq-title">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+    <div id="enquiry-form-wrap">
+      <div class="modal-head">
+        <div><h3 id="enq-title">Get a free quote</h3><p>Tell us what you need and a Plemmo specialist will get back to you.</p></div>
+        <button class="modal-close" data-close aria-label="Close"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></button>
+      </div>
+      <form id="enquiry-form">
+        <div class="form-row two"><div><label>Full Name <span class="req">*</span></label><input class="input" type="text" required></div><div><label>Business Name</label><input class="input" type="text"></div></div>
+        <div class="form-row two"><div><label>Phone <span class="req">*</span></label><input class="input" type="tel" required></div><div><label>Email <span class="req">*</span></label><input class="input" type="email" required></div></div>
+        <div class="form-row"><label>Service Interested In</label><select class="select" id="enq-service"><option>Card Machines</option><option>Business Funding</option><option>EPOS Systems</option><option selected>Digital Signage</option><option>Utilities &amp; Broadband</option><option>Not Sure</option></select></div>
+        <div class="form-row"><label>Selected Product / Package</label><input class="input" id="enq-product" type="text" placeholder="Optional"></div>
+        <div class="form-row"><label>Message</label><textarea class="textarea" placeholder="Tell us a little about your business…"></textarea></div>
+        <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Send Enquiry <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></button>
+      </form>
+    </div>
+    <div id="enquiry-success" class="modal-success" style="display:none;">
+      <div class="big-ic"><iconify-icon icon="solar:check-circle-bold"></iconify-icon></div>
+      <h3>Thanks — enquiry received</h3>
+      <p>Your enquiry has been received. A Plemmo specialist will contact you shortly.</p>
+      <button class="btn btn-ghost" data-close style="justify-content:center;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* signage selector recommendation */
+  var SIG = {
+    menu:{title:'For cafés & takeaways',match:'32" Digital Menu Board Package',price:'£350',unit:'per screen',text:'Digital Menu Boards are perfect for showcasing your menu, promotions and prices with style and clarity.',checks:['Boost impulse orders','Easy to update anytime','Increase average spend']},
+    window:{title:'For high-street visibility',match:'High Brightness Window Display',price:'From £1,770',unit:'starting price',text:'Window displays help your storefront stand out in direct sunlight and attract passing customers.',checks:['Visible from outside','Promote offers 24/7','Built for high-footfall locations']},
+    advertising:{title:'For offers and promotions',match:'Professional Advertising Display',price:'From £650',unit:'starting price',text:'Advertising screens help promote campaigns, products and seasonal messages inside your business.',checks:['Dynamic promotions','Professional visuals','Flexible content updates']},
+    shopfront:{title:'For brand presence',match:'Custom Shopfront Signage',price:'Quote based',unit:'quoted individually',text:'Custom shopfront signs help your business look professional and easy to recognise.',checks:['Built around your brand','Material and lighting options','Site survey recommended']},
+    neon:{title:'For atmosphere and attention',match:'Custom LED Neon Sign',price:'Quote based',unit:'quoted individually',text:'LED neon signs add personality, atmosphere and memorable visual moments to your space.',checks:['Custom colours','Logo and text options','Great for social media appeal']},
+    outdoor:{title:'For all-weather visibility',match:'Outdoor Digital Advertising Display',price:'From £2,960',unit:'starting price',text:'Outdoor screens help businesses advertise in high-impact locations, day and night.',checks:['Weather-resistant options','High visibility','Built for outdoor environments']},
+    kiosk:{title:'For interactive customer experiences',match:'Android Touch Screen Kiosk',price:'From £2,290',unit:'starting price',text:'Touch kiosks help customers browse, order, check in or interact with your business independently.',checks:['Interactive experience','Self-service options','Ideal for hospitality and retail']}
+  };
+  function renderSig(key){
+    var d = SIG[key];
+    document.getElementById('sig-title').textContent = d.title;
+    document.getElementById('sig-match').textContent = d.match;
+    document.getElementById('sig-text').textContent = d.text;
+    document.getElementById('sig-price').textContent = d.price;
+    document.getElementById('sig-unit').textContent = d.unit;
+    document.getElementById('sig-checks').innerHTML = d.checks.map(function(c){return '<li><iconify-icon icon="solar:check-circle-bold"></iconify-icon> '+c+'</li>';}).join('');
+    document.getElementById('sig-cta').setAttribute('data-product', d.match);
+  }
+  document.querySelectorAll('#sig-tabs .tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('#sig-tabs .tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active'); renderSig(tab.dataset.sig);
+    });
+  });
+  renderSig('menu');
+
+  /* pricing tabs */
+  document.querySelectorAll('#price-tabs .tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('#price-tabs .tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      var cat = tab.dataset.cat;
+      document.querySelectorAll('.price-cat').forEach(function(c){ c.classList.toggle('active', c.dataset.cat===cat); });
+    });
+  });
+</script>
+<script src="inner.js"></script>
+</body>
+</html>
