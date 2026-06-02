@@ -889,6 +889,15 @@ body.ip-no-scroll { overflow: hidden; }
    ========================================================================== */
 .digital-signage-page .ds-hero { padding-bottom: clamp(40px, 6vw, 72px); }
 
+/* Dark custom section gets an ambient lime accent for depth */
+.ds-custom { position: relative; overflow: hidden; }
+.ds-custom::before {
+  content: ""; position: absolute; top: -120px; right: -80px;
+  width: 460px; height: 460px; border-radius: 50%;
+  background: rgba(184,240,0,0.10); filter: blur(120px); pointer-events: none;
+}
+.ds-custom > .ip-container { position: relative; z-index: 1; }
+
 /* --- Hero trust (stacked label/value) --- */
 .ds-hero-trust { display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 30px; }
 .ds-hero-trust li { display: flex; align-items: center; gap: 10px; }
@@ -897,15 +906,26 @@ body.ip-no-scroll { overflow: hidden; }
 .ds-hero-trust strong { font-size: 0.95rem; color: var(--charcoal); }
 
 /* --- Hero showroom bento --- */
+.ds-hero .ip-hero__blob--1 { background: rgba(184,240,0,0.22); width: 520px; height: 520px; }
 .ds-showroom {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 150px);
-  gap: 12px;
-  padding: 16px;
+  grid-template-rows: repeat(2, clamp(150px, 20vw, 184px));
+  gap: 14px;
+  padding: 18px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, #14171a, #23282d);
-  box-shadow: var(--shadow-lg);
+  background:
+    radial-gradient(120% 90% at 80% 0%, rgba(184,240,0,0.16), transparent 55%),
+    linear-gradient(135deg, #14171a, #23282d);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: var(--shadow-lg), 0 0 0 6px rgba(184,240,0,0.05);
+}
+/* soft lime glow pooling under the composition for depth */
+.ds-showroom::after {
+  content: ""; position: absolute; left: 8%; right: 8%; bottom: -26px; height: 60px;
+  background: rgba(184,240,0,0.35); filter: blur(40px); border-radius: 50%;
+  z-index: -1; pointer-events: none;
 }
 .ds-tile {
   position: relative;
@@ -914,9 +934,16 @@ body.ip-no-scroll { overflow: hidden; }
   display: flex; align-items: center; justify-content: center;
   padding: 14px;
   color: #fff;
-  transition: transform var(--t-base) var(--ease);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.35);
+  transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
 }
-.ds-tile:hover { transform: translateY(-3px); }
+.ds-tile::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 40%);
+  pointer-events: none;
+}
+.ds-tile:hover { transform: translateY(-4px); box-shadow: 0 22px 40px rgba(0,0,0,0.45); }
 .ds-tile__tag {
   position: absolute; top: 8px; left: 8px;
   background: rgba(8,10,7,0.78); color: #fff;
@@ -979,11 +1006,25 @@ body.ip-no-scroll { overflow: hidden; }
   text-align: center;
   transition: transform var(--t-base) var(--ease), border-color var(--t-fast) ease, background var(--t-fast) ease, box-shadow var(--t-base) var(--ease);
 }
-.ds-pick iconify-icon { font-size: 30px; color: var(--charcoal); transition: color var(--t-fast) ease; }
+.ds-pick iconify-icon {
+  font-size: 30px; color: var(--charcoal);
+  transition: color var(--t-fast) ease, transform var(--t-base) var(--ease);
+}
 .ds-pick span { font-size: 0.82rem; font-weight: 700; color: var(--charcoal); line-height: 1.2; }
-.ds-pick:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #d6dcc7; }
-.ds-pick.is-selected { border-color: var(--lime); background: var(--lime-soft); box-shadow: var(--shadow-sm); }
+.ds-pick:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: #cdd6b6; }
+.ds-pick:hover iconify-icon { transform: translateY(-3px) scale(1.1); color: #5f7a00; }
+.ds-pick.is-selected {
+  border-color: var(--lime); background: var(--lime-soft);
+  box-shadow: 0 8px 22px rgba(184,240,0,0.22);
+}
 .ds-pick.is-selected iconify-icon { color: #5f7a00; }
+/* small check badge on the selected card */
+.ds-pick.is-selected::after {
+  content: ""; position: absolute; top: 10px; right: 10px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23080A07' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 11px no-repeat;
+}
+.ds-pick { position: relative; }
 
 /* --- Recommendation panel --- */
 .ds-rec {
@@ -1006,10 +1047,10 @@ body.ip-no-scroll { overflow: hidden; }
 .ds-rec__body { display: flex; flex-direction: column; }
 .ds-rec__match {
   background: var(--white);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--charcoal);
   border-radius: var(--radius-lg);
   padding: 24px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   display: flex; flex-direction: column;
 }
 .ds-rec__match-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
@@ -1027,16 +1068,28 @@ body.ip-no-scroll { overflow: hidden; }
 
 /* --- Menu board packages --- */
 .ds-packages .ip-pricing-card { padding-top: 0; overflow: hidden; }
+.ds-packages .ip-pricing-card:hover { border-color: #cdd6b6; }
 .ds-pkg-media {
   position: relative;
-  margin: 0 -28px 22px; height: 150px;
+  margin: 0 -28px 22px; height: 168px;
   display: grid; place-items: center;
-  background: linear-gradient(160deg, #0e1116, #1d2733);
+  overflow: hidden;
+  background:
+    radial-gradient(90% 70% at 80% 0%, rgba(184,240,0,0.14), transparent 60%),
+    linear-gradient(160deg, #0e1116, #1d2733);
 }
-.ds-pkg-media--alt { background: linear-gradient(160deg, #14171a, #2a3320); }
+.ds-pkg-media--alt { background:
+    radial-gradient(90% 70% at 80% 0%, rgba(184,240,0,0.16), transparent 60%),
+    linear-gradient(160deg, #14171a, #2a3320); }
 .ds-pkg-media--custom { background: radial-gradient(130% 130% at 70% 20%, var(--lime-soft), var(--cream)); }
 .ds-pkg-media--custom iconify-icon { font-size: 60px; color: var(--charcoal); }
 .ds-pkg-media__size { font-size: 2.4rem; font-weight: 800; color: #fff; }
+/* menu-board style mockup inside package media */
+.ds-pkg-menu { width: 78%; gap: 9px; }
+.ds-pkg-menu .ds-menu__row { font-size: 0.82rem; padding-bottom: 7px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.ds-pkg-menu .ds-menu__row:last-child { border-bottom: none; }
+.ds-pkg-head .ip-pricing-card__price,
+.ds-pkg-head .ip-h3 { line-height: 1.05; }
 .ds-mockup-tag {
   position: absolute; bottom: 10px; left: 12px;
   font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
@@ -1050,17 +1103,35 @@ body.ip-no-scroll { overflow: hidden; }
 }
 .ds-packages .ip-pricing-card--featured::before { content: none; }
 .ds-pkg-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-.ds-pkg-head .ip-pricing-card__price { font-size: 1.6rem; margin: 0; }
-.ds-packages .ip-btn { margin-top: 20px; width: 100%; }
+.ds-pkg-head .ip-pricing-card__price { font-size: clamp(1.8rem, 1.4rem + 1.4vw, 2.1rem); margin: 0; }
+.ds-packages .ip-btn { margin-top: auto; width: 100%; }
+.ds-packages .ip-pricing-card__list { margin-bottom: 24px; }
 
 /* --- Commercial product mockups + tabs --- */
-.ds-tabs-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; margin-bottom: 4px; }
-.ds-tabs-scroll .ip-tabs__nav { flex-wrap: nowrap; width: max-content; max-width: none; }
+.ds-tabs-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; margin-bottom: 32px; }
+.ds-tabs-scroll .ip-tabs__nav { flex-wrap: nowrap; width: max-content; max-width: none; gap: 6px; }
+.ds-tabs-scroll .ip-tab { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.ds-tabs-scroll .ip-tab iconify-icon { font-size: 1.25em; }
 .ds-tabs-scroll::-webkit-scrollbar { height: 5px; }
 .ds-tabs-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-.ds-mockup { position: relative; display: grid; place-items: center; background: linear-gradient(160deg, #1d2733, #0c1118); }
-.ds-mockup__size { font-size: 2rem; font-weight: 800; color: #fff; }
+.ds-mockup {
+  position: relative; display: grid; place-items: center;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(160deg, #1d2733, #0c1118);
+}
+.ds-mockup::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(80% 70% at 70% 10%, rgba(184,240,0,0.12), transparent 60%);
+}
+.ds-mockup::after {
+  content: ""; position: absolute; left: 14%; right: 14%; top: 16%; bottom: 16%;
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.4);
+  transition: transform var(--t-slow) var(--ease);
+}
+.ds-prod:hover .ds-mockup::after { transform: scale(1.05); }
+.ds-mockup__size { position: relative; z-index: 1; font-size: 2.1rem; font-weight: 800; color: #fff; }
 .ds-mockup--4k { background: linear-gradient(160deg, #0e2a3a, #07151d); }
 .ds-mockup--poster { background: linear-gradient(160deg, #2a2233, #120c18); }
 .ds-mockup--window { background: linear-gradient(160deg, #163a2e, #08160f); }
@@ -1081,14 +1152,28 @@ body.ip-no-scroll { overflow: hidden; }
   padding: 16px 16px 22px;
   transition: transform var(--t-base) var(--ease), background var(--t-base) ease;
 }
-.ds-custom-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.07); }
+.ds-custom-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.07); border-color: rgba(184,240,0,0.4); }
 .ds-custom-card__visual {
-  height: 120px; border-radius: var(--radius-md); margin-bottom: 18px;
+  position: relative;
+  height: 130px; border-radius: var(--radius-md); margin-bottom: 18px;
   display: grid; place-items: center; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.ds-custom-card__visual::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 45%);
+  pointer-events: none;
 }
 .ds-cv--shopfront { background: linear-gradient(160deg, #14171a, #23282d); }
 .ds-cv--shopfront span, .ds-cv--window span { font-weight: 800; color: #fff; letter-spacing: 0.06em; text-align: center; font-size: 1rem; }
 .ds-cv--neon { background: radial-gradient(120% 120% at 50% 45%, #2a0d2e, #120814); }
+.ds-cv--neon .ds-neon { animation: ds-neon-flicker 4.5s infinite; }
+@keyframes ds-neon-flicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.55; }
+  94% { opacity: 1; }
+  96% { opacity: 0.7; }
+}
 .ds-cv--full { background: linear-gradient(160deg, #2a3320, #11140f); }
 .ds-cv--full iconify-icon { font-size: 54px; color: var(--lime); }
 .ds-cv--window { background: linear-gradient(160deg, #1b3a4b, #0b1a24); }
