@@ -208,6 +208,90 @@
     .cm-panel p { font-size: 13.5px; color: var(--muted-d); line-height: 1.5; }
     .cm-arrow { display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 30px; }
 
+    /* ══════════════════════════════════════════════════════════════
+       POLISH PASS — depth, micro-interactions, showroom feel
+       ══════════════════════════════════════════════════════════════ */
+    /* hero: larger product + depth */
+    .cm-stage-glow { width: 92%; background: radial-gradient(circle, rgba(198,255,0,0.62), rgba(198,255,0,0.12) 50%, transparent 70%); filter: blur(20px); }
+    .cm-stage-ring { width: 78%; animation: cmSpin 48s linear infinite; }
+    .cm-stage-ring::after { content: ''; position: absolute; inset: 9%; border-radius: 50%; border: 1px solid rgba(198,255,0,0.16); }
+    .cm-stage::after { content: ''; position: absolute; bottom: 7%; left: 50%; transform: translateX(-50%); width: 56%; height: 34px;
+      background: radial-gradient(ellipse, rgba(17,20,15,0.24), transparent 70%); filter: blur(9px); z-index: 1; }
+    @keyframes cmSpin { to { transform: rotate(360deg); } }
+    .cm-term { max-width: 87%; max-height: 92%; filter: drop-shadow(0 52px 72px rgba(17,20,15,0.34)); }
+    .cm-hero h1 { letter-spacing: 0.004em; }
+    .cm-float { box-shadow: 0 22px 48px rgba(17,20,15,0.18); transition: transform .3s; }
+    .cm-float:hover { transform: scale(1.05); }
+
+    /* quiz: the page's core feature */
+    .cm-quiz { position: relative; box-shadow: 0 42px 92px rgba(17,20,15,0.16); }
+    .cm-quiz::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 6;
+      background: linear-gradient(90deg, var(--accent), #9bcc00 55%, transparent); }
+    .cm-quiz-main { padding: 46px; }
+    .cm-prog { height: 8px; background: #ebeee2; box-shadow: inset 0 1px 2px rgba(0,0,0,0.06); }
+    .cm-prog i { background: linear-gradient(90deg, #9bcc00, var(--accent)); box-shadow: 0 0 16px rgba(198,255,0,0.5); position: relative; }
+    .cm-prog i::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 16px; background: rgba(255,255,255,0.6); filter: blur(3px); }
+    .cm-q { animation: cmFade .42s both; }
+    .cm-opt { animation: cmRise .42s both; }
+    .cm-opts .cm-opt:nth-child(1) { animation-delay: .03s; } .cm-opts .cm-opt:nth-child(2) { animation-delay: .07s; }
+    .cm-opts .cm-opt:nth-child(3) { animation-delay: .11s; } .cm-opts .cm-opt:nth-child(4) { animation-delay: .15s; }
+    .cm-opts .cm-opt:nth-child(5) { animation-delay: .19s; } .cm-opts .cm-opt:nth-child(6) { animation-delay: .23s; }
+    .cm-opt .od { transition: transform .16s, background .16s, border-color .16s; }
+    .cm-opt:hover .od { transform: scale(1.1) rotate(-3deg); }
+    .cm-opt.sel { box-shadow: 0 10px 26px rgba(198,255,0,0.22); }
+    @keyframes cmFade { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+    @keyframes cmRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+    /* recommendation: smart card */
+    .cm-result { animation: cmFade .5s both; }
+    .cm-result .r-head { display: flex; align-items: center; gap: 14px; margin: 16px 0 4px; }
+    .cm-result .r-ava { width: 54px; height: 54px; border-radius: 15px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue'; font-size: 28px; letter-spacing: 0.02em; color: #0a0c0a; background: var(--accent); box-shadow: 0 12px 26px rgba(198,255,0,0.4); }
+    .cm-result .r-head .r-name { font-size: 46px; margin: 0; }
+    .cm-result .r-lead { margin: 0; }
+
+    /* provider showroom: brand area + chips */
+    .cm-prov-head { display: flex; align-items: center; gap: 13px; margin-top: 16px; }
+    .cm-prov-mark { width: 46px; height: 46px; border-radius: 13px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue'; font-size: 26px; color: #0a0c0a; background: var(--accent); }
+    .cm-prov-head .cm-prov-logo { margin: 0; }
+    .cm-prov-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+    .cm-prov-chip { font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 100px;
+      background: rgba(198,255,0,0.08); border: 1px solid rgba(198,255,0,0.2); color: var(--accent); }
+    .cm-prov-best { min-height: auto; margin-bottom: 12px; }
+
+    /* rate clarity: pricing-intelligence feel */
+    .cm-factor .fi { transition: transform .2s; }
+    .cm-factor:hover .fi { transform: scale(1.1); }
+    .cm-rate-row { padding: 18px 26px; }
+    .cm-rate-row.best { border-left: 3px solid var(--accent); }
+    .cm-rate-foot { display: flex; align-items: center; gap: 11px; padding: 16px 26px; border-top: 1px solid var(--line-l);
+      background: var(--paper); font-size: 13px; font-weight: 600; color: var(--ink-soft); }
+    .cm-rate-foot iconify-icon { color: #6f8a00; font-size: 20px; flex-shrink: 0; }
+
+    /* terminals: more image-led */
+    .cm-prod-img { aspect-ratio: 1/1; padding: 30px; }
+    .cm-prod-img img { max-width: 84%; }
+
+    /* pathways */
+    .cm-path-ov { background: linear-gradient(to top, rgba(8,10,7,0.94) 16%, rgba(8,10,7,0.22) 60%, transparent); }
+    .cm-path p { max-width: 240px; }
+
+    /* switch & save: storytelling */
+    .cm-arrow iconify-icon { animation: cmNudge 1.8s ease-in-out infinite; }
+    @keyframes cmNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+    .cm-panel { transition: transform .24s, border-color .24s; }
+    .cm-panel:hover { transform: translateY(-5px); }
+    .cm-panel-chips { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin-top: 15px; }
+    .cm-pc { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px; }
+    .cm-pc.bad { background: rgba(255,107,107,0.1); color: #ff9b9b; border: 1px solid rgba(255,107,107,0.22); }
+    .cm-pc.good { background: rgba(198,255,0,0.12); color: var(--accent); border: 1px solid rgba(198,255,0,0.24); }
+
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .cm-term, .cm-paycard, .cm-float, .cm-stage-ring, .cm-arrow iconify-icon, .cm-q, .cm-opt, .cm-result { animation: none !important; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1000px) { .cm-prov-grid { grid-template-columns: repeat(2, 1fr); } .cm-term-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 920px) {
@@ -232,6 +316,15 @@
     @media (max-width: 480px) {
       .cm-cta-row .btn, .cm-prod-btns { width: 100%; }
       .cm-cta-row .btn { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 400px) {
+      .cm-quiz-main, .cm-quiz-side { padding: 22px; }
+      .cm-q { font-size: 21px; margin: 22px 0 16px; }
+      .cm-opt { padding: 13px 14px; font-size: 14px; gap: 11px; }
+      .cm-opt .od { width: 28px; height: 28px; }
+      .cm-result .r-head .r-name { font-size: 38px; }
+      .cm-result .r-ava { width: 46px; height: 46px; font-size: 24px; }
+      .cm-hero { padding: 108px 0 60px; }
     }
   </style>
 </head>
@@ -325,9 +418,10 @@
     <div class="cm-prov-grid reveal">
       <div class="cm-prov">
         <span class="cm-prov-badge">Best for established</span>
-        <div class="cm-prov-logo">Teya</div>
+        <div class="cm-prov-head"><span class="cm-prov-mark">T</span><div class="cm-prov-logo">Teya</div></div>
         <div class="cm-prov-mock"><img src="../assets/card-machines/provider-teya-card.png" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Teya card terminal"></div>
         <div class="cm-prov-best">For businesses with regular monthly card turnover.</div>
+        <div class="cm-prov-chips"><span class="cm-prov-chip">From 0.55%</span><span class="cm-prov-chip">PAX A920 Pro</span><span class="cm-prov-chip">Next-day</span></div>
         <ul>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> Competitive rates from 0.55% where eligible</li>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> £15 + VAT monthly rental</li>
@@ -338,9 +432,10 @@
       </div>
       <div class="cm-prov">
         <span class="cm-prov-badge">Best for simple setup</span>
-        <div class="cm-prov-logo">SumUp</div>
+        <div class="cm-prov-head"><span class="cm-prov-mark">S</span><div class="cm-prov-logo">SumUp</div></div>
         <div class="cm-prov-mock"><img src="../assets/card-machines/provider-sumup-card.png" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="SumUp card reader"></div>
         <div class="cm-prov-best">For new and smaller businesses wanting low commitment.</div>
+        <div class="cm-prov-chips"><span class="cm-prov-chip">No monthly fee</span><span class="cm-prov-chip">One-off ~£162</span><span class="cm-prov-chip">Easy setup</span></div>
         <ul>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> One-off terminal ~£162 inc VAT</li>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> No monthly terminal fee</li>
@@ -351,9 +446,10 @@
       </div>
       <div class="cm-prov">
         <span class="cm-prov-badge">Flexible alternative</span>
-        <div class="cm-prov-logo">Shift4</div>
+        <div class="cm-prov-head"><span class="cm-prov-mark">S4</span><div class="cm-prov-logo">Shift4</div></div>
         <div class="cm-prov-mock"><img src="../assets/card-machines/provider-shift4-card.png" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Shift4 card terminal"></div>
         <div class="cm-prov-best">For lower turnover or businesses needing an alternative fit.</div>
+        <div class="cm-prov-chips"><span class="cm-prov-chip">~0.7% over £10k</span><span class="cm-prov-chip">Blended</span><span class="cm-prov-chip">Next-working-day</span></div>
         <ul>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> Blended rates may be available</li>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> Below £10k: ~1.25% blended</li>
@@ -364,9 +460,10 @@
       </div>
       <div class="cm-prov">
         <span class="cm-prov-badge">Best for larger</span>
-        <div class="cm-prov-logo">Worldpay</div>
+        <div class="cm-prov-head"><span class="cm-prov-mark">W</span><div class="cm-prov-logo">Worldpay</div></div>
         <div class="cm-prov-mock"><img src="../assets/card-machines/provider-worldpay-card.png" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay card terminal"></div>
         <div class="cm-prov-best">For established businesses comparing debit/credit split pricing.</div>
+        <div class="cm-prov-chips"><span class="cm-prov-chip">Debit from 0.30%</span><span class="cm-prov-chip">Split pricing</span><span class="cm-prov-chip">£1 first year</span></div>
         <ul>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> Debit from 0.30% above £25k where eligible</li>
           <li><iconify-icon icon="ph:check-bold"></iconify-icon> Credit from 0.65% above £25k where eligible</li>
@@ -401,6 +498,7 @@
         <div class="cm-rate-row"><span class="turn">£35,001 – £80,000</span><span class="val">0.77%–0.67%</span></div>
         <div class="cm-rate-row"><span class="turn">£80,001 – £100,000</span><span class="val">0.63%–0.61%</span></div>
         <div class="cm-rate-row best"><span class="turn">£100,000+ <span class="best-tag">Lowest tier</span></span><span class="val">from 0.60% / 0.55%</span></div>
+        <div class="cm-rate-foot"><iconify-icon icon="ph:trend-down-duotone"></iconify-icon> Indicative rates generally improve as monthly card turnover increases — subject to provider approval and transaction mix.</div>
       </div>
     </div>
     <p class="disc">Rates are indicative and subject to provider approval, transaction mix, business profile, eligibility and provider terms.</p>
@@ -465,11 +563,11 @@
   <div class="container">
     <div class="head"><span class="kicker"><iconify-icon icon="ph:arrows-left-right-duotone"></iconify-icon> Switching made simple</span><h2>Switching should feel simple, not stressful</h2></div>
     <div class="cm-flow reveal">
-      <div class="cm-panel"><div class="pi"><iconify-icon icon="ph:warning-circle-duotone"></iconify-icon></div><div class="pk">Before</div><h3>Messy fees</h3><p>Unclear rates, mystery charges and slow support that never quite answers.</p></div>
+      <div class="cm-panel"><div class="pi"><iconify-icon icon="ph:warning-circle-duotone"></iconify-icon></div><div class="pk">Before</div><h3>Messy fees</h3><p>Unclear rates, mystery charges and slow support.</p><div class="cm-panel-chips"><span class="cm-pc bad">Hidden costs</span><span class="cm-pc bad">Guesswork</span></div></div>
       <div class="cm-arrow"><iconify-icon icon="ph:arrow-right-bold"></iconify-icon></div>
-      <div class="cm-panel mid"><div class="pi"><iconify-icon icon="ph:scales-duotone"></iconify-icon></div><div class="pk">Plemmo</div><h3>We compare</h3><p>We check suitable providers and explain your options in plain English.</p></div>
+      <div class="cm-panel mid"><div class="pi"><iconify-icon icon="ph:scales-duotone"></iconify-icon></div><div class="pk">Plemmo</div><h3>We compare</h3><p>We check suitable providers and explain your options.</p><div class="cm-panel-chips"><span class="cm-pc good">Side by side</span><span class="cm-pc good">Plain English</span></div></div>
       <div class="cm-arrow"><iconify-icon icon="ph:arrow-right-bold"></iconify-icon></div>
-      <div class="cm-panel"><div class="pi"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon></div><div class="pk">After</div><h3>Clearer setup</h3><p>A better-fit provider, clearer pricing and ongoing support as you grow.</p></div>
+      <div class="cm-panel"><div class="pi"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon></div><div class="pk">After</div><h3>Clearer setup</h3><p>A better-fit provider and ongoing support as you grow.</p><div class="cm-panel-chips"><span class="cm-pc good">Better fit</span><span class="cm-pc good">Supported</span></div></div>
     </div>
     <div style="text-align:center;margin-top:36px;"><a href="#finder" class="btn btn-solid">Start the finder <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a></div>
   </div>
@@ -671,10 +769,11 @@
       return;
     }
     var r = recommend(answers);
+    var mark = r.name.indexOf('vs') > -1 ? 'VS' : (r.name === 'Shift4' ? 'S4' : r.name.charAt(0));
     var html = '<span class="cm-side-tag"><iconify-icon icon="ph:target-duotone"></iconify-icon> ' + (complete ? 'Indicative match' : 'Live preview') + '</span>';
     html += '<div class="cm-result">';
     if (complete) html += '<span class="cm-badge-done"><iconify-icon icon="ph:check-bold"></iconify-icon> Based on your answers</span>';
-    html += '<div class="r-lead">We’d suggest</div><div class="r-name">'+r.name+'</div>'
+    html += '<div class="r-lead">We’d suggest</div><div class="r-head"><span class="r-ava">'+mark+'</span><div class="r-name">'+r.name+'</div></div>'
       + '<div class="r-rate"><iconify-icon icon="ph:percent-duotone"></iconify-icon> '+r.rate+'</div>'
       + '<p class="r-why">'+r.why+'</p><ul>'
       + r.benefits.map(function(b){ return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+b+'</li>'; }).join('')
