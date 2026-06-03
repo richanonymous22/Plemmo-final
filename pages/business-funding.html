@@ -25,7 +25,13 @@
     .opt-row.two { grid-template-columns: repeat(2, 1fr); }
     .copt { position: relative; background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 18px 14px; text-align: center; cursor: pointer; font-size: 14.5px; font-weight: 600; transition: border-color .2s, background .2s, transform .2s; }
     .copt:hover { border-color: var(--line-2); transform: translateY(-3px); background: #1c2118; }
-    .copt iconify-icon { display: block; font-size: 26px; color: var(--accent); margin-bottom: 8px; }
+    .copt.selected { border-color: var(--accent); background: rgba(198,255,0,0.08); box-shadow: 0 8px 22px rgba(198,255,0,0.12); }
+    .copt iconify-icon { display: block; font-size: 26px; color: var(--accent); margin-bottom: 8px; transition: transform .2s; }
+    .copt:hover iconify-icon { transform: scale(1.12); }
+    .checker-nav { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 20px; flex-wrap: wrap; }
+    .checker-back { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.04); border: 1px solid var(--line-2); color: var(--text); font: inherit; font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: var(--radius-pill); cursor: pointer; transition: background .2s, transform .2s; }
+    .checker-back:hover { background: rgba(255,255,255,0.09); transform: translateX(-3px); }
+    .checker-hint { font-size: 12.5px; color: var(--muted-2); margin-left: auto; }
     .checker-done { text-align: center; padding: 8px 0; }
     .checker-done .big-ic { width: 64px; height: 64px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; }
     .checker-done .big-ic iconify-icon { font-size: 36px; color: var(--accent); }
@@ -41,7 +47,15 @@
     @keyframes scroll { to { transform: translateX(-50%); } }
     .lender { flex: 0 0 auto; font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: rgba(255,255,255,0.5); transition: color .3s, transform .3s; }
     .lender:hover { color: var(--text); transform: scale(1.08); }
-    @media (max-width:600px){ .opt-row, .opt-row.two { grid-template-columns: 1fr 1fr; } }
+    /* by-the-numbers band */
+    .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .num-card { text-align: center; padding: 30px 18px; border-radius: var(--radius-lg); position: relative; overflow: hidden;
+      background: radial-gradient(120% 130% at 50% 0%, rgba(198,255,0,0.10), transparent 60%), linear-gradient(180deg, var(--card-2), var(--card));
+      border: 1px solid var(--line); transition: transform .25s, box-shadow .25s, border-color .25s; }
+    .num-card:hover { transform: translateY(-4px); border-color: rgba(198,255,0,0.3); box-shadow: 0 22px 46px rgba(0,0,0,0.4); }
+    .num-card b { display: block; font-size: clamp(32px, 4vw, 46px); font-weight: 900; color: var(--accent); line-height: 1; text-shadow: 0 0 26px rgba(198,255,0,.35); }
+    .num-card span { display: block; margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+    @media (max-width:600px){ .opt-row, .opt-row.two { grid-template-columns: 1fr 1fr; } .numbers { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
@@ -149,6 +163,18 @@
       <div class="s-card"><div class="ic"><iconify-icon icon="solar:wad-of-money-bold-duotone"></iconify-icon></div><h3>Asset Finance</h3><p>Funding for equipment, vehicles, machinery or business assets. Good for EPOS, kitchen equipment and fit-out items.</p><a href="#" class="btn btn-ghost card-btn" data-enquiry data-service="Business Funding" data-product="Asset Finance">Explore option</a></div>
       <div class="s-card"><div class="ic"><iconify-icon icon="solar:refresh-circle-bold-duotone"></iconify-icon></div><h3>Credit Line / Revolving Credit</h3><p>Flexible access to funds when you need them. Good for cash flow and short-term working capital.</p><a href="#" class="btn btn-ghost card-btn" data-enquiry data-service="Business Funding" data-product="Credit Line">Explore option</a></div>
       <div class="s-card" style="background:linear-gradient(135deg,#1a2110,#12150f);border-color:var(--line-2);"><div class="ic"><iconify-icon icon="solar:question-circle-bold-duotone"></iconify-icon></div><h3>Not sure what fits?</h3><p>Tell us about your business and a Plemmo funding specialist will help you compare suitable options.</p><a href="#" class="btn btn-solid card-btn" data-enquiry data-service="Business Funding">Speak to an Expert</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BY THE NUMBERS ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="numbers reveal">
+      <div class="num-card"><b><span data-count="5">0</span></b><span>Funding products</span></div>
+      <div class="num-card"><b><span data-count="12" data-suffix="+">0</span></b><span>UK funding partners</span></div>
+      <div class="num-card"><b><span data-count="100" data-prefix="£" data-suffix="k+">0</span></b><span>Funding amounts</span></div>
+      <div class="num-card"><b><span data-count="0" data-prefix="£">0</span></b><span>Cost to explore</span></div>
     </div>
   </div>
 </section>
@@ -321,12 +347,18 @@
     document.getElementById('step-no').textContent = (cur+1)+' / '+STEPS.length;
     document.getElementById('bar').style.width = ((cur+1)/STEPS.length*100)+'%';
     var html = '<div class="checker-q"><h3>'+s.title+'</h3><div class="opt-row '+s.cls+'">';
-    s.opts.forEach(function(o){ html += '<div class="copt" data-val="'+o.l+'"><iconify-icon icon="'+o.i+'"></iconify-icon>'+o.l+'</div>'; });
-    html += '</div></div>';
+    s.opts.forEach(function(o){ var sel = answers[s.key]===o.l ? ' selected' : '';
+      html += '<div class="copt'+sel+'" data-val="'+o.l+'"><iconify-icon icon="'+o.i+'"></iconify-icon>'+o.l+'</div>'; });
+    html += '</div>';
+    html += '<div class="checker-nav">';
+    if (cur>0) html += '<button type="button" class="checker-back" id="back"><iconify-icon icon="solar:arrow-left-linear"></iconify-icon> Back</button>';
+    html += '<span class="checker-hint">Step '+(cur+1)+' of '+STEPS.length+' · takes ~30 seconds</span></div>';
+    html += '</div>';
     body.innerHTML = html;
     body.querySelectorAll('.copt').forEach(function(el){
       el.addEventListener('click', function(){ answers[s.key] = el.dataset.val; cur++; (cur<STEPS.length)?renderStep():renderResult(); });
     });
+    var back = body.querySelector('#back'); if(back) back.addEventListener('click', function(){ cur = Math.max(0, cur-1); renderStep(); });
   }
 
   function recommend(){

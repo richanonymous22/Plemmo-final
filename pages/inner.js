@@ -26,13 +26,95 @@
     mobileMenu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
   }
 
-  /* ── Reveal on scroll ── */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Reading progress bar ── */
+  var bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+  var updateBar = function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', updateBar, { passive: true });
+  window.addEventListener('resize', updateBar);
+  updateBar();
+
+  /* ── Ambient hero orbs ── */
+  var hero = document.querySelector('.hero');
+  if (hero && !reduceMotion) {
+    ['a', 'b'].forEach(function (k) {
+      var o = document.createElement('span');
+      o.className = 'orb ' + k;
+      hero.insertBefore(o, hero.firstChild);
+    });
+  }
+
+  /* ── Reveal on scroll (with light stagger for grid children) ── */
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  /* ── Animated number counters (elements with [data-count]) ── */
+  var fmt = function (n) { return Math.round(n).toLocaleString('en-GB'); };
+  var runCount = function (el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduceMotion) { el.textContent = prefix + fmt(target) + suffix; return; }
+    var t0 = performance.now(), dur = 1400;
+    el.classList.add('counting');
+    (function step(t) {
+      var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + fmt(target * e) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  };
+  var cio = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { runCount(e.target); cio.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+
+  /* ── Keyboard-accessible tabs (arrow keys move between tabs in a row) ── */
+  document.querySelectorAll('.tabs').forEach(function (group) {
+    var tabs = Array.prototype.slice.call(group.querySelectorAll('.tab'));
+    tabs.forEach(function (tab, i) {
+      tab.setAttribute('tabindex', '0');
+      tab.setAttribute('role', 'button');
+      tab.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); tab.click(); }
+        else if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+          ev.preventDefault();
+          var n = ev.key === 'ArrowRight' ? (i + 1) % tabs.length : (i - 1 + tabs.length) % tabs.length;
+          tabs[n].focus();
+        }
+      });
+    });
+  });
+
+  /* ── Mobile sticky quote bar (auto-built from the page's primary service) ── */
+  (function () {
+    var primaryTrigger = document.querySelector('.nav-cta [data-enquiry], .nav-cta a.btn-solid');
+    var service = primaryTrigger ? primaryTrigger.getAttribute('data-service') : null;
+    var hasModal = document.getElementById('enquiry-modal');
+    var phone = (document.querySelector('a[href^="tel:"]') || {}).getAttribute
+      ? document.querySelector('a[href^="tel:"]').getAttribute('href') : 'tel:02079460958';
+    var wrap = document.createElement('div');
+    wrap.className = 'sticky-cta';
+    var quoteBtn = hasModal
+      ? '<a href="#" class="btn btn-solid" data-enquiry ' + (service ? 'data-service="' + service + '"' : '') + '>Get a Free Quote</a>'
+      : '<a href="#enquiry" class="btn btn-solid">Get a Free Quote</a>';
+    wrap.innerHTML = '<a href="' + phone + '" class="btn btn-ghost" aria-label="Call Plemmo"><iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>' + quoteBtn;
+    document.body.appendChild(wrap);
+    document.body.classList.add('has-sticky-cta');
+    /* its [data-enquiry] trigger is wired by the modal block below */
+    var toggleSticky = function () { wrap.classList.toggle('show', window.scrollY > 600); };
+    window.addEventListener('scroll', toggleSticky, { passive: true });
+    toggleSticky();
+  })();
 
   /* ── FAQ accordion ── */
   document.querySelectorAll('.faq-item').forEach(function (item) {

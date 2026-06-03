@@ -28,17 +28,29 @@
     /* pricing tabs */
     .price-cat { display: none; }
     .price-cat.active { display: block; }
-    /* before/after */
-    .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .ba .col { border-radius: var(--radius); overflow: hidden; position: relative; border: 1px solid var(--line); aspect-ratio: 4/3; }
-    .ba .col img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.16,1,.3,1); }
-    .ba .col:hover img { transform: scale(1.05); }
-    .ba .col .lbl { position: absolute; top: 12px; left: 12px; background: rgba(8,10,8,0.8); border: 1px solid var(--line-2); border-radius: var(--radius-pill); padding: 6px 14px; font-size: 12px; font-weight: 700; }
-    .ba .col.after .lbl { background: var(--accent); color: #0a0c0a; border-color: var(--accent); }
+    /* interactive before/after slider */
+    .ba-slider { position: relative; width: 100%; aspect-ratio: 16/9; max-height: 560px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line-2); box-shadow: 0 40px 90px rgba(0,0,0,0.55); user-select: none; }
+    .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .ba-clip { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0 50% 0 0); will-change: clip-path; }
+    .ba-tag { position: absolute; top: 16px; z-index: 4; background: rgba(8,10,8,0.8); border: 1px solid var(--line-2); border-radius: var(--radius-pill); padding: 6px 14px; font-size: 12px; font-weight: 700; pointer-events: none; }
+    .ba-tag.left { left: 16px; }
+    .ba-tag.right { right: 16px; background: var(--accent); color: #0a0c0a; border-color: var(--accent); }
+    .ba-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: var(--accent); transform: translateX(-50%); z-index: 5; pointer-events: none; box-shadow: 0 0 18px rgba(198,255,0,.6); }
+    .ba-handle iconify-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 46px; height: 46px; font-size: 26px; color: #0a0c0a; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+    .ba-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; z-index: 6; }
+    @media (max-width:600px){ .ba-slider { aspect-ratio: 4/3; } }
     /* custom signage dark band */
     .custom-band { background: radial-gradient(700px 360px at 80% 20%, rgba(198,255,0,0.12), transparent 60%), linear-gradient(135deg,#0c0e0c,#10130d); border:1px solid var(--line); border-radius: var(--radius-lg); padding: 44px; }
     .custom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 26px; }
     .neon-text { font-weight: 900; color: var(--accent); text-shadow: 0 0 10px rgba(198,255,0,0.7), 0 0 30px rgba(198,255,0,0.4); }
+    .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .num-card { text-align: center; padding: 30px 18px; border-radius: var(--radius-lg); position: relative; overflow: hidden;
+      background: radial-gradient(120% 130% at 50% 0%, rgba(198,255,0,0.10), transparent 60%), linear-gradient(180deg, var(--card-2), var(--card));
+      border: 1px solid var(--line); transition: transform .25s, box-shadow .25s, border-color .25s; }
+    .num-card:hover { transform: translateY(-4px); border-color: rgba(198,255,0,0.3); box-shadow: 0 22px 46px rgba(0,0,0,0.4); }
+    .num-card b { display: block; font-size: clamp(30px, 4vw, 44px); font-weight: 900; color: var(--accent); line-height: 1; text-shadow: 0 0 26px rgba(198,255,0,.35); }
+    .num-card span { display: block; margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+    @media (max-width:600px){ .numbers{grid-template-columns:1fr 1fr;} }
     @media (max-width:980px){ .rec-panel.sig{grid-template-columns:1fr;} .custom-grid{grid-template-columns:1fr;} }
     @media (max-width:600px){ .ba{grid-template-columns:1fr;} }
   </style>
@@ -109,8 +121,8 @@
     <div class="sec-head center reveal"><h2>Find the right signage for your business</h2><p class="sub">Pick what you're after and we'll show you a great place to start.</p></div>
     <div class="tabs reveal" id="sig-tabs" style="justify-content:center;flex-wrap:wrap;">
       <div class="tab active" data-sig="menu"><iconify-icon icon="solar:dish-bold-duotone"></iconify-icon> Digital Menu Boards</div>
-      <div class="tab" data-sig="window"><iconify-icon icon="solar:siderbar-bold-duotone"></iconify-icon> Window Displays</div>
-      <div class="tab" data-sig="advertising"><iconify-icon icon="solar:slider-horizontal-bold-duotone"></iconify-icon> Advertising Screens</div>
+      <div class="tab" data-sig="window"><iconify-icon icon="solar:gallery-wide-bold-duotone"></iconify-icon> Window Displays</div>
+      <div class="tab" data-sig="advertising"><iconify-icon icon="solar:posters-bold-duotone"></iconify-icon> Advertising Screens</div>
       <div class="tab" data-sig="shopfront"><iconify-icon icon="solar:shop-2-bold-duotone"></iconify-icon> Shopfront Signs</div>
       <div class="tab" data-sig="neon"><iconify-icon icon="solar:lightbulb-bolt-bold-duotone"></iconify-icon> Neon Signs</div>
       <div class="tab" data-sig="outdoor"><iconify-icon icon="solar:cloud-sun-bold-duotone"></iconify-icon> Outdoor Displays</div>
@@ -151,13 +163,31 @@
   </div>
 </section>
 
-<!-- ── BEFORE / AFTER ── -->
+<!-- ── BEFORE / AFTER (interactive slider) ── -->
 <section class="sec-pad" style="padding-top:0;">
   <div class="container">
-    <div class="sec-head reveal"><h2>The difference a screen makes</h2><p class="sub">From easy-to-miss to impossible to ignore.</p></div>
-    <div class="ba reveal">
-      <div class="col before"><span class="lbl">Before</span><img src="https://images.unsplash.com/photo-1481437156560-3205f6a55735?auto=format&fit=crop&q=80&w=800" alt="Plain shopfront before signage"></div>
-      <div class="col after"><span class="lbl">After</span><img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=800" alt="Bright digital signage after install"></div>
+    <div class="sec-head center reveal"><h2>The difference a screen makes</h2><p class="sub">Drag the handle to see the transformation — from easy-to-miss to impossible to ignore.</p></div>
+    <div class="ba-slider reveal" id="ba-slider">
+      <img class="ba-img after-img" src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=1200" alt="Bright digital signage after install" draggable="false">
+      <div class="ba-clip" id="ba-clip">
+        <img class="ba-img before-img" src="https://images.unsplash.com/photo-1481437156560-3205f6a55735?auto=format&fit=crop&q=80&w=1200" alt="Plain shopfront before signage" draggable="false">
+      </div>
+      <span class="ba-tag left">Before</span>
+      <span class="ba-tag right">After</span>
+      <div class="ba-handle" id="ba-handle"><iconify-icon icon="solar:double-alt-arrow-right-bold-duotone"></iconify-icon></div>
+      <input type="range" min="0" max="100" value="50" class="ba-range" id="ba-range" aria-label="Reveal before and after">
+    </div>
+  </div>
+</section>
+
+<!-- ── BY THE NUMBERS ── -->
+<section class="sec-pad" style="padding-top:0;">
+  <div class="container">
+    <div class="numbers reveal">
+      <div class="num-card"><b><span data-count="7">0</span></b><span>Signage types</span></div>
+      <div class="num-card"><b><span data-count="2">0</span> yr</b><span>Warranty included</span></div>
+      <div class="num-card"><b>5.0</b><span>Customer rated</span></div>
+      <div class="num-card"><b>UK</b><span>Based support</span></div>
     </div>
   </div>
 </section>
@@ -354,6 +384,20 @@
       document.querySelectorAll('.price-cat').forEach(function(c){ c.classList.toggle('active', c.dataset.cat===cat); });
     });
   });
+
+  /* before / after comparison slider */
+  (function(){
+    var range = document.getElementById('ba-range');
+    var clip = document.getElementById('ba-clip');
+    var handle = document.getElementById('ba-handle');
+    if(!range || !clip) return;
+    function set(v){
+      clip.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
+      handle.style.left = v + '%';
+    }
+    range.addEventListener('input', function(){ set(+range.value); });
+    set(+range.value);
+  })();
 </script>
 <script src="inner.js"></script>
 </body>

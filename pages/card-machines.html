@@ -816,6 +816,24 @@
   /* mobile menu */
   document.querySelector('.burger').addEventListener('click', ()=> nav.classList.toggle('open'));
   document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', ()=> nav.classList.remove('open')));
+
+  /* ── premium consistency: reading progress + mobile sticky quote bar ── */
+  (function(){
+    var bar = document.createElement('div'); bar.id='scrollbar';
+    bar.style.cssText='position:fixed;top:0;left:0;height:3px;width:0;z-index:400;background:linear-gradient(90deg,var(--accent-2),var(--accent));box-shadow:0 0 12px rgba(198,255,0,.6);transition:width .12s linear;';
+    document.body.appendChild(bar);
+    function up(){ var h=document.documentElement.scrollHeight-innerHeight; bar.style.width=(h>0?scrollY/h*100:0)+'%'; }
+    addEventListener('scroll',up,{passive:true}); addEventListener('resize',up); up();
+
+    if (innerWidth <= 600) {
+      var wrap=document.createElement('div');
+      wrap.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:90;display:flex;gap:10px;transform:translateY(140%);transition:transform .4s cubic-bezier(.16,1,.3,1);';
+      wrap.innerHTML='<a href="tel:02079460958" class="btn btn-ghost" aria-label="Call Plemmo" style="box-shadow:0 16px 34px rgba(0,0,0,.5)"><iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>'
+        +'<a href="#quote" class="btn btn-solid" style="flex:1;justify-content:center;box-shadow:0 16px 34px rgba(0,0,0,.5)">Get a Free Quote</a>';
+      document.body.appendChild(wrap); document.body.style.paddingBottom='78px';
+      addEventListener('scroll',function(){ wrap.style.transform = scrollY>600?'none':'translateY(140%)'; },{passive:true});
+    }
+  })();
 </script>
 
 </body>
