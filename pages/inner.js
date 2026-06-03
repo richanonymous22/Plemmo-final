@@ -107,7 +107,7 @@
     var quoteBtn = hasModal
       ? '<a href="#" class="btn btn-solid" data-enquiry ' + (service ? 'data-service="' + service + '"' : '') + '>Get a Free Quote</a>'
       : '<a href="#enquiry" class="btn btn-solid">Get a Free Quote</a>';
-    wrap.innerHTML = '<a href="' + phone + '" class="btn btn-ghost" aria-label="Call Plemmo"><iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon></a>' + quoteBtn;
+    wrap.innerHTML = '<a href="' + phone + '" class="btn btn-ghost" aria-label="Call Plemmo"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a>' + quoteBtn;
     document.body.appendChild(wrap);
     document.body.classList.add('has-sticky-cta');
     /* its [data-enquiry] trigger is wired by the modal block below */
