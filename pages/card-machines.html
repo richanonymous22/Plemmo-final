@@ -131,59 +131,67 @@ section{scroll-margin-top:88px}
 .chip.c2{top:40%;right:-6%;animation:floaty 7s ease-in-out infinite .8s}
 .chip.c3{bottom:12%;left:4%;animation:floaty 6.2s ease-in-out infinite 1.2s}
 
-/* ── PARTNERS ── */
-.partners{background:var(--cream);border-radius:var(--r-lg);padding:28px 36px;box-shadow:0 24px 60px rgba(0,0,0,.3)}
-.partners .pl{text-align:center;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:22px}
-.partners .row{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
-.plogo{height:30px;display:inline-flex;align-items:center;filter:grayscale(1);opacity:.62;transition:filter .3s,opacity .3s,transform .3s}
-.plogo:hover{filter:grayscale(0);opacity:1;transform:translateY(-2px)}
+/* ── PARTNERS (moving marquee, full colour) ── */
+.partners{background:var(--cream);border-radius:var(--r-lg);padding:26px 0;box-shadow:0 24px 60px rgba(0,0,0,.3);overflow:hidden}
+.partners .pl{text-align:center;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:20px;padding:0 24px}
+.marquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.mq-track{display:flex;align-items:center;gap:60px;width:max-content;animation:scrollx 30s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+.plogo{height:36px;display:inline-flex;align-items:center;flex:0 0 auto;transition:transform .3s var(--spring)}
+.plogo:hover{transform:translateY(-3px) scale(1.06)}
 .plogo img{height:100%;width:auto;object-fit:contain}
-.wordmark{font-weight:800;font-size:21px;letter-spacing:-.03em;color:#1d2118;display:inline-flex;align-items:center;gap:3px}
+.wordmark{font-weight:800;font-size:22px;letter-spacing:-.03em;color:#1d2118;display:inline-flex;align-items:center;gap:3px}
 .wordmark .b4{background:#111;color:#fff;border-radius:5px;padding:0 5px;margin-left:2px}
 .wordmark small{font-size:11px;vertical-align:super}
 
-/* ── QUIZ ── */
-.quiz{display:grid;grid-template-columns:1fr 1fr;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line);
-  background:linear-gradient(150deg,#141a0f,#0b0e08)}
-.quiz-promo{padding:46px;position:relative}
-.qvis{position:relative;width:200px;height:200px;margin-bottom:28px}
-.qvis .ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(198,255,0,.5);box-shadow:0 0 44px rgba(198,255,0,.32);animation:spin 50s linear infinite}
-.qvis .device{position:absolute;width:56%;left:22%;top:24%;filter:drop-shadow(0 18px 26px rgba(0,0,0,.5))}
-.qvis .fic{position:absolute;width:48px;height:48px;border-radius:14px;background:#11150d;border:1px solid rgba(198,255,0,.4);
-  display:flex;align-items:center;justify-content:center;box-shadow:0 0 22px rgba(198,255,0,.3)}
-.qvis .fic iconify-icon{font-size:24px;color:var(--lime)}
-.qvis .fic.a{top:-8px;left:50%;transform:translateX(-50%);animation:floaty 5s ease-in-out infinite}
-.qvis .fic.b{top:42%;left:-12px;animation:floaty 5.6s ease-in-out infinite .5s}
-.qvis .fic.c{bottom:2px;right:-4px;animation:floaty 6s ease-in-out infinite 1s}
-.quiz-promo h2{font-size:clamp(28px,3.4vw,40px);color:#fff}
-.quiz-promo p{color:var(--muted);font-size:15.5px;margin:16px 0 26px;max-width:380px}
-.quiz-card{background:rgba(255,255,255,.03);border-left:1px solid var(--line);padding:40px;display:flex;flex-direction:column;backdrop-filter:blur(10px)}
-.qhead{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-.qstep{font-family:'Space Grotesk';font-weight:700;font-size:18px;color:var(--lime);white-space:nowrap}
-.qbar{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:var(--pill);overflow:hidden}
+/* ── QUIZ (centered glass) ── */
+.quizx{max-width:880px;margin:0 auto;position:relative;border-radius:var(--r-xl);padding:1.5px;
+  background:linear-gradient(135deg,rgba(198,255,0,.55),rgba(198,255,0,.04) 38%,rgba(198,255,0,.28))}
+.quizx::before{content:'';position:absolute;inset:-50px;background:radial-gradient(circle at 50% 0%,rgba(198,255,0,.16),transparent 60%);z-index:-1;pointer-events:none}
+.quiz-card{background:rgba(12,16,8,.92);backdrop-filter:blur(26px) saturate(1.2);border-radius:calc(var(--r-xl) - 1.5px);padding:42px;position:relative;overflow:hidden}
+.qglow{position:absolute;top:-70px;right:-70px;width:260px;height:260px;background:radial-gradient(circle,rgba(198,255,0,.16),transparent 65%);filter:blur(22px);pointer-events:none}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;position:relative;z-index:1}
+.qstep{font-family:'Space Grotesk';font-weight:600;font-size:12.5px;color:var(--lime);letter-spacing:.05em;text-transform:uppercase}
+.qhint{font-size:12px;color:var(--muted)}
+.qbar{height:6px;background:rgba(255,255,255,.08);border-radius:var(--pill);overflow:hidden;margin-bottom:24px;position:relative;z-index:1}
 .qbar i{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--lime-d),var(--lime));border-radius:var(--pill);box-shadow:0 0 14px rgba(198,255,0,.5);transition:width .5s var(--ease)}
-.qq{font-family:'Space Grotesk';font-size:22px;font-weight:700;color:#fff;margin-bottom:18px;animation:fadeIn .4s both}
-.qopts{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.qopt{display:flex;align-items:center;gap:11px;padding:15px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);
-  color:#e7ebe0;font-family:'Inter';font-weight:600;font-size:14px;cursor:pointer;text-align:left;animation:rise .45s both;
-  transition:transform .2s var(--spring),border-color .2s,background .2s}
-.qopt:hover{transform:translateY(-3px);border-color:rgba(198,255,0,.5);background:rgba(198,255,0,.06)}
-.qopt iconify-icon{font-size:22px;color:var(--lime);flex-shrink:0}
-.qopt.sel{border-color:var(--lime);background:var(--lime-soft);box-shadow:0 8px 22px rgba(198,255,0,.2)}
-.qopts .qopt:nth-child(2){animation-delay:.05s}.qopts .qopt:nth-child(3){animation-delay:.1s}.qopts .qopt:nth-child(4){animation-delay:.15s}.qopts .qopt:nth-child(5){animation-delay:.2s}.qopts .qopt:nth-child(6){animation-delay:.25s}
-.qfoot{display:flex;align-items:center;justify-content:space-between;margin-top:22px}
+.qsteps{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;position:relative;z-index:1}
+.qstep-pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--muted);padding:7px 13px;border-radius:var(--pill);background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.3s}
+.qstep-pill .qn{width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;color:#cfd6c5}
+.qstep-pill iconify-icon{font-size:12px}
+.qstep-pill.active{color:#fff;border-color:rgba(198,255,0,.5);background:var(--lime-soft)}
+.qstep-pill.active .qn{background:var(--lime);color:#0a0c08}
+.qstep-pill.done{color:#bfe07a;border-color:rgba(198,255,0,.28)}
+.qstep-pill.done .qn{background:var(--lime);color:#0a0c08}
+.qq{font-family:'Space Grotesk';font-size:clamp(22px,3vw,30px);font-weight:700;color:#fff;margin-bottom:22px;animation:fadeIn .4s both;position:relative;z-index:1}
+.qtiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1}
+.qtile{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;padding:24px 14px;border-radius:18px;background:rgba(255,255,255,.03);border:1.5px solid var(--line);
+  color:#e7ebe0;font-family:'Inter';font-weight:600;font-size:14px;cursor:pointer;animation:rise .45s both;transition:transform .25s var(--spring),border-color .25s,background .25s,box-shadow .25s}
+.qtile:hover{transform:translateY(-6px);border-color:rgba(198,255,0,.55);background:rgba(198,255,0,.06);box-shadow:0 18px 36px rgba(0,0,0,.35)}
+.qtile .qti{width:52px;height:52px;border-radius:15px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;transition:.25s var(--spring)}
+.qtile:hover .qti{transform:scale(1.1) rotate(-4deg)}
+.qtile .qti iconify-icon{font-size:27px;color:var(--lime)}
+.qtile.sel{border-color:var(--lime);background:var(--lime-soft);box-shadow:0 12px 28px rgba(198,255,0,.26)}
+.qtile.sel .qti{background:var(--lime)}
+.qtile.sel .qti iconify-icon{color:#0a0c08}
+.qtiles .qtile:nth-child(2){animation-delay:.05s}.qtiles .qtile:nth-child(3){animation-delay:.1s}.qtiles .qtile:nth-child(4){animation-delay:.15s}.qtiles .qtile:nth-child(5){animation-delay:.2s}.qtiles .qtile:nth-child(6){animation-delay:.25s}
+.qfoot{display:flex;align-items:center;justify-content:space-between;margin-top:26px;position:relative;z-index:1}
 .qback{background:none;border:none;color:var(--muted);font-family:'Inter';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:color .2s}
 .qback[disabled]{opacity:0;pointer-events:none}.qback:hover{color:#fff}
-.qres{animation:fadeIn .5s both}
-.qres .rh{display:flex;align-items:center;gap:13px;margin-bottom:14px}
-.qres .rav{width:54px;height:54px;border-radius:15px;background:var(--lime);color:#0a0c08;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:26px;flex-shrink:0;box-shadow:0 12px 26px rgba(198,255,0,.4)}
-.qres .rl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.qres .rn{font-family:'Space Grotesk';font-size:30px;font-weight:700;color:#fff;line-height:1}
-.qres p{font-size:13.5px;color:var(--muted);margin-bottom:14px}
-.qres ul{list-style:none;display:grid;gap:8px;margin-bottom:18px}
-.qres li{display:flex;gap:8px;font-size:13px;color:#e7ebe0}
-.qres li iconify-icon{color:var(--lime);flex-shrink:0}
-.qres .rb{display:grid;gap:9px}
+/* result */
+.qres{animation:fadeIn .5s both;position:relative;z-index:1}
+.qres-card{background:linear-gradient(150deg,rgba(198,255,0,.12),rgba(198,255,0,.02));border:1px solid rgba(198,255,0,.32);border-radius:20px;padding:28px}
+.qres .rh{display:flex;align-items:center;gap:15px;margin-bottom:16px}
+.qres .rav{width:60px;height:60px;border-radius:17px;background:linear-gradient(145deg,var(--lime),#9bcc00);color:#0a0c08;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:30px;flex-shrink:0;box-shadow:0 14px 30px rgba(198,255,0,.4)}
+.qres .rl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--lime);font-weight:700}
+.qres .rn{font-family:'Space Grotesk';font-size:34px;font-weight:700;color:#fff;line-height:1}
+.qres p{font-size:14px;color:#cfd6c5;margin-bottom:16px}
+.qres-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.qres-chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#e7ebe0;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:var(--pill);padding:7px 12px}
+.qres-chip iconify-icon{color:var(--lime);font-size:15px}
+.qres .rb{display:flex;gap:10px;flex-wrap:wrap}
+.qres .rb .btn{flex:1;justify-content:center;min-width:170px}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
@@ -244,21 +252,22 @@ section{scroll-margin-top:88px}
 .dot.on{background:#5f9000;width:22px;border-radius:var(--pill)}
 
 /* ── SWITCH & SAVE ── */
-.save{display:grid;grid-template-columns:.95fr 1.55fr auto;gap:36px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xl);padding:42px;position:relative;overflow:hidden}
-.save .orb{z-index:0}
-.save>*{position:relative;z-index:1}
-.save-stat{background:linear-gradient(160deg,rgba(198,255,0,.14),transparent);border:1px solid rgba(198,255,0,.4);border-radius:var(--r-lg);padding:30px}
-.save-stat .t{font-size:16px;font-weight:700;color:#fff;font-family:'Space Grotesk'}
-.save-stat .big{font-family:'Space Grotesk';font-weight:700;font-size:66px;line-height:.9;color:var(--lime);margin:8px 0 2px}
-.save-stat .u{font-size:13px;color:var(--muted)}
-.save-stat .note{font-size:10px;color:#6b7560;margin-top:14px;line-height:1.45}
-.save-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.sfeat{text-align:center}
-.sfeat .ci{width:66px;height:66px;border-radius:50%;border:2px solid rgba(198,255,0,.45);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 0 26px rgba(198,255,0,.2);transition:transform .3s var(--spring)}
-.sfeat:hover .ci{transform:scale(1.08)}
-.sfeat .ci iconify-icon{font-size:28px;color:var(--lime)}
-.sfeat strong{display:block;color:#fff;font-size:15px;margin-bottom:5px;font-family:'Space Grotesk'}
-.sfeat span{font-size:12.5px;color:var(--muted)}
+.save2{position:relative;overflow:hidden;border-radius:var(--r-xl);padding:54px;background:linear-gradient(135deg,#10160d,#080b05);border:1px solid var(--line)}
+.save2 .orb{z-index:0;filter:blur(80px)}
+.save2-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.save-h{font-family:'Space Grotesk';font-size:clamp(26px,3.4vw,38px);font-weight:700;color:#fff}
+.save-num{display:inline-block;font-family:'Space Grotesk';font-weight:700;font-size:clamp(66px,9vw,108px);line-height:.82;margin:8px 0 4px;
+  background:linear-gradient(180deg,#fff 0%,var(--lime) 92%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.save-yr{font-size:15px;color:var(--muted);font-weight:600}
+.save-disc{font-size:11px;color:#6b7560;margin-top:20px;line-height:1.5;max-width:400px}
+.save-list{display:grid;gap:14px}
+.save-card{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:transform .3s var(--ease),border-color .3s,background .3s}
+.save-card:hover{transform:translateX(6px);border-color:rgba(198,255,0,.4);background:rgba(198,255,0,.05)}
+.save-card .si{width:50px;height:50px;border-radius:14px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s var(--spring)}
+.save-card:hover .si{transform:scale(1.08) rotate(-4deg)}
+.save-card .si iconify-icon{font-size:26px;color:var(--lime)}
+.save-card strong{display:block;color:#fff;font-size:16px;margin-bottom:3px;font-family:'Space Grotesk'}
+.save-card span{font-size:13px;color:var(--muted);line-height:1.5}
 
 /* ── REQUIREMENTS + FAQ ── */
 .split{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px}
@@ -330,6 +339,38 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 .msuccess h3{font-size:24px;color:#fff;margin-bottom:10px}
 .msuccess p{color:var(--muted);margin-bottom:22px}
 
+/* ── DETAIL POPUP ── */
+.detail-card{position:relative;z-index:2;width:100%;max-width:660px;max-height:92vh;overflow-y:auto;
+  background:rgba(13,17,9,.94);backdrop-filter:blur(26px) saturate(1.2);border:1px solid var(--line2);border-radius:var(--r-lg);
+  transform:scale(.94) translateY(12px);opacity:0;transition:transform .4s var(--spring),opacity .3s}
+.modal.open .detail-card{transform:none;opacity:1}
+.dt-media{position:relative;height:200px;overflow:hidden;background:#0d100a}
+.dt-media img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.dt-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(13,17,9,1),rgba(13,17,9,.1) 60%)}
+.dt-badge{position:absolute;top:16px;left:16px;z-index:2;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:6px 13px;border-radius:var(--pill)}
+.dt-close{position:absolute;top:14px;right:14px;z-index:3;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border:1px solid var(--line2);color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.dt-close:hover{background:rgba(0,0,0,.85)}
+.dt-body{padding:28px;margin-top:-46px;position:relative;z-index:2}
+.dt-name{font-family:'Space Grotesk';font-size:28px;font-weight:700;color:#fff;margin-bottom:8px}
+.dt-intro{font-size:14.5px;color:#cfd6c5;line-height:1.6;margin-bottom:22px}
+.dt-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.dt-fact{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.dt-fact .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.dt-fact .v{font-family:'Space Grotesk';font-weight:600;font-size:15px;color:#fff;margin-top:5px}
+.dt-fact .v.lime{color:var(--lime)}
+.dt-sub{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:6px 0 13px}
+.dt-pros{list-style:none;display:grid;gap:10px;margin-bottom:22px}
+.dt-pros li{display:flex;gap:10px;font-size:14px;color:#dfe4d7}
+.dt-pros li iconify-icon{color:var(--lime);font-size:18px;flex-shrink:0;margin-top:1px}
+.dt-table{width:100%;border-collapse:collapse;margin-bottom:22px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dt-table th,.dt-table td{text-align:left;padding:11px 15px;font-size:13px}
+.dt-table th{background:rgba(255,255,255,.05);color:var(--muted);font-weight:600;text-transform:uppercase;font-size:10.5px;letter-spacing:.05em}
+.dt-table td{border-top:1px solid var(--line);color:#e7ebe0}
+.dt-table td:last-child,.dt-table th:last-child{text-align:right;color:var(--lime);font-weight:700;font-family:'Space Grotesk'}
+.dt-cta{display:flex;gap:10px;flex-wrap:wrap}
+.dt-cta .btn{flex:1;justify-content:center;min-width:150px}
+.dt-note{font-size:11px;color:#6b7560;margin-top:16px;line-height:1.5}
+
 /* ── STICKY MOBILE CTA ── */
 .sticky{position:fixed;left:16px;right:16px;bottom:16px;z-index:150;display:none;gap:10px;transform:translateY(140%);transition:transform .4s var(--ease)}
 .sticky.show{transform:none}
@@ -345,21 +386,21 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
   .nav-links,.nav-cta .tel{display:none}.burger{display:block}
   .hero{padding:118px 0 70px}.hero-grid{grid-template-columns:1fr;gap:40px}
   .stage{order:-1;max-width:460px;margin:0 auto;min-height:400px}
-  .quiz{grid-template-columns:1fr}.quiz-card{border-left:none;border-top:1px solid var(--line)}
-  .save{grid-template-columns:1fr;gap:28px}.split{grid-template-columns:1fr;gap:38px}
+  .save2-grid{grid-template-columns:1fr;gap:34px}.split{grid-template-columns:1fr;gap:38px}
   .final{grid-template-columns:1fr;padding:42px}.final-stage{max-width:280px;margin:0 auto}
   .sticky{display:flex}
 }
 @media(max-width:600px){
   .section{padding:70px 0}
   .pgrid,.types{grid-template-columns:1fr}
-  .save-feats{grid-template-columns:1fr;gap:18px}.reqs{grid-template-columns:1fr}
-  .quiz-promo,.quiz-card{padding:30px}
-  .partners{padding:24px 18px}.partners .row{justify-content:center;gap:22px}
+  .reqs{grid-template-columns:1fr}
+  .quiz-card{padding:28px}.qtiles{grid-template-columns:repeat(2,1fr)}.save2{padding:34px}
+  .partners{padding:22px 0}
   .fgrid{grid-template-columns:1fr 1fr;gap:26px}
   .hero h1{font-size:clamp(40px,11vw,56px)}
+  .dt-facts{grid-template-columns:1fr}
 }
-@media(max-width:420px){.qopts{grid-template-columns:1fr}.final{padding:28px}.fgrid{grid-template-columns:1fr}}
+@media(max-width:420px){.qtiles{grid-template-columns:1fr}.final{padding:28px}.fgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -429,14 +470,17 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
   <div class="container">
     <div class="partners rv">
       <div class="pl">We partner with leading providers</div>
-      <div class="row">
-        <span class="plogo"><img src="https://logo.clearbit.com/teya.com" alt="Teya" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></span>
-        <span class="plogo"><img src="https://logo.clearbit.com/shift4.com" alt="Shift4" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">SHIFT<span class="b4">4</span></span></span>
-        <span class="plogo"><img src="https://logo.clearbit.com/sumup.com" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></span>
-        <span class="plogo"><img src="https://logo.clearbit.com/worldpay.com" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></span>
-        <span class="plogo"><img src="https://logo.clearbit.com/elavon.com" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></span>
-        <span class="plogo"><img src="https://logo.clearbit.com/evopayments.com" alt="EVO" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">EVO</span></span>
-        <span class="plogo"><span class="wordmark"><iconify-icon icon="ph:cards-three-duotone" style="font-size:24px;margin-right:4px"></iconify-icon>POS</span></span>
+      <div class="marquee">
+        <div class="mq-track" id="mqTrack">
+          <span class="plogo"><img src="https://logo.clearbit.com/teya.com" alt="Teya" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></span>
+          <span class="plogo"><img src="https://logo.clearbit.com/shift4.com" alt="Shift4" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">SHIFT<span class="b4">4</span></span></span>
+          <span class="plogo"><img src="https://logo.clearbit.com/sumup.com" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></span>
+          <span class="plogo"><img src="https://logo.clearbit.com/worldpay.com" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></span>
+          <span class="plogo"><img src="https://logo.clearbit.com/elavon.com" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></span>
+          <span class="plogo"><img src="https://logo.clearbit.com/evopayments.com" alt="EVO" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">EVO</span></span>
+          <span class="plogo"><img src="https://logo.clearbit.com/barclaycard.co.uk" alt="Barclaycard" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#00aeef">Barclaycard</span></span>
+          <span class="plogo"><img src="https://logo.clearbit.com/dojo.tech" alt="Dojo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">Dojo</span></span>
+        </div>
       </div>
     </div>
   </div>
@@ -445,24 +489,19 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 <!-- ════ QUIZ ════ -->
 <section class="section" id="finder" style="padding-top:16px">
   <div class="container">
-    <div class="quiz rv">
-      <div class="quiz-promo">
-        <div class="qvis">
-          <span class="ring"></span>
-          <img class="device" src="../images/Card machine no bg.webp" alt="">
-          <span class="fic a"><iconify-icon icon="ph:coffee-duotone"></iconify-icon></span>
-          <span class="fic b"><iconify-icon icon="ph:shopping-bag-duotone"></iconify-icon></span>
-          <span class="fic c"><iconify-icon icon="ph:scissors-duotone"></iconify-icon></span>
-        </div>
-        <span class="eyebrow"><iconify-icon icon="ph:timer-duotone"></iconify-icon> In 60 seconds</span>
-        <h2 style="margin-top:14px">Find your perfect<br>card machine match</h2>
-        <p>Answer a few quick questions and we'll recommend the best options for your business.</p>
-        <a href="#finder" class="btn btn-primary" id="takequiz">Take the Quiz <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
-      </div>
+    <div class="center rv" style="max-width:600px;margin:0 auto 42px">
+      <span class="eyebrow"><iconify-icon icon="ph:timer-duotone"></iconify-icon> In 60 seconds</span>
+      <h2 class="h2" style="margin-top:14px">Find your perfect card machine match</h2>
+      <p class="lead" style="margin-top:12px">Answer a few quick questions and we'll recommend the best-fit providers for your business — free, no obligation.</p>
+    </div>
+    <div class="quizx rv">
       <div class="quiz-card">
-        <div class="qhead"><span class="qstep" id="qstep">1 / 4</span><div class="qbar"><i id="qbar"></i></div></div>
+        <span class="qglow"></span>
+        <div class="qtop"><span class="qstep" id="qstep">Step 1 of 4</span><span class="qhint">~30 seconds</span></div>
+        <div class="qbar"><i id="qbar"></i></div>
+        <div class="qsteps" id="qsteps"></div>
         <div id="qbody"></div>
-        <div class="qfoot"><button class="qback" id="qback" disabled><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span style="font-size:12px;color:var(--muted)">No obligation · terms apply</span></div>
+        <div class="qfoot"><button class="qback" id="qback" disabled><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span style="font-size:12px;color:var(--muted)">No obligation · provider terms apply</span></div>
       </div>
     </div>
   </div>
@@ -479,31 +518,31 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
         <div class="pmedia"><img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Teya terminal"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Low transaction rates</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Fast next-day payouts</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.8</b></div>
-        <button class="pview" data-quote data-product="Teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pview" data-detail="teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><img src="https://logo.clearbit.com/sumup.com" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
         <div class="pmedia"><img src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="SumUp reader"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for small businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Easy to use</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.7</b></div>
-        <button class="pview" data-quote data-product="SumUp">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pview" data-detail="sumup">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><img src="https://logo.clearbit.com/worldpay.com" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
         <div class="pmedia"><img src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay terminal"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Trusted UK provider</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> 24/7 customer support</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Flexible pricing</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.6</b></div>
-        <button class="pview" data-quote data-product="Worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pview" data-detail="worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><img src="https://logo.clearbit.com/elavon.com" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
         <div class="pmedia"><img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Elavon terminal"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Reliable &amp; secure</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for larger businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Multi-currency option</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.5</b></div>
-        <button class="pview" data-quote data-product="Elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pview" data-detail="elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
     </div>
-    <div class="center rv" style="margin-top:34px"><a href="#" class="btn btn-dark" data-quote>Compare All Providers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
+    <div class="center rv" style="margin-top:34px"><a href="#finder" class="btn btn-dark">Compare All Providers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
     <p class="lead center" style="font-size:11.5px;margin-top:26px;max-width:760px;margin-left:auto;margin-right:auto;color:#9aa48d">Provider names and logos are shown to indicate options Plemmo may introduce. Plemmo is an introducer — not a payment processor, acquiring bank or lender. Ratings, rates, payouts and approval are subject to provider terms and eligibility.</p>
   </div>
 </section>
@@ -514,19 +553,19 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     <div class="types">
       <div class="type tilt rv">
         <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Countertop terminal"></div>
-        <div class="type-body"><h3>Countertop</h3><p>Perfect for fixed locations and high transaction volumes.</p><button class="ln" data-quote data-product="Countertop terminal">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
+        <div class="type-body"><h3>Countertop</h3><p>Perfect for fixed locations and high transaction volumes.</p><button class="ln" data-detail="countertop">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
         <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:shopping-bag-duotone"></iconify-icon></span><img src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Portable terminal"></div>
-        <div class="type-body"><h3>Portable</h3><p>Take payments anywhere in your business.</p><button class="ln" data-quote data-product="Portable terminal">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
+        <div class="type-body"><h3>Portable</h3><p>Take payments anywhere in your business.</p><button class="ln" data-detail="portable">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
         <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-mobile-duotone"></iconify-icon></span><img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Mobile payment"></div>
-        <div class="type-body"><h3>Mobile</h3><p>Turn your smartphone into a card machine. Ideal on the go.</p><button class="ln" data-quote data-product="Mobile card reader">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
+        <div class="type-body"><h3>Mobile</h3><p>Turn your smartphone into a card machine. Ideal on the go.</p><button class="ln" data-detail="mobile">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
         <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-tablet-duotone"></iconify-icon></span><img src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Smart terminal"></div>
-        <div class="type-body"><h3>Smart Terminal</h3><p>All-in-one solution with apps, reports and advanced features.</p><button class="ln" data-quote data-product="Smart terminal">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
+        <div class="type-body"><h3>Smart Terminal</h3><p>All-in-one solution with apps, reports and advanced features.</p><button class="ln" data-detail="smart">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
     </div>
   </div>
@@ -557,20 +596,24 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 <!-- ════ SWITCH & SAVE ════ -->
 <section class="section" id="savings">
   <div class="container">
-    <div class="save rv">
-      <span class="orb o2" style="top:-60px;right:-60px;left:auto"></span>
-      <div class="save-stat">
-        <div class="t">Switch &amp; save</div>
-        <div class="big"><span data-count="300" data-prefix="£" data-suffix="+">£0</span></div>
-        <div class="u">per year on average*</div>
-        <div class="note">*Based on average savings for UK businesses switching card machine provider. Actual savings vary by business and are not guaranteed.</div>
+    <div class="save2 rv">
+      <span class="orb o1" style="top:-130px;right:-110px;opacity:.7"></span>
+      <div class="save2-grid">
+        <div>
+          <span class="eyebrow"><iconify-icon icon="ph:arrows-clockwise-duotone"></iconify-icon> Switch &amp; save</span>
+          <div class="save-h" style="margin-top:14px">Save up to</div>
+          <div class="save-num" data-count="300" data-prefix="£" data-suffix="+">£0</div>
+          <div class="save-yr">per year on average*</div>
+          <p class="lead" style="margin:18px 0 24px;max-width:380px;color:var(--muted)">Already taking card payments? Many UK businesses overpay on fees. We compare suitable providers and help you switch — you keep the savings.</p>
+          <a href="#" class="btn btn-primary btn-lg" data-quote data-product="Switch & save">Check My Savings <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+          <p class="save-disc">*Based on average savings for UK businesses switching card machine provider. Actual savings vary by business and are not guaranteed.</p>
+        </div>
+        <div class="save-list">
+          <div class="save-card"><div class="si"><iconify-icon icon="ph:currency-gbp-duotone"></iconify-icon></div><div><strong>Lower fees</strong><span>Access better rates tailored to your business and turnover.</span></div></div>
+          <div class="save-card"><div class="si"><iconify-icon icon="ph:piggy-bank-duotone"></iconify-icon></div><div><strong>Keep more</strong><span>Cut hidden fees and surprise charges that eat into your margin.</span></div></div>
+          <div class="save-card"><div class="si"><iconify-icon icon="ph:hand-tap-duotone"></iconify-icon></div><div><strong>It's easy</strong><span>We handle the comparison and the switch. You keep the savings.</span></div></div>
+        </div>
       </div>
-      <div class="save-feats">
-        <div class="sfeat"><div class="ci"><iconify-icon icon="ph:currency-gbp-duotone"></iconify-icon></div><strong>Lower fees</strong><span>Access better rates tailored to your business.</span></div>
-        <div class="sfeat"><div class="ci"><iconify-icon icon="ph:chart-line-up-duotone"></iconify-icon></div><strong>Keep more</strong><span>Save on hidden fees and extra charges.</span></div>
-        <div class="sfeat"><div class="ci"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon></div><strong>It's easy</strong><span>We help with the switch. You keep the savings.</span></div>
-      </div>
-      <div><a href="#" class="btn btn-primary" data-quote data-product="Switch & save">Check My Savings <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
     </div>
   </div>
 </section>
@@ -661,6 +704,12 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       <button class="btn btn-ghost" data-close style="justify-content:center">Close</button>
     </div>
   </div>
+</div>
+
+<!-- ════ DETAIL POPUP ════ -->
+<div class="modal" id="detail" role="dialog" aria-modal="true" aria-label="Provider details">
+  <div class="modal-bd" data-dclose></div>
+  <div class="detail-card" id="detailCard"></div>
 </div>
 
 <!-- sticky mobile cta -->
@@ -770,10 +819,10 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     {k:'current',q:'Are you already taking card payments?',o:[{l:'New to card payments',i:'ph:sparkle-duotone'},{l:'Using Teya',i:'ph:credit-card-duotone'},{l:'Using SumUp',i:'ph:credit-card-duotone'},{l:'Using Worldpay',i:'ph:credit-card-duotone'},{l:'Another provider',i:'ph:credit-card-duotone'},{l:'Not sure',i:'ph:question-duotone'}]}
   ];
   var PROV={
-    teya:{n:'Teya',w:'A strong all-rounder for established businesses — competitive blended rates and fast settlement options.',b:['No monthly fees','Low transaction rates','Fast next-day payouts']},
-    sumup:{n:'SumUp',w:'Great for smaller or new businesses wanting low commitment and a simple setup.',b:['No monthly fees','One-off terminal purchase','Easy to use']},
-    worldpay:{n:'Worldpay',w:'A trusted UK provider suited to larger or established businesses comparing flexible pricing.',b:['Trusted UK provider','24/7 customer support','Flexible pricing']},
-    elavon:{n:'Elavon',w:'Reliable and secure — a good fit for larger businesses needing multi-currency options.',b:['Reliable & secure','Great for larger businesses','Multi-currency option']}
+    teya:{k:'teya',n:'Teya',w:'A strong all-rounder for established businesses — competitive blended rates and fast settlement options.',b:['No monthly fees','Low transaction rates','Fast next-day payouts']},
+    sumup:{k:'sumup',n:'SumUp',w:'Great for smaller or new businesses wanting low commitment and a simple setup.',b:['No monthly fees','One-off terminal purchase','Easy to use']},
+    worldpay:{k:'worldpay',n:'Worldpay',w:'A trusted UK provider suited to larger or established businesses comparing flexible pricing.',b:['Trusted UK provider','24/7 customer support','Flexible pricing']},
+    elavon:{k:'elavon',n:'Elavon',w:'Reliable and secure — a good fit for larger businesses needing multi-currency options.',b:['Reliable & secure','Great for larger businesses','Multi-currency option']}
   };
   function rec(a){var t=a.turnover,p=a.priority;
     if(p==='No monthly rental'||p==='Simple setup')return PROV.sumup;
@@ -781,18 +830,80 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     if(t==='£50k+')return PROV.worldpay;
     if(t==='£25k–£50k')return p==='Better support'?PROV.worldpay:PROV.elavon;
     return PROV.teya;}
-  var ans={},cur=0,done=false,body=document.getElementById('qbody'),bar=document.getElementById('qbar'),stepEl=document.getElementById('qstep'),back=document.getElementById('qback');
-  function render(){var s=STEPS[cur];bar.style.width=((cur+1)/STEPS.length*100)+'%';stepEl.textContent=(cur+1)+' / '+STEPS.length;back.disabled=cur===0;
-    var h='<div class="qq">'+s.q+'</div><div class="qopts">';
-    s.o.forEach(function(o){h+='<button class="qopt'+(ans[s.k]===o.l?' sel':'')+'" data-v="'+o.l+'"><iconify-icon icon="'+o.i+'"></iconify-icon> '+o.l+'</button>'});
+  var LABELS=['Business','Turnover','Priority','Status'];
+  var ans={},cur=0,done=false,body=document.getElementById('qbody'),bar=document.getElementById('qbar'),stepEl=document.getElementById('qstep'),back=document.getElementById('qback'),steps=document.getElementById('qsteps');
+  function stepper(){steps.innerHTML=LABELS.map(function(l,i){var c=(done||i<cur)?'done':(i===cur?'active':'');var n=(done||i<cur)?'<iconify-icon icon="ph:check-bold"></iconify-icon>':(i+1);return '<span class="qstep-pill '+c+'"><span class="qn">'+n+'</span>'+l+'</span>'}).join('')}
+  function render(){var s=STEPS[cur];done=false;bar.style.width=((cur+1)/STEPS.length*100)+'%';stepEl.textContent='Step '+(cur+1)+' of '+STEPS.length;back.disabled=cur===0;stepper();
+    var h='<div class="qq">'+s.q+'</div><div class="qtiles">';
+    s.o.forEach(function(o){h+='<button class="qtile'+(ans[s.k]===o.l?' sel':'')+'" data-v="'+o.l+'"><span class="qti"><iconify-icon icon="'+o.i+'"></iconify-icon></span><span>'+o.l+'</span></button>'});
     h+='</div>';body.innerHTML=h;
-    body.querySelectorAll('.qopt').forEach(function(el){el.onclick=function(){ans[s.k]=el.dataset.v;if(cur<STEPS.length-1){cur++;render()}else{done=true;result()}}});}
-  function result(){bar.style.width='100%';stepEl.textContent='Done';back.disabled=false;var r=rec(ans);
-    body.innerHTML='<div class="qres"><div class="rh"><span class="rav">'+r.n.charAt(0)+'</span><div><div class="rl">Indicative match</div><div class="rn">'+r.n+'</div></div></div><p>'+r.w+'</p><ul>'+r.b.map(function(x){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+x+'</li>'}).join('')+'</ul><div class="rb"><a href="#" class="btn btn-primary" id="qgq" style="justify-content:center">Get my '+r.n+' quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#providers" class="btn btn-ghost" style="justify-content:center">Compare all providers</a></div></div>';
-    document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({product:r.n,turnover:ans.turnover,current:ans.current})};}
-  back.onclick=function(){if(done){done=false;render();return}cur=Math.max(0,cur-1);render()};
-  document.getElementById('takequiz').onclick=function(e){e.preventDefault();ans={};cur=0;done=false;render();document.querySelector('.quiz-card').scrollIntoView({behavior:'smooth',block:'center'})};
+    body.querySelectorAll('.qtile').forEach(function(el){el.onclick=function(){ans[s.k]=el.dataset.v;if(cur<STEPS.length-1){cur++;render()}else{result()}}});}
+  function result(){done=true;bar.style.width='100%';stepEl.textContent='Your match';back.disabled=false;stepper();var r=rec(ans);
+    body.innerHTML='<div class="qres"><div class="qres-card"><div class="rh"><span class="rav">'+r.n.charAt(0)+'</span><div><div class="rl">Indicative match</div><div class="rn">'+r.n+'</div></div></div><p>'+r.w+'</p><div class="qres-chips">'+r.b.map(function(x){return '<span class="qres-chip"><iconify-icon icon="ph:check-bold"></iconify-icon>'+x+'</span>'}).join('')+'</div><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Get my '+r.n+' quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" id="qdet">View '+r.n+' details</a></div></div></div>';
+    document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({product:r.n,turnover:ans.turnover,current:ans.current})};
+    document.getElementById('qdet').onclick=function(e){e.preventDefault();openDetail(r.k)};}
+  back.onclick=function(){if(done){done=false;cur=STEPS.length-1;render();return}cur=Math.max(0,cur-1);render()};
   render();
+
+  /* ── PROVIDER / PRODUCT DETAIL POPUPS ── */
+  var IMGP={teya:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=900',sumup:'https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=900',worldpay:'https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=900',elavon:'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=900',mobile:'https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=900'};
+  var DETAIL={
+    teya:{badge:'Best Overall',name:'Teya',img:IMGP.teya,intro:'A strong all-rounder for established UK businesses with regular card turnover. Competitive blended pricing that can improve as you grow, plus fast settlement options.',
+      facts:[['Indicative rate','From 0.55%',1],['Monthly rental','Flexible options'],['Settlement','Fast / next-day'],['Hardware','PAX A920 Pro · Sunmi']],
+      pros:['No-monthly-fee options available','Rates can reduce as turnover grows','Fast next-day payout options','Teya Business Account may be available'],
+      table:[['£10k – £20k','1.10%–0.85%'],['£20k – £35k','0.80%'],['£35k – £80k','0.77%–0.67%'],['£100k+','from 0.55%']],
+      note:'Rates are indicative and subject to provider approval, transaction mix, business profile, eligibility and provider terms.'},
+    sumup:{badge:'Simplest setup',name:'SumUp',img:IMGP.sumup,intro:'Ideal for new and smaller businesses that want to start taking payments quickly, with low commitment and no monthly tie-ins.',
+      facts:[['Terminal','One-off ~£162'],['Monthly fee','None'],['Setup','Quick & simple'],['Payouts','Instant options*']],
+      pros:['No monthly terminal fees','One-off purchase — low commitment','Easy to set up and use','Great for small or seasonal businesses'],
+      note:'*Pricing and payout options are indicative and subject to provider terms and eligibility.'},
+    worldpay:{badge:'For larger businesses',name:'Worldpay',img:IMGP.worldpay,intro:'A trusted, established UK provider suited to larger businesses that want to compare split debit/credit pricing with round-the-clock support.',
+      facts:[['Debit from','0.30%*',1],['Credit from','0.65%*',1],['Rental','£1/mo first year'],['Contract','18 months']],
+      pros:['Trusted, established UK provider','24/7 customer support','Flexible split debit/credit pricing','Suited to higher card volumes'],
+      note:'*Above £25k monthly turnover, where eligible. £29.50 + VAT monthly applies after the first year. Subject to provider approval and terms.'},
+    elavon:{badge:'Reliable & secure',name:'Elavon',img:IMGP.elavon,intro:'A reliable, secure provider that works well for larger or multi-site businesses, including those that need multi-currency acceptance.',
+      facts:[['Best for','Larger businesses'],['Security','Bank-grade'],['Currencies','Multi-currency'],['Support','UK based']],
+      pros:['Reliable and secure processing','Great for larger businesses','Multi-currency acceptance option','Backed by a major banking group'],
+      note:'Features, pricing and availability are subject to provider terms, eligibility and approval.'},
+    countertop:{type:1,badge:'Machine type',name:'Countertop',img:IMGP.teya,intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
+      facts:[['Best for','Shops & counters'],['Connection','Broadband / phone'],['Printer','Built-in receipts'],['Volume','High throughput']],
+      pros:['Fast chip, PIN & contactless','Built-in receipt printer','Reliable for high transaction volumes','Always powered at the till'],
+      note:'Specific models and features vary by provider.'},
+    portable:{type:1,badge:'Machine type',name:'Portable',img:IMGP.worldpay,intro:'A WiFi or Bluetooth terminal you can carry around your premises — take payment at the table or anywhere on site.',
+      facts:[['Best for','Restaurants & venues'],['Connection','WiFi / Bluetooth'],['Battery','Rechargeable'],['Printer','Built-in receipts']],
+      pros:['Take payment at the table','Move freely around your venue','Contactless & chip and PIN','Rechargeable all-day battery'],
+      note:'Specific models and features vary by provider.'},
+    mobile:{type:1,badge:'Machine type',name:'Mobile',img:IMGP.mobile,intro:'A pocket-sized card reader that pairs with the app on your phone — the lowest-cost way to start taking cards on the go.',
+      facts:[['Best for','Trades & pop-ups'],['Connection','Phone app · 4G'],['Cost','Low entry'],['Size','Pocket-sized']],
+      pros:['Turns your phone into a till','Low-cost way to get started','Take payments anywhere','Pay-as-you-go options may apply'],
+      note:'Specific models and features vary by provider.'},
+    smart:{type:1,badge:'Machine type',name:'Smart Terminal',img:IMGP.sumup,intro:'An Android all-in-one with a touchscreen, apps, reporting and EPOS-style features — one device that runs more of your business.',
+      facts:[['Best for','Growing businesses'],['System','Android · apps'],['Printer','Built-in receipts'],['Extras','Reports & EPOS']],
+      pros:['Touchscreen with apps & analytics','Can integrate EPOS features','Built-in receipt printer','One device, many jobs'],
+      note:'Specific models and features vary by provider.'}
+  };
+  var detail=document.getElementById('detail'),dcard=document.getElementById('detailCard');
+  function detailHTML(d){
+    var facts=d.facts?'<div class="dt-facts">'+d.facts.map(function(f){return '<div class="dt-fact"><div class="l">'+f[0]+'</div><div class="v'+(f[2]?' lime':'')+'">'+f[1]+'</div></div>'}).join('')+'</div>':'';
+    var table=d.table?'<div class="dt-sub">Indicative Teya rates by turnover</div><table class="dt-table"><thead><tr><th>Monthly turnover</th><th>Rate</th></tr></thead><tbody>'+d.table.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')+'</tbody></table>':'';
+    var pros='<div class="dt-sub">Why businesses choose it</div><ul class="dt-pros">'+d.pros.map(function(p){return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>'+p+'</li>'}).join('')+'</ul>';
+    var cta=d.type?'Get a quote':'Get a '+d.name+' quote';
+    return '<button class="dt-close" data-dclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button>'
+      +'<div class="dt-media"><span class="dt-badge">'+d.badge+'</span><img src="'+d.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+d.name+'"></div>'
+      +'<div class="dt-body"><div class="dt-name">'+d.name+'</div><p class="dt-intro">'+d.intro+'</p>'+facts+pros+table
+      +'<div class="dt-cta"><a href="#" class="btn btn-primary" data-dquote="'+d.name+'">'+cta+' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" data-dclose>Close</a></div>'
+      +'<p class="dt-note">'+d.note+'</p></div>';
+  }
+  function openDetail(key){var d=DETAIL[key];if(!d)return;dcard.innerHTML=detailHTML(d);detail.classList.add('open');document.body.style.overflow='hidden';dcard.scrollTop=0;
+    dcard.querySelectorAll('[data-dclose]').forEach(function(b){b.onclick=function(e){e.preventDefault();closeDetail()}});
+    var q=dcard.querySelector('[data-dquote]');if(q)q.onclick=function(e){e.preventDefault();closeDetail();openModal({product:q.dataset.dquote})};}
+  function closeDetail(){detail.classList.remove('open');document.body.style.overflow=''}
+  document.querySelectorAll('[data-detail]').forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();openDetail(t.dataset.detail)})});
+  detail.querySelector('.modal-bd').onclick=closeDetail;
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&detail.classList.contains('open'))closeDetail()});
+
+  /* seamless marquee */
+  var mq=document.getElementById('mqTrack');if(mq){mq.innerHTML+=mq.innerHTML}
 })();
 </script>
 </body>
