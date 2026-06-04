@@ -67,19 +67,17 @@ section{scroll-margin-top:88px}
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:background .35s,border-color .35s,backdrop-filter .35s;border-bottom:1px solid transparent}
 .nav.scrolled{background:rgba(8,10,6,.8);backdrop-filter:blur(18px);border-color:var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px;max-width:var(--maxw);margin:0 auto;padding:0 24px}
-.logo{font-family:'Space Grotesk';font-weight:700;font-size:25px;letter-spacing:-.04em;color:#fff}
+.logo{font-family:'Inter';font-weight:900;font-size:24px;letter-spacing:-.04em;color:#fff}
 .logo .d{color:var(--lime)}
-.nav-links{display:flex;gap:25px}
-.nav-links a{font-size:14px;font-weight:500;color:#cdd3c4;display:inline-flex;align-items:center;gap:5px;position:relative;transition:color .2s}
-.nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--lime);transition:width .3s var(--ease)}
-.nav-links a:hover{color:#fff}.nav-links a:hover::after{width:100%}
-.nav-links a.active{color:var(--lime)}.nav-links a.active::after{width:100%}
-.nav-links .ct{font-size:12px;opacity:.7}
-.nav-cta{display:flex;align-items:center;gap:12px}
-.nav-cta .tel{font-size:14px;font-weight:600;color:#fff;display:inline-flex;align-items:center;gap:8px;transition:color .2s}
-.nav-cta .tel iconify-icon{color:var(--lime);font-size:18px}
-.nav-cta .tel:hover{color:var(--lime)}
-.burger{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer}
+.nav-links{display:flex;gap:26px}
+.nav-links a{font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.6);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-links a.active{color:var(--lime)}
+.nav-cta{display:flex;align-items:center;gap:14px}
+.nav .btn{border-radius:var(--pill);padding:11px 22px;font-size:13.5px;font-weight:700}
+.nav-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.22);color:#fff}
+.nav-ghost:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.06)}
+.burger{display:none;background:none;border:none;color:#fff;font-size:28px;cursor:pointer}
 /* mobile menu */
 .mm{position:fixed;inset:0;z-index:300;visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
 .mm.open{visibility:visible;opacity:1}
@@ -116,7 +114,7 @@ section{scroll-margin-top:88px}
 .stage .ring{position:absolute;width:76%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(198,255,0,.2);
   box-shadow:0 0 70px rgba(198,255,0,.12),inset 0 0 60px rgba(198,255,0,.05);
   -webkit-mask:linear-gradient(#000 40%,transparent 80%);mask:linear-gradient(#000 40%,transparent 80%);animation:spin 80s linear infinite}
-.stage .glow{position:absolute;width:80%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(198,255,0,.28),rgba(198,255,0,.03) 52%,transparent 72%);filter:blur(36px);mix-blend-mode:screen}
+.stage .glow{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:94%;height:82%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(198,255,0,.2),rgba(198,255,0,.03) 50%,transparent 72%);filter:blur(48px);mix-blend-mode:screen}
 .stage .pod{position:absolute;bottom:8%;width:80%;height:62px;border-radius:50%;background:radial-gradient(ellipse,#131810 0%,#0a0d08 68%,transparent 74%);border-top:1px solid rgba(198,255,0,.18);box-shadow:0 0 60px rgba(198,255,0,.08)}
 .stage .device{position:relative;z-index:3;width:60%;filter:drop-shadow(0 50px 60px rgba(0,0,0,.6));animation:floaty 6s ease-in-out infinite;will-change:transform}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -150,13 +148,13 @@ section{scroll-margin-top:88px}
   background:linear-gradient(180deg,#13180e,#0c0f08);border:1px solid var(--line2);
   box-shadow:0 44px 100px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05)}
 .quizx::before{content:'';position:absolute;inset:-80px;background:radial-gradient(circle at 50% 0%,rgba(198,255,0,.05),transparent 62%);filter:blur(24px);z-index:0;pointer-events:none;mix-blend-mode:screen}
-.quiz-topbar{position:relative;z-index:1;display:flex;align-items:center;gap:13px;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
-.quiz-dots{display:flex;gap:7px}
+.quiz-topbar{position:relative;z-index:1;display:flex;align-items:center;gap:13px;padding:13px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.012));box-shadow:inset 0 -1px 0 rgba(198,255,0,.06)}
+.quiz-dots{display:flex;gap:7px;flex-shrink:0}
 .quiz-dots i{width:11px;height:11px;border-radius:50%;display:block}
 .quiz-dots i:nth-child(1){background:#ff5f57}.quiz-dots i:nth-child(2){background:#febc2e}.quiz-dots i:nth-child(3){background:#28c840}
-.quiz-wt{font-size:13px;font-weight:600;color:#cdd3c4;display:inline-flex;align-items:center;gap:8px}
-.quiz-wt iconify-icon{color:var(--lime);font-size:16px}
-.quiz-live{margin-left:auto;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.06em}
+.quiz-url{margin:0 auto;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:9px;padding:7px 16px;max-width:340px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quiz-url iconify-icon{color:var(--lime);font-size:13px;flex-shrink:0}
+.quiz-live{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
 .quiz-live .dl{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2.4s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(198,255,0,.35)}70%{box-shadow:0 0 0 7px rgba(198,255,0,0)}100%{box-shadow:0 0 0 0 rgba(198,255,0,0)}}
 .quiz-card{position:relative;z-index:1;background:transparent;padding:40px;overflow:hidden}
@@ -192,13 +190,12 @@ section{scroll-margin-top:88px}
 /* result */
 .qres{animation:fadeIn .5s both;position:relative;z-index:1}
 .qres-card{display:grid;grid-template-columns:160px 1fr;gap:26px;align-items:center;background:linear-gradient(150deg,rgba(198,255,0,.09),rgba(198,255,0,.015));border:1px solid rgba(198,255,0,.26);border-radius:20px;padding:28px}
-.qres-media{position:relative;display:flex;align-items:center;justify-content:center}
-.qres-media::before{content:'';position:absolute;width:80%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(198,255,0,.18),transparent 70%);filter:blur(18px);mix-blend-mode:screen}
-.qres-media img{position:relative;width:100%;max-width:160px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.5))}
+.qres-media{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1/1;border:1px solid rgba(198,255,0,.18)}
+.qres-media img{width:100%;height:100%;object-fit:cover}
 .qres-body{min-width:0}
 .qres .rh{display:flex;align-items:center;gap:15px;margin-bottom:16px}
 .qres .rav{width:56px;height:56px;border-radius:16px;background:linear-gradient(145deg,var(--lime),#9bcc00);color:#0a0c08;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;font-size:28px;flex-shrink:0;box-shadow:0 12px 24px rgba(198,255,0,.22)}
-@media(max-width:560px){.qres-card{grid-template-columns:1fr;text-align:center}.qres-media img{max-width:130px;margin:0 auto}.qres .rh{justify-content:center}.qres-chips{justify-content:center}}
+@media(max-width:560px){.qres-card{grid-template-columns:1fr;text-align:center}.qres-media{max-width:200px;margin:0 auto;aspect-ratio:16/10}.qres .rh{justify-content:center}.qres-chips{justify-content:center}.qres .rb{flex-direction:column}}
 .qres .rl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--lime);font-weight:700}
 .qres .rn{font-family:'Space Grotesk';font-size:34px;font-weight:700;color:#fff;line-height:1}
 .qres p{font-size:14px;color:#cfd6c5;margin-bottom:16px}
@@ -430,8 +427,9 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
   .fgrid{grid-template-columns:1fr 1fr;gap:26px}
   .hero h1{font-size:clamp(40px,11vw,56px)}
   .dt-facts{grid-template-columns:1fr}
+  .quiz-url{max-width:200px;font-size:11px}
 }
-@media(max-width:420px){.qtiles{grid-template-columns:1fr}.final{padding:28px}.fgrid{grid-template-columns:1fr}}
+@media(max-width:420px){.qtiles{grid-template-columns:1fr}.final{padding:28px}.fgrid{grid-template-columns:1fr}.quiz-url{display:none}}
 </style>
 </head>
 <body>
@@ -451,8 +449,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       <a href="contact-us.html">Contact</a>
     </div>
     <div class="nav-cta">
-      <a href="tel:02079460958" class="tel"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon> 020 7946 0958</a>
-      <a href="#" class="btn btn-primary" data-quote>Get a Free Quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+      <a href="tel:02079460958" class="btn nav-ghost">020 7946 0958</a>
+      <a href="#" class="btn btn-primary" data-quote>Get a Free Quote</a>
       <button class="burger" id="burger" aria-label="Menu"><iconify-icon icon="ph:list-bold"></iconify-icon></button>
     </div>
   </div>
@@ -526,7 +524,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     <div class="quizx rv">
       <div class="quiz-topbar">
         <div class="quiz-dots"><i></i><i></i><i></i></div>
-        <span class="quiz-wt"><iconify-icon icon="ph:credit-card-duotone"></iconify-icon> Card Machine Finder</span>
+        <span class="quiz-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/card-machine-finder</span>
         <span class="quiz-live"><span class="dl"></span> Live</span>
       </div>
       <div class="quiz-card">
@@ -875,10 +873,10 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     {k:'current',q:'Are you already taking card payments?',o:[{l:'New to card payments',i:'ph:sparkle-duotone'},{l:'Using Teya',i:'ph:credit-card-duotone'},{l:'Using SumUp',i:'ph:credit-card-duotone'},{l:'Using Worldpay',i:'ph:credit-card-duotone'},{l:'Another provider',i:'ph:credit-card-duotone'},{l:'Not sure',i:'ph:question-duotone'}]}
   ];
   var PROV={
-    teya:{k:'teya',n:'Teya',w:'A strong all-rounder for established businesses — competitive blended rates and fast settlement options.',b:['No monthly fees','Low transaction rates','Fast next-day payouts']},
-    sumup:{k:'sumup',n:'SumUp',w:'Great for smaller or new businesses wanting low commitment and a simple setup.',b:['No monthly fees','One-off terminal purchase','Easy to use']},
-    worldpay:{k:'worldpay',n:'Worldpay',w:'A trusted UK provider suited to larger or established businesses comparing flexible pricing.',b:['Trusted UK provider','24/7 customer support','Flexible pricing']},
-    elavon:{k:'elavon',n:'Elavon',w:'Reliable and secure — a good fit for larger businesses needing multi-currency options.',b:['Reliable & secure','Great for larger businesses','Multi-currency option']}
+    teya:{k:'teya',n:'Teya',img:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=500',w:'A strong all-rounder for established businesses — competitive blended rates and fast settlement options.',b:['No monthly fees','Low transaction rates','Fast next-day payouts']},
+    sumup:{k:'sumup',n:'SumUp',img:'https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=500',w:'Great for smaller or new businesses wanting low commitment and a simple setup.',b:['No monthly fees','One-off terminal purchase','Easy to use']},
+    worldpay:{k:'worldpay',n:'Worldpay',img:'https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=500',w:'A trusted UK provider suited to larger or established businesses comparing flexible pricing.',b:['Trusted UK provider','24/7 customer support','Flexible pricing']},
+    elavon:{k:'elavon',n:'Elavon',img:'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=500',w:'Reliable and secure — a good fit for larger businesses needing multi-currency options.',b:['Reliable & secure','Great for larger businesses','Multi-currency option']}
   };
   function rec(a){var t=a.turnover,p=a.priority;
     if(p==='No monthly rental'||p==='Simple setup')return PROV.sumup;
@@ -895,7 +893,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     h+='</div>';body.innerHTML=h;
     body.querySelectorAll('.qtile').forEach(function(el){el.onclick=function(){ans[s.k]=el.dataset.v;if(cur<STEPS.length-1){cur++;render()}else{result()}}});}
   function result(){done=true;bar.style.width='100%';stepEl.textContent='Your match';back.disabled=false;stepper();var r=rec(ans);
-    body.innerHTML='<div class="qres"><div class="qres-card"><div class="qres-media"><img src="../images/Card machine no bg.webp" alt="'+r.n+' card machine"></div><div class="qres-body"><div class="rh"><span class="rav">'+r.n.charAt(0)+'</span><div><div class="rl">Indicative match</div><div class="rn">'+r.n+'</div></div></div><p>'+r.w+'</p><div class="qres-chips">'+r.b.map(function(x){return '<span class="qres-chip"><iconify-icon icon="ph:check-bold"></iconify-icon>'+x+'</span>'}).join('')+'</div><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Get my '+r.n+' quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" id="qdet">View '+r.n+' details</a></div></div></div></div>';
+    body.innerHTML='<div class="qres"><div class="qres-card"><div class="qres-media"><img src="'+r.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+r.n+' card machine"></div><div class="qres-body"><div class="rh"><span class="rav">'+r.n.charAt(0)+'</span><div><div class="rl">Indicative match</div><div class="rn">'+r.n+'</div></div></div><p>'+r.w+'</p><div class="qres-chips">'+r.b.map(function(x){return '<span class="qres-chip"><iconify-icon icon="ph:check-bold"></iconify-icon>'+x+'</span>'}).join('')+'</div><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Get my '+r.n+' quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" id="qdet">View '+r.n+' details</a></div></div></div></div>';
     document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({product:r.n,turnover:ans.turnover,current:ans.current})};
     document.getElementById('qdet').onclick=function(e){e.preventDefault();openDetail(r.k)};}
   back.onclick=function(){if(done){done=false;cur=STEPS.length-1;render();return}cur=Math.max(0,cur-1);render()};
