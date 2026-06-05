@@ -459,6 +459,53 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 @media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:340px;margin:0 auto;width:100%}}
 @media(max-width:560px){.calc-out{grid-template-columns:1fr}.calc-body{padding:26px}}
 
+/* ── COMPARE: card toggle, floating bar, drawer ── */
+.pcompare{margin-top:10px;display:inline-flex;align-items:center;justify-content:center;gap:7px;width:100%;font-family:'Inter';font-size:12.5px;font-weight:700;color:var(--ink-soft);background:none;border:1px solid var(--line-l);border-radius:var(--pill);padding:9px 13px;cursor:pointer;transition:.2s}
+.pcompare:hover{border-color:var(--ink);color:var(--ink)}
+.pcompare iconify-icon{font-size:16px}
+.pcompare.on{background:rgba(198,255,0,.16);border-color:var(--lime);color:#3c4a00}
+.cmp-bar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(160%);z-index:170;display:flex;align-items:center;gap:14px;
+  background:rgba(16,20,12,.92);backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:var(--pill);padding:9px 11px 9px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5);transition:transform .4s var(--ease)}
+.cmp-bar.show{transform:translateX(-50%)}
+.cmp-bar .ct{font-size:13.5px;font-weight:600;color:#fff;white-space:nowrap}
+.cmp-bar .ct b{color:var(--lime)}
+.cmp-bar .clear{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit}
+.cmp-bar .clear:hover{color:#fff}
+.cmp-drawer{position:fixed;inset:0;z-index:320;display:none}
+.cmp-drawer.open{display:block}
+.cmp-bd{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s}
+.cmp-drawer.open .cmp-bd{opacity:1}
+.cmp-panel{position:absolute;left:0;right:0;bottom:0;max-height:90vh;overflow-y:auto;background:rgba(13,17,9,.97);backdrop-filter:blur(24px);
+  border-top:1px solid var(--line2);border-radius:24px 24px 0 0;padding:28px;transform:translateY(100%);transition:transform .45s var(--ease)}
+.cmp-drawer.open .cmp-panel{transform:none}
+.cmp-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px;max-width:1100px;margin-left:auto;margin-right:auto}
+.cmp-head h3{font-family:'Space Grotesk';font-size:22px;color:#fff}
+.cmp-close{background:rgba(255,255,255,.06);border:1px solid var(--line2);color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+.cmp-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));max-width:1100px;margin:0 auto}
+.cmp-col{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.cmp-col .ci{aspect-ratio:16/10;overflow:hidden;background:#0d100a}
+.cmp-col .ci img{width:100%;height:100%;object-fit:cover}
+.cmp-col .cb{padding:18px;display:flex;flex-direction:column;flex:1}
+.cmp-col h4{font-family:'Space Grotesk';font-size:18px;color:#fff;margin-bottom:10px}
+.cmp-row{display:flex;flex-direction:column;gap:3px;padding:10px 0;border-top:1px solid var(--line)}
+.cmp-row .k{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.cmp-row .v{font-size:13px;color:#e7ebe0;font-weight:600;line-height:1.35}
+.cmp-col .btn{width:100%;justify-content:center;margin-top:14px}
+.cmp-empty{color:var(--muted);text-align:center;padding:30px;max-width:1100px;margin:0 auto}
+
+/* ── STICKY MINI-SUMMARY (desktop, experiment) ── */
+.summary-bar{position:fixed;left:24px;bottom:24px;z-index:150;display:none;align-items:center;gap:13px;
+  background:rgba(16,20,12,.92);backdrop-filter:blur(14px);border:1px solid var(--line2);border-radius:var(--pill);padding:8px 10px 8px 16px;
+  box-shadow:0 18px 44px rgba(0,0,0,.45);transform:translateY(160%);transition:transform .4s var(--ease);max-width:340px}
+.summary-bar.show{transform:none}
+.summary-bar .si{width:34px;height:34px;border-radius:50%;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.summary-bar .si iconify-icon{color:var(--lime);font-size:18px}
+.summary-bar .st{font-size:12.5px;color:#cfd6c5;line-height:1.2}
+.summary-bar .st b{color:#fff;display:block;font-size:13.5px}
+.summary-bar .sx{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 4px}
+.summary-bar .sx:hover{color:#fff}
+@media(min-width:921px){.summary-bar.ready{display:flex}}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1180px){.nav-links{display:none}.nav-ghost{display:none}.burger{display:block}}
 @media(max-width:1000px){.pgrid,.types{grid-template-columns:repeat(2,1fr)}.fgrid{grid-template-columns:1fr 1fr}}
@@ -637,6 +684,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Low transaction rates</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Fast next-day payouts</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.8</b></div>
         <button class="pview" data-detail="teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pcompare" data-cmp="teya"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><img src="https://logo.clearbit.com/sumup.com" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
@@ -644,6 +692,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for small businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Easy to use</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.7</b></div>
         <button class="pview" data-detail="sumup">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pcompare" data-cmp="sumup"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><img src="https://logo.clearbit.com/worldpay.com" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
@@ -651,6 +700,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Trusted UK provider</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> 24/7 customer support</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Flexible pricing</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.6</b></div>
         <button class="pview" data-detail="worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pcompare" data-cmp="worldpay"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><img src="https://logo.clearbit.com/elavon.com" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
@@ -658,6 +708,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Reliable &amp; secure</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for larger businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Multi-currency option</li></ul>
         <div class="stars"><span class="s"><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-fill"></iconify-icon><iconify-icon icon="ph:star-half-fill"></iconify-icon></span><b>4.5</b></div>
         <button class="pview" data-detail="elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+        <button class="pcompare" data-cmp="elavon"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
     </div>
     <div class="center rv" style="margin-top:34px"><a href="#finder" class="btn btn-dark">Compare All Providers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
@@ -882,6 +933,31 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 <div class="modal" id="detail" role="dialog" aria-modal="true" aria-label="Provider details">
   <div class="modal-bd" data-dclose></div>
   <div class="detail-card" id="detailCard"></div>
+</div>
+
+<!-- compare floating bar -->
+<div class="cmp-bar" id="cmpBar">
+  <span class="ct"><b id="cmpCount">0</b> selected to compare</span>
+  <button class="clear" id="cmpClear">Clear</button>
+  <a href="#" class="btn btn-primary" id="cmpOpen" style="border-radius:100px;padding:10px 18px">Compare <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+</div>
+
+<!-- compare drawer -->
+<div class="cmp-drawer" id="cmpDrawer" role="dialog" aria-modal="true" aria-label="Compare providers">
+  <div class="cmp-bd" data-cmpclose></div>
+  <div class="cmp-panel">
+    <div class="cmp-head"><h3>Compare card machine providers</h3><button class="cmp-close" data-cmpclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
+    <div class="cmp-grid" id="cmpGrid"></div>
+    <p class="cmp-empty" id="cmpEmpty" style="display:none">Add providers using "Add to compare" to see them side by side.</p>
+  </div>
+</div>
+
+<!-- sticky mini-summary (experiment) -->
+<div class="summary-bar" id="summaryBar">
+  <span class="si"><iconify-icon icon="ph:target-duotone"></iconify-icon></span>
+  <span class="st" id="summaryText"><b>Your match</b>Take the 60s finder</span>
+  <a href="#" class="btn btn-primary" id="summaryCta" style="border-radius:100px;padding:9px 16px;font-size:13px">Get quote</a>
+  <button class="sx" id="summaryX" aria-label="Dismiss">&times;</button>
 </div>
 
 <!-- sticky mobile cta -->
@@ -1114,6 +1190,56 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
     }
     range.addEventListener('input',upd); upd();
   })();
+
+  /* ── Compare drawer ── */
+  var CMP={
+    teya:{name:'Teya',img:PROV.teya.img,rate:'From 0.55% blended',monthly:'£15 + VAT (or one‑off ~£139)',settlement:'Fast / next‑day',contract:'Flexible',bestfor:'Established, £8k+ turnover'},
+    sumup:{name:'SumUp',img:PROV.sumup.img,rate:'Per‑transaction pricing',monthly:'None — one‑off ~£162',settlement:'Next‑day / instant*',contract:'No contract',bestfor:'New & smaller businesses'},
+    worldpay:{name:'Worldpay',img:PROV.worldpay.img,rate:'Debit from 0.30% / credit 0.65%*',monthly:'£1 first year, then £29.50 + VAT',settlement:'Next‑day',contract:'18 months',bestfor:'Larger / established'},
+    elavon:{name:'Elavon',img:PROV.elavon.img,rate:'Quote‑based',monthly:'Provider terms',settlement:'Provider terms',contract:'Provider terms',bestfor:'Larger / multi‑currency'}
+  };
+  var picked=[],cBar=document.getElementById('cmpBar'),cCount=document.getElementById('cmpCount'),
+      cDrawer=document.getElementById('cmpDrawer'),cGrid=document.getElementById('cmpGrid'),cEmpty=document.getElementById('cmpEmpty');
+  function cReset(b){b.classList.remove('on');b.innerHTML='<iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare'}
+  document.querySelectorAll('.pcompare').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var k=btn.dataset.cmp,i=picked.indexOf(k);
+      if(i>-1){picked.splice(i,1);cReset(btn)}
+      else{if(picked.length>=4){return}picked.push(k);btn.classList.add('on');btn.innerHTML='<iconify-icon icon="ph:check-bold"></iconify-icon> Added'}
+      cCount.textContent=picked.length;cBar.classList.toggle('show',picked.length>0);updSummary();
+    });
+  });
+  document.getElementById('cmpClear').onclick=function(){picked=[];document.querySelectorAll('.pcompare').forEach(cReset);cCount.textContent='0';cBar.classList.remove('show');updSummary()};
+  function cRows(d){return [['Indicative rate',d.rate],['Monthly cost',d.monthly],['Settlement',d.settlement],['Contract',d.contract],['Best for',d.bestfor]].map(function(r){return '<div class="cmp-row"><span class="k">'+r[0]+'</span><span class="v">'+r[1]+'</span></div>'}).join('')}
+  function openCmp(){
+    if(!picked.length){cGrid.innerHTML='';cEmpty.style.display='block'}
+    else{cEmpty.style.display='none';cGrid.innerHTML=picked.map(function(k){var d=CMP[k];return '<div class="cmp-col"><div class="ci"><img src="'+d.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+d.name+'"></div><div class="cb"><h4>'+d.name+'</h4>'+cRows(d)+'<a href="#" class="btn btn-primary" data-cmpquote="'+d.name+'">Get '+d.name+' quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div></div>'}).join('');
+      cGrid.querySelectorAll('[data-cmpquote]').forEach(function(a){a.onclick=function(e){e.preventDefault();closeCmp();openModal({product:a.dataset.cmpquote})}})}
+    cDrawer.classList.add('open');document.body.style.overflow='hidden';
+  }
+  function closeCmp(){cDrawer.classList.remove('open');document.body.style.overflow=''}
+  document.getElementById('cmpOpen').onclick=function(e){e.preventDefault();openCmp()};
+  cDrawer.querySelector('.cmp-bd').onclick=closeCmp;
+  cDrawer.querySelectorAll('[data-cmpclose]').forEach(function(b){b.onclick=closeCmp});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&cDrawer.classList.contains('open'))closeCmp()});
+
+  /* ── Sticky mini-summary (experiment) ── */
+  var sBar=document.getElementById('summaryBar'),sText=document.getElementById('summaryText'),sCta=document.getElementById('summaryCta'),sX=document.getElementById('summaryX'),sDismiss=false;
+  function summaryReady(){
+    var sv=loadAns();
+    if(sv&&sv.type&&sv.turnover&&sv.priority&&sv.current){var r=rec(sv);sText.innerHTML='<b>Your match: '+r.n+'</b>Indicative — get a quote';sBar.dataset.match=r.n;sCta.textContent='Get quote'}
+    else{sText.innerHTML='<b>Find your match</b>Take the 60‑second finder';sBar.removeAttribute('data-match');sCta.textContent='Start'}
+    sBar.classList.add('ready');
+  }
+  function nearBottom(){return (innerHeight+scrollY)>(document.body.scrollHeight-720)}
+  function updSummary(){
+    if(sDismiss||picked.length){sBar.classList.remove('show');return}
+    var calc=document.getElementById('calculator');var past=calc?scrollY>calc.offsetTop+200:scrollY>700;
+    sBar.classList.toggle('show',past&&!nearBottom());
+  }
+  sX.onclick=function(){sDismiss=true;sBar.classList.remove('show')};
+  sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
+  summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 })();
 </script>
 </body>
