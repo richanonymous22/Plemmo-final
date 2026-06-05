@@ -1,322 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../images/logo.png">
-  <title>EPOS Systems for Retail &amp; Hospitality | Plemmo</title>
-  <meta name="description" content="Powerful, easy-to-use EPOS systems for retail, hospitality and service businesses. Fast checkout, stock control, reporting and card machine integration. Get an EPOS quote from Plemmo.">
-
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="studio.css">
-  <style>
-    .ind-img { border-radius: var(--r); overflow: hidden; aspect-ratio: 4/3; }
-    .ind-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1); }
-    .rec:hover .ind-img img { transform: scale(1.05); }
-    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
-    @media (max-width: 860px) { .demo-grid { grid-template-columns: 1fr; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<title>EPOS Systems for Retail &amp; Hospitality | Plemmo</title>
+<meta name="description" content="Powerful, easy-to-use EPOS systems for retail, hospitality and service businesses. Fast checkout, stock control, reporting and card machine integration. Build your setup and get an EPOS quote from Plemmo.">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+.ehero{position:relative;overflow:hidden;padding:140px 0 90px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
+.orb.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(170,230,0,.12),transparent 70%);top:-200px;right:-160px}
+.ehero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.ehero h1{font-size:clamp(44px,6vw,80px);color:#fff;letter-spacing:-.03em}
+.ehero .sub{color:var(--muted);font-size:18px;max-width:440px;margin:22px 0 28px}
+.ehero-btns{display:flex;gap:13px;flex-wrap:wrap}
+.estage{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.estage .glow{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:90%;height:80%;border-radius:50%;background:radial-gradient(ellipse,rgba(198,255,0,.2),transparent 70%);filter:blur(46px);mix-blend-mode:screen}
+.estage img{position:relative;z-index:2;width:84%;filter:drop-shadow(0 50px 60px rgba(0,0,0,.5))}
+.estage .chip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:14px;background:rgba(12,16,8,.6);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 16px 36px rgba(0,0,0,.4)}
+.estage .chip iconify-icon{color:var(--lime);font-size:20px}.estage .chip b{font-family:'Space Grotesk';font-size:14px;color:#fff}
+.estage .c1{top:8%;left:-2%;animation:fl 6s ease-in-out infinite}.estage .c2{bottom:10%;right:-2%;animation:fl 7s ease-in-out infinite .6s}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* benefit row */
+.bench{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.benchc{text-align:center;padding:26px 18px}
+.benchc .bi{width:54px;height:54px;border-radius:15px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.benchc .bi iconify-icon{font-size:27px;color:var(--lime)}.s-light .benchc .bi iconify-icon{color:#5f9000}
+.benchc strong{display:block;font-size:16px;margin-bottom:4px}.benchc span{font-size:13px;color:var(--muted)}.s-light .benchc span{color:var(--ink-soft)}
+/* tabs + industry panel */
+.tabs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px;justify-content:center;flex-wrap:wrap}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;border-radius:var(--pill);padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;border:1.5px solid var(--line-l);background:var(--white);color:var(--ink-soft);transition:.2s;font-family:'Inter'}
+.tab:hover{border-color:var(--ink);color:var(--ink);transform:translateY(-2px)}
+.tab.active{background:var(--lime);border-color:var(--lime);color:#0a0c08}
+.tab iconify-icon{font-size:18px}
+.ipanel{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;margin-top:26px;background:var(--white);border:1px solid var(--line-l);border-radius:var(--r-lg);box-shadow:var(--shadow-l);overflow:hidden}
+.ipanel .ic{padding:36px}
+.ipanel .it{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#5f9000;margin-bottom:10px}
+.ipanel h3{font-size:26px;color:var(--ink);margin-bottom:12px}
+.ipanel p{color:var(--ink-soft);font-size:15px;margin-bottom:18px}
+.ipanel .img{aspect-ratio:4/3}.ipanel .img img{width:100%;height:100%;object-fit:cover}
+/* hardware cards */
+.hw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.hw{display:flex;flex-direction:column;overflow:hidden}
+.hw-media{aspect-ratio:4/3;background:radial-gradient(circle at 50% 30%,rgba(198,255,0,.14),transparent 70%),#0d100a;display:flex;align-items:center;justify-content:center;padding:24px;position:relative}
+.hw-media img{max-height:100%;max-width:80%;object-fit:contain;filter:drop-shadow(0 18px 26px rgba(0,0,0,.5));transition:transform .5s var(--ease)}
+.hw:hover .hw-media img{transform:translateY(-8px) scale(1.04)}
+.hw-media .price{position:absolute;top:14px;right:14px;background:rgba(12,16,8,.7);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:100px;padding:6px 13px;font-family:'Space Grotesk';font-weight:700;font-size:15px;color:var(--lime)}
+.hw-body{padding:22px;display:flex;flex-direction:column;flex:1}
+.hw-body h3{font-size:19px;color:#fff;margin-bottom:4px}.hw-body .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.hw-more{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.hw-more ul{list-style:none;display:grid;gap:8px;padding:6px 0 10px}
+.hw-more li{display:flex;gap:8px;font-size:13px;color:#cfd6c5}.hw-more li iconify-icon{color:var(--lime);font-size:15px;flex-shrink:0}
+.hw-btns{display:flex;gap:10px;margin-top:auto}.hw-btns .btn{flex:1;justify-content:center;font-size:13px;padding:11px 14px}
+/* configurator */
+.cfg{display:grid;grid-template-columns:1.4fr .85fr;gap:24px;align-items:start}
+.cfg-h{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 12px}
+.cfg-bases{display:grid;gap:10px;margin-bottom:24px}
+.cfg-base{display:flex;align-items:center;gap:14px;padding:16px;border-radius:14px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);cursor:pointer;transition:.2s}
+.cfg-base:hover{border-color:rgba(198,255,0,.5)}
+.cfg-base.on{border-color:var(--lime);background:var(--lime-soft)}
+.cfg-base .rd{width:22px;height:22px;border-radius:50%;border:2px solid var(--line2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cfg-base.on .rd{border-color:var(--lime)}.cfg-base.on .rd::after{content:'';width:11px;height:11px;border-radius:50%;background:var(--lime)}
+.cfg-base .bt{flex:1}.cfg-base .bt b{display:block;color:#fff;font-size:15px}.cfg-base .bt span{font-size:12.5px;color:var(--muted)}
+.cfg-base .bp{font-family:'Space Grotesk';font-weight:700;color:var(--lime)}
+.cfg-add{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);cursor:pointer;margin-bottom:9px;transition:.2s}
+.cfg-add:hover{border-color:rgba(198,255,0,.4)}
+.cfg-add.on{border-color:var(--lime);background:var(--lime-soft)}
+.cfg-add .ck{width:22px;height:22px;border-radius:7px;border:2px solid var(--line2);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#0a0c08}
+.cfg-add.on .ck{background:var(--lime);border-color:var(--lime)}
+.cfg-add .ck iconify-icon{font-size:14px;opacity:0}.cfg-add.on .ck iconify-icon{opacity:1}
+.cfg-add .at{flex:1;font-size:14px;font-weight:600;color:#e7ebe0}
+.cfg-add .ap{font-family:'Space Grotesk';font-weight:700;color:var(--lime);font-size:14px}
+.cfg-sum{position:sticky;top:90px;background:linear-gradient(160deg,#15190f,#0c0f08);border:1px solid var(--line2);border-radius:var(--r-lg);padding:24px}
+.cfg-sum h3{font-size:18px;color:#fff;margin-bottom:14px}
+.cfg-list{list-style:none;display:grid;gap:9px;margin-bottom:16px;min-height:30px}
+.cfg-list li{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;color:#cfd6c5}
+.cfg-list li span:last-child{color:#fff;font-weight:600}
+.cfg-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:16px;border-top:1px solid var(--line);margin-bottom:16px}
+.cfg-total .tl{font-size:13px;color:var(--muted)}
+.cfg-total .tv{font-family:'Space Grotesk';font-weight:700;font-size:34px;color:var(--lime)}
+.cfg-sum .btn{width:100%;justify-content:center}
+.cfg-note{font-size:11px;color:#6b7560;margin-top:14px;line-height:1.5}
+/* perks + features */
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.perk{text-align:center;padding:26px 16px}
+.perk iconify-icon{font-size:30px;color:var(--lime);margin-bottom:10px}.s-light .perk iconify-icon{color:#5f9000}
+.perk strong{display:block;font-size:15px}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.feat{display:flex;align-items:center;gap:11px;border-radius:13px;padding:15px 16px;font-size:13.5px;font-weight:700;background:var(--white);border:1px solid var(--line-l);box-shadow:var(--shadow-l);transition:transform .2s}
+.feat:hover{transform:translateY(-3px)}
+.feat iconify-icon{font-size:20px;color:#5f9000;flex-shrink:0}
+/* demo form */
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.demo-card{background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:var(--r-lg);padding:30px}
+.demo-ok{display:none;text-align:center;color:var(--lime);font-weight:700;margin-top:14px}
+@media(max-width:960px){.bench,.feat-grid,.perks{grid-template-columns:repeat(2,1fr)}.hw-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:920px){.ehero-grid{grid-template-columns:1fr;gap:38px}.estage{order:-1;max-width:380px;margin:0 auto}.ipanel,.cfg,.demo-grid{grid-template-columns:1fr}.cfg-sum{position:static}}
+@media(max-width:600px){.bench,.feat-grid,.perks,.hw-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
+<div class="scrollbar" id="scrollbar"></div>
 
-<!-- ── NAV ── -->
 <nav class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="../index.html" class="logo">plemmo<span class="dot">.</span></a>
-    <div class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="card-machines.html">Card Machines</a>
-      <a href="business-funding.html">Funding</a>
-      <a href="epos-systems.html" class="active">EPOS</a>
-      <a href="digital-signage.html">Signage</a>
-      <a href="about-us.html">About</a>
-      <a href="contact-us.html">Contact</a>
-    </div>
-    <div class="nav-cta">
-      <a href="tel:02079460958" class="btn btn-line">020 7946 0958</a>
-      <a href="#" class="btn btn-solid" data-enquiry data-service="EPOS Systems">Get a Free Quote</a>
-      <button class="burger" aria-label="Open menu"><iconify-icon icon="ph:list-bold"></iconify-icon></button>
-    </div>
+  <div class="nav-in">
+    <a href="../index.html" class="logo">plemmo<span class="d">.</span></a>
+    <div class="nav-links"><a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html" class="active">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About</a><a href="contact-us.html">Contact</a></div>
+    <div class="nav-cta"><a href="tel:02079460958" class="btn nav-ghost">020 7946 0958</a><a href="#" class="btn btn-primary" data-quote data-service="EPOS Systems">Get a Free Quote</a><button class="burger" id="burger" aria-label="Menu"><iconify-icon icon="ph:list-bold"></iconify-icon></button></div>
   </div>
 </nav>
+<div class="mm" id="mm"><div class="mm-bd" data-mmclose></div><div class="mm-panel"><div class="mm-top"><span class="logo">plemmo<span class="d">.</span></span><button class="mm-close" data-mmclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div><a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="#" class="btn btn-primary" data-quote data-service="EPOS Systems">Get a Free Quote</a></div></div>
 
-<!-- ── MOBILE MENU ── -->
-<div class="mobile-menu" id="mobile-menu">
-  <div class="mm-backdrop"></div>
-  <div class="mm-panel">
-    <div class="mm-top"><span class="logo">plemmo<span class="dot">.</span></span><button class="mm-close" aria-label="Close menu"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
-    <a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a>
-    <a href="#" class="btn btn-solid" data-enquiry data-service="EPOS Systems">Get a Free Quote</a>
-  </div>
-</div>
-
-<!-- ── HERO (dark) ── -->
-<header class="hero">
-  <div class="container hero-grid">
-    <div>
-      <span class="kicker" style="background:rgba(198,255,0,.1);color:var(--accent);border:1px solid rgba(198,255,0,.22);"><iconify-icon icon="ph:devices-duotone"></iconify-icon> Plemmo EPOS</span>
-      <h1>Run your business<br><span class="accent">smarter.</span></h1>
-      <p class="lead">Powerful, easy-to-use EPOS systems for retail, hospitality and service businesses — checkout, stock and reporting in one place.</p>
-      <div class="hero-btns">
-        <a href="#products" class="btn btn-solid">Get EPOS Quote <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a>
-        <a href="#" class="btn btn-line" data-enquiry data-service="EPOS Systems">Book a Demo</a>
+<!-- HERO -->
+<header class="ehero" id="top">
+  <span class="orb o1"></span>
+  <div class="container ehero-grid">
+    <div class="rv">
+      <span class="eyebrow"><iconify-icon icon="ph:devices-duotone"></iconify-icon> Plemmo EPOS</span>
+      <h1 style="margin-top:14px">Run your business<br><span class="lime">smarter.</span></h1>
+      <p class="sub">Powerful, easy-to-use EPOS systems for retail, hospitality and service businesses — checkout, stock and reporting in one place.</p>
+      <div class="ehero-btns">
+        <a href="#build" class="btn btn-primary btn-lg">Build My EPOS <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+        <a href="#" class="btn btn-ghost btn-lg" data-quote data-service="EPOS Systems">Book a Demo</a>
       </div>
-      <div class="hero-meta">
-        <div class="m"><div class="m-ic"><iconify-icon icon="ph:cloud-duotone"></iconify-icon></div><div><strong>Cloud based</strong><span>Manage anywhere</span></div></div>
-        <div class="m"><div class="m-ic"><iconify-icon icon="ph:chart-line-up-duotone"></iconify-icon></div><div><strong>Real-time</strong><span>Live insights</span></div></div>
-        <div class="m"><div class="m-ic"><iconify-icon icon="ph:lightning-duotone"></iconify-icon></div><div><strong>Fast &amp; secure</strong><span>Built for speed</span></div></div>
-      </div>
+      <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Free setup &amp; training · Integrated card machine options · UK support</p>
     </div>
-    <div class="shot-wrap" style="position:relative;">
-      <div class="shot"><img src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=900" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=900'" alt="Plemmo EPOS terminal on a shop counter"></div>
-      <div class="chip tl"><div class="ci"><iconify-icon icon="ph:cube-duotone"></iconify-icon></div><div><strong>Stock control</strong><span>Built in</span></div></div>
-      <div class="chip br"><div class="ci"><iconify-icon icon="ph:graduation-cap-duotone"></iconify-icon></div><div><strong>Free training</strong><span>UK support</span></div></div>
+    <div class="estage rv">
+      <span class="glow"></span>
+      <img src="../images/EPOS no bg.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=800'" alt="Plemmo EPOS terminal">
+      <div class="chip c1"><iconify-icon icon="ph:cloud-duotone"></iconify-icon><b>Cloud based</b></div>
+      <div class="chip c2"><iconify-icon icon="ph:chart-line-up-duotone"></iconify-icon><b>Real-time</b></div>
     </div>
   </div>
 </header>
 
-<!-- ── BENEFIT ROW (cream) ── -->
-<section class="s tight s-cream">
+<!-- BENEFITS -->
+<section class="section tight s-cream">
   <div class="container">
-    <div class="bench-row reveal">
-      <div class="bench"><div class="bi"><iconify-icon icon="ph:cloud-duotone"></iconify-icon></div><strong>Cloud Based</strong><span>Access your data anywhere</span></div>
-      <div class="bench"><div class="bi"><iconify-icon icon="ph:chart-bar-duotone"></iconify-icon></div><strong>Real-time Insights</strong><span>Live sales &amp; reporting</span></div>
-      <div class="bench"><div class="bi"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon></div><strong>Fast &amp; Secure</strong><span>Reliable every day</span></div>
-      <div class="bench"><div class="bi"><iconify-icon icon="ph:hand-tap-duotone"></iconify-icon></div><strong>Easy to Use</strong><span>Staff up to speed fast</span></div>
+    <div class="bench" data-stagger>
+      <div class="card benchc rv"><div class="bi"><iconify-icon icon="ph:cloud-duotone"></iconify-icon></div><strong>Cloud Based</strong><span>Manage from anywhere</span></div>
+      <div class="card benchc rv"><div class="bi"><iconify-icon icon="ph:chart-bar-duotone"></iconify-icon></div><strong>Real-time Insights</strong><span>Live sales &amp; reporting</span></div>
+      <div class="card benchc rv"><div class="bi"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon></div><strong>Fast &amp; Secure</strong><span>Reliable every day</span></div>
+      <div class="card benchc rv"><div class="bi"><iconify-icon icon="ph:hand-tap-duotone"></iconify-icon></div><strong>Easy to Use</strong><span>Staff up to speed fast</span></div>
     </div>
   </div>
 </section>
 
-<!-- ── INDUSTRY SELECTOR (paper) ── -->
-<section class="s s-light" id="industries">
+<!-- INDUSTRY SELECTOR -->
+<section class="section s-light" id="industries">
   <div class="container">
-    <div class="head"><span class="kicker"><iconify-icon icon="ph:squares-four-duotone"></iconify-icon> Built for your industry</span><h2>Pick your business type</h2><p class="lead">See how Plemmo EPOS fits the way you work.</p></div>
-    <div class="tabs reveal" id="ind-tabs">
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:squares-four-duotone"></iconify-icon> Built for your industry</span><h2 class="h2">Pick your business type</h2><p class="lead">See how Plemmo EPOS fits the way you work.</p></div>
+    <div class="tabs rv" id="indTabs">
       <div class="tab active" data-ind="retail"><iconify-icon icon="ph:shopping-bag-duotone"></iconify-icon> Retail Stores</div>
       <div class="tab" data-ind="hospitality"><iconify-icon icon="ph:wine-duotone"></iconify-icon> Hospitality</div>
-      <div class="tab" data-ind="cafe"><iconify-icon icon="ph:coffee-duotone"></iconify-icon> Cafés &amp; Coffee Shops</div>
+      <div class="tab" data-ind="cafe"><iconify-icon icon="ph:coffee-duotone"></iconify-icon> Cafés</div>
       <div class="tab" data-ind="takeaway"><iconify-icon icon="ph:hamburger-duotone"></iconify-icon> Takeaways</div>
       <div class="tab" data-ind="salon"><iconify-icon icon="ph:scissors-duotone"></iconify-icon> Salons &amp; Barbers</div>
       <div class="tab" data-ind="services"><iconify-icon icon="ph:wrench-duotone"></iconify-icon> Services &amp; More</div>
     </div>
-    <div class="rec reveal" id="ind-panel">
+    <div class="ipanel rv">
+      <div class="ic"><div class="it">Industry setup</div><h3 id="indName">Retail Stores</h3><p id="indDesc">Streamline sales and inventory. Scan, sell and keep stock accurate without the manual work.</p><a href="#" class="btn btn-primary" data-quote data-service="EPOS Systems">Choose This Setup <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
+      <div class="img"><img id="indImg" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800" alt="Retail EPOS setup"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HARDWARE SHOWROOM -->
+<section class="section" id="hardware">
+  <div class="container">
+    <div class="head"><span class="eyebrow"><iconify-icon icon="ph:stack-duotone"></iconify-icon> Hardware</span><h2 class="h2" style="text-align:left">Popular Plemmo EPOS systems</h2><p class="lead">Indicative "from" pricing — final pricing depends on your setup.</p></div>
+    <div class="hw-grid" data-stagger>
+      <div class="card hw rv"><div class="hw-media"><img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=700" onerror="this.onerror=null;this.src='../images/EPOS no bg.png'" alt="Plemmo Smart Terminal"><span class="price">£399</span></div><div class="hw-body"><h3>Plemmo Smart Terminal</h3><div class="sub">All-in-one · 10" touch</div><div class="hw-more" data-more><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Built-in printer · card reader ready</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Cloud software</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 1 year warranty</li></ul></div><div class="hw-btns"><button class="btn btn-ghost" data-detail>Specs</button><a class="btn btn-primary" data-quote data-service="EPOS Systems" data-product="Plemmo Smart Terminal">Choose</a></div></div></div>
+      <div class="card hw rv"><div class="hw-media"><img src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=700" onerror="this.onerror=null;this.src='../images/EPOS no bg.png'" alt="Plemmo Touch Pro"><span class="price">£599</span></div><div class="hw-body"><h3>Plemmo Touch Pro</h3><div class="sub">Premium · 15" dual-screen</div><div class="hw-more" data-more><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Faster processor · built-in printer</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Card reader included</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2 year warranty</li></ul></div><div class="hw-btns"><button class="btn btn-ghost" data-detail>Specs</button><a class="btn btn-primary" data-quote data-service="EPOS Systems" data-product="Plemmo Touch Pro">Choose</a></div></div></div>
+      <div class="card hw rv"><div class="hw-media"><img src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=700" onerror="this.onerror=null;this.src='../images/EPOS no bg.png'" alt="Plemmo Mobile POS"><span class="price">£249</span></div><div class="hw-body"><h3>Plemmo Mobile POS</h3><div class="sub">Portable · take payments anywhere</div><div class="hw-more" data-more><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Bluetooth printer · card reader included</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Cloud software</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 1 year warranty</li></ul></div><div class="hw-btns"><button class="btn btn-ghost" data-detail>Specs</button><a class="btn btn-primary" data-quote data-service="EPOS Systems" data-product="Plemmo Mobile POS">Choose</a></div></div></div>
+    </div>
+    <p class="disc" style="margin-top:22px">Prices shown are indicative "from" pricing and may vary. Final pricing depends on hardware, software, installation and support requirements.</p>
+  </div>
+</section>
+
+<!-- BUILD A PACKAGE -->
+<section class="section s-light" id="build">
+  <div class="container">
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:cube-duotone"></iconify-icon> Build your setup</span><h2 class="h2">Configure your EPOS package</h2><p class="lead">Pick a base system and add what you need — see an indicative total update live.</p></div>
+    <div class="cfg rv">
       <div>
-        <div class="rt">Industry setup</div>
-        <h3 id="ind-name">Retail Stores</h3>
-        <p id="ind-desc">Streamline sales and inventory. Scan, sell and keep stock accurate without the manual work.</p>
-        <a href="#" class="btn btn-solid" data-enquiry data-service="EPOS Systems">Choose This Setup <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a>
+        <p class="cfg-h" style="color:var(--ink-soft)">1 · Choose a base system</p>
+        <div class="cfg-bases" id="cfgBases">
+          <button type="button" class="cfg-base on" data-base="Smart Terminal" data-price="399"><span class="rd"></span><span class="bt"><b>Plemmo Smart Terminal</b><span>All-in-one · 10" touch</span></span><span class="bp">£399</span></button>
+          <button type="button" class="cfg-base" data-base="Touch Pro" data-price="599"><span class="rd"></span><span class="bt"><b>Plemmo Touch Pro</b><span>Premium · 15" dual-screen</span></span><span class="bp">£599</span></button>
+          <button type="button" class="cfg-base" data-base="Mobile POS" data-price="249"><span class="rd"></span><span class="bt"><b>Plemmo Mobile POS</b><span>Portable</span></span><span class="bp">£249</span></button>
+        </div>
+        <p class="cfg-h" style="color:var(--ink-soft)">2 · Add accessories</p>
+        <div id="cfgAdds">
+          <button type="button" class="cfg-add" data-add="Customer Display" data-price="29"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Customer Display</span><span class="ap">£29</span></button>
+          <button type="button" class="cfg-add" data-add="Receipt Printer" data-price="89"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Receipt Printer</span><span class="ap">£89</span></button>
+          <button type="button" class="cfg-add" data-add="Cash Drawer" data-price="89"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Cash Drawer</span><span class="ap">£89</span></button>
+          <button type="button" class="cfg-add" data-add="Barcode Scanner" data-price="79"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Barcode Scanner</span><span class="ap">£79</span></button>
+          <button type="button" class="cfg-add" data-add="Kitchen Printer" data-price="119"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Kitchen Printer</span><span class="ap">£119</span></button>
+        </div>
       </div>
-      <div class="ind-img"><img id="ind-img" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800" alt="Retail store EPOS setup"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── PRODUCTS (dark) ── -->
-<section class="s s-dark" id="products">
-  <div class="container">
-    <div class="head"><span class="kicker"><iconify-icon icon="ph:stack-duotone"></iconify-icon> Hardware</span><h2>Popular Plemmo EPOS systems</h2><p class="lead">Choose the hardware that fits how you sell. Pricing shown is indicative.</p></div>
-    <div class="grid g3 reveal">
-      <div class="card">
-        <div class="ph"><img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=800'" alt="Plemmo Smart Terminal"><span class="tag">Popular</span><span class="price-ov">£399<small>/one-off</small></span></div>
-        <div class="card-body"><div class="float-ic"><iconify-icon icon="ph:device-tablet-duotone"></iconify-icon></div><h3>Plemmo Smart Terminal</h3><div class="sub">All-in-one performance</div>
-          <ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> 10" touch screen</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Built-in printer · card reader ready</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Cloud software · 1 year warranty</li></ul>
-          <a href="#" class="btn btn-line" data-enquiry data-service="EPOS Systems" data-product="Plemmo Smart Terminal">Choose This Setup <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a></div>
-      </div>
-      <div class="card">
-        <div class="ph"><img src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=800'" alt="Plemmo Touch Pro dual-screen terminal"><span class="tag hot">Best for growth</span><span class="price-ov">£599<small>/one-off</small></span></div>
-        <div class="card-body"><div class="float-ic"><iconify-icon icon="ph:monitor-duotone"></iconify-icon></div><h3>Plemmo Touch Pro</h3><div class="sub">Premium dual-screen</div>
-          <ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> 15" screen · faster processor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Built-in printer · card reader included</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Cloud software · 2 year warranty</li></ul>
-          <a href="#" class="btn btn-solid" data-enquiry data-service="EPOS Systems" data-product="Plemmo Touch Pro">Choose This Setup <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a></div>
-      </div>
-      <div class="card">
-        <div class="ph"><img src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Plemmo Mobile POS handheld"><span class="tag">Portable</span><span class="price-ov">£249<small>/one-off</small></span></div>
-        <div class="card-body"><div class="float-ic"><iconify-icon icon="ph:device-mobile-duotone"></iconify-icon></div><h3>Plemmo Mobile POS</h3><div class="sub">Take payments anywhere</div>
-          <ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Portable terminal · Bluetooth printer</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Card reader included</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Cloud software · 1 year warranty</li></ul>
-          <a href="#" class="btn btn-line" data-enquiry data-service="EPOS Systems" data-product="Plemmo Mobile POS">Choose This Setup <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a></div>
+      <div class="cfg-sum">
+        <h3>Your setup</h3>
+        <ul class="cfg-list" id="cfgList"></ul>
+        <div class="cfg-total"><span class="tl">Indicative total</span><span class="tv" id="cfgTotal">£399</span></div>
+        <a href="#" class="btn btn-primary" id="cfgQuote">Get this setup <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+        <p class="reassure" style="margin-top:12px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation</p>
+        <p class="cfg-note">Indicative one-off pricing, editable per setup. Final pricing depends on hardware, software, installation, support and VAT.</p>
       </div>
     </div>
-    <p class="disc">Prices shown are indicative "from" pricing and may vary. Final pricing depends on hardware, software, installation and support requirements.</p>
   </div>
 </section>
 
-<!-- ── ADD-ONS (cream) ── -->
-<section class="s s-cream">
+<!-- PERKS -->
+<section class="section">
   <div class="container">
-    <div class="head"><span class="kicker"><iconify-icon icon="ph:plus-circle-duotone"></iconify-icon> Add-ons</span><h2>Build the exact setup</h2><p class="lead">Mix and match the extras your business needs. Prices are indicative.</p></div>
-    <div class="grid g3 reveal">
-      <div class="addon"><div class="l"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Customer Display</div><span class="c">£29</span></div>
-      <div class="addon"><div class="l"><iconify-icon icon="ph:printer-duotone"></iconify-icon> Receipt Printer</div><span class="c">£89</span></div>
-      <div class="addon"><div class="l"><iconify-icon icon="ph:cardholder-duotone"></iconify-icon> Cash Drawer</div><span class="c">£89</span></div>
-      <div class="addon"><div class="l"><iconify-icon icon="ph:barcode-duotone"></iconify-icon> Barcode Scanner</div><span class="c">£79</span></div>
-      <div class="addon"><div class="l"><iconify-icon icon="ph:cooking-pot-duotone"></iconify-icon> Kitchen Printer</div><span class="c">£119</span></div>
-      <div class="addon"><div class="l"><iconify-icon icon="ph:dots-three-circle-duotone"></iconify-icon> Need something else?</div><a href="#" class="c" style="text-decoration:underline;cursor:pointer;" data-enquiry data-service="EPOS Systems">Ask us</a></div>
+    <div class="perks" data-stagger>
+      <div class="card perk rv"><iconify-icon icon="ph:wrench-duotone"></iconify-icon><strong>Free Setup</strong></div>
+      <div class="card perk rv"><iconify-icon icon="ph:graduation-cap-duotone"></iconify-icon><strong>Free Training</strong></div>
+      <div class="card perk rv"><iconify-icon icon="ph:headset-duotone"></iconify-icon><strong>Free Support</strong></div>
+      <div class="card perk rv"><iconify-icon icon="ph:stack-duotone"></iconify-icon><strong>Flexible Packages</strong></div>
     </div>
   </div>
 </section>
 
-<!-- ── SUPPORT PERKS (paper) ── -->
-<section class="s s-light">
+<!-- FEATURES -->
+<section class="section s-cream">
   <div class="container">
-    <div class="perks reveal">
-      <div class="perk"><iconify-icon icon="ph:wrench-duotone"></iconify-icon><strong>Free Setup</strong></div>
-      <div class="perk"><iconify-icon icon="ph:graduation-cap-duotone"></iconify-icon><strong>Free Training</strong></div>
-      <div class="perk"><iconify-icon icon="ph:headset-duotone"></iconify-icon><strong>Free Support</strong></div>
-      <div class="perk"><iconify-icon icon="ph:stack-duotone"></iconify-icon><strong>Flexible Packages</strong></div>
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:list-checks-duotone"></iconify-icon> Features</span><h2 class="h2">Everything your till should do</h2></div>
+    <div class="feat-grid rv">
+      <div class="feat"><iconify-icon icon="ph:lightning-duotone"></iconify-icon> Fast Checkout</div><div class="feat"><iconify-icon icon="ph:cube-duotone"></iconify-icon> Stock Control</div><div class="feat"><iconify-icon icon="ph:chart-bar-duotone"></iconify-icon> Reports &amp; Analytics</div><div class="feat"><iconify-icon icon="ph:map-pin-duotone"></iconify-icon> Multi-location</div>
+      <div class="feat"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Secure Payments</div><div class="feat"><iconify-icon icon="ph:users-three-duotone"></iconify-icon> Customer Management</div><div class="feat"><iconify-icon icon="ph:cloud-duotone"></iconify-icon> Cloud Based</div><div class="feat"><iconify-icon icon="ph:gift-duotone"></iconify-icon> Loyalty &amp; Offers</div>
+      <div class="feat"><iconify-icon icon="ph:identification-badge-duotone"></iconify-icon> Staff Management</div><div class="feat"><iconify-icon icon="ph:table-duotone"></iconify-icon> Table Management</div><div class="feat"><iconify-icon icon="ph:cooking-pot-duotone"></iconify-icon> Kitchen Display</div><div class="feat"><iconify-icon icon="ph:receipt-duotone"></iconify-icon> Split Bills</div>
+      <div class="feat"><iconify-icon icon="ph:barcode-duotone"></iconify-icon> Barcode Scanning</div><div class="feat"><iconify-icon icon="ph:printer-duotone"></iconify-icon> Receipt Printing</div>
     </div>
   </div>
 </section>
 
-<!-- ── STAT BAND (dark) ── -->
-<section class="s s-dark">
-  <div class="container statband reveal">
-    <div class="sb-copy">
-      <span class="kicker"><iconify-icon icon="ph:gauge-duotone"></iconify-icon> By the numbers</span>
-      <h2>One system,<br>everything covered</h2>
-      <p class="lead">From fast checkout to stock and staff — Plemmo EPOS runs the day-to-day so you don't have to.</p>
-    </div>
-    <div class="statrow">
-      <div class="stat"><iconify-icon class="si" icon="ph:squares-four-duotone"></iconify-icon><b><span data-count="14">0</span></b><span>Built-in features</span></div>
-      <div class="stat"><iconify-icon class="si" icon="ph:storefront-duotone"></iconify-icon><b><span data-count="6">0</span></b><span>Industries supported</span></div>
-      <div class="stat"><iconify-icon class="si" icon="ph:devices-duotone"></iconify-icon><b><span data-count="3">0</span></b><span>Hardware options</span></div>
-      <div class="stat"><iconify-icon class="si" icon="ph:gift-duotone"></iconify-icon><b>Free</b><span>Setup &amp; training</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FEATURE GRID (cream) ── -->
-<section class="s s-cream">
-  <div class="container">
-    <div class="head"><span class="kicker"><iconify-icon icon="ph:list-checks-duotone"></iconify-icon> Features</span><h2>Everything your till should do</h2></div>
-    <div class="feat-grid reveal">
-      <div class="feat"><iconify-icon icon="ph:lightning-duotone"></iconify-icon> Fast Checkout</div>
-      <div class="feat"><iconify-icon icon="ph:cube-duotone"></iconify-icon> Stock Control</div>
-      <div class="feat"><iconify-icon icon="ph:chart-bar-duotone"></iconify-icon> Reports &amp; Analytics</div>
-      <div class="feat"><iconify-icon icon="ph:map-pin-duotone"></iconify-icon> Multi-location</div>
-      <div class="feat"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Secure Payments</div>
-      <div class="feat"><iconify-icon icon="ph:users-three-duotone"></iconify-icon> Customer Management</div>
-      <div class="feat"><iconify-icon icon="ph:cloud-duotone"></iconify-icon> Cloud Based</div>
-      <div class="feat"><iconify-icon icon="ph:gift-duotone"></iconify-icon> Loyalty &amp; Offers</div>
-      <div class="feat"><iconify-icon icon="ph:identification-badge-duotone"></iconify-icon> Staff Management</div>
-      <div class="feat"><iconify-icon icon="ph:table-duotone"></iconify-icon> Table Management</div>
-      <div class="feat"><iconify-icon icon="ph:cooking-pot-duotone"></iconify-icon> Kitchen Display</div>
-      <div class="feat"><iconify-icon icon="ph:receipt-duotone"></iconify-icon> Split Bills</div>
-      <div class="feat"><iconify-icon icon="ph:barcode-duotone"></iconify-icon> Barcode Scanning</div>
-      <div class="feat"><iconify-icon icon="ph:printer-duotone"></iconify-icon> Receipt Printing</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── DEMO FORM (paper) ── -->
-<section class="s s-light" id="demo">
-  <div class="container demo-grid reveal">
+<!-- DEMO FORM -->
+<section class="section" id="demo">
+  <div class="container demo-grid rv">
     <div>
-      <span class="kicker"><iconify-icon icon="ph:play-circle-duotone"></iconify-icon> Book a demo</span>
-      <h2 style="font-size:clamp(34px,4.4vw,56px);margin-bottom:16px;">See Plemmo EPOS<br>in action</h2>
-      <p style="color:var(--ink-soft);font-size:16px;margin-bottom:18px;">Tell us about your business and we'll build the right software &amp; hardware package, then walk you through it. Integrated card machine options available.</p>
-      <ul class="ticks" style="list-style:none;display:grid;gap:12px;">
-        <li style="display:flex;gap:11px;align-items:center;font-weight:600;"><iconify-icon icon="ph:check-circle-duotone" style="color:#7aa800;font-size:22px;"></iconify-icon> Tailored to your industry</li>
-        <li style="display:flex;gap:11px;align-items:center;font-weight:600;"><iconify-icon icon="ph:check-circle-duotone" style="color:#7aa800;font-size:22px;"></iconify-icon> Free setup &amp; training</li>
-        <li style="display:flex;gap:11px;align-items:center;font-weight:600;"><iconify-icon icon="ph:check-circle-duotone" style="color:#7aa800;font-size:22px;"></iconify-icon> Integrated card machine options</li>
-      </ul>
+      <span class="eyebrow"><iconify-icon icon="ph:play-circle-duotone"></iconify-icon> Book a demo</span>
+      <h2 class="h2" style="text-align:left;margin-top:14px">See Plemmo EPOS<br>in action</h2>
+      <p class="lead" style="margin-top:12px;color:var(--muted)">Tell us about your business and we'll tailor the right software &amp; hardware package, then walk you through it. Integrated card machine options available.</p>
+      <p class="reassure"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon> Free setup &amp; training · UK support</p>
     </div>
-    <form id="demo-form" class="form-card">
-      <div class="form-row two"><div><label>Full Name <span class="req">*</span></label><input class="input" type="text" required></div><div><label>Business Name</label><input class="input" type="text"></div></div>
-      <div class="form-row two"><div><label>Phone <span class="req">*</span></label><input class="input" type="tel" required></div><div><label>Email <span class="req">*</span></label><input class="input" type="email" required></div></div>
-      <div class="form-row"><label>Business type</label><select class="select"><option>Retail</option><option>Hospitality</option><option>Café / Coffee Shop</option><option>Takeaway</option><option>Salon / Barber</option><option>Other</option></select></div>
-      <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Get My EPOS Quote <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
-      <div id="demo-ok" class="ok-note"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon> Thanks — a Plemmo specialist will contact you shortly.</div>
+    <form class="demo-card" id="demoForm">
+      <div class="frow two"><div><label>Full Name <span class="req-star">*</span></label><input class="input" type="text" required></div><div><label>Business Name</label><input class="input" type="text"></div></div>
+      <div class="frow two"><div><label>Phone <span class="req-star">*</span></label><input class="input" type="tel" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" required></div></div>
+      <div class="frow"><label>Business type</label><select class="select"><option>Retail</option><option>Hospitality</option><option>Café / Coffee Shop</option><option>Takeaway</option><option>Salon / Barber</option><option>Other</option></select></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Get My EPOS Quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+      <div class="demo-ok" id="demoOk"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon> Thanks — a Plemmo specialist will contact you shortly.</div>
     </form>
   </div>
 </section>
 
-<!-- ── FAQ (dark) ── -->
-<section class="s s-dark">
+<!-- FAQ -->
+<section class="section s-light" id="faq">
   <div class="container">
-    <div class="head center"><span class="kicker"><iconify-icon icon="ph:question-duotone"></iconify-icon> FAQ</span><h2>Good to know</h2></div>
-    <div class="faq-grid reveal">
-      <div class="faq-item"><div class="faq-q">Which EPOS system is right for my business? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>It depends on your business type, checkout volume, stock needs and whether you need hospitality features. We'll help you choose.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Can EPOS integrate with card machines? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — suitable options can be discussed depending on provider and setup.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Do you provide training? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Training and support may be available depending on your package.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Can I track stock? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — stock control is a core EPOS feature.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Can I use it for hospitality? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — hospitality setups can support tables, orders, kitchen printing and reporting depending on the package.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Are prices final? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Pricing depends on hardware, software, installation and support requirements. We'll give you a clear quote.</p></div></div>
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:question-duotone"></iconify-icon> FAQ</span><h2 class="h2">Good to know</h2></div>
+    <div class="faqlist rv">
+      <div class="faq"><div class="faq-q">Which EPOS system is right for my business? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>It depends on your business type, checkout volume, stock needs and whether you need hospitality features. We'll help you choose.</p></div></div>
+      <div class="faq"><div class="faq-q">Can EPOS integrate with card machines? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — suitable options can be discussed depending on provider and setup.</p></div></div>
+      <div class="faq"><div class="faq-q">Do you provide training? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Training and support may be available depending on your package.</p></div></div>
+      <div class="faq"><div class="faq-q">Can I track stock? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — stock control is a core EPOS feature.</p></div></div>
+      <div class="faq"><div class="faq-q">Can I use it for hospitality? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — hospitality setups can support tables, orders, kitchen printing and reporting depending on the package.</p></div></div>
+      <div class="faq"><div class="faq-q">Are prices final? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Pricing depends on hardware, software, installation and support requirements. We'll give you a clear quote.</p></div></div>
     </div>
-    <p class="disc">Plemmo introduces businesses to selected third-party providers where applicable. Products, pricing, availability and services are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.</p>
   </div>
 </section>
 
-<!-- ── CTA (paper, lime band) ── -->
-<section class="s s-light" id="quote">
+<!-- CTA -->
+<section class="section" id="quote">
   <div class="container">
-    <div class="cta reveal">
+    <div class="cta rv">
       <div>
-        <h2>Build your EPOS<br>system today</h2>
-        <p>Tell us what you need and we'll put together the right setup — software, hardware and support.</p>
-        <div class="btns">
-          <a href="#demo" class="btn btn-dark">Get EPOS Quote <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a>
-          <a href="#" class="btn btn-line" data-enquiry data-service="EPOS Systems">Book a Demo</a>
-        </div>
-        <div class="mini">
-          <span><iconify-icon icon="ph:check-circle-duotone"></iconify-icon> Free setup</span>
-          <span><iconify-icon icon="ph:check-circle-duotone"></iconify-icon> Free training</span>
-          <span><iconify-icon icon="ph:check-circle-duotone"></iconify-icon> UK support</span>
-        </div>
+        <h2>Build your EPOS<br><span class="lime">system today</span></h2>
+        <div class="checks"><span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Free setup</span><span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Free training</span><span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> UK support</span></div>
+        <div class="cta-btns"><a href="#build" class="btn btn-primary btn-lg">Build My EPOS <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost btn-lg" data-quote data-service="EPOS Systems">Book a Demo</a></div>
+        <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Flexible package options</p>
       </div>
-      <div class="cta-shot"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=700" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=700'" alt="Café counter running Plemmo EPOS"></div>
+      <div style="aspect-ratio:1/1;border-radius:var(--r-lg);background:radial-gradient(circle at 55% 40%,rgba(198,255,0,.16),transparent 60%);display:flex;align-items:center;justify-content:center"><img src="../images/EPOS no bg.png" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=600'" alt="Plemmo EPOS" style="width:74%;filter:drop-shadow(0 30px 50px rgba(0,0,0,.4))"></div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="container">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <div class="logo">plemmo<span class="dot">.</span></div>
-        <p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
-      </div>
-      <div class="foot-col"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="contact-us.html">Utilities &amp; Broadband</a></div>
-      <div class="foot-col"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
-      <div class="foot-col"><h4>Resources</h4><a href="#products">FAQs</a><a href="#products">Compare Options</a><a href="#">Guides</a></div>
-      <div class="foot-col"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#" data-enquiry data-service="EPOS Systems">Get a Free Quote</a></div>
+    <div class="fgrid">
+      <div class="fbrand"><div class="logo">plemmo<span class="d">.</span></div><p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p></div>
+      <div class="fcol"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="contact-us.html">Utilities &amp; Broadband</a></div>
+      <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
+      <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#build">Build a Package</a><a href="#hardware">Hardware</a></div>
+      <div class="fcol"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#" data-quote data-service="EPOS Systems">Get a Free Quote</a></div>
     </div>
-    <div class="foot-disc">Plemmo introduces businesses to selected third-party providers. Products, pricing, approvals, funding, availability and services are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.</div>
-    <div class="foot-bottom"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+    <div class="fdisc">Plemmo introduces businesses to selected third-party providers where applicable. EPOS products, pricing, availability and services are subject to provider terms, eligibility and approval. Pricing is indicative and may vary. Plemmo may receive commission from providers.</div>
+    <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
   </div>
 </footer>
 
-<!-- ── ENQUIRY MODAL ── -->
-<div class="modal" id="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="enq-title">
-  <div class="modal-backdrop"></div>
+<!-- MODAL -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+  <div class="modal-bd" data-close></div>
   <div class="modal-card">
-    <div id="enquiry-form-wrap">
-      <div class="modal-head">
-        <div><h3 id="enq-title">Get a free quote</h3><p>Tell us what you need and a Plemmo specialist will get back to you.</p></div>
-        <button class="modal-close" data-close aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button>
-      </div>
-      <form id="enquiry-form">
-        <div class="form-row two"><div><label>Full Name <span class="req">*</span></label><input class="input" type="text" required></div><div><label>Business Name</label><input class="input" type="text"></div></div>
-        <div class="form-row two"><div><label>Phone <span class="req">*</span></label><input class="input" type="tel" required></div><div><label>Email <span class="req">*</span></label><input class="input" type="email" required></div></div>
-        <div class="form-row"><label>Service Interested In</label><select class="select" id="enq-service"><option>Card Machines</option><option>Business Funding</option><option selected>EPOS Systems</option><option>Digital Signage</option><option>Utilities &amp; Broadband</option><option>Not Sure</option></select></div>
-        <div class="form-row"><label>Selected Product / Package</label><input class="input" id="enq-product" type="text" placeholder="Optional"></div>
-        <div class="form-row"><label>Message</label><textarea class="textarea" placeholder="Tell us a little about your business…"></textarea></div>
-        <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Send Enquiry <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+    <div id="mform-wrap">
+      <div class="modal-head"><div><h3 id="mtitle">Get an EPOS quote</h3><p>Tell us about your business and a specialist will be in touch.</p></div><button class="modal-close" data-close aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
+      <form id="mform">
+        <div class="frow two"><div><label>Full Name <span class="req-star">*</span></label><input class="input" type="text" required></div><div><label>Business Name</label><input class="input" type="text"></div></div>
+        <div class="frow two"><div><label>Phone <span class="req-star">*</span></label><input class="input" type="tel" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" required></div></div>
+        <div class="frow"><label>Service Interested In</label><select class="select" id="mservice"><option>Card Machines</option><option>Business Funding</option><option selected>EPOS Systems</option><option>Digital Signage</option><option>Utilities &amp; Broadband</option><option>Not Sure</option></select></div>
+        <div class="frow"><label>Selected Product / Package</label><input class="input" id="mprod" type="text" placeholder="Optional"></div>
+        <div class="frow"><label>Message</label><textarea class="textarea" placeholder="Tell us a little about your business…"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
       </form>
     </div>
-    <div id="enquiry-success" class="modal-success" style="display:none;">
-      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
-      <h3>Thanks — enquiry received</h3>
-      <p>Your enquiry has been received. A Plemmo specialist will contact you shortly.</p>
-      <button class="btn btn-line" data-close style="justify-content:center;">Close</button>
-    </div>
+    <div class="msuccess" id="msuccess"><div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div><h3>Thanks — enquiry received</h3><p>Your enquiry has been received. A Plemmo specialist will contact you shortly.</p><button class="btn btn-ghost" data-close style="justify-content:center">Close</button></div>
   </div>
 </div>
 
+<div class="sticky" id="sticky"><a href="tel:02079460958" class="btn btn-ghost call" aria-label="Call"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a><a href="#" class="btn btn-primary" data-quote data-service="EPOS Systems">Get a Free Quote</a></div>
+
 <script>
-  var IND = {
+(function(){
+  /* industry selector */
+  var IND={
     retail:{t:'Retail Stores',d:'Streamline sales and inventory. Scan, sell and keep stock accurate without the manual work.',img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800'},
     hospitality:{t:'Hospitality',d:'Table and order management. Keep service flowing from front of house to the kitchen.',img:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800'},
     cafe:{t:'Cafés & Coffee Shops',d:'Speed up service and billing. Quick taps, fast queues and happy regulars.',img:'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=800'},
@@ -324,20 +337,44 @@
     salon:{t:'Salons & Barbers',d:'Appointments and payments in one place, so you can focus on your clients.',img:'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=800'},
     services:{t:'Services & More',d:'Flexible for any business. Configure Plemmo EPOS around the way you work.',img:'https://images.unsplash.com/photo-1664575602554-2087b04935a5?auto=format&fit=crop&q=80&w=800'}
   };
-  document.querySelectorAll('#ind-tabs .tab').forEach(function(tab){
-    tab.addEventListener('click', function(){
-      document.querySelectorAll('#ind-tabs .tab').forEach(function(t){t.classList.remove('active');});
-      tab.classList.add('active');
-      var d = IND[tab.dataset.ind];
-      document.getElementById('ind-name').textContent = d.t;
-      document.getElementById('ind-desc').textContent = d.d;
-      var img = document.getElementById('ind-img'); img.src = d.img; img.alt = d.t + ' EPOS setup';
-    });
-  });
-  document.getElementById('demo-form').addEventListener('submit', function(e){
-    e.preventDefault(); this.querySelector('button').style.display='none'; document.getElementById('demo-ok').style.display='block';
-  });
+  document.querySelectorAll('#indTabs .tab').forEach(function(tab){tab.onclick=function(){
+    document.querySelectorAll('#indTabs .tab').forEach(function(t){t.classList.remove('active')});tab.classList.add('active');
+    var d=IND[tab.dataset.ind];document.getElementById('indName').textContent=d.t;document.getElementById('indDesc').textContent=d.d;
+    var im=document.getElementById('indImg');im.src=d.img;im.alt=d.t+' EPOS setup';
+  }});
+  /* hardware specs toggle (progressive disclosure) */
+  document.querySelectorAll('[data-detail]').forEach(function(b){b.onclick=function(){
+    var m=b.closest('.hw-body').querySelector('[data-more]'),open=m.style.maxHeight&&m.style.maxHeight!=='0px';
+    m.style.maxHeight=open?null:m.scrollHeight+'px';b.textContent=open?'Specs':'Hide';
+  }});
+  /* configurator */
+  var base={name:'Smart Terminal',price:399},adds=[];
+  var bases=document.getElementById('cfgBases'),addsEl=document.getElementById('cfgAdds'),listEl=document.getElementById('cfgList'),totalEl=document.getElementById('cfgTotal');
+  function gbp(n){return '£'+n.toLocaleString('en-GB')}
+  function renderCfg(){
+    var html='<li><span>'+base.name+'</span><span>'+gbp(base.price)+'</span></li>';
+    var total=base.price;
+    adds.forEach(function(a){total+=a.price;html+='<li><span>+ '+a.name+'</span><span>'+gbp(a.price)+'</span></li>'});
+    listEl.innerHTML=html;totalEl.textContent=gbp(total);
+  }
+  bases.querySelectorAll('.cfg-base').forEach(function(b){b.onclick=function(){
+    bases.querySelectorAll('.cfg-base').forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+    base={name:b.dataset.base,price:+b.dataset.price};renderCfg();
+  }});
+  addsEl.querySelectorAll('.cfg-add').forEach(function(b){b.onclick=function(){
+    var n=b.dataset.add,p=+b.dataset.price,i=adds.findIndex(function(a){return a.name===n});
+    if(i>-1){adds.splice(i,1);b.classList.remove('on')}else{adds.push({name:n,price:p});b.classList.add('on')}renderCfg();
+  }});
+  document.getElementById('cfgQuote').onclick=function(e){e.preventDefault();
+    var total=base.price+adds.reduce(function(s,a){return s+a.price},0);
+    var summary='Plemmo '+base.name+(adds.length?' + '+adds.map(function(a){return a.name}).join(', '):'')+' (indicative '+gbp(total)+')';
+    if(window.PlemmoModal)window.PlemmoModal.open({service:'EPOS Systems',product:summary});
+  };
+  renderCfg();
+  /* demo form (placeholder submit) */
+  var df=document.getElementById('demoForm');if(df)df.addEventListener('submit',function(e){e.preventDefault();df.querySelector('button').style.display='none';document.getElementById('demoOk').style.display='block'});
+})();
 </script>
-<script src="inner.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
