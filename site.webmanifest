@@ -1,0 +1,12 @@
+{
+  "name": "Plemmo — One partner for every business solution",
+  "short_name": "Plemmo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080a06",
+  "theme_color": "#c6ff00",
+  "icons": [
+    { "src": "/images/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
