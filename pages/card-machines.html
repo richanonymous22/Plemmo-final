@@ -407,6 +407,58 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 /* progress bar */
 .scrollbar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--lime);z-index:500;box-shadow:0 0 8px rgba(198,255,0,.3)}
 
+/* ── GRAIN (this-isn't-AI texture) ── */
+body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px}
+
+/* ── REASSURANCE LINE (under CTAs) ── */
+.reassure{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;color:var(--muted);font-weight:500}
+.reassure iconify-icon{color:var(--lime);font-size:16px}
+.s-light .reassure{color:var(--ink-soft)}
+
+/* ── RATE CALCULATOR ── */
+.calc{max-width:900px;margin:0 auto;position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line2);
+  background:linear-gradient(180deg,#13180e,#0c0f08);box-shadow:0 44px 100px rgba(0,0,0,.55)}
+.calc-body{padding:38px}
+.calc-lab{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.calc-lab .l{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.calc-val{font-family:'Space Grotesk';font-weight:700;font-size:clamp(34px,5vw,52px);color:#fff;line-height:1}
+.calc-val small{font-size:.4em;color:var(--muted);font-weight:600;margin-left:6px}
+.calc-range{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:100px;outline:none;margin:18px 0 8px;
+  background:linear-gradient(90deg,var(--lime) var(--p,40%),rgba(255,255,255,.1) var(--p,40%))}
+.calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--lime);border:3px solid #0c0f08;box-shadow:0 6px 16px rgba(0,0,0,.45);cursor:pointer;transition:transform .15s var(--spring)}
+.calc-range::-webkit-slider-thumb:hover{transform:scale(1.12)}
+.calc-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--lime);border:3px solid #0c0f08;cursor:pointer}
+.calc-ticks{display:flex;justify-content:space-between;font-size:11px;color:#6b7560;margin-bottom:28px}
+.calc-out{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.calc-tile{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:20px;transition:border-color .3s,background .3s}
+.calc-tile.hi{border-color:rgba(198,255,0,.4);background:linear-gradient(160deg,rgba(198,255,0,.08),transparent)}
+.calc-tile .tl{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.calc-tile .tv{font-family:'Space Grotesk';font-weight:700;font-size:clamp(24px,3vw,32px);color:#fff;margin-top:6px;line-height:1.05}
+.calc-tile.hi .tv{color:var(--lime)}
+.calc-tile .ts{font-size:12px;color:var(--muted);margin-top:5px}
+.calc-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.calc-note{font-size:11px;color:#6b7560;margin-top:18px;line-height:1.5}
+
+/* ── UK / LOCAL MAP ── */
+.uk-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.uk-copy .lead{color:var(--ink-soft)}
+.uk-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.uk-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--line-l);border-radius:100px;padding:8px 14px;box-shadow:var(--shadow-l)}
+.uk-tag iconify-icon{color:#5f9000;font-size:16px}
+.uk-map{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
+  background:radial-gradient(120% 90% at 50% 10%,#15190f,#0a0d07 70%)}
+.uk-map .mglow{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(198,255,0,.12),transparent 60%);mix-blend-mode:screen}
+.uk-city{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px}
+.uk-dot{width:11px;height:11px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px rgba(198,255,0,.5);animation:pulse 2.6s infinite}
+.uk-city b{font-size:10.5px;font-weight:600;color:#cfd6c5;letter-spacing:.02em;white-space:nowrap}
+.uk-city.sm .uk-dot{width:8px;height:8px;opacity:.8}
+.uk-city.sm b{display:none}
+.uk-map .ring{position:absolute;top:42%;left:50%;width:60%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(198,255,0,.14)}
+
+@media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:340px;margin:0 auto;width:100%}}
+@media(max-width:560px){.calc-out{grid-template-columns:1fr}.calc-body{padding:26px}}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1180px){.nav-links{display:none}.nav-ghost{display:none}.burger{display:block}}
 @media(max-width:1000px){.pgrid,.types{grid-template-columns:repeat(2,1fr)}.fgrid{grid-template-columns:1fr 1fr}}
@@ -477,6 +529,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
         <a href="#finder" class="btn btn-primary btn-lg">Find My Ideal Machine <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
         <a href="#providers" class="btn btn-ghost btn-lg">Compare Providers</a>
       </div>
+      <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply · UK business support</p>
       <div class="trust">
         <div class="t"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon><div><b>Trusted by <span data-count="10000" data-suffix="+">0</span></b><span>UK businesses</span></div></div>
         <div class="t"><iconify-icon icon="ph:star-fill"></iconify-icon><div><b data-count="4.8" data-dec="1">0</b><span>Rated on Trustpilot</span></div></div>
@@ -534,6 +587,39 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
         <div class="qsteps" id="qsteps"></div>
         <div id="qbody"></div>
         <div class="qfoot"><button class="qback" id="qback" disabled><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span style="font-size:12px;color:var(--muted)">No obligation · provider terms apply</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ RATE CALCULATOR ════ -->
+<section class="section" id="calculator" style="padding-top:14px">
+  <div class="container">
+    <div class="center rv" style="max-width:600px;margin:0 auto 40px">
+      <span class="eyebrow"><iconify-icon icon="ph:calculator-duotone"></iconify-icon> Rate calculator</span>
+      <h2 class="h2" style="margin-top:14px">See your indicative rate</h2>
+      <p class="lead" style="margin-top:12px;color:var(--muted)">Slide to your monthly card turnover for an indicative blended rate and estimated cost. Indicative only — subject to provider approval.</p>
+    </div>
+    <div class="calc rv">
+      <div class="quiz-topbar">
+        <div class="quiz-dots"><i></i><i></i><i></i></div>
+        <span class="quiz-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/rate-calculator</span>
+        <span class="quiz-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="calc-body">
+        <div class="calc-lab"><span class="l">Your monthly card turnover</span><span class="calc-val" id="calcTurn">£15,000</span></div>
+        <input type="range" class="calc-range" id="calcRange" min="3000" max="200000" step="1000" value="15000" aria-label="Monthly card turnover">
+        <div class="calc-ticks"><span>£3k</span><span>£50k</span><span>£100k</span><span>£200k+</span></div>
+        <div class="calc-out">
+          <div class="calc-tile hi"><div class="tl">Indicative rate</div><div class="tv" id="calcRate">1.00%</div><div class="ts">blended, where eligible</div></div>
+          <div class="calc-tile"><div class="tl">Est. monthly cost</div><div class="tv" id="calcCost">£150</div><div class="ts">on card processing</div></div>
+          <div class="calc-tile"><div class="tl">Suggested fit</div><div class="tv" id="calcFit" style="font-size:22px">Teya</div><div class="ts" id="calcFitNote">strong all‑rounder</div></div>
+        </div>
+        <div class="calc-cta">
+          <a href="#" class="btn btn-primary" data-quote data-product="Card machine rate quote">Get my exact quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+          <span class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply</span>
+        </div>
+        <p class="calc-note">Rates are indicative and based on Teya example pricing by turnover. Actual rates depend on provider approval, transaction mix, business profile, eligibility and provider terms. For lower turnover, a one‑off reader (e.g. SumUp) with no monthly rental may suit instead.</p>
       </div>
     </div>
   </div>
@@ -676,6 +762,37 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
   </div>
 </section>
 
+<!-- ════ LOCAL / UK MAP ════ -->
+<section class="section s-light" id="local">
+  <div class="container uk-split rv">
+    <div class="uk-copy">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:map-pin-duotone"></iconify-icon> UK high‑street first</span>
+      <h2 style="font-size:clamp(28px,3.8vw,44px);color:var(--ink);margin-top:14px">Built for high‑street<br>businesses across the UK</h2>
+      <p class="lead" style="margin-top:12px">From corner shops and cafés to salons and takeaways — Plemmo helps UK businesses compare suitable options and switch with confidence. Real, local, no jargon.</p>
+      <div class="uk-tags">
+        <span class="uk-tag"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> Retail</span>
+        <span class="uk-tag"><iconify-icon icon="ph:coffee-duotone"></iconify-icon> Cafés</span>
+        <span class="uk-tag"><iconify-icon icon="ph:hamburger-duotone"></iconify-icon> Takeaways</span>
+        <span class="uk-tag"><iconify-icon icon="ph:scissors-duotone"></iconify-icon> Salons</span>
+        <span class="uk-tag"><iconify-icon icon="ph:wrench-duotone"></iconify-icon> Trades</span>
+      </div>
+    </div>
+    <div class="uk-map">
+      <span class="mglow"></span><span class="ring"></span>
+      <span class="uk-city" style="left:42%;top:14%"><span class="uk-dot"></span><b>Glasgow</b></span>
+      <span class="uk-city sm" style="left:50%;top:21%"><span class="uk-dot"></span></span>
+      <span class="uk-city" style="left:58%;top:33%"><span class="uk-dot"></span><b>Newcastle</b></span>
+      <span class="uk-city" style="left:50%;top:46%"><span class="uk-dot"></span><b>Leeds</b></span>
+      <span class="uk-city" style="left:40%;top:52%"><span class="uk-dot"></span><b>Manchester</b></span>
+      <span class="uk-city sm" style="left:36%;top:62%"><span class="uk-dot"></span></span>
+      <span class="uk-city" style="left:46%;top:64%"><span class="uk-dot"></span><b>Birmingham</b></span>
+      <span class="uk-city sm" style="left:30%;top:74%"><span class="uk-dot"></span></span>
+      <span class="uk-city" style="left:40%;top:80%"><span class="uk-dot"></span><b>Bristol</b></span>
+      <span class="uk-city" style="left:58%;top:82%"><span class="uk-dot"></span><b>London</b></span>
+    </div>
+  </div>
+</section>
+
 <!-- ════ HOW IT WORKS ════ -->
 <section class="section" id="how">
   <div class="container how-grid rv">
@@ -712,6 +829,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
           <a href="#finder" class="btn btn-primary btn-lg">Find My Ideal Machine <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
           <a href="#" class="btn btn-ghost btn-lg" data-quote>Speak to an Expert <iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a>
         </div>
+        <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Free, no‑obligation quote · We compare, you decide</p>
       </div>
       <div class="final-stage">
         <span class="glow"></span>
@@ -853,7 +971,9 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
   /* ── MODAL ── */
   var modal=document.getElementById('modal'),fw=document.getElementById('mform-wrap'),sw=document.getElementById('msuccess'),lastF=null;
   function openModal(o){o=o||{};lastF=document.activeElement;fw.style.display='';sw.style.display='none';
-    document.getElementById('mprod').value=o.product||'';if(o.turnover)setSel('mturn',o.turnover);if(o.current)setSel('mcur',o.current);
+    document.getElementById('mprod').value=o.product||'';
+    var svT=o.turnover;if(!svT){try{var sv=JSON.parse(localStorage.getItem('plemmo_cm_finder')||'{}');if(sv.turnover&&sv.turnover!=='Not sure')svT=sv.turnover}catch(e){}}
+    if(svT)setSel('mturn',svT);if(o.current)setSel('mcur',o.current);
     modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){var f=modal.querySelector('input,select,button');f&&f.focus()},60)}
   function closeModal(){modal.classList.remove('open');document.body.style.overflow='';lastF&&lastF.focus&&lastF.focus()}
   function setSel(id,val){var s=document.getElementById(id);for(var i=0;i<s.options.length;i++)if(s.options[i].text===val){s.selectedIndex=i;return}}
@@ -885,19 +1005,24 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     if(t==='£25k–£50k')return p==='Better support'?PROV.worldpay:PROV.elavon;
     return PROV.teya;}
   var LABELS=['Business','Turnover','Priority','Status'];
-  var ans={},cur=0,done=false,body=document.getElementById('qbody'),bar=document.getElementById('qbar'),stepEl=document.getElementById('qstep'),back=document.getElementById('qback'),steps=document.getElementById('qsteps');
+  var SKEY='plemmo_cm_finder';
+  function loadAns(){try{return JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){return {}}}
+  function saveAns(){try{localStorage.setItem(SKEY,JSON.stringify(ans))}catch(e){}}
+  var ans=loadAns(),cur=0,done=false,body=document.getElementById('qbody'),bar=document.getElementById('qbar'),stepEl=document.getElementById('qstep'),back=document.getElementById('qback'),steps=document.getElementById('qsteps');
   function stepper(){steps.innerHTML=LABELS.map(function(l,i){var c=(done||i<cur)?'done':(i===cur?'active':'');var n=(done||i<cur)?'<iconify-icon icon="ph:check-bold"></iconify-icon>':(i+1);return '<span class="qstep-pill '+c+'"><span class="qn">'+n+'</span>'+l+'</span>'}).join('')}
   function render(){var s=STEPS[cur];done=false;bar.style.width=((cur+1)/STEPS.length*100)+'%';stepEl.textContent='Step '+(cur+1)+' of '+STEPS.length;back.disabled=cur===0;stepper();
     var h='<div class="qq">'+s.q+'</div><div class="qtiles">';
     s.o.forEach(function(o){h+='<button class="qtile'+(ans[s.k]===o.l?' sel':'')+'" data-v="'+o.l+'"><span class="qti"><iconify-icon icon="'+o.i+'"></iconify-icon></span><span>'+o.l+'</span></button>'});
     h+='</div>';body.innerHTML=h;
-    body.querySelectorAll('.qtile').forEach(function(el){el.onclick=function(){ans[s.k]=el.dataset.v;if(cur<STEPS.length-1){cur++;render()}else{result()}}});}
+    body.querySelectorAll('.qtile').forEach(function(el){el.onclick=function(){ans[s.k]=el.dataset.v;saveAns();if(cur<STEPS.length-1){cur++;render()}else{result()}}});}
   function result(){done=true;bar.style.width='100%';stepEl.textContent='Your match';back.disabled=false;stepper();var r=rec(ans);
     body.innerHTML='<div class="qres"><div class="qres-card"><div class="qres-media"><img src="'+r.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+r.n+' card machine"></div><div class="qres-body"><div class="rh"><span class="rav">'+r.n.charAt(0)+'</span><div><div class="rl">Indicative match</div><div class="rn">'+r.n+'</div></div></div><p>'+r.w+'</p><div class="qres-chips">'+r.b.map(function(x){return '<span class="qres-chip"><iconify-icon icon="ph:check-bold"></iconify-icon>'+x+'</span>'}).join('')+'</div><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Get my '+r.n+' quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" id="qdet">View '+r.n+' details</a></div></div></div></div>';
     document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({product:r.n,turnover:ans.turnover,current:ans.current})};
     document.getElementById('qdet').onclick=function(e){e.preventDefault();openDetail(r.k)};}
   back.onclick=function(){if(done){done=false;cur=STEPS.length-1;render();return}cur=Math.max(0,cur-1);render()};
-  render();
+  /* resume saved progress */
+  (function(){var first=-1;for(var i=0;i<STEPS.length;i++){if(!ans[STEPS[i].k]){first=i;break}}
+    if(first===-1&&STEPS.length){result()}else{cur=Math.max(0,first);render()}})();
 
   /* ── PROVIDER / PRODUCT DETAIL POPUPS ── */
   var IMGP={teya:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=900',sumup:'https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=900',worldpay:'https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=900',elavon:'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=900',mobile:'https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=900'};
@@ -958,6 +1083,37 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 
   /* seamless marquee */
   var mq=document.getElementById('mqTrack');if(mq){mq.innerHTML+=mq.innerHTML}
+
+  /* ── Rate calculator (indicative Teya pricing by turnover) ── */
+  (function(){
+    var range=document.getElementById('calcRange');if(!range)return;
+    var elT=document.getElementById('calcTurn'),elR=document.getElementById('calcRate'),elC=document.getElementById('calcCost'),
+        elF=document.getElementById('calcFit'),elFN=document.getElementById('calcFitNote');
+    function gbp(n){return '£'+Math.round(n).toLocaleString('en-GB')}
+    function teyaRate(t){ if(t<=9000)return 1.25;if(t<=10000)return 1.20;if(t<=11000)return 1.10;if(t<=12000)return 1.04;
+      if(t<=13000)return 1.02;if(t<=14000)return 1.01;if(t<=15000)return 1.00;if(t<=16000)return 0.95;if(t<=17000)return 0.90;
+      if(t<=18000)return 0.88;if(t<=19000)return 0.86;if(t<=21000)return 0.85;if(t<=35000)return 0.80;if(t<=42000)return 0.77;
+      if(t<=65000)return 0.70;if(t<=80000)return 0.67;if(t<=95000)return 0.63;if(t<=110000)return 0.61;if(t<=199000)return 0.60;return 0.55; }
+    function upd(){
+      var t=+range.value, p=(t-range.min)/(range.max-range.min)*100;
+      range.style.setProperty('--p',p+'%');
+      elT.innerHTML=gbp(t)+(t>=200000?'<small>+</small>':'')+'<small>/mo</small>';
+      if(t<8000){
+        elR.textContent='One‑off';elR.parentElement.classList.remove('hi');
+        elC.textContent='No rental';
+        elF.textContent='SumUp';elFN.textContent='simple, low commitment';
+      } else {
+        var r=teyaRate(t);
+        elR.parentElement.classList.add('hi');
+        elR.textContent=(r.toFixed(2))+'%';
+        elC.textContent=gbp(t*r/100);
+        if(t>=50000){elF.textContent='Teya / Worldpay';elFN.textContent='compare blended vs split';}
+        else if(t>=10000){elF.textContent='Teya';elFN.textContent='strong all‑rounder';}
+        else {elF.textContent='Teya / Shift4';elFN.textContent='good around this level';}
+      }
+    }
+    range.addEventListener('input',upd); upd();
+  })();
 })();
 </script>
 </body>
