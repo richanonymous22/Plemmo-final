@@ -1,199 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../images/logo.png">
-  <title>Contact Plemmo | Speak to a Business Solutions Specialist</title>
-  <meta name="description" content="Tell us what you need help with and a Plemmo specialist will get back to you. Card machines, funding, EPOS, signage, utilities — contact Plemmo today.">
-
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="studio.css">
-  <style>
-    .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: start; }
-    .contact-cards { display: grid; gap: 14px; }
-    @media (max-width: 980px) { .contact-grid { grid-template-columns: 1fr; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<title>Contact Plemmo | Speak to a Business Solutions Specialist</title>
+<meta name="description" content="Tell us what you need help with and a Plemmo specialist will get back to you. Card machines, funding, EPOS, signage, utilities — contact Plemmo today.">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+.chero{position:relative;overflow:hidden;padding:132px 0 56px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
+.orb.o1{width:560px;height:560px;background:radial-gradient(circle,rgba(170,230,0,.1),transparent 70%);top:-180px;right:-140px}
+.chero h1{font-size:clamp(40px,5.4vw,68px);color:#fff;letter-spacing:-.03em;position:relative;z-index:2}
+.chero .sub{color:var(--muted);font-size:18px;max-width:560px;margin:20px 0 0;position:relative;z-index:2}
+.cgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+.router{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:24px}
+.route{display:flex;flex-direction:column;gap:10px;align-items:flex-start;border-radius:14px;padding:16px;cursor:pointer;text-align:left;font:inherit;font-weight:700;font-size:13.5px;background:rgba(255,255,255,.04);border:1.5px solid var(--line);color:#fff;transition:.2s}
+.route:hover{transform:translateY(-3px);border-color:rgba(198,255,0,.5)}
+.route.active{border-color:var(--lime);background:var(--lime-soft)}
+.route iconify-icon{font-size:24px;color:var(--lime)}
+.form-card{background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:var(--r-lg);padding:30px}
+.routed{font-size:12.5px;color:var(--lime);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:7px}
+.cc{display:grid;gap:14px}
+.contact-card{display:flex;align-items:flex-start;gap:15px;border-radius:var(--r);padding:20px;background:var(--panel);border:1px solid var(--line);transition:transform .2s}
+.contact-card:hover{transform:translateY(-3px)}
+.contact-card .cci{width:46px;height:46px;border-radius:12px;background:var(--lime);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-card .cci iconify-icon{font-size:24px;color:#0a0c08}
+.contact-card h4{font-size:16px;color:#fff;margin-bottom:4px}.contact-card a,.contact-card p{font-size:14px;color:var(--muted)}.contact-card a:hover{color:var(--lime)}
+.cok{display:none;text-align:center;padding:14px 0}.cok iconify-icon{font-size:48px;color:var(--lime)}.cok h3{color:#fff;margin:10px 0 6px}.cok p{color:var(--muted);font-size:14px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{padding:26px;border-radius:var(--r-lg);background:var(--panel);border:1px solid var(--line)}
+.step .n{font-family:'Space Grotesk';font-weight:700;font-size:34px;color:var(--lime);line-height:1;margin-bottom:12px}
+.step h4{font-size:16px;color:#fff;margin-bottom:6px}.step p{font-size:13.5px;color:var(--muted)}
+@media(max-width:920px){.cgrid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.router{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-
-<!-- ── NAV ── -->
+<div class="scrollbar" id="scrollbar"></div>
 <nav class="nav" id="nav">
-  <div class="container nav-inner">
-    <a href="../index.html" class="logo">plemmo<span class="dot">.</span></a>
-    <div class="nav-links">
-      <a href="../index.html">Home</a>
-      <a href="card-machines.html">Card Machines</a>
-      <a href="business-funding.html">Funding</a>
-      <a href="epos-systems.html">EPOS</a>
-      <a href="digital-signage.html">Signage</a>
-      <a href="about-us.html">About</a>
-      <a href="contact-us.html" class="active">Contact</a>
-    </div>
-    <div class="nav-cta">
-      <a href="tel:02079460958" class="btn btn-line">020 7946 0958</a>
-      <a href="#enquiry" class="btn btn-solid">Send Enquiry</a>
-      <button class="burger" aria-label="Open menu"><iconify-icon icon="ph:list-bold"></iconify-icon></button>
-    </div>
+  <div class="nav-in">
+    <a href="../index.html" class="logo">plemmo<span class="d">.</span></a>
+    <div class="nav-links"><a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About</a><a href="contact-us.html" class="active">Contact</a></div>
+    <div class="nav-cta"><a href="tel:02079460958" class="btn nav-ghost">020 7946 0958</a><a href="#enquiry" class="btn btn-primary">Send Enquiry</a><button class="burger" id="burger" aria-label="Menu"><iconify-icon icon="ph:list-bold"></iconify-icon></button></div>
   </div>
 </nav>
+<div class="mm" id="mm"><div class="mm-bd" data-mmclose></div><div class="mm-panel"><div class="mm-top"><span class="logo">plemmo<span class="d">.</span></span><button class="mm-close" data-mmclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div><a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="tel:02079460958" class="btn btn-primary">Call 020 7946 0958</a></div></div>
 
-<!-- ── MOBILE MENU ── -->
-<div class="mobile-menu" id="mobile-menu">
-  <div class="mm-backdrop"></div>
-  <div class="mm-panel">
-    <div class="mm-top"><span class="logo">plemmo<span class="dot">.</span></span><button class="mm-close" aria-label="Close menu"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
-    <a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a>
-    <a href="tel:02079460958" class="btn btn-solid">Call 020 7946 0958</a>
-  </div>
-</div>
-
-<!-- ── HERO (dark) ── -->
-<header class="hero" style="padding-bottom:64px;">
+<header class="chero" id="top">
+  <span class="orb o1"></span>
   <div class="container">
-    <div style="max-width:760px;">
-      <span class="kicker" style="background:rgba(198,255,0,.1);color:var(--accent);border:1px solid rgba(198,255,0,.22);"><iconify-icon icon="ph:chat-teardrop-dots-duotone"></iconify-icon> Contact Plemmo</span>
-      <h1>Let's find the right<br><span class="accent">solution for you.</span></h1>
-      <p class="lead" style="max-width:560px;">Tell us what you need help with and a Plemmo specialist will get back to you.</p>
-    </div>
+    <span class="eyebrow" style="position:relative;z-index:2"><iconify-icon icon="ph:chat-teardrop-dots-duotone"></iconify-icon> Contact Plemmo</span>
+    <h1 style="margin-top:14px">Let's find the right<br><span class="lime">solution for you.</span></h1>
+    <p class="sub">Tell us what you need help with and a Plemmo specialist will get back to you.</p>
   </div>
 </header>
 
-<!-- ── CONTACT (paper) ── -->
-<section class="s s-light" id="enquiry" style="padding-top:64px;">
-  <div class="container contact-grid">
-    <div class="form-card reveal">
-      <h2 style="font-family:'Inter';font-weight:800;font-size:24px;margin-bottom:6px;">Send an enquiry</h2>
-      <p style="color:var(--ink-soft);font-size:14px;margin-bottom:22px;">What can we help you with?</p>
+<section class="section s-light" id="enquiry" style="padding-top:56px">
+  <div class="container cgrid">
+    <div class="form-card rv" style="background:var(--white);border-color:var(--line-l);box-shadow:var(--shadow-l)">
+      <h2 style="font-family:'Space Grotesk';font-size:24px;color:var(--ink);margin-bottom:6px">Send an enquiry</h2>
+      <p style="color:var(--ink-soft);font-size:14px;margin-bottom:20px">What can we help you with?</p>
       <div class="router" id="router">
-        <button type="button" class="route active" data-route="Card Machines"><iconify-icon icon="ph:credit-card-duotone"></iconify-icon><span>Card Machines</span></button>
-        <button type="button" class="route" data-route="Business Funding"><iconify-icon icon="ph:hand-coins-duotone"></iconify-icon><span>Business Funding</span></button>
-        <button type="button" class="route" data-route="EPOS Systems"><iconify-icon icon="ph:devices-duotone"></iconify-icon><span>EPOS Systems</span></button>
-        <button type="button" class="route" data-route="Digital Signage"><iconify-icon icon="ph:monitor-play-duotone"></iconify-icon><span>Digital Signage</span></button>
-        <button type="button" class="route" data-route="Utilities &amp; Broadband"><iconify-icon icon="ph:lightning-duotone"></iconify-icon><span>Utilities &amp; Broadband</span></button>
-        <button type="button" class="route" data-route="General Enquiry"><iconify-icon icon="ph:chat-circle-duotone"></iconify-icon><span>General Enquiry</span></button>
+        <button type="button" class="route active" data-route="Card Machines" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><iconify-icon icon="ph:credit-card-duotone"></iconify-icon><span>Card Machines</span></button>
+        <button type="button" class="route" data-route="Business Funding" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><iconify-icon icon="ph:hand-coins-duotone"></iconify-icon><span>Business Funding</span></button>
+        <button type="button" class="route" data-route="EPOS Systems" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><iconify-icon icon="ph:devices-duotone"></iconify-icon><span>EPOS Systems</span></button>
+        <button type="button" class="route" data-route="Digital Signage" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><iconify-icon icon="ph:monitor-play-duotone"></iconify-icon><span>Digital Signage</span></button>
+        <button type="button" class="route" data-route="Utilities &amp; Broadband" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><iconify-icon icon="ph:lightning-duotone"></iconify-icon><span>Utilities</span></button>
+        <button type="button" class="route" data-route="General Enquiry" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><iconify-icon icon="ph:chat-circle-duotone"></iconify-icon><span>General</span></button>
       </div>
-      <form id="contact-form">
-        <div class="form-row two">
-          <div><label>Full Name <span class="req">*</span></label><input class="input" type="text" required></div>
-          <div><label>Business Name</label><input class="input" type="text"></div>
-        </div>
-        <div class="form-row two">
-          <div><label>Phone Number <span class="req">*</span></label><input class="input" type="tel" required></div>
-          <div><label>Email Address <span class="req">*</span></label><input class="input" type="email" required></div>
-        </div>
-        <div class="form-row"><label>Service Interested In</label>
-          <select class="select" id="contact-service"><option>Card Machines</option><option>Business Funding</option><option>EPOS Systems</option><option>Digital Signage</option><option>Utilities &amp; Broadband</option><option>General Enquiry</option></select>
-        </div>
-        <div class="form-row"><label>Message</label><textarea class="textarea" placeholder="Tell us a little about what you need…"></textarea></div>
-        <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;">Send Enquiry <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
+      <div class="routed" id="routed"><iconify-icon icon="ph:arrow-bend-down-right-bold"></iconify-icon> Routed to our Card Machines specialist</div>
+      <form id="cform">
+        <div class="frow two"><div><label style="color:var(--ink-soft)">Full Name <span class="req-star">*</span></label><input class="input" type="text" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Business Name</label><input class="input" type="text" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
+        <div class="frow two"><div><label style="color:var(--ink-soft)">Phone <span class="req-star">*</span></label><input class="input" type="tel" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Email <span class="req-star">*</span></label><input class="input" type="email" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
+        <div class="frow"><label style="color:var(--ink-soft)">Service Interested In</label><select class="select" id="cservice" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><option>Card Machines</option><option>Business Funding</option><option>EPOS Systems</option><option>Digital Signage</option><option>Utilities &amp; Broadband</option><option>General Enquiry</option></select></div>
+        <div class="frow"><label style="color:var(--ink-soft)">Message</label><textarea class="textarea" placeholder="Tell us a little about what you need…" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="color:var(--ink-soft)"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · We'll route it to the right specialist</p>
       </form>
-      <div id="contact-success" class="modal-success" style="display:none;padding-top:8px;">
-        <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
-        <h3 style="color:var(--ink);">Thanks — enquiry received</h3>
-        <p style="color:var(--ink-soft);">Your enquiry has been received. A Plemmo specialist will contact you shortly.</p>
-      </div>
+      <div class="cok" id="cok"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon><h3 style="color:var(--ink)">Thanks — enquiry received</h3><p style="color:var(--ink-soft)">A Plemmo specialist will contact you shortly.</p></div>
     </div>
-    <div class="reveal">
-      <div class="contact-cards">
-        <a href="tel:02079460958" class="contact-card"><div class="cc-ic"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon></div><div><h4>Call us</h4><span>020 7946 0958</span></div></a>
-        <a href="mailto:hello@plemmo.com" class="contact-card"><div class="cc-ic"><iconify-icon icon="ph:envelope-simple-duotone"></iconify-icon></div><div><h4>Email us</h4><span>hello@plemmo.com</span></div></a>
-        <div class="contact-card"><div class="cc-ic"><iconify-icon icon="ph:note-pencil-duotone"></iconify-icon></div><div><h4>Business enquiries</h4><p>Use the form and we'll route it to the right specialist.</p></div></div>
-        <div class="contact-card"><div class="cc-ic"><iconify-icon icon="ph:headset-duotone"></iconify-icon></div><div><h4>Support</h4><p>Existing customers can contact support for help with their service.</p></div></div>
+    <div class="rv">
+      <div class="cc">
+        <a href="tel:02079460958" class="contact-card"><div class="cci"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon></div><div><h4>Call us</h4><span style="color:var(--muted)">020 7946 0958</span></div></a>
+        <a href="mailto:hello@plemmo.com" class="contact-card"><div class="cci"><iconify-icon icon="ph:envelope-simple-duotone"></iconify-icon></div><div><h4>Email us</h4><span style="color:var(--muted)">hello@plemmo.com</span></div></a>
+        <div class="contact-card"><div class="cci"><iconify-icon icon="ph:note-pencil-duotone"></iconify-icon></div><div><h4>Business enquiries</h4><p>Use the form and we'll route it to the right specialist.</p></div></div>
+        <div class="contact-card"><div class="cci"><iconify-icon icon="ph:headset-duotone"></iconify-icon></div><div><h4>Support</h4><p>Existing customers can contact support for help with their service.</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── WHAT NEXT (dark) ── -->
-<section class="s s-dark">
-  <div class="container">
-    <div class="head"><span class="kicker"><iconify-icon icon="ph:path-duotone"></iconify-icon> What happens next</span><h2>A simple, no-obligation process</h2></div>
-    <div class="steps reveal">
-      <div class="step"><div class="n">01</div><h4>Send enquiry</h4><p>Tell us what you need help with.</p></div>
-      <div class="step"><div class="n">02</div><h4>We review</h4><p>We make sure it reaches the right specialist.</p></div>
-      <div class="step"><div class="n">03</div><h4>We contact you</h4><p>A specialist gets in touch as soon as possible.</p></div>
-      <div class="step"><div class="n">04</div><h4>Compare options</h4><p>Together we find suitable options for you.</p></div>
-    </div>
-  </div>
-</section>
+<section class="section"><div class="container">
+  <div class="head center"><span class="eyebrow"><iconify-icon icon="ph:path-duotone"></iconify-icon> What happens next</span><h2 class="h2">A simple, no-obligation process</h2></div>
+  <div class="steps" data-stagger><div class="step rv"><div class="n">01</div><h4>Send enquiry</h4><p>Tell us what you need help with.</p></div><div class="step rv"><div class="n">02</div><h4>We review</h4><p>We make sure it reaches the right specialist.</p></div><div class="step rv"><div class="n">03</div><h4>We contact you</h4><p>A specialist gets in touch as soon as possible.</p></div><div class="step rv"><div class="n">04</div><h4>Compare options</h4><p>Together we find suitable options for you.</p></div></div>
+</div></section>
 
-<!-- ── FAQ (cream) ── -->
-<section class="s s-cream">
-  <div class="container">
-    <div class="head center"><span class="kicker"><iconify-icon icon="ph:question-duotone"></iconify-icon> FAQ</span><h2>Good to know</h2></div>
-    <div class="faq-grid reveal">
-      <div class="faq-item"><div class="faq-q">How quickly will you respond? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>A specialist will contact you as soon as possible.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Can I enquire about multiple services? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — just let us know in your message and we'll help with everything you need.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Is the quote free? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — your initial enquiry or quote request is free unless otherwise stated.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Do you work with all business types? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Plemmo supports many UK small and medium businesses across different industries.</p></div></div>
-      <div class="faq-item"><div class="faq-q">Do I have to proceed? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>No — enquiries are no-obligation unless you enter an agreement with a provider.</p></div></div>
-    </div>
+<section class="section s-cream" id="faq"><div class="container">
+  <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:question-duotone"></iconify-icon> FAQ</span><h2 class="h2">Good to know</h2></div>
+  <div class="faqlist rv">
+    <div class="faq"><div class="faq-q">How quickly will you respond? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>A specialist will contact you as soon as possible.</p></div></div>
+    <div class="faq"><div class="faq-q">Can I enquire about multiple services? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — just let us know in your message and we'll help with everything you need.</p></div></div>
+    <div class="faq"><div class="faq-q">Is the quote free? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — your initial enquiry or quote request is free unless otherwise stated.</p></div></div>
+    <div class="faq"><div class="faq-q">Do you work with all business types? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Plemmo supports many UK small and medium businesses across different industries.</p></div></div>
+    <div class="faq"><div class="faq-q">Do I have to proceed? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>No — enquiries are no-obligation unless you enter an agreement with a provider.</p></div></div>
   </div>
-</section>
+</div></section>
 
-<!-- ── CTA (paper, lime band) ── -->
-<section class="s s-light">
-  <div class="container">
-    <div class="cta reveal">
-      <div>
-        <h2>Prefer to talk it through?</h2>
-        <p>Speak to a Plemmo specialist and we'll help you find the right solution for your business.</p>
-        <div class="btns">
-          <a href="tel:02079460958" class="btn btn-dark">Call 020 7946 0958 <iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a>
-          <a href="#enquiry" class="btn btn-line">Send Enquiry</a>
-        </div>
-        <div class="mini">
-          <span><iconify-icon icon="ph:check-circle-duotone"></iconify-icon> No obligation</span>
-          <span><iconify-icon icon="ph:envelope-simple-duotone"></iconify-icon> hello@plemmo.com</span>
-          <span><iconify-icon icon="ph:map-pin-duotone"></iconify-icon> UK based</span>
-        </div>
-      </div>
-      <div class="cta-shot"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=700" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&q=80&w=700'" alt="A Plemmo specialist ready to help"></div>
-    </div>
-  </div>
-</section>
+<section class="section" id="quote"><div class="container"><div class="cta rv">
+  <div><h2>Prefer to talk<br><span class="lime">it through?</span></h2>
+    <div class="checks"><span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No obligation</span><span><iconify-icon icon="ph:envelope-simple-duotone"></iconify-icon> hello@plemmo.com</span><span><iconify-icon icon="ph:map-pin-duotone"></iconify-icon> UK based</span></div>
+    <div class="cta-btns"><a href="tel:02079460958" class="btn btn-primary btn-lg">Call 020 7946 0958 <iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a><a href="#enquiry" class="btn btn-ghost btn-lg">Send Enquiry</a></div></div>
+  <div style="aspect-ratio:1/1;border-radius:var(--r-lg);background:radial-gradient(circle at 55% 40%,rgba(198,255,0,.16),transparent 60%);display:flex;align-items:center;justify-content:center"><iconify-icon icon="ph:chat-teardrop-dots-duotone" style="font-size:120px;color:var(--lime)"></iconify-icon></div>
+</div></div></section>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="container">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <div class="logo">plemmo<span class="dot">.</span></div>
-        <p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
-      </div>
-      <div class="foot-col"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="contact-us.html">Utilities &amp; Broadband</a></div>
-      <div class="foot-col"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
-      <div class="foot-col"><h4>Resources</h4><a href="#">FAQs</a><a href="#">Compare Options</a><a href="#">Guides</a></div>
-      <div class="foot-col"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#enquiry">Get a Free Quote</a></div>
-    </div>
-    <div class="foot-disc">Plemmo introduces businesses to selected third-party providers. Products, pricing, approvals, funding, availability and services are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.</div>
-    <div class="foot-bottom"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+<footer><div class="container">
+  <div class="fgrid">
+    <div class="fbrand"><div class="logo">plemmo<span class="d">.</span></div><p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p></div>
+    <div class="fcol"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="contact-us.html">Utilities &amp; Broadband</a></div>
+    <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
+    <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="card-machines.html">Compare Options</a><a href="about-us.html">About</a></div>
+    <div class="fcol"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#enquiry">Send Enquiry</a></div>
   </div>
-</footer>
+  <div class="fdisc">Plemmo introduces businesses to selected third-party providers. Products, pricing, approvals, funding, availability and services are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers.</div>
+  <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+</div></footer>
+
+<div class="sticky" id="sticky"><a href="tel:02079460958" class="btn btn-ghost call" aria-label="Call"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a><a href="#enquiry" class="btn btn-primary">Send Enquiry</a></div>
 
 <script>
-  var serviceSel = document.getElementById('contact-service');
-  document.querySelectorAll('#router .route').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('#router .route').forEach(function(b){b.classList.remove('active');});
-      btn.classList.add('active');
-      var val = btn.getAttribute('data-route').replace('&amp;','&');
-      for (var i=0;i<serviceSel.options.length;i++){ if(serviceSel.options[i].text===val){ serviceSel.selectedIndex=i; break; } }
-    });
+(function(){
+  var sel=document.getElementById('cservice'),routed=document.getElementById('routed');
+  function norm(s){return s.replace('&amp;','&')}
+  function setRouted(v){routed.innerHTML='<iconify-icon icon="ph:arrow-bend-down-right-bold"></iconify-icon> Routed to our '+v+' specialist'}
+  document.querySelectorAll('#router .route').forEach(function(b){b.onclick=function(){
+    document.querySelectorAll('#router .route').forEach(function(x){x.classList.remove('active')});b.classList.add('active');
+    var v=norm(b.dataset.route);for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===v){sel.selectedIndex=i;break}}setRouted(v);
+  }});
+  sel.addEventListener('change',function(){var v=sel.value;document.querySelectorAll('#router .route').forEach(function(b){b.classList.toggle('active',norm(b.dataset.route)===v)});setRouted(v)});
+  document.getElementById('cform').addEventListener('submit',function(e){e.preventDefault();
+    /* TODO(launch): POST to your form endpoint here */
+    this.style.display='none';document.getElementById('cok').style.display='block';document.getElementById('cok').scrollIntoView({behavior:'smooth',block:'center'});
   });
-  serviceSel.addEventListener('change', function(){
-    var val = serviceSel.value;
-    document.querySelectorAll('#router .route').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-route').replace('&amp;','&')===val); });
-  });
-  document.getElementById('contact-form').addEventListener('submit', function(e){
-    e.preventDefault(); this.style.display='none'; document.getElementById('contact-success').style.display='block';
-    document.getElementById('contact-success').scrollIntoView({behavior:'smooth', block:'center'});
-  });
+})();
 </script>
-<script src="inner.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
