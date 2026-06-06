@@ -143,6 +143,24 @@ section{scroll-margin-top:88px}
 .chip.c1{top:8%;left:-2%;animation:floaty 6.5s ease-in-out infinite .3s}
 .chip.c2{top:40%;right:-6%;animation:floaty 7s ease-in-out infinite .8s}
 .chip.c3{bottom:12%;left:4%;animation:floaty 6.2s ease-in-out infinite 1.2s}
+.cm-dash{position:absolute;z-index:5;top:4%;left:-7%;width:236px;padding:17px;border-radius:18px;background:rgba(15,19,11,.74);backdrop-filter:blur(18px) saturate(1.2);border:1px solid var(--line2);box-shadow:0 26px 54px rgba(0,0,0,.5);animation:floaty 7s ease-in-out infinite .2s}
+.cm-dash .dh{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.cm-dash .dh .live{display:inline-flex;align-items:center;gap:6px;color:var(--lime);font-weight:700}
+.cm-dash .dh .live i{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+.cm-dash .amt{font-family:'Space Grotesk';font-weight:700;font-size:30px;color:#fff;line-height:1}
+.cm-dash .amt small{font-size:.5em;color:var(--muted);font-weight:600}
+.cm-dash .spark{display:flex;align-items:flex-end;gap:4px;height:34px;margin:12px 0}
+.cm-dash .spark i{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--lime),rgba(198,255,0,.22));transform-origin:bottom;animation:spark 1.5s var(--ease) both}
+.cm-dash .rows{display:grid;gap:7px;padding-top:11px;border-top:1px solid var(--line)}
+.cm-dash .row{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;color:#cfd6c5}
+.cm-dash .row b{color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.cm-dash .row b iconify-icon{color:var(--lime);font-size:14px}
+@keyframes spark{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.cm-pill{position:absolute;z-index:5;bottom:12%;right:-4%;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:14px;background:rgba(15,19,11,.64);backdrop-filter:blur(14px);border:1px solid rgba(198,255,0,.25);box-shadow:0 16px 36px rgba(0,0,0,.4);animation:floaty 6.4s ease-in-out infinite .9s}
+.cm-pill .ic{width:34px;height:34px;border-radius:10px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cm-pill .ic iconify-icon{color:var(--lime);font-size:18px}
+.cm-pill b{display:block;font-family:'Space Grotesk';font-size:15px;color:#fff;line-height:1}.cm-pill span{font-size:11px;color:var(--muted)}
+@media(max-width:600px){.cm-dash{width:190px;left:-2%;padding:14px}.cm-dash .amt{font-size:25px}.cm-pill{right:0}}
 
 /* ── PARTNERS (infinite slider on dark) ── */
 .pl{text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
@@ -461,15 +479,29 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .uk-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .uk-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--line-l);border-radius:100px;padding:8px 14px;box-shadow:var(--shadow-l)}
 .uk-tag iconify-icon{color:#5f9000;font-size:16px}
-.uk-map{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
-  background:radial-gradient(120% 90% at 50% 10%,#15190f,#0a0d07 70%)}
-.uk-map .mglow{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(198,255,0,.12),transparent 60%);mix-blend-mode:screen}
-.uk-city{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px}
-.uk-dot{width:11px;height:11px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px rgba(198,255,0,.5);animation:pulse 2.6s infinite}
-.uk-city b{font-size:10.5px;font-weight:600;color:#cfd6c5;letter-spacing:.02em;white-space:nowrap}
-.uk-city.sm .uk-dot{width:8px;height:8px;opacity:.8}
-.uk-city.sm b{display:none}
-.uk-map .ring{position:absolute;top:42%;left:50%;width:60%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(198,255,0,.14)}
+.uk-map{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);
+  background:radial-gradient(130% 100% at 50% 0%,#10160d 0%,#080b06 72%);box-shadow:var(--shadow)}
+.uk-map .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:32px 32px;-webkit-mask:radial-gradient(circle at 50% 45%,#000 50%,transparent 82%);mask:radial-gradient(circle at 50% 45%,#000 50%,transparent 82%)}
+.uk-map .halo{position:absolute;top:44%;left:50%;width:76%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(198,255,0,.16),transparent 62%);filter:blur(22px);mix-blend-mode:screen}
+.uk-svg{position:absolute;inset:0;width:100%;height:100%}
+.uk-land{stroke:rgba(198,255,0,.5);stroke-width:.7;filter:drop-shadow(0 0 12px rgba(198,255,0,.22))}
+.uk-line{fill:none;stroke:rgba(198,255,0,.45);stroke-width:.5;stroke-dasharray:2 3;animation:ukdash 18s linear infinite}
+@keyframes ukdash{to{stroke-dashoffset:-120}}
+.uk-pin{position:absolute;transform:translate(-50%,-50%);z-index:3;cursor:pointer;width:14px;height:14px}
+.uk-pin .pd{position:absolute;inset:0;border-radius:50%;background:var(--lime);box-shadow:0 0 12px rgba(198,255,0,.7);animation:ukping 2.8s infinite}
+.uk-pin.sm{width:9px;height:9px}.uk-pin.sm .pd{opacity:.7;animation-duration:3.6s}
+@keyframes ukping{0%{box-shadow:0 0 0 0 rgba(198,255,0,.5),0 0 12px rgba(198,255,0,.6)}70%{box-shadow:0 0 0 11px rgba(198,255,0,0),0 0 12px rgba(198,255,0,.5)}100%{box-shadow:0 0 0 0 rgba(198,255,0,0),0 0 12px rgba(198,255,0,.5)}}
+.uk-pin .lbl{position:absolute;left:50%;bottom:20px;transform:translate(-50%,6px);white-space:nowrap;background:rgba(10,13,7,.92);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:10px;padding:7px 11px;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;box-shadow:0 12px 26px rgba(0,0,0,.55)}
+.uk-pin .lbl::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:rgba(10,13,7,.92)}
+.uk-pin:hover,.uk-pin.act{z-index:7}
+.uk-pin:hover .pd,.uk-pin.act .pd{transform:scale(1.35)}
+.uk-pin:hover .lbl,.uk-pin.act .lbl{opacity:1;transform:translate(-50%,0)}
+.uk-pin .lbl b{display:block;font-family:'Space Grotesk';font-size:12px;color:#fff;line-height:1.15}
+.uk-pin .lbl span{font-size:10.5px;color:var(--lime)}
+.uk-badge{position:absolute;left:16px;bottom:16px;z-index:4;display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:8px 13px}
+.uk-badge i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+.uk-compass{position:absolute;top:14px;right:14px;z-index:4;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:18px;background:rgba(10,13,7,.4)}
+@media(prefers-reduced-motion:reduce){.uk-pin .pd,.uk-line,.uk-badge i{animation:none}}
 
 @media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:340px;margin:0 auto;width:100%}}
 @media(max-width:560px){.calc-out{grid-template-columns:1fr}.calc-body{padding:26px}}
@@ -603,9 +635,17 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
       <span class="ring"></span>
       <span class="pod"></span>
       <img loading="lazy" decoding="async" class="device" data-par="0.12" src="../images/Card machine no bg.webp" alt="Plemmo card machine terminal">
-      <div class="chip c1" data-par="0.5"><div class="ic"><iconify-icon icon="ph:wifi-high-bold"></iconify-icon></div><div><b>£48.50</b><span>Tap, insert or swipe</span></div></div>
-      <div class="chip c2" data-par="0.7"><div class="ic"><iconify-icon icon="ph:percent-bold"></iconify-icon></div><div><b>From 0.55%</b><span>where eligible</span></div></div>
-      <div class="chip c3" data-par="0.6"><div class="ic"><iconify-icon icon="ph:lightning-fill"></iconify-icon></div><div><b>Next-day</b><span>settlement options</span></div></div>
+      <div class="cm-dash" data-par="0.5">
+        <div class="dh"><span>Today's takings</span><span class="live"><i></i> Live</span></div>
+        <div class="amt">£1,284<small>.50</small></div>
+        <div class="spark"><i style="height:42%;animation-delay:.05s"></i><i style="height:64%;animation-delay:.1s"></i><i style="height:50%;animation-delay:.15s"></i><i style="height:82%;animation-delay:.2s"></i><i style="height:58%;animation-delay:.25s"></i><i style="height:94%;animation-delay:.3s"></i><i style="height:72%;animation-delay:.35s"></i></div>
+        <div class="rows">
+          <div class="row"><span>Settlement</span><b><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Next day</b></div>
+          <div class="row"><span>Devices online</span><b>3</b></div>
+          <div class="row"><span>Blended rate</span><b>0.55%</b></div>
+        </div>
+      </div>
+      <div class="cm-pill" data-par="0.7"><div class="ic"><iconify-icon icon="ph:wifi-high-bold"></iconify-icon></div><div><b>£48.50</b><span>Tap, insert or swipe</span></div></div>
     </div>
   </div>
 </header>
@@ -843,18 +883,33 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
         <span class="uk-tag"><iconify-icon icon="ph:wrench-duotone"></iconify-icon> Trades</span>
       </div>
     </div>
-    <div class="uk-map">
-      <span class="mglow"></span><span class="ring"></span>
-      <span class="uk-city" style="left:42%;top:14%"><span class="uk-dot"></span><b>Glasgow</b></span>
-      <span class="uk-city sm" style="left:50%;top:21%"><span class="uk-dot"></span></span>
-      <span class="uk-city" style="left:58%;top:33%"><span class="uk-dot"></span><b>Newcastle</b></span>
-      <span class="uk-city" style="left:50%;top:46%"><span class="uk-dot"></span><b>Leeds</b></span>
-      <span class="uk-city" style="left:40%;top:52%"><span class="uk-dot"></span><b>Manchester</b></span>
-      <span class="uk-city sm" style="left:36%;top:62%"><span class="uk-dot"></span></span>
-      <span class="uk-city" style="left:46%;top:64%"><span class="uk-dot"></span><b>Birmingham</b></span>
-      <span class="uk-city sm" style="left:30%;top:74%"><span class="uk-dot"></span></span>
-      <span class="uk-city" style="left:40%;top:80%"><span class="uk-dot"></span><b>Bristol</b></span>
-      <span class="uk-city" style="left:58%;top:82%"><span class="uk-dot"></span><b>London</b></span>
+    <div class="uk-map" id="ukMap">
+      <span class="grid"></span><span class="halo"></span>
+      <span class="uk-compass"><iconify-icon icon="ph:navigation-arrow-fill"></iconify-icon></span>
+      <svg class="uk-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="ukfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(198,255,0,0.13)"/><stop offset="1" stop-color="rgba(198,255,0,0.02)"/></linearGradient></defs>
+        <path class="uk-land" fill="url(#ukfill)" d="M46,8 L52,11 L49,16 L58,21 L53,25 L56,29 L60,33 L59,38 L62,45 L60,50 L64,52 L70,53 L66,57 L63,61 L66,65 L62,67 L57,68 L50,69 L44,70 L36,71 L28,72 L23,71 L27,68 L35,67 L41,66 L39,63 L33,64 L26,65 L29,61 L31,58 L28,53 L33,52 L37,51 L35,47 L38,45 L34,41 L36,37 L32,35 L35,31 L31,29 L34,26 L30,25 L34,22 L31,18 L38,15 L41,10 Z"/>
+        <path class="uk-land" fill="url(#ukfill)" style="opacity:.55" d="M12,50 L21,48 L24,55 L20,63 L12,65 L7,58 L9,52 Z"/>
+        <path class="uk-line" d="M62,70 L50,61 L47,51 L55,49 L58,40 L53,30"/>
+        <path class="uk-line" d="M62,70 L46,68 L38,69"/>
+        <path class="uk-line" d="M47,51 L41,51"/>
+      </svg>
+      <button class="uk-pin" style="left:53%;top:23%"><span class="pd"></span><span class="lbl"><b>Edinburgh</b><span>Retail &amp; hospitality</span></span></button>
+      <button class="uk-pin" style="left:44%;top:23%"><span class="pd"></span><span class="lbl"><b>Glasgow</b><span>Cafés &amp; takeaways</span></span></button>
+      <button class="uk-pin sm" style="left:57%;top:17%"><span class="pd"></span><span class="lbl"><b>Aberdeen</b></span></button>
+      <button class="uk-pin sm" style="left:47%;top:13%"><span class="pd"></span><span class="lbl"><b>Inverness</b></span></button>
+      <button class="uk-pin" style="left:58%;top:31%"><span class="pd"></span><span class="lbl"><b>Newcastle</b><span>Bars &amp; venues</span></span></button>
+      <button class="uk-pin" style="left:20%;top:35%"><span class="pd"></span><span class="lbl"><b>Belfast</b><span>Salons &amp; retail</span></span></button>
+      <button class="uk-pin" style="left:55%;top:38%"><span class="pd"></span><span class="lbl"><b>Leeds</b><span>Retail &amp; services</span></span></button>
+      <button class="uk-pin" style="left:47%;top:39%"><span class="pd"></span><span class="lbl"><b>Manchester</b><span>Hospitality &amp; retail</span></span></button>
+      <button class="uk-pin sm" style="left:41%;top:39%"><span class="pd"></span><span class="lbl"><b>Liverpool</b></span></button>
+      <button class="uk-pin" style="left:50%;top:47%"><span class="pd"></span><span class="lbl"><b>Birmingham</b><span>Takeaways &amp; shops</span></span></button>
+      <button class="uk-pin" style="left:38%;top:53%"><span class="pd"></span><span class="lbl"><b>Cardiff</b><span>Cafés &amp; salons</span></span></button>
+      <button class="uk-pin" style="left:46%;top:52%"><span class="pd"></span><span class="lbl"><b>Bristol</b><span>Independent retail</span></span></button>
+      <button class="uk-pin" style="left:62%;top:54%"><span class="pd"></span><span class="lbl"><b>London</b><span>Every trade</span></span></button>
+      <button class="uk-pin sm" style="left:58%;top:58%"><span class="pd"></span><span class="lbl"><b>Brighton</b></span></button>
+      <button class="uk-pin sm" style="left:30%;top:59%"><span class="pd"></span><span class="lbl"><b>Plymouth</b></span></button>
+      <span class="uk-badge"><i></i> Live · businesses across the UK</span>
     </div>
   </div>
 </section>
@@ -1255,6 +1310,11 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
   sX.onclick=function(){sDismiss=true;sBar.classList.remove('show')};
   sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
   summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
+
+  /* ── UK map pins: tap-to-toggle (touch) ── */
+  var ukPins=document.querySelectorAll('#ukMap .uk-pin');
+  ukPins.forEach(function(p){p.addEventListener('click',function(e){e.preventDefault();var on=p.classList.contains('act');ukPins.forEach(function(x){x.classList.remove('act')});if(!on)p.classList.add('act')})});
+  document.addEventListener('click',function(e){if(!e.target.closest('#ukMap'))ukPins.forEach(function(x){x.classList.remove('act')})});
 })();
 </script>
 </body>
