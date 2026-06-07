@@ -187,9 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 7.6 Section Transitions (Micro-animations)
   gsap.utils.toArray('section').forEach(sec => {
-    // Skip the horizontal scroll and showcase sections to avoid breaking their specialized layouts/fixed elements
+    // Skip sections with specialised scroll behaviour — transforms on parents break position:sticky
     if(sec.classList.contains('sleek-gallery-section') || sec.classList.contains('horizontal-scroll-section') || sec.classList.contains('showcase-section') || sec.classList.contains('sticky-scroll-section')) return;
-    
+
     gsap.from(sec, {
       opacity: 0,
       y: 30,
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollTrigger: {
         trigger: sec,
         start: "top 85%",
-        toggleActions: "play none none reverse"
+        toggleActions: "play none none none"
       }
     });
   });
@@ -303,7 +303,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // 9. Apple-Style Sticky Scroll Image Swap
   const stickySteps = document.querySelectorAll('.sticky-step');
   const stickyImages = document.querySelectorAll('.sticky-image');
-  
+
+  function activateImage(index) {
+    stickyImages.forEach(img => img.classList.remove('active'));
+    stickySteps.forEach(s => s.classList.remove('active'));
+    stickyImages[index].classList.add('active');
+    stickySteps[index].classList.add('active');
+  }
+
   if (stickySteps.length > 0) {
     stickySteps.forEach((step, index) => {
       ScrollTrigger.create({
@@ -314,14 +321,8 @@ document.addEventListener('DOMContentLoaded', () => {
         onEnterBack: () => activateImage(index)
       });
     });
-    
-    function activateImage(index) {
-      stickyImages.forEach(img => img.classList.remove('active'));
-      stickySteps.forEach(s => s.classList.remove('active'));
-      
-      stickyImages[index].classList.add('active');
-      stickySteps[index].classList.add('active');
-    }
+    // Activate first image immediately so nothing is blank on enter
+    activateImage(0);
   }
 
   // 10. Testimonials Infinite Marquee
@@ -479,11 +480,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 13. Hover Image Reveal Showcase
   const hoverItems = document.querySelectorAll('.hover-item');
   const revealImg = document.querySelector('.hover-reveal-img');
-  
+
   if(hoverItems.length > 0 && revealImg && window.innerWidth > 1024) {
     let mouseX = 0, mouseY = 0, revealX = 0, revealY = 0;
     let isHovering = false;
-    
+
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -492,12 +493,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const animateReveal = () => {
       revealX += (mouseX - revealX) * 0.12;
       revealY += (mouseY - revealY) * 0.12;
-      
+
       if(isHovering) {
-        gsap.set(revealImg, { 
-          x: revealX - 200, 
-          y: revealY - 150, 
-          rotation: (mouseX - revealX) * 0.05 
+        gsap.set(revealImg, {
+          x: revealX - 200,
+          y: revealY - 150,
+          rotation: (mouseX - revealX) * 0.05
         });
       }
       requestAnimationFrame(animateReveal);
@@ -517,5 +518,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Recalculate all ScrollTrigger positions after images/fonts have loaded
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 
 });
