@@ -55,8 +55,24 @@ transparent SVG/PNG; ideally a version that reads on a dark tile.
 
 ## 3. I curate — STOCK / lifestyle photos → `images/stock/`
 
-🟦 Pending your approval (see chat shortlist). Once approved I'll download,
-optimise and drop them here, then wire them in. Filenames I'll use:
+🟦 Claude hand-picked one specific Unsplash photo per slot, all to one art
+direction: **bright, clean, premium, human-centric UK small business.**
+Workflow: open each photo → copy its direct `images.unsplash.com/photo-…`
+URL → paste back → Claude wires them in (deduped). IDs are the trailing
+code in each Unsplash URL.
+
+**Curated picks (zero duplicates):** 1 r8JuS5I84h4 · 2 YOF2GyM3RuA ·
+3 JSk0OT2Klac · 4 J8YEvimZMZ4 · 5 qDBxfh5Idak · 6 BBGyxhtPpC0 ·
+7 d1kwH8JJQIk · 8 t66EI-7g7ps · 9 0pD748OKzPc · 10 1YPxT4Imt2k ·
+11 6hb3u7YOFFk · 12 BA1olMZsytM · 13 E8OLZnK3kVg · 14 EyapdJ3818E ·
+15 lwiHiTf4Lho · 16 wVqTWs-1nmI · 17 AIdnnF7oKws · 18 tfoRoSoSH_k ·
+19 iPheGw7_UaI · 20 JKUTrJ4vK00 · 21 Hj8l6JpU_Pc · 22 eN_DifpOb4Q ·
+23 MgQKkfo8fp0 · 24 tkfV4_59gxw · 25 EBLLdsLoJOs · 26 s04x1QTNnCA ·
+27 DUvovc88OfE · 28 jEpZNyFSQwQ · 29 LFUUPn8fLb4 · 30 HkmNSl1Nwl0 ·
+31 Xsn6SS9ovuo · 32 ImO8leS8eI8 · 33 35ZScQDzrs4 · 34 YDe0nOZyLHI ·
+35 NItGfh5zpqc
+
+Filename → slot mapping:
 
 | Filename | Scene | Export size | Used on |
 |----------|-------|-------------|---------|
