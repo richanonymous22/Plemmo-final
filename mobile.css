@@ -228,11 +228,12 @@ html, body {
 
   /* Apple-Style Sticky Scroll (Stacking for Mobile) */
   .sticky-container {
-    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
     gap: 40px !important;
   }
-  
+
   .sticky-text-col {
+    width: 100% !important;
     padding-bottom: 0 !important;
   }
   
@@ -249,6 +250,7 @@ html, body {
 
   .sticky-visual-col {
     position: relative !important;
+    width: 100% !important;
     top: 0 !important;
     height: 350px !important;
   }

@@ -300,18 +300,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 9. Apple-Style Sticky Scroll Image Swap
+  // 9. Apple-Style Sticky Scroll: GSAP-pin the image column, swap images as text scrolls
   const stickySteps = document.querySelectorAll('.sticky-step');
   const stickyImages = document.querySelectorAll('.sticky-image');
+  const stickyVisual = document.querySelector('.sticky-visual-col');
+  const stickyTextCol = document.querySelector('.sticky-text-col');
 
   function activateImage(index) {
     stickyImages.forEach(img => img.classList.remove('active'));
     stickySteps.forEach(s => s.classList.remove('active'));
-    stickyImages[index].classList.add('active');
-    stickySteps[index].classList.add('active');
+    if (stickyImages[index]) stickyImages[index].classList.add('active');
+    if (stickySteps[index]) stickySteps[index].classList.add('active');
   }
 
   if (stickySteps.length > 0) {
+    // Show the first image immediately
+    activateImage(0);
+
+    // Pin the image column in the viewport while the text column scrolls past it.
+    // Uses GSAP pinning (not CSS position:sticky) so it is immune to ancestor
+    // overflow/transform contexts elsewhere on the page.
+    if (stickyVisual && stickyTextCol && window.innerWidth > 768) {
+      ScrollTrigger.create({
+        trigger: stickyVisual,
+        start: "top 15%",
+        endTrigger: stickyTextCol,
+        end: "bottom 85%",
+        pin: stickyVisual,
+        pinSpacing: false
+      });
+    }
+
+    // Cross-fade to the matching image as each text block reaches the centre
     stickySteps.forEach((step, index) => {
       ScrollTrigger.create({
         trigger: step,
@@ -321,8 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
         onEnterBack: () => activateImage(index)
       });
     });
-    // Activate first image immediately so nothing is blank on enter
-    activateImage(0);
   }
 
   // 10. Testimonials Infinite Marquee
