@@ -1148,7 +1148,7 @@ html{overflow-x:hidden}
   var cmForm=document.getElementById('mform');
   cmForm.addEventListener('submit',function(e){e.preventDefault();
     var btn=cmForm.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Sending…';}
-    var fd=new FormData(cmForm);fd.append('_cc','hello@plemmo.co.uk');fd.append('_subject','New Card Machine Enquiry — Plemmo');
+    var fd=new FormData(cmForm);fd.append('_subject','New Card Machine Enquiry — Plemmo');
     fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
       .finally(function(){fw.style.display='none';sw.style.display='block';});
   });

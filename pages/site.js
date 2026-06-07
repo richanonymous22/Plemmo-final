@@ -79,7 +79,7 @@
     if(form)form.addEventListener('submit',function(e){
       e.preventDefault();
       var btn=form.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Sending…';}
-      var fd=new FormData(form);fd.append('_cc','hello@plemmo.co.uk');fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+      var fd=new FormData(form);fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
         .finally(function(){if(fw)fw.style.display='none';if(sw)sw.style.display='block';});
     });
     window.PlemmoModal={open:open,close:close};
