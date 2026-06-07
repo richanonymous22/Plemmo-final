@@ -1145,7 +1145,13 @@ html{overflow-x:hidden}
   modal.querySelectorAll('[data-close]').forEach(function(b){b.onclick=closeModal});
   addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
   modal.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=modal.querySelectorAll('a[href],button:not([disabled]),input,select,textarea');if(!f.length)return;var a=f[0],b=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}});
-  document.getElementById('mform').addEventListener('submit',function(e){e.preventDefault();fw.style.display='none';sw.style.display='block'});
+  var cmForm=document.getElementById('mform');
+  cmForm.addEventListener('submit',function(e){e.preventDefault();
+    var btn=cmForm.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Sending…';}
+    var fd=new FormData(cmForm);fd.append('_cc','hello@plemmo.co.uk');fd.append('_subject','New Card Machine Enquiry — Plemmo');
+    fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+      .finally(function(){fw.style.display='none';sw.style.display='block';});
+  });
   window.__openQuote=openModal;
 
   /* ── QUIZ ── */
