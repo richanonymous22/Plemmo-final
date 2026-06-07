@@ -576,6 +576,27 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
   .quiz-url{max-width:200px;font-size:11px}
 }
 @media(max-width:420px){.qtiles{grid-template-columns:1fr}.final{padding:28px}.fgrid{grid-template-columns:1fr}.quiz-url{display:none}}
+/* ── mobile hardening ── */
+html{overflow-x:hidden}
+@media(max-width:600px){
+  .container{padding:0 18px}
+  .section{padding:58px 0}
+  .h2{font-size:clamp(28px,7vw,40px)}
+  .cm-dash{width:178px;left:0;padding:13px}.cm-dash .amt{font-size:23px}
+  .cm-pill{right:0}
+  .cm-stage{min-height:360px}
+  .calc-out{grid-template-columns:1fr}
+  .cmp-bar{left:16px;right:16px;transform:translateY(160%);bottom:16px}.cmp-bar.show{transform:none}
+  .cmp-bar .ct{font-size:12px}
+  .uk-split{gap:30px}
+  .modal-card{padding:24px}
+}
+@media(max-width:400px){
+  .container{padding:0 14px}
+  .nav-in{padding:0 16px}
+  .nav .btn{padding:10px 15px;font-size:12.5px}
+  .cm-dash{width:160px}
+}
 </style>
 </head>
 <body>

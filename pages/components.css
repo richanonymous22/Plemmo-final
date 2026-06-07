@@ -191,3 +191,32 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 @media(max-width:920px){.cta{grid-template-columns:1fr;padding:42px}.sticky{display:flex}.appwin-body{padding:30px}}
 @media(max-width:600px){.section{padding:70px 0}.fgrid{grid-template-columns:1fr 1fr;gap:26px}.appwin-url{max-width:200px;font-size:11px}}
 @media(max-width:420px){.fgrid{grid-template-columns:1fr}.appwin-url{display:none}}
+
+/* ── mobile hardening (sitewide) ── */
+html{overflow-x:hidden}
+img,svg{max-width:100%}
+@media(max-width:920px){
+  .h2{font-size:clamp(28px,6.4vw,42px)}
+  .head{margin-bottom:36px}
+}
+@media(max-width:600px){
+  .container{padding:0 18px}
+  .section{padding:58px 0}
+  .section.tight{padding:40px 0}
+  h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
+  .cta{padding:32px 22px;border-radius:var(--r-lg)}
+  .cta h2{font-size:clamp(28px,8.5vw,40px)}
+  .cta .checks{gap:12px 18px}
+  .btn{padding:13px 20px}
+  .btn-lg{padding:15px 22px;font-size:15px}
+  .appwin-body{padding:24px}
+  .mq-track{gap:48px}.plogo{font-size:22px}
+  .head .lead{font-size:15.5px}
+  .modal-card{padding:24px}
+}
+@media(max-width:400px){
+  .container{padding:0 14px}
+  .nav-in{padding:0 16px}
+  .nav .btn{padding:10px 16px;font-size:12.5px}
+  .frow.two{grid-template-columns:1fr}
+}
