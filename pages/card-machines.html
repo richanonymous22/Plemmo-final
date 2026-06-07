@@ -564,14 +564,30 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
   .final{grid-template-columns:1fr;padding:42px}.final-stage{max-width:280px;margin:0 auto}
   .sticky{display:flex}
 }
+@media(max-width:768px){
+  .hero h1{font-size:clamp(36px,10vw,58px)}
+  .hero .sub{font-size:16px}
+  .hero-btns{flex-direction:column;gap:12px}
+  .hero-btns .btn{width:100%;justify-content:center}
+  .trust{gap:10px 18px}
+  .save2{padding:28px}
+  .save2-grid{grid-template-columns:1fr;gap:28px}
+  .calc-body{padding:24px}
+  .calc-out{grid-template-columns:1fr}
+  .calc-cta{flex-direction:column}
+  .calc-cta .btn{width:100%;justify-content:center}
+  .final-btns{flex-direction:column}
+  .final-btns .btn{width:100%;justify-content:center}
+  .final .checks{gap:12px}
+}
 @media(max-width:600px){
   .section{padding:70px 0}
   .pgrid,.types{grid-template-columns:1fr}
   .reqs{grid-template-columns:1fr}
-  .quiz-card{padding:28px}.qtiles{grid-template-columns:repeat(2,1fr)}.save2{padding:34px}
+  .quiz-card{padding:28px}.qtiles{grid-template-columns:repeat(2,1fr)}.save2{padding:28px}
   .partners{padding:22px 0}
   .fgrid{grid-template-columns:1fr 1fr;gap:26px}
-  .hero h1{font-size:clamp(40px,11vw,56px)}
+  .hero h1{font-size:clamp(36px,10vw,54px)}
   .dt-facts{grid-template-columns:1fr}
   .quiz-url{max-width:200px;font-size:11px}
 }
@@ -966,11 +982,11 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
     <div class="fgrid">
       <div class="fbrand"><div class="logo">plemmo<span class="d">.</span></div><p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p></div>
       <div class="fcol"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="contact-us.html">Utilities &amp; Broadband</a></div>
-      <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
+      <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="refer-and-earn.html">Refer &amp; Earn</a><a href="contact-us.html">Support</a></div>
       <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#providers">Compare Options</a><a href="#finder">Card Machine Finder</a></div>
       <div class="fcol"><h4>Contact</h4><a href="tel:02079460958">020 7946 0958</a><a href="mailto:hello@plemmo.com">hello@plemmo.com</a><a href="#" data-quote>Get a Free Quote</a></div>
     </div>
-    <div class="fdisc">Plemmo is an introducer and is not a payment processor, acquiring bank or lender. Card machine products, pricing, settlement times, rates, ratings and approval are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers. Provider logos and names are the property of their respective owners.</div>
+    <div class="fdisc">Plemmo is a trading name of PLEMMO SERVICES LTD (Company No. 1707677). Plemmo is an introducer and is not a payment processor, acquiring bank or lender. Card machine products, pricing, settlement times, rates, ratings and approval are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers. Provider logos and names are the property of their respective owners.</div>
     <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
   </div>
 </footer>

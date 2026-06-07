@@ -189,5 +189,48 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 @media(max-width:1180px){.nav-links,.nav-ghost{display:none}.burger{display:block}}
 @media(max-width:1000px){.fgrid{grid-template-columns:1fr 1fr}}
 @media(max-width:920px){.cta{grid-template-columns:1fr;padding:42px}.sticky{display:flex}.appwin-body{padding:30px}}
-@media(max-width:600px){.section{padding:70px 0}.fgrid{grid-template-columns:1fr 1fr;gap:26px}.appwin-url{max-width:200px;font-size:11px}}
-@media(max-width:420px){.fgrid{grid-template-columns:1fr}.appwin-url{display:none}}
+@media(max-width:768px){
+  html,body{overflow-x:hidden}
+  .section{padding:72px 0}
+  /* typography */
+  h1{font-size:clamp(36px,10vw,60px)!important}
+  h2{font-size:clamp(28px,8vw,46px)!important}
+  .h2{font-size:clamp(28px,8vw,42px)!important}
+  .lead{font-size:15px}
+  /* touch targets */
+  .btn{min-height:44px}
+  /* nav cta */
+  .nav-cta .nav-ghost{display:none}
+  /* hero button stacking */
+  .hero-btns,.fhero-btns,.ahero-btns,.shero-btns,.ehero-btns{flex-direction:column;gap:12px}
+  .hero-btns .btn,.fhero-btns .btn,.ahero-btns .btn,.shero-btns .btn,.ehero-btns .btn{width:100%;justify-content:center}
+  /* CTA banner */
+  .cta{padding:32px}
+  .cta h2{font-size:clamp(28px,7vw,40px)!important}
+  .cta-btns{flex-direction:column}
+  .cta-btns .btn{width:100%;justify-content:center}
+  .cta .checks{gap:12px}
+  /* final CTA */
+  .final{grid-template-columns:1fr!important;padding:32px!important}
+  .final h2{font-size:clamp(28px,7vw,40px)!important}
+  .final-btns{flex-direction:column}
+  .final-btns .btn{width:100%;justify-content:center}
+  /* trust row */
+  .trust,.ftrust{gap:10px 20px}
+  /* cards / grids */
+  .frow.two{grid-template-columns:1fr}
+  /* modal */
+  .modal-card{padding:22px}
+  /* footer */
+  .fgrid{grid-template-columns:1fr 1fr;gap:26px}
+  .fbrand{grid-column:span 2}
+  .fdisc,.fbot{font-size:11px}
+  /* app window */
+  .appwin-url{max-width:180px;font-size:11px}
+  .appwin-body{padding:22px}
+  /* sticky */
+  .sticky{display:flex}
+}
+@media(max-width:600px){.section{padding:60px 0}.fgrid{grid-template-columns:1fr 1fr;gap:22px}.appwin-url{max-width:170px;font-size:10px}.fbrand{grid-column:span 2}}
+@media(max-width:480px){.fgrid{grid-template-columns:1fr}.fbrand{grid-column:span 1}}
+@media(max-width:420px){.appwin-url{display:none}}

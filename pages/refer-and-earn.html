@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<link rel="apple-touch-icon" href="../images/logo.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#0a0c06">
+<link rel="canonical" href="https://plemmo.co.uk/pages/refer-and-earn.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plemmo">
+<meta property="og:title" content="Refer &amp; Earn | Plemmo Referral Programme">
+<meta property="og:description" content="Know another UK business owner? Refer them to Plemmo and earn up to £250 when they sign up. No catch — just a thank you.">
+<meta property="og:url" content="https://plemmo.co.uk/pages/refer-and-earn.html">
+<meta property="og:image" content="https://plemmo.co.uk/images/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Refer &amp; Earn | Plemmo Referral Programme">
+<meta name="twitter:description" content="Refer a UK business owner to Plemmo and earn up to £250. Simple, no-catch referral programme.">
+<meta name="twitter:image" content="https://plemmo.co.uk/images/logo.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Plemmo","url":"https://plemmo.co.uk/","logo":"https://plemmo.co.uk/images/logo.png","email":"hello@plemmo.com","telephone":"+442079460958","areaServed":"GB"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://plemmo.co.uk/"},{"@type":"ListItem","position":2,"name":"Refer &amp; Earn","item":"https://plemmo.co.uk/pages/refer-and-earn.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Who can make a referral?","acceptedAnswer":{"@type":"Answer","text":"Any individual or existing Plemmo customer can refer a UK business owner."}},{"@type":"Question","name":"When do I get paid?","acceptedAnswer":{"@type":"Answer","text":"Your reward is paid once the referred business completes sign-up and meets the qualifying criteria."}},{"@type":"Question","name":"Is there a limit to how many I can refer?","acceptedAnswer":{"@type":"Answer","text":"There is no set limit — refer as many eligible businesses as you like."}}]}]}</script>
+<title>Refer &amp; Earn | Plemmo Referral Programme</title>
+<meta name="description" content="Know another UK business owner? Refer them to Plemmo and earn up to £250 when they sign up. Simple, straightforward, no catch.">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+/* ── Refer & Earn page styles ── */
+.rhero{position:relative;overflow:hidden;padding:140px 0 80px;background:radial-gradient(130% 95% at 60% -20%,#11200d 0%,var(--bg) 55%)}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
+.orb.o1{width:700px;height:700px;background:radial-gradient(circle,rgba(170,255,0,.13),transparent 68%);top:-280px;right:-180px}
+.orb.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(150,220,0,.06),transparent 70%);bottom:-240px;left:-200px}
+.rhero-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center}
+.rhero h1{font-size:clamp(46px,7vw,90px);color:#fff;letter-spacing:-.03em;line-height:1.01}
+.rhero .sub{color:var(--muted);font-size:19px;max-width:520px;margin:22px auto 32px}
+.rhero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.reward-pill{display:inline-flex;align-items:center;gap:12px;background:rgba(198,255,0,.1);border:1px solid rgba(198,255,0,.3);border-radius:100px;padding:12px 22px;margin-bottom:28px}
+.reward-pill iconify-icon{font-size:24px;color:var(--lime)}
+.reward-pill span{font-family:'Space Grotesk';font-weight:700;font-size:16px;color:var(--lime)}
+
+/* ── How it works ── */
+.how-steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:46px;position:relative}
+.how-step{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;position:relative;transition:transform .3s var(--ease),border-color .3s}
+.how-step:hover{transform:translateY(-5px);border-color:rgba(198,255,0,.4)}
+.how-step::before{content:attr(data-n);position:absolute;top:16px;right:18px;font-family:'Space Grotesk';font-weight:700;font-size:52px;color:rgba(198,255,0,.07);line-height:1}
+.how-step .si{width:52px;height:52px;border-radius:14px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.how-step .si iconify-icon{font-size:26px;color:var(--lime)}
+.how-step h4{font-size:17px;color:#fff;margin-bottom:8px}
+.how-step p{font-size:13.5px;color:var(--muted);line-height:1.55}
+
+/* ── Reward tiers ── */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+.tier{border-radius:var(--r-lg);padding:32px;text-align:center;border:1px solid var(--line);background:var(--panel);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+.tier:hover{transform:translateY(-6px);border-color:rgba(198,255,0,.4);box-shadow:0 24px 50px rgba(0,0,0,.3)}
+.tier.featured{border-color:var(--lime);background:linear-gradient(160deg,rgba(198,255,0,.1),rgba(198,255,0,.02));box-shadow:0 0 0 1px rgba(198,255,0,.25)}
+.tier .badge{display:inline-block;background:var(--lime);color:#0a0c08;font-size:10px;font-weight:800;padding:4px 12px;border-radius:100px;margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em}
+.tier .amount{font-family:'Space Grotesk';font-weight:700;font-size:clamp(44px,6vw,72px);line-height:1;margin-bottom:8px}
+.tier.featured .amount{color:var(--lime)}
+.tier .product{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:20px}
+.tier ul{list-style:none;text-align:left;display:grid;gap:10px}
+.tier li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#dfe4d7}
+.tier li iconify-icon{color:var(--lime);font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* ── Refer form ── */
+.refer-wrap{max-width:680px;margin:0 auto}
+.refer-card{background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:var(--r-xl);padding:44px;position:relative;overflow:hidden}
+.refer-card .glow{position:absolute;top:-80px;right:-80px;width:260px;height:260px;background:radial-gradient(circle,rgba(198,255,0,.07),transparent 65%);filter:blur(36px);pointer-events:none;mix-blend-mode:screen}
+.rform{display:grid;gap:14px}
+.rform .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rfooter{margin-top:22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.rfooter .btn{flex:1;justify-content:center;min-width:200px}
+.disc-note{font-size:11.5px;color:#6b7560;line-height:1.6;margin-top:16px}
+
+/* ── Why refer ── */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+.why-card{display:flex;gap:16px;align-items:flex-start;background:var(--white);border:1px solid var(--line-l);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow-l)}
+.why-card .wi{width:50px;height:50px;border-radius:13px;background:rgba(95,144,0,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.why-card .wi iconify-icon{font-size:25px;color:#5f9000}
+.why-card h4{font-size:15px;color:var(--ink);margin-bottom:5px}
+.why-card p{font-size:13px;color:var(--ink-soft);line-height:1.5}
+
+/* ── CTA hero box ── */
+.ref-cta{position:relative;overflow:hidden;background:radial-gradient(120% 130% at 88% 50%,#1a2212,var(--bg) 55%);border:1px solid var(--line);border-radius:var(--r-xl);padding:64px;text-align:center}
+.ref-cta h2{font-size:clamp(34px,4.8vw,60px);color:#fff;margin-bottom:16px}
+.ref-cta p{color:var(--muted);font-size:17px;max-width:520px;margin:0 auto 32px}
+.ref-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ── Responsive ── */
+@media(max-width:960px){.how-steps-grid,.tiers{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:920px){.rhero{padding:118px 0 64px}.rform .two{grid-template-columns:1fr}.rfooter{flex-direction:column}.rfooter .btn{width:100%;min-width:unset}}
+@media(max-width:600px){.how-steps-grid,.tiers,.why-grid{grid-template-columns:1fr}.refer-card{padding:28px}.ref-cta{padding:40px}.rhero-btns,.ref-cta-btns{flex-direction:column;align-items:center}.rhero-btns .btn,.ref-cta-btns .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<div class="scrollbar" id="scrollbar"></div>
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="logo">plemmo<span class="d">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="card-machines.html">Card Machines</a>
+      <a href="business-funding.html">Business Funding</a>
+      <a href="epos-systems.html">EPOS Systems</a>
+      <a href="digital-signage.html">Digital Signage</a>
+      <a href="about-us.html">About</a>
+      <a href="contact-us.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="tel:02079460958" class="btn nav-ghost">020 7946 0958</a>
+      <a href="#refer-form" class="btn btn-primary">Refer a Business</a>
+      <button class="burger" id="burger" aria-label="Menu"><iconify-icon icon="ph:list-bold"></iconify-icon></button>
+    </div>
+  </div>
+</nav>
+<div class="mm" id="mm">
+  <div class="mm-bd" data-mmclose></div>
+  <div class="mm-panel">
+    <div class="mm-top"><span class="logo">plemmo<span class="d">.</span></span><button class="mm-close" data-mmclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
+    <a href="../index.html">Home</a>
+    <a href="card-machines.html">Card Machines</a>
+    <a href="business-funding.html">Business Funding</a>
+    <a href="epos-systems.html">EPOS Systems</a>
+    <a href="digital-signage.html">Digital Signage</a>
+    <a href="about-us.html">About Us</a>
+    <a href="contact-us.html">Contact Us</a>
+    <a href="#refer-form" class="btn btn-primary">Refer a Business</a>
+  </div>
+</div>
+
+<!-- ════ HERO ════ -->
+<header class="rhero" id="top">
+  <span class="orb o1"></span><span class="orb o2"></span>
+  <div class="container rhero-inner rv">
+    <div class="reward-pill">
+      <iconify-icon icon="ph:gift-duotone"></iconify-icon>
+      <span>Earn up to £250 per referral</span>
+    </div>
+    <h1>Know a Business<br><span class="lime">Worth Referring?</span></h1>
+    <p class="sub">Introduce another UK business owner to Plemmo and earn a reward when they sign up. No forms, no fuss — just a genuine thank you.</p>
+    <div class="rhero-btns">
+      <a href="#refer-form" class="btn btn-primary btn-lg">Refer a Business Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+      <a href="#how-it-works" class="btn btn-ghost btn-lg">How It Works</a>
+    </div>
+    <p class="reassure" style="justify-content:center;margin-top:18px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Rewards subject to qualifying criteria · T&amp;Cs apply</p>
+  </div>
+</header>
+
+<!-- ════ HOW IT WORKS ════ -->
+<section class="section" id="how-it-works">
+  <div class="container">
+    <div class="head center rv">
+      <span class="eyebrow"><iconify-icon icon="ph:path-duotone"></iconify-icon> How It Works</span>
+      <h2 class="h2" style="margin-top:14px">Simple as one, two, three</h2>
+      <p class="lead" style="margin-top:12px;margin-left:auto;margin-right:auto">Refer a business, we do the rest — you get the reward.</p>
+    </div>
+    <div class="how-steps-grid">
+      <div class="how-step rv" data-n="1">
+        <div class="si"><iconify-icon icon="ph:share-network-duotone"></iconify-icon></div>
+        <h4>Share the details</h4>
+        <p>Fill in the referral form below with your contact details and the business you're referring. Takes under two minutes.</p>
+      </div>
+      <div class="how-step rv" data-n="2">
+        <div class="si"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon></div>
+        <h4>We reach out</h4>
+        <p>Our team contacts the referred business, understands their needs, and guides them through available solutions.</p>
+      </div>
+      <div class="how-step rv" data-n="3">
+        <div class="si"><iconify-icon icon="ph:handshake-duotone"></iconify-icon></div>
+        <h4>They sign up</h4>
+        <p>Once the referred business completes sign-up and meets the qualifying criteria, your reward is triggered.</p>
+      </div>
+      <div class="how-step rv" data-n="4">
+        <div class="si"><iconify-icon icon="ph:money-wavy-duotone"></iconify-icon></div>
+        <h4>You get paid</h4>
+        <p>We send you your reward — up to £250 depending on the solution they take up. Simple, transparent, no catch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ REWARD TIERS ════ -->
+<section class="section s-light">
+  <div class="container">
+    <div class="head center rv">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:gift-duotone"></iconify-icon> Reward Tiers</span>
+      <h2 class="h2" style="margin-top:14px">What you can earn</h2>
+      <p class="lead" style="margin-top:12px;color:var(--ink-soft);margin-left:auto;margin-right:auto">Rewards vary based on the solution the referred business signs up for. All rewards subject to qualifying criteria and T&amp;Cs.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier rv">
+        <div class="amount" style="color:var(--ink)">£50</div>
+        <div class="product">Card Machine</div>
+        <ul>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Business signs up for a card machine via Plemmo</li>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Qualifying criteria met</li>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Reward paid to referrer</li>
+        </ul>
+      </div>
+      <div class="tier featured rv">
+        <div class="badge">Most popular</div>
+        <div class="amount">£150</div>
+        <div class="product">Business Funding</div>
+        <ul>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Business secures funding via a Plemmo-introduced partner</li>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Qualifying criteria met</li>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Reward paid to referrer</li>
+        </ul>
+      </div>
+      <div class="tier rv">
+        <div class="amount" style="color:var(--ink)">£250</div>
+        <div class="product">Full Bundle</div>
+        <ul>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Business signs up for multiple Plemmo solutions</li>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Qualifying criteria met</li>
+          <li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Maximum reward paid to referrer</li>
+        </ul>
+      </div>
+    </div>
+    <p class="disc center" style="margin:28px auto 0;text-align:center">Reward amounts are indicative and subject to qualifying criteria, the solution taken by the referred business, and Plemmo's referral T&amp;Cs. Rewards are not guaranteed and may vary. Subject to change without notice.</p>
+  </div>
+</section>
+
+<!-- ════ WHY REFER ════ -->
+<section class="section">
+  <div class="container">
+    <div class="head center rv">
+      <span class="eyebrow"><iconify-icon icon="ph:star-duotone"></iconify-icon> Why Refer</span>
+      <h2 class="h2" style="margin-top:14px">Good for you. Good for them.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card rv">
+        <div class="wi"><iconify-icon icon="ph:currency-gbp-duotone"></iconify-icon></div>
+        <div>
+          <h4>Real cash rewards</h4>
+          <p>Earn up to £250 per qualifying referral — paid directly to you, no vouchers or gimmicks.</p>
+        </div>
+      </div>
+      <div class="why-card rv">
+        <div class="wi"><iconify-icon icon="ph:users-three-duotone"></iconify-icon></div>
+        <div>
+          <h4>Help other businesses</h4>
+          <p>You're helping a fellow business owner access better deals, honest pricing, and real support.</p>
+        </div>
+      </div>
+      <div class="why-card rv">
+        <div class="wi"><iconify-icon icon="ph:infinity-duotone"></iconify-icon></div>
+        <div>
+          <h4>No referral limit</h4>
+          <p>Refer as many qualifying businesses as you like. There's no cap on how many rewards you can earn.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ REFERRAL FORM ════ -->
+<section class="section s-light" id="refer-form">
+  <div class="container">
+    <div class="head center rv">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Make a Referral</span>
+      <h2 class="h2" style="margin-top:14px">Refer a business today</h2>
+      <p class="lead" style="margin-top:12px;color:var(--ink-soft);margin-left:auto;margin-right:auto">Fill in your details and the business you're referring. Our team will take it from there.</p>
+    </div>
+    <div class="refer-wrap rv">
+      <div class="refer-card" style="background:var(--white);border-color:var(--line-l);box-shadow:var(--shadow-l)">
+        <span class="glow"></span>
+        <form class="rform" id="referForm" novalidate>
+          <h3 style="font-size:20px;color:var(--ink);margin-bottom:6px">Your Details</h3>
+          <div class="two">
+            <div>
+              <label class="frow label" for="r-name" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Your Name <span class="req-star">*</span></label>
+              <input id="r-name" class="input" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)" type="text" placeholder="Your full name" required>
+            </div>
+            <div>
+              <label class="frow label" for="r-phone" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Your Phone <span class="req-star">*</span></label>
+              <input id="r-phone" class="input" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)" type="tel" placeholder="07700 000000" required>
+            </div>
+          </div>
+          <div>
+            <label class="frow label" for="r-email" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Your Email <span class="req-star">*</span></label>
+            <input id="r-email" class="input" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)" type="email" placeholder="you@example.com" required>
+          </div>
+
+          <h3 style="font-size:20px;color:var(--ink);margin-top:10px;margin-bottom:6px">Business You're Referring</h3>
+          <div class="two">
+            <div>
+              <label class="frow label" for="b-name" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Business Name <span class="req-star">*</span></label>
+              <input id="b-name" class="input" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)" type="text" placeholder="Business name" required>
+            </div>
+            <div>
+              <label class="frow label" for="b-contact" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Owner / Contact Name</label>
+              <input id="b-contact" class="input" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)" type="text" placeholder="Contact name">
+            </div>
+          </div>
+          <div class="two">
+            <div>
+              <label class="frow label" for="b-phone" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Business Phone <span class="req-star">*</span></label>
+              <input id="b-phone" class="input" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)" type="tel" placeholder="07700 000000" required>
+            </div>
+            <div>
+              <label class="frow label" for="b-interest" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Main Interest</label>
+              <select id="b-interest" class="select" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)">
+                <option value="">Select a solution...</option>
+                <option>Card Machines</option>
+                <option>Business Funding</option>
+                <option>EPOS Systems</option>
+                <option>Digital Signage</option>
+                <option>Utilities</option>
+                <option>Not sure — let Plemmo advise</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="frow label" for="b-notes" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;display:block;margin-bottom:6px">Any Additional Notes</label>
+            <textarea id="b-notes" class="textarea" style="background:var(--cream);border-color:var(--line-l);color:var(--ink)" placeholder="e.g. they're looking to switch card provider, they run a restaurant..."></textarea>
+          </div>
+
+          <div class="rfooter">
+            <button type="submit" class="btn btn-dark btn-lg">Submit Referral <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+            <span class="reassure" style="color:var(--ink-soft)"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Your details are kept confidential</span>
+          </div>
+          <p class="disc-note" style="color:var(--ink-soft)">By submitting this form you confirm you have permission to share the referred business's contact details. Rewards are subject to qualifying criteria and Plemmo's referral T&amp;Cs. Plemmo is a trading name of PLEMMO SERVICES LTD (Company No. 1707677).</p>
+        </form>
+
+        <div class="cok" id="referOk">
+          <iconify-icon icon="ph:check-circle-duotone"></iconify-icon>
+          <h3 style="color:var(--ink)">Referral submitted!</h3>
+          <p style="color:var(--ink-soft)">Thanks for the referral. Our team will be in touch with the business you've referred. We'll let you know when your reward is triggered.</p>
+          <a href="../index.html" class="btn btn-dark" style="margin-top:16px">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FAQ ════ -->
+<section class="section">
+  <div class="container">
+    <div class="head center rv" style="margin-bottom:40px">
+      <span class="eyebrow"><iconify-icon icon="ph:question-duotone"></iconify-icon> FAQs</span>
+      <h2 class="h2" style="margin-top:14px">Common questions</h2>
+    </div>
+    <div class="faqlist rv">
+      <div class="faq"><div class="faq-q">Who can make a referral? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Anyone can refer a UK business to Plemmo — you don't need to be an existing customer. You just need to know a business owner who could benefit from our solutions.</p></div></div>
+      <div class="faq"><div class="faq-q">When will I receive my reward? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Your reward is triggered once the referred business signs up for a qualifying Plemmo solution and meets the criteria. We'll notify you and arrange payment.</p></div></div>
+      <div class="faq"><div class="faq-q">Is there a limit to how many businesses I can refer? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>No — there is no set limit on the number of eligible businesses you can refer. Each qualifying referral generates a separate reward.</p></div></div>
+      <div class="faq"><div class="faq-q">What counts as a qualifying referral? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>A qualifying referral is a new business (not already known to Plemmo) that signs up for and takes up a Plemmo-introduced solution. Full criteria are set out in our T&amp;Cs.</p></div></div>
+      <div class="faq"><div class="faq-q">Does the business I refer know I referred them? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>We don't share your details with the business without your consent, but you're welcome to let them know — many referrals work best when the business is expecting our call.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FINAL CTA ════ -->
+<section class="section s-light">
+  <div class="container">
+    <div class="ref-cta rv">
+      <h2>Start earning today.<br><span class="lime">Refer a business.</span></h2>
+      <p>Fill in the form above and we'll handle everything else. One referral could earn you up to £250.</p>
+      <div class="ref-cta-btns">
+        <a href="#refer-form" class="btn btn-primary btn-lg">Make a Referral <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+        <a href="tel:02079460958" class="btn btn-ghost btn-lg"><iconify-icon icon="ph:phone-bold"></iconify-icon> 020 7946 0958</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="container">
+    <div class="fgrid">
+      <div class="fbrand">
+        <a href="../index.html" class="logo">plemmo<span class="d">.</span></a>
+        <p>One partner for essential UK business solutions.</p>
+      </div>
+      <div class="fcol">
+        <h4>Company</h4>
+        <a href="../index.html">Home</a>
+        <a href="about-us.html">About Us</a>
+        <a href="contact-us.html">Contact Us</a>
+      </div>
+      <div class="fcol">
+        <h4>Solutions</h4>
+        <a href="card-machines.html">Card Machines</a>
+        <a href="epos-systems.html">EPOS Systems</a>
+        <a href="business-funding.html">Business Funding</a>
+        <a href="digital-signage.html">Digital Signage</a>
+      </div>
+      <div class="fcol">
+        <h4>More</h4>
+        <a href="refer-and-earn.html" class="active">Refer &amp; Earn</a>
+        <a href="contact-us.html">Utilities</a>
+        <a href="contact-us.html">Support</a>
+      </div>
+      <div class="fcol">
+        <h4>Contact</h4>
+        <a href="tel:02079460958">020 7946 0958</a>
+        <a href="mailto:hello@plemmo.com">hello@plemmo.com</a>
+      </div>
+    </div>
+    <div class="fdisc">
+      Plemmo is a trading name of PLEMMO SERVICES LTD (Company No. 1707677). We act as an independent business consultancy and credit broker. We are not a lender or a direct payment acquirer. We introduce customers to a hand-picked panel of providers and may receive a commission for these introductions. Referral rewards are subject to qualifying criteria and full T&amp;Cs available on request. All offers subject to provider terms.
+    </div>
+    <div class="fbot">
+      <span>© 2026 Plemmo. All rights reserved.</span>
+      <span>Registered in England &amp; Wales · Company No. 1707677</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a href="#refer-form" class="btn btn-primary" style="flex:1;justify-content:center">Refer a Business</a>
+  <a href="tel:02079460958" class="btn btn-ghost call" style="justify-content:center"><iconify-icon icon="ph:phone-bold"></iconify-icon></a>
+</div>
+<div class="scrollbar" id="scrollbarEl"></div>
+
+<script src="site.js"></script>
+<script>
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const f=q.closest('.faq');
+    const isOpen=f.classList.contains('open');
+    document.querySelectorAll('.faq.open').forEach(x=>{x.classList.remove('open');x.querySelector('.faq-a').style.maxHeight=null});
+    if(!isOpen){f.classList.add('open');f.querySelector('.faq-a').style.maxHeight=f.querySelector('.faq-a').scrollHeight+'px'}
+  });
+});
+
+/* ── Form submit (placeholder) ── */
+document.getElementById('referForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const req=[...this.querySelectorAll('[required]')];
+  let ok=true;
+  req.forEach(i=>{if(!i.value.trim()){ok=false;i.style.borderColor='#e03';} else{i.style.borderColor=''}});
+  if(ok){
+    this.style.display='none';
+    document.getElementById('referOk').style.display='block';
+  }
+});
+</script>
+</body>
+</html>
