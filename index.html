@@ -340,18 +340,18 @@
     <div class="sticky-text-col">
       <div class="scroll-block sticky-step" data-index="0">
         <div class="scroll-icon"><iconify-icon icon="solar:box-minimalistic-bold-duotone"></iconify-icon></div>
-        <h3>Pre-Configured Delivery</h3>
-        <p>No tedious setup or instruction manuals. Your card machines and EPOS software are meticulously programmed at our UK headquarters. They arrive at your door plug-and-play ready for your exact menu and stock lists.</p>
+        <h3>Set Up &amp; Ready to Go</h3>
+        <p>No wrestling with manuals or long setup calls. We help arrange your card machine and EPOS so everything arrives configured for your business — tills, menu and stock — ready to take payments from day one.</p>
       </div>
       <div class="scroll-block sticky-step" data-index="1">
         <div class="scroll-icon"><iconify-icon icon="solar:banknotes-bold-duotone"></iconify-icon></div>
-        <h3>Next-Day Settlements</h3>
-        <p>Cash flow is the lifeblood of your business. Through our provider partners, next-day settlement options may be available — so you're not left waiting days for your own money.</p>
+        <h3>Settlement That Keeps Up</h3>
+        <p>Cash flow is the lifeblood of your business. Through our provider partners, next-day settlement options may be available — so you're not left waiting days to access your own money.</p>
       </div>
       <div class="scroll-block sticky-step" data-index="2">
         <div class="scroll-icon"><iconify-icon icon="solar:shield-user-bold-duotone"></iconify-icon></div>
-        <h3>Dedicated Account Director</h3>
-        <p>Forget automated bots and offshore call centres. You get a direct line to a UK-based account manager. When you need us, we're one call away.</p>
+        <h3>Real People, Real Support</h3>
+        <p>No automated bots. No offshore call centres. You get a direct line to a UK-based specialist who knows your account. When something needs sorting, we're one call away.</p>
       </div>
     </div>
     <div class="sticky-visual-col perspective-container">
@@ -411,9 +411,9 @@
     <div class="gallery-panel intro-panel">
       <h2 class="ultra-sleek-title">
         <span class="outline-text">THE</span><br>
-        <span>ARSENAL</span>
+        <span>FULL PICTURE</span>
       </h2>
-      <p class="sleek-desc">Precision-engineered tools to run your entire operation. Scroll to explore.</p>
+      <p class="sleek-desc">Everything a UK business needs — payments, funding, technology and signage — in one place. Scroll to explore.</p>
     </div>
 
     <!-- Product 1 -->
@@ -568,7 +568,7 @@
                <li><iconify-icon icon="solar:check-circle-bold-duotone" class="accent-text"></iconify-icon> Contactless &amp; mobile wallets</li>
                <li><iconify-icon icon="solar:check-circle-bold-duotone" class="accent-text"></iconify-icon> EPOS-ready</li>
             </ul>
-            <a href="#quote" class="btn-solid magnetic" data-strength="20" style="width:100%; justify-content:center; margin-top:32px;">Get My Quote</a>
+            <a href="#quote" class="btn-solid magnetic" data-strength="20" style="width:100%; justify-content:center; margin-top:32px;" onclick="document.getElementById('step-1').closest('.wizard-container') && document.getElementById('quote').scrollIntoView({behavior:'smooth'})">Get My Quote</a>
           </div>
         </div>
       </div>
@@ -591,24 +591,24 @@
       <div class="timeline-step reveal-up">
         <div class="step-number">01</div>
         <div class="step-content">
-          <h4>The 5-Minute Audit</h4>
-          <p>Send us a recent merchant statement. Our analysts instantly calculate your exact savings down to the penny. No guesswork.</p>
+          <h4>The 5-Minute Review</h4>
+          <p>Tell us what you're currently paying. We'll compare suitable options from our provider panel and show you where you could save — no obligation, no guesswork.</p>
         </div>
       </div>
       <!-- Step 2 -->
       <div class="timeline-step reveal-up delay-1">
         <div class="step-number">02</div>
         <div class="step-content">
-          <h4>Custom Hardware Setup</h4>
-          <p>We program your new card machines and EPOS software at our HQ. Everything arrives plug-and-play ready for your exact menu and stock.</p>
+          <h4>Tailored Setup, Arranged for You</h4>
+          <p>We work with your chosen provider to get your hardware and software configured for your business — so it's ready to use from the moment it arrives.</p>
         </div>
       </div>
       <!-- Step 3 -->
       <div class="timeline-step reveal-up delay-2">
         <div class="step-number">03</div>
         <div class="step-content">
-          <h4>Go Live & Grow</h4>
-          <p>Unplug the old stuff. Plug in Plemmo. You're instantly processing at better rates with 24/7 UK support backing you up.</p>
+          <h4>Go Live &amp; Keep Growing</h4>
+          <p>Switch over with minimal disruption. Real UK-based support is available when you need it, and we're here if anything ever needs sorting.</p>
         </div>
       </div>
     </div>
@@ -618,66 +618,112 @@
 <!-- INTERACTIVE ONBOARDING WIZARD (LEAD CAPTURE) -->
 <section id="quote" class="section-padding accent-section">
   <div class="container align-center">
-    <h2 class="dark-heading" style="font-size: clamp(48px, 6vw, 80px);">LET'S BUILD YOUR <br>GROWTH ENGINE</h2>
-    
+    <h2 class="dark-heading" style="font-size: clamp(48px, 6vw, 80px);">LET'S FIND THE RIGHT<br>SOLUTION FOR YOU</h2>
+    <p style="color: rgba(0,0,0,0.55); font-size: 18px; margin-top: 16px;">Two quick questions, then your details — and a specialist will call you back.</p>
+
     <div class="wizard-container shadow-heavy" style="background: #fff; border-radius: var(--radius-xl); max-width: 700px; margin: 40px auto 0; padding: 48px; text-align: left;">
-      <div class="wizard-step" id="step-1">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 1 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">What industry are you in?</h3>
-        
-        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div class="wizard-option" onclick="nextStep(2)">
-            <iconify-icon icon="solar:shop-bold-duotone" style="font-size: 32px; margin-bottom: 16px; color: var(--accent);"></iconify-icon>
-            <h4 style="font-size: 18px; margin-bottom: 8px;">Retail</h4>
-            <p style="font-size: 14px; color: var(--text-light-muted);">Shops, boutiques, pop-ups.</p>
-          </div>
-          <div class="wizard-option" onclick="nextStep(2)">
-            <iconify-icon icon="solar:glass-water-bold-duotone" style="font-size: 32px; margin-bottom: 16px; color: var(--accent);"></iconify-icon>
-            <h4 style="font-size: 18px; margin-bottom: 8px;">Hospitality</h4>
-            <p style="font-size: 14px; color: var(--text-light-muted);">Pubs, restaurants, cafes.</p>
-          </div>
-          <div class="wizard-option" onclick="nextStep(2)">
-            <iconify-icon icon="solar:buildings-bold-duotone" style="font-size: 32px; margin-bottom: 16px; color: var(--accent);"></iconify-icon>
-            <h4 style="font-size: 18px; margin-bottom: 8px;">Services</h4>
-            <p style="font-size: 14px; color: var(--text-light-muted);">Salons, gyms, B2B.</p>
-          </div>
-          <div class="wizard-option" onclick="nextStep(2)">
-            <iconify-icon icon="solar:widget-bold-duotone" style="font-size: 32px; margin-bottom: 16px; color: var(--accent);"></iconify-icon>
-            <h4 style="font-size: 18px; margin-bottom: 8px;">Other</h4>
-            <p style="font-size: 14px; color: var(--text-light-muted);">We support all sectors.</p>
-          </div>
-        </div>
+
+      <!-- Progress bar -->
+      <div style="display:flex; gap:8px; margin-bottom:36px;" id="wiz-progress">
+        <div style="flex:1; height:4px; border-radius:4px; background:var(--accent);" id="wp1"></div>
+        <div style="flex:1; height:4px; border-radius:4px; background:#e2e8f0;" id="wp2"></div>
+        <div style="flex:1; height:4px; border-radius:4px; background:#e2e8f0;" id="wp3"></div>
       </div>
-      
-      <div class="wizard-step" id="step-2" style="display: none;">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 2 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">What's your primary goal?</h3>
-        <div class="wizard-grid" style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-          <div class="wizard-option row-option" onclick="nextStep(3)" style="display: flex; align-items: center; gap: 16px;">
-             <iconify-icon icon="solar:card-send-bold-duotone" style="font-size: 32px; color: var(--accent);"></iconify-icon>
-             <span style="font-weight: 700; font-size: 18px;">Reduce Card Fees</span>
+
+      <!-- Step 1 — Industry -->
+      <div class="wizard-step" id="step-1">
+        <span class="step-label" style="text-transform:uppercase;letter-spacing:.1em;color:var(--text-light-muted);font-size:13px;font-weight:700;display:block;margin-bottom:16px;">Step 1 of 3</span>
+        <h3 style="font-size:28px;font-family:var(--font-body);margin-bottom:28px;color:var(--bg-dark);">What type of business do you run?</h3>
+        <div class="wizard-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="wizard-option" onclick="wizStep(2,'Retail')">
+            <iconify-icon icon="solar:shop-bold-duotone" style="font-size:32px;margin-bottom:14px;color:var(--accent);"></iconify-icon>
+            <h4 style="font-size:17px;margin-bottom:6px;">Retail</h4>
+            <p style="font-size:13px;color:var(--text-light-muted);">Shops, boutiques, pop-ups.</p>
           </div>
-          <div class="wizard-option row-option" onclick="nextStep(3)" style="display: flex; align-items: center; gap: 16px;">
-             <iconify-icon icon="solar:monitor-smartphone-bold-duotone" style="font-size: 32px; color: var(--accent);"></iconify-icon>
-             <span style="font-weight: 700; font-size: 18px;">Upgrade EPOS/Hardware</span>
+          <div class="wizard-option" onclick="wizStep(2,'Hospitality')">
+            <iconify-icon icon="solar:glass-water-bold-duotone" style="font-size:32px;margin-bottom:14px;color:var(--accent);"></iconify-icon>
+            <h4 style="font-size:17px;margin-bottom:6px;">Hospitality</h4>
+            <p style="font-size:13px;color:var(--text-light-muted);">Pubs, restaurants, cafés.</p>
           </div>
-          <div class="wizard-option row-option" onclick="nextStep(3)" style="display: flex; align-items: center; gap: 16px;">
-             <iconify-icon icon="solar:wallet-money-bold-duotone" style="font-size: 32px; color: var(--accent);"></iconify-icon>
-             <span style="font-weight: 700; font-size: 18px;">Secure Business Funding</span>
+          <div class="wizard-option" onclick="wizStep(2,'Services')">
+            <iconify-icon icon="solar:buildings-bold-duotone" style="font-size:32px;margin-bottom:14px;color:var(--accent);"></iconify-icon>
+            <h4 style="font-size:17px;margin-bottom:6px;">Services</h4>
+            <p style="font-size:13px;color:var(--text-light-muted);">Salons, gyms, trades, B2B.</p>
+          </div>
+          <div class="wizard-option" onclick="wizStep(2,'Other')">
+            <iconify-icon icon="solar:widget-bold-duotone" style="font-size:32px;margin-bottom:14px;color:var(--accent);"></iconify-icon>
+            <h4 style="font-size:17px;margin-bottom:6px;">Other</h4>
+            <p style="font-size:13px;color:var(--text-light-muted);">We support all sectors.</p>
           </div>
         </div>
       </div>
 
-      <div class="wizard-step" id="step-3" style="display: none;">
-        <span class="step-label" style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-light-muted); font-size: 13px; font-weight: 700; display: block; margin-bottom: 16px;">Step 3 of 3</span>
-        <h3 style="font-size: 32px; font-family: var(--font-body); margin-bottom: 32px; color: var(--bg-dark);">Where should we send your quote?</h3>
-        <div class="form-group" style="margin-bottom: 16px;">
-          <input type="text" placeholder="Full Name" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
+      <!-- Step 2 — Goal -->
+      <div class="wizard-step" id="step-2" style="display:none;">
+        <span class="step-label" style="text-transform:uppercase;letter-spacing:.1em;color:var(--text-light-muted);font-size:13px;font-weight:700;display:block;margin-bottom:16px;">Step 2 of 3</span>
+        <h3 style="font-size:28px;font-family:var(--font-body);margin-bottom:28px;color:var(--bg-dark);">What's your main priority right now?</h3>
+        <div style="display:grid;grid-template-columns:1fr;gap:12px;">
+          <div class="wizard-option row-option" onclick="wizStep(3,'Reduce Card Fees')" style="display:flex;align-items:center;gap:16px;">
+            <iconify-icon icon="solar:card-send-bold-duotone" style="font-size:30px;color:var(--accent);flex-shrink:0;"></iconify-icon>
+            <div><strong style="font-size:17px;display:block;margin-bottom:3px;">Reduce Card Fees</strong><span style="font-size:13px;color:var(--text-light-muted);">Compare card machine providers and rates.</span></div>
+          </div>
+          <div class="wizard-option row-option" onclick="wizStep(3,'Upgrade EPOS / Hardware')" style="display:flex;align-items:center;gap:16px;">
+            <iconify-icon icon="solar:monitor-smartphone-bold-duotone" style="font-size:30px;color:var(--accent);flex-shrink:0;"></iconify-icon>
+            <div><strong style="font-size:17px;display:block;margin-bottom:3px;">Upgrade EPOS / Hardware</strong><span style="font-size:13px;color:var(--text-light-muted);">New till system, screens or equipment.</span></div>
+          </div>
+          <div class="wizard-option row-option" onclick="wizStep(3,'Business Funding')" style="display:flex;align-items:center;gap:16px;">
+            <iconify-icon icon="solar:wallet-money-bold-duotone" style="font-size:30px;color:var(--accent);flex-shrink:0;"></iconify-icon>
+            <div><strong style="font-size:17px;display:block;margin-bottom:3px;">Business Funding</strong><span style="font-size:13px;color:var(--text-light-muted);">Explore funding options from £10k–£100k+.</span></div>
+          </div>
+          <div class="wizard-option row-option" onclick="wizStep(3,'Digital Signage')" style="display:flex;align-items:center;gap:16px;">
+            <iconify-icon icon="solar:screencast-2-bold-duotone" style="font-size:30px;color:var(--accent);flex-shrink:0;"></iconify-icon>
+            <div><strong style="font-size:17px;display:block;margin-bottom:3px;">Digital Signage</strong><span style="font-size:13px;color:var(--text-light-muted);">Menu boards, screens, neon signs.</span></div>
+          </div>
         </div>
-        <div class="form-group" style="margin-bottom: 24px;">
-          <input type="email" placeholder="Work Email" style="width: 100%; padding: 16px; border: 1px solid #e2e8f0; border-radius: var(--radius-md); font-size: 16px; font-family: var(--font-body);">
-        </div>
-        <button class="btn-solid-dark btn-large" style="width: 100%; justify-content: center; border: none; cursor: pointer;">Get My Custom Quote</button>
+        <button onclick="wizBack(1)" style="background:none;border:none;color:var(--text-light-muted);font-size:13px;cursor:pointer;margin-top:20px;padding:0;font-family:var(--font-body);">← Back</button>
+      </div>
+
+      <!-- Step 3 — Contact details -->
+      <div class="wizard-step" id="step-3" style="display:none;">
+        <span class="step-label" style="text-transform:uppercase;letter-spacing:.1em;color:var(--text-light-muted);font-size:13px;font-weight:700;display:block;margin-bottom:16px;">Step 3 of 3</span>
+        <h3 style="font-size:28px;font-family:var(--font-body);margin-bottom:8px;color:var(--bg-dark);">Where should we reach you?</h3>
+        <p style="font-size:14px;color:var(--text-light-muted);margin-bottom:28px;">A specialist will call or email within one business day — no pressure, no hard sell.</p>
+        <form id="wizForm">
+          <input type="hidden" name="_subject" value="New Quote Request — Plemmo">
+          <input type="hidden" name="industry" id="wiz-industry">
+          <input type="hidden" name="goal" id="wiz-goal">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div>
+              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Full Name *</label>
+              <input type="text" name="full_name" required placeholder="Jane Smith" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+            </div>
+            <div>
+              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Business Name</label>
+              <input type="text" name="business_name" placeholder="Acme Ltd" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
+            <div>
+              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Phone *</label>
+              <input type="tel" name="phone" required placeholder="07700 900000" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+            </div>
+            <div>
+              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Email *</label>
+              <input type="email" name="email" required placeholder="jane@business.co.uk" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+            </div>
+          </div>
+          <button type="submit" id="wizSubmitBtn" class="btn-solid-dark btn-large" style="width:100%;justify-content:center;border:none;cursor:pointer;font-family:var(--font-body);font-size:17px;">Get My Free Quote <iconify-icon icon="solar:round-arrow-right-bold-duotone" style="vertical-align:middle;"></iconify-icon></button>
+          <p style="font-size:12px;color:var(--text-light-muted);text-align:center;margin-top:14px;line-height:1.5;">No obligation · We'll never share your details · Subject to provider terms</p>
+        </form>
+        <button onclick="wizBack(2)" style="background:none;border:none;color:var(--text-light-muted);font-size:13px;cursor:pointer;margin-top:12px;padding:0;font-family:var(--font-body);">← Back</button>
+      </div>
+
+      <!-- Success state -->
+      <div class="wizard-step" id="step-done" style="display:none;text-align:center;padding:24px 0;">
+        <iconify-icon icon="solar:check-circle-bold-duotone" style="font-size:64px;color:var(--accent);"></iconify-icon>
+        <h3 style="font-size:28px;color:var(--bg-dark);margin:16px 0 8px;font-family:var(--font-body);">Request received — thank you!</h3>
+        <p style="color:var(--text-light-muted);font-size:15px;max-width:420px;margin:0 auto;line-height:1.6;">A Plemmo specialist will be in touch within one business day. In the meantime, feel free to explore the site.</p>
+        <a href="pages/card-machines.html" class="btn-solid-dark btn-large" style="display:inline-flex;margin-top:28px;border:none;text-decoration:none;">Explore Card Machines</a>
       </div>
 
     </div>
@@ -685,10 +731,47 @@
 </section>
 
 <script>
-  function nextStep(step) {
-    document.querySelectorAll('.wizard-step').forEach(s => s.style.display = 'none');
-    document.getElementById('step-' + step).style.display = 'block';
+(function(){
+  var industry='', goal='';
+
+  function setProgress(step){
+    for(var i=1;i<=3;i++){
+      var el=document.getElementById('wp'+i);
+      if(el) el.style.background = i<=step ? 'var(--accent)' : '#e2e8f0';
+    }
   }
+
+  window.wizStep = function(toStep, value){
+    if(toStep===2){ industry=value; document.getElementById('wiz-industry').value=value; setProgress(2); }
+    if(toStep===3){ goal=value; document.getElementById('wiz-goal').value=value; setProgress(3); }
+    document.querySelectorAll('.wizard-step').forEach(function(s){s.style.display='none';});
+    document.getElementById('step-'+toStep).style.display='block';
+  };
+
+  window.wizBack = function(toStep){
+    document.querySelectorAll('.wizard-step').forEach(function(s){s.style.display='none';});
+    setProgress(toStep);
+    document.getElementById('step-'+toStep).style.display='block';
+  };
+
+  var form = document.getElementById('wizForm');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = document.getElementById('wizSubmitBtn');
+      if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
+      fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{
+        method:'POST',
+        headers:{'Accept':'application/json'},
+        body: new FormData(form)
+      }).finally(function(){
+        document.querySelectorAll('.wizard-step').forEach(function(s){s.style.display='none';});
+        document.getElementById('step-done').style.display='block';
+        document.getElementById('wiz-progress').style.display='none';
+      });
+    });
+  }
+})();
 </script>
 
 <!-- REFER & EARN TEASER -->
@@ -719,27 +802,31 @@
         <img src="images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
         Plemmo
       </div>
-      <p class="tagline">"We provide for and care about local businesses."</p>
+      <p class="tagline">One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
     </div>
 
     <div class="footer-links">
       <div class="link-col">
-        <h4>Company</h4>
-        <a href="index.html">Home</a>
-        <a href="pages/about-us.html">About Us</a>
-        <a href="pages/contact-us.html">Contact Us</a>
-      </div>
-      <div class="link-col">
         <h4>Solutions</h4>
         <a href="pages/card-machines.html">Card Machines</a>
-        <a href="pages/epos-systems.html">EPOS Systems</a>
         <a href="pages/business-funding.html">Business Funding</a>
+        <a href="pages/epos-systems.html">EPOS Systems</a>
         <a href="pages/digital-signage.html">Digital Signage</a>
+        <a href="pages/contact-us.html">Utilities &amp; Broadband</a>
       </div>
       <div class="link-col">
-        <h4>More</h4>
-        <a href="pages/contact-us.html">Utilities &amp; Broadband</a>
-        <a href="pages/contact-us.html">Support</a>
+        <h4>Company</h4>
+        <a href="pages/about-us.html">About Us</a>
+        <a href="pages/contact-us.html">Contact Us</a>
+        <a href="pages/refer-and-earn.html">Refer &amp; Earn</a>
+        <a href="pages/guides.html">Guides</a>
+      </div>
+      <div class="link-col">
+        <h4>Contact</h4>
+        <a href="tel:02079460958">020 7946 0958</a>
+        <a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a>
+        <a href="#quote">Get a Free Quote</a>
+        <a href="pages/contact-us.html">Send an Enquiry</a>
       </div>
     </div>
   </div>

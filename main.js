@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 7.6 Section Transitions (Micro-animations)
   gsap.utils.toArray('section').forEach(sec => {
     // Skip the horizontal scroll and showcase sections to avoid breaking their specialized layouts/fixed elements
-    if(sec.classList.contains('sleek-gallery-section') || sec.classList.contains('horizontal-scroll-section') || sec.classList.contains('showcase-section')) return;
+    if(sec.classList.contains('sleek-gallery-section') || sec.classList.contains('horizontal-scroll-section') || sec.classList.contains('showcase-section') || sec.classList.contains('sticky-scroll-section')) return;
     
     gsap.from(sec, {
       opacity: 0,
