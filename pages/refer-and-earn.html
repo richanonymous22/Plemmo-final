@@ -101,7 +101,7 @@
 <section class="section s-light" id="refer-form">
   <div class="container">
     <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Refer a business</span><h2 class="h2">Send us their details</h2><p class="lead">We'll take it from there — and let you know when your reward is on the way.</p></div>
-    <form class="refer-form" id="referForm"><input type="hidden" name="_subject" value="New Referral — Plemmo">
+    <form class="refer-form" id="referForm"><input type="hidden" name="_subject" value="New Referral — Plemmo"><input type="hidden" name="_cc" value="hello@plemmo.co.uk">
       <div class="frow two"><div><label style="color:var(--ink-soft)">Your Name <span class="req-star">*</span></label><input class="input" type="text" name="referrer_name" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Your Email <span class="req-star">*</span></label><input class="input" type="email" name="referrer_email" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
       <div class="frow two"><div><label style="color:var(--ink-soft)">Their Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Their Contact (phone or email)</label><input class="input" type="text" name="their_contact" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
       <div class="frow"><label style="color:var(--ink-soft)">Anything we should know?</label><textarea class="textarea" name="message" placeholder="Optional — what they might need help with…" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></textarea></div>
@@ -130,7 +130,7 @@
 var rf=document.getElementById('referForm');
 rf.addEventListener('submit',function(e){e.preventDefault();
   var btn=rf.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Sending…';}
-  fetch('https://formsubmit.co/ajax/hello@plemmo.co.uk',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(rf)})
+  fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(rf)})
     .finally(function(){rf.style.display='none';document.getElementById('referOk').style.display='block';document.getElementById('referOk').scrollIntoView({behavior:'smooth',block:'center'});});
 });
 </script>

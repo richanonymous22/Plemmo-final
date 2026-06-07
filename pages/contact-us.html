@@ -89,7 +89,7 @@
         <button type="button" class="route" data-route="General Enquiry" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><iconify-icon icon="ph:chat-circle-duotone"></iconify-icon><span>General</span></button>
       </div>
       <div class="routed" id="routed"><iconify-icon icon="ph:arrow-bend-down-right-bold"></iconify-icon> Routed to our Card Machines specialist</div>
-      <form id="cform"><input type="hidden" name="_subject" value="New Enquiry — Plemmo">
+      <form id="cform"><input type="hidden" name="_subject" value="New Enquiry — Plemmo"><input type="hidden" name="_cc" value="hello@plemmo.co.uk">
         <div class="frow two"><div><label style="color:var(--ink-soft)">Full Name <span class="req-star">*</span></label><input class="input" type="text" name="full_name" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Business Name</label><input class="input" type="text" name="business_name" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
         <div class="frow two"><div><label style="color:var(--ink-soft)">Phone <span class="req-star">*</span></label><input class="input" type="tel" name="phone" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Email <span class="req-star">*</span></label><input class="input" type="email" name="email" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
         <div class="frow"><label style="color:var(--ink-soft)">Service Interested In</label><select class="select" id="cservice" name="service" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"><option>Card Machines</option><option>Business Funding</option><option>EPOS Systems</option><option>Digital Signage</option><option>Utilities &amp; Broadband</option><option>General Enquiry</option></select></div>
@@ -160,7 +160,7 @@
   var cf=document.getElementById('cform');
   cf.addEventListener('submit',function(e){e.preventDefault();
     var btn=cf.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Sending…';}
-    fetch('https://formsubmit.co/ajax/hello@plemmo.co.uk',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(cf)})
+    fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(cf)})
       .finally(function(){cf.style.display='none';document.getElementById('cok').style.display='block';document.getElementById('cok').scrollIntoView({behavior:'smooth',block:'center'});});
   });
 })();
