@@ -3,7 +3,7 @@
   "global": {
     "phone": "020 7946 0958",
     "phoneHref": "tel:02079460958",
-    "email": "hello@plemmo.com",
+    "email": "hello@plemmo.co.uk",
     "domain": "https://plemmo.co.uk",
     "tagline": "One partner for every business solution.",
     "footerBlurb": "One partner for essential business solutions — payments, funding, EPOS, digital signage and more."
@@ -71,9 +71,7 @@
   },
   "editableClaims": {
     "_warning": "These are marketing claims shown on the site. Confirm they are substantiated before launch, or edit/remove.",
-    "trustedBusinesses": "10,000+ UK businesses",
-    "trustpilotRating": "4.8/5",
-    "signageRating": "5.0 Rated",
-    "switchSaving": "£300+ per year on average"
+    "switchSaving": "£300+ per year on average — VERIFIED by owner",
+    "_removed": "trustedBusinesses/trustpilotRating/signageRating removed from live site pending substantiation"
   }
 }

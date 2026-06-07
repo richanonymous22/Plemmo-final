@@ -78,9 +78,9 @@
     modal.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=modal.querySelectorAll('a[href],button:not([disabled]),input,select,textarea');if(!f.length)return;var a=f[0],b=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}});
     if(form)form.addEventListener('submit',function(e){
       e.preventDefault();
-      /* TODO(launch): POST to your form endpoint here, then show success on resolve.
-         e.g. fetch('https://formspree.io/f/XXXX',{method:'POST',body:new FormData(form)}) */
-      if(fw)fw.style.display='none';if(sw)sw.style.display='block';
+      var btn=form.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Sending…';}
+      fetch('https://formsubmit.co/ajax/hello@plemmo.co.uk',{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+        .finally(function(){if(fw)fw.style.display='none';if(sw)sw.style.display='block';});
     });
     window.PlemmoModal={open:open,close:close};
   }
