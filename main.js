@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const stickySteps = document.querySelectorAll('.sticky-step');
   const stickyImages = document.querySelectorAll('.sticky-image');
   
-  if (stickySteps.length > 0 && window.innerWidth > 768) {
+  if (stickySteps.length > 0) {
     stickySteps.forEach((step, index) => {
       ScrollTrigger.create({
         trigger: step,

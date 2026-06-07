@@ -231,7 +231,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.
 
 /* ─── STICKY FEATURE SCROLL (APPLE STYLE) ─── */
 .sticky-scroll-section { padding: 160px 0; background: var(--bg-light); color: var(--text-light); }
-.sticky-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; position: relative; align-items: start; }
+.sticky-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; position: relative; }
 .sticky-text-col { padding-bottom: 50vh; }
 .scroll-block { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; opacity: 0.2; transition: opacity 0.5s ease; }
 .scroll-block.active { opacity: 1; }
@@ -239,7 +239,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.
 .scroll-block p { font-size: 20px; color: var(--text-light-muted); line-height: 1.6; }
 .scroll-icon { width: 80px; height: 80px; background: var(--bg-dark); color: var(--accent); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
-.sticky-visual-col { position: sticky; top: 15vh; align-self: start; height: 70vh; border-radius: var(--radius-xl); overflow: hidden; background: #e2e8f0; box-shadow: var(--shadow-float); }
+.sticky-visual-col { position: sticky; top: 15vh; height: 70vh; border-radius: var(--radius-xl); overflow: hidden; background: #e2e8f0; box-shadow: var(--shadow-float); }
 .sticky-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.1); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
 .sticky-image.active { opacity: 1; transform: scale(1); z-index: 2; }
 .sticky-image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4), transparent); z-index: 3; }
