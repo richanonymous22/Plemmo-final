@@ -336,10 +336,31 @@
     </div>
     <div class="nav-cta">
       <a href="#quote" class="btn btn-solid">Get a Free Quote</a>
-      <button class="burger" aria-label="menu"><iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon></button>
+      <button class="burger" id="burger-btn" aria-label="Open menu"><iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon></button>
     </div>
   </div>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div id="cm-mobile-menu" style="display:none; position:fixed; inset:0; z-index:200;">
+  <div id="cm-backdrop" style="position:absolute; inset:0; background:rgba(8,10,8,0.85); backdrop-filter:blur(10px);"></div>
+  <div style="position:absolute; top:0; right:0; width:85%; max-width:320px; height:100%; background:var(--bg); border-left:1px solid rgba(255,255,255,0.1); display:flex; flex-direction:column;">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 20px; border-bottom:1px solid rgba(255,255,255,0.06);">
+      <span style="font-size:20px; font-weight:900; letter-spacing:-0.04em;">plemmo<span style="color:var(--accent)">.</span></span>
+      <button id="cm-close-btn" style="background:none; border:none; color:var(--text); font-size:26px; cursor:pointer; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center;" aria-label="Close menu"><iconify-icon icon="solar:close-circle-linear"></iconify-icon></button>
+    </div>
+    <div style="padding:32px 20px; display:flex; flex-direction:column; gap:20px; flex:1; overflow-y:auto;">
+      <a href="card-machines.html" style="color:var(--text); text-decoration:none; font-size:22px; font-weight:800; letter-spacing:-0.02em; min-height:44px; display:flex; align-items:center;">Card Machines</a>
+      <a href="epos.html" style="color:var(--text); text-decoration:none; font-size:22px; font-weight:800; letter-spacing:-0.02em; min-height:44px; display:flex; align-items:center;">EPOS Systems</a>
+      <a href="../index.html#funding" style="color:var(--text); text-decoration:none; font-size:22px; font-weight:800; letter-spacing:-0.02em; min-height:44px; display:flex; align-items:center;">Business Funding</a>
+      <a href="refer-and-earn.html" style="color:var(--accent); text-decoration:none; font-size:22px; font-weight:800; letter-spacing:-0.02em; min-height:44px; display:flex; align-items:center;">Refer &amp; Earn</a>
+    </div>
+    <div style="padding:20px 20px 40px; display:flex; flex-direction:column; gap:12px;">
+      <a href="#quote" class="btn btn-solid" style="width:100%; justify-content:center;">Get a Free Quote</a>
+      <a href="tel:07842088092" class="btn btn-ghost" style="width:100%; justify-content:center;">07842 088092</a>
+    </div>
+  </div>
+</div>
 
 <!-- ── HERO ── -->
 <header class="hero">
@@ -630,7 +651,7 @@
       <div class="foot-col"><h4>Support</h4><a href="tel:07842088092">07842 088092</a><a href="#faq">FAQs</a><a href="#quote">Get a Quote</a></div>
     </div>
     <div class="foot-bottom">
-      <span>Plemmo is a trading name. Rates shown are illustrative and subject to underwriting.</span>
+      <span>Plemmo Services Ltd (Company No. 1707677) is an independent business consultancy and credit broker. Rates shown are indicative and subject to provider underwriting and T&amp;Cs.</span>
       <span>© 2026 Plemmo. All Rights Reserved.</span>
     </div>
   </div>
@@ -809,7 +830,15 @@
   });
 
   /* mobile menu */
-  document.querySelector('.burger').addEventListener('click', ()=> location.hash='#finder');
+  const burgerBtn = document.getElementById('burger-btn');
+  const cmMenu = document.getElementById('cm-mobile-menu');
+  const cmClose = document.getElementById('cm-close-btn');
+  const cmBackdrop = document.getElementById('cm-backdrop');
+  function openCmMenu() { cmMenu.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+  function closeCmMenu() { cmMenu.style.display = 'none'; document.body.style.overflow = ''; }
+  if (burgerBtn) burgerBtn.addEventListener('click', openCmMenu);
+  if (cmClose) cmClose.addEventListener('click', closeCmMenu);
+  if (cmBackdrop) cmBackdrop.addEventListener('click', closeCmMenu);
 </script>
 
 </body>

@@ -3,9 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plemmo — Absolute Peak Performance</title>
-  
+  <title>Plemmo — Payments, EPOS, Funding & More for UK Businesses</title>
+  <meta name="description" content="Plemmo is the all-in-one growth toolkit for UK businesses. Compare card machines, EPOS systems, business funding and more — one partner, honest pricing, real UK support.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Plemmo — The All-in-One Growth Toolkit for UK Businesses">
+  <meta property="og:description" content="Card machines, EPOS, business funding, signage and more. One trusted partner with transparent pricing and real UK support.">
+  <meta property="og:url" content="https://www.plemmo.co.uk/">
+  <meta property="og:image" content="https://www.plemmo.co.uk/images/og-image.jpg">
+  <meta property="og:site_name" content="Plemmo">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Plemmo — The All-in-One Growth Toolkit for UK Businesses">
+  <meta name="twitter:description" content="Card machines, EPOS, business funding, signage and more. One trusted partner with transparent pricing and real UK support.">
+  <meta name="twitter:image" content="https://www.plemmo.co.uk/images/og-image.jpg">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Plemmo",
+    "legalName": "Plemmo Services Ltd",
+    "url": "https://www.plemmo.co.uk",
+    "logo": "https://www.plemmo.co.uk/images/logo.png",
+    "description": "Plemmo is an independent business consultancy and credit broker introducing UK businesses to card machine providers, EPOS systems, business funding and more.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "GB"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+447842088092",
+      "contactType": "customer support",
+      "areaServed": "GB"
+    },
+    "sameAs": []
+  }
+  </script>
+
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="mobile.css">
   
   <!-- Iconify for beautiful, crisp icons instead of emojis -->
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
@@ -51,9 +91,39 @@
         <iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon> 07842 088092
       </a>
       <a href="#quote" class="btn-solid magnetic" data-strength="40">Get a Free Quote</a>
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
+        <iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon>
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-backdrop" id="menu-backdrop"></div>
+  <div class="mobile-menu-panel">
+    <div class="mobile-menu-header">
+      <div class="nav-logo">
+        <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="24" style="color: var(--accent)"></iconify-icon>
+        Plemmo
+      </div>
+      <button class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">
+        <iconify-icon icon="solar:close-circle-linear"></iconify-icon>
+      </button>
+    </div>
+    <div class="mobile-menu-content">
+      <a href="pages/card-machines.html">Card Machines</a>
+      <a href="pages/epos.html">EPOS Systems</a>
+      <a href="#funding">Business Funding</a>
+      <a href="#signage">Signage</a>
+      <a href="pages/refer-and-earn.html">Refer &amp; Earn</a>
+    </div>
+    <div class="mobile-menu-actions" style="padding: 0 5% 48px;">
+      <a href="tel:07842088092" class="btn-solid" style="width:100%; justify-content:center; display:flex; align-items:center; gap:8px; margin-bottom:12px;"><iconify-icon icon="solar:phone-calling-bold-duotone"></iconify-icon> 07842 088092</a>
+      <a href="#quote" class="btn-outline" style="width:100%; justify-content:center; display:flex; align-items:center; gap:8px;" onclick="document.getElementById('mobile-menu').classList.remove('active'); document.body.style.overflow='';">Get a Free Quote</a>
+    </div>
+  </div>
+</div>
 
 <!-- HERO SECTION (WEBGL CINEMATIC) -->
 <header class="hero-section">
@@ -82,7 +152,7 @@
           <iconify-icon icon="solar:card-send-bold-duotone" class="float-icon"></iconify-icon>
           <div class="fc-content">
             <strong>Payment Cleared</strong>
-            <span>Next Day Settlement</span>
+            <span>Settlement Options Available</span>
           </div>
         </div>
 
@@ -136,20 +206,20 @@
   <div class="container metrics-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center;">
     <div class="metric-card reveal-up perspective-container">
       <div class="tilt-element glass-panel-dark shadow-heavy" style="padding: 48px; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);">
-        <h3 class="metric-val" style="font-size: clamp(48px, 6vw, 80px); color: var(--accent); margin-bottom: 16px;"><span class="counter" data-target="500">0</span>M+</h3>
-        <p style="font-size: 18px; color: var(--text-dark-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Processed Annually</p>
+        <h3 class="metric-val" style="font-size: clamp(48px, 6vw, 80px); color: var(--accent); margin-bottom: 16px; line-height: 1;">5</h3>
+        <p style="font-size: 18px; color: var(--text-dark-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Solutions · One Partner</p>
       </div>
     </div>
     <div class="metric-card reveal-up delay-1 perspective-container">
       <div class="tilt-element glass-panel-dark shadow-heavy" style="padding: 48px; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);">
-        <h3 class="metric-val" style="font-size: clamp(48px, 6vw, 80px); color: var(--accent); margin-bottom: 16px;"><span class="counter" data-target="99">0</span>.9%</h3>
-        <p style="font-size: 18px; color: var(--text-dark-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Platform Uptime</p>
+        <iconify-icon icon="solar:map-point-bold-duotone" style="font-size: clamp(48px, 6vw, 80px); color: var(--accent); margin-bottom: 16px; display: block;"></iconify-icon>
+        <p style="font-size: 18px; color: var(--text-dark-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">UK-Based Support</p>
       </div>
     </div>
     <div class="metric-card reveal-up delay-2 perspective-container">
       <div class="tilt-element glass-panel-dark shadow-heavy" style="padding: 48px; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);">
-        <h3 class="metric-val" style="font-size: clamp(48px, 6vw, 80px); color: var(--accent); margin-bottom: 16px;"><span class="counter" data-target="10">0</span>s</h3>
-        <p style="font-size: 18px; color: var(--text-dark-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">Avg Support Wait</p>
+        <iconify-icon icon="solar:hand-shake-bold-duotone" style="font-size: clamp(48px, 6vw, 80px); color: var(--accent); margin-bottom: 16px; display: block;"></iconify-icon>
+        <p style="font-size: 18px; color: var(--text-dark-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">No-Obligation Quotes</p>
       </div>
     </div>
   </div>
@@ -170,7 +240,7 @@
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:card-send-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 48px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Card Machines</h3>
-          <p style="color: #cbd5e1; font-size: 18px; max-width: 400px; font-weight: 500;">Accept payments your way. Competitive blended rates, no hidden fees, next working day settlement.</p>
+          <p style="color: #cbd5e1; font-size: 18px; max-width: 400px; font-weight: 500;">Accept payments your way. Competitive blended rates, clear pricing, and next-day settlement options where eligible.</p>
         </div>
       </a>
 
@@ -189,7 +259,7 @@
         <img src="https://images.unsplash.com/photo-1611095787946-fea5e865f1c5?auto=format&fit=crop&q=80&w=600" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.1; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s; filter: grayscale(100%);" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <h3 style="font-size: 32px; color: #0f172a; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Business Funding</h3>
-          <p style="color: #64748b; font-size: 15px; font-weight: 500;">Access £10k to £500k+.</p>
+          <p style="color: #64748b; font-size: 15px; font-weight: 500;">Access from £10k–£100k+.</p>
         </div>
       </a>
 
@@ -202,11 +272,11 @@
         </div>
       </a>
       
-      <!-- Call Centre (Span 2x1) -->
-      <a href="#callcentre" class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: var(--accent);">
+      <!-- Business Support (Span 2x1) -->
+      <a href="#businesssupport" class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: var(--accent);">
         <div style="position: relative; z-index: 10;">
-          <h3 style="font-size: 32px; color: #000; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Call Centre Services</h3>
-          <p style="color: #000; font-size: 15px; font-weight: 600;">Professional call handling partners.</p>
+          <h3 style="font-size: 32px; color: #000; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Business Support</h3>
+          <p style="color: #000; font-size: 15px; font-weight: 600;">Professional call handling and business support partners.</p>
         </div>
       </a>
 
@@ -284,37 +354,38 @@
 <!-- GLASS TESTIMONIALS MARQUEE -->
 <section class="testimonials-section">
   <div class="container align-center">
-    <h2 class="dark-heading" style="color: #fff; margin-bottom: 64px;">TRUSTED BY <span class="accent-text">THOUSANDS</span></h2>
+    <h2 class="dark-heading" style="color: #fff; margin-bottom: 16px;">WHAT UK BUSINESSES <span class="accent-text">ARE SAYING</span></h2>
+    <p style="font-size: 13px; color: var(--text-dark-muted); margin-bottom: 48px; font-style: italic;">Illustrative examples — real customer stories coming soon.</p>
   </div>
   <div class="marquee-container">
     <div class="test-track" id="test-track">
-      <!-- Testimonial 1 -->
+      <!-- Testimonial 1 — Illustrative -->
       <div class="test-card">
         <div class="quote-icon">"</div>
         <div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div>
-        <p class="test-text">Switching to Plemmo cut our transaction fees by 32%. The unified dashboard completely changed how we track weekend sales across our 4 venues.</p>
-        <div class="test-author"><h5>James T.</h5><span>Director, The Artisan Pub Group</span></div>
+        <p class="test-text">We were paying way too much on card fees before switching. Having one partner handle everything has been a game changer for our team.</p>
+        <div class="test-author"><h5>J. T.</h5><span>Director, Pub Group — Illustrative</span></div>
       </div>
-      <!-- Testimonial 2 -->
+      <!-- Testimonial 2 — Illustrative -->
       <div class="test-card">
         <div class="quote-icon">"</div>
         <div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div>
-        <p class="test-text">We needed 50k in funding fast. The banks took weeks to reply. Plemmo secured it in 48 hours and the setup was entirely frictionless.</p>
-        <div class="test-author"><h5>Sarah M.</h5><span>Founder, Bloom Retail UK</span></div>
+        <p class="test-text">The funding introduction process was smooth and far quicker than going direct to the bank. Highly recommended for any small business owner.</p>
+        <div class="test-author"><h5>S. M.</h5><span>Founder, Retail — Illustrative</span></div>
       </div>
-      <!-- Testimonial 3 -->
+      <!-- Testimonial 3 — Illustrative -->
       <div class="test-card">
         <div class="quote-icon">"</div>
         <div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div>
-        <p class="test-text">Their EPOS system integrated flawlessly with the card machines. The UK support team is legendary—always answers immediately.</p>
-        <div class="test-author"><h5>David L.</h5><span>Manager, Grind Coffee</span></div>
+        <p class="test-text">The EPOS system works seamlessly with the card machine solution. The UK support team always picks up — that alone is worth it.</p>
+        <div class="test-author"><h5>D. L.</h5><span>Manager, Coffee Shop — Illustrative</span></div>
       </div>
       <!-- Duplicate for looping -->
       <div class="test-card">
         <div class="quote-icon">"</div>
         <div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div>
-        <p class="test-text">Switching to Plemmo cut our transaction fees by 32%. The unified dashboard completely changed how we track weekend sales across our 4 venues.</p>
-        <div class="test-author"><h5>James T.</h5><span>Director, The Artisan Pub Group</span></div>
+        <p class="test-text">We were paying way too much on card fees before switching. Having one partner handle everything has been a game changer for our team.</p>
+        <div class="test-author"><h5>J. T.</h5><span>Director, Pub Group — Illustrative</span></div>
       </div>
     </div>
   </div>
@@ -368,8 +439,8 @@
 <!-- LIVE ROI CALCULATOR (INTERACTIVE ENGINE) -->
 <section id="calculator" class="calculator-section dark-section section-padding relative-section">
   <div class="container align-center reveal-up">
-    <h2>CALCULATE YOUR <span class="accent-text">REAL SAVINGS</span></h2>
-    <p class="subtitle">Most businesses overpay by 30-40% on standard card processing rates. Drag the slider to see what you could be saving.</p>
+    <h2>CALCULATE YOUR <span class="accent-text">POTENTIAL SAVINGS</span></h2>
+    <p class="subtitle">Many businesses may have room to reduce card processing costs. Drag the slider to see an indicative estimate — actual savings depend on your current provider and transaction mix.</p>
     
     <div class="calc-engine">
       <div class="calc-card shadow-heavy">
@@ -382,12 +453,12 @@
 
         <div class="calc-results dual-grid">
           <div class="result-box old-way">
-            <span>Average Provider Fees</span>
+            <span>Typical Market Fees (Est.)</span>
             <h4 id="old-fee">£750</h4>
             <div class="mini-bar old-bar"></div>
           </div>
           <div class="result-box plemmo-way">
-            <span>Plemmo Blended Rate</span>
+            <span>Indicative Blended Rate</span>
             <h4 id="plemmo-fee">£450</h4>
             <div class="mini-bar plemmo-bar"></div>
           </div>
@@ -395,11 +466,12 @@
 
         <div class="calc-bottom">
           <div class="savings-highlight">
-            <span>Monthly Savings</span>
+            <span>Estimated Monthly Savings</span>
             <h2 id="total-savings" class="accent-text">£300</h2>
           </div>
-          <a href="#quote" class="btn-solid btn-large magnetic" data-strength="40">Claim These Savings <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+          <a href="#quote" class="btn-solid btn-large magnetic" data-strength="40">Get a No-Obligation Quote <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
         </div>
+        <p style="font-size: 12px; color: var(--text-dark-muted); margin-top: 16px; text-align: center;">Indicative figures only. Actual savings subject to provider underwriting and T&amp;Cs.</p>
 
       </div>
     </div>
@@ -522,7 +594,7 @@
     <div class="refer-box glass-panel-dark tilt-element shadow-heavy">
       <h2>KNOW ANOTHER<br>BUSINESS OWNER?</h2>
       <p>Refer them to Plemmo and earn up to £250. No catch. Just a thank you for spreading the word.</p>
-      <a href="#refer" class="btn-solid btn-large magnetic" data-strength="30">See the Referral Programme <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
+      <a href="pages/refer-and-earn.html" class="btn-solid btn-large magnetic" data-strength="30">See the Referral Programme <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></a>
     </div>
   </div>
 </section>
@@ -563,15 +635,16 @@
       </div>
       <div class="link-col">
         <h4>More</h4>
-        <a href="#">Call Centre</a>
+        <a href="#">Business Support</a>
         <a href="#">Utilities</a>
+        <a href="pages/refer-and-earn.html">Refer &amp; Earn</a>
       </div>
     </div>
   </div>
-  
+
   <div class="container footer-bottom">
     <div class="disclaimer">
-      Plemmo is a trading name of [Registered Company Name]. We act as an independent business consultancy and credit broker. We are not a lender or a direct payment acquirer. We introduce customers to a hand-picked panel of providers and may receive a commission for these introductions. All offers are subject to status and provider T&Cs.
+      Plemmo is a trading name of Plemmo Services Ltd (Company No. 1707677). We act as an independent business consultancy and credit broker. We are not a lender or a direct payment acquirer. We introduce customers to a hand-picked panel of providers and may receive a commission for these introductions. All offers are subject to status and provider T&amp;Cs.
     </div>
     <div class="copyright">
       Copyright © 2026 Plemmo. All Rights Reserved
@@ -580,5 +653,17 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+  // Mobile menu
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeMenuBtn = document.getElementById('close-menu-btn');
+  const menuBackdrop = document.getElementById('menu-backdrop');
+  function openMobileMenu() { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeMobileMenu() { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }
+  if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobileMenu);
+  if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileMenu);
+  if (menuBackdrop) menuBackdrop.addEventListener('click', closeMobileMenu);
+</script>
 </body>
 </html>

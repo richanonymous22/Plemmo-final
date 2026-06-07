@@ -89,10 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. Horizontal Scroll Ecosystem
+  // 7. Horizontal Scroll Ecosystem (desktop only)
   const horizontalSection = document.querySelector('.horizontal-scroll-section');
   const horizontalContainer = document.querySelector('.horizontal-container');
-  if(horizontalSection && horizontalContainer) {
+  if(horizontalSection && horizontalContainer && window.innerWidth > 768) {
     gsap.to(horizontalContainer, {
       x: () => -(horizontalContainer.scrollWidth - window.innerWidth) + "px",
       ease: "none",

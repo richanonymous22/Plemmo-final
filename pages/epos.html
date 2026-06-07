@@ -6,6 +6,7 @@
   <title>EPOS Systems — Plemmo</title>
   
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../mobile.css">
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -31,9 +32,39 @@
     <div class="nav-actions">
       <a href="tel:07842088092" class="btn-text magnetic" data-strength="20">07842 088092</a>
       <a href="../index.html#quote" class="btn-solid magnetic" data-strength="40">Get a Free Quote</a>
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">
+        <iconify-icon icon="solar:hamburger-menu-linear"></iconify-icon>
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-backdrop" id="menu-backdrop"></div>
+  <div class="mobile-menu-panel">
+    <div class="mobile-menu-header">
+      <div class="nav-logo">
+        <iconify-icon icon="solar:layers-minimalistic-bold-duotone" width="24" style="color: var(--accent)"></iconify-icon>
+        Plemmo
+      </div>
+      <button class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">
+        <iconify-icon icon="solar:close-circle-linear"></iconify-icon>
+      </button>
+    </div>
+    <div class="mobile-menu-content">
+      <a href="card-machines.html">Card Machines</a>
+      <a href="epos.html">EPOS Systems</a>
+      <a href="../index.html#funding">Business Funding</a>
+      <a href="../index.html#signage">Signage</a>
+      <a href="refer-and-earn.html">Refer &amp; Earn</a>
+    </div>
+    <div class="mobile-menu-actions" style="padding: 0 5% 48px;">
+      <a href="tel:07842088092" class="btn-solid" style="width:100%; justify-content:center; margin-bottom:12px;">07842 088092</a>
+      <a href="../index.html#quote" class="btn-outline" style="width:100%; justify-content:center;">Get a Free Quote</a>
+    </div>
+  </div>
+</div>
 
 <!-- PRODUCT HERO -->
 <header class="hero-section" style="padding-top:200px; padding-bottom: 100px;">
@@ -222,12 +253,24 @@
   
   <div class="container footer-bottom">
     <div class="disclaimer">
-      Plemmo is a trading name of [Registered Company Name]. All hardware remains the property of the acquiring bank unless explicitly purchased. Rates subject to underwriting.
+      Plemmo is a trading name of Plemmo Services Ltd (Company No. 1707677). We act as an independent business consultancy. We are not a lender or a direct payment acquirer. All hardware remains the property of the acquiring bank unless explicitly purchased. Rates subject to provider underwriting and T&amp;Cs.
     </div>
     <div class="copyright">Copyright © 2026 Plemmo. All Rights Reserved</div>
   </div>
 </footer>
 
 <script src="../main.js"></script>
+<script>
+  // Mobile menu
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeMenuBtn = document.getElementById('close-menu-btn');
+  const menuBackdrop = document.getElementById('menu-backdrop');
+  function openMenu() { mobileMenu.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { mobileMenu.classList.remove('active'); document.body.style.overflow = ''; }
+  if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMenu);
+  if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMenu);
+  if (menuBackdrop) menuBackdrop.addEventListener('click', closeMenu);
+</script>
 </body>
 </html>

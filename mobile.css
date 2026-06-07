@@ -360,4 +360,100 @@ html, body {
   .link-col {
     text-align: center;
   }
+
+  /* Hamburger button – show on all pages with site-nav */
+  .site-nav .hamburger-btn {
+    display: flex;
+  }
+  .site-nav .nav-actions .btn-text,
+  .site-nav .nav-actions .btn-solid {
+    display: none !important;
+  }
+  .site-nav .nav-actions {
+    gap: 0;
+  }
+  .site-nav .nav-actions .hamburger-btn {
+    display: flex !important;
+  }
+
+  /* EPOS page hero image */
+  .hero-section .hero-visual img[style*="width: 140%"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* EPOS bento grid */
+  .bento-cards > div,
+  .bento-cards > a {
+    min-height: 260px !important;
+    height: auto !important;
+  }
+
+  /* Wizard on mobile */
+  .wizard-container {
+    padding: 28px !important;
+  }
+
+  /* Calculator */
+  .calc-card {
+    padding: 28px !important;
+  }
+  #turnover-display {
+    font-size: 56px !important;
+  }
+  .calc-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .calc-results {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Horizontal scroll — convert to vertical stack on mobile */
+  .horizontal-scroll-section {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .horizontal-container {
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  .h-panel {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column;
+    gap: 32px;
+    padding: 60px 5% !important;
+    min-height: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .h-visual {
+    height: 200px !important;
+  }
+  .massive-text {
+    font-size: 72px !important;
+  }
+
+  /* Metrics grid icons */
+  .metric-card .tilt-element {
+    padding: 32px 20px !important;
+  }
+
+  /* Refer box */
+  .refer-box {
+    padding: 48px 24px !important;
+  }
+
+  /* Footer CTA buttons */
+  .footer-cta .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Nav actions – show call number + hamburger on mobile */
+  .site-nav .nav-actions > .btn-text {
+    display: none !important;
+  }
 }
