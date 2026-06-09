@@ -3,6 +3,44 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sync GSAP (Lenis removed)
   gsap.registerPlugin(ScrollTrigger);
 
+  // 1. Mobile Menu Logic
+  const hamburgerBtn = document.querySelector('.hamburger-btn');
+  const closeMenuBtn = document.querySelector('.close-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-menu-content a');
+
+  function toggleMobileMenu() {
+    mobileMenu.classList.toggle('active');
+    const isActive = mobileMenu.classList.contains('active');
+    hamburgerBtn.setAttribute('aria-expanded', isActive);
+    document.body.style.overflow = isActive ? 'hidden' : '';
+  }
+
+  if (hamburgerBtn && closeMenuBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    closeMenuBtn.addEventListener('click', toggleMobileMenu);
+    
+    // Close on link click
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('active')) toggleMobileMenu();
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        toggleMobileMenu();
+      }
+    });
+
+    // Close on Backdrop click
+    const backdrop = document.querySelector('.mobile-menu-backdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', toggleMobileMenu);
+    }
+  }
+
   // 2. Custom Cursor Logic
   const cursorDot = document.querySelector('.cursor-dot');
   
@@ -89,21 +127,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. Horizontal Scroll Ecosystem
-  const horizontalSection = document.querySelector('.horizontal-scroll-section');
-  const horizontalContainer = document.querySelector('.horizontal-container');
-  if(horizontalSection && horizontalContainer) {
-    gsap.to(horizontalContainer, {
-      x: () => -(horizontalContainer.scrollWidth - window.innerWidth) + "px",
+  // 7. Sleek Horizontal Gallery
+  const gallerySection = document.querySelector('.sleek-gallery-section');
+  const galleryTrack = document.querySelector('.gallery-track');
+  
+  if(gallerySection && galleryTrack && window.innerWidth > 768) {
+    let scrollTween = gsap.to(galleryTrack, {
+      x: () => -(galleryTrack.scrollWidth - window.innerWidth) + "px",
       ease: "none",
       scrollTrigger: {
-        trigger: horizontalSection,
+        trigger: gallerySection,
         pin: true,
         scrub: 1,
-        end: () => "+=" + horizontalContainer.scrollWidth
+        end: () => "+=" + galleryTrack.scrollWidth
+      }
+    });
+
+    // Parallax & Reveal within horizontal scroll
+    gsap.utils.toArray('.product-panel').forEach(panel => {
+      const img = panel.querySelector('.sleek-img');
+      const metaLeft = panel.querySelector('.meta-left');
+      const metaRight = panel.querySelector('.meta-right');
+      
+      // Slight parallax on image while scrolling horizontally
+      if(img) {
+        gsap.to(img, {
+          x: 150,
+          ease: "none",
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: scrollTween,
+            start: "left right",
+            end: "right left",
+            scrub: true
+          }
+        });
+      }
+
+      // Fade up meta text
+      if(metaLeft && metaRight) {
+        gsap.from([metaLeft, metaRight], {
+          y: 40,
+          opacity: 0,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: scrollTween,
+            start: "left 70%",
+            toggleActions: "play none none reverse"
+          }
+        });
       }
     });
   }
+
+  // 7.5 Global 3D Tilt Effect - DISABLED per user request
+  const tiltElements = document.querySelectorAll('.tilt-element');
+  // Card components remain still. Removed mousemove/parallax tracking logic.
+  
+  // 7.6 Section Transitions (Micro-animations)
+  gsap.utils.toArray('section').forEach(sec => {
+    // Skip sections with specialised scroll behaviour — transforms on parents break position:sticky
+    if(sec.classList.contains('sleek-gallery-section') || sec.classList.contains('horizontal-scroll-section') || sec.classList.contains('showcase-section') || sec.classList.contains('sticky-scroll-section')) return;
+
+    gsap.from(sec, {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      ease: 'power2.out',
+      clearProps: "all",
+      scrollTrigger: {
+        trigger: sec,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      }
+    });
+  });
 
   // 8. Live ROI Calculator Engine
   const slider = document.getElementById('turnover-slider');
@@ -111,12 +210,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const oldFee = document.getElementById('old-fee');
   const plemmoFee = document.getElementById('plemmo-fee');
   const totalSavings = document.getElementById('total-savings');
+  const sliderFill = document.getElementById('slider-fill');
   
   if(slider) {
     const formatCurrency = (num) => new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(num);
     
     slider.addEventListener('input', (e) => {
       const val = parseInt(e.target.value);
+      
+      // Update sleek slider fill
+      const min = parseInt(slider.min) || 5000;
+      const max = parseInt(slider.max) || 250000;
+      const percentage = ((val - min) / (max - min)) * 100;
+      if (sliderFill) {
+         sliderFill.style.width = `${percentage}%`;
+      }
       
       // Calculate rates: Average market rate ~1.5%, Plemmo blended rate ~0.9%
       const avgRate = 0.015;
@@ -131,37 +239,99 @@ document.addEventListener('DOMContentLoaded', () => {
       plemmoFee.textContent = formatCurrency(plemmoVal);
       totalSavings.textContent = formatCurrency(savings);
 
-      // Animate width bars (just visual flair)
-      const maxFee = 250000 * avgRate; // The absolute max old fee
-      document.querySelector('.old-bar').style.width = Math.max((oldVal / maxFee) * 100, 10) + '%';
-      document.querySelector('.plemmo-bar').style.width = Math.max((plemmoVal / maxFee) * 100, 10) + '%';
+      // Animate width bars
+      const maxFee = max * avgRate; // The absolute max old fee
+      document.querySelector('.old-bar').style.width = Math.max((oldVal / maxFee) * 100, 5) + '%';
+      document.querySelector('.plemmo-bar').style.width = Math.max((plemmoVal / maxFee) * 100, 5) + '%';
     });
-    
     // Initialize calculator on page load
     slider.dispatchEvent(new Event('input'));
+
+    // Recommendation Reveal Animation
+    const claimBtn = document.getElementById('claim-savings-btn');
+    const recPanel = document.getElementById('recommendation-panel');
+    const recTurnover = document.getElementById('rec-turnover');
+    
+    if(claimBtn && recPanel) {
+      claimBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Update recommended turnover text
+        recTurnover.textContent = display.textContent;
+        
+        // Ensure panel is visible but transparent to animate
+        recPanel.style.display = 'block';
+        
+        // GSAP timeline for slick reveal
+        const tl = gsap.timeline();
+        
+        // Shrink the main calc a bit
+        tl.to('.calc-sleek-wrapper', {
+          maxWidth: '600px',
+          duration: 0.6,
+          ease: 'power3.inOut'
+        });
+        
+        // Fade and slide in the recommendation panel
+        tl.to(recPanel, {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          ease: 'power3.out'
+        }, "-=0.3"); // Overlap slightly for fluidity
+        
+        // Hide the claim button so it doesn't trigger again
+        gsap.to(claimBtn, {
+           opacity: 0,
+           duration: 0.3,
+           onComplete: () => { claimBtn.style.pointerEvents = 'none'; claimBtn.style.display = 'none'; }
+        });
+      });
+    }
   }
 
   // Navbar Background
+  // Navbar Scroll Logic
   const nav = document.querySelector('.site-nav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-      nav.style.background = 'rgba(11, 14, 20, 0.95)';
-      nav.style.backdropFilter = 'blur(12px)';
-      nav.style.padding = '16px 0';
-      nav.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+      nav.classList.add('scrolled');
     } else {
-      nav.style.background = 'transparent';
-      nav.style.backdropFilter = 'none';
-      nav.style.padding = '24px 0';
-      nav.style.borderBottom = 'none';
+      nav.classList.remove('scrolled');
     }
   });
 
-  // 9. Apple-Style Sticky Scroll Image Swap
+  // 9. Apple-Style Sticky Scroll: GSAP-pin the image column, swap images as text scrolls
   const stickySteps = document.querySelectorAll('.sticky-step');
   const stickyImages = document.querySelectorAll('.sticky-image');
-  
+  const stickyVisual = document.querySelector('.sticky-visual-col');
+  const stickyTextCol = document.querySelector('.sticky-text-col');
+
+  function activateImage(index) {
+    stickyImages.forEach(img => img.classList.remove('active'));
+    stickySteps.forEach(s => s.classList.remove('active'));
+    if (stickyImages[index]) stickyImages[index].classList.add('active');
+    if (stickySteps[index]) stickySteps[index].classList.add('active');
+  }
+
   if (stickySteps.length > 0) {
+    // Show the first image immediately
+    activateImage(0);
+
+    // Pin the image column in the viewport while the text column scrolls past it.
+    // Uses GSAP pinning (not CSS position:sticky) so it is immune to ancestor
+    // overflow/transform contexts elsewhere on the page.
+    if (stickyVisual && stickyTextCol && window.innerWidth > 768) {
+      ScrollTrigger.create({
+        trigger: stickyVisual,
+        start: "top 15%",
+        endTrigger: stickyTextCol,
+        end: "bottom 85%",
+        pin: stickyVisual,
+        pinSpacing: false
+      });
+    }
+
+    // Cross-fade to the matching image as each text block reaches the centre
     stickySteps.forEach((step, index) => {
       ScrollTrigger.create({
         trigger: step,
@@ -171,14 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
         onEnterBack: () => activateImage(index)
       });
     });
-    
-    function activateImage(index) {
-      stickyImages.forEach(img => img.classList.remove('active'));
-      stickySteps.forEach(s => s.classList.remove('active'));
-      
-      stickyImages[index].classList.add('active');
-      stickySteps[index].classList.add('active');
-    }
   }
 
   // 10. Testimonials Infinite Marquee
@@ -336,11 +498,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 13. Hover Image Reveal Showcase
   const hoverItems = document.querySelectorAll('.hover-item');
   const revealImg = document.querySelector('.hover-reveal-img');
-  
+
   if(hoverItems.length > 0 && revealImg && window.innerWidth > 1024) {
     let mouseX = 0, mouseY = 0, revealX = 0, revealY = 0;
     let isHovering = false;
-    
+
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -349,12 +511,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const animateReveal = () => {
       revealX += (mouseX - revealX) * 0.12;
       revealY += (mouseY - revealY) * 0.12;
-      
+
       if(isHovering) {
-        gsap.set(revealImg, { 
-          x: revealX - 200, 
-          y: revealY - 150, 
-          rotation: (mouseX - revealX) * 0.05 
+        gsap.set(revealImg, {
+          x: revealX - 200,
+          y: revealY - 150,
+          rotation: (mouseX - revealX) * 0.05
         });
       }
       requestAnimationFrame(animateReveal);
@@ -374,5 +536,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Recalculate all ScrollTrigger positions after images/fonts have loaded
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 
 });
