@@ -523,6 +523,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     animateReveal();
 
+    const hideReveal = () => {
+      isHovering = false;
+      gsap.to(revealImg, { opacity: 0, scale: 0.8, duration: 0.3 });
+    };
+
     hoverItems.forEach(item => {
       item.addEventListener('mouseenter', () => {
         isHovering = true;
@@ -530,11 +535,23 @@ document.addEventListener('DOMContentLoaded', () => {
         revealImg.style.backgroundImage = `url(${imgUrl})`;
         gsap.to(revealImg, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)" });
       });
-      item.addEventListener('mouseleave', () => {
-        isHovering = false;
-        gsap.to(revealImg, { opacity: 0, scale: 0.8, duration: 0.3 });
-      });
+      item.addEventListener('mouseleave', hideReveal);
     });
+
+    // Safety net: hide the floating image when leaving the whole list
+    // (covers the case where the pointer leaves between items).
+    const hoverList = document.querySelector('.hover-list');
+    if(hoverList) hoverList.addEventListener('mouseleave', hideReveal);
+
+    // Fix: if the user scrolls the showcase section out of view while still
+    // "hovering", the fixed-position image could stay floating. Force-hide it
+    // whenever the section leaves the viewport.
+    const showcase = (hoverList && hoverList.closest('section')) || (revealImg.closest('section'));
+    if(showcase && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(!entry.isIntersecting) hideReveal(); });
+      }, { threshold: 0 }).observe(showcase);
+    }
   }
 
   // Recalculate all ScrollTrigger positions after images/fonts have loaded

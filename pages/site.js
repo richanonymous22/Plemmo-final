@@ -78,9 +78,11 @@
     modal.addEventListener('keydown',function(e){if(e.key!=='Tab')return;var f=modal.querySelectorAll('a[href],button:not([disabled]),input,select,textarea');if(!f.length)return;var a=f[0],b=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}});
     if(form)form.addEventListener('submit',function(e){
       e.preventDefault();
-      var btn=form.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Sending…';}
-      var fd=new FormData(form);fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
-        .finally(function(){if(fw)fw.style.display='none';if(sw)sw.style.display='block';});
+      var btn=form.querySelector('button[type=submit]'),label=btn?btn.innerHTML:'';if(btn){btn.disabled=true;btn.textContent='Sending…';}
+      var fd=new FormData(form);fd.append('_template','table');fd.append('_captcha','false');
+      fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+        .then(function(res){if(!res.ok)throw new Error('Submission failed');if(fw)fw.style.display='none';if(sw)sw.style.display='block';})
+        .catch(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}alert('Sorry — something went wrong sending your enquiry. Please try again or call us on 0333 041 1161.');});
     });
     window.PlemmoModal={open:open,close:close};
   }

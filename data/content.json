@@ -1,8 +1,8 @@
 {
   "_note": "Plemmo editable content — single source of truth for prices & key copy. Update values here, then mirror into the matching page (see CONTENT-GUIDE.md for exact locations). All figures are indicative and subject to provider terms.",
   "global": {
-    "phone": "020 7946 0958",
-    "phoneHref": "tel:02079460958",
+    "phone": "0333 041 1161",
+    "phoneHref": "tel:03330411161",
     "email": "hello@plemmo.co.uk",
     "domain": "https://plemmo.co.uk",
     "tagline": "One partner for every business solution.",
@@ -23,7 +23,7 @@
       { "band": "£80,001–£100,000", "rate": "0.63%–0.61%" },
       { "band": "£100,000+", "rate": "From 0.60% / 0.55%" }
     ],
-    "partners": ["Teya", "SumUp", "Shift4", "Worldpay", "Barclaycard", "Elavon", "EVO", "Zettle", "myPOS"]
+    "partners": ["Teya", "SumUp", "Shift4", "Worldpay", "Elavon", "EVO", "myPOS"]
   },
   "funding": {
     "products": [
