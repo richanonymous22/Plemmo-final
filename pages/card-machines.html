@@ -23,6 +23,8 @@
 <meta name="description" content="Compare leading UK card machine providers — Teya, SumUp, Worldpay, Elavon and more. Find the right card machine, save on fees and get expert support 7 days a week.">
 
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -479,42 +481,41 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .uk-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .uk-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--line-l);border-radius:100px;padding:8px 14px;box-shadow:var(--shadow-l)}
 .uk-tag iconify-icon{color:#5f9000;font-size:16px}
-.uk-map{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);
-  background:radial-gradient(120% 95% at 50% 18%,#123842 0%,#0a1d24 56%,#06121a 100%);box-shadow:var(--shadow)}
-.uk-map .water{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:26px 26px;opacity:.55;pointer-events:none}
-.uk-map .vign{position:absolute;inset:0;background:radial-gradient(120% 95% at 50% 35%,transparent 52%,rgba(0,0,0,.5));pointer-events:none}
-.uk-svg{position:absolute;inset:0;width:100%;height:100%}
-.uk-landmass{fill:url(#uklandgrad);stroke:rgba(198,255,0,.55);stroke-width:.6;stroke-linejoin:round;filter:drop-shadow(0 2px 7px rgba(0,0,0,.55))}
-.uk-coast{fill:none;stroke:rgba(180,230,110,.22);stroke-width:1.8;stroke-linejoin:round}
-.uk-roads{fill:none;stroke:rgba(255,255,255,.15);stroke-width:.38;stroke-linecap:round;stroke-linejoin:round}
-.uk-roads.major{stroke:rgba(255,214,130,.32);stroke-width:.55}
-.uk-region{fill:rgba(198,255,0,0);stroke:rgba(7,16,10,.55);stroke-width:.5;cursor:pointer;pointer-events:all;transition:fill .25s}
-.uk-region:hover{fill:rgba(198,255,0,.26)}
-.uk-region.act{fill:rgba(198,255,0,.32)}
-.uk-rlabel{fill:rgba(255,255,255,.55);font-family:'Space Grotesk',sans-serif;font-size:3px;font-weight:700;text-anchor:middle;letter-spacing:.4px;pointer-events:none;transition:fill .25s;paint-order:stroke;stroke:rgba(6,16,12,.7);stroke-width:.55}
-.uk-rlabel.on{fill:#eafbb0}
-.uk-pin{position:absolute;transform:translate(-50%,-50%);z-index:5;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:2px}
-.uk-pin .pd{width:7px;height:7px;border-radius:50%;background:#fff;border:1.5px solid var(--lime);box-shadow:0 0 8px rgba(198,255,0,.8),0 1px 3px rgba(0,0,0,.6)}
-.uk-pin.cap .pd{width:9px;height:9px;background:var(--lime);border-color:#fff}
-.uk-pin .plb{font-family:'Space Grotesk';font-size:8.5px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.95),0 0 3px rgba(0,0,0,.8);white-space:nowrap}
-.uk-pin.cap .plb{font-size:10px}
-.uk-scale{position:absolute;left:16px;bottom:78px;z-index:6;display:flex;flex-direction:column;align-items:flex-start;gap:3px;font-size:8.5px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.05em}
-.uk-scale .bar{width:42px;height:5px;border:1px solid rgba(255,255,255,.55);border-top:none}
-.uk-live{position:absolute;left:16px;top:14px;z-index:6;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.55);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px}
+.uk-map{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);background:#0a1014;box-shadow:var(--shadow)}
+.uk-leaflet{position:absolute;inset:0}
+.uk-map .leaflet-container{background:#0a1014;font-family:'Inter',system-ui,sans-serif;outline:none}
+.uk-map .leaflet-tile-pane{filter:saturate(.92) brightness(.96)}
+/* zoom controls */
+.uk-map .leaflet-bar{border:none;box-shadow:0 8px 22px rgba(0,0,0,.45);border-radius:12px;overflow:hidden;margin:12px}
+.uk-map .leaflet-bar a{background:rgba(12,16,9,.85);color:#fff;border-bottom:1px solid var(--line);width:32px;height:32px;line-height:32px;font-size:18px;font-weight:700;backdrop-filter:blur(8px);transition:.2s}
+.uk-map .leaflet-bar a:hover{background:var(--lime);color:#0a0c08}
+.uk-map .leaflet-bar a:last-child{border-bottom:none}
+/* attribution + scale */
+.uk-map .leaflet-control-attribution{background:rgba(10,13,7,.55);color:rgba(255,255,255,.5);font-size:9px;padding:2px 6px;border-radius:8px 0 0 0;backdrop-filter:blur(6px)}
+.uk-map .leaflet-control-attribution a{color:rgba(198,255,0,.78)}
+.uk-map .leaflet-control-scale-line{background:rgba(10,13,7,.55);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.45);font-size:9px;font-weight:700;backdrop-filter:blur(6px)}
+/* custom markers */
+.uk-mk{position:relative;width:14px;height:14px}
+.uk-mk i{position:absolute;inset:0;border-radius:50%;background:var(--lime);border:2px solid #0a1014;box-shadow:0 0 0 2px rgba(198,255,0,.45),0 0 10px rgba(198,255,0,.6);z-index:2}
+.uk-mk::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--lime);animation:mkpulse 2.8s infinite;z-index:1}
+.uk-mk.cap{width:18px;height:18px}
+@keyframes mkpulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(2.6);opacity:0}100%{transform:scale(2.6);opacity:0}}
+/* popups */
+.uk-map .leaflet-popup-content-wrapper{background:rgba(12,16,9,.95);backdrop-filter:blur(12px);color:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.uk-map .leaflet-popup-tip{background:rgba(12,16,9,.95);border:1px solid var(--line2)}
+.uk-map .leaflet-popup-content{margin:12px 15px 13px;font-size:13px;line-height:1.4}
+.uk-map .leaflet-popup-close-button{color:var(--muted);padding:8px 8px 0 0}
+.uk-map .leaflet-popup-close-button:hover{color:#fff}
+.mkpop b{display:block;font-family:'Space Grotesk';font-size:14px;color:#fff;margin-bottom:4px}
+.mkpop .t{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--lime);font-weight:600}
+.mkpop .t iconify-icon{font-size:14px}
+.mkpop .r{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+/* overlay badge */
+.uk-live{position:absolute;left:14px;top:12px;z-index:1000;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px;pointer-events:none}
 .uk-live i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
-.uk-info{position:absolute;left:14px;right:14px;bottom:14px;z-index:6;display:flex;align-items:center;gap:13px;background:rgba(10,13,7,.74);backdrop-filter:blur(12px);border:1px solid var(--line2);border-radius:16px;padding:12px 15px;box-shadow:0 16px 36px rgba(0,0,0,.5)}
-.uk-info .ic{width:40px;height:40px;border-radius:11px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s var(--spring)}
-.uk-info .ic iconify-icon{font-size:21px;color:var(--lime)}
-.uk-info .it{flex:1;min-width:0}
-.uk-info .it b{display:block;font-family:'Space Grotesk';font-size:14px;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.uk-info .it span{font-size:11.5px;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.uk-info .stat{text-align:right;flex-shrink:0;padding-left:6px;border-left:1px solid var(--line)}
-.uk-info .stat b{display:block;font-family:'Space Grotesk';font-size:18px;color:var(--lime);line-height:1}
-.uk-info .stat span{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.uk-compass{position:absolute;top:14px;right:14px;z-index:6;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:18px;background:rgba(10,13,7,.4)}
-@media(prefers-reduced-motion:reduce){.uk-live i{animation:none}}
+@media(prefers-reduced-motion:reduce){.uk-live i,.uk-mk::before{animation:none}}
 
-@media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:340px;margin:0 auto;width:100%}}
+@media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:360px;margin:0 auto;width:100%}}
 @media(max-width:560px){.calc-out{grid-template-columns:1fr}.calc-body{padding:26px}}
 
 /* ── COMPARE: card toggle, floating bar, drawer ── */
@@ -910,69 +911,9 @@ html{overflow-x:hidden}
         <span class="uk-tag"><iconify-icon icon="ph:wrench-duotone"></iconify-icon> Trades</span>
       </div>
     </div>
-    <div class="uk-map" id="ukMap">
-      <span class="water"></span>
-      <span class="vign"></span>
-      <svg class="uk-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="uklandgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3c5622"/><stop offset="1" stop-color="#223619"/></linearGradient>
-          <pattern id="uklandtex" width="3" height="3" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern>
-          <clipPath id="uklandclip">
-            <path d="M44,10 L55,16 L62,26 L64,36 L58,36 L60,42 L62,48 L66,56 L72,64 L74,74 L70,82 L74,88 L70,92 L66,95 L56,96 L48,97 L34,102 L24,106 L30,98 L40,94 L44,92 L38,90 L30,84 L33,78 L28,72 L36,66 L38,58 L33,54 L38,48 L34,44 L40,40 L36,36 L42,30 L38,24 L43,16 Z"/>
-            <path d="M14,48 L24,46 L29,52 L26,59 L16,60 L11,54 Z"/>
-          </clipPath>
-        </defs>
-        <!-- coastline halo + land fill -->
-        <path class="uk-coast" d="M44,10 L55,16 L62,26 L64,36 L58,36 L60,42 L62,48 L66,56 L72,64 L74,74 L70,82 L74,88 L70,92 L66,95 L56,96 L48,97 L34,102 L24,106 L30,98 L40,94 L44,92 L38,90 L30,84 L33,78 L28,72 L36,66 L38,58 L33,54 L38,48 L34,44 L40,40 L36,36 L42,30 L38,24 L43,16 Z"/>
-        <path class="uk-coast" d="M14,48 L24,46 L29,52 L26,59 L16,60 L11,54 Z"/>
-        <path class="uk-landmass" d="M44,10 L55,16 L62,26 L64,36 L58,36 L60,42 L62,48 L66,56 L72,64 L74,74 L70,82 L74,88 L70,92 L66,95 L56,96 L48,97 L34,102 L24,106 L30,98 L40,94 L44,92 L38,90 L30,84 L33,78 L28,72 L36,66 L38,58 L33,54 L38,48 L34,44 L40,40 L36,36 L42,30 L38,24 L43,16 Z"/>
-        <path class="uk-landmass" d="M14,48 L24,46 L29,52 L26,59 L16,60 L11,54 Z"/>
-        <g clip-path="url(#uklandclip)">
-          <rect x="0" y="0" width="100" height="130" fill="url(#uklandtex)"/>
-          <!-- road network -->
-          <path class="uk-roads major" d="M68,89 L54,70 L48,54 L56,52"/>
-          <path class="uk-roads major" d="M48,54 L46,36 L54,34"/>
-          <path class="uk-roads" d="M54,70 L46,84 L34,86"/>
-          <path class="uk-roads" d="M54,70 L58,46"/>
-          <path class="uk-roads" d="M68,89 L60,95"/>
-          <!-- hover regions (clipped to land) -->
-          <path class="uk-region" data-region="Scotland" data-types="Retail, hospitality &amp; trades" data-tag="SCO" d="M16,2 L82,2 L82,45 L16,45 Z"/>
-          <path class="uk-region" data-region="Northern England" data-types="Hospitality, retail &amp; venues" data-tag="ENG" d="M16,45 L82,45 L82,62 L16,62 Z"/>
-          <path class="uk-region" data-region="Wales" data-types="Cafés, salons &amp; retail" data-tag="WAL" d="M16,62 L45,62 L45,93 L16,93 Z"/>
-          <path class="uk-region" data-region="Midlands" data-types="Takeaways, shops &amp; services" data-tag="ENG" d="M45,62 L82,62 L82,81 L45,81 Z"/>
-          <path class="uk-region" data-region="South West" data-types="Independent retail &amp; cafés" data-tag="ENG" d="M16,81 L55,81 L55,120 L16,120 Z"/>
-          <path class="uk-region" data-region="South East" data-types="Hospitality &amp; every trade" data-tag="ENG" d="M55,81 L82,81 L82,99 L55,99 Z"/>
-          <path class="uk-region" data-region="Northern Ireland" data-types="Salons &amp; retail" data-tag="NI" d="M6,44 L30,44 L30,63 L6,63 Z"/>
-          <path class="uk-region" data-region="London" data-types="Every trade" data-tag="ENG" d="M63,84 L75,84 L75,93 L63,93 Z"/>
-        </g>
-        <!-- region labels -->
-        <text class="uk-rlabel" data-region="Scotland" x="48" y="28">SCOTLAND</text>
-        <text class="uk-rlabel" data-region="Northern England" x="52" y="55">NORTH</text>
-        <text class="uk-rlabel" data-region="Wales" x="31" y="82">WALES</text>
-        <text class="uk-rlabel" data-region="Midlands" x="58" y="72">MIDLANDS</text>
-        <text class="uk-rlabel" data-region="South West" x="35" y="100">SOUTH WEST</text>
-        <text class="uk-rlabel" data-region="South East" x="67" y="90">SOUTH EAST</text>
-        <text class="uk-rlabel" data-region="Northern Ireland" x="19" y="55">N. IRELAND</text>
-      </svg>
-      <div class="uk-live"><i></i> Live coverage</div>
-      <div class="uk-compass"><iconify-icon icon="ph:compass-duotone"></iconify-icon></div>
-      <div class="uk-scale"><span class="bar"></span> 100 mi</div>
-      <span class="uk-pin" style="left:54%;top:26.2%"><span class="pd"></span><span class="plb">Edinburgh</span></span>
-      <span class="uk-pin cap" style="left:46%;top:27.7%"><span class="pd"></span><span class="plb">Glasgow</span></span>
-      <span class="uk-pin" style="left:58%;top:35.4%"><span class="pd"></span><span class="plb">Newcastle</span></span>
-      <span class="uk-pin" style="left:56%;top:40%"><span class="pd"></span><span class="plb">Leeds</span></span>
-      <span class="uk-pin cap" style="left:48%;top:41.5%"><span class="pd"></span><span class="plb">Manchester</span></span>
-      <span class="uk-pin" style="left:20%;top:40.8%"><span class="pd"></span><span class="plb">Belfast</span></span>
-      <span class="uk-pin cap" style="left:54%;top:53.8%"><span class="pd"></span><span class="plb">Birmingham</span></span>
-      <span class="uk-pin" style="left:34%;top:66.2%"><span class="pd"></span><span class="plb">Cardiff</span></span>
-      <span class="uk-pin" style="left:46%;top:64.6%"><span class="pd"></span><span class="plb">Bristol</span></span>
-      <span class="uk-pin cap" style="left:68%;top:68.5%"><span class="pd"></span><span class="plb">London</span></span>
-      <span class="uk-pin" style="left:30%;top:78.5%"><span class="pd"></span><span class="plb">Plymouth</span></span>
-      <div class="uk-info" id="ukInfo">
-        <span class="ic"><iconify-icon id="ukInfoIc" icon="ph:map-trifold-duotone"></iconify-icon></span>
-        <div class="it"><b id="ukInfoTitle">Coverage across the UK</b><span id="ukInfoSub">Hover a region to explore</span></div>
-        <div class="stat"><b id="ukInfoVal">11</b><span id="ukInfoLab">cities</span></div>
-      </div>
+    <div class="uk-map">
+      <div class="uk-leaflet" id="ukMap" role="application" aria-label="Map of UK towns and cities Plemmo serves"></div>
+      <div class="uk-live"><i></i> Live coverage · UK-wide</div>
     </div>
   </div>
 </section>
@@ -1382,24 +1323,54 @@ html{overflow-x:hidden}
   sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
   summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 
-  /* ── UK coverage map: hover regions to update the info panel ── */
+  /* ── UK coverage map: real, zoomable Leaflet map (dark themed) ── */
   (function(){
-    var map=document.getElementById('ukMap');if(!map)return;
-    var regions=map.querySelectorAll('.uk-region'),labels=map.querySelectorAll('.uk-rlabel');
-    var ic=document.getElementById('ukInfoIc'),ti=document.getElementById('ukInfoTitle'),
-        su=document.getElementById('ukInfoSub'),va=document.getElementById('ukInfoVal'),la=document.getElementById('ukInfoLab');
-    if(!ti)return;
-    var DEF={ic:'ph:map-trifold-duotone',ti:'Coverage across the UK',su:'Hover a region to explore',va:'11',la:'cities'};
-    function clear(){regions.forEach(function(x){x.classList.remove('act')});labels.forEach(function(l){l.classList.remove('on')});}
-    function labelFor(name){var f=null;labels.forEach(function(l){if(l.getAttribute('data-region')===name)f=l});return f;}
-    function show(el){clear();el.classList.add('act');var lb=labelFor(el.dataset.region);if(lb)lb.classList.add('on');
-      ic.setAttribute('icon','ph:map-pin-duotone');ti.textContent=el.dataset.region;su.textContent=el.dataset.types;va.textContent=el.dataset.tag;la.textContent='region';}
-    function reset(){clear();ic.setAttribute('icon',DEF.ic);ti.textContent=DEF.ti;su.textContent=DEF.su;va.textContent=DEF.va;la.textContent=DEF.la;}
-    regions.forEach(function(el){
-      el.addEventListener('mouseenter',function(){show(el)});
-      el.addEventListener('click',function(e){e.preventDefault();if(el.classList.contains('act'))reset();else show(el)});
+    var el=document.getElementById('ukMap');
+    if(!el||!window.L)return;
+    var CITIES=[
+      ['London',51.5074,-0.1278,'Every trade',1],
+      ['Birmingham',52.4862,-1.8904,'Takeaways & shops',1],
+      ['Manchester',53.4808,-2.2426,'Hospitality & retail',1],
+      ['Leeds',53.8008,-1.5491,'Retail & services',0],
+      ['Liverpool',53.4084,-2.9916,'Cafés & venues',0],
+      ['Sheffield',53.3811,-1.4701,'Retail & services',0],
+      ['Newcastle',54.9783,-1.6178,'Bars & venues',0],
+      ['Glasgow',55.8642,-4.2518,'Cafés & takeaways',1],
+      ['Edinburgh',55.9533,-3.1883,'Retail & hospitality',0],
+      ['Aberdeen',57.1497,-2.0943,'Retail & trades',0],
+      ['Inverness',57.4778,-4.2247,'Local independents',0],
+      ['Cardiff',51.4816,-3.1791,'Cafés & salons',1],
+      ['Swansea',51.6214,-3.9436,'Independent retail',0],
+      ['Bristol',51.4545,-2.5879,'Independent retail',0],
+      ['Nottingham',52.9548,-1.1581,'Hospitality & retail',0],
+      ['Leicester',52.6369,-1.1398,'Retail & takeaways',0],
+      ['Belfast',54.5973,-5.9301,'Salons & retail',1],
+      ['Brighton',50.8225,-0.1372,'Cafés & retail',0],
+      ['Southampton',50.9097,-1.4044,'Retail & services',0],
+      ['Plymouth',50.3755,-4.1427,'Local independents',0]
+    ];
+    var map=L.map(el,{
+      zoomControl:true, scrollWheelZoom:false, attributionControl:true,
+      minZoom:5, maxZoom:11, zoomSnap:.5,
+      maxBounds:[[49,-9.5],[61,2.8]], maxBoundsViscosity:1
+    }).setView([54.6,-3.0],5.4);
+    map.zoomControl.setPosition('topright');
+    L.control.scale({position:'bottomleft',imperial:true,metric:false,maxWidth:90}).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains:'abcd', maxZoom:19
+    }).addTo(map);
+    CITIES.forEach(function(c){
+      var cap=c[4]?' cap':'', sz=c[4]?18:14, a=c[4]?9:7;
+      var icon=L.divIcon({className:'',html:'<span class="uk-mk'+cap+'"><i></i></span>',iconSize:[sz,sz],iconAnchor:[a,a]});
+      var m=L.marker([c[1],c[2]],{icon:icon,title:c[0],riseOnHover:true}).addTo(map);
+      m.bindPopup('<div class="mkpop"><b>'+c[0]+'</b><span class="t"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> '+c[3]+'</span><span class="r">Plemmo coverage · compare &amp; switch</span></div>',{closeButton:true});
+      m.on('mouseover',function(){this.openPopup()});
     });
-    map.addEventListener('mouseleave',reset);
+    function fix(){map.invalidateSize(false);}
+    setTimeout(fix,60); window.addEventListener('resize',fix);
+    if('ResizeObserver' in window){try{new ResizeObserver(fix).observe(el);}catch(e){}}
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)fix();});}).observe(el);}
   })();
 })();
 </script>
