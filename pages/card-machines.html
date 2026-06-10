@@ -481,7 +481,9 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .uk-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .uk-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--line-l);border-radius:100px;padding:8px 14px;box-shadow:var(--shadow-l)}
 .uk-tag iconify-icon{color:#5f9000;font-size:16px}
-.uk-map{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);background:#0a1014;box-shadow:var(--shadow)}
+.uk-map{position:relative;isolation:isolate;z-index:0;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);background:#0a1014;box-shadow:var(--shadow)}
+/* keep Leaflet's panes/controls contained so they never overlap the navbar */
+.uk-map .leaflet-pane,.uk-map .leaflet-top,.uk-map .leaflet-bottom{z-index:400}
 .uk-leaflet{position:absolute;inset:0}
 .uk-map .leaflet-container{background:#0a1014;font-family:'Inter',system-ui,sans-serif;outline:none}
 .uk-map .leaflet-tile-pane{filter:saturate(.92) brightness(.96)}
