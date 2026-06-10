@@ -483,10 +483,14 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
   background:radial-gradient(130% 100% at 50% 0%,#10160d 0%,#080b06 72%);box-shadow:var(--shadow)}
 .uk-map .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:32px 32px;-webkit-mask:radial-gradient(circle at 50% 45%,#000 50%,transparent 82%);mask:radial-gradient(circle at 50% 45%,#000 50%,transparent 82%)}
 .uk-map .halo{position:absolute;top:44%;left:50%;width:76%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(198,255,0,.16),transparent 62%);filter:blur(22px);mix-blend-mode:screen}
-.uk-svg{position:absolute;inset:0;width:100%;height:100%}
-.uk-land{stroke:rgba(198,255,0,.5);stroke-width:.7;filter:drop-shadow(0 0 12px rgba(198,255,0,.22))}
-.uk-line{fill:none;stroke:rgba(198,255,0,.45);stroke-width:.5;stroke-dasharray:2 3;animation:ukdash 18s linear infinite}
+.uk-svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 9px rgba(198,255,0,.28))}
+.uk-dots{opacity:.92}
+.uk-glow{fill:none;stroke:rgba(198,255,0,.16);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.uk-land{fill:none;stroke:rgba(198,255,0,.72);stroke-width:.5;stroke-linejoin:round;stroke-linecap:round}
+.uk-line{fill:none;stroke:rgba(198,255,0,.5);stroke-width:.45;stroke-dasharray:1.4 2.6;animation:ukdash 16s linear infinite}
 @keyframes ukdash{to{stroke-dashoffset:-120}}
+.uk-radar{position:absolute;top:42%;left:50%;width:118%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:conic-gradient(from 0deg,rgba(198,255,0,.2),transparent 24%);-webkit-mask:radial-gradient(circle,#000 0,#000 58%,transparent 60%);mask:radial-gradient(circle,#000 0,#000 58%,transparent 60%);animation:ukspin 9s linear infinite;pointer-events:none;mix-blend-mode:screen;opacity:.6;z-index:2}
+@keyframes ukspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .uk-pin{position:absolute;transform:translate(-50%,-50%);z-index:3;cursor:pointer;width:14px;height:14px}
 .uk-pin .pd{position:absolute;inset:0;border-radius:50%;background:var(--lime);box-shadow:0 0 12px rgba(198,255,0,.7);animation:ukping 2.8s infinite}
 .uk-pin.sm{width:9px;height:9px}.uk-pin.sm .pd{opacity:.7;animation-duration:3.6s}
@@ -498,10 +502,19 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .uk-pin:hover .lbl,.uk-pin.act .lbl{opacity:1;transform:translate(-50%,0)}
 .uk-pin .lbl b{display:block;font-family:'Space Grotesk';font-size:12px;color:#fff;line-height:1.15}
 .uk-pin .lbl span{font-size:10.5px;color:var(--lime)}
-.uk-badge{position:absolute;left:16px;bottom:16px;z-index:4;display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:8px 13px}
-.uk-badge i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
-.uk-compass{position:absolute;top:14px;right:14px;z-index:4;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:18px;background:rgba(10,13,7,.4)}
-@media(prefers-reduced-motion:reduce){.uk-pin .pd,.uk-line,.uk-badge i{animation:none}}
+.uk-live{position:absolute;left:16px;top:14px;z-index:6;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.55);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px}
+.uk-live i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+.uk-info{position:absolute;left:14px;right:14px;bottom:14px;z-index:6;display:flex;align-items:center;gap:13px;background:rgba(10,13,7,.74);backdrop-filter:blur(12px);border:1px solid var(--line2);border-radius:16px;padding:12px 15px;box-shadow:0 16px 36px rgba(0,0,0,.5)}
+.uk-info .ic{width:40px;height:40px;border-radius:11px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s var(--spring)}
+.uk-info .ic iconify-icon{font-size:21px;color:var(--lime)}
+.uk-info .it{flex:1;min-width:0}
+.uk-info .it b{display:block;font-family:'Space Grotesk';font-size:14px;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uk-info .it span{font-size:11.5px;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uk-info .stat{text-align:right;flex-shrink:0;padding-left:6px;border-left:1px solid var(--line)}
+.uk-info .stat b{display:block;font-family:'Space Grotesk';font-size:18px;color:var(--lime);line-height:1}
+.uk-info .stat span{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.uk-compass{position:absolute;top:14px;right:14px;z-index:6;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:18px;background:rgba(10,13,7,.4)}
+@media(prefers-reduced-motion:reduce){.uk-pin .pd,.uk-line,.uk-live i,.uk-radar{animation:none}}
 
 @media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:340px;margin:0 auto;width:100%}}
 @media(max-width:560px){.calc-out{grid-template-columns:1fr}.calc-body{padding:26px}}
@@ -902,30 +915,47 @@ html{overflow-x:hidden}
     <div class="uk-map" id="ukMap">
       <span class="grid"></span><span class="halo"></span>
       <span class="uk-compass"><iconify-icon icon="ph:navigation-arrow-fill"></iconify-icon></span>
+      <span class="uk-radar"></span>
       <svg class="uk-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="ukfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(198,255,0,0.13)"/><stop offset="1" stop-color="rgba(198,255,0,0.02)"/></linearGradient></defs>
-        <path class="uk-land" fill="url(#ukfill)" d="M46,8 L52,11 L49,16 L58,21 L53,25 L56,29 L60,33 L59,38 L62,45 L60,50 L64,52 L70,53 L66,57 L63,61 L66,65 L62,67 L57,68 L50,69 L44,70 L36,71 L28,72 L23,71 L27,68 L35,67 L41,66 L39,63 L33,64 L26,65 L29,61 L31,58 L28,53 L33,52 L37,51 L35,47 L38,45 L34,41 L36,37 L32,35 L35,31 L31,29 L34,26 L30,25 L34,22 L31,18 L38,15 L41,10 Z"/>
-        <path class="uk-land" fill="url(#ukfill)" style="opacity:.55" d="M12,50 L21,48 L24,55 L20,63 L12,65 L7,58 L9,52 Z"/>
-        <path class="uk-line" d="M62,70 L50,61 L47,51 L55,49 L58,40 L53,30"/>
-        <path class="uk-line" d="M62,70 L46,68 L38,69"/>
-        <path class="uk-line" d="M47,51 L41,51"/>
+        <defs>
+          <pattern id="ukdots" width="2.8" height="2.8" patternUnits="userSpaceOnUse"><circle cx="1.4" cy="1.4" r="0.62" fill="rgba(198,255,0,0.4)"/></pattern>
+          <clipPath id="ukclip">
+            <path d="M47,15 L52,18 L58,21 L61,26 L60,30 L56,30 L58,33 L59,38 L60,43 L63,48 L66,52 L67,57 L68,61 L66,64 L64,68 L63,71 L60,73 L54,75 L47,75 L38,77 L30,78 L33,74 L40,71 L37,70 L33,66 L35,62 L33,59 L39,55 L40,52 L38,49 L40,45 L39,41 L42,36 L40,32 L43,30 L41,27 L44,23 L42,20 L45,17 Z"/>
+            <path d="M22,40 L26,44 L25,50 L18,52 L13,48 L14,42 Z"/>
+          </clipPath>
+        </defs>
+        <g clip-path="url(#ukclip)"><rect class="uk-dots" x="0" y="0" width="100" height="130" fill="url(#ukdots)"/></g>
+        <path class="uk-glow" d="M47,15 L52,18 L58,21 L61,26 L60,30 L56,30 L58,33 L59,38 L60,43 L63,48 L66,52 L67,57 L68,61 L66,64 L64,68 L63,71 L60,73 L54,75 L47,75 L38,77 L30,78 L33,74 L40,71 L37,70 L33,66 L35,62 L33,59 L39,55 L40,52 L38,49 L40,45 L39,41 L42,36 L40,32 L43,30 L41,27 L44,23 L42,20 L45,17 Z"/>
+        <path class="uk-land" d="M47,15 L52,18 L58,21 L61,26 L60,30 L56,30 L58,33 L59,38 L60,43 L63,48 L66,52 L67,57 L68,61 L66,64 L64,68 L63,71 L60,73 L54,75 L47,75 L38,77 L30,78 L33,74 L40,71 L37,70 L33,66 L35,62 L33,59 L39,55 L40,52 L38,49 L40,45 L39,41 L42,36 L40,32 L43,30 L41,27 L44,23 L42,20 L45,17 Z"/>
+        <path class="uk-glow" style="opacity:.6" d="M22,40 L26,44 L25,50 L18,52 L13,48 L14,42 Z"/>
+        <path class="uk-land" style="opacity:.7" d="M22,40 L26,44 L25,50 L18,52 L13,48 L14,42 Z"/>
+        <path class="uk-line" d="M62,70 L50,61 L47,51 L55,49"/>
+        <path class="uk-line" d="M47,51 L44,30 L53,30"/>
+        <path class="uk-line" d="M50,61 L46,68 L38,69"/>
+        <path class="uk-line" d="M62,70 L58,75"/>
+        <path class="uk-line" d="M50,61 L55,49"/>
       </svg>
-      <button class="uk-pin" style="left:53%;top:23%"><span class="pd"></span><span class="lbl"><b>Edinburgh</b><span>Retail &amp; hospitality</span></span></button>
-      <button class="uk-pin" style="left:44%;top:23%"><span class="pd"></span><span class="lbl"><b>Glasgow</b><span>Cafés &amp; takeaways</span></span></button>
-      <button class="uk-pin sm" style="left:57%;top:17%"><span class="pd"></span><span class="lbl"><b>Aberdeen</b></span></button>
-      <button class="uk-pin sm" style="left:47%;top:13%"><span class="pd"></span><span class="lbl"><b>Inverness</b></span></button>
-      <button class="uk-pin" style="left:58%;top:31%"><span class="pd"></span><span class="lbl"><b>Newcastle</b><span>Bars &amp; venues</span></span></button>
-      <button class="uk-pin" style="left:20%;top:35%"><span class="pd"></span><span class="lbl"><b>Belfast</b><span>Salons &amp; retail</span></span></button>
-      <button class="uk-pin" style="left:55%;top:38%"><span class="pd"></span><span class="lbl"><b>Leeds</b><span>Retail &amp; services</span></span></button>
-      <button class="uk-pin" style="left:47%;top:39%"><span class="pd"></span><span class="lbl"><b>Manchester</b><span>Hospitality &amp; retail</span></span></button>
-      <button class="uk-pin sm" style="left:41%;top:39%"><span class="pd"></span><span class="lbl"><b>Liverpool</b></span></button>
-      <button class="uk-pin" style="left:50%;top:47%"><span class="pd"></span><span class="lbl"><b>Birmingham</b><span>Takeaways &amp; shops</span></span></button>
-      <button class="uk-pin" style="left:38%;top:53%"><span class="pd"></span><span class="lbl"><b>Cardiff</b><span>Cafés &amp; salons</span></span></button>
-      <button class="uk-pin" style="left:46%;top:52%"><span class="pd"></span><span class="lbl"><b>Bristol</b><span>Independent retail</span></span></button>
-      <button class="uk-pin" style="left:62%;top:54%"><span class="pd"></span><span class="lbl"><b>London</b><span>Every trade</span></span></button>
-      <button class="uk-pin sm" style="left:58%;top:58%"><span class="pd"></span><span class="lbl"><b>Brighton</b></span></button>
-      <button class="uk-pin sm" style="left:30%;top:59%"><span class="pd"></span><span class="lbl"><b>Plymouth</b></span></button>
-      <span class="uk-badge"><i></i> Live · businesses across the UK</span>
+      <div class="uk-live"><i></i> Live coverage</div>
+      <button class="uk-pin" data-city="Edinburgh" data-types="Retail &amp; hospitality" data-region="SCO" style="left:53%;top:23%"><span class="pd"></span><span class="lbl"><b>Edinburgh</b><span>Retail &amp; hospitality</span></span></button>
+      <button class="uk-pin" data-city="Glasgow" data-types="Cafés &amp; takeaways" data-region="SCO" style="left:44%;top:23%"><span class="pd"></span><span class="lbl"><b>Glasgow</b><span>Cafés &amp; takeaways</span></span></button>
+      <button class="uk-pin sm" data-city="Aberdeen" data-types="Retail &amp; trades" data-region="SCO" style="left:57%;top:17%"><span class="pd"></span><span class="lbl"><b>Aberdeen</b><span>Retail &amp; trades</span></span></button>
+      <button class="uk-pin sm" data-city="Inverness" data-types="Local independents" data-region="SCO" style="left:47%;top:13%"><span class="pd"></span><span class="lbl"><b>Inverness</b><span>Local independents</span></span></button>
+      <button class="uk-pin" data-city="Newcastle" data-types="Bars &amp; venues" data-region="ENG" style="left:58%;top:31%"><span class="pd"></span><span class="lbl"><b>Newcastle</b><span>Bars &amp; venues</span></span></button>
+      <button class="uk-pin" data-city="Belfast" data-types="Salons &amp; retail" data-region="NI" style="left:20%;top:35%"><span class="pd"></span><span class="lbl"><b>Belfast</b><span>Salons &amp; retail</span></span></button>
+      <button class="uk-pin" data-city="Leeds" data-types="Retail &amp; services" data-region="ENG" style="left:55%;top:38%"><span class="pd"></span><span class="lbl"><b>Leeds</b><span>Retail &amp; services</span></span></button>
+      <button class="uk-pin" data-city="Manchester" data-types="Hospitality &amp; retail" data-region="ENG" style="left:47%;top:39%"><span class="pd"></span><span class="lbl"><b>Manchester</b><span>Hospitality &amp; retail</span></span></button>
+      <button class="uk-pin sm" data-city="Liverpool" data-types="Cafés &amp; venues" data-region="ENG" style="left:41%;top:39%"><span class="pd"></span><span class="lbl"><b>Liverpool</b><span>Cafés &amp; venues</span></span></button>
+      <button class="uk-pin" data-city="Birmingham" data-types="Takeaways &amp; shops" data-region="ENG" style="left:50%;top:47%"><span class="pd"></span><span class="lbl"><b>Birmingham</b><span>Takeaways &amp; shops</span></span></button>
+      <button class="uk-pin" data-city="Cardiff" data-types="Cafés &amp; salons" data-region="WAL" style="left:38%;top:53%"><span class="pd"></span><span class="lbl"><b>Cardiff</b><span>Cafés &amp; salons</span></span></button>
+      <button class="uk-pin" data-city="Bristol" data-types="Independent retail" data-region="ENG" style="left:46%;top:52%"><span class="pd"></span><span class="lbl"><b>Bristol</b><span>Independent retail</span></span></button>
+      <button class="uk-pin" data-city="London" data-types="Every trade" data-region="ENG" style="left:62%;top:54%"><span class="pd"></span><span class="lbl"><b>London</b><span>Every trade</span></span></button>
+      <button class="uk-pin sm" data-city="Brighton" data-types="Cafés &amp; retail" data-region="ENG" style="left:58%;top:58%"><span class="pd"></span><span class="lbl"><b>Brighton</b><span>Cafés &amp; retail</span></span></button>
+      <button class="uk-pin sm" data-city="Plymouth" data-types="Local independents" data-region="ENG" style="left:30%;top:59%"><span class="pd"></span><span class="lbl"><b>Plymouth</b><span>Local independents</span></span></button>
+      <div class="uk-info" id="ukInfo">
+        <span class="ic"><iconify-icon id="ukInfoIc" icon="ph:map-trifold-duotone"></iconify-icon></span>
+        <div class="it"><b id="ukInfoTitle">Businesses across the UK</b><span id="ukInfoSub">Hover a city to explore coverage</span></div>
+        <div class="stat"><b id="ukInfoVal">15</b><span id="ukInfoLab">towns</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1335,10 +1365,23 @@ html{overflow-x:hidden}
   sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
   summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 
-  /* ── UK map pins: tap-to-toggle (touch) ── */
-  var ukPins=document.querySelectorAll('#ukMap .uk-pin');
-  ukPins.forEach(function(p){p.addEventListener('click',function(e){e.preventDefault();var on=p.classList.contains('act');ukPins.forEach(function(x){x.classList.remove('act')});if(!on)p.classList.add('act')})});
-  document.addEventListener('click',function(e){if(!e.target.closest('#ukMap'))ukPins.forEach(function(x){x.classList.remove('act')})});
+  /* ── UK coverage map: interactive city info panel ── */
+  (function(){
+    var map=document.getElementById('ukMap');if(!map)return;
+    var ukPins=map.querySelectorAll('.uk-pin');
+    var ic=document.getElementById('ukInfoIc'),ti=document.getElementById('ukInfoTitle'),
+        su=document.getElementById('ukInfoSub'),va=document.getElementById('ukInfoVal'),la=document.getElementById('ukInfoLab');
+    var DEF={ic:'ph:map-trifold-duotone',ti:'Businesses across the UK',su:'Hover a city to explore coverage',va:String(ukPins.length),la:'towns'};
+    function show(p){if(!ti)return;ic.setAttribute('icon','ph:map-pin-duotone');ti.textContent=p.dataset.city;su.textContent=p.dataset.types;va.textContent=p.dataset.region;la.textContent='region';}
+    function reset(){if(!ti)return;ic.setAttribute('icon',DEF.ic);ti.textContent=DEF.ti;su.textContent=DEF.su;va.textContent=DEF.va;la.textContent=DEF.la;}
+    ukPins.forEach(function(p){
+      p.addEventListener('mouseenter',function(){ukPins.forEach(function(x){x.classList.remove('act')});p.classList.add('act');show(p)});
+      p.addEventListener('focus',function(){ukPins.forEach(function(x){x.classList.remove('act')});p.classList.add('act');show(p)});
+      p.addEventListener('click',function(e){e.preventDefault();var on=p.classList.contains('act')&&ti&&ti.textContent===p.dataset.city;ukPins.forEach(function(x){x.classList.remove('act')});if(!on){p.classList.add('act');show(p)}else{reset()}});
+    });
+    map.addEventListener('mouseleave',function(){ukPins.forEach(function(x){x.classList.remove('act')});reset()});
+    document.addEventListener('click',function(e){if(!e.target.closest('#ukMap')){ukPins.forEach(function(x){x.classList.remove('act')});reset()}});
+  })();
 })();
 </script>
 <script src="../cookie-consent.js"></script>

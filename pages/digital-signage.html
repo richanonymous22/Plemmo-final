@@ -103,6 +103,27 @@
 .btc{display:flex;align-items:center;gap:11px;border-radius:13px;padding:15px 16px;font-size:13.5px;font-weight:700;background:var(--white);border:1px solid var(--line-l);box-shadow:var(--shadow-l);transition:transform .2s}
 .btc:hover{transform:translateY(-3px)}.btc iconify-icon{font-size:20px;color:#5f9000}
 @media(max-width:920px){.shero-grid{grid-template-columns:1fr;gap:38px}.sstage{order:-1;max-width:440px;margin:0 auto;width:100%}.rec,.mb-grid,.cband{grid-template-columns:1fr}.pkg-grid{grid-template-columns:1fr}.bt-grid{grid-template-columns:repeat(2,1fr)}}
+/* pricing visual */
+.sg-show{display:grid;grid-template-columns:.92fr 1.08fr;gap:22px;align-items:start;margin-top:22px}
+.sg-visual{position:sticky;top:96px;position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);aspect-ratio:4/3;background:radial-gradient(circle at 50% 30%,rgba(198,255,0,.1),transparent 70%),#0d100a}
+.sg-visual img{width:100%;height:100%;object-fit:cover;transition:opacity .35s var(--ease),transform .6s var(--ease)}
+.sg-visual:hover img{transform:scale(1.04)}
+.sg-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,6,.7),transparent 55%);pointer-events:none}
+.sg-cap{position:absolute;left:14px;bottom:14px;z-index:2;display:inline-flex;align-items:center;gap:8px;background:rgba(10,13,7,.78);backdrop-filter:blur(8px);border:1px solid var(--line2);color:#fff;font-size:12px;font-weight:700;padding:8px 13px;border-radius:var(--pill)}
+.sg-cap iconify-icon{color:var(--lime);font-size:15px}
+.sg-table-wrap{margin-top:0}
+/* package + custom card media */
+.pkg{overflow:hidden}
+.pkg-media{margin:-24px -24px 18px;aspect-ratio:16/9;overflow:hidden;position:relative;background:#0d100a}
+.pkg-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.pkg:hover .pkg-media img{transform:scale(1.05)}
+.ccard{overflow:hidden;padding:0;display:flex;flex-direction:column}
+.ccard-media{position:relative;aspect-ratio:16/9;overflow:hidden}
+.ccard-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.ccard:hover .ccard-media img{transform:scale(1.05)}
+.ccard-media .ci{position:absolute;left:22px;bottom:-24px;margin:0;box-shadow:0 12px 26px rgba(0,0,0,.45)}
+.ccard-body{padding:36px 28px 28px}
+@media(max-width:920px){.sg-show{grid-template-columns:1fr}.sg-visual{position:relative;top:0;max-width:520px;margin:0 auto;width:100%}}
 @media(max-width:600px){.bt-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -195,9 +216,9 @@
       </div>
     </div>
     <div class="pkg-grid">
-      <div class="card pkg rv"><div class="pp">£350</div><div class="pu">per screen · 32"</div><h3>32" Commercial Screen</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Commercial-grade monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Animated menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='32" Menu Board Package'>Choose</a></div>
-      <div class="card pkg rv"><div class="pp">£400</div><div class="pu">per screen · 40"</div><h3>40" Commercial Screen</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger commercial monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Animated menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='40" Menu Board Package'>Choose</a></div>
-      <div class="card pkg rv"><div class="pp" style="font-size:34px">Custom</div><div class="pu">multi-screen &amp; bespoke</div><h3>Custom menu setup</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger / multi-screen layouts</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Bespoke designs</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Installation options</li></ul><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom menu board setup">Get Custom Quote</a></div>
+      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=600'" alt="32 inch digital menu board screen"></div><div class="pp">£350</div><div class="pu">per screen · 32"</div><h3>32" Commercial Screen</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Commercial-grade monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Animated menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='32" Menu Board Package'>Choose</a></div>
+      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=600'" alt="40 inch commercial menu display"></div><div class="pp">£400</div><div class="pu">per screen · 40"</div><h3>40" Commercial Screen</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger commercial monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Animated menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='40" Menu Board Package'>Choose</a></div>
+      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=600'" alt="Multi-screen custom menu setup"></div><div class="pp" style="font-size:34px">Custom</div><div class="pu">multi-screen &amp; bespoke</div><h3>Custom menu setup</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger / multi-screen layouts</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Bespoke designs</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Installation options</li></ul><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom menu board setup">Get Custom Quote</a></div>
     </div>
   </div>
 </section>
@@ -209,7 +230,9 @@
     <div class="sg-tabs rv" id="pTabs">
       <div class="sg-tab active" data-cat="adv">Advertising</div><div class="sg-tab" data-cat="vib">4K Vibrant</div><div class="sg-tab" data-cat="free">Freestanding</div><div class="sg-tab" data-cat="win">Window</div><div class="sg-tab" data-cat="kiosk">Touch Kiosks</div><div class="sg-tab" data-cat="out">Outdoor</div><div class="sg-tab" data-cat="touch">Interactive</div><div class="sg-tab" data-cat="pos">POS</div>
     </div>
-    <div class="sg-table-wrap rv">
+    <div class="sg-show rv">
+    <div class="sg-visual"><img id="sgImg" loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=800'" alt="Digital advertising display"><span class="sg-cap" id="sgCap"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Advertising displays</span></div>
+    <div class="sg-table-wrap">
       <div class="sg-cat active" data-cat="adv"><table class="sg-table"><tr><td>32" Slimline Pro Advertising Display</td><td>£650</td></tr><tr><td>43" Slimline Pro Advertising Display</td><td>£890</td></tr><tr><td>50" Slimline Pro Advertising Display</td><td>£1,035</td></tr><tr><td>55" Slimline Pro Advertising Display</td><td>£1,350</td></tr></table></div>
       <div class="sg-cat" data-cat="vib"><table class="sg-table"><tr><td>32" Vibrant Professional Display</td><td>£499</td></tr><tr><td>43" 4K Vibrant Professional Display</td><td>£715</td></tr><tr><td>50" 4K Vibrant Professional Display</td><td>£810</td></tr><tr><td>55" 4K Vibrant Professional Display</td><td>£1,140</td></tr></table></div>
       <div class="sg-cat" data-cat="free"><table class="sg-table"><tr><td>50" Android Freestanding Digital Poster</td><td>£1,915</td></tr><tr><td>55" Android Freestanding Digital Poster</td><td>£2,190</td></tr><tr><td>65" 4K Freestanding Digital Poster</td><td>£3,575</td></tr></table></div>
@@ -218,6 +241,7 @@
       <div class="sg-cat" data-cat="out"><table class="sg-table"><tr><td>43" Outdoor Digital Advertising Display</td><td>£2,960</td></tr><tr><td>55" Outdoor Digital Advertising Display</td><td>£5,455</td></tr><tr><td>43" Outdoor Digital A-Board</td><td>£2,370</td></tr></table></div>
       <div class="sg-cat" data-cat="touch"><table class="sg-table"><tr><td>55" 4K Interactive Touch Display</td><td>£1,139</td></tr><tr><td>65" 4K Interactive Touch Display</td><td>£1,230</td></tr><tr><td>75" 4K Interactive Touch Display</td><td>£1,770</td></tr></table></div>
       <div class="sg-cat" data-cat="pos"><table class="sg-table"><tr><td>10" POS Android Advertising Display</td><td>£230</td></tr><tr><td>15" POS Android Advertising Display</td><td>£360</td></tr></table></div>
+    </div>
     </div>
     <p class="disc" style="margin-top:20px">Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability.</p>
   </div>
@@ -228,8 +252,8 @@
   <div class="container">
     <div class="head"><span class="eyebrow"><iconify-icon icon="ph:magic-wand-duotone"></iconify-icon> Bespoke · quoted individually</span><h2 class="h2" style="text-align:left">Custom shopfront &amp; neon signage</h2></div>
     <div class="cband rv">
-      <div class="ccard"><div class="ci"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></div><h3>Shopfront signage</h3><p>Quoted on size, materials, lighting, design complexity, site survey, quantity and installation.</p><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom shopfront signage">Get Custom Quote</a></div>
-      <div class="ccard"><div class="ci"><iconify-icon icon="ph:lightbulb-filament-duotone"></iconify-icon></div><h3>LED neon signs</h3><p>Quoted on size, colour, logo complexity, indoor/outdoor use and quantity.</p><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom LED neon sign">Get Custom Quote</a></div>
+      <div class="ccard"><div class="ccard-media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1481437156560-3205f6a55735?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=800'" alt="Custom shopfront signage"><span class="ci"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span></div><div class="ccard-body"><h3>Shopfront signage</h3><p>Quoted on size, materials, lighting, design complexity, site survey, quantity and installation.</p><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom shopfront signage">Get Custom Quote</a></div></div>
+      <div class="ccard"><div class="ccard-media"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1545061308-1bb30f3f7f7e?auto=format&fit=crop&q=80&w=800" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&q=80&w=800'" alt="Custom LED neon sign"><span class="ci"><iconify-icon icon="ph:lightbulb-filament-duotone"></iconify-icon></span></div><div class="ccard-body"><h3>LED neon signs</h3><p>Quoted on size, colour, logo complexity, indoor/outdoor use and quantity.</p><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom LED neon sign">Get Custom Quote</a></div></div>
     </div>
   </div>
 </section>
@@ -327,8 +351,20 @@
   function setSig(k){var d=SIG[k];document.getElementById('sigTitle').textContent=d.title;document.getElementById('sigMatch').textContent=d.match;document.getElementById('sigText').textContent=d.text;document.getElementById('sigPrice').textContent=d.price;document.getElementById('sigUnit').textContent=d.unit;document.getElementById('sigChecks').innerHTML=d.checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');document.getElementById('sigCta').setAttribute('data-product',d.match);}
   document.querySelectorAll('#sigTabs .tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('#sigTabs .tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');setSig(t.dataset.sig)}});
   setSig('menu');
-  /* pricing tabs */
-  document.querySelectorAll('#pTabs .sg-tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('#pTabs .sg-tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var c=t.dataset.cat;document.querySelectorAll('.sg-cat').forEach(function(s){s.classList.toggle('active',s.dataset.cat===c)})}});
+  /* pricing tabs (+ swapping product visual) */
+  var SGIMG={
+    adv:['photo-1567521464027-f127ff144326','ph:monitor-duotone','Advertising displays'],
+    vib:['photo-1563013544-824ae1b704d3','ph:television-simple-duotone','4K vibrant displays'],
+    free:['photo-1556745757-8d76bdb6984b','ph:scroll-duotone','Freestanding posters'],
+    win:['photo-1481437156560-3205f6a55735','ph:storefront-duotone','Window displays'],
+    kiosk:['photo-1556742502-ec7c0e9f34b1','ph:hand-tap-duotone','Touch kiosks'],
+    out:['photo-1604754742629-3e5728249d73','ph:cloud-sun-duotone','Outdoor displays'],
+    touch:['photo-1517248135467-4c7edcad34c4','ph:cursor-click-duotone','Interactive displays'],
+    pos:['photo-1556742502-ec7c0e9f34b1','ph:cash-register-duotone','POS displays']
+  };
+  var sgImg=document.getElementById('sgImg'),sgCap=document.getElementById('sgCap');
+  function setSgImg(c){var d=SGIMG[c];if(!d||!sgImg)return;sgImg.style.opacity=0;var done=false;setTimeout(function(){sgImg.src='https://images.unsplash.com/'+d[0]+'?auto=format&fit=crop&q=80&w=800';sgImg.alt=d[2];sgImg.onload=function(){sgImg.style.opacity=1};setTimeout(function(){sgImg.style.opacity=1},400);},180);if(sgCap)sgCap.innerHTML='<iconify-icon icon="'+d[1]+'"></iconify-icon> '+d[2];}
+  document.querySelectorAll('#pTabs .sg-tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('#pTabs .sg-tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var c=t.dataset.cat;document.querySelectorAll('.sg-cat').forEach(function(s){s.classList.toggle('active',s.dataset.cat===c)});setSgImg(c)}});
   /* before/after */
   (function(){var r=document.getElementById('baRange'),c=document.getElementById('baClip'),h=document.getElementById('baHandle');if(!r)return;function set(v){c.style.clipPath='inset(0 '+(100-v)+'% 0 0)';h.style.left=v+'%'}r.addEventListener('input',function(){set(+r.value)});set(50)})();
   /* menu board preview cycle */

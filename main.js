@@ -343,15 +343,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 10. Testimonials Infinite Marquee
+  // 10. Testimonials Infinite Marquee (pause on hover)
   const testTrack = document.getElementById('test-track');
   if(testTrack) {
-    gsap.to(testTrack, {
+    const testTween = gsap.to(testTrack, {
       x: "-50%",
       ease: "none",
-      duration: 25,
+      duration: 38,
       repeat: -1
     });
+    const testWrap = testTrack.closest('.marquee-container') || testTrack;
+    testWrap.addEventListener('mouseenter', () => gsap.to(testTween, { timeScale: 0, duration: 0.4 }));
+    testWrap.addEventListener('mouseleave', () => gsap.to(testTween, { timeScale: 1, duration: 0.4 }));
   }
 
 
