@@ -1,43 +1,43 @@
-# Plemmo — Outstanding items (owner-dependent / next round)
+# Plemmo — Outstanding items
 
-These are tracked follow-ups that were intentionally deferred. They need
-owner-supplied content or a larger build, so they were not done in the
-content/compliance/bug-fix round.
+## Still pending (owner to supply)
+- [ ] **Imagery** — replace ALL site imagery with real Plemmo photos:
+  - Card-machines hero (Teya device): `pages/card-machines.html` `src="../images/Card machine no bg.webp"`.
+  - EPOS hero placeholder: `pages/epos-systems.html` `src="../images/EPOS no bg.png"`.
+  - Stock Unsplash images (PREMIUM HARDWARE cards in `index.html`, industry panels, etc.).
+- [ ] **Partner logos** — replace text `.plogo` chips in `pages/card-machines.html` with real logo images once provided.
 
-## Imagery (owner to supply)
-- [ ] Replace ALL imagery across the site with real Plemmo photos.
-  - Card-machines hero is currently the Teya device: `pages/card-machines.html`
-    `<img ... src="../images/Card machine no bg.webp">` (hero).
-  - EPOS hero is the placeholder EPOS render: `pages/epos-systems.html`
-    `<img ... src="../images/EPOS no bg.png">`.
-  - Various stock Unsplash images (e.g. PREMIUM HARDWARE cards in `index.html`,
-    industry panels) should be swapped for real photography.
-- [ ] Replace text partner chips (`.plogo` in `pages/card-machines.html`) with
-  real partner logo images once provided.
+## A few facts to confirm in the (now live) legal pages
+These pages are built and wired, but contain a couple of values the owner said
+are not issued yet — update the text once available:
+- [ ] **VAT registration number** — both companies are VAT registered but the number
+  hadn't been issued. Currently shown as "VAT registration number to be confirmed"
+  in `pages/privacy-policy.html` and `pages/legal-disclosures.html`.
+- [ ] **ADR scheme details** — `pages/complaints.html` says ADR arrangements are being
+  finalised; add the scheme/number once received.
 
-## Legal / compliance — next round (full build)
-Quick wins are done (introducer wording, two-company trading-name footnote +
-company numbers, short service-page disclaimers). Still to build:
-- [ ] Privacy Policy page (incl. ICO registration numbers).
-- [ ] Terms & Conditions page.
-- [ ] Cookie Policy page + cookie consent banner.
-- [ ] Legal Disclosures page.
-- [ ] Complaints page/procedure.
-- [ ] Commission Disclosure page.
-- [ ] Wire footer legal links (Terms, Privacy, Cookie Policy, Legal Disclosures,
-  Complaints, Commission Disclosure) once the pages above exist — deferred now
-  to avoid 404s.
-
-## Forms — verify after deploy
-- [ ] Confirm the FormSubmit endpoint `plemmouk@gmail.com` is activated (first
-  submission to a new endpoint triggers an activation email).
-- [ ] Submit each form once on the live site and confirm the received email
-  contains full_name, business_name, phone, email and the form-specific fields
-  (all handlers now send `_template=table` and only show success on a real 200).
-  Forms: homepage wizard (`index.html`), contact (`contact-us.html`), referral
-  (`refer-and-earn.html`), card-machine modal (`card-machines.html`), EPOS demo
-  (`epos-systems.html`), funding modal (`business-funding.html`).
-
-## Contact details
+## Done
 - [x] Phone number updated to 0333 041 1161 sitewide.
-- [ ] Owner to confirm final logo/brand photos.
+- [x] Reviews, calculator move, hospitality icon, cursor-image fix, partner removal,
+  form-reliability fixes, "credit broker" → "introducer".
+- [x] **Legal compliance suite built and wired** (round 2):
+  - `pages/privacy-policy.html` — UK GDPR, lawful bases, rights, ICO numbers
+    (PLEMMO SERVICES LTD ZC113490 / Digitease Business Solutions Ltd ZB963503),
+    ICO complaint route.
+  - `pages/terms.html` — Terms & Conditions (introducer role, governing law E&W).
+  - `pages/cookie-policy.html` — cookie table + "change preferences" control.
+  - `pages/legal-disclosures.html` — company info, trading-name structure,
+    regulatory status, per-service disclosures.
+  - `pages/complaints.html` — procedure + timescales (ack 5 business days / resolve ≤8 weeks).
+  - `pages/commission-disclosure.html` — how Plemmo is paid.
+  - Consent-style **cookie banner** (`cookie-consent.js`, loaded sitewide; Accept all /
+    Reject non-essential; stores choice; future analytics must gate on
+    `window.plemmoConsent === 'all'` / the `plemmo:consent` event).
+  - Footer **legal links** wired into every page; new pages added to `sitemap.xml`.
+  - Registered office / contact: 133 Soho Hill, Hockley, Birmingham B19 1AT.
+
+## Verify after deploy
+- [ ] Confirm FormSubmit endpoint `plemmouk@gmail.com` is activated; test each form
+  receives full_name, business_name, phone, email + form-specific fields.
+- [ ] Have the legal pages reviewed by a solicitor before relying on them — this build
+  is a strong, compliant-ready baseline but is not a substitute for legal advice.

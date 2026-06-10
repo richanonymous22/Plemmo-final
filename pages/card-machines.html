@@ -597,6 +597,7 @@ html{overflow-x:hidden}
   .nav .btn{padding:10px 15px;font-size:12.5px}
   .cm-dash{width:160px}
 }
+.flegal{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px}.flegal a{color:var(--muted);transition:color .2s}.flegal a:hover{color:var(--lime)}
 </style>
 </head>
 <body>
@@ -986,7 +987,8 @@ html{overflow-x:hidden}
       <div class="fcol"><h4>Contact</h4><a href="tel:03330411161">0333 041 1161</a><a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a><a href="#" data-quote>Get a Free Quote</a></div>
     </div>
     <div class="fdisc">Plemmo is an introducer and is not a payment processor, acquiring bank or lender. Card machine products, pricing, settlement times, rates, ratings and approval are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers. Provider logos and names are the property of their respective owners. Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice.</div>
-    <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+    <div class="flegal"><a href="terms.html">Terms &amp; Conditions</a><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="legal-disclosures.html">Legal Disclosures</a><a href="complaints.html">Complaints</a><a href="commission-disclosure.html">Commission Disclosure</a></div>
+  <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
   </div>
 </footer>
 
@@ -1339,5 +1341,6 @@ html{overflow-x:hidden}
   document.addEventListener('click',function(e){if(!e.target.closest('#ukMap'))ukPins.forEach(function(x){x.classList.remove('act')})});
 })();
 </script>
+<script src="../cookie-consent.js"></script>
 </body>
 </html>

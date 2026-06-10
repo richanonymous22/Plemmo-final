@@ -220,3 +220,34 @@ img,svg{max-width:100%}
   .nav .btn{padding:10px 16px;font-size:12.5px}
   .frow.two{grid-template-columns:1fr}
 }
+
+/* ── legal / policy pages ── */
+.legalhero{position:relative;overflow:hidden;padding:132px 0 48px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
+.legalhero .orb{position:absolute;width:560px;height:560px;border-radius:50%;filter:blur(100px);background:radial-gradient(circle,rgba(170,230,0,.1),transparent 70%);top:-180px;right:-140px;pointer-events:none;z-index:0;mix-blend-mode:screen}
+.legalhero h1{font-size:clamp(34px,5vw,58px);color:#fff;letter-spacing:-.03em;position:relative;z-index:2}
+.legalhero .sub{color:var(--muted);font-size:16px;max-width:660px;margin:16px 0 0;position:relative;z-index:2}
+.legalhero .meta{color:var(--muted);font-size:13px;margin-top:14px;position:relative;z-index:2}
+.legal{max-width:860px;margin:0 auto}
+.legal .toc{background:var(--white);border:1px solid var(--line-l);border-radius:var(--r);box-shadow:var(--shadow-l);padding:22px 26px;margin-bottom:40px}
+.legal .toc h2{font-size:15px;color:var(--ink);margin:0 0 12px}
+.legal .toc ol{margin:0;padding-left:20px}
+.legal .toc a{color:#5f9000;font-size:14px;line-height:2}
+.legal h2{font-size:22px;color:var(--ink);margin:42px 0 12px;scroll-margin-top:96px}
+.legal h3{font-size:16px;color:var(--ink);margin:24px 0 8px}
+.legal p,.legal li{font-size:15px;color:var(--ink-soft);line-height:1.75}
+.legal p{margin:0 0 14px}
+.legal ul,.legal ol{margin:0 0 16px;padding-left:22px}
+.legal li{margin-bottom:8px}
+.legal a.inl{color:#5f9000;font-weight:600;text-decoration:underline}
+.legal strong{color:var(--ink)}
+.legal table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:14px}
+.legal th,.legal td{border:1px solid var(--line-l);padding:10px 12px;text-align:left;color:var(--ink-soft);vertical-align:top}
+.legal th{background:var(--paper);color:var(--ink);font-family:'Space Grotesk';font-weight:700}
+.legal .callout{background:var(--lime-soft);border:1px solid rgba(95,144,0,.25);border-radius:var(--r);padding:16px 18px;margin:0 0 22px;font-size:14px;color:var(--ink-soft)}
+.legal .callout strong{color:#46690a}
+.legal .btn{margin-top:8px}
+
+/* footer legal links */
+.flegal{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px}
+.flegal a{color:var(--muted);transition:color .2s}
+.flegal a:hover{color:var(--lime)}
