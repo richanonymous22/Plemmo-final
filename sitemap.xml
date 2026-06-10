@@ -9,4 +9,10 @@
   <url><loc>https://plemmo.co.uk/pages/contact-us.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://plemmo.co.uk/pages/guides.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://plemmo.co.uk/pages/refer-and-earn.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://plemmo.co.uk/pages/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://plemmo.co.uk/pages/privacy-policy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://plemmo.co.uk/pages/cookie-policy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://plemmo.co.uk/pages/legal-disclosures.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://plemmo.co.uk/pages/complaints.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://plemmo.co.uk/pages/commission-disclosure.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
