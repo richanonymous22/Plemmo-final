@@ -128,12 +128,12 @@
 @media(max-width:920px){.fhero-grid{grid-template-columns:1fr;gap:38px}.fstage{order:-1;max-width:440px;margin:0 auto;width:100%}.fc-tiles{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.fprod-grid,.steps,.uses,.docs{grid-template-columns:1fr}.fmatch{grid-template-columns:46px 1fr;gap:12px}.fmatch .pct{display:none}}
 @media(max-width:420px){.fc-tiles{grid-template-columns:1fr}}
-/* partner logo chips (override shared text .plogo) */
-.mq-track{gap:24px}
-.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:64px;width:162px;padding:0 22px;background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.28);font-size:0;transition:transform .35s var(--spring),box-shadow .35s}
-.plogo:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 32px rgba(0,0,0,.35)}
-.plogo img{max-height:30px;max-width:118px;width:auto;object-fit:contain;display:block}
-.plogo.inv img{filter:invert(1) brightness(1.9)}
+/* partner logos shown directly on the dark strip (uniform white, no chips) */
+.mq-track{gap:60px}
+.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0;background:none;box-shadow:none;border-radius:0;font-size:0;transition:transform .35s var(--spring)}
+.plogo:hover{transform:translateY(-2px)}
+.plogo img{max-height:30px;max-width:130px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.7;transition:opacity .35s}
+.plogo:hover img{opacity:1}
 </style>
 </head>
 <body>

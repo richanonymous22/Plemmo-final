@@ -167,13 +167,13 @@ section{scroll-margin-top:88px}
 /* ── PARTNERS (infinite slider on dark) ── */
 .pl{text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
 .marquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.mq-track{display:flex;align-items:center;gap:24px;width:max-content;animation:scrollx 38s linear infinite}
+.mq-track{display:flex;align-items:center;gap:60px;width:max-content;animation:scrollx 38s linear infinite}
 .marquee:hover .mq-track{animation-play-state:paused}
 @keyframes scrollx{to{transform:translateX(-50%)}}
-.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:64px;width:162px;padding:0 22px;background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.28);transition:transform .35s var(--spring),box-shadow .35s}
-.plogo:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 32px rgba(0,0,0,.35)}
-.plogo img{max-height:30px;max-width:118px;width:auto;object-fit:contain;display:block}
-.plogo.inv img{filter:invert(1) brightness(1.9)}
+.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:42px;transition:transform .35s var(--spring)}
+.plogo:hover{transform:translateY(-2px)}
+.plogo img{max-height:30px;max-width:130px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.7;transition:opacity .35s}
+.plogo:hover img{opacity:1}
 
 /* ── QUIZ (dashboard window) ── */
 .quizx{max-width:900px;margin:0 auto;position:relative;border-radius:26px;overflow:hidden;
