@@ -167,13 +167,15 @@ section{scroll-margin-top:88px}
 /* ── PARTNERS (infinite slider on dark) ── */
 .pl{text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
 .marquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.mq-track{display:flex;align-items:center;gap:60px;width:max-content;animation:scrollx 38s linear infinite}
+.mq-track{display:flex;align-items:center;gap:30px;width:max-content;animation:scrollx 40s linear infinite}
 .marquee:hover .mq-track{animation-play-state:paused}
 @keyframes scrollx{to{transform:translateX(-50%)}}
-.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:42px;transition:transform .35s var(--spring)}
+.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:124px;height:56px;transition:transform .35s var(--spring)}
 .plogo:hover{transform:translateY(-2px)}
-.plogo img{max-height:30px;max-width:130px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.7;transition:opacity .35s}
+.plogo img{max-height:25px;max-width:108px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.72;transition:opacity .35s}
 .plogo:hover img{opacity:1}
+.plogo.lg img{max-height:44px;max-width:62px}   /* square / tall marks */
+.plogo.xw img{max-height:19px;max-width:118px}  /* ultra-wide wordmarks */
 
 /* ── QUIZ (dashboard window) ── */
 .quizx{max-width:900px;margin:0 auto;position:relative;border-radius:26px;overflow:hidden;
@@ -688,13 +690,13 @@ html{overflow-x:hidden}
   <div class="container"><div class="pl rv">Compare leading UK card machine providers</div></div>
   <div class="marquee rv">
     <div class="mq-track" id="mqTrack">
-      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/teya.png" alt="Teya"></span>
+      <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/teya.png" alt="Teya"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon"></span>
-      <span class="plogo inv"><img loading="lazy" decoding="async" src="../images/partners/evo.svg" alt="EVO Payments"></span>
-      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/mypos.svg" alt="myPOS"></span>
+      <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/evo.svg" alt="EVO Payments"></span>
+      <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/mypos.svg" alt="myPOS"></span>
     </div>
   </div>
 </section>
