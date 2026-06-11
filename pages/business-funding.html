@@ -21,6 +21,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Plemmo","url":"https://plemmo.co.uk/","logo":"https://plemmo.co.uk/images/logo.png","email":"hello@plemmo.co.uk","telephone":"+443330411161","areaServed":"GB"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://plemmo.co.uk/"},{"@type":"ListItem","position":2,"name":"Business Funding","item":"https://plemmo.co.uk/pages/business-funding.html"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is approval guaranteed?","acceptedAnswer":{"@type":"Answer","text":"No. Funding is subject to lender checks, eligibility, affordability and approval."}},{"@type":"Question","name":"Is Plemmo a lender?","acceptedAnswer":{"@type":"Answer","text":"No. Plemmo is an introducer — we help you explore options through selected funding partners."}},{"@type":"Question","name":"How much can I borrow?","acceptedAnswer":{"@type":"Answer","text":"Amounts depend on your business profile, affordability, turnover, lender criteria and product type."}}]}]}</script>
 <title>Business Funding Options for UK Businesses | Plemmo</title>
 <meta name="description" content="Explore flexible business funding through selected UK funding partners — merchant cash advance, unsecured loans, revenue-based finance, asset finance and credit lines. Plemmo is an introducer, not a lender.">
+<link rel="preconnect" href="https://code.iconify.design" crossorigin>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -128,6 +129,14 @@
 @media(max-width:920px){.fhero-grid{grid-template-columns:1fr;gap:38px}.fstage{order:-1;max-width:440px;margin:0 auto;width:100%}.fc-tiles{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.fprod-grid,.steps,.uses,.docs{grid-template-columns:1fr}.fmatch{grid-template-columns:46px 1fr;gap:12px}.fmatch .pct{display:none}}
 @media(max-width:420px){.fc-tiles{grid-template-columns:1fr}}
+/* partner logos shown directly on the dark strip (uniform white, balanced) */
+.mq-track{gap:30px}
+.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:124px;height:56px;padding:0;background:none;box-shadow:none;border-radius:0;font-size:0;transition:transform .35s var(--spring)}
+.plogo:hover{transform:translateY(-2px)}
+.plogo img{max-height:25px;max-width:108px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.72;transition:opacity .35s}
+.plogo:hover img{opacity:1}
+.plogo.lg img{max-height:44px;max-width:62px}   /* square / tall marks */
+.plogo.xw img{max-height:19px;max-width:118px}  /* ultra-wide wordmarks */
 </style>
 </head>
 <body>
@@ -176,7 +185,7 @@
       </div>
     </div>
     <div class="fstage rv">
-      <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=900" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="UK business owners exploring funding options with Plemmo">
+      <img loading="eager" fetchpriority="high" decoding="async" src="../images/funding-hero.webp" alt="UK business owners exploring funding options with Plemmo">
       <div class="chip c1"><div class="ic"><iconify-icon icon="ph:coins-duotone"></iconify-icon></div><div><b>£10k–£100k+</b><span>Funding amounts</span></div></div>
       <div class="chip c2"><div class="ic"><iconify-icon icon="ph:gauge-duotone"></iconify-icon></div><div><b>Indicative check</b><span>60 seconds</span></div></div>
     </div>
@@ -214,7 +223,7 @@
   <div class="container"><div class="pl rv">We work with a panel of selected UK funding partners</div></div>
   <div class="marquee rv">
     <div class="mq-track">
-      <span class="plogo">YouLend</span><span class="plogo">iwoca</span><span class="plogo">Funding Circle</span><span class="plogo">365 Finance</span><span class="plogo">Bizcap</span><span class="plogo">Tide</span><span class="plogo">Uncapped</span><span class="plogo">Capify</span><span class="plogo">Fleximize</span><span class="plogo">Cubefunder</span><span class="plogo">Got Capital</span>
+      <span class="plogo xw"><img loading="lazy" decoding="async" src="../images/partners/youlend.svg" alt="YouLend"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/iwoca.svg" alt="iwoca"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/funding-circle.svg" alt="Funding Circle"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/365-finance.svg" alt="365 Finance"></span><span class="plogo xw"><img loading="lazy" decoding="async" src="../images/partners/bizcap.svg" alt="Bizcap"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/tide.svg" alt="Tide"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/uncapped.svg" alt="Uncapped"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/capify.svg" alt="Capify"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/fleximize.png" alt="Fleximize"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/cubefunder.svg" alt="Cubefunder"></span><span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/got-capital.png" alt="Got Capital"></span>
     </div>
   </div>
 </section>
@@ -375,7 +384,7 @@
   var STEPS=[
     {k:'amount',q:'How much funding are you looking for?',o:[{l:'Under £10k',i:'ph:coins-duotone'},{l:'£10k–£25k',i:'ph:money-duotone'},{l:'£25k–£50k',i:'ph:chart-line-up-duotone'},{l:'£50k–£100k',i:'ph:chart-bar-duotone'},{l:'£100k+',i:'ph:trend-up-duotone'}]},
     {k:'purpose',q:"What's the funding for?",o:[{l:'Stock',i:'ph:package-duotone'},{l:'Equipment',i:'ph:wrench-duotone'},{l:'Refurbishment',i:'ph:paint-roller-duotone'},{l:'Marketing',i:'ph:megaphone-duotone'},{l:'Cash flow',i:'ph:wallet-duotone'},{l:'Expansion',i:'ph:trend-up-duotone'},{l:'Other',i:'ph:dots-three-circle-duotone'}]},
-    {k:'trading',q:'How long have you been trading?',o:[{l:'Under 6 months',i:'ph:seedling-duotone'},{l:'6–12 months',i:'ph:plant-duotone'},{l:'1–2 years',i:'ph:tree-duotone'},{l:'2+ years',i:'ph:buildings-duotone'}]},
+    {k:'trading',q:'How long have you been trading?',o:[{l:'Under 6 months',i:'ph:leaf-duotone'},{l:'6–12 months',i:'ph:plant-duotone'},{l:'1–2 years',i:'ph:tree-duotone'},{l:'2+ years',i:'ph:buildings-duotone'}]},
     {k:'turnover',q:'What is your monthly turnover?',o:[{l:'Under £5k',i:'ph:coins-duotone'},{l:'£5k–£10k',i:'ph:money-duotone'},{l:'£10k–£25k',i:'ph:chart-line-up-duotone'},{l:'£25k–£50k',i:'ph:chart-bar-duotone'},{l:'£50k+',i:'ph:trend-up-duotone'}]},
     {k:'cards',q:'Do you take card payments?',o:[{l:'Yes',i:'ph:credit-card-duotone'},{l:'No',i:'ph:x-circle-duotone'},{l:'Not sure',i:'ph:question-duotone'}]}
   ];
@@ -431,11 +440,11 @@
 
   /* ── Product detail popups ── */
   var DET={
-    mca:{img:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=900'},
-    loan:{img:'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=900'},
-    rbf:{img:'https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&q=80&w=900'},
-    asset:{img:'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=900'},
-    credit:{img:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=900'}
+    mca:{img:'../images/funding-hero.webp'},
+    loan:{img:'../images/home-ecosystem-1.webp'},
+    rbf:{img:'../images/home-ecosystem-2.webp'},
+    asset:{img:'../images/home-ecosystem-3.webp'},
+    credit:{img:'../images/home-ecosystem-4.webp'}
   };
   var detail=document.getElementById('detail'),dcard=document.getElementById('detailCard');
   function openDetail(k){var p=PROD[k],d=DET[k];if(!p)return;

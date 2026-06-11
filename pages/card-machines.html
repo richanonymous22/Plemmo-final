@@ -22,7 +22,12 @@
 <title>Card Machines for UK Businesses | Plemmo</title>
 <meta name="description" content="Compare leading UK card machine providers — Teya, SumUp, Worldpay, Elavon and more. Find the right card machine, save on fees and get expert support 7 days a week.">
 
+<link rel="preconnect" href="https://code.iconify.design" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="dns-prefetch" href="https://a.basemaps.cartocdn.com">
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -125,7 +130,17 @@ section{scroll-margin-top:88px}
 .trust .t b{display:block;font-size:13px;color:#fff;font-weight:700;font-family:'Space Grotesk'}
 .trust .t span{font-size:12px;color:var(--muted)}
 /* hero product stage */
-.stage{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;perspective:1000px}
+.stage{position:relative;aspect-ratio:1/1;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);box-shadow:var(--shadow)}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage .chip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:14px;background:rgba(12,16,8,.62);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 16px 36px rgba(0,0,0,.4);white-space:nowrap}
+.stage .chip .ic{width:34px;height:34px;border-radius:9px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stage .chip .ic iconify-icon{color:var(--lime);font-size:18px}
+.stage .chip b{display:block;font-family:'Space Grotesk';font-size:15px;color:#fff;line-height:1}
+.stage .chip span{font-size:11px;color:var(--muted)}
+.stage .c1{top:auto;bottom:16px;left:16px;animation:floaty 6s ease-in-out infinite}
+.stage .c2{top:16px;right:16px;animation:floaty 7s ease-in-out infinite .6s}
+.stage .cm-dash{top:16px;left:16px;bottom:auto;width:min(232px,76%);z-index:4}
+.stage-legacy{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;perspective:1000px}
 .stage .ring{position:absolute;width:76%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(198,255,0,.2);
   box-shadow:0 0 70px rgba(198,255,0,.12),inset 0 0 60px rgba(198,255,0,.05);
   -webkit-mask:linear-gradient(#000 40%,transparent 80%);mask:linear-gradient(#000 40%,transparent 80%);animation:spin 80s linear infinite}
@@ -134,15 +149,7 @@ section{scroll-margin-top:88px}
 .stage .device{position:relative;z-index:3;width:60%;filter:drop-shadow(0 50px 60px rgba(0,0,0,.6));animation:floaty 6s ease-in-out infinite;will-change:transform}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-.chip{position:absolute;z-index:4;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;
-  background:rgba(20,26,16,.55);backdrop-filter:blur(16px);border:1px solid rgba(198,255,0,.25);box-shadow:0 18px 40px rgba(0,0,0,.4)}
-.chip .ic{width:36px;height:36px;border-radius:10px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.chip .ic iconify-icon{font-size:20px;color:var(--lime)}
-.chip b{display:block;font-family:'Space Grotesk';font-size:16px;color:#fff;line-height:1}
-.chip span{font-size:11px;color:var(--muted)}
-.chip.c1{top:8%;left:-2%;animation:floaty 6.5s ease-in-out infinite .3s}
-.chip.c2{top:40%;right:-6%;animation:floaty 7s ease-in-out infinite .8s}
-.chip.c3{bottom:12%;left:4%;animation:floaty 6.2s ease-in-out infinite 1.2s}
+/* legacy floating-hero chip styles removed — hero now uses .stage .chip */
 .cm-dash{position:absolute;z-index:5;top:4%;left:-7%;width:236px;padding:17px;border-radius:18px;background:rgba(15,19,11,.74);backdrop-filter:blur(18px) saturate(1.2);border:1px solid var(--line2);box-shadow:0 26px 54px rgba(0,0,0,.5);animation:floaty 7s ease-in-out infinite .2s}
 .cm-dash .dh{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
 .cm-dash .dh .live{display:inline-flex;align-items:center;gap:6px;color:var(--lime);font-weight:700}
@@ -156,25 +163,20 @@ section{scroll-margin-top:88px}
 .cm-dash .row b{color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:5px}
 .cm-dash .row b iconify-icon{color:var(--lime);font-size:14px}
 @keyframes spark{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-.cm-pill{position:absolute;z-index:5;bottom:12%;right:-4%;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:14px;background:rgba(15,19,11,.64);backdrop-filter:blur(14px);border:1px solid rgba(198,255,0,.25);box-shadow:0 16px 36px rgba(0,0,0,.4);animation:floaty 6.4s ease-in-out infinite .9s}
-.cm-pill .ic{width:34px;height:34px;border-radius:10px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cm-pill .ic iconify-icon{color:var(--lime);font-size:18px}
-.cm-pill b{display:block;font-family:'Space Grotesk';font-size:15px;color:#fff;line-height:1}.cm-pill span{font-size:11px;color:var(--muted)}
-@media(max-width:600px){.cm-dash{width:190px;left:-2%;padding:14px}.cm-dash .amt{font-size:25px}.cm-pill{right:0}}
+@media(max-width:600px){.stage .cm-dash{width:min(220px,82%);padding:14px}.cm-dash .amt{font-size:25px}}
 
 /* ── PARTNERS (infinite slider on dark) ── */
 .pl{text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
 .marquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.mq-track{display:flex;align-items:center;gap:72px;width:max-content;animation:scrollx 32s linear infinite}
+.mq-track{display:flex;align-items:center;gap:30px;width:max-content;animation:scrollx 40s linear infinite}
 .marquee:hover .mq-track{animation-play-state:paused}
 @keyframes scrollx{to{transform:translateX(-50%)}}
-.plogo{flex:0 0 auto;font-family:'Space Grotesk';font-weight:700;font-size:27px;letter-spacing:-.025em;color:#f2f5ee;cursor:default;display:inline-flex;align-items:center;
-  transition:color .35s,transform .35s var(--spring),opacity .35s}
-.plogo:hover{color:#717a68;transform:translateY(-2px) scale(1.05)}
-.plogo .b4{background:#f2f5ee;color:#0a0c08;border-radius:6px;padding:0 6px;margin-left:2px;font-size:22px;transition:background .35s}
-.plogo:hover .b4{background:#717a68;color:#0a0c08}
-.plogo .dotc{color:var(--lime);margin-left:1px;transition:color .35s}
-.plogo:hover .dotc{color:#717a68}
+.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:124px;height:56px;transition:transform .35s var(--spring)}
+.plogo:hover{transform:translateY(-2px)}
+.plogo img{max-height:25px;max-width:108px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.72;transition:opacity .35s}
+.plogo:hover img{opacity:1}
+.plogo.lg img{max-height:44px;max-width:62px}   /* square / tall marks */
+.plogo.xw img{max-height:19px;max-width:118px}  /* ultra-wide wordmarks */
 
 /* ── QUIZ (dashboard window) ── */
 .quizx{max-width:900px;margin:0 auto;position:relative;border-radius:26px;overflow:hidden;
@@ -479,31 +481,43 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .uk-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .uk-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--line-l);border-radius:100px;padding:8px 14px;box-shadow:var(--shadow-l)}
 .uk-tag iconify-icon{color:#5f9000;font-size:16px}
-.uk-map{position:relative;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);
-  background:radial-gradient(130% 100% at 50% 0%,#10160d 0%,#080b06 72%);box-shadow:var(--shadow)}
-.uk-map .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:32px 32px;-webkit-mask:radial-gradient(circle at 50% 45%,#000 50%,transparent 82%);mask:radial-gradient(circle at 50% 45%,#000 50%,transparent 82%)}
-.uk-map .halo{position:absolute;top:44%;left:50%;width:76%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(198,255,0,.16),transparent 62%);filter:blur(22px);mix-blend-mode:screen}
-.uk-svg{position:absolute;inset:0;width:100%;height:100%}
-.uk-land{stroke:rgba(198,255,0,.5);stroke-width:.7;filter:drop-shadow(0 0 12px rgba(198,255,0,.22))}
-.uk-line{fill:none;stroke:rgba(198,255,0,.45);stroke-width:.5;stroke-dasharray:2 3;animation:ukdash 18s linear infinite}
-@keyframes ukdash{to{stroke-dashoffset:-120}}
-.uk-pin{position:absolute;transform:translate(-50%,-50%);z-index:3;cursor:pointer;width:14px;height:14px}
-.uk-pin .pd{position:absolute;inset:0;border-radius:50%;background:var(--lime);box-shadow:0 0 12px rgba(198,255,0,.7);animation:ukping 2.8s infinite}
-.uk-pin.sm{width:9px;height:9px}.uk-pin.sm .pd{opacity:.7;animation-duration:3.6s}
-@keyframes ukping{0%{box-shadow:0 0 0 0 rgba(198,255,0,.5),0 0 12px rgba(198,255,0,.6)}70%{box-shadow:0 0 0 11px rgba(198,255,0,0),0 0 12px rgba(198,255,0,.5)}100%{box-shadow:0 0 0 0 rgba(198,255,0,0),0 0 12px rgba(198,255,0,.5)}}
-.uk-pin .lbl{position:absolute;left:50%;bottom:20px;transform:translate(-50%,6px);white-space:nowrap;background:rgba(10,13,7,.92);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:10px;padding:7px 11px;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;box-shadow:0 12px 26px rgba(0,0,0,.55)}
-.uk-pin .lbl::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:rgba(10,13,7,.92)}
-.uk-pin:hover,.uk-pin.act{z-index:7}
-.uk-pin:hover .pd,.uk-pin.act .pd{transform:scale(1.35)}
-.uk-pin:hover .lbl,.uk-pin.act .lbl{opacity:1;transform:translate(-50%,0)}
-.uk-pin .lbl b{display:block;font-family:'Space Grotesk';font-size:12px;color:#fff;line-height:1.15}
-.uk-pin .lbl span{font-size:10.5px;color:var(--lime)}
-.uk-badge{position:absolute;left:16px;bottom:16px;z-index:4;display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:8px 13px}
-.uk-badge i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
-.uk-compass{position:absolute;top:14px;right:14px;z-index:4;width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--lime);font-size:18px;background:rgba(10,13,7,.4)}
-@media(prefers-reduced-motion:reduce){.uk-pin .pd,.uk-line,.uk-badge i{animation:none}}
+.uk-map{position:relative;isolation:isolate;z-index:0;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);background:#0a1014;box-shadow:var(--shadow)}
+/* keep Leaflet's panes/controls contained so they never overlap the navbar */
+.uk-map .leaflet-pane,.uk-map .leaflet-top,.uk-map .leaflet-bottom{z-index:400}
+.uk-leaflet{position:absolute;inset:0}
+.uk-map .leaflet-container{background:#0a1014;font-family:'Inter',system-ui,sans-serif;outline:none}
+.uk-map .leaflet-tile-pane{filter:saturate(.92) brightness(.96)}
+/* zoom controls */
+.uk-map .leaflet-bar{border:none;box-shadow:0 8px 22px rgba(0,0,0,.45);border-radius:12px;overflow:hidden;margin:12px}
+.uk-map .leaflet-bar a{background:rgba(12,16,9,.85);color:#fff;border-bottom:1px solid var(--line);width:32px;height:32px;line-height:32px;font-size:18px;font-weight:700;backdrop-filter:blur(8px);transition:.2s}
+.uk-map .leaflet-bar a:hover{background:var(--lime);color:#0a0c08}
+.uk-map .leaflet-bar a:last-child{border-bottom:none}
+/* attribution + scale */
+.uk-map .leaflet-control-attribution{background:rgba(10,13,7,.55);color:rgba(255,255,255,.5);font-size:9px;padding:2px 6px;border-radius:8px 0 0 0;backdrop-filter:blur(6px)}
+.uk-map .leaflet-control-attribution a{color:rgba(198,255,0,.78)}
+.uk-map .leaflet-control-scale-line{background:rgba(10,13,7,.55);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.45);font-size:9px;font-weight:700;backdrop-filter:blur(6px)}
+/* custom markers */
+.uk-mk{position:relative;width:14px;height:14px}
+.uk-mk i{position:absolute;inset:0;border-radius:50%;background:var(--lime);border:2px solid #0a1014;box-shadow:0 0 0 2px rgba(198,255,0,.45),0 0 10px rgba(198,255,0,.6);z-index:2}
+.uk-mk::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--lime);animation:mkpulse 2.8s infinite;z-index:1}
+.uk-mk.cap{width:18px;height:18px}
+@keyframes mkpulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(2.6);opacity:0}100%{transform:scale(2.6);opacity:0}}
+/* popups */
+.uk-map .leaflet-popup-content-wrapper{background:rgba(12,16,9,.95);backdrop-filter:blur(12px);color:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.uk-map .leaflet-popup-tip{background:rgba(12,16,9,.95);border:1px solid var(--line2)}
+.uk-map .leaflet-popup-content{margin:12px 15px 13px;font-size:13px;line-height:1.4}
+.uk-map .leaflet-popup-close-button{color:var(--muted);padding:8px 8px 0 0}
+.uk-map .leaflet-popup-close-button:hover{color:#fff}
+.mkpop b{display:block;font-family:'Space Grotesk';font-size:14px;color:#fff;margin-bottom:4px}
+.mkpop .t{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--lime);font-weight:600}
+.mkpop .t iconify-icon{font-size:14px}
+.mkpop .r{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+/* overlay badge */
+.uk-live{position:absolute;left:14px;top:12px;z-index:1000;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px;pointer-events:none}
+.uk-live i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+@media(prefers-reduced-motion:reduce){.uk-live i,.uk-mk::before{animation:none}}
 
-@media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:340px;margin:0 auto;width:100%}}
+@media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:360px;margin:0 auto;width:100%}}
 @media(max-width:560px){.calc-out{grid-template-columns:1fr}.calc-body{padding:26px}}
 
 /* ── COMPARE: card toggle, floating bar, drawer ── */
@@ -582,9 +596,7 @@ html{overflow-x:hidden}
   .container{padding:0 18px}
   .section{padding:58px 0}
   .h2{font-size:clamp(28px,7vw,40px)}
-  .cm-dash{width:178px;left:0;padding:13px}.cm-dash .amt{font-size:23px}
-  .cm-pill{right:0}
-  .cm-stage{min-height:360px}
+  .stage .cm-dash{width:min(200px,82%);padding:13px}.cm-dash .amt{font-size:23px}
   .calc-out{grid-template-columns:1fr}
   .cmp-bar{left:16px;right:16px;transform:translateY(160%);bottom:16px}.cmp-bar.show{transform:none}
   .cmp-bar .ct{font-size:12px}
@@ -652,12 +664,11 @@ html{overflow-x:hidden}
         <div class="t"><iconify-icon icon="ph:headset-duotone"></iconify-icon><div><b>Expert support</b><span>7 days a week</span></div></div>
       </div>
     </div>
-    <div class="stage rv" id="stage">
-      <span class="glow" data-par="0.3"></span>
-      <span class="ring"></span>
-      <span class="pod"></span>
-      <img loading="lazy" decoding="async" class="device" data-par="0.12" src="../images/Card machine no bg.webp" alt="Plemmo card machine terminal">
-      <div class="cm-dash" data-par="0.5">
+    <div class="stage rv">
+      <img loading="eager" fetchpriority="high" decoding="async" src="../images/card-machines-hero.webp" alt="Card machines for UK businesses">
+      <div class="chip c1"><div class="ic"><iconify-icon icon="ph:percent-duotone"></iconify-icon></div><div><b>From 0.55%</b><span>Indicative blended rate</span></div></div>
+      <div class="chip c2"><div class="ic"><iconify-icon icon="ph:lightning-duotone"></iconify-icon></div><div><b>Next-day</b><span>Settlement options</span></div></div>
+      <div class="cm-dash">
         <div class="dh"><span>Today's takings</span><span class="live"><i></i> Live</span></div>
         <div class="amt">£1,284<small>.50</small></div>
         <div class="spark"><i style="height:42%;animation-delay:.05s"></i><i style="height:64%;animation-delay:.1s"></i><i style="height:50%;animation-delay:.15s"></i><i style="height:82%;animation-delay:.2s"></i><i style="height:58%;animation-delay:.25s"></i><i style="height:94%;animation-delay:.3s"></i><i style="height:72%;animation-delay:.35s"></i></div>
@@ -667,7 +678,6 @@ html{overflow-x:hidden}
           <div class="row"><span>Blended rate</span><b>0.55%</b></div>
         </div>
       </div>
-      <div class="cm-pill" data-par="0.7"><div class="ic"><iconify-icon icon="ph:wifi-high-bold"></iconify-icon></div><div><b>£48.50</b><span>Tap, insert or swipe</span></div></div>
     </div>
   </div>
 </header>
@@ -677,13 +687,13 @@ html{overflow-x:hidden}
   <div class="container"><div class="pl rv">Compare leading UK card machine providers</div></div>
   <div class="marquee rv">
     <div class="mq-track" id="mqTrack">
-      <span class="plogo">teya</span>
-      <span class="plogo">SHIFT<span class="b4">4</span></span>
-      <span class="plogo">sumup<span class="dotc">·</span></span>
-      <span class="plogo">worldpay</span>
-      <span class="plogo">Elavon</span>
-      <span class="plogo">EVO</span>
-      <span class="plogo">myPOS</span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/teya.svg" alt="Teya"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon"></span>
+      <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/evo.svg" alt="EVO Payments"></span>
+      <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/mypos.svg" alt="myPOS"></span>
     </div>
   </div>
 </section>
@@ -721,29 +731,29 @@ html{overflow-x:hidden}
     <div class="pgrid">
       <div class="pcard best tilt rv">
         <span class="btag">Best Overall</span>
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/teya.com" alt="Teya" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></div>
-        <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Teya terminal"></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/teya.svg" alt="Teya" style="filter:brightness(0)" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></div>
+        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/teya-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Teya card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Low transaction rates</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Next-day settlement options</li></ul>
         <button class="pview" data-detail="teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="teya"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/sumup.com" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
-        <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="SumUp reader"></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
+        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/sumup-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="SumUp card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for small businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Easy to use</li></ul>
         <button class="pview" data-detail="sumup">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="sumup"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/worldpay.com" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
-        <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay terminal"></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
+        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/worldpay-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Trusted UK provider</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> 24/7 customer support</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Flexible pricing</li></ul>
         <button class="pview" data-detail="worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="worldpay"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/elavon.com" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
-        <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Elavon terminal"></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
+        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/elavon-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Elavon card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Reliable &amp; secure</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for larger businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Multi-currency option</li></ul>
         <button class="pview" data-detail="elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="elavon"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
@@ -759,19 +769,19 @@ html{overflow-x:hidden}
   <div class="container">
     <div class="types">
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Countertop terminal"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-countertop.webp" alt="Countertop terminal"></div>
         <div class="type-body"><h3>Countertop</h3><p>Perfect for fixed locations and high transaction volumes.</p><button class="ln" data-detail="countertop">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:shopping-bag-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Portable terminal"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:shopping-bag-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-portable.webp" alt="Portable terminal"></div>
         <div class="type-body"><h3>Portable</h3><p>Take payments anywhere in your business.</p><button class="ln" data-detail="portable">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-mobile-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Mobile payment"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-mobile-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-mobile.webp" alt="Mobile payment"></div>
         <div class="type-body"><h3>Mobile</h3><p>Turn your smartphone into a card machine. Ideal on the go.</p><button class="ln" data-detail="mobile">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-tablet-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Smart terminal"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-tablet-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-smart.webp" alt="Smart terminal"></div>
         <div class="type-body"><h3>Smart Terminal</h3><p>All-in-one solution with apps, reports and advanced features.</p><button class="ln" data-detail="smart">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
     </div>
@@ -899,33 +909,9 @@ html{overflow-x:hidden}
         <span class="uk-tag"><iconify-icon icon="ph:wrench-duotone"></iconify-icon> Trades</span>
       </div>
     </div>
-    <div class="uk-map" id="ukMap">
-      <span class="grid"></span><span class="halo"></span>
-      <span class="uk-compass"><iconify-icon icon="ph:navigation-arrow-fill"></iconify-icon></span>
-      <svg class="uk-svg" viewBox="0 0 100 130" preserveAspectRatio="none" aria-hidden="true">
-        <defs><linearGradient id="ukfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(198,255,0,0.13)"/><stop offset="1" stop-color="rgba(198,255,0,0.02)"/></linearGradient></defs>
-        <path class="uk-land" fill="url(#ukfill)" d="M46,8 L52,11 L49,16 L58,21 L53,25 L56,29 L60,33 L59,38 L62,45 L60,50 L64,52 L70,53 L66,57 L63,61 L66,65 L62,67 L57,68 L50,69 L44,70 L36,71 L28,72 L23,71 L27,68 L35,67 L41,66 L39,63 L33,64 L26,65 L29,61 L31,58 L28,53 L33,52 L37,51 L35,47 L38,45 L34,41 L36,37 L32,35 L35,31 L31,29 L34,26 L30,25 L34,22 L31,18 L38,15 L41,10 Z"/>
-        <path class="uk-land" fill="url(#ukfill)" style="opacity:.55" d="M12,50 L21,48 L24,55 L20,63 L12,65 L7,58 L9,52 Z"/>
-        <path class="uk-line" d="M62,70 L50,61 L47,51 L55,49 L58,40 L53,30"/>
-        <path class="uk-line" d="M62,70 L46,68 L38,69"/>
-        <path class="uk-line" d="M47,51 L41,51"/>
-      </svg>
-      <button class="uk-pin" style="left:53%;top:23%"><span class="pd"></span><span class="lbl"><b>Edinburgh</b><span>Retail &amp; hospitality</span></span></button>
-      <button class="uk-pin" style="left:44%;top:23%"><span class="pd"></span><span class="lbl"><b>Glasgow</b><span>Cafés &amp; takeaways</span></span></button>
-      <button class="uk-pin sm" style="left:57%;top:17%"><span class="pd"></span><span class="lbl"><b>Aberdeen</b></span></button>
-      <button class="uk-pin sm" style="left:47%;top:13%"><span class="pd"></span><span class="lbl"><b>Inverness</b></span></button>
-      <button class="uk-pin" style="left:58%;top:31%"><span class="pd"></span><span class="lbl"><b>Newcastle</b><span>Bars &amp; venues</span></span></button>
-      <button class="uk-pin" style="left:20%;top:35%"><span class="pd"></span><span class="lbl"><b>Belfast</b><span>Salons &amp; retail</span></span></button>
-      <button class="uk-pin" style="left:55%;top:38%"><span class="pd"></span><span class="lbl"><b>Leeds</b><span>Retail &amp; services</span></span></button>
-      <button class="uk-pin" style="left:47%;top:39%"><span class="pd"></span><span class="lbl"><b>Manchester</b><span>Hospitality &amp; retail</span></span></button>
-      <button class="uk-pin sm" style="left:41%;top:39%"><span class="pd"></span><span class="lbl"><b>Liverpool</b></span></button>
-      <button class="uk-pin" style="left:50%;top:47%"><span class="pd"></span><span class="lbl"><b>Birmingham</b><span>Takeaways &amp; shops</span></span></button>
-      <button class="uk-pin" style="left:38%;top:53%"><span class="pd"></span><span class="lbl"><b>Cardiff</b><span>Cafés &amp; salons</span></span></button>
-      <button class="uk-pin" style="left:46%;top:52%"><span class="pd"></span><span class="lbl"><b>Bristol</b><span>Independent retail</span></span></button>
-      <button class="uk-pin" style="left:62%;top:54%"><span class="pd"></span><span class="lbl"><b>London</b><span>Every trade</span></span></button>
-      <button class="uk-pin sm" style="left:58%;top:58%"><span class="pd"></span><span class="lbl"><b>Brighton</b></span></button>
-      <button class="uk-pin sm" style="left:30%;top:59%"><span class="pd"></span><span class="lbl"><b>Plymouth</b></span></button>
-      <span class="uk-badge"><i></i> Live · businesses across the UK</span>
+    <div class="uk-map">
+      <div class="uk-leaflet" id="ukMap" role="application" aria-label="Map of UK towns and cities Plemmo serves"></div>
+      <div class="uk-live"><i></i> Live coverage · UK-wide</div>
     </div>
   </div>
 </section>
@@ -945,7 +931,7 @@ html{overflow-x:hidden}
       </div>
     </div>
     <div class="how-img">
-      <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&q=80&w=900" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="UK business owner taking a card payment at the counter">
+      <img loading="lazy" decoding="async" src="../images/card-hero.webp" alt="UK business owner taking a card payment at the counter">
       <span class="tagchip"><iconify-icon icon="ph:headset-duotone"></iconify-icon> Real UK business support</span>
     </div>
   </div>
@@ -1139,7 +1125,7 @@ html{overflow-x:hidden}
     if(svT)setSel('mturn',svT);if(o.current)setSel('mcur',o.current);
     modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){var f=modal.querySelector('input,select,button');f&&f.focus()},60)}
   function closeModal(){modal.classList.remove('open');document.body.style.overflow='';lastF&&lastF.focus&&lastF.focus()}
-  function setSel(id,val){var s=document.getElementById(id);for(var i=0;i<s.options.length;i++)if(s.options[i].text===val){s.selectedIndex=i;return}}
+  function setSel(id,val){var s=document.getElementById(id);if(!s)return;for(var i=0;i<s.options.length;i++)if(s.options[i].text===val){s.selectedIndex=i;return}}
   document.querySelectorAll('[data-quote]').forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();openModal({product:t.dataset.product})})});
   modal.querySelector('.modal-bd').onclick=closeModal;
   modal.querySelectorAll('[data-close]').forEach(function(b){b.onclick=closeModal});
@@ -1163,10 +1149,10 @@ html{overflow-x:hidden}
     {k:'current',q:'Are you already taking card payments?',o:[{l:'New to card payments',i:'ph:sparkle-duotone'},{l:'Using Teya',i:'ph:credit-card-duotone'},{l:'Using SumUp',i:'ph:credit-card-duotone'},{l:'Using Worldpay',i:'ph:credit-card-duotone'},{l:'Another provider',i:'ph:credit-card-duotone'},{l:'Not sure',i:'ph:question-duotone'}]}
   ];
   var PROV={
-    teya:{k:'teya',n:'Teya',img:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=500',w:'A strong all-rounder for established businesses — competitive blended rates and fast settlement options.',b:['No monthly fees','Low transaction rates','Fast next-day payouts']},
-    sumup:{k:'sumup',n:'SumUp',img:'https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=500',w:'Great for smaller or new businesses wanting low commitment and a simple setup.',b:['No monthly fees','One-off terminal purchase','Easy to use']},
-    worldpay:{k:'worldpay',n:'Worldpay',img:'https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=500',w:'A trusted UK provider suited to larger or established businesses comparing flexible pricing.',b:['Trusted UK provider','24/7 customer support','Flexible pricing']},
-    elavon:{k:'elavon',n:'Elavon',img:'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=500',w:'Reliable and secure — a good fit for larger businesses needing multi-currency options.',b:['Reliable & secure','Great for larger businesses','Multi-currency option']}
+    teya:{k:'teya',n:'Teya',img:'../images/card-type-smart.webp',w:'A strong all-rounder for established businesses — competitive blended rates and fast settlement options.',b:['No monthly fees','Low transaction rates','Fast next-day payouts']},
+    sumup:{k:'sumup',n:'SumUp',img:'../images/card-type-mobile.webp',w:'Great for smaller or new businesses wanting low commitment and a simple setup.',b:['No monthly fees','One-off terminal purchase','Easy to use']},
+    worldpay:{k:'worldpay',n:'Worldpay',img:'../images/card-type-countertop.webp',w:'A trusted UK provider suited to larger or established businesses comparing flexible pricing.',b:['Trusted UK provider','24/7 customer support','Flexible pricing']},
+    elavon:{k:'elavon',n:'Elavon',img:'../images/card-type-portable.webp',w:'Reliable and secure — a good fit for larger businesses needing multi-currency options.',b:['Reliable & secure','Great for larger businesses','Multi-currency option']}
   };
   function rec(a){var t=a.turnover,p=a.priority;
     if(p==='No monthly rental'||p==='Simple setup')return PROV.sumup;
@@ -1195,7 +1181,7 @@ html{overflow-x:hidden}
     if(first===-1&&STEPS.length){result()}else{cur=Math.max(0,first);render()}})();
 
   /* ── PROVIDER / PRODUCT DETAIL POPUPS ── */
-  var IMGP={teya:'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=900',sumup:'https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=900',worldpay:'https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=900',elavon:'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=900',mobile:'https://images.unsplash.com/photo-1556740714-a8395b3bf30f?auto=format&fit=crop&q=80&w=900'};
+  var IMGP={teya:'../images/card-type-smart.webp',sumup:'../images/card-type-mobile.webp',worldpay:'../images/card-type-countertop.webp',elavon:'../images/card-type-portable.webp',mobile:'../images/card-type-mobile.webp'};
   var DETAIL={
     teya:{badge:'Best Overall',name:'Teya',img:IMGP.teya,intro:'A strong all-rounder for established UK businesses with regular card turnover. Competitive blended pricing that can improve as you grow, plus fast settlement options.',
       facts:[['Indicative rate','From 0.55%',1],['Monthly rental','Flexible options'],['Settlement','Fast / next-day'],['Hardware','PAX A920 Pro · Sunmi']],
@@ -1335,10 +1321,55 @@ html{overflow-x:hidden}
   sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
   summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 
-  /* ── UK map pins: tap-to-toggle (touch) ── */
-  var ukPins=document.querySelectorAll('#ukMap .uk-pin');
-  ukPins.forEach(function(p){p.addEventListener('click',function(e){e.preventDefault();var on=p.classList.contains('act');ukPins.forEach(function(x){x.classList.remove('act')});if(!on)p.classList.add('act')})});
-  document.addEventListener('click',function(e){if(!e.target.closest('#ukMap'))ukPins.forEach(function(x){x.classList.remove('act')})});
+  /* ── UK coverage map: real, zoomable Leaflet map (dark themed) ── */
+  (function(){
+    var el=document.getElementById('ukMap');
+    if(!el||!window.L)return;
+    var CITIES=[
+      ['London',51.5074,-0.1278,'Every trade',1],
+      ['Birmingham',52.4862,-1.8904,'Takeaways & shops',1],
+      ['Manchester',53.4808,-2.2426,'Hospitality & retail',1],
+      ['Leeds',53.8008,-1.5491,'Retail & services',0],
+      ['Liverpool',53.4084,-2.9916,'Cafés & venues',0],
+      ['Sheffield',53.3811,-1.4701,'Retail & services',0],
+      ['Newcastle',54.9783,-1.6178,'Bars & venues',0],
+      ['Glasgow',55.8642,-4.2518,'Cafés & takeaways',1],
+      ['Edinburgh',55.9533,-3.1883,'Retail & hospitality',0],
+      ['Aberdeen',57.1497,-2.0943,'Retail & trades',0],
+      ['Inverness',57.4778,-4.2247,'Local independents',0],
+      ['Cardiff',51.4816,-3.1791,'Cafés & salons',1],
+      ['Swansea',51.6214,-3.9436,'Independent retail',0],
+      ['Bristol',51.4545,-2.5879,'Independent retail',0],
+      ['Nottingham',52.9548,-1.1581,'Hospitality & retail',0],
+      ['Leicester',52.6369,-1.1398,'Retail & takeaways',0],
+      ['Belfast',54.5973,-5.9301,'Salons & retail',1],
+      ['Brighton',50.8225,-0.1372,'Cafés & retail',0],
+      ['Southampton',50.9097,-1.4044,'Retail & services',0],
+      ['Plymouth',50.3755,-4.1427,'Local independents',0]
+    ];
+    var map=L.map(el,{
+      zoomControl:true, scrollWheelZoom:false, attributionControl:true,
+      minZoom:5, maxZoom:11, zoomSnap:.5,
+      maxBounds:[[49,-9.5],[61,2.8]], maxBoundsViscosity:1
+    }).setView([54.6,-3.0],5.4);
+    map.zoomControl.setPosition('topright');
+    L.control.scale({position:'bottomleft',imperial:true,metric:false,maxWidth:90}).addTo(map);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains:'abcd', maxZoom:19
+    }).addTo(map);
+    CITIES.forEach(function(c){
+      var cap=c[4]?' cap':'', sz=c[4]?18:14, a=c[4]?9:7;
+      var icon=L.divIcon({className:'',html:'<span class="uk-mk'+cap+'"><i></i></span>',iconSize:[sz,sz],iconAnchor:[a,a]});
+      var m=L.marker([c[1],c[2]],{icon:icon,title:c[0],riseOnHover:true}).addTo(map);
+      m.bindPopup('<div class="mkpop"><b>'+c[0]+'</b><span class="t"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> '+c[3]+'</span><span class="r">Plemmo coverage · compare &amp; switch</span></div>',{closeButton:true});
+      m.on('mouseover',function(){this.openPopup()});
+    });
+    function fix(){map.invalidateSize(false);}
+    setTimeout(fix,60); window.addEventListener('resize',fix);
+    if('ResizeObserver' in window){try{new ResizeObserver(fix).observe(el);}catch(e){}}
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)fix();});}).observe(el);}
+  })();
 })();
 </script>
 <script src="../cookie-consent.js"></script>
