@@ -40,6 +40,23 @@
     #webgl-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
     .hero-content { z-index: 10; position: relative; mix-blend-mode: difference; color: #fff; }
     .hero-title { background: none; -webkit-text-fill-color: #fff; }
+    /* Subpage-style footer */
+    .sfooter{background:#0c0f09;border-top:1px solid rgba(255,255,255,.10);padding:64px 0 30px}
+    .sfooter .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:36px}
+    .sfooter .fbrand p{color:#9aa48d;font-size:14px;max-width:300px;margin-top:14px}
+    .sfooter .fcol h4{font-family:var(--font-heading),sans-serif;font-size:14px;color:#fff;margin-bottom:16px}
+    .sfooter .fcol a{display:block;color:#9aa48d;font-size:14px;padding:6px 0;transition:color .2s}
+    .sfooter .fcol a:hover{color:var(--accent)}
+    .sfooter .fdisc{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.10);font-size:11.5px;color:#6b7560;line-height:1.6}
+    .sfooter .fbot{margin-top:18px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#9aa48d}
+    .sfooter .flegal{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px}
+    .sfooter .flegal a{color:#9aa48d;transition:color .2s}
+    .sfooter .flegal a:hover{color:var(--accent)}
+    .sfooter .logo-footer{display:flex;align-items:center;gap:8px;font-family:var(--font-body),sans-serif;font-weight:900;font-size:22px;letter-spacing:-.04em;color:#fff;margin-bottom:12px}
+    .sfooter .logo-footer img{height:26px;width:auto;display:block}
+    .sfooter .logo-footer .d{color:var(--accent)}
+    @media(max-width:900px){.sfooter .fgrid{grid-template-columns:1fr 1fr;gap:28px}}
+    @media(max-width:560px){.sfooter .fgrid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -261,7 +278,7 @@
       </a>
 
       <!-- Utilities (Span 1x1) -->
-      <a href="pages/contact-us.html" class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #0f172a;">
+      <a href="pages/utilities-broadband.html" class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #0f172a;">
         <img alt="" src="images/home-ecosystem-6.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:bolt-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
@@ -345,66 +362,66 @@
       <!-- Review 1 -->
       <div class="test-card">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">I have been working with Digitease for many years, and they have consistently been my top service provider. Their dedication, reliability, and quality of service are unmatched. I highly recommend them to anyone looking for dependable digital solutions.</p>
+        <p class="test-text">I have been working with Plemmo for many years, and they have consistently been my top service provider. Their dedication, reliability, and quality of service are unmatched. I highly recommend them to anyone looking for dependable digital solutions.</p>
         <div class="test-author"><span class="tc-avatar">SA</span><div class="tc-meta"><h5>Saif Ali</h5><span>Director, iMobile World · Birmingham</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <!-- Review 2 -->
       <div class="test-card">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">I run six businesses, and Digitease has been handling everything for me — from EPOS systems to card machines and even electricity services. Their all-in-one support has made my life so much easier. Truly a reliable and professional team!</p>
+        <p class="test-text">I run six businesses, and Plemmo has been handling everything for me — from EPOS systems to card machines and even electricity services. Their all-in-one support has made my life so much easier. Truly a reliable and professional team!</p>
         <div class="test-author"><span class="tc-avatar">RS</span><div class="tc-meta"><h5>Rabeen Saleem</h5><span>Director, Swan Delights · Coventry</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <!-- Review 3 -->
       <div class="test-card">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">Digitease has been a game-changer for our business. From setting up our EPOS system to providing reliable card machines and energy solutions, their service has been outstanding. They're efficient, supportive, and always just a call away. Highly recommended for any business looking for hassle-free operations.</p>
+        <p class="test-text">Plemmo has been a game-changer for our business. From setting up our EPOS system to providing reliable card machines and energy solutions, their service has been outstanding. They're efficient, supportive, and always just a call away. Highly recommended for any business looking for hassle-free operations.</p>
         <div class="test-author"><span class="tc-avatar">NH</span><div class="tc-meta"><h5>Mr. Neam Hassan</h5><span>Owner, Kashmir Halal Meat · Derby</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <!-- Review 4 -->
       <div class="test-card">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">Digitease has been a vital part of our business operations across all our locations. From EPOS systems to card machines and utility services, they've delivered top-quality support and solutions. Their professionalism and consistency make them our go-to service provider. Highly recommended for multi-location businesses like ours.</p>
+        <p class="test-text">Plemmo has been a vital part of our business operations across all our locations. From EPOS systems to card machines and utility services, they've delivered top-quality support and solutions. Their professionalism and consistency make them our go-to service provider. Highly recommended for multi-location businesses like ours.</p>
         <div class="test-author"><span class="tc-avatar">AM</span><div class="tc-meta"><h5>Abdul Malik</h5><span>Owner, Khyber Shop · Birmingham &amp; Wolverhampton</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <!-- Review 5 -->
       <div class="test-card">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">We've been using Digitease for our card machine services, and it's been a smooth experience from the start. Fast setup, great rates, and reliable support — exactly what a busy store like ours needs. Very pleased with the service!</p>
+        <p class="test-text">We've been using Plemmo for our card machine services, and it's been a smooth experience from the start. Fast setup, great rates, and reliable support — exactly what a busy store like ours needs. Very pleased with the service!</p>
         <div class="test-author"><span class="tc-avatar">NV</span><div class="tc-meta"><h5>Navya</h5><span>Director, Headyhill Convenience · Heywood</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <!-- Duplicate set for seamless looping -->
       <div class="test-card" aria-hidden="true">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">I have been working with Digitease for many years, and they have consistently been my top service provider. Their dedication, reliability, and quality of service are unmatched. I highly recommend them to anyone looking for dependable digital solutions.</p>
+        <p class="test-text">I have been working with Plemmo for many years, and they have consistently been my top service provider. Their dedication, reliability, and quality of service are unmatched. I highly recommend them to anyone looking for dependable digital solutions.</p>
         <div class="test-author"><span class="tc-avatar">SA</span><div class="tc-meta"><h5>Saif Ali</h5><span>Director, iMobile World · Birmingham</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <div class="test-card" aria-hidden="true">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">I run six businesses, and Digitease has been handling everything for me — from EPOS systems to card machines and even electricity services. Their all-in-one support has made my life so much easier. Truly a reliable and professional team!</p>
+        <p class="test-text">I run six businesses, and Plemmo has been handling everything for me — from EPOS systems to card machines and even electricity services. Their all-in-one support has made my life so much easier. Truly a reliable and professional team!</p>
         <div class="test-author"><span class="tc-avatar">RS</span><div class="tc-meta"><h5>Rabeen Saleem</h5><span>Director, Swan Delights · Coventry</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <div class="test-card" aria-hidden="true">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">Digitease has been a game-changer for our business. From setting up our EPOS system to providing reliable card machines and energy solutions, their service has been outstanding. They're efficient, supportive, and always just a call away. Highly recommended for any business looking for hassle-free operations.</p>
+        <p class="test-text">Plemmo has been a game-changer for our business. From setting up our EPOS system to providing reliable card machines and energy solutions, their service has been outstanding. They're efficient, supportive, and always just a call away. Highly recommended for any business looking for hassle-free operations.</p>
         <div class="test-author"><span class="tc-avatar">NH</span><div class="tc-meta"><h5>Mr. Neam Hassan</h5><span>Owner, Kashmir Halal Meat · Derby</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <div class="test-card" aria-hidden="true">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">Digitease has been a vital part of our business operations across all our locations. From EPOS systems to card machines and utility services, they've delivered top-quality support and solutions. Their professionalism and consistency make them our go-to service provider. Highly recommended for multi-location businesses like ours.</p>
+        <p class="test-text">Plemmo has been a vital part of our business operations across all our locations. From EPOS systems to card machines and utility services, they've delivered top-quality support and solutions. Their professionalism and consistency make them our go-to service provider. Highly recommended for multi-location businesses like ours.</p>
         <div class="test-author"><span class="tc-avatar">AM</span><div class="tc-meta"><h5>Abdul Malik</h5><span>Owner, Khyber Shop · Birmingham &amp; Wolverhampton</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
       <div class="test-card" aria-hidden="true">
         <div class="tc-top"><div class="stars"><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon></div><span class="tc-verified"><iconify-icon icon="solar:verified-check-bold"></iconify-icon> Verified</span></div>
-        <p class="test-text">We've been using Digitease for our card machine services, and it's been a smooth experience from the start. Fast setup, great rates, and reliable support — exactly what a busy store like ours needs. Very pleased with the service!</p>
+        <p class="test-text">We've been using Plemmo for our card machine services, and it's been a smooth experience from the start. Fast setup, great rates, and reliable support — exactly what a busy store like ours needs. Very pleased with the service!</p>
         <div class="test-author"><span class="tc-avatar">NV</span><div class="tc-meta"><h5>Navya</h5><span>Director, Headyhill Convenience · Heywood</span></div></div>
         <iconify-icon class="tc-quote" icon="ph:quotes-fill"></iconify-icon>
       </div>
@@ -801,43 +818,39 @@
   </div>
 </section>
 
-<!-- FOOTER CTA & FOOTER -->
-<footer class="site-footer">
-  <div class="container footer-cta reveal-up">
-    <h2>READY TO SIMPLIFY<br><span class="accent-text">YOUR BUSINESS?</span></h2>
-    <p>One call. One partner. Multiple solutions.</p>
-    <div class="hero-buttons justify-center">
-      <a href="#quote" class="btn-solid btn-large magnetic" data-strength="30">Get Your Free Quote Today</a>
-      <a href="tel:03330411161" class="btn-outline btn-large magnetic" data-strength="30">Or call us: 0333 041 1161</a>
-    </div>
-  </div>
-
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <img src="images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
-        Plemmo
+<!-- FOOTER -->
+<footer class="sfooter">
+  <div class="container">
+    <div class="fgrid">
+      <div class="fbrand">
+        <div class="logo-footer">
+          <img src="images/logo.png" alt="Plemmo Logo">
+          plemmo<span class="d">.</span>
+        </div>
+        <p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
       </div>
-      <p class="tagline">One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
-    </div>
-
-    <div class="footer-links">
-      <div class="link-col">
+      <div class="fcol">
         <h4>Solutions</h4>
         <a href="pages/card-machines.html">Card Machines</a>
         <a href="pages/business-funding.html">Business Funding</a>
         <a href="pages/epos-systems.html">EPOS Systems</a>
         <a href="pages/digital-signage.html">Digital Signage</a>
-        <a href="pages/contact-us.html">Utilities &amp; Broadband</a>
+        <a href="pages/utilities-broadband.html">Utilities &amp; Broadband</a>
       </div>
-      <div class="link-col">
+      <div class="fcol">
         <h4>Company</h4>
         <a href="pages/about-us.html">About Us</a>
         <a href="pages/contact-us.html">Contact Us</a>
         <a href="pages/refer-and-earn.html">Refer &amp; Earn</a>
         <a href="pages/guides.html">Guides</a>
       </div>
-      <div class="link-col">
+      <div class="fcol">
+        <h4>Resources</h4>
+        <a href="#quote">Get a Quote</a>
+        <a href="pages/card-machines.html">Compare Card Machines</a>
+        <a href="pages/refer-and-earn.html">Refer &amp; Earn</a>
+      </div>
+      <div class="fcol">
         <h4>Contact</h4>
         <a href="tel:03330411161">0333 041 1161</a>
         <a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a>
@@ -845,13 +858,10 @@
         <a href="pages/contact-us.html">Send an Enquiry</a>
       </div>
     </div>
-  </div>
-  
-  <div class="container footer-bottom">
-    <div class="disclaimer">
-      Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We act as an introducer and are not a lender or a direct payment acquirer. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice. We introduce customers to a hand-picked panel of providers and may receive a commission for these introductions. All offers are subject to status and provider T&Cs.
+    <div class="fdisc">
+      Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We act as an introducer and are not a lender or a direct payment acquirer. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice. We introduce customers to a hand-picked panel of providers and may receive a commission for these introductions. All offers are subject to status and provider T&amp;Cs.
     </div>
-    <div class="footer-legal">
+    <div class="flegal">
       <a href="pages/terms.html">Terms &amp; Conditions</a>
       <a href="pages/privacy-policy.html">Privacy Policy</a>
       <a href="pages/cookie-policy.html">Cookie Policy</a>
@@ -859,8 +869,9 @@
       <a href="pages/complaints.html">Complaints</a>
       <a href="pages/commission-disclosure.html">Commission Disclosure</a>
     </div>
-    <div class="copyright">
-      Copyright © 2026 Plemmo. All Rights Reserved
+    <div class="fbot">
+      <span>Plemmo — one partner for every business solution.</span>
+      <span>© 2026 Plemmo. All Rights Reserved.</span>
     </div>
   </div>
 </footer>
