@@ -129,13 +129,14 @@ section{scroll-margin-top:88px}
 /* hero product stage */
 .stage{position:relative;aspect-ratio:1/1;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);box-shadow:var(--shadow)}
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.stage .chip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:14px;background:rgba(12,16,8,.62);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 16px 36px rgba(0,0,0,.4)}
+.stage .chip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:14px;background:rgba(12,16,8,.62);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 16px 36px rgba(0,0,0,.4);white-space:nowrap}
 .stage .chip .ic{width:34px;height:34px;border-radius:9px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .stage .chip .ic iconify-icon{color:var(--lime);font-size:18px}
 .stage .chip b{display:block;font-family:'Space Grotesk';font-size:15px;color:#fff;line-height:1}
 .stage .chip span{font-size:11px;color:var(--muted)}
 .stage .c1{top:16px;left:16px;animation:floaty 6s ease-in-out infinite}
-.stage .c2{bottom:16px;right:16px;animation:floaty 7s ease-in-out infinite .6s}
+.stage .c2{top:16px;right:16px;animation:floaty 7s ease-in-out infinite .6s}
+.stage .cm-dash{top:auto;left:16px;bottom:16px;width:min(232px,76%);z-index:4}
 .stage-legacy{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;perspective:1000px}
 .stage .ring{position:absolute;width:76%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(198,255,0,.2);
   box-shadow:0 0 70px rgba(198,255,0,.12),inset 0 0 60px rgba(198,255,0,.05);
@@ -678,6 +679,16 @@ html{overflow-x:hidden}
       <img loading="lazy" decoding="async" src="../images/card-machines-hero.webp" alt="Card machines for UK businesses">
       <div class="chip c1"><div class="ic"><iconify-icon icon="ph:percent-duotone"></iconify-icon></div><div><b>From 0.55%</b><span>Indicative blended rate</span></div></div>
       <div class="chip c2"><div class="ic"><iconify-icon icon="ph:lightning-duotone"></iconify-icon></div><div><b>Next-day</b><span>Settlement options</span></div></div>
+      <div class="cm-dash">
+        <div class="dh"><span>Today's takings</span><span class="live"><i></i> Live</span></div>
+        <div class="amt">£1,284<small>.50</small></div>
+        <div class="spark"><i style="height:42%;animation-delay:.05s"></i><i style="height:64%;animation-delay:.1s"></i><i style="height:50%;animation-delay:.15s"></i><i style="height:82%;animation-delay:.2s"></i><i style="height:58%;animation-delay:.25s"></i><i style="height:94%;animation-delay:.3s"></i><i style="height:72%;animation-delay:.35s"></i></div>
+        <div class="rows">
+          <div class="row"><span>Settlement</span><b><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Next day</b></div>
+          <div class="row"><span>Devices online</span><b>3</b></div>
+          <div class="row"><span>Blended rate</span><b>0.55%</b></div>
+        </div>
+      </div>
     </div>
   </div>
 </header>
