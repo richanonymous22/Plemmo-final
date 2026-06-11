@@ -34,12 +34,12 @@
 .ehero h1{font-size:clamp(44px,6vw,80px);color:#fff;letter-spacing:-.03em}
 .ehero .sub{color:var(--muted);font-size:18px;max-width:440px;margin:22px 0 28px}
 .ehero-btns{display:flex;gap:13px;flex-wrap:wrap}
-.estage{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
-.estage .glow{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:90%;height:80%;border-radius:50%;background:radial-gradient(ellipse,rgba(198,255,0,.2),transparent 70%);filter:blur(46px);mix-blend-mode:screen}
-.estage img{position:relative;z-index:2;width:84%;filter:drop-shadow(0 50px 60px rgba(0,0,0,.5))}
+.estage{position:relative;aspect-ratio:1/1;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);box-shadow:var(--shadow)}
+.estage .glow{display:none}
+.estage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .estage .chip{position:absolute;z-index:3;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:14px;background:rgba(12,16,8,.6);backdrop-filter:blur(14px);border:1px solid var(--line2);box-shadow:0 16px 36px rgba(0,0,0,.4)}
 .estage .chip iconify-icon{color:var(--lime);font-size:20px}.estage .chip b{font-family:'Space Grotesk';font-size:14px;color:#fff}
-.estage .c1{top:8%;left:-2%;animation:fl 6s ease-in-out infinite}.estage .c2{bottom:10%;right:-2%;animation:fl 7s ease-in-out infinite .6s}
+.estage .c1{top:16px;left:16px;animation:fl 6s ease-in-out infinite}.estage .c2{bottom:16px;right:16px;animation:fl 7s ease-in-out infinite .6s}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 /* benefit row */
 .bench{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -147,8 +147,7 @@
       <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Free setup &amp; training · Integrated card machine options · UK support</p>
     </div>
     <div class="estage rv">
-      <span class="glow"></span>
-      <img loading="lazy" decoding="async" src="../images/epos-hero.webp" alt="Plemmo EPOS system" style="border-radius:20px">
+      <img loading="lazy" decoding="async" src="../images/epos-hero.webp" alt="Plemmo EPOS system">
       <div class="chip c1"><iconify-icon icon="ph:cloud-duotone"></iconify-icon><b>Cloud based</b></div>
       <div class="chip c2"><iconify-icon icon="ph:chart-line-up-duotone"></iconify-icon><b>Real-time</b></div>
     </div>
