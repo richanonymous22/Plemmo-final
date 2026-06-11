@@ -10,6 +10,9 @@
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#0a0c06">
   <link rel="canonical" href="https://plemmo.co.uk/">
+  <link rel="preconnect" href="https://code.iconify.design" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Plemmo">
   <meta property="og:title" content="Plemmo | One Partner for UK Business Solutions">
@@ -25,54 +28,21 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="mobile.css">
   
-  <!-- Iconify for beautiful, crisp icons instead of emojis -->
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  
-  <!-- GSAP, ScrollTrigger, Lenis for Absolute Peak Motion -->
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  
-  <!-- Three.js for Absolute Peak WebGL -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  
+  <!-- Iconify icons + GSAP/ScrollTrigger/Lenis motion + Three.js WebGL (deferred, execute in order before main.js) -->
+  <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script defer src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <style>
     /* Resetting the hero to hold the WebGL Canvas */
     #webgl-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
     .hero-content { z-index: 10; position: relative; mix-blend-mode: difference; color: #fff; }
     .hero-title { background: none; -webkit-text-fill-color: #fff; }
   </style>
-
-  <!-- Lottie for Illustrations -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
-<!-- DEMO BANNER -->
-<div class="demo-banner" style="display:none">
-  <div class="demo-marquee">
-    <div class="demo-track">
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-    </div>
-    <div class="demo-track">
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-      <span>THIS IS A DEMO SITE MADE TO BE PREVIEWED — THE FINAL VERSION CAN BE WAY DIFFERENT</span>
-      <span class="spacer">•</span>
-    </div>
-  </div>
-</div>
-
 <!-- CUSTOM CURSOR -->
 <div class="cursor-dot"></div>
 
@@ -151,7 +121,7 @@
     <!-- 3D Interactive Visual -->
     <div class="hero-visual perspective-container">
       <div class="visual-main tilt-element">
-        <img src="images/home-hero-owner.webp" alt="UK Business Owner" class="main-portrait shadow-heavy">
+        <img fetchpriority="high" decoding="async" src="images/home-hero-owner.webp" alt="UK Business Owner" class="main-portrait shadow-heavy">
         
         <!-- Floating 3D Cards -->
         <div class="float-card float-pos float-anim-1 parallax-obj" data-speed="1.2">
@@ -242,7 +212,7 @@
       
       <!-- Card Machines (Span 2x2) -->
       <a href="pages/card-machines.html" class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 2; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 48px; background: #000;">
-        <img src="images/home-ecosystem-1.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <img alt="" src="images/home-ecosystem-1.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:card-send-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 48px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">Card Machines</h3>
@@ -252,7 +222,7 @@
 
       <!-- EPOS (Span 1x2) -->
       <a href="pages/epos-systems.html" class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 2; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 48px; background: #121824;">
-        <img src="images/home-ecosystem-2.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <img alt="" src="images/home-ecosystem-2.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:monitor-smartphone-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 40px; color: #fff; margin-bottom: 12px; font-family: var(--font-heading); line-height: 1;">EPOS Systems</h3>
@@ -262,7 +232,7 @@
 
       <!-- Business Funding (Span 1x1) -->
       <a href="pages/business-funding.html" class="bento-creative-card reveal-up" style="grid-column: span 1; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #fff; border: 1px solid #e2e8f0;">
-        <img src="images/home-ecosystem-3.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.4; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <img alt="" src="images/home-ecosystem-3.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.4; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:wallet-money-bold-duotone" style="font-size: 40px; color: var(--bg-dark); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #0f172a; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Business Funding</h3>
@@ -272,7 +242,7 @@
 
       <!-- Digital Signage (Span 2x1) -->
       <a href="pages/digital-signage.html" class="bento-creative-card reveal-up delay-1" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #000;">
-        <img src="images/home-ecosystem-4.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <img alt="" src="images/home-ecosystem-4.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:screencast-2-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #fff; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Digital Signage</h3>
@@ -282,7 +252,7 @@
       
       <!-- Business Support (Span 2x1) -->
       <a href="pages/contact-us.html" class="bento-creative-card reveal-up" style="grid-column: span 2; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: var(--accent);">
-        <img src="images/home-ecosystem-5.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; mix-blend-mode: multiply; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <img alt="" src="images/home-ecosystem-5.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.6; mix-blend-mode: multiply; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:phone-calling-bold-duotone" style="font-size: 40px; color: #000; margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #000; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Business Support</h3>
@@ -292,7 +262,7 @@
 
       <!-- Utilities (Span 1x1) -->
       <a href="pages/contact-us.html" class="bento-creative-card reveal-up delay-1" style="grid-column: span 1; grid-row: span 1; position: relative; overflow: hidden; border-radius: var(--radius-xl); text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: #0f172a;">
-        <img src="images/home-ecosystem-6.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
+        <img alt="" src="images/home-ecosystem-6.webp" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; opacity: 0.5; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;" class="bg-hover-zoom">
         <div style="position: relative; z-index: 10;">
           <iconify-icon icon="solar:bolt-bold-duotone" style="font-size: 40px; color: var(--accent); margin-bottom: 24px;"></iconify-icon>
           <h3 style="font-size: 32px; color: #fff; margin-bottom: 8px; font-family: var(--font-heading); line-height: 1;">Utilities</h3>
@@ -895,7 +865,7 @@
   </div>
 </footer>
 
-<script src="main.js"></script>
-<script src="cookie-consent.js"></script>
+<script defer src="main.js"></script>
+<script defer src="cookie-consent.js"></script>
 </body>
 </html>

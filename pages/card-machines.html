@@ -22,6 +22,9 @@
 <title>Card Machines for UK Businesses | Plemmo</title>
 <meta name="description" content="Compare leading UK card machine providers — Teya, SumUp, Worldpay, Elavon and more. Find the right card machine, save on fees and get expert support 7 days a week.">
 
+<link rel="preconnect" href="https://code.iconify.design" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="dns-prefetch" href="https://a.basemaps.cartocdn.com">
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -662,7 +665,7 @@ html{overflow-x:hidden}
       </div>
     </div>
     <div class="stage rv">
-      <img loading="lazy" decoding="async" src="../images/card-machines-hero.webp" alt="Card machines for UK businesses">
+      <img loading="eager" fetchpriority="high" decoding="async" src="../images/card-machines-hero.webp" alt="Card machines for UK businesses">
       <div class="chip c1"><div class="ic"><iconify-icon icon="ph:percent-duotone"></iconify-icon></div><div><b>From 0.55%</b><span>Indicative blended rate</span></div></div>
       <div class="chip c2"><div class="ic"><iconify-icon icon="ph:lightning-duotone"></iconify-icon></div><div><b>Next-day</b><span>Settlement options</span></div></div>
       <div class="cm-dash">
@@ -1122,7 +1125,7 @@ html{overflow-x:hidden}
     if(svT)setSel('mturn',svT);if(o.current)setSel('mcur',o.current);
     modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){var f=modal.querySelector('input,select,button');f&&f.focus()},60)}
   function closeModal(){modal.classList.remove('open');document.body.style.overflow='';lastF&&lastF.focus&&lastF.focus()}
-  function setSel(id,val){var s=document.getElementById(id);for(var i=0;i<s.options.length;i++)if(s.options[i].text===val){s.selectedIndex=i;return}}
+  function setSel(id,val){var s=document.getElementById(id);if(!s)return;for(var i=0;i<s.options.length;i++)if(s.options[i].text===val){s.selectedIndex=i;return}}
   document.querySelectorAll('[data-quote]').forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();openModal({product:t.dataset.product})})});
   modal.querySelector('.modal-bd').onclick=closeModal;
   modal.querySelectorAll('[data-close]').forEach(function(b){b.onclick=closeModal});
