@@ -167,16 +167,13 @@ section{scroll-margin-top:88px}
 /* ── PARTNERS (infinite slider on dark) ── */
 .pl{text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
 .marquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-.mq-track{display:flex;align-items:center;gap:72px;width:max-content;animation:scrollx 32s linear infinite}
+.mq-track{display:flex;align-items:center;gap:24px;width:max-content;animation:scrollx 38s linear infinite}
 .marquee:hover .mq-track{animation-play-state:paused}
 @keyframes scrollx{to{transform:translateX(-50%)}}
-.plogo{flex:0 0 auto;font-family:'Space Grotesk';font-weight:700;font-size:27px;letter-spacing:-.025em;color:#f2f5ee;cursor:default;display:inline-flex;align-items:center;
-  transition:color .35s,transform .35s var(--spring),opacity .35s}
-.plogo:hover{color:#717a68;transform:translateY(-2px) scale(1.05)}
-.plogo .b4{background:#f2f5ee;color:#0a0c08;border-radius:6px;padding:0 6px;margin-left:2px;font-size:22px;transition:background .35s}
-.plogo:hover .b4{background:#717a68;color:#0a0c08}
-.plogo .dotc{color:var(--lime);margin-left:1px;transition:color .35s}
-.plogo:hover .dotc{color:#717a68}
+.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:64px;width:162px;padding:0 22px;background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.28);transition:transform .35s var(--spring),box-shadow .35s}
+.plogo:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 32px rgba(0,0,0,.35)}
+.plogo img{max-height:30px;max-width:118px;width:auto;object-fit:contain;display:block}
+.plogo.inv img{filter:invert(1) brightness(1.9)}
 
 /* ── QUIZ (dashboard window) ── */
 .quizx{max-width:900px;margin:0 auto;position:relative;border-radius:26px;overflow:hidden;
@@ -691,13 +688,13 @@ html{overflow-x:hidden}
   <div class="container"><div class="pl rv">Compare leading UK card machine providers</div></div>
   <div class="marquee rv">
     <div class="mq-track" id="mqTrack">
-      <span class="plogo">teya</span>
-      <span class="plogo">SHIFT<span class="b4">4</span></span>
-      <span class="plogo">sumup<span class="dotc">·</span></span>
-      <span class="plogo">worldpay</span>
-      <span class="plogo">Elavon</span>
-      <span class="plogo">EVO</span>
-      <span class="plogo">myPOS</span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/teya.png" alt="Teya"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon"></span>
+      <span class="plogo inv"><img loading="lazy" decoding="async" src="../images/partners/evo.svg" alt="EVO Payments"></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/mypos.svg" alt="myPOS"></span>
     </div>
   </div>
 </section>
@@ -735,28 +732,28 @@ html{overflow-x:hidden}
     <div class="pgrid">
       <div class="pcard best tilt rv">
         <span class="btag">Best Overall</span>
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/teya.com" alt="Teya" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/teya.png" alt="Teya" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Teya terminal"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Low transaction rates</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Next-day settlement options</li></ul>
         <button class="pview" data-detail="teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="teya"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/sumup.com" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="SumUp reader"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for small businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Easy to use</li></ul>
         <button class="pview" data-detail="sumup">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="sumup"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/worldpay.com" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1604754742629-3e5728249d73?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay terminal"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Trusted UK provider</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> 24/7 customer support</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Flexible pricing</li></ul>
         <button class="pview" data-detail="worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="worldpay"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="https://logo.clearbit.com/elavon.com" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80&w=600" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Elavon terminal"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Reliable &amp; secure</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Great for larger businesses</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Multi-currency option</li></ul>
         <button class="pview" data-detail="elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>

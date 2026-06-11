@@ -16,7 +16,11 @@ Folders: `images/partners/` · `images/products/` · `images/stock/` · `images/
 
 ---
 
-## 1) PARTNER LOGOS → `images/partners/`  (18 total)
+## 1) PARTNER LOGOS → `images/partners/`  (18 total) — ✅ RECEIVED & WIRED IN
+All 18 logos are in `images/partners/` (renamed to clean filenames) and now render
+as white logo-chips in the card-machines & business-funding marquees (and the four
+provider cards). EVO and Got Capital were white-only, so they're auto-inverted to read
+on the light chips. Shift4 uses its black variant on the chip. ✅
 
 ### Payment / card-machine partners (7) — used on card-machines page (provider cards, compare tool, logo marquee)
 | ⬜ | Filename | Partner |

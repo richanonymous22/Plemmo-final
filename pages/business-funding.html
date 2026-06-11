@@ -128,6 +128,12 @@
 @media(max-width:920px){.fhero-grid{grid-template-columns:1fr;gap:38px}.fstage{order:-1;max-width:440px;margin:0 auto;width:100%}.fc-tiles{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.fprod-grid,.steps,.uses,.docs{grid-template-columns:1fr}.fmatch{grid-template-columns:46px 1fr;gap:12px}.fmatch .pct{display:none}}
 @media(max-width:420px){.fc-tiles{grid-template-columns:1fr}}
+/* partner logo chips (override shared text .plogo) */
+.mq-track{gap:24px}
+.plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:64px;width:162px;padding:0 22px;background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.28);font-size:0;transition:transform .35s var(--spring),box-shadow .35s}
+.plogo:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 32px rgba(0,0,0,.35)}
+.plogo img{max-height:30px;max-width:118px;width:auto;object-fit:contain;display:block}
+.plogo.inv img{filter:invert(1) brightness(1.9)}
 </style>
 </head>
 <body>
@@ -214,7 +220,7 @@
   <div class="container"><div class="pl rv">We work with a panel of selected UK funding partners</div></div>
   <div class="marquee rv">
     <div class="mq-track">
-      <span class="plogo">YouLend</span><span class="plogo">iwoca</span><span class="plogo">Funding Circle</span><span class="plogo">365 Finance</span><span class="plogo">Bizcap</span><span class="plogo">Tide</span><span class="plogo">Uncapped</span><span class="plogo">Capify</span><span class="plogo">Fleximize</span><span class="plogo">Cubefunder</span><span class="plogo">Got Capital</span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/youlend.svg" alt="YouLend"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/iwoca.svg" alt="iwoca"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/funding-circle.svg" alt="Funding Circle"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/365-finance.svg" alt="365 Finance"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/bizcap.svg" alt="Bizcap"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/tide.svg" alt="Tide"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/uncapped.svg" alt="Uncapped"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/capify.svg" alt="Capify"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/fleximize.png" alt="Fleximize"></span><span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/cubefunder.svg" alt="Cubefunder"></span><span class="plogo inv"><img loading="lazy" decoding="async" src="../images/partners/got-capital.png" alt="Got Capital"></span>
     </div>
   </div>
 </section>
