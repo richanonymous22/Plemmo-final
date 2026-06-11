@@ -109,8 +109,7 @@ Art direction for all of these: **bright, clean, premium, human-centric UK small
 | ⬜ | `card-provider-teya.webp` … (per provider) | Context photo behind each provider card (optional — can reuse brand shots) | 900×700 |
 
 ### Business funding
-| ⬜ | `funding-hero.webp` | Owners exploring funding | 1200×800 |
-| ⬜ | `funding-mca.webp` / `-loan.webp` / `-rbf.webp` / `-asset.webp` / `-credit.webp` | 5 funding-type headers | 1200×700 |
+| ⬜ | `funding-hero.webp` | Owners exploring funding | 1200×800 | (currently **duplicates** the About "team helping" photo — needs its own) |
 
 ### EPOS — industries (6)
 | ⬜ | `epos-industry-retail.webp` / `-hospitality.webp` / `-cafe.webp` / `-takeaway.webp` / `-salon.webp` / `-services.webp` | Industry scenes | 1000×1000 |
