@@ -18,11 +18,11 @@
   <meta property="og:title" content="Plemmo | One Partner for UK Business Solutions">
   <meta property="og:description" content="One partner for every business solution. Plemmo helps UK businesses compare and arrange card machines, funding, EPOS, digital signage and more.">
   <meta property="og:url" content="https://plemmo.co.uk/">
-  <meta property="og:image" content="https://plemmo.co.uk/images/logo.png">
+  <meta property="og:image" content="https://plemmo.co.uk/images/og-share.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Plemmo | One Partner for UK Business Solutions">
   <meta name="twitter:description" content="One partner for every business solution — card machines, funding, EPOS, signage and more.">
-  <meta name="twitter:image" content="https://plemmo.co.uk/images/logo.png">
+  <meta name="twitter:image" content="https://plemmo.co.uk/images/og-share.jpg">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Plemmo","legalName":"PLEMMO SERVICES LTD","url":"https://plemmo.co.uk/","logo":"https://plemmo.co.uk/images/logo.png","email":"hello@plemmo.co.uk","telephone":"+443330411161","description":"One partner for essential UK business solutions — card machines, funding, EPOS, digital signage and more.","areaServed":"GB"},{"@type":"WebSite","name":"Plemmo","url":"https://plemmo.co.uk/"}]}</script>
   
   <link rel="stylesheet" href="styles.css">
@@ -40,23 +40,22 @@
     #webgl-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
     .hero-content { z-index: 10; position: relative; mix-blend-mode: difference; color: #fff; }
     .hero-title { background: none; -webkit-text-fill-color: #fff; }
-    /* Subpage-style footer */
-    .sfooter{background:#0c0f09;border-top:1px solid rgba(255,255,255,.10);padding:64px 0 30px}
-    .sfooter .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:36px}
-    .sfooter .fbrand p{color:#9aa48d;font-size:14px;max-width:300px;margin-top:14px}
-    .sfooter .fcol h4{font-family:var(--font-heading),sans-serif;font-size:14px;color:#fff;margin-bottom:16px}
-    .sfooter .fcol a{display:block;color:#9aa48d;font-size:14px;padding:6px 0;transition:color .2s}
-    .sfooter .fcol a:hover{color:var(--accent)}
-    .sfooter .fdisc{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.10);font-size:11.5px;color:#6b7560;line-height:1.6}
-    .sfooter .fbot{margin-top:18px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#9aa48d}
-    .sfooter .flegal{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px}
-    .sfooter .flegal a{color:#9aa48d;transition:color .2s}
-    .sfooter .flegal a:hover{color:var(--accent)}
-    .sfooter .logo-footer{display:flex;align-items:center;gap:8px;font-family:var(--font-body),sans-serif;font-weight:900;font-size:22px;letter-spacing:-.04em;color:#fff;margin-bottom:12px}
-    .sfooter .logo-footer img{height:26px;width:auto;display:block}
-    .sfooter .logo-footer .d{color:var(--accent)}
-    @media(max-width:900px){.sfooter .fgrid{grid-template-columns:1fr 1fr;gap:28px}}
-    @media(max-width:560px){.sfooter .fgrid{grid-template-columns:1fr}}
+    /* Footer — exact match to subpages */
+    footer.site-footer-v2{background:#0c0f09;border-top:1px solid rgba(255,255,255,.10);padding:64px 0 30px}
+    footer.site-footer-v2 .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:36px}
+    footer.site-footer-v2 .fbrand .flogo{margin-bottom:14px;display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-weight:900;font-size:24px;letter-spacing:-.04em;color:#fff}
+    footer.site-footer-v2 .fbrand .flogo img{height:26px;width:auto;display:block;flex-shrink:0}
+    footer.site-footer-v2 .fbrand p{color:#9aa48d;font-size:14px;max-width:300px}
+    footer.site-footer-v2 .fcol h4{font-family:'Space Grotesk','Inter',sans-serif;font-size:14px;color:#fff;margin-bottom:16px}
+    footer.site-footer-v2 .fcol a{display:block;color:#9aa48d;font-size:14px;padding:6px 0;transition:color .2s}
+    footer.site-footer-v2 .fcol a:hover{color:#c6ff00}
+    footer.site-footer-v2 .fdisc{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.10);font-size:11.5px;color:#6b7560;line-height:1.6}
+    footer.site-footer-v2 .fbot{margin-top:18px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#9aa48d}
+    footer.site-footer-v2 .flegal{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px}
+    footer.site-footer-v2 .flegal a{color:#9aa48d;transition:color .2s}
+    footer.site-footer-v2 .flegal a:hover{color:#c6ff00}
+    @media(max-width:900px){footer.site-footer-v2 .fgrid{grid-template-columns:1fr 1fr;gap:28px}}
+    @media(max-width:420px){footer.site-footer-v2 .fgrid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -66,10 +65,10 @@
 <!-- STICKY NAVIGATION -->
 <nav class="site-nav glass-nav">
   <div class="nav-container">
-    <div class="nav-logo">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;color:inherit;">
       <img src="images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
       Plemmo
-    </div>
+    </a>
     <div class="nav-links">
       <a href="pages/card-machines.html" class="magnetic" data-strength="20">Card Machines</a>
       <a href="pages/business-funding.html" class="magnetic" data-strength="20">Funding</a>
@@ -94,10 +93,10 @@
   <div class="mobile-menu-backdrop"></div>
   <div class="mobile-menu-panel">
     <div class="mobile-menu-header">
-      <div class="nav-logo">
+      <a href="index.html" class="nav-logo" style="text-decoration:none;color:inherit;">
         <img src="images/logo.png" alt="Plemmo Logo" class="nav-logo-img">
         Plemmo
-      </div>
+      </a>
       <button class="close-menu-btn" aria-label="Close Mobile Menu">
         <iconify-icon icon="solar:close-circle-bold-duotone"></iconify-icon>
       </button>
@@ -125,7 +124,7 @@
 
   <div class="container hero-container">
     <div class="hero-content">
-      <span class="trust-label highlight-label">The All-in-One Growth Toolkit for UK Businesses</span>
+      <span class="trust-label highlight-label">Run your Business, We'll handle the rest</span>
       <h1 class="hero-title reveal-text">STOP JUGGLING PROVIDERS.<br>START RUNNING YOUR BUSINESS.</h1>
       <p class="hero-desc reveal-text">Plemmo brings together payments, funding, technology, and support — so you don't have to deal with five different companies, five different invoices, and five different headaches.</p>
       
@@ -819,13 +818,13 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="sfooter">
+<footer class="site-footer-v2">
   <div class="container">
     <div class="fgrid">
       <div class="fbrand">
-        <div class="logo-footer">
+        <div class="flogo">
           <img src="images/logo.png" alt="Plemmo Logo">
-          plemmo<span class="d">.</span>
+          plemmo
         </div>
         <p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p>
       </div>
