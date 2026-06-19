@@ -63,10 +63,12 @@
 .ipanel .img{aspect-ratio:4/3}.ipanel .img img{width:100%;height:100%;object-fit:cover}
 /* hardware cards */
 .hw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.hw-grid.two{grid-template-columns:repeat(2,1fr);max-width:760px;margin-inline:auto}
 .hw{display:flex;flex-direction:column;overflow:hidden}
 .hw-media{aspect-ratio:4/3;background:radial-gradient(circle at 50% 30%,rgba(198,255,0,.14),transparent 70%),#0d100a;display:flex;align-items:center;justify-content:center;padding:24px;position:relative}
 .hw-media img{max-height:100%;max-width:80%;object-fit:contain;filter:drop-shadow(0 18px 26px rgba(0,0,0,.5));transition:transform .5s var(--ease)}
-.hw:hover .hw-media img{transform:translateY(-8px) scale(1.04)}
+.hw-media .hw-ph{font-size:84px;color:var(--lime);filter:drop-shadow(0 16px 24px rgba(0,0,0,.5));transition:transform .5s var(--ease)}
+.hw:hover .hw-media img,.hw:hover .hw-media .hw-ph{transform:translateY(-8px) scale(1.04)}
 .hw-media .price{position:absolute;top:14px;right:14px;background:rgba(12,16,8,.7);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:100px;padding:6px 13px;font-family:'Space Grotesk';font-weight:700;font-size:15px;color:var(--lime)}
 .hw-body{padding:22px;display:flex;flex-direction:column;flex:1}
 .hw-body h3{font-size:19px;color:#fff;margin-bottom:4px}.hw-body .sub{font-size:13px;color:var(--muted);margin-bottom:14px}
@@ -118,7 +120,7 @@
 .demo-ok{display:none;text-align:center;color:var(--lime);font-weight:700;margin-top:14px}
 @media(max-width:960px){.bench,.feat-grid,.perks{grid-template-columns:repeat(2,1fr)}.hw-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:920px){.ehero-grid{grid-template-columns:1fr;gap:38px}.estage{order:-1;max-width:380px;margin:0 auto}.ipanel,.cfg,.demo-grid{grid-template-columns:1fr}.cfg-sum{position:static}}
-@media(max-width:600px){.bench,.feat-grid,.perks,.hw-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.bench,.feat-grid,.perks,.hw-grid,.hw-grid.two{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -196,6 +198,34 @@
       <div class="card hw rv"><div class="hw-media"><img loading="lazy" decoding="async" src="../images/epos-mobile-pos.webp" alt="Plemmo Mobile POS"><span class="price">£249</span></div><div class="hw-body"><h3>Plemmo Mobile POS</h3><div class="sub">Portable · take payments anywhere</div><div class="hw-more" data-more><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Bluetooth printer · card reader included</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Cloud software</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 1 year warranty</li></ul></div><div class="hw-btns"><button class="btn btn-ghost" data-detail>Specs</button><a class="btn btn-primary" data-quote data-service="EPOS Systems" data-product="Plemmo Mobile POS">Choose</a></div></div></div>
     </div>
     <p class="disc" style="margin-top:22px">Prices shown are indicative "from" pricing and may vary. Final pricing depends on hardware, software, installation and support requirements.</p>
+  </div>
+</section>
+
+<!-- CASH REGISTERS -->
+<section class="section" id="cash-registers">
+  <div class="container">
+    <div class="head"><span class="eyebrow"><iconify-icon icon="ph:cash-register-duotone"></iconify-icon> Cash Registers</span><h2 class="h2" style="text-align:left">Simple, reliable tills</h2><p class="lead">Straightforward cash registers for retail, hospitality, convenience stores, salons and takeaways — perfect when you want a dependable till without a full EPOS setup.</p></div>
+    <div class="hw-grid two" data-stagger>
+      <div class="card hw rv">
+        <div class="hw-media"><iconify-icon class="hw-ph" icon="ph:cash-register-duotone"></iconify-icon><span class="price">£350 + VAT</span></div>
+        <div class="hw-body">
+          <h3>NR-510R</h3>
+          <div class="sub">Reliable till · retail &amp; hospitality</div>
+          <div class="hw-more" data-more><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Thermal receipt printer</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Multiple departments &amp; PLUs</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Cash drawer compatible</li></ul></div>
+          <div class="hw-btns"><button class="btn btn-ghost" data-detail>Details</button><a class="btn btn-primary" data-quote data-service="EPOS Systems" data-product="NR-510R Cash Register">Enquire</a></div>
+        </div>
+      </div>
+      <div class="card hw rv">
+        <div class="hw-media"><iconify-icon class="hw-ph" icon="ph:cash-register-duotone"></iconify-icon><span class="price">£200 + VAT</span></div>
+        <div class="hw-body">
+          <h3>ER-180US</h3>
+          <div class="sub">Entry-level · easy to use</div>
+          <div class="hw-more" data-more><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Compact countertop design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Simple, fast operation</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Ideal for small shops</li></ul></div>
+          <div class="hw-btns"><button class="btn btn-ghost" data-detail>Details</button><a class="btn btn-primary" data-quote data-service="EPOS Systems" data-product="ER-180US Cash Register">Enquire</a></div>
+        </div>
+      </div>
+    </div>
+    <p class="disc" style="margin-top:22px">More models available — enquire for quotes and options. Prices shown are plus VAT and may vary depending on model, bundle, stock and setup requirements.</p>
   </div>
 </section>
 
@@ -288,44 +318,6 @@
       <div class="faq"><div class="faq-q">Can I use it for hospitality? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — hospitality setups can support tables, orders, kitchen printing and reporting depending on the package.</p></div></div>
       <div class="faq"><div class="faq-q">Are prices final? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Pricing depends on hardware, software, installation and support requirements. We'll give you a clear quote.</p></div></div>
     </div>
-  </div>
-</section>
-
-<!-- CASH REGISTERS -->
-<section class="section s-light" id="cash-registers">
-  <div class="container">
-    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:cash-register-duotone"></iconify-icon> Cash Registers</span><h2 class="h2">Cash Registers</h2><p class="lead">Simple, reliable cash registers for retail, hospitality, convenience stores, salons, takeaways, and small businesses. Choose from entry-level models or ask us for more options based on your business setup.</p></div>
-    <div class="hw-grid rv" style="max-width:720px;margin:40px auto 0">
-      <div class="card hw rv">
-        <div class="hw-media" style="background:#0d100a;display:flex;align-items:center;justify-content:center">
-          <iconify-icon icon="ph:cash-register-duotone" style="font-size:80px;color:var(--lime);opacity:.7"></iconify-icon>
-          <span class="price">£350 + VAT</span>
-        </div>
-        <div class="hw-body">
-          <h3>NR-510R</h3>
-          <div class="sub">Cash register · reliable for retail &amp; hospitality</div>
-          <div class="hw-btns">
-            <a class="btn btn-primary" href="#" data-quote data-service="EPOS Systems" data-product="NR-510R Cash Register">Enquire</a>
-          </div>
-        </div>
-      </div>
-      <div class="card hw rv">
-        <div class="hw-media" style="background:#0d100a;display:flex;align-items:center;justify-content:center">
-          <iconify-icon icon="ph:cash-register-duotone" style="font-size:80px;color:var(--lime);opacity:.7"></iconify-icon>
-          <span class="price">£200 + VAT</span>
-        </div>
-        <div class="hw-body">
-          <h3>ER-180US</h3>
-          <div class="sub">Cash register · entry-level &amp; easy to use</div>
-          <div class="hw-btns">
-            <a class="btn btn-primary" href="#" data-quote data-service="EPOS Systems" data-product="ER-180US Cash Register">Enquire</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="disc center" style="margin-top:24px">More models available. Enquire to get quotes and options.</p>
-    <div class="center" style="margin-top:22px"><a href="#" class="btn btn-dark" data-quote data-service="EPOS Systems" data-product="Cash Register">Enquire about cash registers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
-    <p class="disc center" style="margin-top:14px;font-size:11px">Prices shown are plus VAT. Accessory pricing may vary depending on model, bundle, stock, and setup requirements.</p>
   </div>
 </section>
 
