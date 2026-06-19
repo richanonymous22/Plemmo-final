@@ -189,6 +189,11 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 .fcol a{display:block;color:var(--muted);font-size:14px;padding:6px 0;transition:color .2s}
 .fcol a:hover{color:var(--lime)}
 .fdisc{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);font-size:11.5px;color:#6b7560;line-height:1.6}
+.fcompliance{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px}
+.fcomp-item{border:1px solid var(--line);border-radius:10px;padding:11px 14px;background:rgba(255,255,255,.02)}
+.fcomp-item .ct{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:3px}
+.fcomp-item .cv{font-size:12px;color:#aeb8a2;line-height:1.45}
+.fcomp-item .cv b{color:#cfd6c5;font-weight:600}
 .fbot{margin-top:18px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
 .flegal{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px}
 .flegal a{color:var(--muted);transition:color .2s}
@@ -257,6 +262,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       <a href="business-funding.html">Funding</a>
       <a href="epos-systems.html">EPOS</a>
       <a href="digital-signage.html">Signage</a>
+      <a href="utilities-broadband.html" class="active">Utilities</a>
       <a href="about-us.html">About</a>
       <a href="contact-us.html">Contact</a>
     </div>
@@ -277,6 +283,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     <a href="business-funding.html">Business Funding</a>
     <a href="epos-systems.html">EPOS Systems</a>
     <a href="digital-signage.html">Digital Signage</a>
+    <a href="utilities-broadband.html">Utilities</a>
     <a href="about-us.html">About Us</a>
     <a href="contact-us.html">Contact Us</a>
     <a href="#" class="btn btn-primary" data-quote data-service="Utilities &amp; Broadband">Get a Free Quote</a>
@@ -571,7 +578,14 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       <div class="fcol"><h4>Resources</h4><a href="#">Get a Quote</a><a href="card-machines.html">Compare Card Machines</a><a href="refer-and-earn.html">Refer &amp; Earn</a></div>
       <div class="fcol"><h4>Contact</h4><a href="tel:03330411161">0333 041 1161</a><a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a><a href="#">Get a Free Quote</a><a href="contact-us.html">Send an Enquiry</a></div>
     </div>
-    <div class="fdisc">Plemmo acts as an introducer for utility and broadband services. Products, pricing, and availability are subject to provider terms, eligibility, and your specific location and usage. Plemmo may receive commission from utility partners. Any potential savings discussed are indicative and cannot be guaranteed until a formal quote is finalized using actual usage data. Energy quotes are subject to supplier availability, business usage, contract status, credit checks, and acceptance. Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) (ICO ref: ZC113490) and Digitease Business Solutions Ltd (Company No. 15196464) (ICO ref: ZB963503). Digitease Business Solutions Ltd is registered with an approved Alternative Dispute Resolution (ADR) scheme for energy broker disputes. ADR Membership Number: C35DIGI06. Depending on the service requested, products may be supplied directly or through selected third-party providers.</div>
+    <div class="fdisc">
+      <p>Plemmo acts as an introducer for utility and broadband services and may receive commission from utility partners. Products, pricing and availability are subject to provider terms, eligibility, and your specific location and usage. Any potential savings are indicative and cannot be guaranteed until a formal quote is finalised using your actual usage data. Energy quotes are subject to supplier availability, business usage, contract status, credit checks and acceptance. Depending on the service requested, products may be supplied directly or through selected third-party providers.</p>
+      <div class="fcompliance">
+        <div class="fcomp-item"><span class="ct">PLEMMO SERVICES LTD</span><span class="cv">Company No. <b>17076776</b> · ICO ref <b>ZC113490</b></span></div>
+        <div class="fcomp-item"><span class="ct">Digitease Business Solutions Ltd</span><span class="cv">Company No. <b>15196464</b> · ICO ref <b>ZB963503</b></span></div>
+        <div class="fcomp-item"><span class="ct">Energy broker ADR scheme</span><span class="cv">Digitease is registered with an approved Alternative Dispute Resolution scheme · Membership No. <b>C35DIGI06</b></span></div>
+      </div>
+    </div>
     <div class="flegal"><a href="terms.html">Terms &amp; Conditions</a><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="legal-disclosures.html">Legal Disclosures</a><a href="complaints.html">Complaints</a><a href="commission-disclosure.html">Commission Disclosure</a></div>
     <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
   </div>

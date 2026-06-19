@@ -9,11 +9,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-menu-content a');
 
+  let savedScrollY = 0;
   function toggleMobileMenu() {
     mobileMenu.classList.toggle('active');
     const isActive = mobileMenu.classList.contains('active');
     hamburgerBtn.setAttribute('aria-expanded', isActive);
-    document.body.style.overflow = isActive ? 'hidden' : '';
+    // Lock background scroll. position:fixed is required for iOS Safari,
+    // which ignores body overflow:hidden.
+    if (isActive) {
+      savedScrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, savedScrollY);
+    }
   }
 
   if (hamburgerBtn && closeMenuBtn && mobileMenu) {
@@ -214,30 +233,59 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if(slider) {
     const formatCurrency = (num) => new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(num);
-    
+    const oldRate = document.getElementById('old-rate');
+    const plemmoRateTag = document.getElementById('plemmo-rate');
+
+    // Plemmo blended rate by monthly turnover — mirrors the card-machines
+    // rate calculator (Shift4 flat under £10k, then Teya blended tiers).
+    const plemmoRateFor = (t) => {
+      if (t < 10000) return 0.0125;   // Shift4 flat 1.25% for lower turnover
+      if (t < 11000) return 0.0120;
+      if (t < 12000) return 0.0110;
+      if (t < 13000) return 0.0104;
+      if (t < 14000) return 0.0102;
+      if (t < 15000) return 0.0101;
+      if (t < 16000) return 0.0100;
+      if (t < 17000) return 0.0095;
+      if (t < 18000) return 0.0090;
+      if (t < 19000) return 0.0088;
+      if (t < 20000) return 0.0086;
+      if (t < 22000) return 0.0085;
+      if (t < 36000) return 0.0080;
+      if (t < 43000) return 0.0077;
+      if (t < 66000) return 0.0070;
+      if (t < 81000) return 0.0067;
+      if (t < 100000) return 0.0063;
+      if (t < 120000) return 0.0061;
+      if (t < 200000) return 0.0060;
+      return 0.0055;
+    };
+
     slider.addEventListener('input', (e) => {
       const val = parseInt(e.target.value);
-      
-      // Update sleek slider fill
+
+      // Update sleek slider fill (clamped to 0–100%)
       const min = parseInt(slider.min) || 5000;
       const max = parseInt(slider.max) || 250000;
-      const percentage = ((val - min) / (max - min)) * 100;
+      const percentage = Math.min(Math.max(((val - min) / (max - min)) * 100, 0), 100);
       if (sliderFill) {
          sliderFill.style.width = `${percentage}%`;
       }
-      
-      // Calculate rates: Average market rate ~1.5%, Plemmo blended rate ~0.9%
+
+      // Typical market blended rate vs Plemmo's turnover-based blended rate
       const avgRate = 0.015;
-      const plemmoRate = 0.009;
-      
+      const plemmoRate = plemmoRateFor(val);
+
       const oldVal = val * avgRate;
       const plemmoVal = val * plemmoRate;
-      const savings = oldVal - plemmoVal;
+      const savings = Math.max(oldVal - plemmoVal, 0);
 
       display.textContent = formatCurrency(val);
       oldFee.textContent = formatCurrency(oldVal);
       plemmoFee.textContent = formatCurrency(plemmoVal);
       totalSavings.textContent = formatCurrency(savings);
+      if (oldRate) oldRate.textContent = (avgRate * 100).toFixed(2) + '% blended';
+      if (plemmoRateTag) plemmoRateTag.textContent = (plemmoRate * 100).toFixed(2) + '% blended';
 
       // Animate width bars
       const maxFee = max * avgRate; // The absolute max old fee

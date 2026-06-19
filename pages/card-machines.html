@@ -472,6 +472,15 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .calc-tile .tv{font-family:'Space Grotesk';font-weight:700;font-size:clamp(24px,3vw,32px);color:#fff;margin-top:6px;line-height:1.05}
 .calc-tile.hi .tv{color:var(--lime)}
 .calc-tile .ts{font-size:12px;color:var(--muted);margin-top:5px}
+.calc-opts{display:grid;gap:10px;margin:0 0 24px}
+.calc-opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.02)}
+.calc-opt.rec{border-color:rgba(198,255,0,.4);background:linear-gradient(160deg,rgba(198,255,0,.07),transparent)}
+.calc-opt .ol{display:flex;align-items:center;gap:11px;min-width:0}
+.calc-opt .obadge{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:100px;padding:4px 10px;white-space:nowrap;flex-shrink:0}
+.calc-opt.rec .obadge{color:#0a0c08;background:var(--lime);border-color:var(--lime)}
+.calc-opt .op{font-weight:600;color:#fff;font-size:14px;line-height:1.2}
+.calc-opt .op small{color:var(--muted);font-weight:500;display:block;font-size:11.5px;margin-top:2px}
+.calc-opt .ov{font-family:'Space Grotesk';font-weight:700;color:var(--lime);font-size:16px;white-space:nowrap;text-align:right;flex-shrink:0}
 .calc-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .calc-note{font-size:11px;color:#6b7560;margin-top:18px;line-height:1.5}
 
@@ -624,6 +633,7 @@ html{overflow-x:hidden}
       <a href="business-funding.html">Funding</a>
       <a href="epos-systems.html">EPOS</a>
       <a href="digital-signage.html">Signage</a>
+      <a href="utilities-broadband.html">Utilities</a>
       <a href="about-us.html">About</a>
       <a href="contact-us.html">Contact</a>
     </div>
@@ -640,7 +650,7 @@ html{overflow-x:hidden}
   <div class="mm-bd" data-mmclose></div>
   <div class="mm-panel">
     <div class="mm-top"><span class="logo" style="display:flex;align-items:center;gap:8px;"><img src="../images/logo.png" alt="Plemmo" style="height:26px;width:auto;display:block;flex-shrink:0;">plemmo</span><button class="mm-close" data-mmclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
-    <a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a>
+    <a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="utilities-broadband.html">Utilities</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a>
     <a href="#" class="btn btn-primary" data-quote>Get a Free Quote</a>
   </div>
 </div>
@@ -745,7 +755,7 @@ html{overflow-x:hidden}
       <div class="pcard tilt rv">
         <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/worldpay-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay card machine"></div>
-        <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Debit from 0.28% / credit 0.65%</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Suited to MOTO / phone payments</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> For businesses above £15k turnover</li></ul>
+        <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Debit from 0.30% / credit 0.65%</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Suited to MOTO / phone payments</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> For businesses above £15k turnover</li></ul>
         <button class="pview" data-detail="worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="worldpay"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
@@ -856,11 +866,12 @@ html{overflow-x:hidden}
           <div class="calc-tile"><div class="tl">Est. monthly cost</div><div class="tv" id="calcCost">£150</div><div class="ts">on card processing</div></div>
           <div class="calc-tile"><div class="tl">Suggested fit</div><div class="tv" id="calcFit" style="font-size:22px">Teya</div><div class="ts" id="calcFitNote">strong all‑rounder</div></div>
         </div>
+        <div class="calc-opts" id="calcOpts"></div>
         <div class="calc-cta">
           <a href="#" class="btn btn-primary" data-quote data-product="Card machine rate quote">Get my exact quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
           <span class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply</span>
         </div>
-        <p class="calc-note">Rates are indicative only and may vary depending on business type, monthly card turnover, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Final pricing is confirmed after review. For lower turnover (under £5k), Shift4 may suit with a flat 1.25% rate plus a 25p next-day settlement fee. For around £5k, SumUp may also be considered.</p>
+        <p class="calc-note"><b>Recommended</b> shows the best-fit provider for your turnover. <b>Alternative</b>, <b>lowest contract</b> and <b>split-rate</b> options are shown where available. Teya is the recommended option above £10k (£15 + VAT rental, flexible terms). Shift4 suits lower turnover at a flat 1.25% + 25p next-day settlement fee. SumUp contract rates require a 12 or 24-month term. Worldpay split debit/credit pricing is shown for £25k+. All rates are indicative only and may vary depending on business type, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Final pricing is confirmed after review.</p>
       </div>
     </div>
   </div>
@@ -1150,26 +1161,25 @@ html{overflow-x:hidden}
   var PROV={
     teya:{k:'teya',n:'Teya',img:'../images/teya-card-machine.webp',w:'A flexible option for established businesses above £15k monthly turnover — rental or buy routes available, with instant or next-day settlement options.',b:['Rental and buy options available','Instant or next-day settlement','Flexible contract terms']},
     sumup:{k:'sumup',n:'SumUp',img:'../images/sumup-card-machine.webp',w:'A strong option for smaller businesses wanting a simple, low-commitment setup. Terminal from £105 inc. VAT with rates that can start from 0.55%.',b:['Terminal from £105 inc. VAT','Rates can start from 0.55%','Instant payout into SumUp account']},
-    worldpay:{k:'worldpay',n:'Worldpay',img:'../images/worldpay-card-machine.webp',w:'Can suit more established businesses needing competitive split rates, phone payments, and a broader payment setup. Indicative rates may start from 0.28% debit and 0.65% credit.',b:['Debit from 0.28% / credit 0.65%','Suited to MOTO / phone payments','For businesses above £15k turnover']},
+    worldpay:{k:'worldpay',n:'Worldpay',img:'../images/worldpay-card-machine.webp',w:'Can suit more established businesses needing competitive split rates, phone payments, and a broader payment setup. Indicative rates may start from 0.30% debit and 0.65% credit.',b:['Debit from 0.30% / credit 0.65%','Suited to MOTO / phone payments','For businesses above £15k turnover']},
     elavon:{k:'elavon',n:'Elavon',img:'../images/elavon-card-machine.webp',w:'Can suit businesses needing competitive rates, phone payment options, and regular/everyday payout support. Above £15k monthly turnover.',b:['MOTO / phone payment options','Everyday payout available','Suited to businesses above £15k']},
     shift4:{k:'shift4',n:'Shift4',img:'../images/Card machine no bg.webp',w:'A simple, low-commitment option ideal for smaller businesses and those new to card payments. Flat rate 1.25% + 25p next-day settlement fee, no monthly rental.',b:['No monthly rental','Flat rate 1.25% + 25p settlement fee','Simple setup & low commitment']}
   };
-  function rec(a){var t=a.turnover,p=a.priority,type=a.type,cur=a.current;
-    if(type==='Charity')return p==='Lowest rates'?PROV.sumup:PROV.shift4;
-    if(p==='MOTO / phone payments')return PROV.elavon;
+  function rec(a){var t=a.turnover,p=a.priority,type=a.type;
+    var low=(t==='Under £5k'),mid=(t==='£5k–£10k'),big=(t==='£15k–£50k'||t==='£50k+');
+    /* Charity → SumUp / Shift4 only */
+    if(type==='Charity')return (low||mid)?PROV.shift4:PROV.sumup;
+    /* Priority-driven rules */
+    if(p==='MOTO / phone payments')return big?PROV.worldpay:PROV.elavon;
     if(p==='Pay by link')return PROV.teya;
-    if(p==='Lowest rates')return PROV.teya;
-    if(p==='No monthly rental')return PROV.shift4;
-    if(p==='Fast payouts')return PROV.elavon;
+    if(p==='No monthly rental')return low?PROV.shift4:(mid?PROV.sumup:PROV.shift4);
+    if(p==='Fast payouts')return (low||mid)?PROV.sumup:PROV.teya;
     if(p==='Simple setup')return PROV.sumup;
-    if(cur==='Using Teya'&&(t==='Under £5k'||t==='£5k–£10k'||t==='£10k–£15k'))return PROV.shift4;
-    if(cur==='Using SumUp'&&(t==='Under £5k'||t==='£5k–£10k'||t==='£10k–£15k'))return PROV.shift4;
-    if(cur==='New to card payments')return PROV.shift4;
-    if(t==='Under £5k')return PROV.shift4;
-    if(t==='£5k–£10k')return PROV.shift4;
-    if(t==='£10k–£15k')return PROV.sumup;
-    if(t==='£15k–£50k')return PROV.teya;
-    if(t==='£50k+')return PROV.elavon;
+    if(p==='Better support')return PROV.teya;
+    if(p==='Lowest rates')return low?PROV.shift4:(mid?PROV.sumup:PROV.teya);
+    /* Turnover-driven default — Teya is first option from £10k+ */
+    if(low)return PROV.shift4;
+    if(mid)return PROV.sumup;
     return PROV.teya;}
   var LABELS=['Business','Turnover','Priority','Status'];
   var SKEY='plemmo_cm_finder';
@@ -1197,14 +1207,17 @@ html{overflow-x:hidden}
     teya:{badge:'Flexible plans',name:'Teya',img:IMGP.teya,intro:'Teya offers flexible card payment options with rental and purchase routes available. Instant settlement may be available with a Teya business account, while next-day settlement options may also apply. Suited to businesses above £15k monthly card turnover. Final rates and terms depend on business profile, turnover, and provider approval.',
       facts:[['Indicative rate','From 0.55%',1],['Terminal options','Rental or buy outright'],['Settlement','Instant (Teya account) or next-day'],['Hardware','PAX A920 Pro · Sunmi']],
       pros:['Rental and buy options available','Teya bank account is optional','Contract and no-contract routes available','Rates can reduce as turnover grows'],
-      table:[['£15k – £20k','1.10%–0.85%'],['£20k – £35k','0.80%'],['£35k – £80k','0.77%–0.67%'],['£100k+','from 0.55%']],
-      note:'Rates are indicative only and may vary depending on business type, monthly card turnover, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Final pricing is confirmed after review.'},
+      tableTitle:'Indicative Teya blended rates by turnover',
+      table:[['£10k','1.20%'],['£12k','1.04%'],['£15k','1.00%'],['£18k','0.88%'],['£20k','0.85%'],['£22k – £35k','0.80%'],['£36k – £42k','0.77%'],['£43k – £65k','0.70%'],['£66k – £80k','0.67%'],['£81k – £95k','0.63%'],['£100k','0.61%'],['£120k – £190k','0.60%'],['£200k+','0.55%']],
+      note:'Rates are indicative only and may vary depending on business type, monthly card turnover, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Teya monthly rental is £15 + VAT (or buy the terminal outright). Final pricing is confirmed after review.'},
     sumup:{badge:'Simplest setup',name:'SumUp',img:IMGP.sumup,intro:'SumUp can be a strong option for smaller businesses wanting simple setup and a buy-outright terminal. Terminal pricing starts from £105 inc. VAT, with rates from 0.55% depending on turnover and business profile. Instant payout may be available through a SumUp business account.',
       facts:[['Terminal','From £105 inc. VAT'],['Monthly fee','None'],['Rate from','0.55%',1],['Instant payout','Via SumUp account']],
-      pros:['Terminal from £105 inc. VAT — low commitment','No monthly fees or contract','Rates can start from 0.55%','Instant payout option via SumUp account','Easy to set up and use'],
-      note:'Rates are indicative and subject to provider approval, transaction mix, business profile and terms. Instant payout available into a SumUp business account.'},
-    worldpay:{badge:'For larger businesses',name:'Worldpay',img:IMGP.worldpay,intro:'Worldpay can suit more established businesses needing competitive split rates, phone payments, and a broader payment setup. Indicative rates may start from 0.28% debit and 0.65% credit, depending on business profile and approval.',
-      facts:[['Debit from','0.28%*',1],['Credit from','0.65%*',1],['Rental','£1/mo first year'],['Contract','18 months']],
+      pros:['Terminal from £105 inc. VAT — low commitment','Pay As You Go or lower contract rates','Rates can start from 0.55% on a 24-month term','Instant payout option via SumUp account','Easy to set up and use'],
+      tableTitle:'SumUp rates — Pay As You Go → 24-month contract',
+      table:[['£5k – £7.5k','1.49% → 1.19%'],['£7.5k – £10k','1.29% → 1.19%'],['£10k – £15k','1.19% → 0.89%'],['£15k – £20k','0.99% → 0.79%'],['£20k – £30k','0.89% → 0.75%'],['£30k – £50k','0.79% → 0.69%'],['£50k – £100k','0.75% → 0.59%'],['£100k+','0.69% → 0.55%']],
+      note:'Rates shown range from Pay As You Go (no contract) to the lowest 24-month contract rate. Premium, international, corporate and customer-not-present payments may be charged separately under SumUp terms. Subject to provider approval and business profile.'},
+    worldpay:{badge:'For larger businesses',name:'Worldpay',img:IMGP.worldpay,intro:'Worldpay can suit more established businesses needing competitive split rates, phone payments, and a broader payment setup. Indicative rates may start from 0.30% debit and 0.65% credit, depending on business profile and approval.',
+      facts:[['Debit from','0.30%*',1],['Credit from','0.65%*',1],['Rental','£1/mo first year'],['Contract','18 months']],
       pros:['Trusted, established UK provider','Suited to MOTO / phone payments','24/7 customer support','For businesses above £15k turnover'],
       note:'*Indicative rates. £29.50 + VAT monthly applies after the first year. Subject to provider approval, eligibility and terms. Rates depend on business profile, turnover and card mix.'},
     elavon:{badge:'Reliable & secure',name:'Elavon',img:IMGP.elavon,intro:'Elavon can suit businesses needing competitive rates, phone payment options, and regular/everyday payout support. Final rates depend on turnover, sector, transaction mix, and approval. Suited to businesses above £15k monthly turnover.',
@@ -1235,7 +1248,7 @@ html{overflow-x:hidden}
   var detail=document.getElementById('detail'),dcard=document.getElementById('detailCard');
   function detailHTML(d){
     var facts=d.facts?'<div class="dt-facts">'+d.facts.map(function(f){return '<div class="dt-fact"><div class="l">'+f[0]+'</div><div class="v'+(f[2]?' lime':'')+'">'+f[1]+'</div></div>'}).join('')+'</div>':'';
-    var table=d.table?'<div class="dt-sub">Indicative Teya rates by turnover</div><table class="dt-table"><thead><tr><th>Monthly turnover</th><th>Rate</th></tr></thead><tbody>'+d.table.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')+'</tbody></table>':'';
+    var table=d.table?'<div class="dt-sub">'+(d.tableTitle||'Indicative rates by turnover')+'</div><table class="dt-table"><thead><tr><th>Monthly turnover</th><th>Rate</th></tr></thead><tbody>'+d.table.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')+'</tbody></table>':'';
     var pros='<div class="dt-sub">Why businesses choose it</div><ul class="dt-pros">'+d.pros.map(function(p){return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>'+p+'</li>'}).join('')+'</ul>';
     var cta=d.type?'Get a quote':'Get a '+d.name+' quote';
     return '<button class="dt-close" data-dclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button>'
@@ -1255,37 +1268,66 @@ html{overflow-x:hidden}
   /* seamless marquee */
   var mq=document.getElementById('mqTrack');if(mq){mq.innerHTML+=mq.innerHTML}
 
-  /* ── Rate calculator (indicative Teya pricing by turnover) ── */
+  /* ── Rate calculator (owner pricing: Teya / Shift4 / SumUp / Worldpay) ── */
   (function(){
     var range=document.getElementById('calcRange');if(!range)return;
     var elT=document.getElementById('calcTurn'),elR=document.getElementById('calcRate'),elC=document.getElementById('calcCost'),
-        elF=document.getElementById('calcFit'),elFN=document.getElementById('calcFitNote');
+        elF=document.getElementById('calcFit'),elFN=document.getElementById('calcFitNote'),elO=document.getElementById('calcOpts'),
+        outWrap=document.querySelector('.calc-out');
     function gbp(n){return '£'+Math.round(n).toLocaleString('en-GB')}
-    function teyaRate(t){if(t<=20000)return 1.00;if(t<=35000)return 0.80;if(t<=42000)return 0.77;if(t<=65000)return 0.70;if(t<=80000)return 0.67;if(t<=95000)return 0.63;if(t<=110000)return 0.61;if(t<=199000)return 0.60;return 0.55;}
+    function pc(r){return r.toFixed(2)+'%'}
+    /* Teya blended rates by monthly turnover (owner chart) */
+    function teyaRate(t){
+      if(t<10000)return 1.25;if(t<11000)return 1.20;if(t<12000)return 1.10;if(t<13000)return 1.04;
+      if(t<14000)return 1.02;if(t<15000)return 1.01;if(t<16000)return 1.00;if(t<17000)return 0.95;
+      if(t<18000)return 0.90;if(t<19000)return 0.88;if(t<20000)return 0.86;if(t<22000)return 0.85;
+      if(t<36000)return 0.80;if(t<43000)return 0.77;if(t<66000)return 0.70;if(t<81000)return 0.67;
+      if(t<100000)return 0.63;if(t<120000)return 0.61;if(t<200000)return 0.60;return 0.55;
+    }
+    /* SumUp [PAYG, 12-month, 24-month] by turnover band */
+    function sumup(t){
+      if(t<7500)return[1.49,1.29,1.19];if(t<10000)return[1.29,1.19,1.19];if(t<15000)return[1.19,0.99,0.89];
+      if(t<20000)return[0.99,0.89,0.79];if(t<30000)return[0.89,0.79,0.75];if(t<50000)return[0.79,0.75,0.69];
+      if(t<100000)return[0.75,0.69,0.59];return[0.69,0.59,0.55];
+    }
+    function opt(cls,badge,prov,sub,val){
+      return '<div class="calc-opt'+(cls?' '+cls:'')+'"><div class="ol"><span class="obadge">'+badge+'</span>'
+        +'<span class="op">'+prov+(sub?'<small>'+sub+'</small>':'')+'</span></div><span class="ov">'+val+'</span></div>';
+    }
     function upd(){
       var t=+range.value, p=(t-range.min)/(range.max-range.min)*100;
       range.style.setProperty('--p',p+'%');
       elT.innerHTML=gbp(t)+(t>=200000?'<small>+</small>':'')+'<small>/mo</small>';
+      /* reset highlight so only the rate tile is ever highlighted */
+      if(outWrap)outWrap.querySelectorAll('.calc-tile').forEach(function(x){x.classList.remove('hi')});
+      elR.parentElement.classList.add('hi');
+      var opts='';
       if(t<5000){
-        elR.textContent='1.25% + 25p';elR.parentElement.classList.add('hi');
-        elC.textContent=gbp(t*0.0125);
+        elR.textContent='1.25% + 25p';elC.textContent=gbp(t*0.0125);
         elF.textContent='Shift4';elFN.textContent='ideal for lower turnover';
-      } else if(t<=10000){
-        elR.textContent='1.25% + 25p';elR.parentElement.classList.add('hi');
-        elC.textContent=gbp(t*0.0125);
-        elF.textContent='Shift4 / SumUp';elFN.textContent='good options at this level';
-      } else if(t<15000){
-        elR.textContent='From 0.55%';elR.parentElement.classList.add('hi');
-        elC.textContent=gbp(t*0.0055);
-        elF.textContent='Shift4 / SumUp';elFN.textContent='consider based on your needs';
+        opts=opt('rec','Recommended','Shift4','1.25% blended + 25p next-day settlement','1.25%')
+            +opt('','No contract','SumUp Pay As You Go','simple — buy your terminal','PAYG');
+      } else if(t<10000){
+        var s=sumup(t);
+        elR.textContent='1.25% + 25p';elC.textContent=gbp(t*0.0125);
+        elF.textContent='Shift4 / SumUp';elFN.textContent='best fit at this level';
+        opts=opt('rec','Recommended','Shift4','1.25% blended + 25p settlement','1.25%')
+            +opt('','Alternative','SumUp Pay As You Go','no contract',pc(s[0]))
+            +opt('','Contract','SumUp 12-month','lower rate · 12-mo term',pc(s[1]))
+            +opt('','Lowest contract','SumUp 24-month','lowest rate · 24-mo term',pc(s[2]));
       } else {
-        var r=teyaRate(t);
-        elR.parentElement.classList.add('hi');
-        elR.textContent=(r.toFixed(2))+'%';
-        elC.textContent=gbp(t*r/100);
-        if(t>=50000){elF.textContent='Teya / Worldpay';elFN.textContent='compare blended vs split';}
-        else{elF.textContent='Teya / Elavon';elFN.textContent='strong for this level';}
+        var r=teyaRate(t), s=sumup(t);
+        elR.textContent=pc(r);elC.textContent=gbp(t*r/100);
+        elF.textContent='Teya';elFN.textContent='first choice above £10k';
+        opts=opt('rec','Recommended','Teya','£15 + VAT rental · flexible',pc(r))
+            +opt('','Alternative','Shift4','no monthly rental','0.70%')
+            +opt('','Lowest contract','SumUp 24-month','requires 24-mo term',pc(s[2]));
+        if(t>=25000){
+          var deb=t<30000?'0.35%':'0.30%', cre=t<30000?'0.75%':'0.65%';
+          opts+=opt('','Split rate','Worldpay','debit / credit pricing',deb+' / '+cre);
+        }
       }
+      elO.innerHTML=opts;
     }
     range.addEventListener('input',upd); upd();
   })();
@@ -1294,7 +1336,7 @@ html{overflow-x:hidden}
   var CMP={
     teya:{name:'Teya',img:PROV.teya.img,rate:'From 0.55% (turnover dependent)',monthly:'Rental or buy outright',settlement:'Instant (Teya account) or next-day',contract:'Flexible',bestfor:'Businesses above £15k monthly turnover'},
     sumup:{name:'SumUp',img:PROV.sumup.img,rate:'From 0.55% depending on profile',monthly:'None — one-off from £105 inc. VAT',settlement:'Next-day / instant (SumUp account)',contract:'No contract',bestfor:'Smaller businesses and new to card'},
-    worldpay:{name:'Worldpay',img:PROV.worldpay.img,rate:'Debit from 0.28% / credit 0.65%*',monthly:'£1 first year, then £29.50 + VAT',settlement:'Next-day',contract:'18 months',bestfor:'Established businesses above £15k'},
+    worldpay:{name:'Worldpay',img:PROV.worldpay.img,rate:'Debit from 0.30% / credit 0.65%*',monthly:'£1 first year, then £29.50 + VAT',settlement:'Next-day',contract:'18 months',bestfor:'Established businesses above £15k'},
     elavon:{name:'Elavon',img:PROV.elavon.img,rate:'Competitive rates — quote based',monthly:'Provider terms',settlement:'Everyday payout available',contract:'Provider terms',bestfor:'Businesses above £15k needing MOTO'},
     shift4:{name:'Shift4',img:PROV.shift4.img,rate:'1.25% + 25p next-day settlement fee',monthly:'None',settlement:'Next-day',contract:'No contract',bestfor:'Smaller businesses / new to card'}
   };

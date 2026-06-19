@@ -93,6 +93,14 @@
 .sg-table tr:first-child td{border-top:none}
 .sg-table td:last-child{text-align:right;font-family:'Space Grotesk';font-weight:700;color:var(--lime);white-space:nowrap}
 .sg-table tr:hover td{background:rgba(255,255,255,.03)}
+/* price cards */
+.sg-pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:16px}
+.sg-pcard{display:flex;flex-direction:column;gap:10px;padding:16px 16px 17px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.025);transition:border-color .2s,transform .2s,background .2s}
+.sg-pcard:hover{border-color:var(--line2);background:rgba(255,255,255,.045);transform:translateY(-2px)}
+.sg-chip{align-self:flex-start;display:inline-flex;align-items:center;border-radius:var(--pill);padding:4px 11px;font-family:'Space Grotesk';font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--lime);background:rgba(198,255,0,.09);border:1px solid rgba(198,255,0,.22)}
+.sg-pname{font-size:13.5px;line-height:1.35;color:#e7ebe0;flex:1}
+.sg-pprice{font-family:'Space Grotesk';font-weight:700;font-size:20px;color:var(--lime);white-space:nowrap;line-height:1}
+@media(max-width:600px){.sg-pgrid{grid-template-columns:1fr}}
 /* custom band */
 .cband{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .ccard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px}
@@ -134,11 +142,11 @@
 <nav class="nav" id="nav">
   <div class="nav-in">
     <a href="../index.html" class="logo" style="display:flex;align-items:center;gap:8px;"><img src="../images/logo.png" alt="Plemmo" style="height:26px;width:auto;display:block;flex-shrink:0;">plemmo</a>
-    <div class="nav-links"><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Funding</a><a href="epos-systems.html">EPOS</a><a href="digital-signage.html" class="active">Signage</a><a href="about-us.html">About</a><a href="contact-us.html">Contact</a></div>
+    <div class="nav-links"><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Funding</a><a href="epos-systems.html">EPOS</a><a href="digital-signage.html" class="active">Signage</a><a href="utilities-broadband.html">Utilities</a><a href="about-us.html">About</a><a href="contact-us.html">Contact</a></div>
     <div class="nav-cta"><a href="tel:03330411161" class="btn nav-ghost">0333 041 1161</a><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage">Get a Free Quote</a><button class="burger" id="burger" aria-label="Menu"><iconify-icon icon="ph:list-bold"></iconify-icon></button></div>
   </div>
 </nav>
-<div class="mm" id="mm"><div class="mm-bd" data-mmclose></div><div class="mm-panel"><div class="mm-top"><span class="logo" style="display:flex;align-items:center;gap:8px;"><img src="../images/logo.png" alt="Plemmo" style="height:26px;width:auto;display:block;flex-shrink:0;">plemmo</span><button class="mm-close" data-mmclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div><a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage">Get a Free Quote</a></div></div>
+<div class="mm" id="mm"><div class="mm-bd" data-mmclose></div><div class="mm-panel"><div class="mm-top"><span class="logo" style="display:flex;align-items:center;gap:8px;"><img src="../images/logo.png" alt="Plemmo" style="height:26px;width:auto;display:block;flex-shrink:0;">plemmo</span><button class="mm-close" data-mmclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div><a href="../index.html">Home</a><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="utilities-broadband.html">Utilities</a><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage">Get a Free Quote</a></div></div>
 
 <!-- HERO -->
 <header class="shero" id="top">
@@ -229,19 +237,52 @@
   <div class="container">
     <div class="head"><span class="eyebrow"><iconify-icon icon="ph:tag-duotone"></iconify-icon> Pricing</span><h2 class="h2" style="text-align:left">Commercial display screens</h2><p class="lead">Indicative pricing across our most popular ranges.</p></div>
     <div class="sg-tabs rv" id="pTabs">
-      <div class="sg-tab active" data-cat="adv">Advertising</div><div class="sg-tab" data-cat="vib">4K Vibrant</div><div class="sg-tab" data-cat="free">Freestanding</div><div class="sg-tab" data-cat="win">Window</div><div class="sg-tab" data-cat="kiosk">Touch Kiosks</div><div class="sg-tab" data-cat="out">Outdoor</div><div class="sg-tab" data-cat="touch">Interactive</div><div class="sg-tab" data-cat="pos">POS</div>
+      <div class="sg-tab active" role="button" tabindex="0" data-cat="adv">Advertising</div><div class="sg-tab" role="button" tabindex="0" data-cat="vib">4K Vibrant</div><div class="sg-tab" role="button" tabindex="0" data-cat="free">Freestanding</div><div class="sg-tab" role="button" tabindex="0" data-cat="win">Window</div><div class="sg-tab" role="button" tabindex="0" data-cat="kiosk">Touch Kiosks</div><div class="sg-tab" role="button" tabindex="0" data-cat="out">Outdoor</div><div class="sg-tab" role="button" tabindex="0" data-cat="touch">Interactive</div><div class="sg-tab" role="button" tabindex="0" data-cat="pos">POS</div>
     </div>
     <div class="sg-show rv">
     <div class="sg-visual"><img id="sgImg" loading="lazy" decoding="async" src="../images/signage-cat-advertising.webp" alt="Digital advertising display"><span class="sg-cap" id="sgCap"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Advertising displays</span></div>
     <div class="sg-table-wrap">
-      <div class="sg-cat active" data-cat="adv"><table class="sg-table"><tr><td>32" Slimline Pro Advertising Display</td><td>£650</td></tr><tr><td>43" Slimline Pro Advertising Display</td><td>£890</td></tr><tr><td>50" Slimline Pro Advertising Display</td><td>£1,035</td></tr><tr><td>55" Slimline Pro Advertising Display</td><td>£1,350</td></tr></table></div>
-      <div class="sg-cat" data-cat="vib"><table class="sg-table"><tr><td>32" Vibrant Professional Display</td><td>£499</td></tr><tr><td>43" 4K Vibrant Professional Display</td><td>£715</td></tr><tr><td>50" 4K Vibrant Professional Display</td><td>£810</td></tr><tr><td>55" 4K Vibrant Professional Display</td><td>£1,140</td></tr></table></div>
-      <div class="sg-cat" data-cat="free"><table class="sg-table"><tr><td>50" Android Freestanding Digital Poster</td><td>£1,915</td></tr><tr><td>55" Android Freestanding Digital Poster</td><td>£2,190</td></tr><tr><td>65" 4K Freestanding Digital Poster</td><td>£3,575</td></tr></table></div>
-      <div class="sg-cat" data-cat="win"><table class="sg-table"><tr><td>43" Ultra High Brightness Window Display</td><td>£1,770</td></tr><tr><td>55" Ultra High Brightness Window Display</td><td>£2,220</td></tr><tr><td>65" Ultra High Brightness Window Display</td><td>£3,240</td></tr></table></div>
-      <div class="sg-cat" data-cat="kiosk"><table class="sg-table"><tr><td>43" Android Touch Screen Kiosk</td><td>£2,290</td></tr><tr><td>50" Android Touch Screen Kiosk</td><td>£2,565</td></tr><tr><td>55" Android Touch Screen Kiosk</td><td>£2,745</td></tr></table></div>
-      <div class="sg-cat" data-cat="out"><table class="sg-table"><tr><td>43" Outdoor Digital Advertising Display</td><td>£2,960</td></tr><tr><td>55" Outdoor Digital Advertising Display</td><td>£5,455</td></tr><tr><td>43" Outdoor Digital A-Board</td><td>£2,370</td></tr></table></div>
-      <div class="sg-cat" data-cat="touch"><table class="sg-table"><tr><td>55" 4K Interactive Touch Display</td><td>£1,139</td></tr><tr><td>65" 4K Interactive Touch Display</td><td>£1,230</td></tr><tr><td>75" 4K Interactive Touch Display</td><td>£1,770</td></tr></table></div>
-      <div class="sg-cat" data-cat="pos"><table class="sg-table"><tr><td>10" POS Android Advertising Display</td><td>£230</td></tr><tr><td>15" POS Android Advertising Display</td><td>£360</td></tr></table></div>
+      <div class="sg-cat active" data-cat="adv"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">32"</span><span class="sg-pname">32" Slimline Pro Advertising Display</span><span class="sg-pprice">£650</span></div>
+        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Slimline Pro Advertising Display</span><span class="sg-pprice">£890</span></div>
+        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" Slimline Pro Advertising Display</span><span class="sg-pprice">£1,035</span></div>
+        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Slimline Pro Advertising Display</span><span class="sg-pprice">£1,350</span></div>
+      </div></div>
+      <div class="sg-cat" data-cat="vib"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">32"</span><span class="sg-pname">32" Vibrant Professional Display</span><span class="sg-pprice">£499</span></div>
+        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" 4K Vibrant Professional Display</span><span class="sg-pprice">£715</span></div>
+        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" 4K Vibrant Professional Display</span><span class="sg-pprice">£810</span></div>
+        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" 4K Vibrant Professional Display</span><span class="sg-pprice">£1,140</span></div>
+      </div></div>
+      <div class="sg-cat" data-cat="free"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" Android Freestanding Digital Poster</span><span class="sg-pprice">£1,915</span></div>
+        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Android Freestanding Digital Poster</span><span class="sg-pprice">£2,190</span></div>
+        <div class="sg-pcard"><span class="sg-chip">65"</span><span class="sg-pname">65" 4K Freestanding Digital Poster</span><span class="sg-pprice">£3,575</span></div>
+      </div></div>
+      <div class="sg-cat" data-cat="win"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Ultra High Brightness Window Display</span><span class="sg-pprice">£1,770</span></div>
+        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Ultra High Brightness Window Display</span><span class="sg-pprice">£2,220</span></div>
+        <div class="sg-pcard"><span class="sg-chip">65"</span><span class="sg-pname">65" Ultra High Brightness Window Display</span><span class="sg-pprice">£3,240</span></div>
+      </div></div>
+      <div class="sg-cat" data-cat="kiosk"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Android Touch Screen Kiosk</span><span class="sg-pprice">£2,290</span></div>
+        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" Android Touch Screen Kiosk</span><span class="sg-pprice">£2,565</span></div>
+        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Android Touch Screen Kiosk</span><span class="sg-pprice">£2,745</span></div>
+      </div></div>
+      <div class="sg-cat" data-cat="out"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Outdoor Digital Advertising Display</span><span class="sg-pprice">£2,960</span></div>
+        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Outdoor Digital Advertising Display</span><span class="sg-pprice">£5,455</span></div>
+        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Outdoor Digital A-Board</span><span class="sg-pprice">£2,370</span></div>
+      </div></div>
+      <div class="sg-cat" data-cat="touch"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" 4K Interactive Touch Display</span><span class="sg-pprice">£1,139</span></div>
+        <div class="sg-pcard"><span class="sg-chip">65"</span><span class="sg-pname">65" 4K Interactive Touch Display</span><span class="sg-pprice">£1,230</span></div>
+        <div class="sg-pcard"><span class="sg-chip">75"</span><span class="sg-pname">75" 4K Interactive Touch Display</span><span class="sg-pprice">£1,770</span></div>
+      </div></div>
+      <div class="sg-cat" data-cat="pos"><div class="sg-pgrid">
+        <div class="sg-pcard"><span class="sg-chip">10"</span><span class="sg-pname">10" POS Android Advertising Display</span><span class="sg-pprice">£230</span></div>
+        <div class="sg-pcard"><span class="sg-chip">15"</span><span class="sg-pname">15" POS Android Advertising Display</span><span class="sg-pprice">£360</span></div>
+      </div></div>
     </div>
     </div>
     <p class="disc" style="margin-top:20px">Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability.</p>
@@ -365,7 +406,7 @@
   };
   var sgImg=document.getElementById('sgImg'),sgCap=document.getElementById('sgCap');
   function setSgImg(c){var d=SGIMG[c];if(!d||!sgImg)return;sgImg.style.opacity=0;setTimeout(function(){sgImg.src='../images/'+d[0];sgImg.alt=d[2];sgImg.onload=function(){sgImg.style.opacity=1};setTimeout(function(){sgImg.style.opacity=1},400);},180);if(sgCap)sgCap.innerHTML='<iconify-icon icon="'+d[1]+'"></iconify-icon> '+d[2];}
-  document.querySelectorAll('#pTabs .sg-tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('#pTabs .sg-tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var c=t.dataset.cat;document.querySelectorAll('.sg-cat').forEach(function(s){s.classList.toggle('active',s.dataset.cat===c)});setSgImg(c)}});
+  document.querySelectorAll('#pTabs .sg-tab').forEach(function(t){function activate(){document.querySelectorAll('#pTabs .sg-tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var c=t.dataset.cat;document.querySelectorAll('.sg-cat').forEach(function(s){s.classList.toggle('active',s.dataset.cat===c)});setSgImg(c)}t.onclick=activate;t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();activate()}})});
   /* before/after */
   (function(){var r=document.getElementById('baRange'),c=document.getElementById('baClip'),h=document.getElementById('baHandle');if(!r)return;function set(v){c.style.clipPath='inset(0 '+(100-v)+'% 0 0)';h.style.left=v+'%'}r.addEventListener('input',function(){set(+r.value)});set(50)})();
   /* menu board preview cycle */
