@@ -122,6 +122,18 @@ html, body {
    MOBILE MEDIA QUERIES (<= 768px)
    ========================================================================== */
 
+/* Desktop nav fits only above ~1180px (7 links + actions in a 1080px box);
+   below that, collapse to the hamburger. Also closes the old 769–1024px
+   gap where links hid but the hamburger never appeared. */
+@media (max-width: 1180px) {
+  .nav-links, .nav-actions {
+    display: none !important;
+  }
+  .hamburger-btn {
+    display: flex !important;
+  }
+}
+
 @media (max-width: 768px) {
   /* Navigation */
   .nav-links, .nav-actions {

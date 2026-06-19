@@ -1,11 +1,13 @@
 # Plemmo — Outstanding items
 
-## Still pending (owner to supply)
-- [ ] **Imagery** — replace ALL site imagery with real Plemmo photos:
+## NEXT UP (item 5 — do after the visual round) — REMIND OWNER
+- [ ] **Replace ALL site imagery with real Plemmo photos.** Current placeholders (Unsplash + onerror fallbacks) to swap:
   - Card-machines hero (Teya device): `pages/card-machines.html` `src="../images/Card machine no bg.webp"`.
   - EPOS hero placeholder: `pages/epos-systems.html` `src="../images/EPOS no bg.png"`.
-  - Stock Unsplash images (PREMIUM HARDWARE cards in `index.html`, industry panels, etc.).
-- [ ] **Partner logos** — replace text `.plogo` chips in `pages/card-machines.html` with real logo images once provided.
+  - Digital signage product images (NEW this round, all placeholders): pricing-tab visual (`#sgImg` + `SGIMG` map in inline JS), the 3 menu-board package cards (`.pkg-media`), and the 2 custom-band cards (`.ccard-media`).
+  - Stock Unsplash images (PREMIUM HARDWARE cards in `index.html`, industry panels, before/after, etc.).
+- [ ] **Add real partner logos** — replace text `.plogo` chips in `pages/card-machines.html` with real logo images once provided.
+- [ ] **Real calculator data** — bring in the actual product we offer at each monthly-turnover cap, and update the rate calculator logic in `pages/card-machines.html` (the `teyaRate()` table + the "Suggested fit" product names) so the indicative rates and recommended products are accurate, not example pricing.
 
 ## A few facts to confirm in the (now live) legal pages
 These pages are built and wired, but contain a couple of values the owner said
