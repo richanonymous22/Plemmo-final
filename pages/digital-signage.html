@@ -113,8 +113,8 @@
 .btc:hover{transform:translateY(-3px)}.btc iconify-icon{font-size:20px;color:#5f9000}
 @media(max-width:920px){.shero-grid{grid-template-columns:1fr;gap:38px}.sstage{order:-1;max-width:440px;margin:0 auto;width:100%}.rec,.mb-grid,.cband{grid-template-columns:1fr}.pkg-grid{grid-template-columns:1fr}.bt-grid{grid-template-columns:repeat(2,1fr)}}
 /* pricing visual */
-.sg-show{display:grid;grid-template-columns:.92fr 1.08fr;gap:22px;align-items:start;margin-top:22px}
-.sg-visual{position:sticky;top:96px;position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);aspect-ratio:4/3;background:radial-gradient(circle at 50% 30%,rgba(198,255,0,.1),transparent 70%),#0d100a}
+.sg-show{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start;margin-top:22px}
+.sg-visual{position:sticky;top:96px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);aspect-ratio:4/3;background:radial-gradient(circle at 50% 30%,rgba(198,255,0,.1),transparent 70%),#0d100a}
 .sg-visual img{width:100%;height:100%;object-fit:cover;transition:opacity .35s var(--ease),transform .6s var(--ease)}
 .sg-visual:hover img{transform:scale(1.04)}
 .sg-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,6,.7),transparent 55%);pointer-events:none}
@@ -132,7 +132,7 @@
 .ccard:hover .ccard-media img{transform:scale(1.05)}
 .ccard-media .ci{position:absolute;left:22px;bottom:-24px;margin:0;box-shadow:0 12px 26px rgba(0,0,0,.45)}
 .ccard-body{padding:36px 28px 28px}
-@media(max-width:920px){.sg-show{grid-template-columns:1fr}.sg-visual{position:relative;top:0;max-width:520px;margin:0 auto;width:100%}}
+@media(max-width:920px){.sg-show{grid-template-columns:1fr}.sg-visual{position:relative!important;top:0;max-width:520px;margin:0 auto;width:100%;order:-1}}
 @media(max-width:600px){.bt-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -240,7 +240,6 @@
       <div class="sg-tab active" role="button" tabindex="0" data-cat="adv">Advertising</div><div class="sg-tab" role="button" tabindex="0" data-cat="vib">4K Vibrant</div><div class="sg-tab" role="button" tabindex="0" data-cat="free">Freestanding</div><div class="sg-tab" role="button" tabindex="0" data-cat="win">Window</div><div class="sg-tab" role="button" tabindex="0" data-cat="kiosk">Touch Kiosks</div><div class="sg-tab" role="button" tabindex="0" data-cat="out">Outdoor</div><div class="sg-tab" role="button" tabindex="0" data-cat="touch">Interactive</div><div class="sg-tab" role="button" tabindex="0" data-cat="pos">POS</div>
     </div>
     <div class="sg-show rv">
-    <div class="sg-visual"><img id="sgImg" loading="lazy" decoding="async" src="../images/signage-cat-advertising.webp" alt="Digital advertising display"><span class="sg-cap" id="sgCap"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Advertising displays</span></div>
     <div class="sg-table-wrap">
       <div class="sg-cat active" data-cat="adv"><div class="sg-pgrid">
         <div class="sg-pcard"><span class="sg-chip">32"</span><span class="sg-pname">32" Slimline Pro Advertising Display</span><span class="sg-pprice">£650</span></div>
@@ -284,6 +283,7 @@
         <div class="sg-pcard"><span class="sg-chip">15"</span><span class="sg-pname">15" POS Android Advertising Display</span><span class="sg-pprice">£360</span></div>
       </div></div>
     </div>
+    <div class="sg-visual"><img id="sgImg" loading="lazy" decoding="async" src="../images/signage-cat-advertising.webp" alt="Digital advertising display"><span class="sg-cap" id="sgCap"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Advertising displays</span></div>
     </div>
     <p class="disc" style="margin-top:20px">Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability.</p>
   </div>
@@ -353,7 +353,7 @@
     </div>
     <div class="fdisc">Plemmo introduces businesses to selected third-party providers where applicable. Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability. Custom signage, shopfront signage and neon signs are quoted individually. Plemmo may receive commission from providers. Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice.</div>
     <div class="flegal"><a href="terms.html">Terms &amp; Conditions</a><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="legal-disclosures.html">Legal Disclosures</a><a href="complaints.html">Complaints</a><a href="commission-disclosure.html">Commission Disclosure</a></div>
-  <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+  <div class="fbot"><span>Plemmo — Run your business, we'll handle the rest.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
   </div>
 </footer>
 

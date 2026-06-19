@@ -984,7 +984,7 @@ html{overflow-x:hidden}
     </div>
     <div class="fdisc">Plemmo is an introducer and is not a payment processor, acquiring bank or lender. Card machine products, pricing, settlement times, rates, ratings and approval are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers. Provider logos and names are the property of their respective owners. Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice.</div>
     <div class="flegal"><a href="terms.html">Terms &amp; Conditions</a><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="legal-disclosures.html">Legal Disclosures</a><a href="complaints.html">Complaints</a><a href="commission-disclosure.html">Commission Disclosure</a></div>
-  <div class="fbot"><span>Plemmo — one partner for every business solution.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
+  <div class="fbot"><span>Plemmo — Run your business, we'll handle the rest.</span><span>© 2026 Plemmo. All Rights Reserved.</span></div>
   </div>
 </footer>
 
@@ -1312,20 +1312,13 @@ html{overflow-x:hidden}
         elR.textContent='1.25% + 25p';elC.textContent=gbp(t*0.0125);
         elF.textContent='Shift4 / SumUp';elFN.textContent='best fit at this level';
         opts=opt('rec','Recommended','Shift4','1.25% blended + 25p settlement','1.25%')
-            +opt('','Alternative','SumUp Pay As You Go','no contract',pc(s[0]))
-            +opt('','Contract','SumUp 12-month','lower rate · 12-mo term',pc(s[1]))
-            +opt('','Lowest contract','SumUp 24-month','lowest rate · 24-mo term',pc(s[2]));
+            +opt('','Alternative','SumUp Pay As You Go','no contract',pc(s[0]));
       } else {
-        var r=teyaRate(t), s=sumup(t);
+        var r=teyaRate(t);
         elR.textContent=pc(r);elC.textContent=gbp(t*r/100);
         elF.textContent='Teya';elFN.textContent='first choice above £10k';
         opts=opt('rec','Recommended','Teya','£15 + VAT rental · flexible',pc(r))
-            +opt('','Alternative','Shift4','no monthly rental','0.70%')
-            +opt('','Lowest contract','SumUp 24-month','requires 24-mo term',pc(s[2]));
-        if(t>=25000){
-          var deb=t<30000?'0.35%':'0.30%', cre=t<30000?'0.75%':'0.65%';
-          opts+=opt('','Split rate','Worldpay','debit / credit pricing',deb+' / '+cre);
-        }
+            +opt('','Alternative','Shift4','no monthly rental','0.70%');
       }
       elO.innerHTML=opts;
     }
