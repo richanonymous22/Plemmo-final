@@ -10,20 +10,40 @@
   },
   "cardMachines": {
     "providers": [
-      { "key": "teya", "name": "Teya", "badge": "Best Overall", "rating": 4.8, "bestFor": "Established, £8k+ turnover", "rate": "From 0.55% blended", "monthly": "£15 + VAT (or one-off ~£139)", "settlement": "Fast / next-day", "contract": "Flexible", "highlights": ["No monthly fees", "Low transaction rates", "Fast next-day payouts"] },
-      { "key": "sumup", "name": "SumUp", "badge": "Simplest", "rating": 4.7, "bestFor": "New & smaller businesses", "rate": "Per-transaction pricing", "monthly": "None — one-off ~£162", "settlement": "Next-day / instant*", "contract": "No contract", "highlights": ["No monthly fees", "Great for small businesses", "Easy to use"] },
-      { "key": "worldpay", "name": "Worldpay", "badge": "For larger businesses", "rating": 4.6, "bestFor": "Larger / established", "rate": "Debit from 0.30% / credit 0.65%*", "monthly": "£1 first year, then £29.50 + VAT", "settlement": "Next-day", "contract": "18 months", "highlights": ["Trusted UK provider", "24/7 customer support", "Flexible pricing"] },
-      { "key": "elavon", "name": "Elavon", "badge": "Reliable & secure", "rating": 4.5, "bestFor": "Larger / multi-currency", "rate": "Quote-based", "monthly": "Provider terms", "settlement": "Provider terms", "contract": "Provider terms", "highlights": ["Reliable & secure", "Great for larger businesses", "Multi-currency option"] }
+      { "key": "teya", "name": "Teya", "badge": "Flexible plans", "rating": 4.8, "bestFor": "Businesses above £15k monthly card turnover", "rate": "From 0.55% blended (turnover dependent)", "monthly": "£15 + VAT (or one-off ~£139)", "settlement": "Instant (with Teya account) or next-day", "contract": "Flexible", "highlights": ["Rental and buy options available","Instant or next-day settlement options","Flexible contract terms"] },
+      { "key": "sumup", "name": "SumUp", "badge": "Simplest", "rating": 4.7, "bestFor": "New & smaller businesses", "rate": "From 0.55% depending on turnover and profile", "monthly": "None — one-off £105 inc. VAT", "settlement": "Next-day / instant*", "contract": "No contract", "highlights": ["Terminal from £105 inc. VAT","Instant payout into SumUp account","No monthly fees or contract"] },
+      { "key": "worldpay", "name": "Worldpay", "badge": "For larger businesses", "rating": 4.6, "bestFor": "£25k+ wanting split debit/credit rates", "rate": "Debit from 0.30% / credit from 0.65%*", "monthly": "£1 first year, then £29.50 + VAT", "settlement": "Next-day", "contract": "18 months", "highlights": ["Trusted UK provider", "24/7 customer support", "Split debit/credit pricing for £25k+"] },
+      { "key": "elavon", "name": "Elavon", "badge": "Reliable & secure", "rating": 4.5, "bestFor": "Larger / multi-currency", "rate": "Quote-based", "monthly": "Provider terms", "settlement": "Provider terms", "contract": "Provider terms", "highlights": ["Reliable & secure", "Great for larger businesses", "Multi-currency option"] },
+      { "key": "shift4", "name": "Shift4", "badge": "Low commitment", "rating": 4.5, "bestFor": "Smaller businesses and new to card", "rate": "1.25% + 25p next-day settlement fee", "monthly": "None — no monthly rental", "settlement": "Next-day", "contract": "No contract", "highlights": ["No monthly rental","Flat rate 1.25% + 25p","Simple setup"] }
     ],
+    "_recommendationLogic": "Under £5k: Shift4 (1.25% + 25p). £5k–£10k: Shift4 / SumUp PAYG. £10k+: Teya first option (blended tiers below). £25k+: Worldpay split-rate alternative (0.35%/0.75% around £25k, 0.30%/0.65% above). MOTO/phone: Worldpay or Elavon. Charity: SumUp / Shift4 only. Fast payout: Teya or SumUp. No monthly rental: Shift4 / SumUp PAYG / Teya buyout.",
     "teyaRatesByTurnover": [
-      { "band": "£8,000–£10,000", "rate": "1.25%–1.20%" },
-      { "band": "£10,001–£20,000", "rate": "1.10%–0.85%" },
-      { "band": "£20,001–£35,000", "rate": "0.80%" },
-      { "band": "£35,001–£80,000", "rate": "0.77%–0.67%" },
-      { "band": "£80,001–£100,000", "rate": "0.63%–0.61%" },
-      { "band": "£100,000+", "rate": "From 0.60% / 0.55%" }
+      { "band": "£10,000", "rate": "1.20%" },
+      { "band": "£12,000", "rate": "1.04%" },
+      { "band": "£15,000", "rate": "1.00%" },
+      { "band": "£20,000", "rate": "0.85%" },
+      { "band": "£22,000–£35,000", "rate": "0.80%" },
+      { "band": "£36,000–£42,000", "rate": "0.77%" },
+      { "band": "£43,000–£65,000", "rate": "0.70%" },
+      { "band": "£66,000–£80,000", "rate": "0.67%" },
+      { "band": "£81,000–£95,000", "rate": "0.63%" },
+      { "band": "£100,000", "rate": "0.61%" },
+      { "band": "£120,000–£190,000", "rate": "0.60%" },
+      { "band": "£200,000+", "rate": "0.55%" }
     ],
-    "partners": ["Teya", "SumUp", "Shift4", "Worldpay", "Elavon", "EVO", "myPOS"]
+    "sumupRatesByTurnover": [
+      { "band": "£5k–£7.5k", "payg": "1.49%", "contract12": "1.29%", "contract24": "1.19%" },
+      { "band": "£7.5k–£10k", "payg": "1.29%", "contract12": "1.19%", "contract24": "1.19%" },
+      { "band": "£10k–£15k", "payg": "1.19%", "contract12": "0.99%", "contract24": "0.89%" },
+      { "band": "£15k–£20k", "payg": "0.99%", "contract12": "0.89%", "contract24": "0.79%" },
+      { "band": "£20k–£30k", "payg": "0.89%", "contract12": "0.79%", "contract24": "0.75%" },
+      { "band": "£30k–£50k", "payg": "0.79%", "contract12": "0.75%", "contract24": "0.69%" },
+      { "band": "£50k–£100k", "payg": "0.75%", "contract12": "0.69%", "contract24": "0.59%" },
+      { "band": "£100k+", "payg": "0.69%", "contract12": "0.59%", "contract24": "0.55%" }
+    ],
+    "shift4Rate": "Below £10k: 1.25% blended (+25p next-day settlement). Above £10k: 0.70% blended (secondary to Teya).",
+    "worldpayRates": "Around £25k: 0.35% debit / 0.75% credit. Above £25k: 0.30% debit / 0.65% credit.",
+    "partners": ["Teya", "SumUp", "Shift4", "Worldpay", "Elavon", "Dojo", "takepayments", "Barclays", "MyPOS"]
   },
   "funding": {
     "products": [
@@ -68,6 +88,9 @@
       "POS": [["10\" POS Display", "£230"], ["15\" POS Display", "£360"]]
     },
     "custom": "Shopfront & neon signage quoted individually based on size, materials, lighting, design, site survey, quantity and installation."
+  },
+  "referral": {
+    "referralAmount": 100
   },
   "editableClaims": {
     "_warning": "These are marketing claims shown on the site. Confirm they are substantiated before launch, or edit/remove.",
