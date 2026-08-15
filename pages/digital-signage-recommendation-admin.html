@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../images/logo.png">
+<meta name="robots" content="noindex,nofollow">
+<title>Digital Signage Engine — Admin | Plemmo</title>
+<link rel="preconnect" href="https://code.iconify.design" crossorigin>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt-d);line-height:1.5}
+h1,h2,h3,h4{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 80px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.topbar .logo{font-weight:900;font-size:20px;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}
+.topbar .logo img{height:24px}
+.topbar .badge{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--lime);background:var(--lime-soft);border-radius:100px;padding:5px 12px}
+.notice{background:rgba(198,255,0,.06);border:1px solid rgba(198,255,0,.22);border-radius:14px;padding:14px 18px;font-size:12.5px;color:#cfd6c5;line-height:1.6;margin-bottom:22px}
+.notice b{color:var(--lime)}
+
+.gate{max-width:380px;margin:14vh auto;text-align:center}
+.gate h2{margin-bottom:10px}
+.gate p{color:var(--muted);font-size:13.5px;margin-bottom:20px}
+.gate input{width:100%;padding:13px 15px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line2);color:#fff;font-size:15px;margin-bottom:12px}
+.gate .err{color:#ff8080;font-size:12.5px;margin-bottom:10px;display:none}
+
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:10px;cursor:pointer;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:#fff;transition:.2s}
+.btn:hover{background:rgba(255,255,255,.1)}
+.btn.primary{background:var(--lime);color:#0a0c08;border-color:var(--lime);font-weight:700}
+.btn.primary:hover{background:#d4ff3a}
+.btn.danger{border-color:rgba(255,90,90,.4);color:#ff8080}
+.btn.danger:hover{background:rgba(255,90,90,.1)}
+.btn.small{padding:6px 12px;font-size:12px}
+
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.tab{font-size:13px;font-weight:600;color:var(--muted);background:none;border:none;padding:9px 14px;border-radius:9px;cursor:pointer}
+.tab:hover{color:#fff}
+.tab.active{background:var(--lime-soft);color:var(--lime)}
+
+.panel{display:none}
+.panel.active{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.card h3{font-size:15px;color:#fff;margin-bottom:4px}
+.card .sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+input[type=text],input[type=number],input[type=password],select,textarea{width:100%;padding:9px 11px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--line2);color:#fff;font-family:'Inter';font-size:13.5px}
+textarea{font-size:13px;min-height:70px;resize:vertical}
+.field{margin-bottom:12px}
+.switch{position:relative;width:40px;height:22px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.switch .sl{position:absolute;inset:0;background:rgba(255,255,255,.15);border-radius:100px;cursor:pointer;transition:.2s}
+.switch .sl::before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.switch input:checked+.sl{background:var(--lime)}
+.switch input:checked+.sl::before{transform:translateX(18px);background:#0a0c08}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:600;text-transform:uppercase;font-size:10.5px;letter-spacing:.05em}
+.pill{font-size:11.5px;font-weight:600;background:rgba(255,255,255,.06);border:1px solid var(--line2);border-radius:100px;padding:5px 11px;display:inline-flex;align-items:center;gap:6px}
+.badge{font-size:10px;padding:2px 7px;border-radius:100px;background:rgba(255,255,255,.08);color:var(--muted)}
+.badge.lime{background:rgba(198,255,0,.14);color:var(--lime)}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--panel);border:1px solid rgba(198,255,0,.4);color:#fff;padding:12px 18px;border-radius:12px;font-size:13px;box-shadow:0 20px 40px rgba(0,0,0,.4);z-index:999;opacity:0;transform:translateY(10px);transition:.25s}
+.toast.show{opacity:1;transform:none}
+.audit-item{padding:9px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+.audit-item .ts{color:var(--muted);font-size:11px;display:block;margin-top:2px}
+.audit-item .cat{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--lime);background:var(--lime-soft);border-radius:100px;padding:2px 8px;margin-right:8px}
+.searchbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.searchbar input,.searchbar select{max-width:240px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo"><img src="../images/logo.png" alt="Plemmo"> plemmo <span class="badge">Digital Signage · Admin</span></div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="digital-signage-recommendation.html" class="btn small"><iconify-icon icon="ph:arrow-square-out"></iconify-icon> View live engine</a>
+      <button class="btn small danger" id="lockBtn" style="display:none"><iconify-icon icon="ph:lock-key"></iconify-icon> Lock</button>
+    </div>
+  </div>
+
+  <div id="gate" class="gate">
+    <h2>Admin access</h2>
+    <p>Enter the admin passcode to manage screen sizes, pricing, design services, business categories, FAQs and leads. This is a soft, browser-only gate — not real authentication.</p>
+    <input type="password" id="passInput" placeholder="Passcode">
+    <div class="err" id="passErr">Incorrect passcode — try again.</div>
+    <button class="btn primary" id="unlockBtn" style="width:100%;justify-content:center">Unlock</button>
+  </div>
+
+  <div id="adminApp" style="display:none">
+    <div class="notice"><b>Browser-local admin.</b> Changes save to this browser only (localStorage) — export a backup after editing. Independent from every other module's admin — separate storage, separate passcode.</div>
+    <div class="tabs" id="tabs"></div>
+    <div id="panels"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="signage-engine/config.js"></script>
+<script src="signage-engine/engine.js"></script>
+<script src="signage-engine/store.js"></script>
+<script src="signage-engine/admin-app.js"></script>
+</body>
+</html>
