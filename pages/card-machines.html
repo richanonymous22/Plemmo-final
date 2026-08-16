@@ -31,6 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fluid.css">
 <style>
 /* ════════════════════════════════════════════════════════════════════════
    PLEMMO · CARD MACHINES — self-contained launch build
@@ -860,21 +861,12 @@ html{overflow-x:hidden}
         <span class="quiz-live"><span class="dl"></span> Live</span>
       </div>
       <div class="calc-body">
-        <div class="calc-lab"><span class="l">Your monthly card turnover</span><span class="calc-val" id="calcTurn">£15,000</span></div>
-        <input type="range" class="calc-range" id="calcRange" min="3000" max="200000" step="1000" value="15000" aria-label="Monthly card turnover">
-        <div class="calc-ticks"><span>£3k</span><span>£50k</span><span>£100k</span><span>£200k+</span></div>
-        <div class="calc-out">
-          <div class="calc-tile hi"><div class="tl">Indicative rate</div><div class="tv" id="calcRate">1.00%</div><div class="ts">blended, where eligible</div></div>
-          <div class="calc-tile"><div class="tl">Est. monthly cost</div><div class="tv" id="calcCost">£150</div><div class="ts">on card processing</div></div>
-          <div class="calc-tile"><div class="tl">Suggested fit</div><div class="tv" id="calcFit" style="font-size:22px">Teya</div><div class="ts" id="calcFitNote">strong all‑rounder</div></div>
-        </div>
-        <div class="calc-opts" id="calcOpts"></div>
-        <div class="calc-cta">
+        <div data-rate-explorer></div>
+        <div class="calc-cta" style="margin-top:26px">
           <a href="#" class="btn btn-primary" data-quote data-product="Card machine rate quote">Get my exact quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
           <span class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply</span>
         </div>
-        <p class="calc-note"><b>Recommended</b> shows the best-fit provider for your turnover. <b>Alternative</b>, <b>lowest contract</b> and <b>split-rate</b> options are shown where available. Teya is the recommended option above £10k (£15 + VAT rental, flexible terms). Shift4 suits lower turnover at a flat 1.25% + 25p next-day settlement fee. SumUp contract rates require a 12 or 24-month term. Worldpay split debit/credit pricing is shown for £25k+. All rates are indicative only and may vary depending on business type, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Final pricing is confirmed after review.</p>
-        <p class="calc-note">Rates shown are indicative only and subject to business type, turnover, card mix, provider approval and contract terms.</p>
+        <p class="calc-note">The curve plots Teya's blended rate across every turnover band; the dashed line is SumUp on the contract term you've selected. Providers re-rank underneath as you drag. Teya is the recommended option above £10k (£15 + VAT rental, flexible terms). Shift4 charges no monthly rental. SumUp's lower rates require a 12 or 24-month term. Worldpay's split debit/credit pricing applies from around £25k and is listed separately because it has no single blended figure. All rates are indicative only and may vary with business type, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Final pricing is confirmed after review.</p>
       </div>
     </div>
   </div>
@@ -1430,6 +1422,8 @@ html{overflow-x:hidden}
   })();
 })();
 </script>
+<script src="fluid.js"></script>
+<script src="rate-explorer.js"></script>
 <script src="../cookie-consent.js"></script>
 </body>
 </html>
