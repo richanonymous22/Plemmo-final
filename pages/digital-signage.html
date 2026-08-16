@@ -111,7 +111,26 @@
 .bt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .btc{display:flex;align-items:center;gap:11px;border-radius:13px;padding:15px 16px;font-size:13.5px;font-weight:700;background:var(--white);border:1px solid var(--line-l);box-shadow:var(--shadow-l);transition:transform .2s}
 .btc:hover{transform:translateY(-3px)}.btc iconify-icon{font-size:20px;color:#5f9000}
-@media(max-width:920px){.shero-grid{grid-template-columns:1fr;gap:38px}.sstage{order:-1;max-width:440px;margin:0 auto;width:100%}.rec,.mb-grid,.cband{grid-template-columns:1fr}.pkg-grid{grid-template-columns:1fr}.bt-grid{grid-template-columns:repeat(2,1fr)}}
+/* selector steps (business type / service / screen size) */
+.sel-step{margin-top:34px}
+.sel-step:first-of-type{margin-top:8px}
+.sel-q{display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:800;color:var(--ink);margin-bottom:16px;text-align:center;flex-wrap:wrap}
+.sel-n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#0a0c08;font-size:12px;font-weight:800;flex-shrink:0}
+.sel-note{font-size:12px;font-weight:600;color:var(--ink-soft)}
+.sel-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.sel-chip{font-size:11px;font-weight:700;color:#5f9000;background:rgba(95,144,0,.1);border:1px solid rgba(95,144,0,.25);border-radius:var(--pill);padding:5px 10px}
+/* services (digital signage / menu design / promotional design) */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc-card{padding:28px}
+.svc-card .ci{width:50px;height:50px;border-radius:14px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.svc-card .ci iconify-icon{font-size:24px;color:#5f9000}
+.svc-card h3{font-size:19px;color:var(--ink);margin-bottom:12px}
+.svc-card ul{list-style:none;display:grid;gap:8px;margin-bottom:18px}
+.svc-card li{display:flex;gap:8px;font-size:13.5px;color:var(--ink-soft)}
+.svc-card li iconify-icon{color:#5f9000;font-size:15px}
+.tab.static{cursor:default}
+.tab.static:hover{transform:none;border-color:var(--line-l);color:var(--ink-soft)}
+@media(max-width:920px){.shero-grid{grid-template-columns:1fr;gap:38px}.sstage{order:-1;max-width:440px;margin:0 auto;width:100%}.rec,.mb-grid,.cband{grid-template-columns:1fr}.pkg-grid{grid-template-columns:1fr}.bt-grid{grid-template-columns:repeat(2,1fr)}.svc-grid{grid-template-columns:1fr}}
 /* pricing visual */
 .sg-show{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start;margin-top:22px}
 .sg-visual{position:sticky;top:96px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);aspect-ratio:4/3;background:radial-gradient(circle at 50% 30%,rgba(198,255,0,.1),transparent 70%),#0d100a}
@@ -154,11 +173,11 @@
   <div class="container shero-grid">
     <div class="rv">
       <span class="eyebrow"><iconify-icon icon="ph:monitor-play-duotone"></iconify-icon> Digital Screens &amp; Signage</span>
-      <h1 style="margin-top:14px">Make your business<br><span class="lime">impossible to ignore.</span></h1>
-      <p class="sub">High-impact digital screens and signage that attract more customers, showcase your brand and drive real results.</p>
+      <h1 style="margin-top:14px">Digital Signage &amp; Menu Boards<br><span class="lime">for Modern Businesses</span></h1>
+      <p class="sub">Promote your products, menus and offers with professionally designed digital displays. Suitable for restaurants, cafés, retail stores, salons, supermarkets and more.</p>
       <div class="shero-btns">
-        <a href="#selector" class="btn btn-primary btn-lg">Get a Signage Quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
-        <a href="#" class="btn btn-ghost btn-lg" data-quote data-service="Digital Signage">Book Free Consultation</a>
+        <a href="#" class="btn btn-primary btn-lg" data-quote data-service="Digital Signage">Request a Quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+        <a href="#menu" class="btn btn-ghost btn-lg">Design My Menu</a>
       </div>
       <div class="spills">
         <span class="spill"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Quality Guaranteed</span>
@@ -174,18 +193,38 @@
 <!-- SELECTOR -->
 <section class="section s-light" id="selector">
   <div class="container">
-    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:magic-wand-duotone"></iconify-icon> Find your fit</span><h2 class="h2">Find the right signage</h2><p class="lead">Pick what you're after and we'll show you a great place to start.</p></div>
-    <div class="tabs rv" id="sigTabs">
-      <div class="tab active" data-sig="menu"><iconify-icon icon="ph:fork-knife-duotone"></iconify-icon> Menu Boards</div>
-      <div class="tab" data-sig="window"><iconify-icon icon="ph:app-window-duotone"></iconify-icon> Window Displays</div>
-      <div class="tab" data-sig="advertising"><iconify-icon icon="ph:megaphone-duotone"></iconify-icon> Advertising Screens</div>
-      <div class="tab" data-sig="shopfront"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> Shopfront Signs</div>
-      <div class="tab" data-sig="neon"><iconify-icon icon="ph:lightbulb-filament-duotone"></iconify-icon> Neon Signs</div>
-      <div class="tab" data-sig="outdoor"><iconify-icon icon="ph:cloud-sun-duotone"></iconify-icon> Outdoor Displays</div>
-      <div class="tab" data-sig="kiosk"><iconify-icon icon="ph:device-tablet-duotone"></iconify-icon> Touch Kiosks</div>
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:magic-wand-duotone"></iconify-icon> Find your fit</span><h2 class="h2">Tell us about your business</h2><p class="lead">Answer a few quick questions — business type, service and screen size — and we'll show you a great place to start.</p></div>
+
+    <div class="sel-step rv">
+      <div class="sel-q"><span class="sel-n">1</span> What type of business do you have?</div>
+      <div class="tabs" id="bizTabs"></div>
     </div>
+
+    <div class="sel-step rv">
+      <div class="sel-q"><span class="sel-n">2</span> What service do you need? <span class="sel-note">(select all that apply)</span></div>
+      <div class="tabs" id="svcTabs"></div>
+    </div>
+
+    <div class="sel-step rv">
+      <div class="sel-q"><span class="sel-n">3</span> What screen size are you interested in?</div>
+      <div class="tabs" id="sizeTabs"></div>
+    </div>
+
+    <div class="sel-step rv">
+      <div class="sel-q"><span class="sel-n">4</span> Which signage type interests you most?</div>
+      <div class="tabs" id="sigTabs">
+        <div class="tab active" data-sig="menu"><iconify-icon icon="ph:fork-knife-duotone"></iconify-icon> Menu Boards</div>
+        <div class="tab" data-sig="window"><iconify-icon icon="ph:app-window-duotone"></iconify-icon> Window Displays</div>
+        <div class="tab" data-sig="advertising"><iconify-icon icon="ph:megaphone-duotone"></iconify-icon> Advertising Screens</div>
+        <div class="tab" data-sig="shopfront"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> Shopfront Signs</div>
+        <div class="tab" data-sig="neon"><iconify-icon icon="ph:lightbulb-filament-duotone"></iconify-icon> Neon Signs</div>
+        <div class="tab" data-sig="outdoor"><iconify-icon icon="ph:cloud-sun-duotone"></iconify-icon> Outdoor Displays</div>
+        <div class="tab" data-sig="kiosk"><iconify-icon icon="ph:device-tablet-duotone"></iconify-icon> Touch Kiosks</div>
+      </div>
+    </div>
+
     <div class="rec rv" id="sigPanel">
-      <div><div class="rt" id="sigTitle">For cafés &amp; takeaways</div><h3 id="sigMatch">32" Digital Menu Board Package</h3><p id="sigText"></p><ul id="sigChecks"></ul></div>
+      <div><div class="rt" id="sigTitle">For cafés &amp; takeaways</div><h3 id="sigMatch">32" Digital Menu Board Package</h3><p id="sigText"></p><ul id="sigChecks"></ul><div class="sel-chips" id="sigChips"></div></div>
       <div class="rec-price"><div class="rl">Best match</div><div class="ramt" id="sigPrice">£350</div><div class="runit" id="sigUnit">per screen</div><a href="#" class="btn btn-primary" id="sigCta" data-quote data-service="Digital Signage">Get a Signage Quote</a></div>
     </div>
   </div>
@@ -205,10 +244,56 @@
   </div>
 </section>
 
+<!-- SERVICES: hardware, design, or both -->
+<section class="section s-light" id="services">
+  <div class="container">
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:squares-four-duotone"></iconify-icon> Our services</span><h2 class="h2">Hardware, design — or both</h2><p class="lead">Order a screen, a design service, or a complete signage + design package. It's entirely up to you.</p></div>
+    <div class="svc-grid rv">
+      <div class="card svc-card">
+        <div class="ci"><iconify-icon icon="ph:monitor-duotone"></iconify-icon></div>
+        <h3>Digital Signage</h3>
+        <ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Screen Sizes</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Professional Installation Support</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Commercial Grade Displays</li></ul>
+        <a href="#menu" class="btn btn-ghost">View Screens</a>
+      </div>
+      <div class="card svc-card">
+        <div class="ci"><iconify-icon icon="ph:fork-knife-duotone"></iconify-icon></div>
+        <h3>Menu Design</h3>
+        <ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Restaurant Menus</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Café Menus</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Takeaway Menus</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Digital Menu Boards</li></ul>
+        <a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-svc="Professional Menu Design" data-product="Professional Menu Design">Get a Menu Design Quote</a>
+      </div>
+      <div class="card svc-card">
+        <div class="ci"><iconify-icon icon="ph:megaphone-duotone"></iconify-icon></div>
+        <h3>Promotional Design</h3>
+        <ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Digital Posters</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Offers</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Seasonal Promotions</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Window Displays</li></ul>
+        <a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-svc="Promotional Poster Design" data-product="Promotional Design">Get a Promotional Design Quote</a>
+      </div>
+    </div>
+    <div class="tabs rv" style="margin-top:34px">
+      <div class="tab static"><iconify-icon icon="ph:palette-duotone"></iconify-icon> Professional Design</div>
+      <div class="tab static"><iconify-icon icon="ph:layout-duotone"></iconify-icon> Modern Layouts</div>
+      <div class="tab static"><iconify-icon icon="ph:image-duotone"></iconify-icon> High Resolution Graphics</div>
+      <div class="tab static"><iconify-icon icon="ph:drop-duotone"></iconify-icon> Brand Colour Matching</div>
+      <div class="tab static"><iconify-icon icon="ph:eye-duotone"></iconify-icon> Easy to Read Menus</div>
+      <div class="tab static"><iconify-icon icon="ph:lightning-duotone"></iconify-icon> Fast Turnaround</div>
+      <div class="tab static"><iconify-icon icon="ph:file-duotone"></iconify-icon> Digital Ready Files</div>
+      <div class="tab static"><iconify-icon icon="ph:printer-duotone"></iconify-icon> Print Ready Files (if required)</div>
+    </div>
+    <div class="head center" style="margin-top:54px"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:seal-check-duotone"></iconify-icon> Why Plemmo</span><h2 class="h2" style="font-size:clamp(26px,3.4vw,34px)">Why choose Plemmo</h2></div>
+    <div class="bt-grid rv">
+      <div class="btc"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Professional Commercial Displays</div>
+      <div class="btc"><iconify-icon icon="ph:palette-duotone"></iconify-icon> High Quality Menu Designs</div>
+      <div class="btc"><iconify-icon icon="ph:tag-duotone"></iconify-icon> Business Branding</div>
+      <div class="btc"><iconify-icon icon="ph:lightning-duotone"></iconify-icon> Fast Turnaround</div>
+      <div class="btc"><iconify-icon icon="ph:coins-duotone"></iconify-icon> Competitive Pricing</div>
+      <div class="btc"><iconify-icon icon="ph:headset-duotone"></iconify-icon> Support After Installation</div>
+    </div>
+  </div>
+</section>
+
 <!-- MENU PACKAGES + PREVIEW -->
 <section class="section s-light" id="menu">
   <div class="container">
-    <div class="head"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:fork-knife-duotone"></iconify-icon> Menu boards</span><h2 class="h2" style="text-align:left">Digital menu board packages</h2><p class="lead">A polished digital menu — screen, setup and animated design included.</p></div>
+    <div class="head"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:fork-knife-duotone"></iconify-icon> Menu boards</span><h2 class="h2" style="text-align:left">Digital menu board packages</h2><p class="lead">A polished digital menu — screen, setup and professional menu design included.</p></div>
     <div class="mb-grid rv">
       <div class="menuboard">
         <div class="mh"><iconify-icon icon="ph:fork-knife-duotone"></iconify-icon> Today's Menu</div>
@@ -225,9 +310,9 @@
       </div>
     </div>
     <div class="pkg-grid">
-      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="../images/signage-pkg-32.webp" alt="32 inch digital menu board screen"></div><div class="pp">£350</div><div class="pu">per screen · 32"</div><h3>32" Commercial Screen</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Commercial-grade monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Animated menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='32" Menu Board Package'>Choose</a></div>
-      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="../images/signage-pkg-40.webp" alt="40 inch commercial menu display"></div><div class="pp">£400</div><div class="pu">per screen · 40"</div><h3>40" Commercial Screen</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger commercial monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Animated menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='40" Menu Board Package'>Choose</a></div>
-      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="../images/signage-pkg-custom.webp" alt="Multi-screen custom menu setup"></div><div class="pp" style="font-size:34px">Custom</div><div class="pu">multi-screen &amp; bespoke</div><h3>Custom menu setup</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger / multi-screen layouts</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Bespoke designs</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Installation options</li></ul><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom menu board setup">Get Custom Quote</a></div>
+      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="../images/signage-pkg-32.webp" alt="32 inch digital menu board screen"></div><div class="pp">£350</div><div class="pu">per screen · 32"</div><h3>32" Digital Signage</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Commercial-grade monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Includes professional menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='32" Digital Signage Package' data-size='32"' data-svc="Screen &amp; Design Package">Choose</a></div>
+      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="../images/signage-pkg-40.webp" alt="40 inch commercial menu display"></div><div class="pp">£400</div><div class="pu">per screen · 40"</div><h3>40" Digital Signage</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger commercial monitor</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Includes professional menu design</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Free changes within 3 months</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> 2-year warranty</li></ul><a href="#" class="btn btn-primary" data-quote data-service="Digital Signage" data-product='40" Digital Signage Package' data-size='40"' data-svc="Screen &amp; Design Package">Choose</a></div>
+      <div class="card pkg rv"><div class="pkg-media"><img loading="lazy" decoding="async" src="../images/signage-pkg-custom.webp" alt="Multi-screen custom menu setup"></div><div class="pp" style="font-size:34px">Custom</div><div class="pu">multi-screen &amp; bespoke</div><h3>Custom menu setup</h3><ul><li><iconify-icon icon="ph:check-bold"></iconify-icon> Larger / multi-screen layouts</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Bespoke designs</li><li><iconify-icon icon="ph:check-bold"></iconify-icon> Installation options</li></ul><a href="#" class="btn btn-ghost" data-quote data-service="Digital Signage" data-product="Custom menu board setup" data-svc="Screen &amp; Design Package">Get Custom Quote</a></div>
     </div>
   </div>
 </section>
@@ -315,14 +400,7 @@
 <section class="section s-light" id="faq">
   <div class="container">
     <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:question-duotone"></iconify-icon> FAQ</span><h2 class="h2">Good to know</h2></div>
-    <div class="faqlist rv">
-      <div class="faq"><div class="faq-q">How long does installation take? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>It depends on product type, site requirements, delivery and installation scope.</p></div></div>
-      <div class="faq"><div class="faq-q">Can I update my content easily? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Many screen solutions allow content updates. The method depends on your setup.</p></div></div>
-      <div class="faq"><div class="faq-q">Do you offer nationwide installation? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Installation availability depends on your area and the scope of the project — just ask and we'll check.</p></div></div>
-      <div class="faq"><div class="faq-q">What warranty is included? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>The menu board package includes a 2-year warranty. Other products may depend on supplier and product terms.</p></div></div>
-      <div class="faq"><div class="faq-q">Can you design my menu/content? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — menu board packages can include professional animated menu designs and design changes for 3 months.</p></div></div>
-      <div class="faq"><div class="faq-q">Do you provide custom quotes? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Yes — custom signage, shopfront signs, neon signs, installation and larger display setups are quoted individually.</p></div></div>
-    </div>
+    <div class="faqlist rv" id="faqList"></div>
     <p class="disc center" style="margin:24px auto 0">Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability. Custom signage, shopfront signage and neon signs are quoted individually.</p>
   </div>
 </section>
@@ -364,11 +442,13 @@
     <div id="mform-wrap">
       <div class="modal-head"><div><h3 id="mtitle">Get a signage quote</h3><p>Tell us about your business and a specialist will be in touch.</p></div><button class="modal-close" data-close aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
       <form id="mform">
-        <div class="frow two"><div><label>Full Name <span class="req-star">*</span></label><input class="input" type="text" name="full_name" required></div><div><label>Business Name</label><input class="input" type="text" name="business_name"></div></div>
-        <div class="frow two"><div><label>Phone <span class="req-star">*</span></label><input class="input" type="tel" name="phone" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" name="email" required></div></div>
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="full_name" required></div></div>
+        <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="phone" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" required></div></div>
+        <div class="frow two"><div><label>Business Type</label><select class="select" id="mbiz" name="business_type"><option value="">Select…</option></select></div><div><label>Screen Size</label><select class="select" id="msize" name="screen_size"><option value="">Select…</option></select></div></div>
+        <div class="frow two"><div><label>Service Required</label><input class="input" id="msvc" type="text" name="service_required" placeholder="Selected above, or describe here"></div><div><label>Number of Screens Required</label><input class="input" id="mcount" type="number" name="screens_required" min="1" step="1" placeholder="e.g. 1"></div></div>
         <div class="frow"><label>Service Interested In</label><select class="select" id="mservice" name="service"><option>Card Machines</option><option>Business Funding</option><option>EPOS Systems</option><option selected>Digital Signage</option><option>Utilities &amp; Broadband</option><option>Not Sure</option></select></div>
         <div class="frow"><label>Selected Product / Package</label><input class="input" id="mprod" type="text" name="product" placeholder="Optional"></div>
-        <div class="frow"><label>Message</label><textarea class="textarea" name="message" placeholder="Tell us a little about your business…"></textarea></div>
+        <div class="frow"><label>Additional Requirements</label><textarea class="textarea" name="additional_requirements" placeholder="Tell us about screens, quantities, branding or anything else…"></textarea></div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
       </form>
     </div>
@@ -380,9 +460,71 @@
 
 <script>
 (function(){
-  /* signage selector */
+  /* ══════════════════════════════════════════════════════════════════
+     ADMIN-EDITABLE CONFIG — Digital Signage & Menu Design.
+     Business types, service options, screen sizes and FAQs live here
+     so staff can update commercial/content data without touching the
+     selector, lead-form and render logic below. The selector tabs, the
+     lead-form's Business Type / Screen Size dropdowns and the FAQ list
+     are all built from this object — add/remove array entries to
+     extend any of them later (e.g. new screen sizes, new services).
+     ══════════════════════════════════════════════════════════════════ */
+  var SIGNAGE_CONFIG = {
+    businessTypes: [
+      {v:'Restaurant',i:'ph:fork-knife-duotone'},
+      {v:'Café',i:'ph:coffee-duotone'},
+      {v:'Coffee Shop',i:'ph:coffee-duotone'},
+      {v:'Fast Food',i:'ph:hamburger-duotone'},
+      {v:'Takeaway',i:'ph:bag-duotone'},
+      {v:'Bakery',i:'ph:bread-duotone'},
+      {v:'Dessert Shop',i:'ph:ice-cream-duotone'},
+      {v:'Supermarket',i:'ph:basket-duotone'},
+      {v:'Convenience Store',i:'ph:storefront-duotone'},
+      {v:'Retail Shop',i:'ph:shopping-bag-duotone'},
+      {v:'Salon',i:'ph:scissors-duotone'},
+      {v:'Barbershop',i:'ph:scissors-duotone'},
+      {v:'Pharmacy',i:'ph:first-aid-duotone'},
+      {v:'Hotel',i:'ph:building-duotone'},
+      {v:'Reception Area',i:'ph:door-open-duotone'},
+      {v:'Office',i:'ph:briefcase-duotone'},
+      {v:'Other',i:'ph:dots-three-circle-duotone'}
+    ],
+    /* kind is metadata for future use (hardware / design / bundle) — customers
+       can already mix any combination, so a Hardware-only, Design-only or
+       Complete (Screen & Design Package) enquiry are all naturally possible. */
+    services: [
+      {v:'Digital Menu Board',kind:'hardware'},
+      {v:'Promotional Digital Screen',kind:'hardware'},
+      {v:'Window Display Screen',kind:'hardware'},
+      {v:'Advertising Display',kind:'hardware'},
+      {v:'Professional Menu Design',kind:'design'},
+      {v:'Promotional Poster Design',kind:'design'},
+      {v:'Social Media Design',kind:'design'},
+      {v:'Existing Menu Update',kind:'design'},
+      {v:'Screen & Design Package',kind:'bundle'}
+    ],
+    screenSizes: [
+      {v:'32"'},
+      {v:'40"'},
+      {v:'Other / Not Sure'}
+    ],
+    faqs: [
+      {q:'Which screen size should I choose?',a:'32" suits most single-till or counter setups, and 40" gives more visibility for busier locations or bigger menus. Not sure? Choose "Other / Not Sure" in the quote form and we’ll help you decide.'},
+      {q:'Can you update my menu later?',a:'Yes — menu board packages include free design changes within 3 months, and an Existing Menu Update service is available any time after that if your menu changes.'},
+      {q:'Can I use my own branding?',a:'Yes — every screen and design is built around your logo, brand colours and fonts so it looks like a natural extension of your business.'},
+      {q:'Do you design promotional adverts?',a:'Yes — we design promotional posters, offers, seasonal campaigns and social media adverts, either alongside a screen or as a standalone design service.'},
+      {q:'Can I order multiple screens?',a:'Yes — just tell us how many screens you need (and where) in the quote form and we’ll put together multi-screen pricing.'},
+      {q:'Can you redesign my existing menu?',a:'Yes — if you already have a menu we can refresh or fully redesign it as part of the Existing Menu Update service, with or without a new screen.'},
+      {q:'How long does installation take?',a:'It depends on product type, site requirements, delivery and installation scope.'},
+      {q:'Do you offer nationwide installation?',a:'Installation availability depends on your area and the scope of the project — just ask and we’ll check.'},
+      {q:'What warranty is included?',a:'The menu board package includes a 2-year warranty. Other products may depend on supplier and product terms.'},
+      {q:'Do you provide custom quotes?',a:'Yes — custom signage, shopfront signs, neon signs, installation and larger display setups are quoted individually.'}
+    ]
+  };
+
+  /* signage-type recommendation panel ("Find your fit" step 4) */
   var SIG={
-    menu:{title:'For cafés & takeaways',match:'32" Digital Menu Board Package',price:'£350',unit:'per screen',text:'Digital Menu Boards are perfect for showcasing your menu, promotions and prices with style and clarity.',checks:['Boost impulse orders','Easy to update anytime','Increase average spend']},
+    menu:{title:'For cafés & takeaways',match:'32" Digital Menu Board Package',price:'£350',unit:'per screen',text:'Digital Menu Boards are perfect for showcasing your menu, promotions and prices with style and clarity.',checks:['Includes professional menu design','Boost impulse orders','Easy to update anytime']},
     window:{title:'For high-street visibility',match:'High Brightness Window Display',price:'From £1,770',unit:'starting price',text:'Window displays help your storefront stand out in direct sunlight and attract passing customers.',checks:['Visible from outside','Promote offers 24/7','Built for high-footfall locations']},
     advertising:{title:'For offers and promotions',match:'Professional Advertising Display',price:'From £650',unit:'starting price',text:'Advertising screens help promote campaigns, products and seasonal messages inside your business.',checks:['Dynamic promotions','Professional visuals','Flexible content updates']},
     shopfront:{title:'For brand presence',match:'Custom Shopfront Signage',price:'Quote',unit:'quoted individually',text:'Custom shopfront signs help your business look professional and easy to recognise.',checks:['Built around your brand','Material & lighting options','Site survey recommended']},
@@ -390,9 +532,114 @@
     outdoor:{title:'For all-weather visibility',match:'Outdoor Digital Advertising Display',price:'From £2,960',unit:'starting price',text:'Outdoor screens help businesses advertise in high-impact locations, day and night.',checks:['Weather-resistant options','High visibility','Built for outdoor environments']},
     kiosk:{title:'For interactive experiences',match:'Android Touch Screen Kiosk',price:'From £2,290',unit:'starting price',text:'Touch kiosks help customers browse, order, check in or interact with your business independently.',checks:['Interactive experience','Self-service options','Ideal for hospitality & retail']}
   };
-  function setSig(k){var d=SIG[k];document.getElementById('sigTitle').textContent=d.title;document.getElementById('sigMatch').textContent=d.match;document.getElementById('sigText').textContent=d.text;document.getElementById('sigPrice').textContent=d.price;document.getElementById('sigUnit').textContent=d.unit;document.getElementById('sigChecks').innerHTML=d.checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');document.getElementById('sigCta').setAttribute('data-product',d.match);}
+
+  /* ── build the business type / service / screen size tabs from config ── */
+  /* built with DOM APIs (not innerHTML string-building) so values containing
+     a literal quote character, e.g. the 32"/40" screen sizes, can't break
+     the generated markup */
+  function renderTabs(id,items,attr){
+    var wrap=document.getElementById(id);if(!wrap)return;
+    wrap.innerHTML='';
+    items.forEach(function(it){
+      var el=document.createElement('div');
+      el.className='tab';
+      el.setAttribute('data-'+attr,it.v);
+      if(it.i){var ic=document.createElement('iconify-icon');ic.setAttribute('icon',it.i);el.appendChild(ic);el.appendChild(document.createTextNode(' '+it.v));}
+      else{el.appendChild(document.createTextNode(it.v));}
+      wrap.appendChild(el);
+    });
+  }
+  renderTabs('bizTabs',SIGNAGE_CONFIG.businessTypes,'biz');
+  renderTabs('svcTabs',SIGNAGE_CONFIG.services,'svc');
+  renderTabs('sizeTabs',SIGNAGE_CONFIG.screenSizes,'size');
+
+  /* ── build the lead-form Business Type / Screen Size dropdowns from config ── */
+  function fillSelect(id,items){
+    var s=document.getElementById(id);if(!s)return;
+    items.forEach(function(it){var o=document.createElement('option');o.textContent=it.v;s.appendChild(o)});
+  }
+  fillSelect('mbiz',SIGNAGE_CONFIG.businessTypes);
+  fillSelect('msize',SIGNAGE_CONFIG.screenSizes);
+
+  /* ── build the FAQ list from config ── */
+  (function renderFaqs(){
+    var wrap=document.getElementById('faqList');if(!wrap)return;
+    wrap.innerHTML=SIGNAGE_CONFIG.faqs.map(function(f){
+      return '<div class="faq"><div class="faq-q">'+f.q+' <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>'+f.a+'</p></div></div>';
+    }).join('');
+  })();
+
+  /* ── selector state: business type / services (multi) / screen size / signage type ── */
+  var selState={biz:'',services:[],size:'',sig:'menu'};
+
+  function renderChips(){
+    var chips=[];
+    if(selState.biz)chips.push(selState.biz);
+    selState.services.forEach(function(s){chips.push(s)});
+    if(selState.size)chips.push(selState.size);
+    var el=document.getElementById('sigChips');
+    if(el)el.innerHTML=chips.map(function(c){return '<span class="sel-chip">'+c+'</span>'}).join('');
+  }
+  /* keep the lead-form fields in sync with the selector as the customer picks,
+     so any "Get a Signage Quote" button on the page opens the modal pre-filled */
+  function syncModalFields(){
+    var b=document.getElementById('mbiz');if(b&&selState.biz)b.value=selState.biz;
+    var sz=document.getElementById('msize');if(sz&&selState.size)sz.value=selState.size;
+    var sv=document.getElementById('msvc');if(sv)sv.value=selState.services.join(', ');
+  }
+  function setSig(k){
+    selState.sig=k;var d=SIG[k];
+    document.getElementById('sigTitle').textContent=selState.biz?('For '+selState.biz):d.title;
+    document.getElementById('sigMatch').textContent=d.match;
+    document.getElementById('sigText').textContent=d.text;
+    var price=d.price,unit=d.unit;
+    /* screen size selection overrides the menu-board price with the exact package price */
+    if(k==='menu'){
+      if(selState.size==='32"'){price='£350';unit='per screen';}
+      else if(selState.size==='40"'){price='£400';unit='per screen';}
+    }
+    document.getElementById('sigPrice').textContent=price;
+    document.getElementById('sigUnit').textContent=unit;
+    document.getElementById('sigChecks').innerHTML=d.checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
+    document.getElementById('sigCta').setAttribute('data-product',d.match);
+    renderChips();
+    syncModalFields();
+  }
+
+  /* step 1 — business type (single-select) */
+  document.querySelectorAll('#bizTabs .tab').forEach(function(t){t.onclick=function(){
+    document.querySelectorAll('#bizTabs .tab').forEach(function(x){x.classList.remove('active')});
+    t.classList.add('active');selState.biz=t.dataset.biz;setSig(selState.sig);
+  }});
+  /* step 2 — service required (multi-select) */
+  document.querySelectorAll('#svcTabs .tab').forEach(function(t){t.onclick=function(){
+    t.classList.toggle('active');
+    var v=t.dataset.svc,idx=selState.services.indexOf(v);
+    if(t.classList.contains('active')){if(idx===-1)selState.services.push(v);}
+    else if(idx>-1)selState.services.splice(idx,1);
+    renderChips();syncModalFields();
+  }});
+  /* step 3 — screen size (single-select) */
+  document.querySelectorAll('#sizeTabs .tab').forEach(function(t){t.onclick=function(){
+    document.querySelectorAll('#sizeTabs .tab').forEach(function(x){x.classList.remove('active')});
+    t.classList.add('active');selState.size=t.dataset.size;setSig(selState.sig);
+  }});
+  /* step 4 — signage type (single-select, existing recommendation engine) */
   document.querySelectorAll('#sigTabs .tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('#sigTabs .tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');setSig(t.dataset.sig)}});
   setSig('menu');
+
+  /* CTAs that represent a specific screen size / service (e.g. the 32"/40"
+     package "Choose" buttons) pre-fill the lead form's Screen Size / Service
+     Required fields directly, taking priority over whatever is currently
+     selected in the "Find your fit" flow above. */
+  document.querySelectorAll('[data-quote][data-size],[data-quote][data-svc]').forEach(function(t){
+    t.addEventListener('click',function(){
+      var sz=t.getAttribute('data-size'),sv=t.getAttribute('data-svc');
+      if(sz){var s=document.getElementById('msize');if(s)s.value=sz;}
+      if(sv){var v=document.getElementById('msvc');if(v)v.value=sv;}
+    });
+  });
+
   /* pricing tabs (+ swapping product visual) */
   var SGIMG={
     adv:['signage-cat-advertising.webp','ph:monitor-duotone','Advertising displays'],
