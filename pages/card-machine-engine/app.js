@@ -8,6 +8,40 @@
    ════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
+
+  /* ── embeddable lookups ────────────────────────────────────────────────
+     This module now runs on the service page (the "comparison page" the
+     specification refers to) rather than a page of its own. Some elements it
+     used to own there — hero copy, FAQ list, service-card grids — belong to
+     the host page and may simply not exist.
+
+     Writing to a missing element must not abort the module and take the
+     whole quiz down with it, so member access goes through el(), which
+     returns an inert stub and logs once. Bare getElementById() calls are
+     left alone, because several are used as `if (!x) return` guards that
+     must keep seeing null. */
+  var _elMissing = {};
+  var _elNoop = function () {};
+  var _elStub = {
+    innerHTML: '', textContent: '', value: '', disabled: false, checked: false,
+    style: {}, dataset: {},
+    classList: { add: _elNoop, remove: _elNoop, toggle: _elNoop, contains: function () { return false; } },
+    addEventListener: _elNoop, removeEventListener: _elNoop, dispatchEvent: _elNoop,
+    appendChild: _elNoop, removeChild: _elNoop, insertBefore: _elNoop, remove: _elNoop,
+    setAttribute: _elNoop, removeAttribute: _elNoop, getAttribute: function () { return null; },
+    querySelector: function () { return null; }, querySelectorAll: function () { return []; },
+    closest: function () { return null; }, scrollIntoView: _elNoop,
+    focus: _elNoop, blur: _elNoop, click: _elNoop, reset: _elNoop, submit: _elNoop
+  };
+  function el(id) {
+    var e = document.getElementById(id);
+    if (e) return e;
+    if (!_elMissing[id]) {
+      _elMissing[id] = 1;
+      if (window.console && console.debug) console.debug('[plemmo] optional element #' + id + ' is not on this page');
+    }
+    return _elStub;
+  }
   var STORE = window.PLEMMO_CME_STORE;
   var ENGINE = window.PLEMMO_CME_ENGINE;
   var CONFIG = STORE.getConfig();
@@ -94,8 +128,8 @@
   function goBack() {
     if (stepIndex === 0) return;
     stepIndex--;
-    document.getElementById('results').style.display = 'none';
-    document.getElementById('lead-form').style.display = 'none';
+    el('results').style.display = 'none';
+    el('lead-form').style.display = 'none';
     render();
   }
 
@@ -270,10 +304,10 @@
     restart.onclick = function () {
       answers = { categoryId: null, typeId: null, turnoverBandId: null, currentProviderId: null, charityNoRental: null, foodBeveragePaymentMethod: null };
       stepIndex = 0; lastResult = null;
-      document.getElementById('results').style.display = 'none';
-      document.getElementById('lead-form').style.display = 'none';
+      el('results').style.display = 'none';
+      el('lead-form').style.display = 'none';
       render();
-      document.getElementById('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
     foot.appendChild(back); foot.appendChild(restart);
     body.appendChild(foot);
@@ -300,25 +334,25 @@
     var type = ENGINE.findType(cat, answers.typeId);
     var turnoverLabel = labelFor(CONFIG.turnoverBands, answers.turnoverBandId);
     var currentLabel = labelFor(CONFIG.currentProviderOptions, answers.currentProviderId);
-    document.getElementById('cmeRecap').innerHTML = [
+    el('cmeRecap').innerHTML = [
       cat ? cat.name : '', type ? type.name : '', turnoverLabel,
       'Current: ' + currentLabel
     ].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
-    document.getElementById('leadCategory').value = cat ? cat.name : '';
-    document.getElementById('leadType').value = type ? type.name : '';
-    document.getElementById('leadTurnover').value = turnoverLabel;
-    document.getElementById('leadCurrent').value = currentLabel;
+    el('leadCategory').value = cat ? cat.name : '';
+    el('leadType').value = type ? type.name : '';
+    el('leadTurnover').value = turnoverLabel;
+    el('leadCurrent').value = currentLabel;
     leadSection.style.display = 'none'; /* revealed once a card CTA or fallback CTA is used */
     if (lastResult && lastResult.fallback) {
       /* Fallback still allows lead submission — show the form directly. */
-      document.getElementById('leadRecommended').value = 'Not matched — manual review requested';
+      el('leadRecommended').value = 'Not matched — manual review requested';
       leadSection.style.display = '';
     }
   }
 
   function openLeadForm(providerId, intent) {
     var provider = CONFIG.providers[providerId];
-    document.getElementById('leadRecommended').value = (provider ? provider.name : providerId) + (intent === 'callback' ? ' (callback requested)' : ' (apply now)');
+    el('leadRecommended').value = (provider ? provider.name : providerId) + (intent === 'callback' ? ' (callback requested)' : ' (apply now)');
     var notesField = document.getElementById('leadNotes');
     if (!notesField.value) notesField.value = intent === 'callback'
       ? 'Please call me back about ' + (provider ? provider.name : 'this recommendation') + '.'
@@ -339,15 +373,15 @@
 
       var recommendedIds = lastResult && !lastResult.fallback ? lastResult.providers.map(function (p) { return p.provider.name; }) : [];
       var lead = {
-        businessName: document.getElementById('leadBusinessName').value,
-        contactName: document.getElementById('leadContactName').value,
-        mobile: document.getElementById('leadMobile').value,
-        email: document.getElementById('leadEmail').value,
+        businessName: el('leadBusinessName').value,
+        contactName: el('leadContactName').value,
+        mobile: el('leadMobile').value,
+        email: el('leadEmail').value,
         categoryId: answers.categoryId, typeId: answers.typeId,
         turnoverBandId: answers.turnoverBandId, currentProviderId: answers.currentProviderId,
         recommendedProviderIds: recommendedIds,
-        recommendedChoice: document.getElementById('leadRecommended').value,
-        notes: document.getElementById('leadNotes').value,
+        recommendedChoice: el('leadRecommended').value,
+        notes: el('leadNotes').value,
         needsReview: !!(lastResult && lastResult.fallback)
       };
       STORE.addLead(lead);
@@ -356,7 +390,7 @@
       fd.append('_template', 'table'); fd.append('_captcha', 'false');
       if (lead.email) fd.append('_replyto', lead.email);
       fetch(CONFIG.leadSubmitEndpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
-        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; document.getElementById('cmeLeadOk').style.display = 'block'; document.getElementById('cmeLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
+        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; el('cmeLeadOk').style.display = 'block'; el('cmeLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
         .catch(function () {
           /* Lead is already saved locally — still confirm to the user, but let them know to call if email failed. */
           if (btn) { btn.disabled = false; btn.innerHTML = label; }

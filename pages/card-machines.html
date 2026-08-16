@@ -620,6 +620,78 @@ html{overflow-x:hidden}
   .cm-dash{width:160px}
 }
 .flegal{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px}.flegal a{color:var(--muted);transition:color .2s}.flegal a:hover{color:var(--lime)}
+
+/* ── embedded recommendation engine ── */
+
+/* ── Card Machine Recommendation Engine — page-specific ── */
+.cmehero{position:relative;overflow:hidden;padding:140px 0 70px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
+.orb.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(170,230,0,.12),transparent 70%);top:-200px;right:-160px}
+.cmehero-in{position:relative;z-index:2;max-width:720px}
+.cmehero h1{font-size:clamp(38px,5.2vw,60px);color:#fff;letter-spacing:-.03em}
+.cmehero .sub{color:var(--muted);font-size:17px;max-width:560px;margin:18px 0 0}
+.cme-steps-strip{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;position:relative;z-index:1}
+.cme-pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--muted);padding:7px 13px;border-radius:var(--pill);background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.3s}
+.cme-pill .n{width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;color:#cfd6c5}
+.cme-pill.active{color:#fff;border-color:rgba(198,255,0,.5);background:var(--lime-soft)}
+.cme-pill.active .n{background:var(--lime);color:#0a0c08}
+.cme-pill.done{color:#bfe07a;border-color:rgba(198,255,0,.28)}
+.cme-pill.done .n{background:var(--lime);color:#0a0c08}
+.cme-q{font-family:'Space Grotesk';font-size:clamp(20px,2.8vw,28px);font-weight:700;color:#fff;margin-bottom:20px;position:relative;z-index:1;animation:cmef .4s both}
+.cme-hint{font-size:13px;color:var(--muted);margin:-10px 0 20px;position:relative;z-index:1}
+.cme-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative;z-index:1}
+.cme-tiles.wide{grid-template-columns:repeat(2,1fr)}
+.cme-tile{display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;padding:20px 12px;border-radius:16px;background:rgba(255,255,255,.03);border:1.5px solid var(--line);color:#e7ebe0;font-family:'Inter';font-weight:600;font-size:13.5px;cursor:pointer;transition:transform .25s var(--spring),border-color .25s,background .25s}
+.cme-tile:hover{transform:translateY(-5px);border-color:rgba(198,255,0,.5);background:rgba(198,255,0,.06)}
+.cme-tile .ti{width:44px;height:44px;border-radius:13px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center}
+.cme-tile .ti iconify-icon{font-size:22px;color:var(--lime)}
+.cme-tile.sel{border-color:var(--lime);background:var(--lime-soft)}
+.cme-tile.sel .ti{background:var(--lime)}.cme-tile.sel .ti iconify-icon{color:#0a0c08}
+.cme-foot{display:flex;align-items:center;justify-content:space-between;margin-top:24px;position:relative;z-index:1}
+.cme-back{background:none;border:none;color:var(--muted);font-family:'Inter';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.cme-back[disabled]{opacity:0;pointer-events:none}.cme-back:hover{color:#fff}
+@keyframes cmef{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* result / fallback */
+.cme-fallback{background:linear-gradient(150deg,rgba(198,255,0,.12),rgba(198,255,0,.03));border:1px solid rgba(95,144,0,.3);border-radius:18px;padding:24px;text-align:center}
+.cme-fallback iconify-icon{font-size:34px;color:#5f9000;margin-bottom:10px}
+.cme-fallback h3{font-family:'Space Grotesk';color:var(--ink);font-size:20px;margin-bottom:8px}
+.cme-fallback p{color:var(--ink-soft);font-size:14px;max-width:480px;margin:0 auto}
+
+/* comparison cards */
+.cme-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:8px}
+.cme-card{position:relative;background:var(--white);border:1px solid var(--line-l);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-l);display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s}
+.cme-card:hover{transform:translateY(-5px);box-shadow:0 34px 60px rgba(17,20,15,.16)}
+.cme-card.top{border-color:var(--lime);box-shadow:0 0 0 2px var(--lime),var(--shadow-l)}
+.cme-rank{position:absolute;top:-12px;left:20px;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:5px 13px;border-radius:var(--pill)}
+.cme-card .plogo-c{height:30px;display:flex;align-items:center;margin-bottom:14px}
+.cme-card .plogo-c img{height:26px;width:auto;object-fit:contain}
+.cme-card .plogo-c .wordmark{font-family:'Space Grotesk';font-weight:700;font-size:20px;color:var(--ink)}
+.cme-model{display:inline-flex;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#5f9000;background:var(--lime-soft);border-radius:100px;padding:4px 10px;margin-bottom:12px;width:fit-content}
+.cme-rates{display:grid;gap:8px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line-l)}
+.cme-rate-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--ink-soft)}
+.cme-rate-row b{color:var(--ink);font-family:'Space Grotesk';font-size:15px}
+.cme-card ul{list-style:none;display:grid;gap:8px;margin-bottom:16px}
+.cme-card li{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.cme-card li iconify-icon{color:#5f9000;font-size:16px;flex-shrink:0;margin-top:1px}
+.cme-card-btns{margin-top:auto;display:grid;gap:8px}
+.cme-card-btns .btn{justify-content:center;width:100%}
+.cme-note{font-size:11px;color:#8a9279;margin-top:14px}
+
+/* lead form */
+.cme-lead{max-width:720px;margin:0 auto}
+.cme-recap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.cme-recap span{font-size:12px;font-weight:600;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line-l);border-radius:100px;padding:6px 12px}
+
+/* pricing disclaimer block */
+.cme-disclaimer{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+.cme-disclaimer p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.cme-disclaimer ul{margin:0;padding-left:18px;display:grid;grid-template-columns:1fr 1fr;gap:4px 20px}
+.cme-disclaimer li{font-size:12px;color:#8a9279;line-height:1.7}
+
+@media(max-width:760px){.cme-tiles{grid-template-columns:repeat(2,1fr)}.cme-disclaimer ul{grid-template-columns:1fr}}
+@media(max-width:480px){.cme-tiles{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -661,10 +733,10 @@ html{overflow-x:hidden}
   <span class="orb o1"></span><span class="orb o2"></span>
   <div class="container hero-grid">
     <div class="rv">
-      <h1>Card machines<br>that work<br><span class="lime">as hard as you.</span></h1>
+      <h1>Compare card machines.<br><span class="lime">Keep the difference.</span></h1>
       <p class="sub">Compare leading providers. Find the right card machine. Save on fees.</p>
       <div class="hero-btns">
-        <a href="#finder" class="btn btn-primary btn-lg">Find My Ideal Machine <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+        <a href="#engine" class="btn btn-primary btn-lg">Find My Ideal Machine <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
         <a href="#providers" class="btn btn-ghost btn-lg">Compare Providers</a>
       </div>
       <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply · UK business support</p>
@@ -709,32 +781,7 @@ html{overflow-x:hidden}
   <div class="container"><p class="lead center" style="font-size:11px;margin-top:14px;color:#6b7560">Provider names and logos remain the property of their respective owners and are displayed solely to indicate products or services that may be introduced.</p></div>
 </section>
 
-<!-- ════ QUIZ ════ -->
-<section class="section" id="finder" style="padding-top:16px">
-  <div class="container">
-    <div class="center rv" style="max-width:600px;margin:0 auto 42px">
-      <span class="eyebrow"><iconify-icon icon="ph:timer-duotone"></iconify-icon> In 60 seconds</span>
-      <h2 class="h2" style="margin-top:14px">Find your perfect card machine match</h2>
-      <p class="lead" style="margin-top:12px">Answer a few quick questions and we'll recommend the best-fit providers for your business — free, no obligation.</p>
-      <p class="lead" style="margin-top:10px;font-size:14px">Want a fuller breakdown across all our providers, including split-rate options? Try our <a href="card-machine-recommendation.html" class="lime" style="text-decoration:underline">complete Recommendation Engine</a>.</p>
-    </div>
-    <div class="quizx rv">
-      <div class="quiz-topbar">
-        <div class="quiz-dots"><i></i><i></i><i></i></div>
-        <span class="quiz-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/card-machine-finder</span>
-        <span class="quiz-live"><span class="dl"></span> Live</span>
-      </div>
-      <div class="quiz-card">
-        <span class="qglow"></span>
-        <div class="qtop"><span class="qstep" id="qstep">Step 1 of 4</span><span class="qhint">~30 seconds</span></div>
-        <div class="qbar"><i id="qbar"></i></div>
-        <div class="qsteps" id="qsteps"></div>
-        <div id="qbody"></div>
-        <div class="qfoot"><button class="qback" id="qback" disabled><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span style="font-size:12px;color:var(--muted)">No obligation · provider terms apply</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ════ TOP PROVIDERS ════ -->
 <section class="section s-light" id="providers">
@@ -770,7 +817,7 @@ html{overflow-x:hidden}
         <button class="pcompare" data-cmp="elavon"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
     </div>
-    <div class="center rv" style="margin-top:34px"><a href="#finder" class="btn btn-dark">Compare All Providers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
+    <div class="center rv" style="margin-top:34px"><a href="#engine" class="btn btn-dark">Compare All Providers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
     <p class="lead center" style="font-size:11.5px;margin-top:26px;max-width:760px;margin-left:auto;margin-right:auto;color:#9aa48d">Provider names and logos remain the property of their respective owners and are displayed solely to indicate products or services that may be introduced.</p>
   </div>
 </section>
@@ -953,7 +1000,7 @@ html{overflow-x:hidden}
           <span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Expert support</span>
         </div>
         <div class="final-btns">
-          <a href="#finder" class="btn btn-primary btn-lg">Find My Ideal Machine <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+          <a href="#engine" class="btn btn-primary btn-lg">Find My Ideal Machine <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
           <a href="#" class="btn btn-ghost btn-lg" data-quote>Speak to an Expert <iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a>
         </div>
         <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Free, no‑obligation quote · We compare, you decide</p>
@@ -968,13 +1015,73 @@ html{overflow-x:hidden}
 </section>
 
 <!-- ════ FOOTER ════ -->
+
+<!-- ════ RECOMMENDATION ENGINE (embedded — see spec "comparison page") ════ -->
+<section class="section" id="engine" style="padding-top:20px">
+  <div class="container" style="max-width:900px">
+    <div class="appwin rv">
+      <div class="appwin-bar">
+        <div class="appwin-dots"><i></i><i></i><i></i></div>
+        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/card-machine-recommendation</span>
+        <span class="appwin-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="appwin-body">
+        <div id="cmeBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section s-light" id="results" style="display:none">
+  <div class="container">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Suggested for you</span>
+      <h2 class="h2" id="resultsHeading">Suggested Providers</h2>
+      <p class="lead" id="resultsSub">Based on what you told us — ranked by suitability, not just price.</p>
+    </div>
+    <div id="resultsBody"></div>
+    <p class="disc center" style="margin:22px auto 0" id="recommendationDisclaimer"></p>
+  </div>
+</section>
+
+<section class="section" id="lead-form" style="display:none">
+  <div class="container cme-lead">
+    <div class="head center">
+      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
+      <h2 class="h2">Get your exact quote</h2>
+      <p class="lead" style="margin-top:10px">Leave your details and a Plemmo specialist will confirm your exact rate and next steps.</p>
+    </div>
+    <div class="cme-recap" id="cmeRecap"></div>
+    <form class="appwin" id="cmeLeadForm" style="padding:0" novalidate>
+      <input type="hidden" name="_subject" value="Card Machine Recommendation — New Lead">
+      <input type="hidden" name="recommended_provider" id="leadRecommended">
+      <input type="hidden" name="business_category" id="leadCategory">
+      <input type="hidden" name="business_type" id="leadType">
+      <input type="hidden" name="monthly_turnover" id="leadTurnover">
+      <input type="hidden" name="current_provider" id="leadCurrent">
+      <div class="appwin-body" style="padding:30px">
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
+        <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="mobile" id="leadMobile" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
+        <div class="frow"><label>Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send my details <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · We'll only use this to contact you about your enquiry</p>
+      </div>
+    </form>
+    <div class="msuccess" id="cmeLeadOk" style="display:none">
+      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
+      <h3>Thanks — we've got your details</h3>
+      <p>A Plemmo specialist will be in touch shortly to confirm your exact quote.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container">
     <div class="fgrid">
       <div class="fbrand"><div class="logo">plemmo</div><p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p><p style="margin-top:8px;font-size:13px;color:var(--lime)">Run your business, we'll handle the rest.</p></div>
       <div class="fcol"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="utilities-broadband.html">Utilities &amp; Broadband</a></div>
       <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
-      <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#providers">Compare Options</a><a href="#finder">Card Machine Finder</a></div>
+      <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#providers">Compare Options</a><a href="#engine">Card Machine Finder</a></div>
       <div class="fcol"><h4>Contact</h4><a href="tel:03330411161">0333 041 1161</a><a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a><a href="#" data-quote>Get a Free Quote</a></div>
     </div>
     <div class="fdisc">Plemmo is an introducer and is not a payment processor, acquiring bank or lender. Card machine products, pricing, settlement times, rates, ratings and approval are subject to provider terms, eligibility and approval. Plemmo may receive commission from providers. Provider logos and names are the property of their respective owners. Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice.</div>
@@ -1147,12 +1254,8 @@ html{overflow-x:hidden}
   window.__openQuote=openModal;
 
   /* ── QUIZ ── */
-  var STEPS=[
-    {k:'type',q:'What type of business do you run?',o:[{l:'Charity',i:'ph:heart-duotone'},{l:'Food and beverage',i:'ph:coffee-duotone'},{l:'Health, beauty and wellness',i:'ph:scissors-duotone'},{l:'Retail',i:'ph:storefront-duotone'},{l:'Services',i:'ph:briefcase-duotone'}]},
-    {k:'turnover',q:'What is your monthly card turnover?',o:[{l:'Under £5k',i:'ph:coins-duotone'},{l:'£5k–£10k',i:'ph:money-duotone'},{l:'£10k–£15k',i:'ph:chart-line-up-duotone'},{l:'£15k–£50k',i:'ph:chart-bar-duotone'},{l:'£50k+',i:'ph:trend-up-duotone'},{l:'Not sure',i:'ph:question-duotone'}]},
-    {k:'priority',q:'What matters most to you?',o:[{l:'Lowest rates',i:'ph:percent-duotone'},{l:'No monthly rental',i:'ph:file-dashed-duotone'},{l:'Fast payouts',i:'ph:lightning-duotone'},{l:'Simple setup',i:'ph:hand-tap-duotone'},{l:'Better support',i:'ph:headset-duotone'},{l:'MOTO / phone payments',i:'ph:phone-duotone'},{l:'Pay by link',i:'ph:link-duotone'}]},
-    {k:'current',q:'Are you already taking card payments?',o:[{l:'New to card payments',i:'ph:sparkle-duotone'},{l:'Using Dojo',i:'ph:credit-card-duotone'},{l:'Using Shift4',i:'ph:credit-card-duotone'},{l:'Using Barclays',i:'ph:credit-card-duotone'},{l:'Using MyPOS',i:'ph:credit-card-duotone'},{l:'Using Elavon',i:'ph:credit-card-duotone'},{l:'Using EVO',i:'ph:credit-card-duotone'},{l:'Using takepayments',i:'ph:credit-card-duotone'},{l:'Using Teya',i:'ph:credit-card-duotone'},{l:'Using SumUp',i:'ph:credit-card-duotone'},{l:'Using Worldpay',i:'ph:credit-card-duotone'},{l:'Another provider',i:'ph:credit-card-duotone'}]}
-  ];
+  /* PROV is kept from the removed finder: the provider compare drawer below
+     still uses it for provider names and imagery. */
   var PROV={
     teya:{k:'teya',n:'Teya',img:'../images/teya-card-machine.webp',w:'A flexible option for established businesses above £15k monthly turnover — rental or buy routes available, with instant or next-day settlement options.',b:['Rental and buy options available','Instant or next-day settlement','Flexible contract terms']},
     sumup:{k:'sumup',n:'SumUp',img:'../images/sumup-card-machine.webp',w:'A strong option for smaller businesses wanting a simple, low-commitment setup. Terminal from £105 inc. VAT with rates that can start from 0.55%.',b:['Terminal from £105 inc. VAT','Rates can start from 0.55%','Instant payout into SumUp account']},
@@ -1160,165 +1263,10 @@ html{overflow-x:hidden}
     elavon:{k:'elavon',n:'Elavon',img:'../images/elavon-card-machine.webp',w:'Can suit businesses needing competitive rates, phone payment options, and regular/everyday payout support. Above £15k monthly turnover.',b:['MOTO / phone payment options','Everyday payout available','Suited to businesses above £15k']},
     shift4:{k:'shift4',n:'Shift4',img:'../images/Card machine no bg.webp',w:'A simple, low-commitment option ideal for smaller businesses and those new to card payments. Flat rate 1.25% + 25p next-day settlement fee, no monthly rental.',b:['No monthly rental','Flat rate 1.25% + 25p settlement fee','Simple setup & low commitment']}
   };
-  function rec(a){var t=a.turnover,p=a.priority,type=a.type;
-    var low=(t==='Under £5k'),mid=(t==='£5k–£10k'),big=(t==='£15k–£50k'||t==='£50k+');
-    /* Charity → SumUp / Shift4 only */
-    if(type==='Charity')return (low||mid)?PROV.shift4:PROV.sumup;
-    /* Priority-driven rules */
-    if(p==='MOTO / phone payments')return big?PROV.worldpay:PROV.elavon;
-    if(p==='Pay by link')return PROV.teya;
-    if(p==='No monthly rental')return low?PROV.shift4:(mid?PROV.sumup:PROV.shift4);
-    if(p==='Fast payouts')return (low||mid)?PROV.sumup:PROV.teya;
-    if(p==='Simple setup')return PROV.sumup;
-    if(p==='Better support')return PROV.teya;
-    if(p==='Lowest rates')return low?PROV.shift4:(mid?PROV.sumup:PROV.teya);
-    /* Turnover-driven default — Teya is first option from £10k+ */
-    if(low)return PROV.shift4;
-    if(mid)return PROV.sumup;
-    return PROV.teya;}
-  var LABELS=['Business','Turnover','Priority','Status'];
-  var SKEY='plemmo_cm_finder';
-  function loadAns(){try{return JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){return {}}}
-  function saveAns(){try{localStorage.setItem(SKEY,JSON.stringify(ans))}catch(e){}}
-  var ans=loadAns(),cur=0,done=false,body=document.getElementById('qbody'),bar=document.getElementById('qbar'),stepEl=document.getElementById('qstep'),back=document.getElementById('qback'),steps=document.getElementById('qsteps');
-  function stepper(){steps.innerHTML=LABELS.map(function(l,i){var c=(done||i<cur)?'done':(i===cur?'active':'');var n=(done||i<cur)?'<iconify-icon icon="ph:check-bold"></iconify-icon>':(i+1);return '<span class="qstep-pill '+c+'"><span class="qn">'+n+'</span>'+l+'</span>'}).join('')}
-  function render(){var s=STEPS[cur];done=false;bar.style.width=((cur+1)/STEPS.length*100)+'%';stepEl.textContent='Step '+(cur+1)+' of '+STEPS.length;back.disabled=cur===0;stepper();
-    var h='<div class="qq">'+s.q+'</div><div class="qtiles">';
-    s.o.forEach(function(o){h+='<button class="qtile'+(ans[s.k]===o.l?' sel':'')+'" data-v="'+o.l+'"><span class="qti"><iconify-icon icon="'+o.i+'"></iconify-icon></span><span>'+o.l+'</span></button>'});
-    h+='</div>';body.innerHTML=h;
-    body.querySelectorAll('.qtile').forEach(function(el){el.onclick=function(){ans[s.k]=el.dataset.v;saveAns();if(cur<STEPS.length-1){cur++;render()}else{result()}}});}
-  function result(){done=true;bar.style.width='100%';stepEl.textContent='Your match';back.disabled=false;stepper();var r=rec(ans);
-    body.innerHTML='<div class="qres"><div class="qres-card"><div class="qres-media"><img loading="lazy" decoding="async" src="'+r.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+r.n+' card machine"></div><div class="qres-body"><div class="rh"><span class="rav">'+r.n.charAt(0)+'</span><div><div class="rl">Suggested Provider</div><div class="rn">'+r.n+'</div></div></div><p>'+r.w+'</p><div class="qres-chips">'+r.b.map(function(x){return '<span class="qres-chip"><iconify-icon icon="ph:check-bold"></iconify-icon>'+x+'</span>'}).join('')+'</div><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Get my '+r.n+' quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" id="qdet">View '+r.n+' details</a></div></div></div><p style="font-size:11px;color:#6b7560;margin-top:14px;line-height:1.5">Recommendations are generated from the information you provide and do not constitute financial advice.</p></div>';
-    document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({product:r.n,turnover:ans.turnover,current:ans.current})};
-    document.getElementById('qdet').onclick=function(e){e.preventDefault();openDetail(r.k)};}
-  back.onclick=function(){if(done){done=false;cur=STEPS.length-1;render();return}cur=Math.max(0,cur-1);render()};
-  /* resume saved progress */
-  (function(){var first=-1;for(var i=0;i<STEPS.length;i++){if(!ans[STEPS[i].k]){first=i;break}}
-    if(first===-1&&STEPS.length){result()}else{cur=Math.max(0,first);render()}})();
 
-  /* ── PROVIDER / PRODUCT DETAIL POPUPS ── */
-  var IMGP={teya:'../images/teya-card-machine.webp',sumup:'../images/sumup-card-machine.webp',worldpay:'../images/worldpay-card-machine.webp',elavon:'../images/elavon-card-machine.webp',mobile:'../images/card-type-mobile.webp'};
-  var DETAIL={
-    teya:{badge:'Flexible plans',name:'Teya',img:IMGP.teya,intro:'Teya offers flexible card payment options with rental and purchase routes available. Instant settlement may be available with a Teya business account, while next-day settlement options may also apply. Suited to businesses above £15k monthly card turnover. Final rates and terms depend on business profile, turnover, and provider approval.',
-      facts:[['Indicative rate','From 0.55%',1],['Terminal options','Rental or buy outright'],['Settlement','Instant (Teya account) or next-day'],['Hardware','PAX A920 Pro · Sunmi']],
-      pros:['Rental and buy options available','Teya bank account is optional','Contract and no-contract routes available','Rates can reduce as turnover grows'],
-      tableTitle:'Indicative Teya blended rates by turnover',
-      table:[['£10k','1.20%'],['£12k','1.04%'],['£15k','1.00%'],['£18k','0.88%'],['£20k','0.85%'],['£22k – £35k','0.80%'],['£36k – £42k','0.77%'],['£43k – £65k','0.70%'],['£66k – £80k','0.67%'],['£81k – £95k','0.63%'],['£100k','0.61%'],['£120k – £190k','0.60%'],['£200k+','0.55%']],
-      note:'Rates are indicative only and may vary depending on business type, monthly card turnover, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Teya monthly rental is £15 + VAT (or buy the terminal outright). Final pricing is confirmed after review.'},
-    sumup:{badge:'Simplest setup',name:'SumUp',img:IMGP.sumup,intro:'SumUp can be a strong option for smaller businesses wanting simple setup and a buy-outright terminal. Terminal pricing starts from £105 inc. VAT, with rates from 0.55% depending on turnover and business profile. Instant payout may be available through a SumUp business account.',
-      facts:[['Terminal','From £105 inc. VAT'],['Monthly fee','None'],['Rate from','0.55%',1],['Instant payout','Via SumUp account']],
-      pros:['Terminal from £105 inc. VAT — low commitment','Pay As You Go or lower contract rates','Rates can start from 0.55% on a 24-month term','Instant payout option via SumUp account','Easy to set up and use'],
-      tableTitle:'SumUp rates — Pay As You Go → 24-month contract',
-      table:[['£5k – £7.5k','1.49% → 1.19%'],['£7.5k – £10k','1.29% → 1.19%'],['£10k – £15k','1.19% → 0.89%'],['£15k – £20k','0.99% → 0.79%'],['£20k – £30k','0.89% → 0.75%'],['£30k – £50k','0.79% → 0.69%'],['£50k – £100k','0.75% → 0.59%'],['£100k+','0.69% → 0.55%']],
-      note:'Rates shown range from Pay As You Go (no contract) to the lowest 24-month contract rate. Premium, international, corporate and customer-not-present payments may be charged separately under SumUp terms. Subject to provider approval and business profile.'},
-    worldpay:{badge:'For larger businesses',name:'Worldpay',img:IMGP.worldpay,intro:'Worldpay can suit more established businesses needing competitive split rates, phone payments, and a broader payment setup. Indicative rates may start from 0.30% debit and 0.65% credit, depending on business profile and approval.',
-      facts:[['Debit from','0.30%*',1],['Credit from','0.65%*',1],['Rental','£1/mo first year'],['Contract','18 months']],
-      pros:['Trusted, established UK provider','Suited to MOTO / phone payments','24/7 customer support','For businesses above £15k turnover'],
-      note:'*Indicative rates. £29.50 + VAT monthly applies after the first year. Subject to provider approval, eligibility and terms. Rates depend on business profile, turnover and card mix.'},
-    elavon:{badge:'Reliable & secure',name:'Elavon',img:IMGP.elavon,intro:'Elavon can suit businesses needing competitive rates, phone payment options, and regular/everyday payout support. Final rates depend on turnover, sector, transaction mix, and approval. Suited to businesses above £15k monthly turnover.',
-      facts:[['Best for','Businesses above £15k'],['MOTO / phone','Available'],['Payout','Everyday payout option'],['Currencies','Multi-currency']],
-      pros:['MOTO / phone payment options available','Everyday payout available','Competitive rates for larger businesses','Multi-currency acceptance option'],
-      note:'Features, pricing and availability are subject to provider terms, eligibility and approval. Rates are indicative and depend on turnover, sector, and card mix.'},
-    shift4:{badge:'Low commitment',name:'Shift4',img:'../images/Card machine no bg.webp',intro:'A simple, low-commitment option ideal for smaller businesses and those new to card payments. Flat rate pricing with no monthly rental makes it straightforward to get started.',
-      facts:[['Rate','1.25% + 25p settlement fee',1],['Monthly rental','None'],['Settlement','Next-day'],['Setup','Quick & simple']],
-      pros:['No monthly rental — low commitment','Flat rate 1.25% + 25p next-day settlement fee','Ideal for lower turnover businesses','Simple setup — get started quickly','Pay by link available'],
-      note:'Rate is 1.25% plus a 25p next-day settlement fee. Subject to approval and provider terms. Rates are indicative and may vary.'},
-    countertop:{type:1,badge:'Machine type',name:'Countertop',img:'../images/card-type-portable.webp',intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
-      facts:[['Best for','Shops & counters'],['Connection','Broadband / phone'],['Printer','Built-in receipts'],['Volume','High throughput']],
-      pros:['Fast chip, PIN & contactless','Built-in receipt printer','Reliable for high transaction volumes','Always powered at the till'],
-      note:'Specific models and features vary by provider.'},
-    portable:{type:1,badge:'Machine type',name:'Portable',img:'../images/countertop.webp',intro:'A WiFi or Bluetooth terminal you can carry around your premises — take payment at the table or anywhere on site.',
-      facts:[['Best for','Restaurants & venues'],['Connection','WiFi / Bluetooth'],['Battery','Rechargeable'],['Printer','Built-in receipts']],
-      pros:['Take payment at the table','Move freely around your venue','Contactless & chip and PIN','Rechargeable all-day battery'],
-      note:'Specific models and features vary by provider.'},
-    mobile:{type:1,badge:'Machine type',name:'Mobile',img:IMGP.mobile,intro:'A pocket-sized card reader that pairs with the app on your phone — the lowest-cost way to start taking cards on the go.',
-      facts:[['Best for','Trades & pop-ups'],['Connection','Phone app · 4G'],['Cost','Low entry'],['Size','Pocket-sized']],
-      pros:['Turns your phone into a till','Low-cost way to get started','Take payments anywhere','Pay-as-you-go options may apply'],
-      note:'Specific models and features vary by provider.'},
-    smart:{type:1,badge:'Machine type',name:'Smart Terminal',img:'../images/card-type-smart.webp',intro:'An Android all-in-one with a touchscreen, apps, reporting and EPOS-style features — one device that runs more of your business.',
-      facts:[['Best for','Growing businesses'],['System','Android · apps'],['Printer','Built-in receipts'],['Extras','Reports & EPOS']],
-      pros:['Touchscreen with apps & analytics','Can integrate EPOS features','Built-in receipt printer','One device, many jobs'],
-      note:'Specific models and features vary by provider.'}
-  };
-  var detail=document.getElementById('detail'),dcard=document.getElementById('detailCard');
-  function detailHTML(d){
-    var facts=d.facts?'<div class="dt-facts">'+d.facts.map(function(f){return '<div class="dt-fact"><div class="l">'+f[0]+'</div><div class="v'+(f[2]?' lime':'')+'">'+f[1]+'</div></div>'}).join('')+'</div>':'';
-    var table=d.table?'<div class="dt-sub">'+(d.tableTitle||'Indicative rates by turnover')+'</div><table class="dt-table"><thead><tr><th>Monthly turnover</th><th>Rate</th></tr></thead><tbody>'+d.table.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')+'</tbody></table>':'';
-    var pros='<div class="dt-sub">Why businesses choose it</div><ul class="dt-pros">'+d.pros.map(function(p){return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>'+p+'</li>'}).join('')+'</ul>';
-    var cta=d.type?'Get a quote':'Get a '+d.name+' quote';
-    return '<button class="dt-close" data-dclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button>'
-      +'<div class="dt-media"><span class="dt-badge">'+d.badge+'</span><img loading="lazy" decoding="async" src="'+d.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+d.name+'"></div>'
-      +'<div class="dt-body"><div class="dt-name">'+d.name+'</div><p class="dt-intro">'+d.intro+'</p>'+facts+pros+table
-      +'<div class="dt-cta"><a href="#" class="btn btn-primary" data-dquote="'+d.name+'">'+cta+' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" data-dclose>Close</a></div>'
-      +'<p class="dt-note">'+d.note+'</p></div>';
-  }
-  function openDetail(key){var d=DETAIL[key];if(!d)return;dcard.innerHTML=detailHTML(d);detail.classList.add('open');document.body.style.overflow='hidden';dcard.scrollTop=0;
-    dcard.querySelectorAll('[data-dclose]').forEach(function(b){b.onclick=function(e){e.preventDefault();closeDetail()}});
-    var q=dcard.querySelector('[data-dquote]');if(q)q.onclick=function(e){e.preventDefault();closeDetail();openModal({product:q.dataset.dquote})};}
-  function closeDetail(){detail.classList.remove('open');document.body.style.overflow=''}
-  document.querySelectorAll('[data-detail]').forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();openDetail(t.dataset.detail)})});
-  detail.querySelector('.modal-bd').onclick=closeDetail;
-  addEventListener('keydown',function(e){if(e.key==='Escape'&&detail.classList.contains('open'))closeDetail()});
-
-  /* seamless marquee */
-  var mq=document.getElementById('mqTrack');if(mq){mq.innerHTML+=mq.innerHTML}
-
-  /* ── Rate calculator (owner pricing: Teya / Shift4 / SumUp / Worldpay) ── */
-  (function(){
-    var range=document.getElementById('calcRange');if(!range)return;
-    var elT=document.getElementById('calcTurn'),elR=document.getElementById('calcRate'),elC=document.getElementById('calcCost'),
-        elF=document.getElementById('calcFit'),elFN=document.getElementById('calcFitNote'),elO=document.getElementById('calcOpts'),
-        outWrap=document.querySelector('.calc-out');
-    function gbp(n){return '£'+Math.round(n).toLocaleString('en-GB')}
-    function pc(r){return r.toFixed(2)+'%'}
-    /* Teya blended rates by monthly turnover (owner chart) */
-    function teyaRate(t){
-      if(t<10000)return 1.25;if(t<11000)return 1.20;if(t<12000)return 1.10;if(t<13000)return 1.04;
-      if(t<14000)return 1.02;if(t<15000)return 1.01;if(t<16000)return 1.00;if(t<17000)return 0.95;
-      if(t<18000)return 0.90;if(t<19000)return 0.88;if(t<20000)return 0.86;if(t<22000)return 0.85;
-      if(t<36000)return 0.80;if(t<43000)return 0.77;if(t<66000)return 0.70;if(t<81000)return 0.67;
-      if(t<100000)return 0.63;if(t<120000)return 0.61;if(t<200000)return 0.60;return 0.55;
-    }
-    /* SumUp [PAYG, 12-month, 24-month] by turnover band */
-    function sumup(t){
-      if(t<7500)return[1.49,1.29,1.19];if(t<10000)return[1.29,1.19,1.19];if(t<15000)return[1.19,0.99,0.89];
-      if(t<20000)return[0.99,0.89,0.79];if(t<30000)return[0.89,0.79,0.75];if(t<50000)return[0.79,0.75,0.69];
-      if(t<100000)return[0.75,0.69,0.59];return[0.69,0.59,0.55];
-    }
-    function opt(cls,badge,prov,sub,val){
-      return '<div class="calc-opt'+(cls?' '+cls:'')+'"><div class="ol"><span class="obadge">'+badge+'</span>'
-        +'<span class="op">'+prov+(sub?'<small>'+sub+'</small>':'')+'</span></div><span class="ov">'+val+'</span></div>';
-    }
-    function upd(){
-      var t=+range.value, p=(t-range.min)/(range.max-range.min)*100;
-      range.style.setProperty('--p',p+'%');
-      elT.innerHTML=gbp(t)+(t>=200000?'<small>+</small>':'')+'<small>/mo</small>';
-      /* reset highlight so only the rate tile is ever highlighted */
-      if(outWrap)outWrap.querySelectorAll('.calc-tile').forEach(function(x){x.classList.remove('hi')});
-      elR.parentElement.classList.add('hi');
-      var opts='';
-      if(t<5000){
-        elR.textContent='1.25% + 25p';elC.textContent=gbp(t*0.0125);
-        elF.textContent='Shift4';elFN.textContent='ideal for lower turnover';
-        opts=opt('rec','Recommended','Shift4','1.25% blended + 25p next-day settlement','1.25%')
-            +opt('','No contract','SumUp Pay As You Go','simple — buy your terminal','PAYG');
-      } else if(t<10000){
-        var s=sumup(t);
-        elR.textContent='1.25% + 25p';elC.textContent=gbp(t*0.0125);
-        elF.textContent='Shift4 / SumUp';elFN.textContent='best fit at this level';
-        opts=opt('rec','Recommended','Shift4','1.25% blended + 25p settlement','1.25%')
-            +opt('','Alternative','SumUp Pay As You Go','no contract',pc(s[0]));
-      } else {
-        var r=teyaRate(t);
-        elR.textContent=pc(r);elC.textContent=gbp(t*r/100);
-        elF.textContent='Teya';elFN.textContent='first choice above £10k';
-        opts=opt('rec','Recommended','Teya','£15 + VAT rental · flexible',pc(r))
-            +opt('','Alternative','Shift4','no monthly rental','0.70%');
-      }
-      elO.innerHTML=opts;
-    }
-    range.addEventListener('input',upd); upd();
-  })();
+  /* The lightweight card machine finder that used to live here has been replaced by the
+     full recommendation engine embedded further down this page, so its
+     script is gone with its markup. */
 
   /* ── Compare drawer ── */
   var CMP={
@@ -1356,9 +1304,13 @@ html{overflow-x:hidden}
   /* ── Sticky mini-summary (experiment) ── */
   var sBar=document.getElementById('summaryBar'),sText=document.getElementById('summaryText'),sCta=document.getElementById('summaryCta'),sX=document.getElementById('summaryX'),sDismiss=false;
   function summaryReady(){
-    var sv=loadAns();
-    if(sv&&sv.type&&sv.turnover&&sv.priority&&sv.current){var r=rec(sv);sText.innerHTML='<b>Your match: '+r.n+'</b>Indicative — get a quote';sBar.dataset.match=r.n;sCta.textContent='Get quote'}
-    else{sText.innerHTML='<b>Find your match</b>Take the 60‑second finder';sBar.removeAttribute('data-match');sCta.textContent='Start'}
+    /* The old finder stored its answers in localStorage; the full
+       recommendation engine on this page owns that journey now, so the bar
+       simply invites the visitor into it rather than replaying a stale
+       answer set. */
+    sText.innerHTML='<b>Find the right provider</b>Answer 5 questions';
+    sBar.removeAttribute('data-match');
+    sCta.textContent='Start';
     sBar.classList.add('ready');
   }
   function nearBottom(){return (innerHeight+scrollY)>(document.body.scrollHeight-720)}
@@ -1368,7 +1320,7 @@ html{overflow-x:hidden}
     sBar.classList.toggle('show',past&&!nearBottom());
   }
   sX.onclick=function(){sDismiss=true;sBar.classList.remove('show')};
-  sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
+  sCta.onclick=function(e){e.preventDefault();var eng=document.getElementById('engine');if(eng)eng.scrollIntoView({behavior:'smooth',block:'start'});};
   summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 
   /* ── UK coverage map: real, zoomable Leaflet map (dark themed) ── */
@@ -1427,5 +1379,9 @@ html{overflow-x:hidden}
 <script src="fluid.js"></script>
 <script src="rate-explorer.js"></script>
 <script src="../cookie-consent.js"></script>
+<script src="card-machine-engine/store.js"></script>
+<script src="card-machine-engine/app.js"></script>
+<script src="quiz-fluid.js"></script>
+<script src="results-polish.js"></script>
 </body>
 </html>

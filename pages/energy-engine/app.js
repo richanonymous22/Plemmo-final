@@ -8,6 +8,40 @@
    ════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
+
+  /* ── embeddable lookups ────────────────────────────────────────────────
+     This module now runs on the service page (the "comparison page" the
+     specification refers to) rather than a page of its own. Some elements it
+     used to own there — hero copy, FAQ list, service-card grids — belong to
+     the host page and may simply not exist.
+
+     Writing to a missing element must not abort the module and take the
+     whole quiz down with it, so member access goes through el(), which
+     returns an inert stub and logs once. Bare getElementById() calls are
+     left alone, because several are used as `if (!x) return` guards that
+     must keep seeing null. */
+  var _elMissing = {};
+  var _elNoop = function () {};
+  var _elStub = {
+    innerHTML: '', textContent: '', value: '', disabled: false, checked: false,
+    style: {}, dataset: {},
+    classList: { add: _elNoop, remove: _elNoop, toggle: _elNoop, contains: function () { return false; } },
+    addEventListener: _elNoop, removeEventListener: _elNoop, dispatchEvent: _elNoop,
+    appendChild: _elNoop, removeChild: _elNoop, insertBefore: _elNoop, remove: _elNoop,
+    setAttribute: _elNoop, removeAttribute: _elNoop, getAttribute: function () { return null; },
+    querySelector: function () { return null; }, querySelectorAll: function () { return []; },
+    closest: function () { return null; }, scrollIntoView: _elNoop,
+    focus: _elNoop, blur: _elNoop, click: _elNoop, reset: _elNoop, submit: _elNoop
+  };
+  function el(id) {
+    var e = document.getElementById(id);
+    if (e) return e;
+    if (!_elMissing[id]) {
+      _elMissing[id] = 1;
+      if (window.console && console.debug) console.debug('[plemmo] optional element #' + id + ' is not on this page');
+    }
+    return _elStub;
+  }
   var STORE = window.PLEMMO_ENERGY_STORE;
   var ENGINE = window.PLEMMO_ENERGY_ENGINE;
   var CONFIG = STORE.getConfig();
@@ -24,24 +58,24 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   /* ── static content from config ── */
-  document.getElementById('heroHeadline').textContent = CONFIG.hero.headline;
-  document.getElementById('heroSub').textContent = CONFIG.hero.subheading;
-  document.getElementById('heroPrimaryBtn').innerHTML = esc(CONFIG.hero.primaryBtn) + ' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon>';
-  document.getElementById('heroSecondaryBtn').textContent = CONFIG.hero.secondaryBtn;
-  document.getElementById('servicesGrid').innerHTML = CONFIG.services.map(function (s) {
+  el('heroHeadline').textContent = CONFIG.hero.headline;
+  el('heroSub').textContent = CONFIG.hero.subheading;
+  el('heroPrimaryBtn').innerHTML = esc(CONFIG.hero.primaryBtn) + ' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon>';
+  el('heroSecondaryBtn').textContent = CONFIG.hero.secondaryBtn;
+  el('servicesGrid').innerHTML = CONFIG.services.map(function (s) {
     return '<div class="svc rv"><div class="si"><iconify-icon icon="' + esc(s.icon) + '"></iconify-icon></div><strong>' + esc(s.name) + '</strong></div>';
   }).join('');
-  document.getElementById('whyChooseGrid').innerHTML = CONFIG.whyChoose.map(function (w) {
+  el('whyChooseGrid').innerHTML = CONFIG.whyChoose.map(function (w) {
     return '<div class="card benchc rv" style="padding:20px"><div class="bi"><iconify-icon icon="' + esc(w.icon) + '"></iconify-icon></div><strong>' + esc(w.title) + '</strong><span>' + esc(w.text) + '</span></div>';
   }).join('');
-  document.getElementById('faqList').innerHTML = CONFIG.faqs.map(function (f) {
+  el('faqList').innerHTML = CONFIG.faqs.map(function (f) {
     return '<div class="faq"><div class="faq-q">' + esc(f.q) + ' <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>' + esc(f.a) + '</p></div></div>';
   }).join('');
-  document.getElementById('docList').innerHTML = CONFIG.requiredDocuments.map(function (d) {
+  el('docList').innerHTML = CONFIG.requiredDocuments.map(function (d) {
     return '<span><iconify-icon icon="ph:check-circle-fill"></iconify-icon>' + esc(d) + '</span>';
   }).join('');
-  document.getElementById('ctaHeadline').textContent = CONFIG.cta.headline;
-  document.getElementById('ctaButtons').innerHTML = CONFIG.cta.buttons.map(function (b, i) {
+  el('ctaHeadline').textContent = CONFIG.cta.headline;
+  el('ctaButtons').innerHTML = CONFIG.cta.buttons.map(function (b, i) {
     return '<button type="button" class="btn ' + (i === 1 ? 'btn-primary' : 'btn-ghost') + ' btn-lg" data-cta="' + esc(b) + '">' + esc(b) + '</button>';
   }).join('');
   document.querySelectorAll('[data-cta]').forEach(function (btn) {
@@ -82,7 +116,7 @@
   function goBack() {
     if (stepIndex === 0) return;
     stepIndex--;
-    document.getElementById('results').style.display = 'none';
+    el('results').style.display = 'none';
     render();
   }
   function advance() { stepIndex++; render(); }
@@ -145,10 +179,10 @@
     restart.onclick = function () {
       answers = { businessTypeId: null, energyRequiredId: null, currentSupplierId: null, contractStatusId: null, annualSpendBandId: null, locationCountBandId: null, meterTypeId: null, tariffTypeId: null };
       stepIndex = 0; lastResult = null;
-      document.getElementById('results').style.display = 'none';
-      document.getElementById('lead-form').style.display = 'none';
+      el('results').style.display = 'none';
+      el('lead-form').style.display = 'none';
       render();
-      document.getElementById('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
     foot.appendChild(back); foot.appendChild(restart); body.appendChild(foot);
   }
@@ -162,26 +196,26 @@
     var contractLabel = labelFor(CONFIG.contractStatusOptions, answers.contractStatusId);
     var spendLabel = labelFor(CONFIG.annualSpendBands, answers.annualSpendBandId, 'label');
     var locLabel = labelFor(CONFIG.locationCountBands, answers.locationCountBandId, 'label');
-    document.getElementById('enRecap').innerHTML = [bizLabel, energyLabel, supplierLabel, contractLabel, spendLabel, locLabel].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
-    document.getElementById('leadBizType').value = bizLabel;
-    document.getElementById('leadEnergyRequired').value = energyLabel;
-    document.getElementById('leadSupplier').value = supplierLabel;
-    document.getElementById('leadContractStatus').value = contractLabel;
-    document.getElementById('leadSpend').value = spendLabel;
-    document.getElementById('leadLocations').value = locLabel;
+    el('enRecap').innerHTML = [bizLabel, energyLabel, supplierLabel, contractLabel, spendLabel, locLabel].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
+    el('leadBizType').value = bizLabel;
+    el('leadEnergyRequired').value = energyLabel;
+    el('leadSupplier').value = supplierLabel;
+    el('leadContractStatus').value = contractLabel;
+    el('leadSpend').value = spendLabel;
+    el('leadLocations').value = locLabel;
   }
 
   function openLeadForm(solutionId) {
     var solution = CONFIG.solutionTypes[solutionId];
     fillRecap();
-    document.getElementById('leadRecommended').value = solution ? solution.name : solutionId;
+    el('leadRecommended').value = solution ? solution.name : solutionId;
     var notesField = document.getElementById('leadNotes');
     if (!notesField.value) notesField.value = "I'd like a quote for a " + (solution ? solution.name : 'suitable contract') + '.';
     revealLeadForm();
   }
   function openLeadFormGeneric(intentLabel) {
     fillRecap();
-    if (!document.getElementById('leadRecommended').value && lastResult) document.getElementById('leadRecommended').value = lastResult.solutions[0].name;
+    if (!el('leadRecommended').value && lastResult) el('leadRecommended').value = lastResult.solutions[0].name;
     var notesField = document.getElementById('leadNotes');
     if (!notesField.value) notesField.value = intentLabel + ' — please get in touch.';
     revealLeadForm();
@@ -204,16 +238,16 @@
       var fileInput = document.getElementById('leadFile');
       var hasAttachment = !!(fileInput && fileInput.files && fileInput.files.length);
       var lead = {
-        businessName: document.getElementById('leadBusinessName').value,
-        contactName: document.getElementById('leadContactName').value,
-        telephone: document.getElementById('leadTelephone').value,
-        email: document.getElementById('leadEmail').value,
+        businessName: el('leadBusinessName').value,
+        contactName: el('leadContactName').value,
+        telephone: el('leadTelephone').value,
+        email: el('leadEmail').value,
         businessTypeId: answers.businessTypeId, energyRequiredId: answers.energyRequiredId,
         currentSupplierId: answers.currentSupplierId, contractStatusId: answers.contractStatusId,
         annualSpendBandId: answers.annualSpendBandId, locationCountBandId: answers.locationCountBandId,
-        recommendedSolution: document.getElementById('leadRecommended').value,
+        recommendedSolution: el('leadRecommended').value,
         hasAttachment: hasAttachment,
-        notes: document.getElementById('leadNotes').value
+        notes: el('leadNotes').value
       };
       STORE.addLead(lead);
 
@@ -221,7 +255,7 @@
       fd.append('_template', 'table'); fd.append('_captcha', 'false');
       if (lead.email) fd.append('_replyto', lead.email);
       fetch(CONFIG.leadSubmitEndpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
-        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; document.getElementById('enLeadOk').style.display = 'block'; document.getElementById('enLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
+        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; el('enLeadOk').style.display = 'block'; el('enLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.innerHTML = label; }
           alert('Your details were saved, but we could not send the confirmation email. Please call us on 0333 041 1161 to make sure we have your enquiry.');
