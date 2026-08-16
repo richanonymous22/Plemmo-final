@@ -1014,7 +1014,7 @@ html{overflow-x:hidden}
   <div class="modal-bd" data-close></div>
   <div class="modal-card">
     <div id="mform-wrap">
-      <div class="modal-head"><div><h3 id="mtitle">Get started with Plemmo</h3><p>Tell us about your business and a specialist will get back to you.</p></div><button class="modal-close" data-close aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
+      <div class="modal-head"><div><h3 id="mtitle">Get started with Plemmo</h3><p id="msub">Tell us about your business and a specialist will get back to you.</p></div><button class="modal-close" data-close aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
       <form id="mform">
         <div class="frow two"><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="full_name" required></div><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" required></div></div>
         <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="phone" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" required></div></div>
@@ -1156,6 +1156,10 @@ html{overflow-x:hidden}
     var svT=o.turnover;if(!svT){try{var sv=JSON.parse(localStorage.getItem('plemmo_cm_finder')||'{}');if(sv.turnover)svT=sv.turnover}catch(e){}}
     if(svT)setSel('mturn',svT);if(o.current)setSel('mcur',o.current);if(o.category)setSel('mcat',o.category);
     var typeEl=document.getElementById('mtype');if(typeEl)typeEl.value=o.type||'';
+    var mt=document.getElementById('mtitle'),ms=document.getElementById('msub');
+    if(o.intent==='callback'){mt.textContent=o.product?'Request a callback about '+o.product:'Request a callback';ms.textContent="Leave your details and we'll call you back — no obligation.";}
+    else if(o.intent==='apply'){mt.textContent=o.product?'Apply for '+o.product:'Apply now';ms.textContent='Tell us about your business and a specialist will confirm your exact pricing.';}
+    else{mt.textContent='Get started with Plemmo';ms.textContent='Tell us about your business and a specialist will get back to you.';}
     modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){var f=modal.querySelector('input,select,button');f&&f.focus()},60)}
   function closeModal(){modal.classList.remove('open');document.body.style.overflow='';lastF&&lastF.focus&&lastF.focus()}
   function setSel(id,val){var s=document.getElementById(id);if(!s)return;for(var i=0;i<s.options.length;i++)if(s.options[i].text===val){s.selectedIndex=i;return}}
@@ -1304,7 +1308,8 @@ html{overflow-x:hidden}
     }
     var cards=r.list.map(function(k,i){return providerResultCard(k,ans,r.atv,i===0)}).join('');
     body.innerHTML='<div class="qres"><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Recommended in priority order for your answers. Your current provider is never recommended.</p><div class="qres-list">'+cards+'</div></div>';
-    body.querySelectorAll('[data-qapply]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qapply;openModal({category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
+    body.querySelectorAll('[data-qapply]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qapply;openModal({intent:'apply',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
+    body.querySelectorAll('[data-qcallback]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qcallback;openModal({intent:'callback',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
     body.querySelectorAll('[data-qdetail]').forEach(function(b){b.onclick=function(e){e.preventDefault();openDetail(b.dataset.qdetail)}});
     body.querySelectorAll('[data-qcmp]').forEach(function(b){b.onclick=function(e){e.preventDefault();var btn=document.querySelector('.pcompare[data-cmp="'+b.dataset.qcmp+'"]');if(btn)btn.click();document.getElementById('cmpOpen').click();}});
   }
@@ -1318,8 +1323,9 @@ html{overflow-x:hidden}
       +'<div class="qres-media"><img loading="lazy" decoding="async" src="'+p.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+p.name+'"></div>'
       +'<div class="qres-body"><div class="rh"><span class="rav">'+p.name.charAt(0)+'</span><div><div class="rl">'+(p.type==='blended'?'Blended Rate':'Split Rate')+'</div><div class="rn">'+p.name+'</div></div></div>'
       +'<div class="qres-chips"><span class="qres-chip"><iconify-icon icon="ph:percent-bold"></iconify-icon>'+rateLine+'</span><span class="qres-chip"><iconify-icon icon="ph:calendar-bold"></iconify-icon>'+p.rental+'</span><span class="qres-chip"><iconify-icon icon="ph:device-mobile-bold"></iconify-icon>'+p.device+'</span><span class="qres-chip"><iconify-icon icon="ph:file-text-bold"></iconify-icon>'+p.contract+'</span></div>'
-      +'<p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">'+p.features.slice(0,3).join(' · ')+'</p>'
-      +'<div class="rb"><button class="btn btn-ghost" data-qcmp="'+k+'">Compare</button><a href="#" class="btn btn-primary" data-qapply="'+k+'">Apply <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><button class="btn btn-ghost" data-qdetail="'+k+'">Details</button></div></div></div>';
+      +'<p style="font-size:12.5px;color:var(--muted);margin-bottom:10px">'+p.features.slice(0,3).join(' · ')+'</p>'
+      +'<div class="rb"><button class="btn btn-ghost" data-qcmp="'+k+'">Compare</button><a href="#" class="btn btn-primary" data-qapply="'+k+'">Apply Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" data-qcallback="'+k+'">Request Callback</a></div>'
+      +'<button class="pview" data-qdetail="'+k+'" style="margin-top:10px">View full pricing <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div></div>';
   }
   back.onclick=function(){if(done){done=false;var steps=buildSteps(ans);cur=steps.length-1;render();return}cur=Math.max(0,cur-1);render()};
   /* resume saved progress */
@@ -1383,16 +1389,17 @@ html{overflow-x:hidden}
     var facts=d.facts?'<div class="dt-facts">'+d.facts.map(function(f){return '<div class="dt-fact"><div class="l">'+f[0]+'</div><div class="v'+(f[2]?' lime':'')+'">'+f[1]+'</div></div>'}).join('')+'</div>':'';
     var table=d.table?'<div class="dt-sub">'+(d.tableTitle||'Indicative rates by turnover')+'</div><table class="dt-table"><thead><tr><th>Monthly turnover</th><th>Rate</th></tr></thead><tbody>'+d.table.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')+'</tbody></table>':'';
     var pros='<div class="dt-sub">Why businesses choose it</div><ul class="dt-pros">'+d.pros.map(function(p){return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>'+p+'</li>'}).join('')+'</ul>';
-    var cta=d.type?'Get a quote':'Get a '+d.name+' quote';
+    var cta=d.type?'Apply Now':'Apply for '+d.name;
     return '<button class="dt-close" data-dclose aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button>'
       +'<div class="dt-media"><span class="dt-badge">'+d.badge+'</span><img loading="lazy" decoding="async" src="'+d.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+d.name+'"></div>'
       +'<div class="dt-body"><div class="dt-name">'+d.name+'</div><p class="dt-intro">'+d.intro+'</p>'+facts+pros+table
-      +'<div class="dt-cta"><a href="#" class="btn btn-primary" data-dquote="'+d.name+'">'+cta+' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" data-dclose>Close</a></div>'
+      +'<div class="dt-cta"><a href="#" class="btn btn-primary" data-dquote="'+d.name+'">'+cta+' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" data-dcallback="'+d.name+'">Request Callback</a></div>'
       +'<p class="dt-note">'+d.note+'</p></div>';
   }
   function openDetail(key){var d=DETAIL[key];if(!d)return;dcard.innerHTML=detailHTML(d);detail.classList.add('open');document.body.style.overflow='hidden';dcard.scrollTop=0;
     dcard.querySelectorAll('[data-dclose]').forEach(function(b){b.onclick=function(e){e.preventDefault();closeDetail()}});
-    var q=dcard.querySelector('[data-dquote]');if(q)q.onclick=function(e){e.preventDefault();closeDetail();openModal({product:q.dataset.dquote})};}
+    var q=dcard.querySelector('[data-dquote]');if(q)q.onclick=function(e){e.preventDefault();closeDetail();openModal({intent:'apply',product:q.dataset.dquote})};
+    var cb=dcard.querySelector('[data-dcallback]');if(cb)cb.onclick=function(e){e.preventDefault();closeDetail();openModal({intent:'callback',product:cb.dataset.dcallback})};}
   function closeDetail(){detail.classList.remove('open');document.body.style.overflow=''}
   document.querySelectorAll('[data-detail]').forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();openDetail(t.dataset.detail)})});
   detail.querySelector('.modal-bd').onclick=closeDetail;
