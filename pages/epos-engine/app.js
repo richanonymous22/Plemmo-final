@@ -101,10 +101,12 @@
   }
 
   function renderCard(pkg, rank) {
-    var hardwareList = pkg.hardwareIncluded.slice(0, 5).map(function (h) { return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>' + esc(h) + '</li>'; }).join('');
+    /* Full list — results-polish.js folds anything past the first few
+       behind a disclosure, so nothing is lost and nothing is dumped. */
+    var hardwareList = pkg.hardwareIncluded.map(function (h) { return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>' + esc(h) + '</li>'; }).join('');
     var flatFeatures = [];
     pkg.featureGroups.forEach(function (g) { flatFeatures = flatFeatures.concat(g.items); });
-    var featureList = flatFeatures.slice(0, 5).map(function (f) { return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>' + esc(f) + '</li>'; }).join('');
+    var featureList = flatFeatures.map(function (f) { return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>' + esc(f) + '</li>'; }).join('');
     var cm = pkg.cardMachine;
     return '<div class="ep-card' + (rank === 1 ? ' top' : '') + '">'
       + (rank === 1 ? '<span class="ep-rank">Top suggestion</span>' : '')

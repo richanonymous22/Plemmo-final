@@ -780,7 +780,7 @@ html{overflow-x:hidden}
   <div class="container">
     <div class="types">
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-countertop.webp" alt="Countertop terminal"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-portable.webp" alt="Countertop terminal"></div>
         <div class="type-body"><h3>Countertop</h3><p>Perfect for fixed locations and high transaction volumes.</p><button class="ln" data-detail="countertop">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
@@ -866,7 +866,7 @@ html{overflow-x:hidden}
           <a href="#" class="btn btn-primary" data-quote data-product="Card machine rate quote">Get my exact quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
           <span class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply</span>
         </div>
-        <p class="calc-note">The curve plots Teya's blended rate across every turnover band; the dashed line is SumUp on the contract term you've selected. Providers re-rank underneath as you drag. Teya is the recommended option above £10k (£15 + VAT rental, flexible terms). Shift4 charges no monthly rental. SumUp's lower rates require a 12 or 24-month term. Worldpay's split debit/credit pricing applies from around £25k and is listed separately because it has no single blended figure. All rates are indicative only and may vary with business type, card mix, transaction profile, settlement option, provider approval, and contract or buy-out option. Final pricing is confirmed after review.</p>
+        <p class="calc-note">The curve plots Teya’s published blended rate across every turnover band; the dashed line is Shift4’s blended rate. These are published rates shown for illustration — they are not a recommendation. Use the recommendation engine for suitable providers based on your business type, turnover, how you take payments and your current provider.</p>
       </div>
     </div>
   </div>
@@ -1223,7 +1223,7 @@ html{overflow-x:hidden}
       facts:[['Rate','1.25% + 25p settlement fee',1],['Monthly rental','None'],['Settlement','Next-day'],['Setup','Quick & simple']],
       pros:['No monthly rental — low commitment','Flat rate 1.25% + 25p next-day settlement fee','Ideal for lower turnover businesses','Simple setup — get started quickly','Pay by link available'],
       note:'Rate is 1.25% plus a 25p next-day settlement fee. Subject to approval and provider terms. Rates are indicative and may vary.'},
-    countertop:{type:1,badge:'Machine type',name:'Countertop',img:'../images/card-type-countertop.webp',intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
+    countertop:{type:1,badge:'Machine type',name:'Countertop',img:'../images/card-type-portable.webp',intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
       facts:[['Best for','Shops & counters'],['Connection','Broadband / phone'],['Printer','Built-in receipts'],['Volume','High throughput']],
       pros:['Fast chip, PIN & contactless','Built-in receipt printer','Reliable for high transaction volumes','Always powered at the till'],
       note:'Specific models and features vary by provider.'},
@@ -1422,6 +1422,8 @@ html{overflow-x:hidden}
   })();
 })();
 </script>
+<script src="card-machine-engine/config.js"></script>
+<script src="card-machine-engine/engine.js"></script>
 <script src="fluid.js"></script>
 <script src="rate-explorer.js"></script>
 <script src="../cookie-consent.js"></script>

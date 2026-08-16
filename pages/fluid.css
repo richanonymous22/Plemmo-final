@@ -137,15 +137,25 @@ section[id],header[id],div[id][class*="section"]{scroll-margin-top:96px}
 .fl-rx-legend-hint{margin-left:auto;color:#6b7560}
 .fl-rx-legend-hint iconify-icon{font-size:15px;color:var(--lime,#c6ff00)}
 
-/* Badges: the lowest number and the recommended option are different claims
-   and must never be collapsed into one. */
-.fl-rx-pick,.fl-rx-low{
-  display:inline-block;margin-left:9px;padding:2px 8px;border-radius:100px;
-  font-family:'Inter',sans-serif;font-size:9.5px;font-weight:800;
-  text-transform:uppercase;letter-spacing:.07em;vertical-align:2px;
+/* Rate rows are a factual price list in fixed provider order — deliberately
+   not ranked, badged or highlighted, so nothing here reads as a
+   recommendation. The recommendation engine makes those, using the owner's
+   rules. */
+.fl-rx-rates{position:relative;z-index:2;margin-top:22px;display:grid;gap:9px}
+.fl-rx-rates .fl-rx-row{grid-template-columns:1fr auto}
+.fl-rx-quote{font-size:15px;font-weight:700;color:#c3ccb6;letter-spacing:-.01em}
+
+/* Hand-off to the engine. Visually distinct from the rate rows so it reads
+   as "next step", not as another provider. */
+.fl-rx-next{
+  position:relative;z-index:2;margin-top:22px;padding:20px 22px;border-radius:18px;
+  display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:rgba(198,255,0,.07);border:1px solid rgba(198,255,0,.26);
 }
-.fl-rx-pick{background:var(--lime,#c6ff00);color:#0a0c08}
-.fl-rx-low{background:rgba(255,255,255,.12);color:#c3ccb6;border:1px solid rgba(255,255,255,.18)}
+.fl-rx-next strong{display:block;font-family:'Space Grotesk','Inter',sans-serif;font-size:15.5px;color:#fff;letter-spacing:-.015em;margin-bottom:6px}
+.fl-rx-next p{margin:0;font-size:13px;line-height:1.6;color:#a8b39a;max-width:52ch}
+.fl-rx-next .btn{flex-shrink:0}
+@media(max-width:620px){.fl-rx-next{flex-direction:column;align-items:stretch}.fl-rx-next .btn{justify-content:center}}
 
 /* the scrubber track */
 .fl-rx-track{
@@ -317,4 +327,65 @@ section[id],header[id],div[id][class*="section"]{scroll-margin-top:96px}
   .fl-rx-row.best{border-color:var(--lime,#c6ff00);border-width:2px}
   .fl-sp-chip{border-color:rgba(255,255,255,.45);color:#eef2e8}
   .fl-rx-axis,.fl-sp-axis,.fl-rx-scale{fill:#b9c2ac;color:#b9c2ac}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RECOMMENDATION RESULTS — hierarchy & progressive disclosure (§79/§80/§84)
+   Presentation only: nothing is reordered or hidden from the page, and every
+   required field stays reachable.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* §80 — the answer, then the alternatives. */
+.fl-res-matchlabel,.fl-res-divider{
+  grid-column:1/-1;display:flex;align-items:center;gap:14px;margin:4px 0 2px;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;
+}
+.fl-res-matchlabel span{color:var(--lime,#c6ff00)}
+.fl-res-divider span{color:#7f8a72}
+.fl-res-matchlabel::after,.fl-res-divider::after{
+  content:'';flex:1;height:1px;background:currentColor;opacity:.22;
+}
+.s-light .fl-res-matchlabel span,.s-cream .fl-res-matchlabel span{color:#5f9000}
+.s-light .fl-res-divider span,.s-cream .fl-res-divider span{color:#8a9279}
+
+/* The leading recommendation carries more weight — not more information. */
+.fl-res-match{position:relative}
+.fl-res-match::after{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  box-shadow:0 0 0 2px rgba(198,255,0,.55),0 26px 60px rgba(0,0,0,.34);
+}
+.fl-res-alt{opacity:.985}
+
+/* §79 — disclosure. Height is animated by a spring in JS. */
+.fl-res-more{height:0;overflow:hidden;opacity:0;will-change:height}
+.fl-res-more ul{margin-top:8px}
+.fl-res-toggle{
+  display:inline-flex;align-items:center;gap:7px;margin-top:12px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#e7ebe0;
+  font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  padding:9px 14px;border-radius:100px;cursor:pointer;will-change:transform;
+  -webkit-tap-highlight-color:transparent;
+}
+.fl-res-toggle:hover{border-color:rgba(198,255,0,.45);color:#fff}
+.fl-res-toggle span{
+  font-size:10.5px;font-weight:800;color:var(--lime,#c6ff00);
+  background:rgba(198,255,0,.14);border-radius:100px;padding:2px 7px;
+}
+.s-light .fl-res-toggle,.s-cream .fl-res-toggle{
+  background:#fff;border-color:var(--line-l,#e7ebdd);color:var(--ink,#0b0e08);
+}
+.s-light .fl-res-toggle span,.s-cream .fl-res-toggle span{color:#5f9000;background:rgba(198,255,0,.2)}
+
+/* §84 — phone layout. Comparison content must stack and stay tappable
+   rather than scrolling sideways. */
+@media(max-width:640px){
+  .cme-grid,.ep-grid,.fn-grid,.en-grid{grid-template-columns:1fr !important}
+  .cme-card-btns,.ep-card-btns,.fn-card-btns,.en-card-btns{flex-direction:column;gap:9px}
+  .cme-card-btns .btn,.ep-card-btns .btn,.fn-card-btns .btn,.en-card-btns .btn{
+    width:100%;justify-content:center;min-height:48px;   /* comfortable touch target */
+  }
+  .fl-res-toggle{width:100%;justify-content:center;min-height:46px}
+  .fl-rx-track{height:60px}                               /* easier to grab */
+  .fl-rx-handle{width:44px;height:44px;margin:-22px 0 0 -22px}
+  .fl-sp-chip{min-height:42px;display:inline-flex;align-items:center}
 }
