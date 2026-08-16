@@ -764,6 +764,64 @@ html{overflow-x:hidden}
   </div>
 </header>
 
+<!-- ════ FIND YOUR MATCH — the primary path, directly under the hero ════ -->
+<section class="section" id="engine" style="padding-top:20px">
+  <div class="container" style="max-width:900px">
+    <div class="appwin rv">
+      <div class="appwin-bar">
+        <div class="appwin-dots"><i></i><i></i><i></i></div>
+        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/card-machine-recommendation</span>
+        <span class="appwin-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="appwin-body">
+        <div id="cmeBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section s-light" id="results" style="display:none">
+  <div class="container">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Suggested for you</span>
+      <h2 class="h2" id="resultsHeading">Suggested Providers</h2>
+      <p class="lead" id="resultsSub">Based on what you told us — ranked by suitability, not just price.</p>
+    </div>
+    <div id="resultsBody"></div>
+    <p class="disc center" style="margin:22px auto 0" id="recommendationDisclaimer"></p>
+  </div>
+</section>
+<section class="section" id="lead-form" style="display:none">
+  <div class="container cme-lead">
+    <div class="head center">
+      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
+      <h2 class="h2">Get your exact quote</h2>
+      <p class="lead" style="margin-top:10px">Leave your details and a Plemmo specialist will confirm your exact rate and next steps.</p>
+    </div>
+    <div class="cme-recap" id="cmeRecap"></div>
+    <form class="appwin" id="cmeLeadForm" style="padding:0" novalidate>
+      <input type="hidden" name="_subject" value="Card Machine Recommendation — New Lead">
+      <input type="hidden" name="recommended_provider" id="leadRecommended">
+      <input type="hidden" name="business_category" id="leadCategory">
+      <input type="hidden" name="business_type" id="leadType">
+      <input type="hidden" name="monthly_turnover" id="leadTurnover">
+      <input type="hidden" name="current_provider" id="leadCurrent">
+      <div class="appwin-body" style="padding:30px">
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
+        <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="mobile" id="leadMobile" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
+        <div class="frow"><label>Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send my details <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · We'll only use this to contact you about your enquiry</p>
+      </div>
+    </form>
+    <div class="msuccess" id="cmeLeadOk" style="display:none">
+      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
+      <h3>Thanks — we've got your details</h3>
+      <p>A Plemmo specialist will be in touch shortly to confirm your exact quote.</p>
+    </div>
+  </div>
+</section>
+
+
 <!-- ════ PARTNERS ════ -->
 <section class="section tight" style="padding-top:6px">
   <div class="container"><div class="pl rv">Compare leading UK card machine providers</div></div>
@@ -1016,64 +1074,7 @@ html{overflow-x:hidden}
 
 <!-- ════ FOOTER ════ -->
 
-<!-- ════ RECOMMENDATION ENGINE (embedded — see spec "comparison page") ════ -->
-<section class="section" id="engine" style="padding-top:20px">
-  <div class="container" style="max-width:900px">
-    <div class="appwin rv">
-      <div class="appwin-bar">
-        <div class="appwin-dots"><i></i><i></i><i></i></div>
-        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/card-machine-recommendation</span>
-        <span class="appwin-live"><span class="dl"></span> Live</span>
-      </div>
-      <div class="appwin-body">
-        <div id="cmeBody"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section s-light" id="results" style="display:none">
-  <div class="container">
-    <div class="head center">
-      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Suggested for you</span>
-      <h2 class="h2" id="resultsHeading">Suggested Providers</h2>
-      <p class="lead" id="resultsSub">Based on what you told us — ranked by suitability, not just price.</p>
-    </div>
-    <div id="resultsBody"></div>
-    <p class="disc center" style="margin:22px auto 0" id="recommendationDisclaimer"></p>
-  </div>
-</section>
-
-<section class="section" id="lead-form" style="display:none">
-  <div class="container cme-lead">
-    <div class="head center">
-      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
-      <h2 class="h2">Get your exact quote</h2>
-      <p class="lead" style="margin-top:10px">Leave your details and a Plemmo specialist will confirm your exact rate and next steps.</p>
-    </div>
-    <div class="cme-recap" id="cmeRecap"></div>
-    <form class="appwin" id="cmeLeadForm" style="padding:0" novalidate>
-      <input type="hidden" name="_subject" value="Card Machine Recommendation — New Lead">
-      <input type="hidden" name="recommended_provider" id="leadRecommended">
-      <input type="hidden" name="business_category" id="leadCategory">
-      <input type="hidden" name="business_type" id="leadType">
-      <input type="hidden" name="monthly_turnover" id="leadTurnover">
-      <input type="hidden" name="current_provider" id="leadCurrent">
-      <div class="appwin-body" style="padding:30px">
-        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
-        <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="mobile" id="leadMobile" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
-        <div class="frow"><label>Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send my details <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
-        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · We'll only use this to contact you about your enquiry</p>
-      </div>
-    </form>
-    <div class="msuccess" id="cmeLeadOk" style="display:none">
-      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
-      <h3>Thanks — we've got your details</h3>
-      <p>A Plemmo specialist will be in touch shortly to confirm your exact quote.</p>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="container">

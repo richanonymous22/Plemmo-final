@@ -253,6 +253,62 @@
   </div>
 </header>
 
+<!-- ════ FIND YOUR MATCH — the primary path, directly under the hero ════ -->
+<section class="section" id="engine" style="padding-top:20px">
+  <div class="container" style="max-width:900px">
+    <div class="appwin rv">
+      <div class="appwin-bar">
+        <div class="appwin-dots"><i></i><i></i><i></i></div>
+        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/digital-signage</span>
+        <span class="appwin-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="appwin-body">
+        <div id="sgBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section s-light" id="results" style="display:none">
+  <div class="container">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Your selection</span>
+      <h2 class="h2">Your Signage &amp; Design Options</h2>
+      <p class="lead">Based on what you told us.</p>
+    </div>
+    <div id="resultsBody"></div>
+  </div>
+</section>
+<section class="section s-light" id="lead-form" style="display:none">
+  <div class="container sg-lead">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
+      <h2 class="h2">Tell us what you need</h2>
+      <p class="lead" style="margin-top:10px">Hardware only, design only, or both — let us know and we'll follow up with your quote.</p>
+    </div>
+    <div class="sg-recap" id="sgRecap"></div>
+    <form class="appwin" id="sgLeadForm" style="padding:0" novalidate>
+      <input type="hidden" name="_subject" value="Digital Signage Enquiry — New Lead">
+      <input type="hidden" name="business_type" id="leadBizType">
+      <input type="hidden" name="services_required" id="leadServices">
+      <input type="hidden" name="screen_size" id="leadScreenSize">
+      <div class="appwin-body" style="padding:30px">
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
+        <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="mobile" id="leadMobile" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
+        <div class="frow"><label>Number of Screens Required</label><input class="input" type="number" min="0" name="number_of_screens" id="leadScreens" placeholder="e.g. 1"></div>
+        <div class="frow"><label>Additional Requirements</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send my enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Not an online checkout — a specialist will follow up</p>
+      </div>
+    </form>
+    <div class="msuccess" id="sgLeadOk" style="display:none">
+      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
+      <h3>Thanks — we've got your details</h3>
+      <p>A Plemmo specialist will be in touch shortly with your quote.</p>
+    </div>
+  </div>
+</section>
+
+
 
 
 <!-- BEFORE / AFTER -->
@@ -362,62 +418,7 @@
 </section>
 
 
-<!-- ════ RECOMMENDATION ENGINE (embedded — see spec "comparison page") ════ -->
-<section class="section" id="engine" style="padding-top:20px">
-  <div class="container" style="max-width:900px">
-    <div class="appwin rv">
-      <div class="appwin-bar">
-        <div class="appwin-dots"><i></i><i></i><i></i></div>
-        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/digital-signage</span>
-        <span class="appwin-live"><span class="dl"></span> Live</span>
-      </div>
-      <div class="appwin-body">
-        <div id="sgBody"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section s-light" id="results" style="display:none">
-  <div class="container">
-    <div class="head center">
-      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Your selection</span>
-      <h2 class="h2">Your Signage &amp; Design Options</h2>
-      <p class="lead">Based on what you told us.</p>
-    </div>
-    <div id="resultsBody"></div>
-  </div>
-</section>
-
-<section class="section s-light" id="lead-form" style="display:none">
-  <div class="container sg-lead">
-    <div class="head center">
-      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
-      <h2 class="h2">Tell us what you need</h2>
-      <p class="lead" style="margin-top:10px">Hardware only, design only, or both — let us know and we'll follow up with your quote.</p>
-    </div>
-    <div class="sg-recap" id="sgRecap"></div>
-    <form class="appwin" id="sgLeadForm" style="padding:0" novalidate>
-      <input type="hidden" name="_subject" value="Digital Signage Enquiry — New Lead">
-      <input type="hidden" name="business_type" id="leadBizType">
-      <input type="hidden" name="services_required" id="leadServices">
-      <input type="hidden" name="screen_size" id="leadScreenSize">
-      <div class="appwin-body" style="padding:30px">
-        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
-        <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="mobile" id="leadMobile" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
-        <div class="frow"><label>Number of Screens Required</label><input class="input" type="number" min="0" name="number_of_screens" id="leadScreens" placeholder="e.g. 1"></div>
-        <div class="frow"><label>Additional Requirements</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send my enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
-        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Not an online checkout — a specialist will follow up</p>
-      </div>
-    </form>
-    <div class="msuccess" id="sgLeadOk" style="display:none">
-      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
-      <h3>Thanks — we've got your details</h3>
-      <p>A Plemmo specialist will be in touch shortly with your quote.</p>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="container">

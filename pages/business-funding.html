@@ -261,6 +261,66 @@
   </div>
 </header>
 
+<!-- ════ FIND YOUR MATCH — the primary path, directly under the hero ════ -->
+<section class="section" id="engine" style="padding-top:10px">
+  <div class="container" style="max-width:900px">
+    <div class="appwin rv">
+      <div class="appwin-bar">
+        <div class="appwin-dots"><i></i><i></i><i></i></div>
+        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/business-finance</span>
+        <span class="appwin-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="appwin-body">
+        <div id="fnBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section s-light" id="results" style="display:none">
+  <div class="container">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Suggested for you</span>
+      <h2 class="h2" id="resultsHeading">Suggested Finance Products</h2>
+      <p class="lead" id="resultsSub">Based on what you told us — a finance product type, not a specific lender.</p>
+    </div>
+    <div id="resultsBody"></div>
+    <div class="notice-box" style="margin-top:26px"><iconify-icon icon="ph:info-fill"></iconify-icon><p id="noticeText2"></p></div>
+  </div>
+</section>
+<section class="section" id="lead-form" style="display:none">
+  <div class="container fn-lead">
+    <div class="head center">
+      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
+      <h2 class="h2">Tell us about your business</h2>
+      <p class="lead" style="margin-top:10px">We'll review your enquiry and introduce you to a suitable finance partner.</p>
+    </div>
+    <div class="fn-recap" id="fnRecap"></div>
+    <form class="appwin" id="fnLeadForm" style="padding:0" novalidate>
+      <input type="hidden" name="_subject" value="Business Finance Enquiry — New Lead">
+      <input type="hidden" name="suggested_product" id="leadRecommended">
+      <input type="hidden" name="funding_amount" id="leadAmount">
+      <input type="hidden" name="funding_purpose" id="leadPurpose">
+      <input type="hidden" name="business_type" id="leadBizType">
+      <input type="hidden" name="business_sector" id="leadSector">
+      <input type="hidden" name="annual_turnover" id="leadTurnover">
+      <input type="hidden" name="time_trading" id="leadTimeTrading">
+      <div class="appwin-body" style="padding:30px">
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
+        <div class="frow two"><div><label>Telephone <span class="req-star">*</span></label><input class="input" type="tel" name="telephone" id="leadTelephone" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
+        <div class="frow"><label>Additional Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enquire Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Plemmo is an introducer, not a lender</p>
+      </div>
+    </form>
+    <div class="msuccess" id="fnLeadOk" style="display:none">
+      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
+      <h3>Thanks — we've got your details</h3>
+      <p>A Plemmo specialist will review your enquiry and introduce you to a suitable finance partner.</p>
+    </div>
+  </div>
+</section>
+
+
 
 
 <!-- LENDER STRIP -->
@@ -374,66 +434,7 @@
 
 <!-- FOOTER -->
 
-<!-- ════ RECOMMENDATION ENGINE (embedded — see spec "comparison page") ════ -->
-<section class="section" id="engine" style="padding-top:10px">
-  <div class="container" style="max-width:900px">
-    <div class="appwin rv">
-      <div class="appwin-bar">
-        <div class="appwin-dots"><i></i><i></i><i></i></div>
-        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/business-finance</span>
-        <span class="appwin-live"><span class="dl"></span> Live</span>
-      </div>
-      <div class="appwin-body">
-        <div id="fnBody"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section s-light" id="results" style="display:none">
-  <div class="container">
-    <div class="head center">
-      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Suggested for you</span>
-      <h2 class="h2" id="resultsHeading">Suggested Finance Products</h2>
-      <p class="lead" id="resultsSub">Based on what you told us — a finance product type, not a specific lender.</p>
-    </div>
-    <div id="resultsBody"></div>
-    <div class="notice-box" style="margin-top:26px"><iconify-icon icon="ph:info-fill"></iconify-icon><p id="noticeText2"></p></div>
-  </div>
-</section>
-
-<section class="section" id="lead-form" style="display:none">
-  <div class="container fn-lead">
-    <div class="head center">
-      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
-      <h2 class="h2">Tell us about your business</h2>
-      <p class="lead" style="margin-top:10px">We'll review your enquiry and introduce you to a suitable finance partner.</p>
-    </div>
-    <div class="fn-recap" id="fnRecap"></div>
-    <form class="appwin" id="fnLeadForm" style="padding:0" novalidate>
-      <input type="hidden" name="_subject" value="Business Finance Enquiry — New Lead">
-      <input type="hidden" name="suggested_product" id="leadRecommended">
-      <input type="hidden" name="funding_amount" id="leadAmount">
-      <input type="hidden" name="funding_purpose" id="leadPurpose">
-      <input type="hidden" name="business_type" id="leadBizType">
-      <input type="hidden" name="business_sector" id="leadSector">
-      <input type="hidden" name="annual_turnover" id="leadTurnover">
-      <input type="hidden" name="time_trading" id="leadTimeTrading">
-      <div class="appwin-body" style="padding:30px">
-        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
-        <div class="frow two"><div><label>Telephone <span class="req-star">*</span></label><input class="input" type="tel" name="telephone" id="leadTelephone" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
-        <div class="frow"><label>Additional Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enquire Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
-        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Plemmo is an introducer, not a lender</p>
-      </div>
-    </form>
-    <div class="msuccess" id="fnLeadOk" style="display:none">
-      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
-      <h3>Thanks — we've got your details</h3>
-      <p>A Plemmo specialist will review your enquiry and introduce you to a suitable finance partner.</p>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="container">

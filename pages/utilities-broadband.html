@@ -577,6 +577,67 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
   </div>
 </header>
 
+<!-- ════ FIND YOUR MATCH — the primary path, directly under the hero ════ -->
+<section class="section" id="engine" style="padding-top:20px">
+  <div class="container" style="max-width:900px">
+    <div class="appwin rv">
+      <div class="appwin-bar">
+        <div class="appwin-dots"><i></i><i></i><i></i></div>
+        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/business-energy</span>
+        <span class="appwin-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="appwin-body">
+        <div id="enBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section s-light" id="results" style="display:none">
+  <div class="container">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Recommended for you</span>
+      <h2 class="h2" id="resultsHeading">Your Recommended Contract Type</h2>
+      <p class="lead">Based on your answers. Your Plemmo account manager will confirm real supplier pricing once we compare the market for you.</p>
+    </div>
+    <div id="resultsBody"></div>
+    <p class="en-note">Prices shown are not live market rates — we compare suppliers on your behalf once you enquire.</p>
+  </div>
+</section>
+<section class="section" id="lead-form" style="display:none">
+  <div class="container en-lead">
+    <div class="head center">
+      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Get your quote</span>
+      <h2 class="h2">Tell us about your business</h2>
+      <p class="lead" style="margin-top:10px">We'll compare suppliers and come back with your options.</p>
+    </div>
+    <div class="en-recap" id="enRecap"></div>
+    <form class="appwin" id="enLeadForm" style="padding:0" novalidate>
+      <input type="hidden" name="_subject" value="Business Energy Enquiry — New Lead">
+      <input type="hidden" name="recommended_solution" id="leadRecommended">
+      <input type="hidden" name="business_type" id="leadBizType">
+      <input type="hidden" name="energy_required" id="leadEnergyRequired">
+      <input type="hidden" name="current_supplier" id="leadSupplier">
+      <input type="hidden" name="contract_status" id="leadContractStatus">
+      <input type="hidden" name="annual_spend" id="leadSpend">
+      <input type="hidden" name="locations" id="leadLocations">
+      <div class="appwin-body" style="padding:30px">
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
+        <div class="frow two"><div><label>Telephone <span class="req-star">*</span></label><input class="input" type="tel" name="telephone" id="leadTelephone" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
+        <div class="frow"><label>Additional Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
+        <div class="frow file-field"><label>Upload your latest energy bill (optional, max 10MB)</label><input type="file" name="attachment" id="leadFile" accept=".pdf,.jpg,.jpeg,.png"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px">Send my details <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Free quotation</p>
+      </div>
+    </form>
+    <div class="msuccess" id="enLeadOk" style="display:none">
+      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
+      <h3>Thanks — we've got your details</h3>
+      <p>A Plemmo energy specialist will be in touch shortly with your options.</p>
+    </div>
+  </div>
+</section>
+
+
 <!-- WHY SWITCH -->
 <section class="section s-light" id="why">
   <div class="container rv">
@@ -942,67 +1003,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 
 <!-- FOOTER -->
 
-<!-- ════ RECOMMENDATION ENGINE (embedded — see spec "comparison page") ════ -->
-<section class="section" id="engine" style="padding-top:20px">
-  <div class="container" style="max-width:900px">
-    <div class="appwin rv">
-      <div class="appwin-bar">
-        <div class="appwin-dots"><i></i><i></i><i></i></div>
-        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/business-energy</span>
-        <span class="appwin-live"><span class="dl"></span> Live</span>
-      </div>
-      <div class="appwin-body">
-        <div id="enBody"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section s-light" id="results" style="display:none">
-  <div class="container">
-    <div class="head center">
-      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Recommended for you</span>
-      <h2 class="h2" id="resultsHeading">Your Recommended Contract Type</h2>
-      <p class="lead">Based on your answers. Your Plemmo account manager will confirm real supplier pricing once we compare the market for you.</p>
-    </div>
-    <div id="resultsBody"></div>
-    <p class="en-note">Prices shown are not live market rates — we compare suppliers on your behalf once you enquire.</p>
-  </div>
-</section>
-
-<section class="section" id="lead-form" style="display:none">
-  <div class="container en-lead">
-    <div class="head center">
-      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Get your quote</span>
-      <h2 class="h2">Tell us about your business</h2>
-      <p class="lead" style="margin-top:10px">We'll compare suppliers and come back with your options.</p>
-    </div>
-    <div class="en-recap" id="enRecap"></div>
-    <form class="appwin" id="enLeadForm" style="padding:0" novalidate>
-      <input type="hidden" name="_subject" value="Business Energy Enquiry — New Lead">
-      <input type="hidden" name="recommended_solution" id="leadRecommended">
-      <input type="hidden" name="business_type" id="leadBizType">
-      <input type="hidden" name="energy_required" id="leadEnergyRequired">
-      <input type="hidden" name="current_supplier" id="leadSupplier">
-      <input type="hidden" name="contract_status" id="leadContractStatus">
-      <input type="hidden" name="annual_spend" id="leadSpend">
-      <input type="hidden" name="locations" id="leadLocations">
-      <div class="appwin-body" style="padding:30px">
-        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
-        <div class="frow two"><div><label>Telephone <span class="req-star">*</span></label><input class="input" type="tel" name="telephone" id="leadTelephone" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
-        <div class="frow"><label>Additional Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
-        <div class="frow file-field"><label>Upload your latest energy bill (optional, max 10MB)</label><input type="file" name="attachment" id="leadFile" accept=".pdf,.jpg,.jpeg,.png"></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px">Send my details <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
-        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Free quotation</p>
-      </div>
-    </form>
-    <div class="msuccess" id="enLeadOk" style="display:none">
-      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
-      <h3>Thanks — we've got your details</h3>
-      <p>A Plemmo energy specialist will be in touch shortly with your options.</p>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="container">
