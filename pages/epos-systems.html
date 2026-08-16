@@ -76,35 +76,62 @@
 .hw-more ul{list-style:none;display:grid;gap:8px;padding:6px 0 10px}
 .hw-more li{display:flex;gap:8px;font-size:13px;color:#cfd6c5}.hw-more li iconify-icon{color:var(--lime);font-size:15px;flex-shrink:0}
 .hw-btns{display:flex;gap:10px;margin-top:auto}.hw-btns .btn{flex:1;justify-content:center;font-size:13px;padding:11px 14px}
-/* configurator */
-.cfg{display:grid;grid-template-columns:1.4fr .85fr;gap:24px;align-items:start}
-.cfg-h{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 12px}
-.cfg-bases{display:grid;gap:10px;margin-bottom:24px}
-.cfg-base{display:flex;align-items:center;gap:14px;padding:16px;border-radius:14px;background:var(--cream);border:1.5px solid var(--line-l);cursor:pointer;transition:.2s}
-.cfg-base:hover{border-color:var(--ink)}
-.cfg-base.on{border-color:#9bcc00;background:rgba(198,255,0,.14)}
-.cfg-base .rd{width:22px;height:22px;border-radius:50%;border:2px solid var(--line-l);flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--white)}
-.cfg-base.on .rd{border-color:#9bcc00}.cfg-base.on .rd::after{content:'';width:11px;height:11px;border-radius:50%;background:#9bcc00}
-.cfg-base .bt{flex:1}.cfg-base .bt b{display:block;color:var(--ink);font-size:15px}.cfg-base .bt span{font-size:12.5px;color:var(--ink-soft)}
-.cfg-base .bp{font-family:'Space Grotesk';font-weight:700;color:#5f9000}
-.cfg-add{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:var(--white);border:1px solid var(--line-l);cursor:pointer;margin-bottom:9px;transition:.2s}
-.cfg-add:hover{border-color:var(--ink)}
-.cfg-add.on{border-color:#9bcc00;background:rgba(198,255,0,.14)}
-.cfg-add .ck{width:22px;height:22px;border-radius:7px;border:2px solid var(--line-l);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#0a0c08;background:var(--white)}
-.cfg-add.on .ck{background:var(--lime);border-color:var(--lime)}
-.cfg-add .ck iconify-icon{font-size:14px;opacity:0}.cfg-add.on .ck iconify-icon{opacity:1}
-.cfg-add .at{flex:1;font-size:14px;font-weight:600;color:var(--ink)}
-.cfg-add .ap{font-family:'Space Grotesk';font-weight:700;color:#5f9000;font-size:14px}
-.cfg-sum{position:sticky;top:90px;background:linear-gradient(160deg,#15190f,#0c0f08);border:1px solid var(--line2);border-radius:var(--r-lg);padding:24px}
-.cfg-sum h3{font-size:18px;color:#fff;margin-bottom:14px}
-.cfg-list{list-style:none;display:grid;gap:9px;margin-bottom:16px;min-height:30px}
-.cfg-list li{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;color:#cfd6c5}
-.cfg-list li span:last-child{color:#fff;font-weight:600}
-.cfg-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:16px;border-top:1px solid var(--line);margin-bottom:16px}
-.cfg-total .tl{font-size:13px;color:var(--muted)}
-.cfg-total .tv{font-family:'Space Grotesk';font-weight:700;font-size:34px;color:var(--lime)}
-.cfg-sum .btn{width:100%;justify-content:center}
-.cfg-note{font-size:11px;color:#6b7560;margin-top:14px;line-height:1.5}
+/* EPOS recommendation engine */
+.epc-step{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);text-align:center;margin:0 0 16px}
+.epc-catgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:640px;margin:0 auto 40px}
+.epc-cat{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:26px 18px;border-radius:16px;background:var(--white);border:1.5px solid var(--line-l);cursor:pointer;transition:.2s}
+.epc-cat:hover{border-color:var(--ink);transform:translateY(-3px)}
+.epc-cat.active{border-color:#9bcc00;background:rgba(198,255,0,.14)}
+.epc-cat iconify-icon{font-size:30px;color:#5f9000}
+.epc-cat b{font-size:16px;color:var(--ink)}
+.epc-cat span{font-size:12px;color:var(--ink-soft)}
+#epTypeWrap{margin-bottom:40px}
+.epc-resnote{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.epc-resnote p{font-size:13.5px;color:var(--ink-soft)}
+.epc-resnote p b{color:var(--ink)}
+.epc-reset{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#5f9000;background:none;border:none;cursor:pointer;padding:6px 4px}
+.epc-reset:hover{text-decoration:underline}
+.epc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start}
+.epc-card{position:relative;padding:26px;display:flex;flex-direction:column}
+.epc-rank{position:absolute;top:-12px;left:24px;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:5px 14px;border-radius:var(--pill);white-space:nowrap;box-shadow:0 6px 18px rgba(198,255,0,.3)}
+.epc-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.epc-logo{width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,var(--lime),#9bcc00);color:#0a0c08;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:800;font-size:16px;flex-shrink:0;box-shadow:0 10px 22px rgba(198,255,0,.22)}
+.epc-provider{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#5f9000}
+.epc-pkgname{font-family:'Space Grotesk';font-size:17px;font-weight:700;color:var(--ink)}
+.epc-prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.epc-price{background:var(--cream);border:1px solid var(--line-l);border-radius:12px;padding:12px 14px}
+.epc-price .l{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin-bottom:3px}
+.epc-price .v{display:block;font-family:'Space Grotesk';font-weight:700;font-size:18px;color:#5f9000}
+.epc-price .n{font-size:11px;color:var(--ink-soft)}
+.epc-h{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:0 0 8px}
+.epc-hw{margin-bottom:14px}
+.epc-hw ul{list-style:none;display:grid;gap:6px}
+.epc-hw li{display:flex;gap:8px;font-size:13px;color:var(--ink-soft)}
+.epc-hw li iconify-icon{color:#5f9000;font-size:14px;flex-shrink:0;margin-top:2px}
+.epc-upgrade{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:var(--ink-soft);background:var(--cream);border:1px dashed var(--line-l);border-radius:10px;padding:9px 11px;margin-bottom:14px}
+.epc-upgrade iconify-icon{color:#5f9000;flex-shrink:0;margin-top:1px}
+.epc-feat{margin-bottom:14px}
+.epc-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.epc-chip{font-size:12px;font-weight:600;color:var(--ink);background:var(--cream);border:1px solid var(--line-l);border-radius:var(--pill);padding:6px 11px}
+.epc-chip-more{color:#5f9000;background:rgba(198,255,0,.14);border-color:transparent}
+.epc-more-btn{display:inline-flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;font-size:12.5px;font-weight:700;color:#5f9000;padding:2px 0}
+.epc-more{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.epc-fgroup{padding:10px 0}
+.epc-fgroup b{display:block;font-size:12px;color:var(--ink);margin-bottom:6px}
+.epc-fgroup ul{list-style:none;display:grid;gap:5px}
+.epc-fgroup li{display:flex;gap:7px;font-size:12.5px;color:var(--ink-soft)}
+.epc-fgroup li iconify-icon{color:#5f9000;font-size:13px;flex-shrink:0;margin-top:2px}
+.epc-promos{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.epc-promo{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#5f9000;background:rgba(198,255,0,.14);border-radius:var(--pill);padding:6px 11px}
+.epc-suit{font-size:12.5px;color:var(--ink-soft);margin-bottom:14px}
+.epc-suit b{color:var(--ink)}
+.epc-status{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:600;color:#3a4a12;background:rgba(198,255,0,.16);border:1px solid rgba(198,255,0,.4);border-radius:12px;padding:11px 13px;margin-bottom:16px;line-height:1.4}
+.epc-status iconify-icon{color:#5f9000;font-size:17px;flex-shrink:0;margin-top:1px}
+.epc-btns{display:flex;gap:10px;margin-top:auto}
+.epc-btns .btn{flex:1;justify-content:center;font-size:13px;padding:11px 14px}
+.epc-empty{text-align:center;padding:44px 26px}
+.epc-empty p{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:16px}
+@media(max-width:600px){.epc-catgrid{grid-template-columns:1fr}}
 /* perks + features */
 .perks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .perk{text-align:center;padding:26px 16px}
@@ -119,7 +146,7 @@
 .demo-card{background:rgba(255,255,255,.03);border:1px solid var(--line2);border-radius:var(--r-lg);padding:30px}
 .demo-ok{display:none;text-align:center;color:var(--lime);font-weight:700;margin-top:14px}
 @media(max-width:960px){.bench,.feat-grid,.perks{grid-template-columns:repeat(2,1fr)}.hw-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:920px){.ehero-grid{grid-template-columns:1fr;gap:38px}.estage{order:-1;max-width:380px;margin:0 auto}.ipanel,.cfg,.demo-grid{grid-template-columns:1fr}.cfg-sum{position:static}}
+@media(max-width:920px){.ehero-grid{grid-template-columns:1fr;gap:38px}.estage{order:-1;max-width:380px;margin:0 auto}.ipanel,.demo-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.bench,.feat-grid,.perks,.hw-grid,.hw-grid.two{grid-template-columns:1fr}}
 </style>
 </head>
@@ -144,7 +171,7 @@
       <h1 style="margin-top:14px">Run your business<br><span class="lime">smarter.</span></h1>
       <p class="sub">Powerful, easy-to-use EPOS systems for retail, hospitality and service businesses — checkout, stock and reporting in one place.</p>
       <div class="ehero-btns">
-        <a href="#build" class="btn btn-primary btn-lg">Build My EPOS <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+        <a href="#build" class="btn btn-primary btn-lg">Find My EPOS System <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
         <a href="#" class="btn btn-ghost btn-lg" data-quote data-service="EPOS Systems">Book a Demo</a>
       </div>
       <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Free setup &amp; training · Integrated card machine options · UK support</p>
@@ -229,35 +256,23 @@
   </div>
 </section>
 
-<!-- BUILD A PACKAGE -->
+<!-- EPOS RECOMMENDATION ENGINE -->
 <section class="section s-light" id="build">
   <div class="container">
-    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:cube-duotone"></iconify-icon> Build your setup</span><h2 class="h2">Configure your EPOS package</h2><p class="lead">Pick a base system and add what you need — see an indicative total update live.</p></div>
-    <div class="cfg rv">
-      <div>
-        <p class="cfg-h" style="color:var(--ink-soft)">1 · Choose a base system</p>
-        <div class="cfg-bases" id="cfgBases">
-          <button type="button" class="cfg-base on" data-base="Smart Terminal" data-price="399"><span class="rd"></span><span class="bt"><b>Plemmo Smart Terminal</b><span>All-in-one · 10" touch</span></span><span class="bp">£399</span></button>
-          <button type="button" class="cfg-base" data-base="Touch Pro" data-price="599"><span class="rd"></span><span class="bt"><b>Plemmo Touch Pro</b><span>Premium · 15" dual-screen</span></span><span class="bp">£599</span></button>
-          <button type="button" class="cfg-base" data-base="Mobile POS" data-price="249"><span class="rd"></span><span class="bt"><b>Plemmo Mobile POS</b><span>Portable</span></span><span class="bp">£249</span></button>
-        </div>
-        <p class="cfg-h" style="color:var(--ink-soft)">2 · Add accessories</p>
-        <div id="cfgAdds">
-          <button type="button" class="cfg-add" data-add="Customer Display" data-price="29"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Customer Display</span><span class="ap">£29</span></button>
-          <button type="button" class="cfg-add" data-add="Receipt Printer" data-price="89"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Receipt Printer</span><span class="ap">£89</span></button>
-          <button type="button" class="cfg-add" data-add="Cash Drawer" data-price="89"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Cash Drawer</span><span class="ap">£89</span></button>
-          <button type="button" class="cfg-add" data-add="Barcode Scanner" data-price="79"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Barcode Scanner</span><span class="ap">£79</span></button>
-          <button type="button" class="cfg-add" data-add="Kitchen Printer" data-price="119"><span class="ck"><iconify-icon icon="ph:check-bold"></iconify-icon></span><span class="at">Kitchen Printer</span><span class="ap">£119</span></button>
-        </div>
-      </div>
-      <div class="cfg-sum">
-        <h3>Your setup</h3>
-        <ul class="cfg-list" id="cfgList"></ul>
-        <div class="cfg-total"><span class="tl">Indicative total</span><span class="tv" id="cfgTotal">£399</span></div>
-        <a href="#" class="btn btn-primary" id="cfgQuote">Get this setup <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
-        <p class="reassure" style="margin-top:12px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation</p>
-        <p class="cfg-note">Indicative one-off pricing, editable per setup. Final pricing depends on hardware, software, installation, support and VAT.</p>
-      </div>
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:magic-wand-duotone"></iconify-icon> EPOS Recommendation Engine</span><h2 class="h2">Find your EPOS system</h2><p class="lead">Tell us your business category and type — see your recommended EPOS packages instantly. No sign-up, no page reload.</p></div>
+
+    <p class="epc-step">Step 1 · What type of business do you have?</p>
+    <div class="epc-catgrid rv" id="epCatTabs"></div>
+
+    <div id="epTypeWrap" style="display:none">
+      <p class="epc-step">Step 2 · Select your business type</p>
+      <div class="tabs rv" id="epTypeTabs"></div>
+    </div>
+
+    <div id="epResults" style="display:none">
+      <div class="epc-resnote"><p id="epNote"></p><button type="button" class="epc-reset" id="epReset"><iconify-icon icon="ph:arrow-counter-clockwise-bold"></iconify-icon> Change selection</button></div>
+      <div class="epc-grid" id="epCards"></div>
+      <p class="disc" style="margin-top:22px">Pricing, packages and features shown are indicative and subject to each provider's terms. Plemmo introduces businesses to selected third-party providers — provider names and logos remain the property of their respective owners and are shown solely to indicate products or services that may be introduced. Please contact us for a personalised quotation.</p>
     </div>
   </div>
 </section>
@@ -328,7 +343,7 @@
       <div>
         <h2>Build your EPOS<br><span class="lime">system today</span></h2>
         <div class="checks"><span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Free setup</span><span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Free training</span><span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> UK support</span></div>
-        <div class="cta-btns"><a href="#build" class="btn btn-primary btn-lg">Build My EPOS <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost btn-lg" data-quote data-service="EPOS Systems">Book a Demo</a></div>
+        <div class="cta-btns"><a href="#build" class="btn btn-primary btn-lg">Find My EPOS System <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost btn-lg" data-quote data-service="EPOS Systems">Book a Demo</a></div>
         <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Flexible package options</p>
       </div>
       <div style="aspect-ratio:1/1;border-radius:var(--r-lg);background:radial-gradient(circle at 55% 40%,rgba(198,255,0,.16),transparent 60%);display:flex;align-items:center;justify-content:center"><img loading="lazy" decoding="async" src="../images/EPOS no bg.png" alt="Plemmo EPOS" style="width:74%;filter:drop-shadow(0 30px 50px rgba(0,0,0,.4))"></div>
@@ -342,7 +357,7 @@
       <div class="fbrand"><div class="logo">plemmo</div><p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p><p style="margin-top:8px;font-size:13px;color:var(--lime)">Run your business, we'll handle the rest.</p></div>
       <div class="fcol"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="utilities-broadband.html">Utilities &amp; Broadband</a></div>
       <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
-      <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#build">Build a Package</a><a href="#hardware">Hardware</a></div>
+      <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#build">EPOS Finder</a><a href="#hardware">Hardware</a></div>
       <div class="fcol"><h4>Contact</h4><a href="tel:03330411161">0333 041 1161</a><a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a><a href="#" data-quote data-service="EPOS Systems">Get a Free Quote</a></div>
     </div>
     <div class="fdisc">Plemmo introduces businesses to selected third-party providers where applicable. EPOS products, pricing, availability and services are subject to provider terms, eligibility and approval. Pricing is indicative and may vary. Plemmo may receive commission from providers. Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice.</div>
@@ -358,11 +373,12 @@
     <div id="mform-wrap">
       <div class="modal-head"><div><h3 id="mtitle">Get an EPOS quote</h3><p>Tell us about your business and a specialist will be in touch.</p></div><button class="modal-close" data-close aria-label="Close"><iconify-icon icon="ph:x-bold"></iconify-icon></button></div>
       <form id="mform">
-        <div class="frow two"><div><label>Full Name <span class="req-star">*</span></label><input class="input" type="text" required></div><div><label>Business Name</label><input class="input" type="text"></div></div>
-        <div class="frow two"><div><label>Phone <span class="req-star">*</span></label><input class="input" type="tel" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" required></div></div>
+        <div class="frow two"><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="full_name" required></div><div><label>Business Name</label><input class="input" type="text" name="business_name"></div></div>
+        <div class="frow two"><div><label>Telephone Number <span class="req-star">*</span></label><input class="input" type="tel" name="phone" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" required></div></div>
+        <div class="frow two"><div><label>Business Category</label><select class="select" id="mcat" name="business_category"><option value="">Select…</option><option>Hospitality</option><option>Retail</option></select></div><div><label>Business Type</label><input class="input" id="mtype" type="text" name="business_type" placeholder="e.g. Café, Grocery Store…"></div></div>
         <div class="frow"><label>Service Interested In</label><select class="select" id="mservice" name="service"><option>Card Machines</option><option>Business Funding</option><option selected>EPOS Systems</option><option>Digital Signage</option><option>Utilities &amp; Broadband</option><option>Not Sure</option></select></div>
-        <div class="frow"><label>Selected Product / Package</label><input class="input" id="mprod" type="text" name="product" placeholder="Optional"></div>
-        <div class="frow"><label>Message</label><textarea class="textarea" name="message" placeholder="Tell us a little about your business…"></textarea></div>
+        <div class="frow"><label>Selected EPOS Package</label><input class="input" id="mprod" type="text" name="product" placeholder="Filled in automatically, or optional"></div>
+        <div class="frow"><label>Additional Notes</label><textarea class="textarea" name="message" placeholder="Tell us a little about your business…"></textarea></div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
       </form>
     </div>
@@ -397,30 +413,234 @@
     var m=b.closest('.hw-body').querySelector('[data-more]'),open=m.style.maxHeight&&m.style.maxHeight!=='0px';
     m.style.maxHeight=open?null:m.scrollHeight+'px';b.textContent=open?'Specs':'Hide';
   }});
-  /* configurator */
-  var base={name:'Smart Terminal',price:399},adds=[];
-  var bases=document.getElementById('cfgBases'),addsEl=document.getElementById('cfgAdds'),listEl=document.getElementById('cfgList'),totalEl=document.getElementById('cfgTotal');
-  function gbp(n){return '£'+n.toLocaleString('en-GB')}
-  function renderCfg(){
-    var html='<li><span>'+base.name+'</span><span>'+gbp(base.price)+'</span></li>';
-    var total=base.price;
-    adds.forEach(function(a){total+=a.price;html+='<li><span>+ '+a.name+'</span><span>'+gbp(a.price)+'</span></li>'});
-    listEl.innerHTML=html;totalEl.textContent=gbp(total);
-  }
-  bases.querySelectorAll('.cfg-base').forEach(function(b){b.onclick=function(){
-    bases.querySelectorAll('.cfg-base').forEach(function(x){x.classList.remove('on')});b.classList.add('on');
-    base={name:b.dataset.base,price:+b.dataset.price};renderCfg();
-  }});
-  addsEl.querySelectorAll('.cfg-add').forEach(function(b){b.onclick=function(){
-    var n=b.dataset.add,p=+b.dataset.price,i=adds.findIndex(function(a){return a.name===n});
-    if(i>-1){adds.splice(i,1);b.classList.remove('on')}else{adds.push({name:n,price:p});b.classList.add('on')}renderCfg();
-  }});
-  document.getElementById('cfgQuote').onclick=function(e){e.preventDefault();
-    var total=base.price+adds.reduce(function(s,a){return s+a.price},0);
-    var summary='Plemmo '+base.name+(adds.length?' + '+adds.map(function(a){return a.name}).join(', '):'')+' (indicative '+gbp(total)+')';
-    if(window.PlemmoModal)window.PlemmoModal.open({service:'EPOS Systems',product:summary});
+  /* ══════════════════════════════════════════════════════════════════
+     ADMIN-EDITABLE CONFIG — EPOS Recommendation Engine.
+     Completely separate from the Card Machine Recommendation Engine on
+     card-machines.html (own config object, own logic, own data — they
+     only share visual styling). Providers, packages, pricing and the
+     fixed recommendation order are grouped here so staff can update
+     commercial data without touching the engine logic below (mirrors
+     the data/content.json pattern — see CONTENT-GUIDE.md).
+     Recommendations are based ONLY on Business Category + Business Type.
+     No turnover, no business size, no AI — just the fixed lists below,
+     never reordered automatically.
+     ══════════════════════════════════════════════════════════════════ */
+  /* Reusable Plemmo EPOS feature groups (shared by both Plemmo packages,
+     defined once here so admins only edit the feature wording in one place).
+     Declared before EPOS_CONFIG so the config object can reference them
+     while it is being built. */
+  var EPOS_PLEMMO_GROUPS = {
+    'Sales':['Fast Checkout','Barcode Scanning','Multiple Payment Methods','Split Payments','Refund Management','Discounts & Promotions','Gift Cards','Product Variations'],
+    'Inventory':['Real-Time Stock Management','Low Stock Alerts','Supplier Management','Purchase Orders','Stock Transfers','Stock Adjustments','Barcode Inventory'],
+    'Staff Management':['Multiple Staff Accounts','User Permissions','Clock In / Clock Out','Staff Sales Performance'],
+    'Reporting':['Sales Reports','Product Reports','Profit Reports','Staff Reports','Customer Reports','Tax Reports','End of Day Reports'],
+    'Customer Management':['Customer Database','Customer Purchase History','Loyalty Programme'],
+    'Business Management':['Cloud Based','Multi-store Support','Remote Access','Secure Backup','Role Permissions'],
+    'Hardware Integration':['Card Machines','Barcode Scanners','Receipt Printers','Cash Drawers','Customer Facing Displays']
   };
-  renderCfg();
+  var EPOS_PLEMMO_HOSPITALITY_EXTRA = {
+    'Hospitality Features':['Table Management','Table Reservations','Kitchen Display System (KDS)','Kitchen Printer Support','Table Transfers','Split Bills','Tips Management','Eat-In Orders','Takeaway Orders','Delivery Orders','QR Ordering','Online Ordering','Menu Management','Course Ordering','Floor Plan Management']
+  };
+  /* Assembles [name, items] pairs for a package's featureGroups from the
+     shared group libraries above — keeps package definitions short and
+     avoids repeating the same feature wording in more than one place. */
+  function groupList(names){
+    var src={},k;
+    for(k in EPOS_PLEMMO_GROUPS)src[k]=EPOS_PLEMMO_GROUPS[k];
+    for(k in EPOS_PLEMMO_HOSPITALITY_EXTRA)src[k]=EPOS_PLEMMO_HOSPITALITY_EXTRA[k];
+    return names.map(function(n){return [n,src[n]]});
+  }
+  var EPOS_CONFIG = {
+    /* Q1 order + Q2 example business types shown per category */
+    categoryOrder: ['Hospitality','Retail'],
+    catIcon: {Hospitality:'ph:wine-duotone',Retail:'ph:shopping-bag-duotone'},
+    categories: {
+      Hospitality: ['Restaurant','Café','Coffee Shop','Bar','Pub','Hotel','Food Truck','Fine Dining','Takeaway','Dessert Shop','Bakery'],
+      Retail: ['Grocery Store','Convenience Store','Off Licence','Clothing Store','Electronics Store','Jewellery Store','Pharmacy','Vape Shop','Pet Shop','Furniture Store','Florist','Hardware Store','Gift Shop','Other Retail Businesses']
+    },
+    /* Provider identity — "logo" is a simple lime initials badge since no
+       third-party provider logo artwork is bundled with this site; swap
+       in an <img> here later if real logo assets are added. */
+    providers: {
+      plemmo:{name:'Plemmo EPOS',initials:'PL'},
+      shift4:{name:'Shift4 EPOS',initials:'S4'},
+      sumup:{name:'SumUp POS',initials:'SU'},
+      eposnow:{name:'Epos Now',initials:'EN'}
+    },
+    /* Integrated card machine status — shown verbatim on every card of that provider */
+    cardStatus: {
+      plemmo:'Integrated card machine available. Additional charges may apply. Please contact us for more information and a personalised quotation.',
+      shift4:'Integrated Card Machine Included',
+      sumup:'Integrated Card Machine Included',
+      eposnow:'Integrated Card Machine Included'
+    },
+    /* Shared Plemmo feature group libraries, exposed here too so admins can
+       find/edit them from the single EPOS_CONFIG object (same data as the
+       EPOS_PLEMMO_GROUPS / EPOS_PLEMMO_HOSPITALITY_EXTRA vars above). */
+    plemmoGroups: EPOS_PLEMMO_GROUPS,
+    plemmoHospitalityExtra: EPOS_PLEMMO_HOSPITALITY_EXTRA,
+    /* Every package the engine can recommend. Add new packages/providers here —
+       the rendering + ordering logic below never needs to change. */
+    packages: {
+      plemmo_retail: {
+        key:'plemmo_retail', providerKey:'plemmo', packageName:'Plemmo Retail EPOS',
+        hardwarePrice:'£900', hardwarePriceNote:'one-off', monthly:'£10/month',
+        hardwareIncluded:['Single Screen Touchscreen EPOS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
+        optionalUpgrade:{name:'Customer Facing Display',price:'£200'},
+        featureGroups: groupList(['Sales','Inventory','Staff Management','Reporting','Customer Management','Business Management','Hardware Integration']),
+        suitableFor:['Grocery Stores','Convenience Stores','Clothing Stores','Electronics Stores','Jewellery Stores','Pharmacies','Vape Shops','Pet Shops','Furniture Stores','Florists','Hardware Stores','Gift Shops','Other Retail Businesses']
+      },
+      plemmo_hospitality: {
+        key:'plemmo_hospitality', providerKey:'plemmo', packageName:'Plemmo Hospitality EPOS',
+        hardwarePrice:'£500', hardwarePriceNote:'one-off', monthly:'£20/month',
+        hardwareIncluded:['Single Screen Touchscreen EPOS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
+        featureGroups: groupList(['Sales','Inventory','Staff Management','Reporting','Customer Management','Business Management','Hospitality Features','Hardware Integration']),
+        suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways','Dessert Shops']
+      },
+      shift4_hospitality: {
+        key:'shift4_hospitality', providerKey:'shift4', packageName:'Shift4 Hospitality POS',
+        hardwarePrice:'£0', hardwarePriceNote:'upfront', monthly:'£39/month',
+        hardwareIncluded:['Integrated Card Machine','EPOS Terminal','Receipt Printer','Cash Drawer'],
+        featureGroups: [
+          ['Payments',['Integrated Card Machine']],
+          ['Business Management',['Real-Time Analytics','Staff Management','Inventory Control','Labour Cost Analysis','Sales Forecasting','Fraud Prevention']],
+          ['Cloud',['Cloud Back Office','Mobile App','API Access','Multi-site Management']],
+          ['Reporting',['Sales Reports','Performance Reports','Labour Reports','Inventory Reports']],
+          ['Inventory',['Stock Management','Low Stock Alerts','Supplier Management']],
+          ['Support',['24/7 Priority Support','Lifetime Warranty']]
+        ],
+        suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways']
+      },
+      sumup_retail: {
+        key:'sumup_retail', providerKey:'sumup', packageName:'SumUp Retail POS Kit',
+        hardwarePrice:'£649', hardwarePriceNote:'one-off', monthly:'£29/month',
+        hardwareIncluded:['POS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
+        features:['Integrated Card Machine','Retail POS Solution','Barcode Scanning','Stock Management','Sales Reporting','Customer Management','Staff Accounts','Cloud Based'],
+        promotions:['30% Discount Available','6 Monthly Instalments Available (on request)']
+      },
+      eposnow_countertop: {
+        key:'eposnow_countertop', providerKey:'eposnow', packageName:'Epos Now Countertop',
+        hardwarePrice:'£199', hardwarePriceNote:'one-off', monthly:'£39/month',
+        hardwareIncluded:['Single Screen EPOS Terminal','Built-in Receipt Printer','Cash Drawer','Integrated Card Machine'],
+        features:['Cloud-Based EPOS','Inventory Management','Sales Reporting','Staff Management','Customer Management','Hospitality Features','Integrated Card Machine Included']
+      },
+      eposnow_countertop_duo: {
+        key:'eposnow_countertop_duo', providerKey:'eposnow', packageName:'Epos Now Countertop Duo',
+        hardwarePrice:'£249', hardwarePriceNote:'one-off', monthly:'£39/month',
+        hardwareIncluded:['All-in-One Dual Screen Point of Sale System','15.6-inch Full HD Staff Touchscreen','10.1-inch HD Customer-Facing Display','Built-in 80mm Thermal Receipt Printer','Cash Drawer','Integrated Card Machine'],
+        features:['Cloud-Based EPOS','Real-Time Reporting','Inventory Management','Customer Management','Staff Management','Multi-store Support','Retail Features','Hospitality Features','Reporting Dashboard','Integrated Card Machine Included']
+      }
+    },
+    /* Fixed recommendation order per category — exactly as specified by the
+       owner, never reordered automatically and not affected by business type. */
+    order: {
+      Retail: ['plemmo_retail','eposnow_countertop_duo','sumup_retail'],
+      Hospitality: ['plemmo_hospitality','shift4_hospitality','eposnow_countertop','eposnow_countertop_duo']
+    }
+  };
+
+  /* ── pure engine functions — read EPOS_CONFIG only, no hardcoded rules ── */
+  function epGetRecommendations(category){
+    var order=(EPOS_CONFIG.order[category]||[]);
+    return order.map(function(k){return EPOS_CONFIG.packages[k]}).filter(function(p){return !!p});
+  }
+  function epFeatureList(pkg){
+    var flat=[];
+    if(pkg.featureGroups)pkg.featureGroups.forEach(function(g){flat=flat.concat(g[1])});
+    else if(pkg.features)flat=pkg.features.slice();
+    return flat;
+  }
+
+  /* ── DOM / rendering ── */
+  var epState={category:null,type:null};
+  var epCatTabs=document.getElementById('epCatTabs'),epTypeWrap=document.getElementById('epTypeWrap'),
+      epTypeTabs=document.getElementById('epTypeTabs'),epResults=document.getElementById('epResults'),
+      epCards=document.getElementById('epCards'),epNote=document.getElementById('epNote'),epReset=document.getElementById('epReset');
+
+  function epChip(t){return '<span class="epc-chip">'+t+'</span>'}
+  function epFeatureHTML(pkg){
+    var flat=epFeatureList(pkg),chips=flat.slice(0,6).map(epChip).join(''),extra=flat.length>6?flat.length-6:0;
+    var chipsHTML=chips+(extra?'<span class="epc-chip epc-chip-more">+'+extra+' more</span>':'');
+    var moreHTML='';
+    if(pkg.featureGroups){
+      moreHTML=pkg.featureGroups.map(function(g){return '<div class="epc-fgroup"><b>'+g[0]+'</b><ul>'+g[1].map(function(i){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon>'+i+'</li>'}).join('')+'</ul></div>'}).join('');
+    } else if(flat.length){
+      moreHTML='<ul style="list-style:none;display:grid;gap:5px">'+flat.map(function(i){return '<li style="display:flex;gap:7px;font-size:12.5px;color:var(--ink-soft)"><iconify-icon icon="ph:check-bold" style="color:#5f9000;font-size:13px;flex-shrink:0;margin-top:2px"></iconify-icon>'+i+'</li>'}).join('')+'</ul>';
+    }
+    var toggle=flat.length>6?'<button type="button" class="epc-more-btn" data-epmore>View all features <iconify-icon icon="ph:caret-down-bold"></iconify-icon></button><div class="epc-more">'+moreHTML+'</div>':'';
+    return '<div class="epc-feat"><p class="epc-h">Key features</p><div class="epc-chips">'+chipsHTML+'</div>'+toggle+'</div>';
+  }
+  function epPkgCardHTML(pkg,rank){
+    var prov=EPOS_CONFIG.providers[pkg.providerKey],status=EPOS_CONFIG.cardStatus[pkg.providerKey];
+    var hwHTML='<div class="epc-hw"><p class="epc-h">Hardware included</p><ul>'+pkg.hardwareIncluded.map(function(h){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon>'+h+'</li>'}).join('')+'</ul></div>';
+    var upgradeHTML=pkg.optionalUpgrade?('<div class="epc-upgrade"><iconify-icon icon="ph:plus-circle-duotone"></iconify-icon> Optional upgrade (not included by default): '+pkg.optionalUpgrade.name+' — '+pkg.optionalUpgrade.price+'</div>'):'';
+    var promoHTML=pkg.promotions?('<div class="epc-promos">'+pkg.promotions.map(function(p){return '<span class="epc-promo"><iconify-icon icon="ph:tag-duotone"></iconify-icon>'+p+'</span>'}).join('')+'</div>'):'';
+    var suitHTML=pkg.suitableFor?('<p class="epc-suit"><b>Suitable for:</b> '+pkg.suitableFor.join(', ')+'</p>'):'';
+    return '<div class="card epc-card">'
+      +(rank===1?'<span class="epc-rank">Recommended #1</span>':'')
+      +'<div class="epc-top"><span class="epc-logo">'+prov.initials+'</span><div><div class="epc-provider">'+prov.name+'</div><div class="epc-pkgname">'+pkg.packageName+'</div></div></div>'
+      +'<div class="epc-prices"><div class="epc-price"><span class="l">Hardware</span><span class="v">'+pkg.hardwarePrice+'</span><span class="n">'+pkg.hardwarePriceNote+'</span></div><div class="epc-price"><span class="l">Software</span><span class="v">'+pkg.monthly+'</span></div></div>'
+      +hwHTML+upgradeHTML+epFeatureHTML(pkg)+promoHTML+suitHTML
+      +'<div class="epc-status"><iconify-icon icon="ph:credit-card-duotone"></iconify-icon>'+status+'</div>'
+      +'<div class="epc-btns"><a href="#" class="btn btn-primary" data-ep-apply="'+pkg.key+'">Apply Now</a><a href="#" class="btn btn-ghost" data-ep-contact="'+pkg.key+'">Contact Us</a></div>'
+      +'</div>';
+  }
+  function epRenderCatTabs(){
+    epCatTabs.innerHTML=EPOS_CONFIG.categoryOrder.map(function(c){
+      return '<button type="button" class="epc-cat'+(epState.category===c?' active':'')+'" data-epcat="'+c+'"><iconify-icon icon="'+EPOS_CONFIG.catIcon[c]+'"></iconify-icon><b>'+c+'</b><span>'+EPOS_CONFIG.categories[c].slice(0,3).join(', ')+'…</span></button>';
+    }).join('');
+    epCatTabs.querySelectorAll('[data-epcat]').forEach(function(b){b.onclick=function(){epSelectCategory(b.dataset.epcat)}});
+  }
+  function epRenderTypeTabs(){
+    var types=EPOS_CONFIG.categories[epState.category]||[];
+    epTypeTabs.innerHTML=types.map(function(t){return '<div class="tab'+(epState.type===t?' active':'')+'" role="button" tabindex="0" data-eptype="'+t+'">'+t+'</div>'}).join('');
+    epTypeTabs.querySelectorAll('[data-eptype]').forEach(function(el){
+      function activate(){epSelectType(el.dataset.eptype)}
+      el.onclick=activate;
+      el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();activate()}});
+    });
+  }
+  function epSelectCategory(cat){
+    epState.category=cat;epState.type=null;
+    epRenderCatTabs();epRenderTypeTabs();
+    epTypeWrap.style.display='';epResults.style.display='none';
+    epTypeWrap.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function epSelectType(t){
+    epState.type=t;epRenderTypeTabs();epRenderResults();
+  }
+  function epRenderResults(){
+    var list=epGetRecommendations(epState.category);
+    epResults.style.display='';
+    if(!list.length){
+      epCards.innerHTML='<div class="card epc-card epc-empty"><p>Please contact us for a personalised EPOS quotation.</p><a href="#" class="btn btn-primary" data-ep-contact="none">Contact Us</a></div>';
+    } else {
+      epCards.innerHTML=list.map(function(p,i){return epPkgCardHTML(p,i+1)}).join('');
+    }
+    epNote.innerHTML='Recommended for <b>'+epState.type+'</b> ('+epState.category+') — shown in Plemmo\'s fixed recommendation order.';
+    epResults.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function epOpenModal(pkgKey){
+    var pkg=(pkgKey&&pkgKey!=='none')?EPOS_CONFIG.packages[pkgKey]:null;
+    var product=pkg?(EPOS_CONFIG.providers[pkg.providerKey].name+' — '+pkg.packageName):'';
+    if(window.PlemmoModal)window.PlemmoModal.open({service:'EPOS Systems',product:product});
+    var catEl=document.getElementById('mcat'),typeEl=document.getElementById('mtype');
+    if(catEl)catEl.value=epState.category||'';
+    if(typeEl)typeEl.value=epState.type||'';
+  }
+  epCards.addEventListener('click',function(e){
+    var a=e.target.closest('[data-ep-apply]');
+    if(a){e.preventDefault();epOpenModal(a.getAttribute('data-ep-apply'));return}
+    var c=e.target.closest('[data-ep-contact]');
+    if(c){e.preventDefault();epOpenModal(c.getAttribute('data-ep-contact'));return}
+    var m=e.target.closest('[data-epmore]');
+    if(m){var body=m.nextElementSibling,open=body.style.maxHeight&&body.style.maxHeight!=='0px';
+      body.style.maxHeight=open?null:body.scrollHeight+'px';
+      m.innerHTML=open?'View all features <iconify-icon icon="ph:caret-down-bold"></iconify-icon>':'Hide features <iconify-icon icon="ph:caret-up-bold"></iconify-icon>';
+      return}
+  });
+  epReset.onclick=function(){epState={category:null,type:null};epRenderCatTabs();epTypeWrap.style.display='none';epResults.style.display='none';document.getElementById('epCatTabs').scrollIntoView({behavior:'smooth',block:'start'})};
+  epRenderCatTabs();
   /* demo form (placeholder submit) */
   var df=document.getElementById('demoForm');
   if(df)df.addEventListener('submit',function(e){e.preventDefault();
