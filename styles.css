@@ -441,3 +441,122 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .footer-links { grid-template-columns: 1fr 1fr; }
   .marquee-item { font-size: 14px; margin: 0 20px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   HOMEPAGE NARRATIVE SECTIONS
+   Editorial compositions, not card grids. Each section earns its place in the
+   story: what do you need → who are you → what we run for you.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── §6 "What are you trying to sort out?" ─────────────────────────────────
+   A magazine contents page, not a six-card grid: full-width rows you scan
+   down, with the photograph revealing on hover so the imagery supports the
+   choice instead of decorating it. */
+.sort-section { background: var(--bg-dark); color: var(--text-dark); padding: 120px 0 130px; }
+.sort-head { max-width: 720px; margin-bottom: 56px; }
+.sort-eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.sort-head h2 { font-size: clamp(30px, 4vw, 54px); line-height: 1.04; letter-spacing: -.032em; color: #fff; }
+.sort-head p { margin-top: 16px; font-size: 17px; line-height: 1.6; color: var(--text-dark-muted); max-width: 52ch; }
+
+.sort-list { border-top: 1px solid rgba(255,255,255,.12); }
+.sort-row {
+  position: relative; display: grid; grid-template-columns: 56px 1fr auto;
+  align-items: center; gap: 28px; padding: 30px 4px; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.12); color: inherit;
+  transition: background-color .3s ease, padding-left .35s cubic-bezier(.16,1,.3,1);
+}
+.sort-row:hover { background: rgba(255,255,255,.028); padding-left: 18px; }
+.sort-num { font-size: 12px; font-weight: 700; color: #6b7560; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+.sort-label { font-family: var(--font-heading); font-size: clamp(24px, 3.2vw, 42px);
+  line-height: 1.06; letter-spacing: -.028em; color: #fff; }
+.sort-sub { display: block; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+  letter-spacing: .01em; color: var(--text-dark-muted); margin-top: 7px; }
+.sort-go { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; flex-shrink: 0;
+  transition: background-color .3s, border-color .3s, transform .35s cubic-bezier(.16,1,.3,1); }
+.sort-row:hover .sort-go { background: var(--accent); border-color: var(--accent); color: #0a0c08; transform: translateX(4px); }
+
+/* The photograph follows the pointer on desktop — it belongs to the row you
+   are actually considering, so it appears where you are looking. */
+.sort-peek {
+  position: fixed; top: 0; left: 0; width: 320px; height: 220px; border-radius: 12px;
+  overflow: hidden; pointer-events: none; opacity: 0; z-index: 40;
+  box-shadow: 0 30px 70px rgba(0,0,0,.55); will-change: transform, opacity;
+}
+.sort-peek img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 900px) {
+  .sort-peek { display: none; }
+  /* On touch there is no hover, so the image belongs inline. */
+  .sort-row { grid-template-columns: 44px 1fr auto; gap: 16px; padding: 22px 2px; }
+  .sort-row:hover { padding-left: 2px; }
+}
+
+/* ── §7 "Start with your business" ────────────────────────────────────────
+   Asymmetric photo grid — the environments do the talking. */
+.biz-section { background: var(--bg-light); color: var(--text-light); padding: 120px 0; }
+.biz-head { max-width: 640px; margin-bottom: 48px; }
+.biz-head .sort-eyebrow { color: #5f9000; }
+.biz-head h2 { font-size: clamp(30px, 4vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: var(--text-light); }
+.biz-head p { margin-top: 14px; font-size: 17px; line-height: 1.6; color: var(--text-light-muted); }
+.biz-grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr; grid-template-rows: 260px 260px; gap: 16px; }
+.biz-tile { position: relative; overflow: hidden; border-radius: 14px; text-decoration: none;
+  display: block; background: #0d1108; }
+/* Tile 1 holds the left column across both rows; tile 4 spans the remaining
+   two cells on row two, so the grid fills without a hole. */
+.biz-tile:nth-child(1) { grid-row: span 2; }
+.biz-tile:nth-child(4) { grid-column: span 2; }
+.biz-tile img { width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .7s cubic-bezier(.16,1,.3,1); }
+.biz-tile:hover img { transform: scale(1.045); }
+.biz-tile::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(6,8,4,.86) 0%, rgba(6,8,4,.24) 42%, transparent 70%); }
+.biz-cap { position: absolute; left: 22px; right: 22px; bottom: 20px; z-index: 2; }
+.biz-cap strong { display: block; font-family: var(--font-heading); font-size: 24px;
+  letter-spacing: -.022em; color: #fff; }
+.biz-cap span { display: block; margin-top: 5px; font-size: 13.5px; color: rgba(255,255,255,.72); }
+@media (max-width: 900px) {
+  .biz-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 210px 190px 190px; }
+  .biz-tile:nth-child(1) { grid-row: span 1; grid-column: span 2; }
+  .biz-tile:nth-child(4) { grid-column: span 2; }
+}
+@media (max-width: 560px) { .biz-grid { grid-template-columns: 1fr; grid-auto-rows: 190px; }
+  .biz-tile:nth-child(1), .biz-tile:nth-child(4) { grid-column: span 1; } }
+
+/* ── §8 "Your Plemmo stack" ───────────────────────────────────────────────
+   Five layers, read as a stack: each row steps further in, so the sequence
+   is visible in the layout rather than only in the numbering. */
+.stack-section { background: var(--bg-dark); color: var(--text-dark); padding: 120px 0 130px; overflow: hidden; }
+.stack-head { max-width: 660px; margin-bottom: 60px; }
+.stack-head h2 { font-size: clamp(30px, 4vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: #fff; }
+.stack-head p { margin-top: 14px; font-size: 17px; line-height: 1.6; color: var(--text-dark-muted); }
+.stack-row { display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: center;
+  padding: 26px 0; border-top: 1px solid rgba(255,255,255,.1); }
+.stack-row:last-child { border-bottom: 1px solid rgba(255,255,255,.1); }
+.stack-meta { display: flex; align-items: baseline; gap: 20px; }
+.stack-n { font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--accent);
+  letter-spacing: .04em; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.stack-verb { font-family: var(--font-heading); font-size: clamp(22px, 2.8vw, 34px);
+  letter-spacing: -.026em; color: #fff; line-height: 1.1; }
+.stack-verb em { font-style: normal; display: block; font-family: 'Inter', sans-serif;
+  font-size: 14.5px; font-weight: 500; letter-spacing: .01em; color: var(--text-dark-muted); margin-top: 8px; }
+.stack-shot { height: 120px; border-radius: 10px; overflow: hidden; background: #0d1108; }
+.stack-shot img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .92;
+  transition: transform .7s cubic-bezier(.16,1,.3,1), opacity .4s; }
+.stack-row:hover .stack-shot img { transform: scale(1.05); opacity: 1; }
+@media (max-width: 780px) {
+  .stack-row { grid-template-columns: 1fr; gap: 18px; }
+  .stack-shot { height: 150px; }
+}
+
+/* ── §57 Why Plemmo ───────────────────────────────────────────────────────
+   Four plain statements. No icons-in-circles, no cards — the restraint is
+   the point. */
+.why-section { background: var(--bg-light); color: var(--text-light); padding: 110px 0; }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 48px; }
+.why-item { border-top: 2px solid var(--text-light); padding-top: 20px; }
+.why-item h3 { font-family: var(--font-heading); font-size: 17px; letter-spacing: -.012em;
+  text-transform: uppercase; color: var(--text-light); margin-bottom: 10px; }
+.why-item p { font-size: 15px; line-height: 1.62; color: var(--text-light-muted); }
+@media (max-width: 900px) { .why-grid { grid-template-columns: 1fr 1fr; gap: 30px; } }
+@media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }

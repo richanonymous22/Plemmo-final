@@ -53,6 +53,19 @@ The page references are correct; only the filenames are misleading. Rename
 the files (and update `pages/card-machines.html`) when the real product
 photography lands, so the next person isn't caught by this.
 
+## Photography library needs more range
+The current library leans on one business owner and one café/retail interior
+across several sections. That reads as a brand campaign rather than stock,
+so it is not fatal, but the owner specifically asked that sections not repeat
+near-identical imagery. When real Plemmo photography is commissioned, the
+gaps worth filling first are:
+
+- a commercial premises / utility context shot for Business Energy (currently
+  borrowing a bill-review image)
+- a close-up of hands on a card terminal mid-payment
+- a genuine installation/setup shot (engineer fitting a screen or till)
+- more trade variety: garage, barber, takeaway, convenience store
+
 ## Verify after deploy
 - [ ] Confirm FormSubmit endpoint `plemmouk@gmail.com` is activated; test each form
   receives full_name, business_name, phone, email + form-specific fields.
