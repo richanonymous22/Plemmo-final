@@ -339,7 +339,7 @@
     this.value = opts.value == null ? min : opts.value;
     var spring = new Spring({ from: this.value, response: 0.35, damping: 1.0 });
     var tracker = new VelocityTracker(110);
-    var dragging = false, pid = null, grabDX = 0, width = 1, moved = false;
+    var dragging = false, pid = null, grabDX = 0, width = 1, moved = false, pendingTarget = null;
 
     spring.onUpdate = function (v) { self.value = v; onChange(v, dragging); };
 
@@ -361,7 +361,11 @@
       if (e.button != null && e.button !== 0) return;
       width = el.clientWidth || 1;
       dragging = true; moved = false; pid = e.pointerId;
-      el.setPointerCapture(e.pointerId);
+      /* Capture keeps tracking alive when the pointer leaves the element.
+         It throws for a pointer id the browser doesn't consider active, and
+         an exception here would abort the gesture and leave the control
+         dead, so failing to capture must not be fatal. */
+      try { el.setPointerCapture(e.pointerId); } catch (err) {}
       el.classList.add('fl-grabbing');
       /* Grab the *current on-screen value*, so an interrupted animation is
          picked up exactly where it visually is. */
@@ -373,9 +377,11 @@
          not jump under the finger. If it lands on the track, treat it as a
          direct set — that is what a track press means. */
       grabDX = Math.abs(pointerPx - handlePx) < 26 ? (pointerPx - handlePx) : 0;
+      pendingTarget = null;
       if (grabDX === 0) {
-        var v0 = clampToTrack(pointerPx);
-        spring.to(Math.max(min, Math.min(max, v0)), { response: 0.28, damping: 1.0 });
+        var v0 = Math.max(min, Math.min(max, clampToTrack(pointerPx)));
+        pendingTarget = v0;                 /* honoured by up() if never dragged */
+        spring.to(v0, { response: 0.28, damping: 1.0 });
       }
       tracker.reset();
       tracker.add(pointerPx);
@@ -404,6 +410,21 @@
       if (!dragging || (pid != null && e.pointerId !== pid)) return;
       dragging = false; pid = null;
       el.classList.remove('fl-grabbing');
+
+      /* A tap on the track (rather than a drag of the handle) already chose a
+         destination in down(). Projecting momentum from self.value here would
+         read the pre-animation position — the spring has only just been
+         re-targeted and hasn't travelled yet — and snap straight back to
+         where the handle started. Honour the tap instead. */
+      if (!moved && pendingTarget != null) {
+        var tapTarget = nearestSnap(pendingTarget);
+        pendingTarget = null;
+        spring.to(tapTarget, { response: 0.3, damping: 1.0 });
+        spring.onRest = function (v) { onCommit(v); };
+        onCommit(tapTarget);
+        return;
+      }
+      pendingTarget = null;
 
       var vpx = tracker.velocity();                 /* px/s */
       var vval = unscale(vpx);                      /* value units/s */
@@ -511,7 +532,7 @@
       dragging = true; decided = false; pid = e.pointerId;
       startX = e.clientX; startPos = pos.value;
       pos.stop();                                   /* grab it mid-flight */
-      track.setPointerCapture(e.pointerId);
+      try { track.setPointerCapture(e.pointerId); } catch (err) {}
       track.classList.add('fl-grabbing');
       tracker.reset(); tracker.add(e.clientX);
     }

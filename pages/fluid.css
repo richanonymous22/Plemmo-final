@@ -137,15 +137,25 @@ section[id],header[id],div[id][class*="section"]{scroll-margin-top:96px}
 .fl-rx-legend-hint{margin-left:auto;color:#6b7560}
 .fl-rx-legend-hint iconify-icon{font-size:15px;color:var(--lime,#c6ff00)}
 
-/* Badges: the lowest number and the recommended option are different claims
-   and must never be collapsed into one. */
-.fl-rx-pick,.fl-rx-low{
-  display:inline-block;margin-left:9px;padding:2px 8px;border-radius:100px;
-  font-family:'Inter',sans-serif;font-size:9.5px;font-weight:800;
-  text-transform:uppercase;letter-spacing:.07em;vertical-align:2px;
+/* Rate rows are a factual price list in fixed provider order — deliberately
+   not ranked, badged or highlighted, so nothing here reads as a
+   recommendation. The recommendation engine makes those, using the owner's
+   rules. */
+.fl-rx-rates{position:relative;z-index:2;margin-top:22px;display:grid;gap:9px}
+.fl-rx-rates .fl-rx-row{grid-template-columns:1fr auto}
+.fl-rx-quote{font-size:15px;font-weight:700;color:#c3ccb6;letter-spacing:-.01em}
+
+/* Hand-off to the engine. Visually distinct from the rate rows so it reads
+   as "next step", not as another provider. */
+.fl-rx-next{
+  position:relative;z-index:2;margin-top:22px;padding:20px 22px;border-radius:18px;
+  display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:rgba(198,255,0,.07);border:1px solid rgba(198,255,0,.26);
 }
-.fl-rx-pick{background:var(--lime,#c6ff00);color:#0a0c08}
-.fl-rx-low{background:rgba(255,255,255,.12);color:#c3ccb6;border:1px solid rgba(255,255,255,.18)}
+.fl-rx-next strong{display:block;font-family:'Space Grotesk','Inter',sans-serif;font-size:15.5px;color:#fff;letter-spacing:-.015em;margin-bottom:6px}
+.fl-rx-next p{margin:0;font-size:13px;line-height:1.6;color:#a8b39a;max-width:52ch}
+.fl-rx-next .btn{flex-shrink:0}
+@media(max-width:620px){.fl-rx-next{flex-direction:column;align-items:stretch}.fl-rx-next .btn{justify-content:center}}
 
 /* the scrubber track */
 .fl-rx-track{
