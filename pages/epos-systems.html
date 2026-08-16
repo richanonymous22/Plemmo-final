@@ -27,6 +27,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="fluid.css">
 <style>
 .ehero{position:relative;overflow:hidden;padding:140px 0 90px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
 .orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
@@ -121,6 +122,76 @@
 @media(max-width:960px){.bench,.feat-grid,.perks{grid-template-columns:repeat(2,1fr)}.hw-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:920px){.ehero-grid{grid-template-columns:1fr;gap:38px}.estage{order:-1;max-width:380px;margin:0 auto}.ipanel,.cfg,.demo-grid{grid-template-columns:1fr}.cfg-sum{position:static}}
 @media(max-width:600px){.bench,.feat-grid,.perks,.hw-grid,.hw-grid.two{grid-template-columns:1fr}}
+
+/* ── embedded recommendation engine ── */
+
+/* ── EPOS Recommendation Engine — page-specific ── */
+.epeh{position:relative;overflow:hidden;padding:140px 0 70px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
+.orb.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(170,230,0,.12),transparent 70%);top:-200px;right:-160px}
+.epeh-in{position:relative;z-index:2;max-width:720px}
+.epeh h1{font-size:clamp(38px,5.2vw,60px);color:#fff;letter-spacing:-.03em}
+.epeh .sub{color:var(--muted);font-size:17px;max-width:560px;margin:18px 0 0}
+
+.ep-steps-strip{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;position:relative;z-index:1}
+.ep-pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--muted);padding:7px 13px;border-radius:var(--pill);background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.3s}
+.ep-pill .n{width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;color:#cfd6c5}
+.ep-pill.active{color:#fff;border-color:rgba(198,255,0,.5);background:var(--lime-soft)}
+.ep-pill.active .n{background:var(--lime);color:#0a0c08}
+.ep-pill.done{color:#bfe07a;border-color:rgba(198,255,0,.28)}
+.ep-pill.done .n{background:var(--lime);color:#0a0c08}
+.ep-q{font-family:'Space Grotesk';font-size:clamp(20px,2.8vw,28px);font-weight:700;color:#fff;margin-bottom:20px;position:relative;z-index:1;animation:epf .4s both}
+.ep-hint{font-size:13px;color:var(--muted);margin:-10px 0 20px;position:relative;z-index:1}
+.ep-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;position:relative;z-index:1}
+.ep-tiles.cat{grid-template-columns:repeat(2,1fr);max-width:480px}
+.ep-tile{display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;padding:20px 12px;border-radius:16px;background:rgba(255,255,255,.03);border:1.5px solid var(--line);color:#e7ebe0;font-family:'Inter';font-weight:600;font-size:13.5px;cursor:pointer;transition:transform .25s var(--spring),border-color .25s,background .25s}
+.ep-tile:hover{transform:translateY(-5px);border-color:rgba(198,255,0,.5);background:rgba(198,255,0,.06)}
+.ep-tile .ti{width:44px;height:44px;border-radius:13px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center}
+.ep-tile .ti iconify-icon{font-size:22px;color:var(--lime)}
+.ep-tile.sel{border-color:var(--lime);background:var(--lime-soft)}
+.ep-tile.sel .ti{background:var(--lime)}.ep-tile.sel .ti iconify-icon{color:#0a0c08}
+.ep-foot{display:flex;align-items:center;justify-content:space-between;margin-top:24px;position:relative;z-index:1}
+.ep-back{background:none;border:none;color:var(--muted);font-family:'Inter';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.ep-back[disabled]{opacity:0;pointer-events:none}.ep-back:hover{color:#fff}
+@keyframes epf{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+.ep-fallback{background:linear-gradient(150deg,rgba(198,255,0,.12),rgba(198,255,0,.03));border:1px solid rgba(95,144,0,.3);border-radius:18px;padding:24px;text-align:center}
+.ep-fallback iconify-icon{font-size:34px;color:#5f9000;margin-bottom:10px}
+.ep-fallback h3{font-family:'Space Grotesk';color:var(--ink);font-size:20px;margin-bottom:8px}
+.ep-fallback p{color:var(--ink-soft);font-size:14px;max-width:480px;margin:0 auto}
+
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:8px}
+.ep-card{position:relative;background:var(--white);border:1px solid var(--line-l);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-l);display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s}
+.ep-card:hover{transform:translateY(-5px);box-shadow:0 34px 60px rgba(17,20,15,.16)}
+.ep-card.top{border-color:var(--lime);box-shadow:0 0 0 2px var(--lime),var(--shadow-l)}
+.ep-rank{position:absolute;top:-12px;left:20px;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:5px 13px;border-radius:var(--pill)}
+.plogo-c{height:30px;display:flex;align-items:center;margin-bottom:6px}
+.plogo-c img{height:26px;width:auto;object-fit:contain}
+.plogo-c .wordmark{font-family:'Space Grotesk';font-weight:700;font-size:20px;color:var(--ink)}
+.modal-card .plogo-c .wordmark{color:#fff}
+.ep-pkgname{font-family:'Space Grotesk';font-weight:700;font-size:16px;color:var(--ink);margin-bottom:14px}
+.ep-prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line-l)}
+.ep-price{background:var(--paper);border-radius:12px;padding:10px 12px}
+.ep-price .l{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.ep-price .v{font-family:'Space Grotesk';font-weight:700;font-size:17px;color:var(--ink);margin-top:2px}
+.ep-cm{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;border-radius:100px;padding:5px 11px;margin-bottom:12px;width:fit-content}
+.ep-cm.included{background:var(--lime-soft);color:#5f9000}
+.ep-cm.available{background:rgba(17,20,15,.06);color:var(--ink-soft)}
+.ep-card ul{list-style:none;display:grid;gap:8px;margin-bottom:14px}
+.ep-card li{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--ink-soft);font-weight:500}
+.ep-card li iconify-icon{color:#5f9000;font-size:16px;flex-shrink:0;margin-top:1px}
+.ep-card .ep-cm-note{font-size:11px;color:#8a9279;margin-bottom:14px;line-height:1.5}
+.ep-viewmore{background:none;border:none;color:#5f9000;font-weight:700;font-size:12.5px;cursor:pointer;padding:0;margin-bottom:14px;text-align:left}
+.ep-card-btns{margin-top:auto;display:grid;gap:8px}
+.ep-card-btns .btn{justify-content:center;width:100%}
+
+.ep-lead{max-width:720px;margin:0 auto}
+.ep-recap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.ep-recap span{font-size:12px;font-weight:600;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line-l);border-radius:100px;padding:6px 12px}
+
+@media(max-width:760px){.ep-tiles.cat{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.ep-tiles{grid-template-columns:1fr}.ep-tiles.cat{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -141,13 +212,14 @@
   <div class="container ehero-grid">
     <div class="rv">
       <span class="eyebrow"><iconify-icon icon="ph:devices-duotone"></iconify-icon> Plemmo EPOS</span>
-      <h1 style="margin-top:14px">Run your business<br><span class="lime">smarter.</span></h1>
+      <h1 style="margin-top:14px">One till that knows your<br><span class="lime">stock, staff and sales.</span></h1>
       <p class="sub">Powerful, easy-to-use EPOS systems for retail, hospitality and service businesses — checkout, stock and reporting in one place.</p>
       <div class="ehero-btns">
         <a href="#build" class="btn btn-primary btn-lg">Build My EPOS <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
         <a href="#" class="btn btn-ghost btn-lg" data-quote data-service="EPOS Systems">Book a Demo</a>
       </div>
       <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Free setup &amp; training · Integrated card machine options · UK support</p>
+      <p class="reassure" style="margin-top:8px"><iconify-icon icon="ph:sparkle-duotone"></iconify-icon> Not sure which one? Try our <a href="epos-systems.html#engine" class="lime" style="text-decoration:underline">EPOS Recommendation Engine</a></p>
     </div>
     <div class="estage rv">
       <img loading="eager" fetchpriority="high" decoding="async" src="../images/epos-hero.webp" alt="Plemmo EPOS system">
@@ -336,6 +408,63 @@
   </div>
 </section>
 
+
+<!-- ════ RECOMMENDATION ENGINE (embedded — see spec "comparison page") ════ -->
+<section class="section" id="engine" style="padding-top:20px">
+  <div class="container" style="max-width:900px">
+    <div class="appwin rv">
+      <div class="appwin-bar">
+        <div class="appwin-dots"><i></i><i></i><i></i></div>
+        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/epos-recommendation</span>
+        <span class="appwin-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="appwin-body">
+        <div id="epBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section s-light" id="results" style="display:none">
+  <div class="container">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Suggested for you</span>
+      <h2 class="h2" id="resultsHeading">Suggested EPOS Systems</h2>
+      <p class="lead" id="resultsSub">Based on your business type.</p>
+    </div>
+    <div id="resultsBody"></div>
+  </div>
+</section>
+
+<section class="section" id="lead-form" style="display:none">
+  <div class="container ep-lead">
+    <div class="head center">
+      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
+      <h2 class="h2">Get your personalised quote</h2>
+      <p class="lead" style="margin-top:10px">Leave your details and a Plemmo specialist will confirm pricing and next steps.</p>
+    </div>
+    <div class="ep-recap" id="epRecap"></div>
+    <form class="appwin" id="epLeadForm" style="padding:0" novalidate>
+      <input type="hidden" name="_subject" value="EPOS Recommendation — New Lead">
+      <input type="hidden" name="recommended_package" id="leadRecommended">
+      <input type="hidden" name="business_category" id="leadCategory">
+      <input type="hidden" name="business_type" id="leadType">
+      <div class="appwin-body" style="padding:30px">
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
+        <div class="frow two"><div><label>Mobile Number <span class="req-star">*</span></label><input class="input" type="tel" name="mobile" id="leadMobile" required></div><div><label>Email Address <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
+        <div class="frow"><label>Additional Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send my details <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · We'll only use this to contact you about your enquiry</p>
+      </div>
+    </form>
+    <div class="msuccess" id="epLeadOk" style="display:none">
+      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
+      <h3>Thanks — we've got your details</h3>
+      <p>A Plemmo specialist will be in touch shortly to confirm your quote.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container">
     <div class="fgrid">
@@ -434,5 +563,12 @@
 </script>
 <script src="site.js"></script>
 <script src="../cookie-consent.js"></script>
+<script src="epos-engine/config.js"></script>
+<script src="epos-engine/engine.js"></script>
+<script src="epos-engine/store.js"></script>
+<script src="epos-engine/app.js"></script>
+<script src="fluid.js"></script>
+<script src="quiz-fluid.js"></script>
+<script src="results-polish.js"></script>
 </body>
 </html>

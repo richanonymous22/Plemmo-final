@@ -1,0 +1,391 @@
+/* ==========================================================================
+   PLEMMO — fluid.css
+   The material, type and component layer that pairs with fluid.js.
+
+   Two rules run through the whole file:
+   1. Anything a finger can touch is animated by a spring in JS, not by a CSS
+      transition here — transitions can't be grabbed and reversed mid-flight.
+      CSS handles colour, border and shadow; JS handles transform and opacity.
+   2. Every translucent surface has a defined fallback for
+      prefers-reduced-transparency and prefers-contrast.
+   ========================================================================== */
+
+/* ── typography: tracking and leading are size-specific ────────────────────
+   One letter-spacing value across a whole scale is wrong somewhere. Large
+   text reads too loose and needs negative tracking; small text needs a touch
+   of positive tracking to stay legible. */
+.fl-display{
+  font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;
+  font-size:clamp(2rem,5vw,3.6rem);line-height:1.04;letter-spacing:-.03em;
+  font-optical-sizing:auto;text-wrap:balance;
+}
+.fl-title{
+  font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;
+  font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.15;letter-spacing:-.022em;
+}
+.fl-heading{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:1.06rem;line-height:1.3;letter-spacing:-.012em}
+.fl-body{font-size:.97rem;line-height:1.62;letter-spacing:0}
+.fl-meta{font-size:.78rem;line-height:1.45;letter-spacing:.018em;font-weight:600}
+/* Numerals in data UI must not jitter as they count. */
+.fl-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;letter-spacing:-.02em}
+
+/* ── materials ─────────────────────────────────────────────────────────────
+   Weight encodes hierarchy: thick separates structural regions, thin draws
+   attention to interactive elements. Never stack thin on thin. */
+.fl-mat-thick{
+  background:rgba(12,16,9,.72);
+  backdrop-filter:blur(28px) saturate(170%);
+  -webkit-backdrop-filter:blur(28px) saturate(170%);
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 28px 70px rgba(0,0,0,.5);
+}
+.fl-mat-thin{
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(14px) saturate(150%);
+  -webkit-backdrop-filter:blur(14px) saturate(150%);
+  border:1px solid rgba(255,255,255,.12);
+}
+/* A bright top edge reads as light catching the lip of a real material. */
+.fl-mat-thick,.fl-mat-thin{position:relative}
+.fl-mat-thick::before,.fl-mat-thin::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.13),transparent 42%);
+  opacity:.6;
+}
+/* Vibrancy: over a blurred surface, flat grey text dissolves. Lift the
+   contrast and the weight instead of reaching for a lighter grey. */
+.fl-vibrant{color:#e9efe0;font-weight:550;letter-spacing:.008em}
+.fl-vibrant-dim{color:#a8b39a;font-weight:550;letter-spacing:.012em}
+
+/* ── scroll edge ───────────────────────────────────────────────────────────
+   The material appears only once content is actually beneath the chrome, so
+   there is no rule floating over empty background at the top of the page. */
+[data-scroll-edge]{transition:background .35s var(--ease,ease),backdrop-filter .35s,box-shadow .35s}
+[data-scroll-edge].fl-edge{
+  background:rgba(8,10,6,.76);
+  backdrop-filter:blur(22px) saturate(165%);
+  -webkit-backdrop-filter:blur(22px) saturate(165%);
+  box-shadow:0 1px 0 rgba(255,255,255,.06),0 12px 34px rgba(0,0,0,.34);
+}
+
+/* ── press ────────────────────────────────────────────────────────────────
+   The scale itself is driven by a spring in JS. CSS only carries the colour
+   shift, which has no interruption problem. */
+[data-press]{
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:border-color .18s ease-out,background-color .18s ease-out,box-shadow .18s ease-out;
+  will-change:transform;
+}
+[data-press].fl-pressed{transition-duration:60ms}
+
+/* ── reveal ───────────────────────────────────────────────────────────────
+   Start hidden; fluid.js springs it in. Without JS, .fl-rv is never added,
+   so content stays visible rather than disappearing. */
+.fl-rv{opacity:0}
+.fl-rv.fl-in{opacity:1}
+
+.fl-grabbing{cursor:grabbing !important}
+
+/* Jumping to #anchor must not park the heading underneath the fixed nav —
+   arriving at a section whose title you can't see is disorienting. */
+section[id],header[id],div[id][class*="section"]{scroll-margin-top:96px}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RATE EXPLORER
+   The turnover→rate tables are a curve, not a list. Drag along it.
+   ══════════════════════════════════════════════════════════════════════════ */
+.fl-rx{
+  position:relative;border-radius:26px;padding:clamp(20px,3vw,34px);
+  background:linear-gradient(168deg,#13180e 0%,#0b0e08 68%);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 40px 90px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.fl-rx::after{ /* soft lime bloom, blended so it merges into the dark */
+  content:'';position:absolute;width:520px;height:520px;right:-180px;top:-240px;
+  background:radial-gradient(circle,rgba(198,255,0,.13),transparent 68%);
+  filter:blur(70px);mix-blend-mode:screen;pointer-events:none;
+}
+.fl-rx-top{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between;margin-bottom:22px}
+.fl-rx-turn .lbl{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:#9aa48d;margin-bottom:6px}
+.fl-rx-turn .val{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:clamp(34px,5.4vw,52px);line-height:1;color:#fff;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.fl-rx-turn .val em{font-style:normal;color:#9aa48d;font-size:.42em;font-weight:600;letter-spacing:-.01em;margin-left:6px}
+.fl-rx-headline{text-align:right;min-width:180px}
+.fl-rx-headline .lbl{display:block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:#9aa48d;margin-bottom:6px}
+.fl-rx-headline .rate{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,44px);line-height:1;color:var(--lime,#c6ff00);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.fl-rx-headline .who{display:block;margin-top:6px;font-size:12.5px;color:#c3ccb6;font-weight:600}
+
+/* the curve */
+.fl-rx-chart{position:relative;z-index:2;height:190px;margin:6px 0 2px;border-radius:16px;overflow:hidden}
+.fl-rx-chart svg{display:block;width:100%;height:100%;overflow:visible}
+.fl-rx-grid line{stroke:rgba(255,255,255,.07);stroke-width:1}
+.fl-rx-area{fill:url(#flRxGrad)}
+.fl-rx-line{fill:none;stroke:var(--lime,#c6ff00);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.fl-rx-line.alt{stroke:rgba(255,255,255,.34);stroke-width:2;stroke-dasharray:5 5}
+.fl-rx-dot{fill:var(--lime,#c6ff00);stroke:#0b0e08;stroke-width:3}
+.fl-rx-rule{stroke:rgba(198,255,0,.45);stroke-width:1.5;stroke-dasharray:4 4}
+/* Axis labels sit on their own plate so a gridline never strikes through
+   the text. */
+.fl-rx-axis{font-size:10.5px;fill:#8d9880;font-weight:600;letter-spacing:.04em;paint-order:stroke;stroke:#0b0e08;stroke-width:3px;stroke-linejoin:round}
+
+.fl-rx-legend{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;margin:12px 0 4px;font-size:11.5px;font-weight:600;color:#9aa48d;letter-spacing:.012em}
+.fl-rx-legend span{display:inline-flex;align-items:center;gap:7px}
+.fl-rx-legend i{width:16px;height:0;border-top-width:2.5px;border-top-style:solid;display:block;flex-shrink:0}
+.fl-rx-legend i.k-teya{border-color:var(--lime,#c6ff00)}
+.fl-rx-legend i.k-sumup{border-color:rgba(255,255,255,.42);border-top-style:dashed}
+.fl-rx-legend em{font-style:normal;color:#c3ccb6}
+.fl-rx-legend-hint{margin-left:auto;color:#6b7560}
+.fl-rx-legend-hint iconify-icon{font-size:15px;color:var(--lime,#c6ff00)}
+
+/* Rate rows are a factual price list in fixed provider order — deliberately
+   not ranked, badged or highlighted, so nothing here reads as a
+   recommendation. The recommendation engine makes those, using the owner's
+   rules. */
+.fl-rx-rates{position:relative;z-index:2;margin-top:22px;display:grid;gap:9px}
+.fl-rx-rates .fl-rx-row{grid-template-columns:1fr auto}
+.fl-rx-quote{font-size:15px;font-weight:700;color:#c3ccb6;letter-spacing:-.01em}
+
+/* Hand-off to the engine. Visually distinct from the rate rows so it reads
+   as "next step", not as another provider. */
+.fl-rx-next{
+  position:relative;z-index:2;margin-top:22px;padding:20px 22px;border-radius:18px;
+  display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:rgba(198,255,0,.07);border:1px solid rgba(198,255,0,.26);
+}
+.fl-rx-next strong{display:block;font-family:'Space Grotesk','Inter',sans-serif;font-size:15.5px;color:#fff;letter-spacing:-.015em;margin-bottom:6px}
+.fl-rx-next p{margin:0;font-size:13px;line-height:1.6;color:#a8b39a;max-width:52ch}
+.fl-rx-next .btn{flex-shrink:0}
+@media(max-width:620px){.fl-rx-next{flex-direction:column;align-items:stretch}.fl-rx-next .btn{justify-content:center}}
+
+/* the scrubber track */
+.fl-rx-track{
+  position:relative;z-index:2;height:52px;margin-top:10px;border-radius:16px;cursor:grab;
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
+  touch-action:pan-y;-webkit-tap-highlight-color:transparent;
+}
+.fl-rx-track:focus-visible{outline:2px solid var(--lime,#c6ff00);outline-offset:3px}
+.fl-rx-fill{position:absolute;inset:1px auto 1px 1px;border-radius:15px;background:linear-gradient(90deg,rgba(198,255,0,.14),rgba(198,255,0,.3));pointer-events:none}
+.fl-rx-handle{
+  position:absolute;top:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;
+  background:var(--lime,#c6ff00);box-shadow:0 6px 18px rgba(198,255,0,.34),0 2px 6px rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;color:#0a0c08;font-size:17px;pointer-events:none;
+}
+.fl-rx-ticks{position:absolute;inset:0;pointer-events:none}
+.fl-rx-ticks i{position:absolute;top:50%;width:2px;height:9px;margin-top:-4.5px;border-radius:2px;background:rgba(255,255,255,.16)}
+.fl-rx-scale{display:flex;justify-content:space-between;margin-top:9px;font-size:11px;color:#7f8a72;font-weight:600;letter-spacing:.04em}
+
+/* provider ranking rows — they reorder as you drag */
+.fl-rx-rank{position:relative;z-index:2;margin-top:24px;display:grid;gap:9px}
+.fl-rx-row{
+  display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:14px;
+  padding:13px 16px;border-radius:15px;background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);will-change:transform;
+  transition:border-color .3s ease,background-color .3s ease;
+}
+.fl-rx-row.best{border-color:rgba(198,255,0,.46);background:rgba(198,255,0,.075)}
+.fl-rx-row .pos{font-size:12px;font-weight:700;color:#7f8a72;font-variant-numeric:tabular-nums}
+.fl-rx-row.best .pos{color:var(--lime,#c6ff00)}
+.fl-rx-row .nm{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:15px;color:#fff;letter-spacing:-.012em}
+.fl-rx-row .nt{display:block;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#9aa48d;letter-spacing:.006em;margin-top:2px}
+.fl-rx-row .rt{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:19px;color:#e9efe0;font-variant-numeric:tabular-nums;letter-spacing:-.02em;text-align:right}
+.fl-rx-row.best .rt{color:var(--lime,#c6ff00)}
+.fl-rx-row .rt small{display:block;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:#7f8a72;letter-spacing:.05em;text-transform:uppercase;margin-top:2px}
+.fl-rx-note{position:relative;z-index:2;margin-top:16px;font-size:11.5px;line-height:1.6;color:#6b7560}
+
+@media(max-width:640px){
+  .fl-rx-top{flex-direction:column;align-items:flex-start;gap:12px}
+  .fl-rx-headline{text-align:left}
+  .fl-rx-chart{height:150px}
+  .fl-rx-row{grid-template-columns:22px 1fr auto;gap:10px;padding:11px 13px}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PRICE SPECTRUM
+   Every screen we sell, placed on one scale by price — so the range is
+   legible at a glance instead of buried in eight separate tables.
+   ══════════════════════════════════════════════════════════════════════════ */
+.fl-sp{position:relative}
+.fl-sp-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.fl-sp-chip{
+  font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  padding:9px 15px;border-radius:100px;cursor:pointer;white-space:nowrap;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#c3ccb6;
+  will-change:transform;
+}
+.fl-sp-chip:hover{border-color:rgba(198,255,0,.4);color:#fff}
+.fl-sp-chip.on{background:var(--lime,#c6ff00);border-color:var(--lime,#c6ff00);color:#0a0c08;font-weight:700}
+.fl-sp-chip .ct{opacity:.62;margin-left:6px;font-variant-numeric:tabular-nums}
+
+.fl-sp-plot{
+  position:relative;border-radius:24px;padding:28px 24px 16px;
+  background:linear-gradient(170deg,#12170d,#0a0d07);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 34px 80px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.045);
+  overflow:hidden;
+}
+.fl-sp-lanes{position:relative;min-height:340px}
+.fl-sp-lane{position:relative;height:82px;border-bottom:1px dashed rgba(255,255,255,.07)}
+.fl-sp-lane:last-child{border-bottom:0}
+.fl-sp-lane-lbl{
+  position:absolute;left:0;top:6px;font-size:10.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:#6b7560;pointer-events:none;z-index:1;
+}
+/* Nodes are <button> for keyboard and screen-reader parity, so every piece
+   of the UA's default chrome has to be cleared or they render as boxes. */
+.fl-sp-node{
+  position:absolute;top:28px;left:0;appearance:none;-webkit-appearance:none;
+  background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;
+  transform-origin:50% 50%;will-change:transform;
+  display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.fl-sp-node:focus{outline:none}
+.fl-sp-node:focus-visible i{box-shadow:0 0 0 3px rgba(198,255,0,.2),0 0 0 6px var(--lime,#c6ff00)}
+.fl-sp-node i{
+  display:block;border-radius:5px;background:rgba(198,255,0,.55);
+  box-shadow:0 0 0 3px rgba(198,255,0,.12);transition:background .25s,box-shadow .25s;
+}
+.fl-sp-node:hover i{background:var(--lime,#c6ff00);box-shadow:0 0 0 5px rgba(198,255,0,.18)}
+.fl-sp-node.on i{background:var(--lime,#c6ff00);box-shadow:0 0 0 5px rgba(198,255,0,.24),0 4px 14px rgba(198,255,0,.34)}
+/* Every price is legible at rest — a plot you have to poke to read is a
+   worse table, not a better one. Selection raises contrast rather than
+   being the only way to see a number. */
+.fl-sp-node .tag{
+  font-size:10px;font-weight:700;color:#8b957d;white-space:nowrap;letter-spacing:.03em;
+  font-variant-numeric:tabular-nums;transition:color .25s;
+}
+.fl-sp-node:hover .tag{color:#dfe6d4}
+.fl-sp-node.on .tag{color:var(--lime,#c6ff00)}
+/* Ticks are absolutely placed to line up with the nodes above them. */
+.fl-sp-axis{position:relative;height:30px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:#7f8a72;font-weight:600;font-variant-numeric:tabular-nums}
+.fl-sp-axis span{position:absolute;top:12px;transform:translateX(-50%);white-space:nowrap}
+
+.fl-sp-readout{
+  margin-top:18px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
+  padding:20px 22px;border-radius:20px;background:rgba(198,255,0,.07);
+  border:1px solid rgba(198,255,0,.26);
+}
+.fl-sp-readout .rk{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:var(--lime,#c6ff00);margin-bottom:5px}
+.fl-sp-readout h4{font-family:'Space Grotesk','Inter',sans-serif;font-size:19px;color:#fff;letter-spacing:-.02em;margin:0 0 5px}
+.fl-sp-readout p{font-size:12.5px;color:#a8b39a;margin:0;line-height:1.55}
+.fl-sp-readout .pr{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:34px;color:var(--lime,#c6ff00);letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1;text-align:right}
+.fl-sp-readout .pr small{display:block;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;color:#7f8a72;text-transform:uppercase;letter-spacing:.07em;margin-top:5px}
+
+@media(max-width:640px){
+  .fl-sp-plot{padding:20px 16px 12px}
+  .fl-sp-readout{grid-template-columns:1fr;gap:12px}
+  .fl-sp-readout .pr{text-align:left}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DECK — draggable card deck with depth
+   ══════════════════════════════════════════════════════════════════════════ */
+.fl-deck{position:relative;perspective:1400px;overflow:hidden;padding:30px 0}
+.fl-deck-track{
+  position:relative;height:100%;display:flex;align-items:center;justify-content:center;
+  transform-style:preserve-3d;cursor:grab;touch-action:pan-y;
+}
+.fl-deck-track>*{position:absolute;will-change:transform,opacity;backface-visibility:hidden}
+.fl-deck-nav{display:flex;gap:9px;justify-content:center;align-items:center;margin-top:22px}
+.fl-deck-dot{
+  width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;
+  border:none;padding:0;will-change:transform;transition:background .3s;
+}
+.fl-deck-dot.on{background:var(--lime,#c6ff00)}
+.fl-deck-btn{
+  width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#fff;
+  cursor:pointer;font-size:18px;will-change:transform;
+}
+.fl-deck-btn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3)}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY FALLBACKS
+   Reduced motion means a gentler equivalent, not the absence of feedback.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.14s !important;scroll-behavior:auto !important;
+  }
+  .fl-rv{opacity:1}
+  /* Depth still reads through scale and opacity; the travel is what's
+     vestibular, so the deck flattens rather than disappearing. */
+  .fl-deck{perspective:none}
+  .fl-deck-track>*{transition:opacity .18s ease}
+}
+@media (prefers-reduced-transparency: reduce){
+  .fl-mat-thick{background:#0e120a;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .fl-mat-thin{background:#161b12;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .fl-mat-thick::before,.fl-mat-thin::before{display:none}
+  [data-scroll-edge].fl-edge{background:#080a06;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media (prefers-contrast: more){
+  .fl-mat-thick,.fl-mat-thin{background:#0b0e07;border-color:rgba(255,255,255,.5)}
+  .fl-vibrant-dim{color:#cdd6c0}
+  .fl-rx-row{border-color:rgba(255,255,255,.34);background:#0d1108}
+  .fl-rx-row.best{border-color:var(--lime,#c6ff00);border-width:2px}
+  .fl-sp-chip{border-color:rgba(255,255,255,.45);color:#eef2e8}
+  .fl-rx-axis,.fl-sp-axis,.fl-rx-scale{fill:#b9c2ac;color:#b9c2ac}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RECOMMENDATION RESULTS — hierarchy & progressive disclosure (§79/§80/§84)
+   Presentation only: nothing is reordered or hidden from the page, and every
+   required field stays reachable.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* §80 — the answer, then the alternatives. */
+.fl-res-matchlabel,.fl-res-divider{
+  grid-column:1/-1;display:flex;align-items:center;gap:14px;margin:4px 0 2px;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;
+}
+.fl-res-matchlabel span{color:var(--lime,#c6ff00)}
+.fl-res-divider span{color:#7f8a72}
+.fl-res-matchlabel::after,.fl-res-divider::after{
+  content:'';flex:1;height:1px;background:currentColor;opacity:.22;
+}
+.s-light .fl-res-matchlabel span,.s-cream .fl-res-matchlabel span{color:#5f9000}
+.s-light .fl-res-divider span,.s-cream .fl-res-divider span{color:#8a9279}
+
+/* The leading recommendation carries more weight — not more information. */
+.fl-res-match{position:relative}
+.fl-res-match::after{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  box-shadow:0 0 0 2px rgba(198,255,0,.55),0 26px 60px rgba(0,0,0,.34);
+}
+.fl-res-alt{opacity:.985}
+
+/* §79 — disclosure. Height is animated by a spring in JS. */
+.fl-res-more{height:0;overflow:hidden;opacity:0;will-change:height}
+.fl-res-more ul{margin-top:8px}
+.fl-res-toggle{
+  display:inline-flex;align-items:center;gap:7px;margin-top:12px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#e7ebe0;
+  font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  padding:9px 14px;border-radius:100px;cursor:pointer;will-change:transform;
+  -webkit-tap-highlight-color:transparent;
+}
+.fl-res-toggle:hover{border-color:rgba(198,255,0,.45);color:#fff}
+.fl-res-toggle span{
+  font-size:10.5px;font-weight:800;color:var(--lime,#c6ff00);
+  background:rgba(198,255,0,.14);border-radius:100px;padding:2px 7px;
+}
+.s-light .fl-res-toggle,.s-cream .fl-res-toggle{
+  background:#fff;border-color:var(--line-l,#e7ebdd);color:var(--ink,#0b0e08);
+}
+.s-light .fl-res-toggle span,.s-cream .fl-res-toggle span{color:#5f9000;background:rgba(198,255,0,.2)}
+
+/* §84 — phone layout. Comparison content must stack and stay tappable
+   rather than scrolling sideways. */
+@media(max-width:640px){
+  .cme-grid,.ep-grid,.fn-grid,.en-grid{grid-template-columns:1fr !important}
+  .cme-card-btns,.ep-card-btns,.fn-card-btns,.en-card-btns{flex-direction:column;gap:9px}
+  .cme-card-btns .btn,.ep-card-btns .btn,.fn-card-btns .btn,.en-card-btns .btn{
+    width:100%;justify-content:center;min-height:48px;   /* comfortable touch target */
+  }
+  .fl-res-toggle{width:100%;justify-content:center;min-height:46px}
+  .fl-rx-track{height:60px}                               /* easier to grab */
+  .fl-rx-handle{width:44px;height:44px;margin:-22px 0 0 -22px}
+  .fl-sp-chip{min-height:42px;display:inline-flex;align-items:center}
+}

@@ -1,22 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* ==========================================================================
    PLEMMO V6 — ABSOLUTE PEAK (3D Tilt, Parallax, Custom Cursors)
    ========================================================================== */
 
 :root {
-  --bg-dark: #0B0E14; /* Deep Navy/Black */
-  --bg-dark-secondary: #121824;
-  --bg-light: #F8FAFC; /* Off-white */
-  --accent: #C6FF00; /* Vibrant Lime/Yellow */
-  --accent-hover: #b3e600;
+  --bg-dark: #080a06;        /* brand --bg */
+  --bg-dark-secondary: #11150e; /* brand --panel */
+  --bg-light: #f5f7f0;       /* brand --paper */
+  --accent: #c6ff00;         /* brand --lime */
+  --accent-hover: #aee000;   /* brand --lime-d */
   
-  --text-dark: #ffffff;
-  --text-dark-muted: #94a3b8;
-  --text-light: #0f172a;
-  --text-light-muted: #64748b;
+  --text-dark: #eef2e8;      /* brand --txt-d */
+  --text-dark-muted: #9aa48d;/* brand --muted */
+  --text-light: #0b0e08;     /* brand --ink */
+  --text-light-muted: #5c6553;/* brand --ink-soft */
   
-  --font-heading: 'Bebas Neue', sans-serif;
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   
   --radius-sm: 8px;
@@ -37,16 +37,17 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
   overflow-x: hidden;
-  cursor: none; /* Custom Cursor */
 }
 
 /* ─── DEMO BANNER ─── */
-.demo-banner { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--accent); color: #000; font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.1em; padding: 8px 0; z-index: 9999; overflow: hidden; pointer-events: none; border-top: 1px solid rgba(0,0,0,0.1); }
-.demo-marquee { display: flex; white-space: nowrap; width: 200%; animation: slide-demo 20s linear infinite; }
-.demo-track span { margin: 0 20px; font-weight: 600; }
 @keyframes slide-demo { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.05; letter-spacing: 0.02em; }
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; font-optical-sizing: auto; text-wrap: balance; }
+h1 { line-height: 1.03; letter-spacing: -0.035em; }   /* display: tighten as it grows */
+h2 { line-height: 1.08; letter-spacing: -0.028em; }
+h3 { line-height: 1.18; letter-spacing: -0.02em; }
+h4 { line-height: 1.28; letter-spacing: -0.012em; }
+small, .meta, .eyebrow { letter-spacing: 0.02em; }    /* small text opens up */
 .accent-text { color: var(--accent); }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
@@ -56,7 +57,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.
 .light-bg { background-color: var(--bg-light); color: var(--text-light); }
 
 /* ─── CUSTOM CURSOR ─── */
-.cursor-dot { position: fixed; width: 16px; height: 16px; background: #fff; border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1); mix-blend-mode: difference; }
+.cursor-dot { display: none; position: fixed; width: 16px; height: 16px; background: #fff; border-radius: 50%; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1); mix-blend-mode: difference; }
 .cursor-hover .cursor-dot { width: 80px; height: 80px; }
 
 /* ─── BUTTONS ─── */
@@ -153,7 +154,8 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.
 
 .hero-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; position: relative; z-index: 2; }
 .highlight-label { background: rgba(198, 255, 0, 0.1); color: var(--accent); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 32px; border: 1px solid rgba(198, 255, 0, 0.2); }
-.hero-title { font-size: clamp(48px, 6vw, 90px); color: #fff; margin-bottom: 24px; line-height: 0.9; }
+.hero-title { font-size: clamp(40px, 5.4vw, 72px); color: #fff; margin-bottom: 22px;
+              line-height: 1.02; letter-spacing: -0.038em; max-width: 15ch; text-wrap: balance; }
 .hero-desc { font-size: 20px; color: var(--text-dark-muted); margin-bottom: 48px; max-width: 500px; line-height: 1.6; }
 .hero-buttons { display: flex; gap: 24px; margin-bottom: 0; }
 

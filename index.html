@@ -27,6 +27,7 @@
   
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="mobile.css">
+  <link rel="stylesheet" href="pages/fluid.css">
   
   <!-- Iconify icons + GSAP/ScrollTrigger/Lenis motion + Three.js WebGL (deferred, execute in order before main.js) -->
   <script defer src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
@@ -34,6 +35,7 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="gsap-fallback.js"></script>
 
   <style>
     /* Resetting the hero to hold the WebGL Canvas */
@@ -60,7 +62,6 @@
 </head>
 <body>
 <!-- CUSTOM CURSOR -->
-<div class="cursor-dot"></div>
 
 <!-- STICKY NAVIGATION -->
 <nav class="site-nav glass-nav">
@@ -80,7 +81,7 @@
     </div>
     <div class="nav-actions">
       <a href="tel:03330411161" class="btn-glass magnetic" data-strength="20">0333 041 1161</a>
-      <a href="#quote" class="btn-solid magnetic" data-strength="40">Get a Free Quote</a>
+      <a href="#quote" class="btn-solid magnetic" data-strength="40">Compare my options</a>
     </div>
     
     <button class="hamburger-btn" aria-label="Open Mobile Menu" aria-expanded="false" aria-controls="mobile-menu">
@@ -113,7 +114,7 @@
 
       <div class="mobile-menu-actions">
         <a href="tel:03330411161" class="btn-outline" style="width: 100%; justify-content: center; margin-bottom: 16px;">0333 041 1161</a>
-        <a href="#quote" class="btn-solid" style="width: 100%; justify-content: center;">Get a Free Quote</a>
+        <a href="#quote" class="btn-solid" style="width: 100%; justify-content: center;">Compare my options</a>
       </div>
     </div>
   </div>
@@ -126,13 +127,13 @@
 
   <div class="container hero-container">
     <div class="hero-content">
-      <span class="trust-label highlight-label">Run your Business, We'll handle the rest</span>
-      <h1 class="hero-title reveal-text">STOP JUGGLING PROVIDERS.<br>START RUNNING YOUR BUSINESS.</h1>
-      <p class="hero-desc reveal-text">Plemmo brings together payments, funding, technology, and support — so you don't have to deal with five different companies, five different invoices, and five different headaches.</p>
+      <span class="trust-label highlight-label">One partner · Five services</span>
+      <h1 class="hero-title reveal-text">Five suppliers, five invoices, five headaches. Or one Plemmo.</h1>
+      <p class="hero-desc reveal-text">Card machines, funding, EPOS, signage and utilities — compared for your business, arranged by one team you can actually phone. No obligation, and you keep whatever you save.</p>
       
       <div class="hero-buttons reveal-text">
-        <a href="#quote" class="btn-solid btn-large magnetic" data-strength="50">Get My Free Quote</a>
-        <a href="#solutions" class="btn-outline btn-large magnetic" data-strength="50">See What We Offer <iconify-icon icon="solar:alt-arrow-down-bold-duotone"></iconify-icon></a>
+        <a href="#quote" class="btn-solid btn-large magnetic" data-strength="50">Compare my options</a>
+        <a href="#solutions" class="btn-outline btn-large magnetic" data-strength="50">See the five services <iconify-icon icon="solar:alt-arrow-down-bold-duotone"></iconify-icon></a>
       </div>
     </div>
 
@@ -185,7 +186,7 @@
 <section class="section-padding dark-section problem-section">
   <div class="container dual-grid align-center-mobile">
     <div class="split-content reveal-left">
-      <h2>YOUR BUSINESS DESERVES<br>BETTER THAN THIS.</h2>
+      <h2>The admin nobody<br>warned you about.</h2>
       <p>Most UK businesses are stuck overpaying on card fees, tied into contracts they didn't fully understand, and calling support lines that lead nowhere.</p>
       <p class="highlight-text">We built Plemmo to fix that. One trusted partner. Honest pricing. Real people picking up the phone.</p>
     </div>
@@ -223,7 +224,7 @@
 <section id="solutions" class="section-padding bento-section light-bg relative-section">
   <div class="container">
     <div class="section-header align-center reveal-up">
-      <h2>EVERYTHING YOUR BUSINESS NEEDS.<br><span class="accent-text">UNDER ONE ROOF.</span></h2>
+      <h2>Five services.<br><span class="accent-text">One phone number.</span></h2>
     </div>
 
     <div class="bento-cards" style="display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 300px; gap: 20px;">
@@ -296,7 +297,7 @@
 <section class="section-padding dark-section showcase-section relative-section" style="overflow: hidden;">
   <div class="container">
     <div class="section-header align-center reveal-up" style="margin-bottom: 80px;">
-      <h2>PREMIUM HARDWARE.<br><span class="accent-text">ZERO COMPROMISES.</span></h2>
+      <h2>Hardware that earns<br><span class="accent-text">its place on your counter.</span></h2>
     </div>
     
     <ul class="hover-list">
@@ -355,7 +356,7 @@
 <section class="testimonials-section">
   <div class="container align-center">
     <span class="tst-eyebrow"><span class="ststars">★★★★★</span> Rated 5.0 by UK businesses</span>
-    <h2 class="dark-heading" style="color: #fff; margin-bottom: 14px;">LOVED BY <span class="accent-text">UK BUSINESSES</span></h2>
+    <h2 class="dark-heading" style="color: #fff; margin-bottom: 14px;">What owners <span class="accent-text">tell us</span></h2>
     <p style="color: var(--text-dark-muted); margin-bottom: 8px; font-size: 15px;">Real reviews from real UK businesses we look after every day.</p>
   </div>
   <div class="marquee-container">
@@ -523,7 +524,7 @@
   <div class="container reveal-up">
     
     <div class="section-header align-center" style="margin-bottom: 64px;">
-      <h2>ESTIMATE YOUR <span class="accent-text">POTENTIAL SAVINGS</span></h2>
+      <h2>See what you could <span class="accent-text">stop paying</span></h2>
       <p style="font-size: 20px; color: var(--text-dark-muted); max-width: 600px; margin: 20px auto 0; line-height: 1.6;">Many businesses may be paying more than they need to on card processing. Drag the slider for an indicative estimate.</p>
     </div>
 
@@ -611,7 +612,7 @@
 <section class="section-padding dark-section">
   <div class="container">
     <div class="section-header align-center reveal-up">
-      <h2>SWITCHING IS <span class="accent-text">SEAMLESS</span></h2>
+      <h2>Switching, <span class="accent-text">start to finish</span></h2>
       <p style="font-size: 20px; color: var(--text-dark-muted); max-width: 600px; margin: 20px auto 0;">Zero downtime. Zero disruption. We handle the technical heavy lifting.</p>
     </div>
     
@@ -647,7 +648,7 @@
 <!-- INTERACTIVE ONBOARDING WIZARD (LEAD CAPTURE) -->
 <section id="quote" class="section-padding accent-section">
   <div class="container align-center">
-    <h2 class="dark-heading" style="font-size: clamp(48px, 6vw, 80px);">LET'S FIND THE RIGHT<br>SOLUTION FOR YOU</h2>
+    <h2 class="dark-heading" style="font-size: clamp(48px, 6vw, 80px);">Tell us about<br>your business</h2>
     <p style="color: rgba(0,0,0,0.55); font-size: 18px; margin-top: 16px;">Two quick questions, then your details — and a specialist will call you back.</p>
 
     <div class="wizard-container shadow-heavy" style="background: #fff; border-radius: var(--radius-xl); max-width: 700px; margin: 40px auto 0; padding: 48px; text-align: left;">
@@ -814,7 +815,7 @@
 <section class="section-padding light-bg refer-section">
   <div class="container align-center reveal-up perspective-container">
     <div class="refer-box glass-panel-dark tilt-element shadow-heavy">
-      <h2>KNOW ANOTHER<br>BUSINESS OWNER?</h2>
+      <h2>Know someone<br>who&rsquo;s overpaying?</h2>
       <p>Refer them to Plemmo and earn up to £100. No catch. Just a thank you for spreading the word.</p>
       <a href="pages/refer-and-earn.html" class="btn-solid btn-large magnetic" data-strength="30">See the Referral Programme <iconify-icon icon="solar:round-arrow-right-bold-duotone"></iconify-icon></a>
     </div>
@@ -858,7 +859,7 @@
         <h4>Contact</h4>
         <a href="tel:03330411161">0333 041 1161</a>
         <a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a>
-        <a href="#quote">Get a Free Quote</a>
+        <a href="#quote">Compare my options</a>
         <a href="pages/contact-us.html">Send an Enquiry</a>
       </div>
     </div>
@@ -880,6 +881,7 @@
   </div>
 </footer>
 
+<script defer src="pages/fluid.js"></script>
 <script defer src="main.js"></script>
 <script defer src="cookie-consent.js"></script>
 </body>

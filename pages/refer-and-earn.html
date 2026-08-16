@@ -129,6 +129,19 @@
   </div>
 </section>
 
+<section class="section s-light" id="become-partner">
+  <div class="container" style="max-width:780px">
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:handshake-duotone"></iconify-icon> Partnerships</span><h2 class="h2">Become a Partner</h2><p class="lead">Run a business that works alongside ours — accountants, brokers, consultants, agencies? Let's talk about a partnership that works for both of us.</p></div>
+    <form class="refer-form" id="partnerForm" style="margin-top:36px"><input type="hidden" name="_subject" value="Become a Partner Enquiry — Plemmo">
+      <div class="frow two"><div><label style="color:var(--ink-soft)">Name <span class="req-star">*</span></label><input class="input" type="text" name="name" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Company / Organisation</label><input class="input" type="text" name="company" style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
+      <div class="frow two"><div><label style="color:var(--ink-soft)">Email <span class="req-star">*</span></label><input class="input" type="email" name="email" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div><div><label style="color:var(--ink-soft)">Contact Number <span class="req-star">*</span></label><input class="input" type="tel" name="phone" required style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></div></div>
+      <div class="frow"><label style="color:var(--ink-soft)">Tell us about the partnership you have in mind</label><textarea class="textarea" name="message" placeholder="What kind of partnership are you looking for, and why do you think it's a fit..." style="background:var(--paper);border-color:var(--line-l);color:var(--ink)"></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enquire about becoming a partner <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+    </form>
+    <div id="partnerOk" style="display:none;text-align:center;padding:30px 0"><iconify-icon icon="ph:check-circle-duotone" style="font-size:52px;color:var(--lime)"></iconify-icon><h3 style="color:var(--ink);margin:12px 0 6px">Thanks — we'll be in touch</h3><p style="color:var(--ink-soft)">We'll review your enquiry and get back to you.</p></div>
+  </div>
+</section>
+
 <footer><div class="container">
   <div class="fgrid">
     <div class="fbrand"><div class="logo">plemmo</div><p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p><p style="margin-top:8px;font-size:13px;color:var(--lime)">Run your business, we'll handle the rest.</p></div>
@@ -150,6 +163,17 @@ if(tf)tf.addEventListener('submit',function(e){e.preventDefault();
   var fd=new FormData(tf);fd.append('_template','table');fd.append('_captcha','false');
   fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
     .then(function(res){if(!res.ok)throw new Error('fail');tf.style.display='none';document.getElementById('teamOk').style.display='block';})
+    .catch(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}alert('Sorry — something went wrong. Please call us on 0333 041 1161.');});
+});
+</script>
+<script>
+var pf=document.getElementById('partnerForm');
+if(pf)pf.addEventListener('submit',function(e){e.preventDefault();
+  var btn=pf.querySelector('button[type=submit]'),label=btn?btn.innerHTML:'';if(btn){btn.disabled=true;btn.textContent='Sending…';}
+  var fd=new FormData(pf);fd.append('_template','table');fd.append('_captcha','false');
+  if(pf.email&&pf.email.value)fd.append('_replyto',pf.email.value);
+  fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+    .then(function(res){if(!res.ok)throw new Error('fail');pf.style.display='none';document.getElementById('partnerOk').style.display='block';})
     .catch(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}alert('Sorry — something went wrong. Please call us on 0333 041 1161.');});
 });
 </script>

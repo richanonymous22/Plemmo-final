@@ -38,6 +38,21 @@ are not issued yet — update the text once available:
   - Footer **legal links** wired into every page; new pages added to `sitemap.xml`.
   - Registered office / contact: 133 Soho Hill, Hockley, Birmingham B19 1AT.
 
+## Image filenames that do not match their contents
+Flagged while fixing the owner's note that "counter top photo is even not
+counter top card machine". Two files are misnamed relative to what they show:
+
+- `images/card-type-countertop.webp` shows a **handheld** unit (no cable, no
+  dock). It is now unused.
+- `images/card-type-portable.webp` shows a terminal **on a cabled dock** —
+  i.e. the actual countertop product. It is now used for the Countertop card.
+- `images/countertop.webp` shows a **handheld** Plemmo terminal and is used
+  for the Portable card.
+
+The page references are correct; only the filenames are misleading. Rename
+the files (and update `pages/card-machines.html`) when the real product
+photography lands, so the next person isn't caught by this.
+
 ## Verify after deploy
 - [ ] Confirm FormSubmit endpoint `plemmouk@gmail.com` is activated; test each form
   receives full_name, business_name, phone, email + form-specific fields.
