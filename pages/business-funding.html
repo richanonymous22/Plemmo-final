@@ -27,6 +27,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="fluid.css">
 <style>
 /* ── Business Funding page-specific ── */
 .fhero{position:relative;overflow:hidden;padding:140px 0 90px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
@@ -137,6 +138,74 @@
 .plogo:hover img{opacity:1}
 .plogo.lg img{max-height:44px;max-width:62px}   /* square / tall marks */
 .plogo.xw img{max-height:19px;max-width:118px}  /* ultra-wide wordmarks */
+
+/* ── embedded recommendation engine ── */
+
+/* ── Business Finance & Funding — page-specific ── */
+.fneh{position:relative;overflow:hidden;padding:140px 0 60px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
+.orb.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(170,230,0,.12),transparent 70%);top:-200px;right:-160px}
+.fneh-in{position:relative;z-index:2;max-width:720px}
+.fneh h1{font-size:clamp(38px,5.2vw,60px);color:#fff;letter-spacing:-.03em}
+.fneh .sub{color:var(--muted);font-size:17px;max-width:580px;margin:18px 0 0}
+.fneh-btns{display:flex;gap:13px;flex-wrap:wrap;margin-top:26px}
+
+.notice-box{background:rgba(198,255,0,.05);border:1px solid rgba(198,255,0,.22);border-radius:16px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start}
+.notice-box iconify-icon{font-size:24px;color:var(--lime);flex-shrink:0;margin-top:2px}
+.notice-box p{font-size:13px;color:#cfd6c5;line-height:1.6}
+.s-light .notice-box{background:var(--paper);border-color:var(--line-l)}
+.s-light .notice-box p{color:var(--ink-soft)}
+
+.fn-steps-strip{display:flex;gap:8px;margin-bottom:30px;flex-wrap:wrap;position:relative;z-index:1}
+.fn-pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--muted);padding:7px 13px;border-radius:var(--pill);background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.3s}
+.fn-pill .n{width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;color:#cfd6c5}
+.fn-pill.active{color:#fff;border-color:rgba(198,255,0,.5);background:var(--lime-soft)}
+.fn-pill.active .n{background:var(--lime);color:#0a0c08}
+.fn-pill.done{color:#bfe07a;border-color:rgba(198,255,0,.28)}
+.fn-pill.done .n{background:var(--lime);color:#0a0c08}
+.fn-q{font-family:'Space Grotesk';font-size:clamp(20px,2.8vw,28px);font-weight:700;color:#fff;margin-bottom:20px;position:relative;z-index:1;animation:fnf .4s both}
+.fn-hint{font-size:13px;color:var(--muted);margin:-10px 0 20px;position:relative;z-index:1}
+.fn-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;position:relative;z-index:1}
+.fn-tile{display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center;padding:20px 12px;border-radius:16px;background:rgba(255,255,255,.03);border:1.5px solid var(--line);color:#e7ebe0;font-family:'Inter';font-weight:600;font-size:13.5px;cursor:pointer;transition:transform .25s var(--spring),border-color .25s,background .25s}
+.fn-tile:hover{transform:translateY(-5px);border-color:rgba(198,255,0,.5);background:rgba(198,255,0,.06)}
+.fn-tile.sel{border-color:var(--lime);background:var(--lime-soft)}
+.fn-foot{display:flex;align-items:center;justify-content:space-between;margin-top:24px;position:relative;z-index:1}
+.fn-back{background:none;border:none;color:var(--muted);font-family:'Inter';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.fn-back[disabled]{opacity:0;pointer-events:none}.fn-back:hover{color:#fff}
+@keyframes fnf{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+.fn-fallback{background:linear-gradient(150deg,rgba(198,255,0,.12),rgba(198,255,0,.03));border:1px solid rgba(95,144,0,.3);border-radius:18px;padding:24px;text-align:center}
+.fn-fallback iconify-icon{font-size:34px;color:#5f9000;margin-bottom:10px}
+.fn-fallback h3{font-family:'Space Grotesk';color:var(--ink);font-size:20px;margin-bottom:8px}
+.fn-fallback p{color:var(--ink-soft);font-size:14px;max-width:480px;margin:0 auto}
+
+.fn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:8px}
+.fn-card{position:relative;background:var(--white);border:1px solid var(--line-l);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-l);display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s}
+.fn-card:hover{transform:translateY(-5px);box-shadow:0 34px 60px rgba(17,20,15,.16)}
+.fn-card.top{border-color:var(--lime);box-shadow:0 0 0 2px var(--lime),var(--shadow-l)}
+.fn-rank{position:absolute;top:-12px;left:20px;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:5px 13px;border-radius:var(--pill)}
+.fn-card h3{font-family:'Space Grotesk';font-size:17px;color:var(--ink);margin-bottom:12px}
+.fn-facts{display:grid;gap:8px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line-l)}
+.fn-fact{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--ink-soft)}
+.fn-fact b{color:var(--ink);font-family:'Space Grotesk';font-size:13px;text-align:right}
+.fn-card p.desc{font-size:13px;color:var(--ink-soft);line-height:1.55;margin-bottom:16px}
+.fn-card .btn{margin-top:auto;justify-content:center;width:100%}
+
+.bench{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.benchc{text-align:center;padding:26px 18px}
+.benchc .bi{width:54px;height:54px;border-radius:15px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.benchc .bi iconify-icon{font-size:27px;color:var(--lime)}
+.benchc strong{display:block;font-size:16px;margin-bottom:4px}
+.benchc span{font-size:13px;color:var(--muted)}
+@media(max-width:960px){.bench{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.bench{grid-template-columns:1fr}}
+
+.fn-lead{max-width:720px;margin:0 auto}
+.fn-recap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.fn-recap span{font-size:12px;font-weight:600;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line-l);border-radius:100px;padding:6px 12px}
+
+@media(max-width:480px){.fn-tiles{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -174,7 +243,7 @@
       <h1 style="margin-top:14px">Funding options built<br>around <span class="lime">your business</span></h1>
       <p class="sub">Plemmo helps UK businesses explore flexible funding options through selected funding partners. We're an introducer — not a lender.</p>
       <div class="fhero-btns">
-        <a href="#checker" class="btn btn-primary btn-lg">Check Funding Options <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+        <a href="#engine" class="btn btn-primary btn-lg">Check Funding Options <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
         <a href="#products" class="btn btn-ghost btn-lg">Explore Options</a>
       </div>
       <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Subject to lender approval · UK support</p>
@@ -192,32 +261,7 @@
   </div>
 </header>
 
-<!-- FUNDING CHECKER -->
-<section class="section" id="checker" style="padding-top:30px">
-  <div class="container">
-    <div class="center rv" style="max-width:600px;margin:0 auto 42px">
-      <span class="eyebrow"><iconify-icon icon="ph:gauge-duotone"></iconify-icon> Funding checker</span>
-      <h2 class="h2" style="margin-top:14px">See your indicative funding options</h2>
-      <p class="lead" style="margin-top:12px;color:var(--muted)">Answer five quick questions for an indicative profile and matched funding types. No obligation — subject to lender checks.</p>
-      <p class="lead" style="margin-top:10px;font-size:14px;color:var(--muted)">Prefer a fuller breakdown by finance product? Try our <a href="business-finance-recommendation.html" class="lime" style="text-decoration:underline">Business Funding Finder</a>.</p>
-    </div>
-    <div class="appwin rv">
-      <div class="appwin-bar">
-        <div class="appwin-dots"><i></i><i></i><i></i></div>
-        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/funding-checker</span>
-        <span class="appwin-live"><span class="dl"></span> Live</span>
-      </div>
-      <div class="appwin-body">
-        <span class="fc-glow"></span>
-        <div class="fc-top"><span class="fc-step" id="fcStep">Step 1 of 5</span><span class="fc-hint">~60 seconds</span></div>
-        <div class="fc-bar"><i id="fcBar"></i></div>
-        <div id="fcBody"></div>
-        <div class="fc-foot"><button class="fc-back" id="fcBack" disabled><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span style="font-size:12px;color:var(--muted)">Introducer · not a lender</span></div>
-      </div>
-    </div>
-    <p class="disc center" style="margin:26px auto 0">Plemmo is an introducer, not a lender. Funding is subject to status, eligibility, affordability checks, lender approval and provider terms. Plemmo may receive commission from funding partners.</p>
-  </div>
-</section>
+
 
 <!-- LENDER STRIP -->
 <section class="section tight">
@@ -240,7 +284,7 @@
       <div class="card fprod tilt rv"><div class="pi"><iconify-icon icon="ph:chart-line-up-duotone"></iconify-icon></div><h3>Revenue-Based Finance</h3><p>Funding that can align with your business revenue performance.</p><div class="gf"><b>Good for:</b> growth-focused businesses</div><button class="pa" data-detail="rbf">See details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       <div class="card fprod tilt rv"><div class="pi"><iconify-icon icon="ph:wrench-duotone"></iconify-icon></div><h3>Asset Finance</h3><p>Funding for equipment, vehicles, machinery or other business assets.</p><div class="gf"><b>Good for:</b> EPOS, equipment, kitchen kit, fit-out</div><button class="pa" data-detail="asset">See details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       <div class="card fprod tilt rv"><div class="pi"><iconify-icon icon="ph:wallet-duotone"></iconify-icon></div><h3>Credit Line / Revolving Credit</h3><p>Flexible access to funds when you need them, repaid as you go.</p><div class="gf"><b>Good for:</b> cash flow &amp; short-term working capital</div><button class="pa" data-detail="credit">See details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
-      <div class="card fprod tilt rv" style="background:linear-gradient(160deg,rgba(198,255,0,.1),var(--white));"><div class="pi"><iconify-icon icon="ph:chats-circle-duotone"></iconify-icon></div><h3>Not sure which fits?</h3><p>Run the 60-second checker or speak to a funding specialist — we'll help you find suitable options.</p><a class="pa" href="#checker">Check my options <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a></div>
+      <div class="card fprod tilt rv" style="background:linear-gradient(160deg,rgba(198,255,0,.1),var(--white));"><div class="pi"><iconify-icon icon="ph:chats-circle-duotone"></iconify-icon></div><h3>Not sure which fits?</h3><p>Run the 60-second checker or speak to a funding specialist — we'll help you find suitable options.</p><a class="pa" href="#engine">Check my options <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a></div>
     </div>
   </div>
 </section>
@@ -316,7 +360,7 @@
           <span><iconify-icon icon="ph:check-circle-fill"></iconify-icon> UK support</span>
         </div>
         <div class="cta-btns">
-          <a href="#checker" class="btn btn-primary btn-lg">See Funding Matches <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+          <a href="#engine" class="btn btn-primary btn-lg">See Funding Matches <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
           <a href="#" class="btn btn-ghost btn-lg" data-quote data-service="Business Funding">Speak to Funding Expert</a>
         </div>
         <p class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> Introducer, not a lender · Subject to lender approval</p>
@@ -329,13 +373,75 @@
 </section>
 
 <!-- FOOTER -->
+
+<!-- ════ RECOMMENDATION ENGINE (embedded — see spec "comparison page") ════ -->
+<section class="section" id="engine" style="padding-top:10px">
+  <div class="container" style="max-width:900px">
+    <div class="appwin rv">
+      <div class="appwin-bar">
+        <div class="appwin-dots"><i></i><i></i><i></i></div>
+        <span class="appwin-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/business-finance</span>
+        <span class="appwin-live"><span class="dl"></span> Live</span>
+      </div>
+      <div class="appwin-body">
+        <div id="fnBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section s-light" id="results" style="display:none">
+  <div class="container">
+    <div class="head center">
+      <span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:trophy-duotone"></iconify-icon> Suggested for you</span>
+      <h2 class="h2" id="resultsHeading">Suggested Finance Products</h2>
+      <p class="lead" id="resultsSub">Based on what you told us — a finance product type, not a specific lender.</p>
+    </div>
+    <div id="resultsBody"></div>
+    <div class="notice-box" style="margin-top:26px"><iconify-icon icon="ph:info-fill"></iconify-icon><p id="noticeText2"></p></div>
+  </div>
+</section>
+
+<section class="section" id="lead-form" style="display:none">
+  <div class="container fn-lead">
+    <div class="head center">
+      <span class="eyebrow"><iconify-icon icon="ph:paper-plane-tilt-duotone"></iconify-icon> Next step</span>
+      <h2 class="h2">Tell us about your business</h2>
+      <p class="lead" style="margin-top:10px">We'll review your enquiry and introduce you to a suitable finance partner.</p>
+    </div>
+    <div class="fn-recap" id="fnRecap"></div>
+    <form class="appwin" id="fnLeadForm" style="padding:0" novalidate>
+      <input type="hidden" name="_subject" value="Business Finance Enquiry — New Lead">
+      <input type="hidden" name="suggested_product" id="leadRecommended">
+      <input type="hidden" name="funding_amount" id="leadAmount">
+      <input type="hidden" name="funding_purpose" id="leadPurpose">
+      <input type="hidden" name="business_type" id="leadBizType">
+      <input type="hidden" name="business_sector" id="leadSector">
+      <input type="hidden" name="annual_turnover" id="leadTurnover">
+      <input type="hidden" name="time_trading" id="leadTimeTrading">
+      <div class="appwin-body" style="padding:30px">
+        <div class="frow two"><div><label>Business Name <span class="req-star">*</span></label><input class="input" type="text" name="business_name" id="leadBusinessName" required></div><div><label>Contact Name <span class="req-star">*</span></label><input class="input" type="text" name="contact_name" id="leadContactName" required></div></div>
+        <div class="frow two"><div><label>Telephone <span class="req-star">*</span></label><input class="input" type="tel" name="telephone" id="leadTelephone" required></div><div><label>Email <span class="req-star">*</span></label><input class="input" type="email" name="email" id="leadEmail" required></div></div>
+        <div class="frow"><label>Additional Notes</label><textarea class="textarea" name="notes" id="leadNotes" placeholder="Anything else we should know? (optional)"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enquire Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
+        <p class="reassure" style="justify-content:center;margin-top:14px"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Plemmo is an introducer, not a lender</p>
+      </div>
+    </form>
+    <div class="msuccess" id="fnLeadOk" style="display:none">
+      <div class="big"><iconify-icon icon="ph:check-bold"></iconify-icon></div>
+      <h3>Thanks — we've got your details</h3>
+      <p>A Plemmo specialist will review your enquiry and introduce you to a suitable finance partner.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container">
     <div class="fgrid">
       <div class="fbrand"><div class="logo">plemmo</div><p>One partner for essential business solutions — payments, funding, EPOS, digital signage and more.</p><p style="margin-top:8px;font-size:13px;color:var(--lime)">Run your business, we'll handle the rest.</p></div>
       <div class="fcol"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="utilities-broadband.html">Utilities &amp; Broadband</a></div>
       <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="contact-us.html">Support</a></div>
-      <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#products">Compare Options</a><a href="#checker">Funding Checker</a></div>
+      <div class="fcol"><h4>Resources</h4><a href="#faq">FAQs</a><a href="#products">Compare Options</a><a href="#engine">Funding Checker</a></div>
       <div class="fcol"><h4>Contact</h4><a href="tel:03330411161">0333 041 1161</a><a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a><a href="#" data-quote data-service="Business Funding">Get a Free Quote</a></div>
     </div>
     <div class="fdisc">Plemmo is an introducer, not a lender, and is not FCA authorised. We only introduce incorporated business enquiries to third-party lenders/brokers. Funding is subject to status, eligibility, affordability checks, lender approval and provider terms. Plemmo may receive commission from funding partners. Plemmo introduces businesses to selected third-party providers. Plemmo is a trading name used by PLEMMO SERVICES LTD (Company No. 17076776) and Digitease Business Solutions Ltd (Company No. 15196464). Depending on the service requested, products may be supplied directly or through selected third-party providers. We are not authorised or regulated by the Financial Conduct Authority and do not provide financial advice.</div>
@@ -382,60 +488,10 @@
 
 <script>
 (function(){
-  /* ── Funding checker ── */
-  var STEPS=[
-    {k:'amount',q:'How much funding are you looking for?',o:[{l:'Under £10k',i:'ph:coins-duotone'},{l:'£10k–£25k',i:'ph:money-duotone'},{l:'£25k–£50k',i:'ph:chart-line-up-duotone'},{l:'£50k–£100k',i:'ph:chart-bar-duotone'},{l:'£100k+',i:'ph:trend-up-duotone'}]},
-    {k:'purpose',q:"What's the funding for?",o:[{l:'Stock',i:'ph:package-duotone'},{l:'Equipment',i:'ph:wrench-duotone'},{l:'Refurbishment',i:'ph:paint-roller-duotone'},{l:'Marketing',i:'ph:megaphone-duotone'},{l:'Cash flow',i:'ph:wallet-duotone'},{l:'Expansion',i:'ph:trend-up-duotone'},{l:'Other',i:'ph:dots-three-circle-duotone'}]},
-    {k:'trading',q:'How long have you been trading?',o:[{l:'Under 6 months',i:'ph:leaf-duotone'},{l:'6–12 months',i:'ph:plant-duotone'},{l:'1–2 years',i:'ph:tree-duotone'},{l:'2+ years',i:'ph:buildings-duotone'}]},
-    {k:'turnover',q:'What is your monthly turnover?',o:[{l:'Under £5k',i:'ph:coins-duotone'},{l:'£5k–£10k',i:'ph:money-duotone'},{l:'£10k–£25k',i:'ph:chart-line-up-duotone'},{l:'£25k–£50k',i:'ph:chart-bar-duotone'},{l:'£50k+',i:'ph:trend-up-duotone'}]},
-    {k:'cards',q:'Do you take card payments?',o:[{l:'Yes',i:'ph:credit-card-duotone'},{l:'No',i:'ph:x-circle-duotone'},{l:'Not sure',i:'ph:question-duotone'}]}
-  ];
-  var PROD={
-    mca:{n:'Merchant Cash Advance',i:'ph:credit-card-duotone',w:'Flexible funding repaid as a percentage of your future card sales — repayments flex with your takings.',g:'Businesses with regular card payments'},
-    loan:{n:'Unsecured Business Loan',i:'ph:bank-duotone',w:'A fixed lump sum for eligible businesses without putting up asset security.',g:'Expansion, working capital, stock, refurbishment'},
-    rbf:{n:'Revenue-Based Finance',i:'ph:chart-line-up-duotone',w:'Funding that can align repayments with your revenue performance.',g:'Growth-focused businesses'},
-    asset:{n:'Asset Finance',i:'ph:wrench-duotone',w:'Spread the cost of equipment, vehicles, machinery or other business assets.',g:'EPOS, equipment, kitchen kit, fit-out'},
-    credit:{n:'Credit Line / Revolving Credit',i:'ph:wallet-duotone',w:'A flexible facility you can draw from when needed and repay as you go.',g:'Cash flow & short-term working capital'}
-  };
-  function score(a){ /* indicative profile strength 0-100 (not a promise) */
-    var s=20;
-    s+={'Under 6 months':5,'6–12 months':15,'1–2 years':28,'2+ years':40}[a.trading]||10;
-    s+={'Under £5k':6,'£5k–£10k':14,'£10k–£25k':22,'£25k–£50k':30,'£50k+':36}[a.turnover]||10;
-    if(a.cards==='Yes')s+=8;
-    return Math.max(15,Math.min(96,s));
-  }
-  function matches(a){
-    var m={mca:30,loan:30,rbf:30,asset:30,credit:30};
-    if(a.cards==='Yes')m.mca+=45; else m.mca-=10;
-    if(a.purpose==='Equipment'){m.asset+=50;}
-    if(a.purpose==='Cash flow'){m.credit+=45;m.mca+=10;}
-    if(a.purpose==='Expansion'||a.purpose==='Marketing'){m.rbf+=35;m.loan+=20;}
-    if(a.purpose==='Stock'||a.purpose==='Refurbishment'){m.loan+=30;m.mca+=15;}
-    if(a.trading==='2+ years'){m.loan+=25;}
-    if(a.turnover==='£25k–£50k'||a.turnover==='£50k+'){m.loan+=20;m.rbf+=15;}
-    var arr=Object.keys(m).map(function(k){return {k:k,v:Math.max(20,Math.min(96,m[k]))}});
-    arr.sort(function(x,y){return y.v-x.v});return arr.slice(0,3);
-  }
-  var ans={},cur=0,done=false,body=document.getElementById('fcBody'),bar=document.getElementById('fcBar'),stepEl=document.getElementById('fcStep'),back=document.getElementById('fcBack');
-  try{ans=JSON.parse(localStorage.getItem('plemmo_funding')||'{}')||{}}catch(e){ans={}}
-  function save(){try{localStorage.setItem('plemmo_funding',JSON.stringify(ans))}catch(e){}}
-  function render(){var s=STEPS[cur];done=false;bar.style.width=((cur+1)/STEPS.length*100)+'%';stepEl.textContent='Step '+(cur+1)+' of '+STEPS.length;back.disabled=cur===0;
-    var h='<div class="fc-q">'+s.q+'</div><div class="fc-tiles">';
-    s.o.forEach(function(o){h+='<button class="fc-tile'+(ans[s.k]===o.l?' sel':'')+'" data-v="'+o.l+'"><span class="ti"><iconify-icon icon="'+o.i+'"></iconify-icon></span><span>'+o.l+'</span></button>'});
-    h+='</div>';body.innerHTML=h;
-    body.querySelectorAll('.fc-tile').forEach(function(el){el.onclick=function(){ans[s.k]=el.dataset.v;save();if(cur<STEPS.length-1){cur++;render()}else{result()}}});}
-  function result(){done=true;bar.style.width='100%';stepEl.textContent='Your matches';back.disabled=false;
-    var sc=score(ans),lab=sc>=70?'Looks promising':(sc>=45?'Worth exploring':"Let's talk it through"),ms=matches(ans);
-    var h='<div class="fres"><div class="elig"><div class="elig-top"><span class="el">Indicative profile</span><span class="ev">'+lab+'</span></div><div class="elig-track"><span class="elig-fill" id="eligFill"></span></div><div class="elig-note">Indicative only — not a decision or offer. Funding is subject to lender checks, affordability, eligibility and approval.</div></div>';
-    h+='<div class="fmatches">'+ms.map(function(x){var p=PROD[x.k];return '<div class="fmatch"><span class="mi"><iconify-icon icon="'+p.i+'"></iconify-icon></span><div><h4>'+p.n+'</h4><div class="fitbar"><i data-w="'+x.v+'"></i></div></div><span class="pct">'+x.v+'%</span></div>'}).join('')+'</div>';
-    h+='<div class="fres-btns"><a href="#" class="btn btn-primary" id="fcQuote">See my funding matches <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" id="fcRestart">Start over</a></div></div>';
-    body.innerHTML=h;
-    setTimeout(function(){document.getElementById('eligFill').style.width=sc+'%';body.querySelectorAll('.fitbar i').forEach(function(i){i.style.width=i.dataset.w+'%'})},80);
-    document.getElementById('fcQuote').onclick=function(e){e.preventDefault();openQuote(PROD[ms[0].k].n)};
-    document.getElementById('fcRestart').onclick=function(e){e.preventDefault();ans={};save();cur=0;render()};
-  }
-  back.onclick=function(){if(done){done=false;cur=STEPS.length-1;render();return}cur=Math.max(0,cur-1);render()};
-  (function(){var f=-1;for(var i=0;i<STEPS.length;i++){if(!ans[STEPS[i].k]){f=i;break}}if(f===-1){result()}else{cur=Math.max(0,f);render()}})();
+
+  /* The 60-second funding checker that used to live here has been replaced
+     by the full recommendation engine embedded further down this page, so
+     its script is gone with its markup. */
   function openQuote(prod){var amt={'Under £10k':'Under £10k','£10k–£25k':'£10k–£25k','£25k–£50k':'£25k–£50k','£50k–£100k':'£50k–£100k','£100k+':'£100k+'}[ans.amount];
     if(window.PlemmoModal)window.PlemmoModal.open({service:'Business Funding',product:prod});
     var a=document.getElementById('mamount');if(a&&amt){for(var i=0;i<a.options.length;i++){if(a.options[i].text===amt){a.selectedIndex=i;break}}}}
@@ -469,5 +525,12 @@
 </script>
 <script src="site.js"></script>
 <script src="../cookie-consent.js"></script>
+<script src="finance-engine/config.js"></script>
+<script src="finance-engine/engine.js"></script>
+<script src="finance-engine/store.js"></script>
+<script src="finance-engine/app.js"></script>
+<script src="fluid.js"></script>
+<script src="quiz-fluid.js"></script>
+<script src="results-polish.js"></script>
 </body>
 </html>

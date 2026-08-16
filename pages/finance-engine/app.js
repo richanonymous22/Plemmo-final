@@ -8,6 +8,40 @@
    ════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
+
+  /* ── embeddable lookups ────────────────────────────────────────────────
+     This module now runs on the service page (the "comparison page" the
+     specification refers to) rather than a page of its own. Some elements it
+     used to own there — hero copy, FAQ list, service-card grids — belong to
+     the host page and may simply not exist.
+
+     Writing to a missing element must not abort the module and take the
+     whole quiz down with it, so member access goes through el(), which
+     returns an inert stub and logs once. Bare getElementById() calls are
+     left alone, because several are used as `if (!x) return` guards that
+     must keep seeing null. */
+  var _elMissing = {};
+  var _elNoop = function () {};
+  var _elStub = {
+    innerHTML: '', textContent: '', value: '', disabled: false, checked: false,
+    style: {}, dataset: {},
+    classList: { add: _elNoop, remove: _elNoop, toggle: _elNoop, contains: function () { return false; } },
+    addEventListener: _elNoop, removeEventListener: _elNoop, dispatchEvent: _elNoop,
+    appendChild: _elNoop, removeChild: _elNoop, insertBefore: _elNoop, remove: _elNoop,
+    setAttribute: _elNoop, removeAttribute: _elNoop, getAttribute: function () { return null; },
+    querySelector: function () { return null; }, querySelectorAll: function () { return []; },
+    closest: function () { return null; }, scrollIntoView: _elNoop,
+    focus: _elNoop, blur: _elNoop, click: _elNoop, reset: _elNoop, submit: _elNoop
+  };
+  function el(id) {
+    var e = document.getElementById(id);
+    if (e) return e;
+    if (!_elMissing[id]) {
+      _elMissing[id] = 1;
+      if (window.console && console.debug) console.debug('[plemmo] optional element #' + id + ' is not on this page');
+    }
+    return _elStub;
+  }
   var STORE = window.PLEMMO_FINANCE_STORE;
   var ENGINE = window.PLEMMO_FINANCE_ENGINE;
   var CONFIG = STORE.getConfig();
@@ -24,16 +58,16 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   /* ── static content from config (hero, notice, why-choose, FAQ) ── */
-  document.getElementById('heroHeadline').textContent = CONFIG.hero.headline;
-  document.getElementById('heroSub').textContent = CONFIG.hero.subheading;
-  document.getElementById('heroPrimaryBtn').innerHTML = esc(CONFIG.hero.primaryBtn) + ' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon>';
-  document.getElementById('heroSecondaryBtn').textContent = CONFIG.hero.secondaryBtn;
-  document.getElementById('noticeText').textContent = CONFIG.mandatoryNotice;
-  document.getElementById('noticeText2').textContent = CONFIG.mandatoryNotice;
-  document.getElementById('whyChooseGrid').innerHTML = CONFIG.whyChoose.map(function (w) {
+  el('heroHeadline').textContent = CONFIG.hero.headline;
+  el('heroSub').textContent = CONFIG.hero.subheading;
+  el('heroPrimaryBtn').innerHTML = esc(CONFIG.hero.primaryBtn) + ' <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon>';
+  el('heroSecondaryBtn').textContent = CONFIG.hero.secondaryBtn;
+  el('noticeText').textContent = CONFIG.mandatoryNotice;
+  el('noticeText2').textContent = CONFIG.mandatoryNotice;
+  el('whyChooseGrid').innerHTML = CONFIG.whyChoose.map(function (w) {
     return '<div class="card benchc rv" style="padding:20px"><div class="bi"><iconify-icon icon="' + esc(w.icon) + '"></iconify-icon></div><strong>' + esc(w.title) + '</strong><span>' + esc(w.text) + '</span></div>';
   }).join('');
-  document.getElementById('faqList').innerHTML = CONFIG.faqs.map(function (f) {
+  el('faqList').innerHTML = CONFIG.faqs.map(function (f) {
     return '<div class="faq"><div class="faq-q">' + esc(f.q) + ' <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>' + esc(f.a) + '</p></div></div>';
   }).join('');
 
@@ -71,8 +105,8 @@
   function goBack() {
     if (stepIndex === 0) return;
     stepIndex--;
-    document.getElementById('results').style.display = 'none';
-    document.getElementById('lead-form').style.display = 'none';
+    el('results').style.display = 'none';
+    el('lead-form').style.display = 'none';
     render();
   }
   function advance() { stepIndex++; render(); }
@@ -154,10 +188,10 @@
     restart.onclick = function () {
       answers = { fundingAmountId: null, fundingPurposeId: null, businessTypeId: null, businessSectorId: null, turnoverBandId: null, timeTradingId: null };
       stepIndex = 0; lastResult = null;
-      document.getElementById('results').style.display = 'none';
-      document.getElementById('lead-form').style.display = 'none';
+      el('results').style.display = 'none';
+      el('lead-form').style.display = 'none';
       render();
-      document.getElementById('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
     foot.appendChild(back); foot.appendChild(restart); body.appendChild(foot);
   }
@@ -172,23 +206,23 @@
     var sectorLabel = labelFor(CONFIG.businessSectors, answers.businessSectorId);
     var turnoverLabel = labelFor(CONFIG.turnoverBands, answers.turnoverBandId, 'label');
     var tradingLabel = labelFor(CONFIG.timeTradingBands, answers.timeTradingId, 'label');
-    document.getElementById('fnRecap').innerHTML = [amountLabel, purposeLabel, bizTypeLabel, sectorLabel, turnoverLabel, tradingLabel].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
-    document.getElementById('leadAmount').value = amountLabel;
-    document.getElementById('leadPurpose').value = purposeLabel;
-    document.getElementById('leadBizType').value = bizTypeLabel;
-    document.getElementById('leadSector').value = sectorLabel;
-    document.getElementById('leadTurnover').value = turnoverLabel;
-    document.getElementById('leadTimeTrading').value = tradingLabel;
+    el('fnRecap').innerHTML = [amountLabel, purposeLabel, bizTypeLabel, sectorLabel, turnoverLabel, tradingLabel].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
+    el('leadAmount').value = amountLabel;
+    el('leadPurpose').value = purposeLabel;
+    el('leadBizType').value = bizTypeLabel;
+    el('leadSector').value = sectorLabel;
+    el('leadTurnover').value = turnoverLabel;
+    el('leadTimeTrading').value = tradingLabel;
     leadSection.style.display = 'none';
     if (lastResult && lastResult.fallback) {
-      document.getElementById('leadRecommended').value = 'Not matched — manual review requested';
+      el('leadRecommended').value = 'Not matched — manual review requested';
       leadSection.style.display = '';
     }
   }
 
   function openLeadForm(productId) {
     var product = CONFIG.products[productId];
-    document.getElementById('leadRecommended').value = product ? product.name : productId;
+    el('leadRecommended').value = product ? product.name : productId;
     var notesField = document.getElementById('leadNotes');
     if (!notesField.value) notesField.value = "I'd like to enquire about " + (product ? product.name : 'this funding product') + '.';
     var leadSection = document.getElementById('lead-form');
@@ -205,15 +239,15 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
       var lead = {
-        businessName: document.getElementById('leadBusinessName').value,
-        contactName: document.getElementById('leadContactName').value,
-        telephone: document.getElementById('leadTelephone').value,
-        email: document.getElementById('leadEmail').value,
+        businessName: el('leadBusinessName').value,
+        contactName: el('leadContactName').value,
+        telephone: el('leadTelephone').value,
+        email: el('leadEmail').value,
         fundingAmountId: answers.fundingAmountId, fundingPurposeId: answers.fundingPurposeId,
         turnoverBandId: answers.turnoverBandId, timeTradingId: answers.timeTradingId,
         recommendedProductIds: lastResult && !lastResult.fallback ? lastResult.products.map(function (p) { return p.id; }) : [],
-        recommendedChoice: document.getElementById('leadRecommended').value,
-        notes: document.getElementById('leadNotes').value,
+        recommendedChoice: el('leadRecommended').value,
+        notes: el('leadNotes').value,
         needsReview: !!(lastResult && lastResult.fallback)
       };
       STORE.addLead(lead);
@@ -222,7 +256,7 @@
       fd.append('_template', 'table'); fd.append('_captcha', 'false');
       if (lead.email) fd.append('_replyto', lead.email);
       fetch(CONFIG.leadSubmitEndpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
-        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; document.getElementById('fnLeadOk').style.display = 'block'; document.getElementById('fnLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
+        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; el('fnLeadOk').style.display = 'block'; el('fnLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.innerHTML = label; }
           alert('Your details were saved, but we could not send the confirmation email. Please call us on 0333 041 1161 to make sure we have your enquiry.');

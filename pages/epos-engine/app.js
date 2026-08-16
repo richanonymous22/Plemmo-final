@@ -8,6 +8,40 @@
    ════════════════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
+
+  /* ── embeddable lookups ────────────────────────────────────────────────
+     This module now runs on the service page (the "comparison page" the
+     specification refers to) rather than a page of its own. Some elements it
+     used to own there — hero copy, FAQ list, service-card grids — belong to
+     the host page and may simply not exist.
+
+     Writing to a missing element must not abort the module and take the
+     whole quiz down with it, so member access goes through el(), which
+     returns an inert stub and logs once. Bare getElementById() calls are
+     left alone, because several are used as `if (!x) return` guards that
+     must keep seeing null. */
+  var _elMissing = {};
+  var _elNoop = function () {};
+  var _elStub = {
+    innerHTML: '', textContent: '', value: '', disabled: false, checked: false,
+    style: {}, dataset: {},
+    classList: { add: _elNoop, remove: _elNoop, toggle: _elNoop, contains: function () { return false; } },
+    addEventListener: _elNoop, removeEventListener: _elNoop, dispatchEvent: _elNoop,
+    appendChild: _elNoop, removeChild: _elNoop, insertBefore: _elNoop, remove: _elNoop,
+    setAttribute: _elNoop, removeAttribute: _elNoop, getAttribute: function () { return null; },
+    querySelector: function () { return null; }, querySelectorAll: function () { return []; },
+    closest: function () { return null; }, scrollIntoView: _elNoop,
+    focus: _elNoop, blur: _elNoop, click: _elNoop, reset: _elNoop, submit: _elNoop
+  };
+  function el(id) {
+    var e = document.getElementById(id);
+    if (e) return e;
+    if (!_elMissing[id]) {
+      _elMissing[id] = 1;
+      if (window.console && console.debug) console.debug('[plemmo] optional element #' + id + ' is not on this page');
+    }
+    return _elStub;
+  }
   var STORE = window.PLEMMO_EPOS_STORE;
   var ENGINE = window.PLEMMO_EPOS_ENGINE;
   var CONFIG = STORE.getConfig();
@@ -59,8 +93,8 @@
   function goBack() {
     if (stepIndex === 0) return;
     stepIndex--;
-    document.getElementById('results').style.display = 'none';
-    document.getElementById('lead-form').style.display = 'none';
+    el('results').style.display = 'none';
+    el('lead-form').style.display = 'none';
     render();
   }
   function advance() { stepIndex++; render(); }
@@ -163,10 +197,10 @@
     restart.innerHTML = 'Start over <iconify-icon icon="ph:arrow-clockwise-bold"></iconify-icon>';
     restart.onclick = function () {
       answers = { categoryId: null, typeId: null }; stepIndex = 0; lastResult = null;
-      document.getElementById('results').style.display = 'none';
-      document.getElementById('lead-form').style.display = 'none';
+      el('results').style.display = 'none';
+      el('lead-form').style.display = 'none';
       render();
-      document.getElementById('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el('engine').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
     foot.appendChild(back); foot.appendChild(restart); body.appendChild(foot);
   }
@@ -203,7 +237,7 @@
     if (applyBtn) applyBtn.onclick = function (e) { e.preventDefault(); closeDetail(); openLeadForm(pkgId, 'apply'); };
     detail.querySelector('.modal-bd').onclick = closeDetail;
   }
-  function closeDetail() { document.getElementById('detail').classList.remove('open'); document.body.style.overflow = ''; }
+  function closeDetail() { el('detail').classList.remove('open'); document.body.style.overflow = ''; }
 
   function labelFor(list, id) { var found = null; (list || []).forEach(function (o) { if (o.id === id) found = o.name; }); return found || id; }
 
@@ -211,19 +245,19 @@
     var leadSection = document.getElementById('lead-form');
     var cat = ENGINE.findCategory(CONFIG, answers.categoryId);
     var type = ENGINE.findType(cat, answers.typeId);
-    document.getElementById('epRecap').innerHTML = [cat ? cat.name : '', type ? type.name : ''].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
-    document.getElementById('leadCategory').value = cat ? cat.name : '';
-    document.getElementById('leadType').value = type ? type.name : '';
+    el('epRecap').innerHTML = [cat ? cat.name : '', type ? type.name : ''].filter(Boolean).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
+    el('leadCategory').value = cat ? cat.name : '';
+    el('leadType').value = type ? type.name : '';
     leadSection.style.display = 'none';
     if (lastResult && lastResult.fallback) {
-      document.getElementById('leadRecommended').value = 'Not matched — manual review requested';
+      el('leadRecommended').value = 'Not matched — manual review requested';
       leadSection.style.display = '';
     }
   }
 
   function openLeadForm(pkgId, intent) {
     var pkg = ENGINE.formatPackage(CONFIG, pkgId);
-    document.getElementById('leadRecommended').value = (pkg ? pkg.name : pkgId) + (intent === 'contact' ? ' (contact requested)' : ' (apply now)');
+    el('leadRecommended').value = (pkg ? pkg.name : pkgId) + (intent === 'contact' ? ' (contact requested)' : ' (apply now)');
     var notesField = document.getElementById('leadNotes');
     if (!notesField.value) notesField.value = intent === 'contact'
       ? 'Please contact me about ' + (pkg ? pkg.name : 'this recommendation') + '.'
@@ -242,14 +276,14 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
       var lead = {
-        businessName: document.getElementById('leadBusinessName').value,
-        contactName: document.getElementById('leadContactName').value,
-        mobile: document.getElementById('leadMobile').value,
-        email: document.getElementById('leadEmail').value,
+        businessName: el('leadBusinessName').value,
+        contactName: el('leadContactName').value,
+        mobile: el('leadMobile').value,
+        email: el('leadEmail').value,
         categoryId: answers.categoryId, typeId: answers.typeId,
         recommendedPackageId: lastResult && !lastResult.fallback && lastResult.packages[0] ? lastResult.packages[0].id : null,
-        recommendedChoice: document.getElementById('leadRecommended').value,
-        notes: document.getElementById('leadNotes').value,
+        recommendedChoice: el('leadRecommended').value,
+        notes: el('leadNotes').value,
         needsReview: !!(lastResult && lastResult.fallback)
       };
       STORE.addLead(lead);
@@ -258,7 +292,7 @@
       fd.append('_template', 'table'); fd.append('_captcha', 'false');
       if (lead.email) fd.append('_replyto', lead.email);
       fetch(CONFIG.leadSubmitEndpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
-        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; document.getElementById('epLeadOk').style.display = 'block'; document.getElementById('epLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
+        .then(function (res) { if (!res.ok) throw new Error('fail'); leadForm.style.display = 'none'; el('epLeadOk').style.display = 'block'; el('epLeadOk').scrollIntoView({ behavior: 'smooth', block: 'center' }); })
         .catch(function () {
           if (btn) { btn.disabled = false; btn.innerHTML = label; }
           alert('Your details were saved, but we could not send the confirmation email. Please call us on 0333 041 1161 to make sure we have your enquiry.');
