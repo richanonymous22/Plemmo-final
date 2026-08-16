@@ -213,7 +213,8 @@
   function renderCard(item, rank) {
     var provider = item.provider, p = item.pricing;
     var model = p.pricingType === 'blended' ? 'Blended Rate' : 'Split Rate';
-    var features = (p.features || []).slice(0, 6).map(function (f) {
+    /* Full feature list; the disclosure folds the tail. */
+    var features = (p.features || []).map(function (f) {
       return '<li><iconify-icon icon="ph:check-circle-fill"></iconify-icon>' + esc(f) + '</li>';
     }).join('');
     return '<div class="cme-card' + (rank === 1 ? ' top' : '') + '">'

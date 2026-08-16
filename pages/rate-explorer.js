@@ -42,8 +42,8 @@
   }
 
   function build(mount) {
-    var CFG = w.PLEMMO_CME_CONFIG;
-    if (!CFG || !CFG.providers) {
+    var CFG = w.PLEMMO_CME_CONFIG, ENG = w.PLEMMO_CME_ENGINE;
+    if (!CFG || !CFG.providers || !ENG) {
       /* Without the config there are no rates to show, and inventing them is
          not an option. Leave the section out rather than display a figure
          that isn't the owner's. */
@@ -54,13 +54,19 @@
     var teya = CFG.providers.teya, shift4 = CFG.providers.shift4;
     var teyaTable = (teya && teya.blendedRateTable) || [];
 
-    /* Rate lookups read straight from config — no local copies. */
+    /* Rate lookups reuse the ENGINE's own band lookup, not just its data.
+       Reimplementing the lookup is how this component went wrong before: the
+       published table has deliberate gaps (nothing listed for £35k-£40k or
+       £60k-£70k) and the owner's rule is that a rate holds until the next
+       band starts. A naive `t >= min && t < max` test returns null in those
+       gaps and shows "On request" for turnovers that do have a rate.
+       PLEMMO_CME_ENGINE.lookupBand carries the rate forward, and using it
+       keeps this illustration and the recommendation engine in agreement by
+       construction. */
     function teyaRate(t) {
-      for (var i = 0; i < teyaTable.length; i++) {
-        var r = teyaTable[i];
-        if (t >= r.min && (r.max == null || t < r.max)) return r.rate;
-      }
-      return null;                    /* outside the published table */
+      if (t < 10000) return null;     /* Teya's table starts at £10k */
+      var row = ENG.lookupBand(teyaTable, t);
+      return row ? row.rate : null;
     }
     function shift4Rate(t) {
       if (!shift4) return null;
@@ -219,7 +225,7 @@
       var bits = ['Rates shown are indicative only and subject to business type, turnover, card mix, provider approval and contract terms.'];
       bits.push('The pricing shown is indicative only and subject to underwriting and approval. Additional charges may apply, including PCI compliance and non-compliance fees, faster settlement charges, monthly account fees, gateway or virtual terminal fees, and other provider-specific fees and charges.');
       if (teyaRate(t) == null) {
-        bits.push('Teya’s published rate table does not cover this turnover band — we’ll confirm your rate directly.');
+        bits.push('Teya’s rates start at £10,000 monthly card turnover — below that we’ll recommend a provider that suits your level.');
       }
       elNote.textContent = bits.join(' ');
     }

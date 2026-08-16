@@ -328,3 +328,64 @@ section[id],header[id],div[id][class*="section"]{scroll-margin-top:96px}
   .fl-sp-chip{border-color:rgba(255,255,255,.45);color:#eef2e8}
   .fl-rx-axis,.fl-sp-axis,.fl-rx-scale{fill:#b9c2ac;color:#b9c2ac}
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RECOMMENDATION RESULTS — hierarchy & progressive disclosure (§79/§80/§84)
+   Presentation only: nothing is reordered or hidden from the page, and every
+   required field stays reachable.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* §80 — the answer, then the alternatives. */
+.fl-res-matchlabel,.fl-res-divider{
+  grid-column:1/-1;display:flex;align-items:center;gap:14px;margin:4px 0 2px;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;
+}
+.fl-res-matchlabel span{color:var(--lime,#c6ff00)}
+.fl-res-divider span{color:#7f8a72}
+.fl-res-matchlabel::after,.fl-res-divider::after{
+  content:'';flex:1;height:1px;background:currentColor;opacity:.22;
+}
+.s-light .fl-res-matchlabel span,.s-cream .fl-res-matchlabel span{color:#5f9000}
+.s-light .fl-res-divider span,.s-cream .fl-res-divider span{color:#8a9279}
+
+/* The leading recommendation carries more weight — not more information. */
+.fl-res-match{position:relative}
+.fl-res-match::after{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  box-shadow:0 0 0 2px rgba(198,255,0,.55),0 26px 60px rgba(0,0,0,.34);
+}
+.fl-res-alt{opacity:.985}
+
+/* §79 — disclosure. Height is animated by a spring in JS. */
+.fl-res-more{height:0;overflow:hidden;opacity:0;will-change:height}
+.fl-res-more ul{margin-top:8px}
+.fl-res-toggle{
+  display:inline-flex;align-items:center;gap:7px;margin-top:12px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#e7ebe0;
+  font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.01em;
+  padding:9px 14px;border-radius:100px;cursor:pointer;will-change:transform;
+  -webkit-tap-highlight-color:transparent;
+}
+.fl-res-toggle:hover{border-color:rgba(198,255,0,.45);color:#fff}
+.fl-res-toggle span{
+  font-size:10.5px;font-weight:800;color:var(--lime,#c6ff00);
+  background:rgba(198,255,0,.14);border-radius:100px;padding:2px 7px;
+}
+.s-light .fl-res-toggle,.s-cream .fl-res-toggle{
+  background:#fff;border-color:var(--line-l,#e7ebdd);color:var(--ink,#0b0e08);
+}
+.s-light .fl-res-toggle span,.s-cream .fl-res-toggle span{color:#5f9000;background:rgba(198,255,0,.2)}
+
+/* §84 — phone layout. Comparison content must stack and stay tappable
+   rather than scrolling sideways. */
+@media(max-width:640px){
+  .cme-grid,.ep-grid,.fn-grid,.en-grid{grid-template-columns:1fr !important}
+  .cme-card-btns,.ep-card-btns,.fn-card-btns,.en-card-btns{flex-direction:column;gap:9px}
+  .cme-card-btns .btn,.ep-card-btns .btn,.fn-card-btns .btn,.en-card-btns .btn{
+    width:100%;justify-content:center;min-height:48px;   /* comfortable touch target */
+  }
+  .fl-res-toggle{width:100%;justify-content:center;min-height:46px}
+  .fl-rx-track{height:60px}                               /* easier to grab */
+  .fl-rx-handle{width:44px;height:44px;margin:-22px 0 0 -22px}
+  .fl-sp-chip{min-height:42px;display:inline-flex;align-items:center}
+}

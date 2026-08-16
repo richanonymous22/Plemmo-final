@@ -71,7 +71,7 @@
     plemmoCoreFeatureGroups: [
       { group: 'Sales Features', items: ['Fast Checkout', 'Barcode Scanning', 'Multiple Payment Methods', 'Split Payments', 'Refund Management', 'Discounts & Promotions', 'Gift Cards', 'Product Variations'] },
       { group: 'Inventory Management', items: ['Real-Time Stock Management', 'Low Stock Alerts', 'Supplier Management', 'Purchase Orders', 'Stock Transfers', 'Stock Adjustments', 'Barcode Inventory'] },
-      { group: 'Staff Management', items: ['Multiple Staff Accounts', 'User Permissions', 'Clock In/Clock Out', 'Staff Sales Performance'] },
+      { group: 'Staff Management', items: ['Multiple Staff Accounts', 'User Permissions', 'Clock In / Clock Out', 'Staff Sales Performance'] },
       { group: 'Reporting', items: ['Sales Reports', 'Product Reports', 'Profit Reports', 'Staff Reports', 'Customer Reports', 'Tax Reports', 'End of Day Reports'] },
       { group: 'Customer Management', items: ['Customer Database', 'Customer Purchase History', 'Loyalty Programme'] },
       { group: 'Business Management', items: ['Cloud Based', 'Multi-store Support', 'Remote Access', 'Secure Backup', 'Role Permissions'] },
