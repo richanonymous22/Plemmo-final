@@ -27,6 +27,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="fluid.css">
 <style>
 .shero{position:relative;overflow:hidden;padding:140px 0 90px;background:radial-gradient(130% 95% at 80% -10%,#11160d 0%,var(--bg) 50%)}
 .orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;mix-blend-mode:screen}
@@ -236,55 +237,10 @@
 <!-- COMMERCIAL PRICING -->
 <section class="section" id="pricing">
   <div class="container">
-    <div class="head"><span class="eyebrow"><iconify-icon icon="ph:tag-duotone"></iconify-icon> Pricing</span><h2 class="h2" style="text-align:left">Commercial display screens</h2><p class="lead">Indicative pricing across our most popular ranges.</p></div>
-    <div class="sg-tabs rv" id="pTabs">
-      <div class="sg-tab active" role="button" tabindex="0" data-cat="adv">Advertising</div><div class="sg-tab" role="button" tabindex="0" data-cat="vib">4K Vibrant</div><div class="sg-tab" role="button" tabindex="0" data-cat="free">Freestanding</div><div class="sg-tab" role="button" tabindex="0" data-cat="win">Window</div><div class="sg-tab" role="button" tabindex="0" data-cat="kiosk">Touch Kiosks</div><div class="sg-tab" role="button" tabindex="0" data-cat="out">Outdoor</div><div class="sg-tab" role="button" tabindex="0" data-cat="touch">Interactive</div><div class="sg-tab" role="button" tabindex="0" data-cat="pos">POS</div>
-    </div>
+    <div class="head"><span class="eyebrow"><iconify-icon icon="ph:tag-duotone"></iconify-icon> Pricing</span><h2 class="h2" style="text-align:left">Commercial display screens</h2><p class="lead">Every commercial display we supply, plotted by price and screen size. Filter by type to zoom into a range, or select any dot for the model and its indicative price.</p></div>
     <div class="sg-show rv">
-    <div class="sg-table-wrap">
-      <div class="sg-cat active" data-cat="adv"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">32"</span><span class="sg-pname">32" Slimline Pro Advertising Display</span><span class="sg-pprice">£650</span></div>
-        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Slimline Pro Advertising Display</span><span class="sg-pprice">£890</span></div>
-        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" Slimline Pro Advertising Display</span><span class="sg-pprice">£1,035</span></div>
-        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Slimline Pro Advertising Display</span><span class="sg-pprice">£1,350</span></div>
-      </div></div>
-      <div class="sg-cat" data-cat="vib"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">32"</span><span class="sg-pname">32" Vibrant Professional Display</span><span class="sg-pprice">£499</span></div>
-        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" 4K Vibrant Professional Display</span><span class="sg-pprice">£715</span></div>
-        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" 4K Vibrant Professional Display</span><span class="sg-pprice">£810</span></div>
-        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" 4K Vibrant Professional Display</span><span class="sg-pprice">£1,140</span></div>
-      </div></div>
-      <div class="sg-cat" data-cat="free"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" Android Freestanding Digital Poster</span><span class="sg-pprice">£1,915</span></div>
-        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Android Freestanding Digital Poster</span><span class="sg-pprice">£2,190</span></div>
-        <div class="sg-pcard"><span class="sg-chip">65"</span><span class="sg-pname">65" 4K Freestanding Digital Poster</span><span class="sg-pprice">£3,575</span></div>
-      </div></div>
-      <div class="sg-cat" data-cat="win"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Ultra High Brightness Window Display</span><span class="sg-pprice">£1,770</span></div>
-        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Ultra High Brightness Window Display</span><span class="sg-pprice">£2,220</span></div>
-        <div class="sg-pcard"><span class="sg-chip">65"</span><span class="sg-pname">65" Ultra High Brightness Window Display</span><span class="sg-pprice">£3,240</span></div>
-      </div></div>
-      <div class="sg-cat" data-cat="kiosk"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Android Touch Screen Kiosk</span><span class="sg-pprice">£2,290</span></div>
-        <div class="sg-pcard"><span class="sg-chip">50"</span><span class="sg-pname">50" Android Touch Screen Kiosk</span><span class="sg-pprice">£2,565</span></div>
-        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Android Touch Screen Kiosk</span><span class="sg-pprice">£2,745</span></div>
-      </div></div>
-      <div class="sg-cat" data-cat="out"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Outdoor Digital Advertising Display</span><span class="sg-pprice">£2,960</span></div>
-        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" Outdoor Digital Advertising Display</span><span class="sg-pprice">£5,455</span></div>
-        <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Outdoor Digital A-Board</span><span class="sg-pprice">£2,370</span></div>
-      </div></div>
-      <div class="sg-cat" data-cat="touch"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">55"</span><span class="sg-pname">55" 4K Interactive Touch Display</span><span class="sg-pprice">£1,139</span></div>
-        <div class="sg-pcard"><span class="sg-chip">65"</span><span class="sg-pname">65" 4K Interactive Touch Display</span><span class="sg-pprice">£1,230</span></div>
-        <div class="sg-pcard"><span class="sg-chip">75"</span><span class="sg-pname">75" 4K Interactive Touch Display</span><span class="sg-pprice">£1,770</span></div>
-      </div></div>
-      <div class="sg-cat" data-cat="pos"><div class="sg-pgrid">
-        <div class="sg-pcard"><span class="sg-chip">10"</span><span class="sg-pname">10" POS Android Advertising Display</span><span class="sg-pprice">£230</span></div>
-        <div class="sg-pcard"><span class="sg-chip">15"</span><span class="sg-pname">15" POS Android Advertising Display</span><span class="sg-pprice">£360</span></div>
-      </div></div>
-    </div>
-    <div class="sg-visual"><img id="sgImg" loading="lazy" decoding="async" src="../images/signage-cat-advertising.webp" alt="Digital advertising display"><span class="sg-cap" id="sgCap"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Advertising displays</span></div>
+      <div data-price-spectrum></div>
+      <div class="sg-visual"><img id="sgImg" loading="lazy" decoding="async" src="../images/signage-cat-advertising.webp" alt="Digital advertising display"><span class="sg-cap" id="sgCap"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> Advertising displays</span></div>
     </div>
     <p class="disc" style="margin-top:20px">Product pricing may vary based on size, specification, VAT, delivery, installation, design work, site survey and availability.</p>
   </div>
@@ -407,13 +363,16 @@
   };
   var sgImg=document.getElementById('sgImg'),sgCap=document.getElementById('sgCap');
   function setSgImg(c){var d=SGIMG[c];if(!d||!sgImg)return;sgImg.style.opacity=0;setTimeout(function(){sgImg.src='../images/'+d[0];sgImg.alt=d[2];sgImg.onload=function(){sgImg.style.opacity=1};setTimeout(function(){sgImg.style.opacity=1},400);},180);if(sgCap)sgCap.innerHTML='<iconify-icon icon="'+d[1]+'"></iconify-icon> '+d[2];}
-  document.querySelectorAll('#pTabs .sg-tab').forEach(function(t){function activate(){document.querySelectorAll('#pTabs .sg-tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var c=t.dataset.cat;document.querySelectorAll('.sg-cat').forEach(function(s){s.classList.toggle('active',s.dataset.cat===c)});setSgImg(c)}t.onclick=activate;t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();activate()}})});
+  /* The price spectrum announces which category is in view; the photo follows. */
+  document.addEventListener('spectrum:filter',function(e){setSgImg(e.detail.cat||'adv')});
   /* before/after */
   (function(){var r=document.getElementById('baRange'),c=document.getElementById('baClip'),h=document.getElementById('baHandle');if(!r)return;function set(v){c.style.clipPath='inset(0 '+(100-v)+'% 0 0)';h.style.left=v+'%'}r.addEventListener('input',function(){set(+r.value)});set(50)})();
   /* menu board preview cycle */
   (function(){var rows=document.querySelectorAll('.menuboard [data-mi]');if(!rows.length)return;var i=0;function tick(){rows.forEach(function(r,n){r.classList.toggle('on',n<=i)});i=(i+1)%(rows.length+1)}tick();setInterval(tick,1100)})();
 })();
 </script>
+<script src="fluid.js"></script>
+<script src="price-spectrum.js"></script>
 <script src="site.js"></script>
 <script src="../cookie-consent.js"></script>
 </body>
