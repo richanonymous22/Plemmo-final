@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Slight parallax on image while scrolling horizontally
       if(img) {
         gsap.to(img, {
-          x: 150,
+          x: 36,
           ease: "none",
           scrollTrigger: {
             trigger: panel,

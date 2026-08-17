@@ -81,11 +81,26 @@
 .pkg h3{font-size:18px;color:var(--ink);margin-bottom:10px}
 .pkg ul{list-style:none;display:grid;gap:8px;margin-bottom:16px}.pkg li{display:flex;gap:8px;font-size:13px;color:var(--ink-soft)}.pkg li iconify-icon{color:#5f9000;font-size:15px}
 .pkg .btn{margin-top:auto;justify-content:center}
-/* pricing */
-.sg-tabs{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px}
-.sg-tabs::-webkit-scrollbar{display:none}
-.sg-tab{flex:0 0 auto;border-radius:var(--pill);padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;border:1.5px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-family:'Inter';transition:.2s}
-.sg-tab.active{background:var(--lime);border-color:var(--lime);color:#0a0c08}
+/* pricing — use case cards */
+.sg-uc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.sg-uc{cursor:pointer;border-radius:16px;border:1.5px solid var(--line);background:rgba(255,255,255,.025);overflow:hidden;transition:border-color .2s,transform .2s,background .2s;display:flex;flex-direction:column}
+.sg-uc:hover{border-color:var(--line2);background:rgba(255,255,255,.045);transform:translateY(-3px)}
+.sg-uc.active{border-color:var(--lime);background:rgba(198,255,0,.06)}
+.sg-uc-img{aspect-ratio:16/10;background-image:var(--uc-img);background-size:cover;background-position:center;position:relative}
+.sg-uc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,10,6,.5),transparent 60%)}
+.sg-uc-icon{position:absolute;left:12px;bottom:-16px;width:36px;height:36px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:var(--lime);color:#0a0c08;font-size:19px;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.sg-uc-body{padding:24px 15px 15px;display:flex;flex-direction:column;gap:6px;flex:1}
+.sg-uc-body h3{font-size:14.5px;color:#fff;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.sg-uc-body p{font-size:12px;color:var(--muted);line-height:1.45;flex:1}
+.sg-uc-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:10px;margin-top:2px;border-top:1px solid var(--line);font-size:11.5px}
+.sg-uc-meta span{color:var(--muted)}
+.sg-uc-meta b{font-family:'Space Grotesk';color:var(--lime);font-size:15px;white-space:nowrap}
+.sg-detail-head{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line);background:rgba(198,255,0,.04)}
+.sg-detail-head iconify-icon{font-size:20px;color:var(--lime)}
+.sg-detail-head b{color:#fff;font-size:14.5px}
+.sg-detail-head span{color:var(--muted);font-size:12.5px}
+@media(max-width:920px){.sg-uc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.sg-uc-grid{grid-template-columns:1fr}}
 .sg-table-wrap{border:1px solid var(--line2);border-radius:var(--r-lg);overflow:hidden;margin-top:22px;background:rgba(255,255,255,.02)}
 .sg-cat{display:none}.sg-cat.active{display:block}
 .sg-table{width:100%;border-collapse:collapse}
@@ -339,11 +354,43 @@
 <section class="section" id="pricing">
   <div class="container">
     <div class="head"><span class="eyebrow"><iconify-icon icon="ph:tag-duotone"></iconify-icon> Pricing</span><h2 class="h2" style="text-align:left">Commercial display screens</h2><p class="lead">Indicative pricing across our most popular ranges.</p></div>
-    <div class="sg-tabs rv" id="pTabs">
-      <div class="sg-tab active" role="button" tabindex="0" data-cat="adv">Advertising</div><div class="sg-tab" role="button" tabindex="0" data-cat="vib">4K Vibrant</div><div class="sg-tab" role="button" tabindex="0" data-cat="free">Freestanding</div><div class="sg-tab" role="button" tabindex="0" data-cat="win">Window</div><div class="sg-tab" role="button" tabindex="0" data-cat="kiosk">Touch Kiosks</div><div class="sg-tab" role="button" tabindex="0" data-cat="out">Outdoor</div><div class="sg-tab" role="button" tabindex="0" data-cat="touch">Interactive</div><div class="sg-tab" role="button" tabindex="0" data-cat="pos">POS</div>
+    <div class="sg-uc-grid rv" id="pTabs">
+      <div class="sg-uc active" role="button" tabindex="0" data-cat="adv" style="--uc-img:url(../images/signage-cat-advertising.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:monitor-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>Advertising &amp; Promotions</h3><p>Eye-catching displays for offers, promotions and brand messaging on the shop floor.</p><div class="sg-uc-meta"><span>Retail &amp; shopfronts</span><b>From £650</b></div></div>
+      </div>
+      <div class="sg-uc" role="button" tabindex="0" data-cat="vib" style="--uc-img:url(../images/signage-cat-4k-vibrant.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:television-simple-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>4K Vibrant Menu &amp; Content Boards</h3><p>Ultra-vivid colour, ideal for food photography and eye-catching menu boards.</p><div class="sg-uc-meta"><span>Cafés &amp; restaurants</span><b>From £499</b></div></div>
+      </div>
+      <div class="sg-uc" role="button" tabindex="0" data-cat="free" style="--uc-img:url(../images/signage-cat-freestanding.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:scroll-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>Freestanding Displays</h3><p>Portable floor-standing posters — no wall mounting required.</p><div class="sg-uc-meta"><span>Reception &amp; entrances</span><b>From £1,915</b></div></div>
+      </div>
+      <div class="sg-uc" role="button" tabindex="0" data-cat="win" style="--uc-img:url(../images/signage-cat-window.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>Window Displays</h3><p>Ultra-bright screens that stay readable in daylight through glass.</p><div class="sg-uc-meta"><span>Shopfront windows</span><b>From £1,770</b></div></div>
+      </div>
+      <div class="sg-uc" role="button" tabindex="0" data-cat="kiosk" style="--uc-img:url(../images/signage-cat-kiosk.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:hand-tap-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>Self-Service Touch Kiosks</h3><p>Interactive touchscreens for ordering, check-in and wayfinding.</p><div class="sg-uc-meta"><span>Self-service ordering</span><b>From £2,290</b></div></div>
+      </div>
+      <div class="sg-uc" role="button" tabindex="0" data-cat="out" style="--uc-img:url(../images/signage-cat-outdoor.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:cloud-sun-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>Outdoor Signage</h3><p>Weatherproof, high-brightness displays built for exterior use.</p><div class="sg-uc-meta"><span>Forecourts &amp; exteriors</span><b>From £2,370</b></div></div>
+      </div>
+      <div class="sg-uc" role="button" tabindex="0" data-cat="touch" style="--uc-img:url(../images/signage-cat-interactive.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:cursor-click-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>Interactive Touch Displays</h3><p>Large-format interactive touch screens for showrooms and presentations.</p><div class="sg-uc-meta"><span>Showrooms &amp; presentations</span><b>From £1,139</b></div></div>
+      </div>
+      <div class="sg-uc" role="button" tabindex="0" data-cat="pos" style="--uc-img:url(../images/signage-cat-pos.webp)">
+        <div class="sg-uc-img"><span class="sg-uc-icon"><iconify-icon icon="ph:cash-register-duotone"></iconify-icon></span></div>
+        <div class="sg-uc-body"><h3>Point of Sale Displays</h3><p>Compact counter-top screens for upsell and promotions at checkout.</p><div class="sg-uc-meta"><span>Counters &amp; checkouts</span><b>From £230</b></div></div>
+      </div>
     </div>
     <div class="sg-show rv">
     <div class="sg-table-wrap">
+      <div class="sg-detail-head" id="sgDetailHead"><iconify-icon icon="ph:monitor-duotone"></iconify-icon> <b>Advertising &amp; Promotions</b> <span>— sizes &amp; indicative pricing</span></div>
       <div class="sg-cat active" data-cat="adv"><div class="sg-pgrid">
         <div class="sg-pcard"><span class="sg-chip">32"</span><span class="sg-pname">32" Slimline Pro Advertising Display</span><span class="sg-pprice">£650</span></div>
         <div class="sg-pcard"><span class="sg-chip">43"</span><span class="sg-pname">43" Slimline Pro Advertising Display</span><span class="sg-pprice">£890</span></div>
@@ -738,9 +785,9 @@
     touch:['signage-cat-interactive.webp','ph:cursor-click-duotone','Interactive displays'],
     pos:['signage-cat-pos.webp','ph:cash-register-duotone','POS displays']
   };
-  var sgImg=document.getElementById('sgImg'),sgCap=document.getElementById('sgCap');
-  function setSgImg(c){var d=SGIMG[c];if(!d||!sgImg)return;sgImg.style.opacity=0;setTimeout(function(){sgImg.src='../images/'+d[0];sgImg.alt=d[2];sgImg.onload=function(){sgImg.style.opacity=1};setTimeout(function(){sgImg.style.opacity=1},400);},180);if(sgCap)sgCap.innerHTML='<iconify-icon icon="'+d[1]+'"></iconify-icon> '+d[2];}
-  document.querySelectorAll('#pTabs .sg-tab').forEach(function(t){function activate(){document.querySelectorAll('#pTabs .sg-tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var c=t.dataset.cat;document.querySelectorAll('.sg-cat').forEach(function(s){s.classList.toggle('active',s.dataset.cat===c)});setSgImg(c)}t.onclick=activate;t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();activate()}})});
+  var sgImg=document.getElementById('sgImg'),sgCap=document.getElementById('sgCap'),sgDetailHead=document.getElementById('sgDetailHead');
+  function setSgImg(c){var d=SGIMG[c];if(!d||!sgImg)return;sgImg.style.opacity=0;setTimeout(function(){sgImg.src='../images/'+d[0];sgImg.alt=d[2];sgImg.onload=function(){sgImg.style.opacity=1};setTimeout(function(){sgImg.style.opacity=1},400);},180);if(sgCap)sgCap.innerHTML='<iconify-icon icon="'+d[1]+'"></iconify-icon> '+d[2];if(sgDetailHead){var title=document.querySelector('#pTabs .sg-uc[data-cat="'+c+'"] h3');sgDetailHead.innerHTML='<iconify-icon icon="'+d[1]+'"></iconify-icon> <b>'+(title?title.textContent:d[2])+'</b> <span>— sizes &amp; indicative pricing</span>';}}
+  document.querySelectorAll('#pTabs .sg-uc').forEach(function(t){function activate(){document.querySelectorAll('#pTabs .sg-uc').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var c=t.dataset.cat;document.querySelectorAll('.sg-cat').forEach(function(s){s.classList.toggle('active',s.dataset.cat===c)});setSgImg(c)}t.onclick=activate;t.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();activate()}})});
   /* before/after */
   (function(){var r=document.getElementById('baRange'),c=document.getElementById('baClip'),h=document.getElementById('baHandle');if(!r)return;function set(v){c.style.clipPath='inset(0 '+(100-v)+'% 0 0)';h.style.left=v+'%'}r.addEventListener('input',function(){set(+r.value)});set(50)})();
   /* menu board preview cycle */

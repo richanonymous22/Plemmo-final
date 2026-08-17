@@ -296,7 +296,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.
 
 .product-card-sleek { width: 100%; height: 75vh; display: flex; flex-direction: column; }
 .product-img-box { flex: 1; border-radius: var(--radius-xl); overflow: hidden; position: relative; background: #111; }
-.sleek-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transform: scale(1.1); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: grayscale(100%); }
+.sleek-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transform: scale(1.16); transition: opacity 0.8s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); filter: grayscale(100%); }
 .product-img-box:hover .sleek-img { opacity: 1; transform: scale(1); filter: grayscale(0%); }
 
 .product-meta { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 32px; }
