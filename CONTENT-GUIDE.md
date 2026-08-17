@@ -14,9 +14,9 @@ the change.
 
 ## Global (phone, email, footer)
 - **File:** every page in `pages/` + `404.html`
-- **What:** phone `020 7946 0958`, email `hello@plemmo.co.uk`, footer blurb.
+- **What:** phone `0333 041 1161`, email `hello@plemmo.co.uk`, footer blurb.
 - Phone appears in: top nav button, mobile menu, footer "Contact", sticky bar.
-  Search each page for `02079460958` / `020 7946 0958`.
+  Search each page for `03330411161` / `0333 041 1161`.
 
 ## "Admin panel" — how it actually works on this site (read this first)
 
