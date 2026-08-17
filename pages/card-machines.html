@@ -177,8 +177,6 @@ section{scroll-margin-top:88px}
 .plogo:hover img{opacity:1}
 .plogo.lg img{max-height:44px;max-width:62px}   /* square / tall marks */
 .plogo.xw img{max-height:19px;max-width:118px}  /* ultra-wide wordmarks */
-.plogo .word{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;color:#fff;opacity:.72;transition:opacity .35s;white-space:nowrap}
-.plogo:hover .word{opacity:1}
 
 /* ── QUIZ (dashboard window) ── */
 .quizx{max-width:900px;margin:0 auto;position:relative;border-radius:26px;overflow:hidden;
@@ -706,11 +704,11 @@ html{overflow-x:hidden}
   <div class="container"><div class="pl rv">Compare leading UK card machine providers</div></div>
   <div class="marquee rv">
     <div class="mq-track" id="mqTrack">
-      <span class="plogo"><span class="word">Teya</span></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/teya.svg" alt="Teya"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay"></span>
-      <span class="plogo"><span class="word">Elavon</span></span>
+      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon"></span>
       <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/evo.svg" alt="EVO Payments"></span>
       <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/mypos.svg" alt="myPOS"></span>
     </div>
@@ -749,7 +747,7 @@ html{overflow-x:hidden}
     <h2 class="h2 rv"><span class="lime">Top</span> card machine providers</h2>
     <div class="pgrid">
       <div class="pcard tilt rv">
-        <div class="plogo-c"><span class="wordmark">Teya</span></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/teya.svg" alt="Teya" style="filter:brightness(0)" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/teya-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Teya card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Rental and buy options available</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Instant or next-day settlement</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Flexible contract terms</li></ul>
         <button class="pview" data-detail="teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -771,21 +769,21 @@ html{overflow-x:hidden}
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
-        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/mobile.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay card machine"></div>
+        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/worldpay-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Split rate — separate debit &amp; credit</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Suited to MOTO / phone payments</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Configurable rental</li></ul>
         <button class="pview" data-detail="worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="worldpay"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><span class="wordmark" style="color:#13427d">Elavon</span></div>
-        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/countertop.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Elavon card machine"></div>
+        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
+        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/elavon-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Elavon card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Split rate — £19.99/month rental</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Low &amp; High ATV pricing tables</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Suited to higher-turnover businesses</li></ul>
         <button class="pview" data-detail="elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="elavon"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
         <div class="plogo-c"><span class="wordmark">Clover</span></div>
-        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/card-type-smart.webp" alt="Clover card machine"></div>
+        <div class="pmedia"><img loading="lazy" decoding="async" src="../images/Card machine no bg.webp" alt="Clover card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Clover Flex &amp; Clover Mini devices</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> £1/month rental — first 6 months</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Split rate — Low &amp; High ATV tables</li></ul>
         <button class="pview" data-detail="clover">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
         <button class="pcompare" data-cmp="clover"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
@@ -801,7 +799,7 @@ html{overflow-x:hidden}
   <div class="container">
     <div class="types">
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-countertop.webp" alt="Countertop card machine on a fixed stand"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-smart.webp" alt="Countertop card machine on a fixed stand"></div>
         <div class="type-body"><h3>Countertop</h3><p>Perfect for fixed locations and high transaction volumes.</p><button class="ln" data-detail="countertop">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
@@ -809,7 +807,7 @@ html{overflow-x:hidden}
         <div class="type-body"><h3>Portable</h3><p>Take payments anywhere in your business.</p><button class="ln" data-detail="portable">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-mobile-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-mobile.webp" alt="Mobile payment"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:device-mobile-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/mobile.webp" alt="Mobile payment"></div>
         <div class="type-body"><h3>Mobile</h3><p>Turn your smartphone into a card machine. Ideal on the go.</p><button class="ln" data-detail="mobile">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
@@ -1210,14 +1208,14 @@ html{overflow-x:hidden}
         rateText:'1.25% below £10,000/month · 0.70% at £10,000+ (plus 25p next-day settlement fee per payout)'},
       sumup:{name:'SumUp',type:'blended',img:'../images/sumup-card-machine.webp',rental:'None',contract:'Pay As You Go, 12 Month or 24 Month Contract',device:'Up to 1 / 2 / 3 Terminals',features:['Blended Pricing','Pay As You Go Available','12 Month Contract Available','24 Month Contract Available','Integrated Payment Solution','Suitable for Small Businesses','Suitable for Growing Businesses'],
         rateText:'Blended rate confirmed after review — see contract options'},
-      clover:{name:'Clover',type:'split',img:'../images/card-type-smart.webp',rental:'£24/month (£1/month promo for first 6 months, then £24/month)',contract:'Rolling',device:'Clover Flex · Clover Mini',features:['Clover Flex','Clover Mini','£1/month rental — first 6 months','Split-rate pricing'],
+      clover:{name:'Clover',type:'split',img:'../images/Card machine no bg.webp',rental:'£24/month (£1/month promo for first 6 months, then £24/month)',contract:'Rolling',device:'Clover Flex · Clover Mini',features:['Clover Flex','Clover Mini','£1/month rental — first 6 months','Split-rate pricing'],
         promo:true,
         low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'}],
         high:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.70%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:150000,max:Infinity,debit:'0.28%',credit:'0.58%',auth:'2p'}]},
-      elavon:{name:'Elavon',type:'split',img:'../images/countertop.webp',rental:'£19.99/month',contract:'Provider terms',device:'Countertop terminal',features:['Split-rate pricing','Everyday payout available','Suited to higher turnover businesses'],
+      elavon:{name:'Elavon',type:'split',img:'../images/elavon-card-machine.webp',rental:'£19.99/month',contract:'Provider terms',device:'Countertop terminal',features:['Split-rate pricing','Everyday payout available','Suited to higher turnover businesses'],
         low:[{min:20000,max:40000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:40000,max:50000,debit:'0.32%',credit:'0.60%',auth:'2p'},{min:50000,max:100000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:100000,max:Infinity,debit:'0.29%',credit:'0.55%',auth:'2p'}],
         high:[{min:20000,max:40000,debit:'0.55%',credit:'0.75%',auth:'3p'},{min:40000,max:50000,debit:'0.40%',credit:'0.70%',auth:'3p'},{min:50000,max:100000,debit:'0.35%',credit:'0.55%',auth:'2p'},{min:100000,max:Infinity,debit:'0.32%',credit:'0.55%',auth:'2p'}]},
-      worldpay:{name:'Worldpay',type:'split',img:'../images/mobile.webp',rental:'Configurable — may vary by merchant agreement',contract:'Provider terms',device:'Countertop / portable terminal',features:['Split-rate pricing','Configurable rental','Suited to MOTO / phone payments'],
+      worldpay:{name:'Worldpay',type:'split',img:'../images/worldpay-card-machine.webp',rental:'Configurable — may vary by merchant agreement',contract:'Provider terms',device:'Countertop / portable terminal',features:['Split-rate pricing','Configurable rental','Suited to MOTO / phone payments'],
         low:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}],
         high:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}]}
     },
@@ -1336,7 +1334,7 @@ html{overflow-x:hidden}
     if(first===-1&&steps.length){result()}else{cur=Math.max(0,first);render()}})();
 
   /* ── PROVIDER / PRODUCT DETAIL POPUPS ── */
-  var IMGP={teya:'../images/teya-card-machine.webp',sumup:'../images/sumup-card-machine.webp',worldpay:'../images/mobile.webp',elavon:'../images/countertop.webp',mobile:'../images/card-type-mobile.webp'};
+  var IMGP={teya:'../images/teya-card-machine.webp',sumup:'../images/sumup-card-machine.webp',worldpay:'../images/worldpay-card-machine.webp',elavon:'../images/elavon-card-machine.webp',mobile:'../images/mobile.webp'};
   var DETAIL={
     teya:{badge:'Blended rate',name:'Teya',img:IMGP.teya,intro:'Teya is a blended-rate provider with rental or buyout terminal options, flexible contract terms and a choice of payout speeds. The pricing shown is indicative only and subject to underwriting and approval.',
       facts:[['Pricing model','Blended'],['Monthly rental','£15.00/mo (or £139+VAT buyout)'],['Contract','12 Month or No Contract'],['Devices','PAX A920 Pro · Sunmi']],
@@ -1352,7 +1350,7 @@ html{overflow-x:hidden}
       facts:[['Pricing model','Blended'],['Contract options','PAYG · 12 Month · 24 Month'],['Hardware','Up to 1 / 2 / 3 Terminals'],['Monthly rental','None']],
       pros:['Blended Pricing','Pay As You Go Available','12 Month Contract Available','24 Month Contract Available','Integrated Payment Solution','Suitable for Small Businesses','Suitable for Growing Businesses'],
       note:'The pricing shown is indicative only and subject to underwriting and approval. Debit/credit rates and a transaction-rate table are not shown for SumUp. Additional charges may include PCI compliance fees, faster settlement charges, account fees and other provider-specific fees.'},
-    clover:{badge:'Split rate',name:'Clover',img:'../images/card-type-smart.webp',intro:'Clover is a split-rate provider with Clover Flex and Clover Mini devices. Standard rental is £24/month, with a £1/month promotional rate for the first 6 months (reverting to £24/month from month 7). The pricing shown is indicative only and subject to underwriting and provider approval.',
+    clover:{badge:'Split rate',name:'Clover',img:'../images/Card machine no bg.webp',intro:'Clover is a split-rate provider with Clover Flex and Clover Mini devices. Standard rental is £24/month, with a £1/month promotional rate for the first 6 months (reverting to £24/month from month 7). The pricing shown is indicative only and subject to underwriting and provider approval.',
       facts:[['Pricing model','Split Rate'],['Devices','Clover Flex · Clover Mini'],['Rental','£24/month'],['Promotion','£1/month for first 6 months']],
       pros:['Clover Flex and Clover Mini devices','£1/month rental promotion — first 6 months','Low ATV and High ATV pricing tables','Custom quote above the top threshold'],
       tableTitle:'Clover — Low ATV split rate by monthly turnover',
@@ -1370,7 +1368,7 @@ html{overflow-x:hidden}
       tableTitle:'Worldpay split rate by monthly turnover',
       table:[['£15,000–£20,000','Debit 0.35% / Credit 0.75% / Auth 2p'],['Above £20,000','Debit 0.30% / Credit 0.75% / Auth 2p']],
       note:'The pricing shown is indicative only and subject to underwriting and provider approval. Additional charges may include PCI compliance fees, chargeback fees, additional terminal charges and other provider-specific fees.'},
-    countertop:{type:1,badge:'Machine type',name:'Countertop',img:'../images/card-type-countertop.webp',intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
+    countertop:{type:1,badge:'Machine type',name:'Countertop',img:'../images/card-type-smart.webp',intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
       facts:[['Best for','Shops & counters'],['Connection','Broadband / phone'],['Printer','Built-in receipts'],['Volume','High throughput']],
       pros:['Fast chip, PIN & contactless','Built-in receipt printer','Reliable for high transaction volumes','Always powered at the till'],
       note:'Specific models and features vary by provider.'},
