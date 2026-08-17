@@ -236,29 +236,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const oldRate = document.getElementById('old-rate');
     const plemmoRateTag = document.getElementById('plemmo-rate');
 
-    // Plemmo blended rate by monthly turnover — mirrors the card-machines
-    // rate calculator (Shift4 flat under £10k, then Teya blended tiers).
+    // Plemmo blended rate by monthly turnover — the best available rate across
+    // Plemmo's real card machine panel, kept in sync with the recommendation
+    // engine's provider data on pages/card-machines.html (Shift4 1.25%/0.70%,
+    // Teya's blended table). Below £10k Shift4 is the only option (1.25%).
+    // From £10k Shift4's flat 0.70% beats every Teya band up to £90k, so that's
+    // the accurate "best rate" across that whole range; above £90k Teya's table
+    // overtakes it. If either provider's owner-supplied figures change, update
+    // them here AND in pages/card-machines.html's `CM.providers` object.
     const plemmoRateFor = (t) => {
-      if (t < 10000) return 0.0125;   // Shift4 flat 1.25% for lower turnover
-      if (t < 11000) return 0.0120;
-      if (t < 12000) return 0.0110;
-      if (t < 13000) return 0.0104;
-      if (t < 14000) return 0.0102;
-      if (t < 15000) return 0.0101;
-      if (t < 16000) return 0.0100;
-      if (t < 17000) return 0.0095;
-      if (t < 18000) return 0.0090;
-      if (t < 19000) return 0.0088;
-      if (t < 20000) return 0.0086;
-      if (t < 22000) return 0.0085;
-      if (t < 36000) return 0.0080;
-      if (t < 43000) return 0.0077;
-      if (t < 66000) return 0.0070;
-      if (t < 81000) return 0.0067;
-      if (t < 100000) return 0.0063;
-      if (t < 120000) return 0.0061;
-      if (t < 200000) return 0.0060;
-      return 0.0055;
+      if (t < 10000) return 0.0125;   // Shift4 blended rate below £10,000/month
+      if (t < 90000) return 0.0070;   // Shift4 blended rate from £10,000/month
+      if (t < 110000) return 0.0067;  // Teya blended rate £90,000–£110,000
+      if (t < 150000) return 0.0065;  // Teya blended rate £110,000–£150,000
+      return 0.0060;                  // Teya blended rate above £150,000
     };
 
     slider.addEventListener('input', (e) => {
