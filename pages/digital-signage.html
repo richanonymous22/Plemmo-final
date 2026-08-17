@@ -119,6 +119,38 @@
 .sel-note{font-size:12px;font-weight:600;color:var(--ink-soft)}
 .sel-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .sel-chip{font-size:11px;font-weight:700;color:#5f9000;background:rgba(95,144,0,.1);border:1px solid rgba(95,144,0,.25);border-radius:var(--pill);padding:5px 10px}
+/* one-question-at-a-time signage finder wizard */
+.wiz-card{max-width:760px;margin:0 auto;background:var(--white);border:1px solid var(--line-l);border-radius:var(--r-xl);box-shadow:var(--shadow-l);padding:40px;position:relative;overflow:hidden}
+.wiz-glow{position:absolute;top:-100px;right:-100px;width:280px;height:280px;background:radial-gradient(circle,rgba(198,255,0,.14),transparent 68%);pointer-events:none}
+.wiz-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;position:relative;z-index:1}
+.wiz-pills{display:flex;gap:8px;flex-wrap:wrap}
+.wiz-pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--ink-soft);padding:6px 12px;border-radius:var(--pill);background:var(--cream);border:1px solid var(--line-l);transition:.25s}
+.wiz-pill .wn{width:17px;height:17px;border-radius:50%;background:var(--line-l);color:var(--ink-soft);display:inline-flex;align-items:center;justify-content:center;font-size:10px}
+.wiz-pill.active{color:var(--ink);border-color:var(--lime);background:var(--lime-soft)}
+.wiz-pill.active .wn{background:var(--lime);color:#0a0c08}
+.wiz-pill.done{color:#3c4a00}
+.wiz-pill.done .wn{background:var(--lime);color:#0a0c08}
+.wiz-hint{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.wiz-bar{height:5px;border-radius:var(--pill);background:var(--line-l);overflow:hidden;margin-bottom:26px;position:relative;z-index:1}
+.wiz-bar i{display:block;height:100%;width:33%;background:linear-gradient(90deg,#9bcc00,var(--lime));border-radius:var(--pill);transition:width .5s var(--ease)}
+.wiz-q{font-size:clamp(20px,2.6vw,26px);color:var(--ink);margin-bottom:20px;position:relative;z-index:1}
+.wiz-q span{display:block;font-size:12.5px;font-weight:700;color:#5f9000;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.wiz-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative;z-index:1}
+.wiz-tiles.compact{grid-template-columns:repeat(3,1fr);max-height:340px;overflow-y:auto;padding-right:4px}
+.wiz-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:18px 10px;border-radius:14px;background:var(--cream);border:1.5px solid var(--line-l);color:var(--ink);font-weight:600;font-size:13px;cursor:pointer;transition:transform .2s var(--spring),border-color .2s,background .2s}
+.wiz-tile.row{flex-direction:row;justify-content:flex-start;text-align:left;padding:13px 15px}
+.wiz-tile iconify-icon{font-size:22px;color:#5f9000}
+.wiz-tile:hover{transform:translateY(-3px);border-color:rgba(198,255,0,.6)}
+.wiz-tile.sel{border-color:var(--lime);background:var(--lime-soft)}
+.wiz-tile .ck{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--line-l);background:var(--white);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:8px}
+.wiz-tile.sel .ck{background:var(--lime);border-color:var(--lime)}
+.wiz-tile .ck iconify-icon{font-size:12px;color:#0a0c08;opacity:0}
+.wiz-tile.sel .ck iconify-icon{opacity:1}
+@media(max-width:640px){.wiz-tiles,.wiz-tiles.compact{grid-template-columns:repeat(2,1fr)}}
+.wiz-foot{display:flex;align-items:center;justify-content:space-between;margin-top:24px;position:relative;z-index:1}
+.wiz-back{background:none;border:none;color:var(--ink-soft);font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:0}
+.wiz-back[disabled]{opacity:0;pointer-events:none}
+.wiz-card .btn{position:relative;z-index:1}
 /* services (digital signage / menu design / promotional design) */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .svc-card{padding:28px}
@@ -190,40 +222,26 @@
   </div>
 </header>
 
-<!-- SELECTOR -->
+<!-- SELECTOR (signage finder wizard) -->
 <section class="section s-light" id="selector">
   <div class="container">
-    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:magic-wand-duotone"></iconify-icon> Find your fit</span><h2 class="h2">Tell us about your business</h2><p class="lead">Answer a few quick questions — business type, service and screen size — and we'll show you a great place to start.</p></div>
+    <div class="head center"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:magic-wand-duotone"></iconify-icon> Find your fit</span><h2 class="h2">Tell us about your business</h2><p class="lead">Three quick questions and we'll show you a great place to start — no page reloads, no commitment.</p></div>
 
-    <div class="sel-step rv">
-      <div class="sel-q"><span class="sel-n">1</span> What type of business do you have?</div>
-      <div class="tabs" id="bizTabs"></div>
-    </div>
-
-    <div class="sel-step rv">
-      <div class="sel-q"><span class="sel-n">2</span> What service do you need? <span class="sel-note">(select all that apply)</span></div>
-      <div class="tabs" id="svcTabs"></div>
-    </div>
-
-    <div class="sel-step rv">
-      <div class="sel-q"><span class="sel-n">3</span> What screen size are you interested in?</div>
-      <div class="tabs" id="sizeTabs"></div>
-    </div>
-
-    <div class="sel-step rv">
-      <div class="sel-q"><span class="sel-n">4</span> Which signage type interests you most?</div>
-      <div class="tabs" id="sigTabs">
-        <div class="tab active" data-sig="menu"><iconify-icon icon="ph:fork-knife-duotone"></iconify-icon> Menu Boards</div>
-        <div class="tab" data-sig="window"><iconify-icon icon="ph:app-window-duotone"></iconify-icon> Window Displays</div>
-        <div class="tab" data-sig="advertising"><iconify-icon icon="ph:megaphone-duotone"></iconify-icon> Advertising Screens</div>
-        <div class="tab" data-sig="shopfront"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> Shopfront Signs</div>
-        <div class="tab" data-sig="neon"><iconify-icon icon="ph:lightbulb-filament-duotone"></iconify-icon> Neon Signs</div>
-        <div class="tab" data-sig="outdoor"><iconify-icon icon="ph:cloud-sun-duotone"></iconify-icon> Outdoor Displays</div>
-        <div class="tab" data-sig="kiosk"><iconify-icon icon="ph:device-tablet-duotone"></iconify-icon> Touch Kiosks</div>
+    <div class="wiz-card rv" id="wizCard">
+      <span class="wiz-glow"></span>
+      <div class="wiz-top">
+        <div class="wiz-pills" id="wizPills"></div>
+        <span class="wiz-hint" id="wizHint">~20 seconds</span>
+      </div>
+      <div class="wiz-bar"><i id="wizBar"></i></div>
+      <div id="wizBody"></div>
+      <div class="wiz-foot">
+        <button class="wiz-back" id="wizBack" disabled><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button>
+        <span style="font-size:12px;color:var(--ink-soft)">Free to use · no obligation</span>
       </div>
     </div>
 
-    <div class="rec rv" id="sigPanel">
+    <div class="rec rv" id="sigPanel" style="display:none;margin-top:26px">
       <div><div class="rt" id="sigTitle">For cafés &amp; takeaways</div><h3 id="sigMatch">32" Digital Menu Board Package</h3><p id="sigText"></p><ul id="sigChecks"></ul><div class="sel-chips" id="sigChips"></div></div>
       <div class="rec-price"><div class="rl">Best match</div><div class="ramt" id="sigPrice">£350</div><div class="runit" id="sigUnit">per screen</div><a href="#" class="btn btn-primary" id="sigCta" data-quote data-service="Digital Signage">Get a Signage Quote</a></div>
     </div>
@@ -533,26 +551,6 @@
     kiosk:{title:'For interactive experiences',match:'Android Touch Screen Kiosk',price:'From £2,290',unit:'starting price',text:'Touch kiosks help customers browse, order, check in or interact with your business independently.',checks:['Interactive experience','Self-service options','Ideal for hospitality & retail']}
   };
 
-  /* ── build the business type / service / screen size tabs from config ── */
-  /* built with DOM APIs (not innerHTML string-building) so values containing
-     a literal quote character, e.g. the 32"/40" screen sizes, can't break
-     the generated markup */
-  function renderTabs(id,items,attr){
-    var wrap=document.getElementById(id);if(!wrap)return;
-    wrap.innerHTML='';
-    items.forEach(function(it){
-      var el=document.createElement('div');
-      el.className='tab';
-      el.setAttribute('data-'+attr,it.v);
-      if(it.i){var ic=document.createElement('iconify-icon');ic.setAttribute('icon',it.i);el.appendChild(ic);el.appendChild(document.createTextNode(' '+it.v));}
-      else{el.appendChild(document.createTextNode(it.v));}
-      wrap.appendChild(el);
-    });
-  }
-  renderTabs('bizTabs',SIGNAGE_CONFIG.businessTypes,'biz');
-  renderTabs('svcTabs',SIGNAGE_CONFIG.services,'svc');
-  renderTabs('sizeTabs',SIGNAGE_CONFIG.screenSizes,'size');
-
   /* ── build the lead-form Business Type / Screen Size dropdowns from config ── */
   function fillSelect(id,items){
     var s=document.getElementById(id);if(!s)return;
@@ -569,64 +567,153 @@
     }).join('');
   })();
 
-  /* ── selector state: business type / services (multi) / screen size / signage type ── */
-  var selState={biz:'',services:[],size:'',sig:'menu'};
+  /* ══════════════════════════════════════════════════════════════════
+     "Find your fit" — one-question-at-a-time signage finder wizard.
+     Replaces the old four-stacked-tab-rows layout (business type / service
+     / screen size / signage type all visible at once, which made the
+     section very long and cluttered). Business type, service and screen
+     size are asked one at a time from SIGNAGE_CONFIG; the signage-type
+     question is gone as a separate step — instead the recommendation is
+     derived from whichever hardware service(s) the customer picked (see
+     HW_PRIORITY below), since that information was already being collected
+     and asking it twice was redundant. Shopfront/Neon/Outdoor/Kiosk remain
+     fully browsable further down the page (custom band + pricing catalogue)
+     — they just aren't part of this lead-gen flow.
+     ══════════════════════════════════════════════════════════════════ */
+  var WIZ_STEPS=[
+    {k:'biz',label:'Business',q:'What type of business do you have?',mode:'single',items:SIGNAGE_CONFIG.businessTypes},
+    {k:'services',label:'Service',q:'What service do you need?',sub:'Select all that apply',mode:'multi',items:SIGNAGE_CONFIG.services},
+    {k:'size',label:'Screen size',q:'What screen size are you interested in?',mode:'single',items:SIGNAGE_CONFIG.screenSizes}
+  ];
+  var wizState={biz:'',services:[],size:''},wizCur=0,wizDone=false;
+  var HW_PRIORITY=['Digital Menu Board','Window Display Screen','Advertising Display','Promotional Digital Screen'];
+  var HW_MAP={'Digital Menu Board':'menu','Window Display Screen':'window','Advertising Display':'advertising','Promotional Digital Screen':'advertising'};
 
   function renderChips(){
     var chips=[];
-    if(selState.biz)chips.push(selState.biz);
-    selState.services.forEach(function(s){chips.push(s)});
-    if(selState.size)chips.push(selState.size);
+    if(wizState.biz)chips.push(wizState.biz);
+    wizState.services.forEach(function(s){chips.push(s)});
+    if(wizState.size)chips.push(wizState.size);
     var el=document.getElementById('sigChips');
     if(el)el.innerHTML=chips.map(function(c){return '<span class="sel-chip">'+c+'</span>'}).join('');
   }
-  /* keep the lead-form fields in sync with the selector as the customer picks,
+  /* keep the lead-form fields in sync with the wizard as the customer picks,
      so any "Get a Signage Quote" button on the page opens the modal pre-filled */
   function syncModalFields(){
-    var b=document.getElementById('mbiz');if(b&&selState.biz)b.value=selState.biz;
-    var sz=document.getElementById('msize');if(sz&&selState.size)sz.value=selState.size;
-    var sv=document.getElementById('msvc');if(sv)sv.value=selState.services.join(', ');
-  }
-  function setSig(k){
-    selState.sig=k;var d=SIG[k];
-    document.getElementById('sigTitle').textContent=selState.biz?('For '+selState.biz):d.title;
-    document.getElementById('sigMatch').textContent=d.match;
-    document.getElementById('sigText').textContent=d.text;
-    var price=d.price,unit=d.unit;
-    /* screen size selection overrides the menu-board price with the exact package price */
-    if(k==='menu'){
-      if(selState.size==='32"'){price='£350';unit='per screen';}
-      else if(selState.size==='40"'){price='£400';unit='per screen';}
-    }
-    document.getElementById('sigPrice').textContent=price;
-    document.getElementById('sigUnit').textContent=unit;
-    document.getElementById('sigChecks').innerHTML=d.checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
-    document.getElementById('sigCta').setAttribute('data-product',d.match);
-    renderChips();
-    syncModalFields();
+    var b=document.getElementById('mbiz');if(b&&wizState.biz)b.value=wizState.biz;
+    var sz=document.getElementById('msize');if(sz&&wizState.size)sz.value=wizState.size;
+    var sv=document.getElementById('msvc');if(sv)sv.value=wizState.services.join(', ');
   }
 
-  /* step 1 — business type (single-select) */
-  document.querySelectorAll('#bizTabs .tab').forEach(function(t){t.onclick=function(){
-    document.querySelectorAll('#bizTabs .tab').forEach(function(x){x.classList.remove('active')});
-    t.classList.add('active');selState.biz=t.dataset.biz;setSig(selState.sig);
-  }});
-  /* step 2 — service required (multi-select) */
-  document.querySelectorAll('#svcTabs .tab').forEach(function(t){t.onclick=function(){
-    t.classList.toggle('active');
-    var v=t.dataset.svc,idx=selState.services.indexOf(v);
-    if(t.classList.contains('active')){if(idx===-1)selState.services.push(v);}
-    else if(idx>-1)selState.services.splice(idx,1);
+  function renderPills(){
+    document.getElementById('wizPills').innerHTML=WIZ_STEPS.map(function(s,i){
+      var cls=(wizDone||i<wizCur)?'done':(i===wizCur?'active':'');
+      var n=(wizDone||i<wizCur)?'<iconify-icon icon="ph:check-bold"></iconify-icon>':(i+1);
+      return '<span class="wiz-pill '+cls+'"><span class="wn">'+n+'</span>'+s.label+'</span>';
+    }).join('');
+  }
+
+  /* Tiles are built with DOM APIs (not innerHTML string-building) so values
+     containing a literal quote character, e.g. the 32"/40" screen sizes,
+     can't break the generated markup or the data-v value read back from it. */
+  function renderWiz(){
+    var s=WIZ_STEPS[wizCur];wizDone=false;
+    document.getElementById('wizBar').style.width=((wizCur+1)/WIZ_STEPS.length*100)+'%';
+    document.getElementById('wizBack').disabled=(wizCur===0);
+    renderPills();
+    var body=document.getElementById('wizBody');
+    body.innerHTML='';
+    var q=document.createElement('div');q.className='wiz-q';
+    if(s.sub){var sub=document.createElement('span');sub.textContent=s.sub;q.appendChild(sub);}
+    q.appendChild(document.createTextNode(s.q));
+    body.appendChild(q);
+    var grid=document.createElement('div');grid.className='wiz-tiles'+(s.items.length>6?' compact':'');
+    s.items.forEach(function(it){
+      var val=it.v,isSel=(s.mode==='multi')?(wizState[s.k].indexOf(val)>-1):(wizState[s.k]===val);
+      var btn=document.createElement('button');
+      btn.type='button';btn.className='wiz-tile'+(isSel?' sel':'')+(s.mode==='multi'?' row':'');
+      btn.setAttribute('data-v',val);
+      if(s.mode==='multi'){
+        var ck=document.createElement('span');ck.className='ck';
+        var ckIc=document.createElement('iconify-icon');ckIc.setAttribute('icon','ph:check-bold');ck.appendChild(ckIc);
+        btn.appendChild(ck);
+      }
+      if(it.i){var ic=document.createElement('iconify-icon');ic.setAttribute('icon',it.i);btn.appendChild(ic);}
+      var lbl=document.createElement('span');lbl.textContent=val;btn.appendChild(lbl);
+      btn.onclick=function(){
+        if(s.mode==='multi'){
+          var arr=wizState[s.k],idx=arr.indexOf(val);
+          if(idx>-1)arr.splice(idx,1);else arr.push(val);
+          btn.classList.toggle('sel');
+          syncModalFields();
+        }else{
+          wizState[s.k]=val;syncModalFields();
+          if(wizCur<WIZ_STEPS.length-1){wizCur++;renderWiz();}else{showResult();}
+        }
+      };
+      grid.appendChild(btn);
+    });
+    body.appendChild(grid);
+    if(s.mode==='multi'){
+      var cont=document.createElement('button');
+      cont.type='button';cont.id='wizContinue';cont.className='btn btn-primary';
+      cont.style.cssText='margin-top:20px;width:100%;justify-content:center';
+      cont.innerHTML='See My Recommendation <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon>';
+      cont.onclick=function(){if(wizCur<WIZ_STEPS.length-1){wizCur++;renderWiz();}else{showResult();}};
+      body.appendChild(cont);
+    }
+  }
+
+  function pickSigKey(){
+    for(var i=0;i<HW_PRIORITY.length;i++){if(wizState.services.indexOf(HW_PRIORITY[i])>-1)return HW_MAP[HW_PRIORITY[i]];}
+    if(wizState.services.indexOf('Screen & Design Package')>-1)return 'menu';
+    return null; /* design-only (or nothing) selected — no screen hardware to recommend */
+  }
+
+  function computeResult(){
+    document.getElementById('sigTitle').textContent=wizState.biz?('For '+wizState.biz):'Your recommendation';
+    var key=pickSigKey();
+    if(key){
+      var d=SIG[key],price=d.price,unit=d.unit;
+      if(key==='menu'){
+        if(wizState.size==='32"'){price='£350';unit='per screen';}
+        else if(wizState.size==='40"'){price='£400';unit='per screen';}
+      }
+      document.getElementById('sigMatch').textContent=d.match;
+      document.getElementById('sigText').textContent=d.text;
+      document.getElementById('sigPrice').textContent=price;
+      document.getElementById('sigUnit').textContent=unit;
+      document.getElementById('sigChecks').innerHTML=d.checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
+      document.getElementById('sigCta').setAttribute('data-product',d.match);
+    }else{
+      var svcList=wizState.services.length?wizState.services.join(', '):'your signage and design needs';
+      document.getElementById('sigMatch').textContent='Design Service Quote';
+      document.getElementById('sigText').textContent='Based on '+svcList+", we'll put together design-only pricing for your business — no screen hardware required.";
+      document.getElementById('sigPrice').textContent='Quote';
+      document.getElementById('sigUnit').textContent='quoted individually';
+      document.getElementById('sigChecks').innerHTML=['Professional design team','Fast turnaround','Digital & print-ready files'].map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
+      document.getElementById('sigCta').setAttribute('data-product','Design Service Quote');
+    }
     renderChips();syncModalFields();
-  }});
-  /* step 3 — screen size (single-select) */
-  document.querySelectorAll('#sizeTabs .tab').forEach(function(t){t.onclick=function(){
-    document.querySelectorAll('#sizeTabs .tab').forEach(function(x){x.classList.remove('active')});
-    t.classList.add('active');selState.size=t.dataset.size;setSig(selState.sig);
-  }});
-  /* step 4 — signage type (single-select, existing recommendation engine) */
-  document.querySelectorAll('#sigTabs .tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('#sigTabs .tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');setSig(t.dataset.sig)}});
-  setSig('menu');
+  }
+
+  function showResult(){
+    wizDone=true;
+    document.getElementById('wizBar').style.width='100%';
+    document.getElementById('wizBack').disabled=false;
+    renderPills();
+    document.getElementById('wizBody').innerHTML='<div style="text-align:center;padding:6px 0 2px"><iconify-icon icon="ph:check-circle-fill" style="font-size:36px;color:var(--lime)"></iconify-icon><p style="margin-top:10px;font-weight:700;color:var(--ink);font-size:16px">Your recommendation is ready</p><p style="font-size:13px;color:var(--ink-soft);margin-top:4px">See it below, or hit Back to change an answer.</p></div>';
+    computeResult();
+    var panel=document.getElementById('sigPanel');
+    panel.style.display='';
+    panel.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+
+  document.getElementById('wizBack').onclick=function(){
+    if(wizDone){wizDone=false;wizCur=WIZ_STEPS.length-1;renderWiz();return;}
+    wizCur=Math.max(0,wizCur-1);renderWiz();
+  };
+  renderWiz();
 
   /* CTAs that represent a specific screen size / service (e.g. the 32"/40"
      package "Choose" buttons) pre-fill the lead form's Screen Size / Service
