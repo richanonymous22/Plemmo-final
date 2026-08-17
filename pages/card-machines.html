@@ -177,6 +177,8 @@ section{scroll-margin-top:88px}
 .plogo:hover img{opacity:1}
 .plogo.lg img{max-height:44px;max-width:62px}   /* square / tall marks */
 .plogo.xw img{max-height:19px;max-width:118px}  /* ultra-wide wordmarks */
+.plogo .word{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;color:#fff;opacity:.72;transition:opacity .35s;white-space:nowrap}
+.plogo:hover .word{opacity:1}
 
 /* ── QUIZ (dashboard window) ── */
 .quizx{max-width:900px;margin:0 auto;position:relative;border-radius:26px;overflow:hidden;
@@ -704,11 +706,11 @@ html{overflow-x:hidden}
   <div class="container"><div class="pl rv">Compare leading UK card machine providers</div></div>
   <div class="marquee rv">
     <div class="mq-track" id="mqTrack">
-      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/teya.svg" alt="Teya"></span>
+      <span class="plogo"><span class="word">Teya</span></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay"></span>
-      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon"></span>
+      <span class="plogo"><span class="word">Elavon</span></span>
       <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/evo.svg" alt="EVO Payments"></span>
       <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/mypos.svg" alt="myPOS"></span>
     </div>
@@ -747,7 +749,7 @@ html{overflow-x:hidden}
     <h2 class="h2 rv"><span class="lime">Top</span> card machine providers</h2>
     <div class="pgrid">
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/teya.svg" alt="Teya" style="filter:brightness(0)" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none">teya</span></div>
+        <div class="plogo-c"><span class="wordmark">Teya</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/teya-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Teya card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Rental and buy options available</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Instant or next-day settlement</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Flexible contract terms</li></ul>
         <button class="pview" data-detail="teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -775,7 +777,7 @@ html{overflow-x:hidden}
         <button class="pcompare" data-cmp="worldpay"><iconify-icon icon="ph:scales-duotone"></iconify-icon> Add to compare</button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/elavon.svg" alt="Elavon" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"><span class="wordmark" style="display:none;color:#13427d">Elavon</span></div>
+        <div class="plogo-c"><span class="wordmark" style="color:#13427d">Elavon</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/elavon-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Elavon card machine"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Split rate — £19.99/month rental</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Low &amp; High ATV pricing tables</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Suited to higher-turnover businesses</li></ul>
         <button class="pview" data-detail="elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
