@@ -908,7 +908,7 @@ html{overflow-x:hidden}
           <a href="#" class="btn btn-primary" data-quote data-product="Card machine rate quote">Get my exact quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
           <span class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply</span>
         </div>
-        <p class="calc-note">Rates are indicative only and confirmed after review, based on business type, turnover, card mix and provider approval.</p>
+        <p class="calc-note">Rates shown are indicative only and subject to business type, turnover, card mix, provider approval and contract terms.</p>
       </div>
     </div>
   </div>
@@ -1225,7 +1225,7 @@ html{overflow-x:hidden}
         rateText:'Blended rate confirmed after review — see contract options'},
       clover:{name:'Clover',type:'split',img:'../images/clover-card-machine.webp',rental:'£24/month (£1/month promo for first 6 months, then £24/month)',contract:'Rolling',device:'Clover Flex · Clover Mini',features:['Clover Flex','Clover Mini','£1/month rental — first 6 months','Split-rate pricing'],
         promo:true,
-        low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'}],
+        low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'},{min:250000,max:Infinity,debit:'Custom Quote',credit:'Custom Quote',auth:'2p'}],
         high:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.70%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:150000,max:Infinity,debit:'0.28%',credit:'0.58%',auth:'2p'}]},
       elavon:{name:'Elavon',type:'split',img:'../images/elavon-card-machine.webp',rental:'£19.99/month',contract:'Provider terms',device:'Countertop terminal',features:['Split-rate pricing','Everyday payout available','Suited to higher turnover businesses'],
         low:[{min:20000,max:40000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:40000,max:50000,debit:'0.32%',credit:'0.60%',auth:'2p'},{min:50000,max:100000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:100000,max:Infinity,debit:'0.29%',credit:'0.55%',auth:'2p'}],
@@ -1239,7 +1239,7 @@ html{overflow-x:hidden}
        priority for the other non-charity categories, since only F&B and Charity have their own
        explicit band tables in the spec — admin can give any category its own bands later. */
     generalBands: [
-      {max:5000, priority:['shift4']},
+      {max:5000, priority:['shift4'], fallback:['sumup']},
       {max:10000, priority:['sumup','shift4']},
       {max:15000, priority:['teya','worldpay','sumup']},
       {max:20000, priority:['teya','worldpay','sumup']},
@@ -1257,8 +1257,8 @@ html{overflow-x:hidden}
   }
   function bandFor(turnoverLabel){
     var v=CM.turnoverMid[turnoverLabel]!==undefined?CM.turnoverMid[turnoverLabel]:Infinity;
-    for(var i=0;i<CM.generalBands.length;i++){if(v<=CM.generalBands[i].max)return CM.generalBands[i].priority.slice();}
-    return CM.generalBands[CM.generalBands.length-1].priority.slice();
+    for(var i=0;i<CM.generalBands.length;i++){if(v<=CM.generalBands[i].max)return CM.generalBands[i];}
+    return CM.generalBands[CM.generalBands.length-1];
   }
   function pickRow(table,turnoverLabel){
     if(!table)return null;
@@ -1287,16 +1287,23 @@ html{overflow-x:hidden}
           no-op until such questions are defined and added to buildSteps()/answers. */
   function recommend(a){
     var currentKey=(a.current&&a.current!=='None'&&a.current!=='Other')?a.current.toLowerCase():null;
-    var priority,reason;
+    var priority,reason,fallbackPriority;
     if(a.category==='Charity / Non-Profit'){
       if(a.norental==='Yes'){priority=CM.charityNoRental.slice();reason='Charity / Non-Profit — no monthly rental requested';}
-      else{priority=bandFor(a.turnover);reason='Charity / Non-Profit — turnover-based';}
+      else{var b=bandFor(a.turnover);priority=b.priority.slice();fallbackPriority=b.fallback;reason='Charity / Non-Profit — turnover-based';}
     } else if(a.category==='Food & Beverage' && a.moto==='Over the Phone (MOTO)'){
       priority=CM.foodMoto.slice();reason='Food & Beverage — MOTO/phone payments';
     } else {
-      priority=bandFor(a.turnover);reason='Turnover-based';
+      var b=bandFor(a.turnover);priority=b.priority.slice();fallbackPriority=b.fallback;reason='Turnover-based';
     }
     var list=priority.filter(function(k){return k!==currentKey});
+    /* If the current-provider exclusion empties out a band's priority list (e.g. the
+       below-£5,000 band is Shift4-only), fall back to that band's declared fallback
+       provider(s) instead of showing "no match" — matches core-rules.json's per-band
+       "fallback" field. */
+    if(list.length===0 && fallbackPriority && fallbackPriority.length){
+      list=fallbackPriority.filter(function(k){return k!==currentKey});
+    }
     var atv=classifyATV(a.category,a.type);
     return {list:list,atv:atv,reason:reason,fallback:list.length===0};
   }
@@ -1350,7 +1357,7 @@ html{overflow-x:hidden}
     var p=CM.providers[k];
     var rateLine;
     if(p.type==='blended'){rateLine=p.rateText||'Blended — see pricing table';}
-    else{var row=pickRow(p[atv],a.turnover);rateLine=row?('Debit '+row.debit+' / Credit '+row.credit+' · Auth fee '+row.auth):'Custom quote — please contact us';}
+    else{var row=pickRow(p[atv],a.turnover);rateLine=row?(row.debit==='Custom Quote'?'Custom Quote — please contact us for pricing at this turnover':'Debit '+row.debit+' / Credit '+row.credit+' · Auth fee '+row.auth):'Custom quote — please contact us';}
     return '<div class="qres-card qpc'+(isTop?' best':'')+'">'
       +(isTop?'<div class="btag">Top recommendation</div>':'')
       +'<div class="qres-media"><img loading="lazy" decoding="async" src="'+p.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+p.name+'"></div>'
@@ -1463,7 +1470,7 @@ html{overflow-x:hidden}
       elT.innerHTML=gbp(t)+(t>=200000?'<small>+</small>':'')+'<small>/mo</small>';
       if(outWrap)outWrap.querySelectorAll('.calc-tile').forEach(function(x){x.classList.remove('hi')});
       elR.parentElement.classList.add('hi');
-      var band=turnoverLabelFor(t),priority=bandFor(band),topKey=priority[0],top=CM.providers[topKey];
+      var band=turnoverLabelFor(t),priority=bandFor(band).priority,topKey=priority[0],top=CM.providers[topKey];
       var rateText=top.type==='blended'?(top.rateText||'Blended — see pricing table'):'Split rate — see pricing table';
       elR.textContent='0.35%'; elC.textContent=gbp(t*0.0035);
       elF.textContent=top.name; elFN.textContent='suggested fit for '+band+' turnover';

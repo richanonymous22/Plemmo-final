@@ -597,6 +597,27 @@
     {k:'services',label:'Service',q:'What service do you need?',sub:'Select all that apply',mode:'multi',items:SIGNAGE_CONFIG.services},
     {k:'size',label:'Screen size',q:'What screen size are you interested in?',mode:'single',items:SIGNAGE_CONFIG.screenSizes}
   ];
+  /* Which services are relevant per business type (core-rules.json service_filtering) —
+     unmapped types (e.g. "Other") show every service. */
+  var SERVICE_FILTER={
+    'Restaurant':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+    'Café':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+    'Coffee Shop':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+    'Fast Food':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+    'Takeaway':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+    'Bakery':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+    'Dessert Shop':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+    'Supermarket':['Promotional Digital Screen','Advertising Display','Window Display Screen'],
+    'Convenience Store':['Promotional Digital Screen','Advertising Display','Window Display Screen'],
+    'Retail Shop':['Promotional Digital Screen','Window Display Screen','Advertising Display'],
+    'Salon':['Promotional Digital Screen','Window Display Screen'],
+    'Barbershop':['Promotional Digital Screen','Window Display Screen'],
+    'Pharmacy':['Promotional Digital Screen','Window Display Screen'],
+    'Hotel':['Digital Menu Board','Promotional Digital Screen','Window Display Screen'],
+    'Reception Area':['Promotional Digital Screen','Advertising Display'],
+    'Office':['Promotional Digital Screen','Advertising Display']
+  };
+  function servicesFor(biz){var allowed=SERVICE_FILTER[biz];return allowed?SIGNAGE_CONFIG.services.filter(function(it){return allowed.indexOf(it.v)>-1}):SIGNAGE_CONFIG.services;}
   var wizState={biz:'',services:[],size:''},wizCur=0,wizDone=false;
   var HW_PRIORITY=['Digital Menu Board','Window Display Screen','Advertising Display','Promotional Digital Screen'];
   var HW_MAP={'Digital Menu Board':'menu','Window Display Screen':'window','Advertising Display':'advertising','Promotional Digital Screen':'advertising'};
@@ -639,8 +660,10 @@
     if(s.sub){var sub=document.createElement('span');sub.textContent=s.sub;q.appendChild(sub);}
     q.appendChild(document.createTextNode(s.q));
     body.appendChild(q);
-    var grid=document.createElement('div');grid.className='wiz-tiles'+(s.items.length>6?' compact':'');
-    s.items.forEach(function(it){
+    var items=(s.k==='services')?servicesFor(wizState.biz):s.items;
+    if(s.k==='services'&&!items.length)items=s.items; /* safety net — never render an empty step */
+    var grid=document.createElement('div');grid.className='wiz-tiles'+(items.length>6?' compact':'');
+    items.forEach(function(it){
       var val=it.v,isSel=(s.mode==='multi')?(wizState[s.k].indexOf(val)>-1):(wizState[s.k]===val);
       var btn=document.createElement('button');
       btn.type='button';btn.className='wiz-tile'+(isSel?' sel':'')+(s.mode==='multi'?' row':'');
@@ -659,7 +682,12 @@
           btn.classList.toggle('sel');
           syncModalFields();
         }else{
-          wizState[s.k]=val;syncModalFields();
+          wizState[s.k]=val;
+          if(s.k==='biz'){
+            var allowedNow=SERVICE_FILTER[val];
+            if(allowedNow)wizState.services=wizState.services.filter(function(sv){return allowedNow.indexOf(sv)>-1});
+          }
+          syncModalFields();
           if(wizCur<WIZ_STEPS.length-1){wizCur++;renderWiz();}else{showResult();}
         }
       };
@@ -686,17 +714,24 @@
     document.getElementById('sigTitle').textContent=wizState.biz?('For '+wizState.biz):'Your recommendation';
     var key=pickSigKey();
     if(key){
-      var d=SIG[key],price=d.price,unit=d.unit;
+      var d=SIG[key],price=d.price,unit=d.unit,match=d.match,checks=d.checks.slice();
       if(key==='menu'){
         if(wizState.size==='32"'){price='£350';unit='per screen';}
         else if(wizState.size==='40"'){price='£400';unit='per screen';}
+        else{
+          /* "Other / Not Sure" — show both sizes rather than silently defaulting,
+             and invite a custom-size enquiry (core-rules.json screen_selection_rule). */
+          match=match+' (32" or 40")';
+          price='£350 – £400';unit="per screen — we'll help you pick the right size";
+          checks.push('Not sure on size? We\'ll recommend 32" or 40" for your space — or a fully custom size on request');
+        }
       }
-      document.getElementById('sigMatch').textContent=d.match;
+      document.getElementById('sigMatch').textContent=match;
       document.getElementById('sigText').textContent=d.text;
       document.getElementById('sigPrice').textContent=price;
       document.getElementById('sigUnit').textContent=unit;
-      document.getElementById('sigChecks').innerHTML=d.checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
-      document.getElementById('sigCta').setAttribute('data-product',d.match);
+      document.getElementById('sigChecks').innerHTML=checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
+      document.getElementById('sigCta').setAttribute('data-product',match);
     }else{
       var svcList=wizState.services.length?wizState.services.join(', '):'your signage and design needs';
       document.getElementById('sigMatch').textContent='Design Service Quote';

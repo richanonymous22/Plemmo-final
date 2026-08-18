@@ -1,0 +1,1123 @@
+{
+  "version": "2.0.0",
+  "last_updated": "2026-08-18",
+  "fixes_applied": [
+    "Digital Signage - Strict screen size filtering implemented",
+    "Food & Beverage - MOTO rule strictly enforced (turnover ignored)",
+    "Charity - No-rental rule strictly enforced (excludes ALL rental providers)",
+    "Current Provider Exclusion - Applied ONLY to Card Machine module",
+    "EPOS - Strict recommendation order enforced for Retail and Hospitality",
+    "ATV Classification - Correctly applies to Card Machine only",
+    "All module independence maintained",
+    "Error handling for all scenarios"
+  ],
+  "modules": {
+    "card_machine": {
+      "name": "Card Machine Recommendation Engine",
+      "description": "Recommends card machine providers based on business type, turnover, and requirements",
+      "exclude_current_provider": true,
+      "categories": {
+        "food_and_beverage": {
+          "sub_categories": [
+            "bakery", "cafe", "restaurant", "fast_food", "fine_dining", 
+            "bar_pub", "food_truck", "catering", "butchers", "fishmongers", 
+            "fruit_and_vegetable_shop"
+          ],
+          "requires_additional_question": true,
+          "additional_question": "How do you take payments?",
+          "options": ["over_the_phone_moto", "pay_by_link", "neither"],
+          "rules": {
+            "over_the_phone_moto": {
+              "recommendations": ["elavon", "worldpay"],
+              "ignore_turnover": true,
+              "exclude_all_other_providers": true,
+              "max_recommendations": 2
+            },
+            "pay_by_link": {
+              "use_turnover": true
+            },
+            "neither": {
+              "use_turnover": true
+            }
+          },
+          "turnover_based": {
+            "below_5000": {
+              "priority": ["shift4"],
+              "fallback": ["sumup"],
+              "max_recommendations": 1
+            },
+            "5000_to_10000": {
+              "priority": ["sumup", "shift4"],
+              "max_recommendations": 2
+            },
+            "10000_to_15000": {
+              "priority": ["teya", "worldpay", "sumup"],
+              "max_recommendations": 3
+            },
+            "15000_to_20000": {
+              "priority": ["teya", "worldpay", "sumup"],
+              "max_recommendations": 3
+            },
+            "20000_to_30000": {
+              "priority": ["teya", "elavon", "clover"],
+              "max_recommendations": 3
+            },
+            "30000_to_35000": {
+              "priority": ["elavon", "clover", "teya"],
+              "max_recommendations": 3
+            },
+            "above_35000": {
+              "priority": ["elavon", "clover", "teya"],
+              "max_recommendations": 3
+            }
+          }
+        },
+        "retail": {
+          "sub_categories": [
+            "grocery_store", "convenience_store", "off_licence", "clothing_store",
+            "electronics_store", "furniture_store", "hardware_store", "automotive_store",
+            "jewellery_store", "bookshop", "florist", "pet_shop", "vape_shop",
+            "market_stall", "other_retail"
+          ]
+        },
+        "health_beauty_wellness": {
+          "sub_categories": [
+            "barber", "hair_salon", "beauty_salon", "cosmetic_store",
+            "pharmacy", "dentist", "gym", "spa", "wellness_centre"
+          ]
+        },
+        "leisure_entertainment": {
+          "sub_categories": [
+            "hotel", "hostel", "accommodation", "event_company", "festival",
+            "shooting_club", "experiences", "activities", "cinema",
+            "entertainment_venue", "travel_agency"
+          ]
+        },
+        "services": {
+          "sub_categories": [
+            "accountant", "bookkeeper", "solicitor", "lawyer", "consultant",
+            "estate_agent", "property_management", "tradesperson", "contractor",
+            "education", "garage", "mot_centre", "taxi", "chauffeur", "vehicle_hire",
+            "cleaning_company", "photographer", "videographer", "courier", "logistics",
+            "marketing_agency", "it_services", "digital_agency", "other_services"
+          ]
+        },
+        "charity": {
+          "sub_categories": [
+            "registered_charity", "community_organisation", 
+            "religious_organisation", "non_profit_organisation"
+          ],
+          "requires_additional_question": true,
+          "additional_question": "Do you require a card machine with no monthly rental?",
+          "options": ["yes", "no"],
+          "rules": {
+            "yes": {
+              "recommendations": ["shift4", "sumup"],
+              "exclude_all_rental_providers": true,
+              "excluded_providers": ["teya", "clover", "elavon", "worldpay"],
+              "max_recommendations": 2,
+              "strict_enforcement": true
+            },
+            "no": {
+              "use_standard_rules": true
+            }
+          }
+        }
+      },
+      "atv_classification": {
+        "high_atv": {
+          "leisure": [
+            "hotel", "hostel", "accommodation", "event_company", "festival",
+            "shooting_club", "experiences", "activities", "cinema",
+            "entertainment_venue", "travel_agency"
+          ],
+          "retail": [
+            "electronics_store", "automotive_store", "jewellery_store",
+            "bookshop", "florist"
+          ],
+          "services": [
+            "accountant", "bookkeeper", "solicitor", "lawyer", "consultant",
+            "estate_agent", "property_management", "tradesperson", "contractor",
+            "education", "garage", "mot_centre", "taxi", "chauffeur", "vehicle_hire",
+            "cleaning_company", "photographer", "videographer", "courier", "logistics",
+            "marketing_agency", "it_services", "digital_agency", "other_services"
+          ]
+        },
+        "low_atv": {
+          "food_and_beverage": [
+            "restaurant", "cafe", "fast_food", "bakery", "bar_pub", "food_truck",
+            "catering", "butchers", "fishmongers", "fruit_and_vegetable_shop"
+          ],
+          "retail": [
+            "grocery_store", "convenience_store", "vape_shop", "pet_shop", 
+            "clothing_store", "furniture_store", "hardware_store", "market_stall",
+            "off_licence", "other_retail"
+          ],
+          "health_beauty_wellness": [
+            "barber", "hair_salon", "beauty_salon", "cosmetic_store", "pharmacy",
+            "dentist", "gym", "spa", "wellness_centre"
+          ]
+        }
+      },
+      "monthly_turnover_options": [
+        "below_5000",
+        "5000_to_10000",
+        "10000_to_15000",
+        "15000_to_20000",
+        "20000_to_30000",
+        "30000_to_35000",
+        "35000_to_50000",
+        "50000_to_100000",
+        "above_100000"
+      ],
+      "current_provider_options": [
+        "none", "teya", "shift4", "sumup", "clover", "elavon", "worldpay", "other"
+      ],
+      "providers": {
+        "teya": {
+          "pricing_model": "blended",
+          "display_type": "blended",
+          "has_rental": true,
+          "contract_options": ["12_month", "no_contract"],
+          "terminal_options": {
+            "monthly_rental": 15.00,
+            "terminal_buyout": 139.00,
+            "buyout_vat": true
+          },
+          "payout_options": [
+            "instant_payout_requires_teya_business_account",
+            "everyday_payout",
+            "next_working_day_payout"
+          ],
+          "business_account_benefits": [
+            "instant_settlement",
+            "0.5_percent_cashback"
+          ],
+          "features": [
+            "tap_to_pay", "instant_payout", "everyday_payout",
+            "next_working_day_payout", "0.5_percent_cashback", "blended_pricing"
+          ],
+          "rate_table": {
+            "10000_to_15000": 1.20,
+            "15000_to_20000": 1.00,
+            "20000_to_25000": 0.90,
+            "25000_to_30000": 0.82,
+            "30000_to_35000": 0.82,
+            "40000_to_45000": 0.80,
+            "45000_to_50000": 0.77,
+            "50000_to_60000": 0.75,
+            "70000_to_80000": 0.72,
+            "80000_to_90000": 0.70,
+            "90000_to_110000": 0.67,
+            "110000_to_150000": 0.65,
+            "above_150000": 0.60
+          },
+          "display_components": {
+            "show": ["provider_logo", "provider_name", "pricing_model_blended", "monthly_rental", "contract_options", "terminal_options", "key_features", "apply_now_button", "request_callback_button"],
+            "hide": ["debit_card_rate", "credit_card_rate", "authorisation_fee"]
+          }
+        },
+        "shift4": {
+          "pricing_model": "blended",
+          "display_type": "blended",
+          "has_rental": false,
+          "monthly_rental": "none_for_one_terminal",
+          "blended_rates": {
+            "below_10000": 1.25,
+            "above_10000": 0.70
+          },
+          "settlement_fee": 0.25,
+          "features": [
+            "no_monthly_rental", "one_terminal_included", "pay_by_link",
+            "virtual_terminal", "next_day_settlement", "blended_pricing"
+          ],
+          "display_components": {
+            "show": ["provider_logo", "provider_name", "pricing_model_blended", "monthly_rental", "contract_options", "terminal_options", "key_features", "apply_now_button", "request_callback_button"],
+            "hide": ["debit_card_rate", "credit_card_rate", "authorisation_fee"]
+          }
+        },
+        "sumup": {
+          "pricing_model": "blended",
+          "display_type": "blended",
+          "has_rental": false,
+          "contract_options": ["pay_as_you_go", "12_month", "24_month"],
+          "hardware_availability": {
+            "max_terminals": 3
+          },
+          "features": [
+            "blended_pricing", "pay_as_you_go_available",
+            "12_month_contract_available", "24_month_contract_available",
+            "integrated_payment_solution", "suitable_for_small_businesses",
+            "suitable_for_growing_businesses"
+          ],
+          "display_restrictions": {
+            "no_transaction_rate_table": true,
+            "no_debit_or_credit_rates": true
+          },
+          "display_components": {
+            "show": ["provider_logo", "provider_name", "pricing_model_blended", "monthly_rental", "contract_options", "terminal_options", "key_features", "apply_now_button", "request_callback_button"],
+            "hide": ["debit_card_rate", "credit_card_rate", "authorisation_fee", "transaction_rate_table"]
+          }
+        },
+        "clover": {
+          "pricing_model": "split",
+          "display_type": "split",
+          "has_rental": true,
+          "device_models": ["clover_flex", "clover_mini"],
+          "standard_rental": 24.00,
+          "promotional_offer": {
+            "first_6_months": 1.00,
+            "from_month_7": 24.00
+          },
+          "low_atv_pricing": {
+            "20000_to_40000": {"debit": 0.45, "credit": 0.75, "auth_fee": 0.02, "rental": 24.00},
+            "40000_to_60000": {"debit": 0.40, "credit": 0.72, "auth_fee": 0.02, "rental": 24.00},
+            "60000_to_100000": {"debit": 0.35, "credit": 0.68, "auth_fee": 0.02, "rental": 24.00},
+            "100000_to_150000": {"debit": 0.30, "credit": 0.65, "auth_fee": 0.02, "rental": 24.00},
+            "150000_to_250000": {"debit": 0.28, "credit": 0.65, "auth_fee": 0.02, "rental": 24.00},
+            "above_250000": {"debit": "custom_quote", "credit": "custom_quote", "auth_fee": 0.02, "rental": 24.00}
+          },
+          "high_atv_pricing": {
+            "20000_to_40000": {"debit": 0.45, "credit": 0.75, "auth_fee": 0.02, "rental": 24.00},
+            "40000_to_60000": {"debit": 0.40, "credit": 0.70, "auth_fee": 0.02, "rental": 24.00},
+            "60000_to_100000": {"debit": 0.35, "credit": 0.65, "auth_fee": 0.02, "rental": 24.00},
+            "100000_to_150000": {"debit": 0.30, "credit": 0.60, "auth_fee": 0.02, "rental": 24.00},
+            "above_150000": {"debit": 0.28, "credit": 0.58, "auth_fee": 0.02, "rental": 24.00}
+          },
+          "display_components": {
+            "show": ["provider_logo", "provider_name", "pricing_model_split", "debit_card_rate", "credit_card_rate", "authorisation_fee", "monthly_rental", "device_models", "promotional_offers", "apply_now_button", "request_callback_button"]
+          }
+        },
+        "elavon": {
+          "pricing_model": "split",
+          "display_type": "split",
+          "has_rental": true,
+          "monthly_rental": 19.99,
+          "low_atv_pricing": {
+            "20000_to_40000": {"debit": 0.35, "credit": 0.65, "auth_fee": 0.02, "rental": 19.99},
+            "40000_to_50000": {"debit": 0.32, "credit": 0.60, "auth_fee": 0.02, "rental": 19.99},
+            "50000_to_100000": {"debit": 0.30, "credit": 0.60, "auth_fee": 0.02, "rental": 19.99},
+            "above_100000": {"debit": 0.29, "credit": 0.55, "auth_fee": 0.02, "rental": 19.99}
+          },
+          "high_atv_pricing": {
+            "20000_to_40000": {"debit": 0.55, "credit": 0.75, "auth_fee": 0.03, "rental": 19.99},
+            "40000_to_50000": {"debit": 0.40, "credit": 0.70, "auth_fee": 0.03, "rental": 19.99},
+            "50000_to_100000": {"debit": 0.35, "credit": 0.55, "auth_fee": 0.02, "rental": 19.99},
+            "above_100000": {"debit": 0.32, "credit": 0.55, "auth_fee": 0.02, "rental": 19.99}
+          },
+          "display_components": {
+            "show": ["provider_logo", "provider_name", "pricing_model_split", "debit_card_rate", "credit_card_rate", "authorisation_fee", "monthly_rental", "device_models", "apply_now_button", "request_callback_button"]
+          }
+        },
+        "worldpay": {
+          "pricing_model": "split",
+          "display_type": "split",
+          "has_rental": true,
+          "monthly_rental": "configurable",
+          "pricing": {
+            "15000_to_20000": {"debit": 0.35, "credit": 0.75, "auth_fee": 0.02},
+            "above_20000": {"debit": 0.30, "credit": 0.75, "auth_fee": 0.02}
+          },
+          "display_components": {
+            "show": ["provider_logo", "provider_name", "pricing_model_split", "debit_card_rate", "credit_card_rate", "authorisation_fee", "monthly_rental", "device_models", "apply_now_button", "request_callback_button"]
+          }
+        }
+      },
+      "max_recommendations": 3,
+      "disclaimers": {
+        "general": "The pricing displayed throughout the comparison engine is indicative only and subject to underwriting and provider approval.",
+        "additional_charges": [
+          "PCI Compliance Fee",
+          "PCI Non-Compliance Charges",
+          "Faster Settlement / Faster Payment Charges",
+          "Monthly Account Fees (where applicable)",
+          "Gateway or Virtual Terminal Fees (where applicable)",
+          "Chargeback Fees",
+          "Additional Terminal Charges",
+          "Other provider-specific fees and charges"
+        ],
+        "calculator": "Rates shown are indicative only and subject to business type, turnover, card mix, provider approval and contract terms.",
+        "suggested_provider": "Recommendations are generated from the information you provide and do not constitute financial advice."
+      }
+    },
+    "epos": {
+      "name": "EPOS Recommendation Engine",
+      "description": "Recommends EPOS systems based on business category only (NO turnover logic)",
+      "exclude_current_provider": false,
+      "categories": {
+        "hospitality": {
+          "business_types": [
+            "restaurant", "cafe", "coffee_shop", "bar", "pub", "hotel",
+            "food_truck", "fine_dining", "takeaway", "dessert_shop", "bakery"
+          ],
+          "recommendations": {
+            "priority": [
+              {
+                "rank": 1,
+                "provider": "plemmo_epos",
+                "package": "plemmo_hospitality_epos",
+                "hardware_price": 500,
+                "monthly_fee": 20,
+                "hardware_included": ["epos_terminal", "receipt_printer"],
+                "integrated_card_machine": {
+                  "status": "available",
+                  "message": "Integrated card machine available. Additional charges may apply. Please contact us for more information."
+                },
+                "always_show": true,
+                "cannot_be_excluded": true
+              },
+              {
+                "rank": 2,
+                "provider": "shift4_epos",
+                "package": "shift4_hospitality_pos",
+                "hardware_price": 0,
+                "monthly_fee": 39,
+                "hardware_included": ["integrated_card_machine", "epos_terminal", "receipt_printer", "cash_drawer"],
+                "integrated_card_machine": {
+                  "status": "included",
+                  "message": "Integrated Card Machine Included"
+                }
+              },
+              {
+                "rank": 3,
+                "provider": "epos_now",
+                "package": "countertop",
+                "hardware_price": 199,
+                "monthly_fee": 39,
+                "hardware_included": ["single_screen_epos_terminal", "built_in_receipt_printer", "cash_drawer", "integrated_card_machine"],
+                "integrated_card_machine": {
+                  "status": "included",
+                  "message": "Integrated Card Machine Included"
+                }
+              },
+              {
+                "rank": 4,
+                "provider": "epos_now",
+                "package": "countertop_duo",
+                "hardware_price": 249,
+                "monthly_fee": 39,
+                "hardware_included": ["all_in_one_dual_screen_pos", "15.6_inch_full_hd_staff_touchscreen", "10.1_inch_hd_customer_facing_display", "built_in_80mm_thermal_receipt_printer", "cash_drawer", "integrated_card_machine"],
+                "integrated_card_machine": {
+                  "status": "included",
+                  "message": "Integrated Card Machine Included"
+                }
+              }
+            ]
+          }
+        },
+        "retail": {
+          "business_types": [
+            "grocery_store", "convenience_store", "off_licence", "clothing_store",
+            "electronics_store", "jewellery_store", "pharmacy", "vape_shop",
+            "pet_shop", "furniture_store", "florist", "hardware_store",
+            "gift_shop", "other_retail_businesses"
+          ],
+          "recommendations": {
+            "priority": [
+              {
+                "rank": 1,
+                "provider": "plemmo_epos",
+                "package": "plemmo_retail_epos",
+                "hardware_price": 900,
+                "monthly_fee": 10,
+                "hardware_included": ["single_screen_touchscreen_epos_terminal", "receipt_printer", "cash_drawer", "barcode_scanner"],
+                "optional_upgrades": {
+                  "customer_facing_display": {
+                    "price": 200,
+                    "description": "Customer Facing Display"
+                  }
+                },
+                "integrated_card_machine": {
+                  "status": "available",
+                  "message": "Integrated card machine available. Additional charges may apply. Please contact us for more information."
+                },
+                "always_show": true,
+                "cannot_be_excluded": true
+              },
+              {
+                "rank": 2,
+                "provider": "epos_now",
+                "package": "countertop_duo",
+                "hardware_price": 249,
+                "monthly_fee": 39,
+                "hardware_included": ["all_in_one_dual_screen_pos", "15.6_inch_full_hd_staff_touchscreen", "10.1_inch_hd_customer_facing_display", "built_in_80mm_thermal_receipt_printer", "cash_drawer", "integrated_card_machine"],
+                "integrated_card_machine": {
+                  "status": "included",
+                  "message": "Integrated Card Machine Included"
+                }
+              },
+              {
+                "rank": 3,
+                "provider": "sumup_pos",
+                "package": "retail_pos_kit",
+                "hardware_price": 649,
+                "monthly_fee": 29,
+                "hardware_included": ["pos_terminal", "receipt_printer", "cash_drawer", "barcode_scanner"],
+                "promotions": ["30_percent_discount_available", "6_monthly_instalments_available"],
+                "integrated_card_machine": {
+                  "status": "included",
+                  "message": "Integrated Card Machine Included"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "features": {
+        "plemmo_epos": {
+          "sales": [
+            "fast_checkout", "barcode_scanning", "multiple_payment_methods",
+            "split_payments", "refund_management", "discounts_and_promotions",
+            "gift_cards", "product_variations"
+          ],
+          "inventory": [
+            "real_time_stock_management", "low_stock_alerts", "supplier_management",
+            "purchase_orders", "stock_transfers", "stock_adjustments", "barcode_inventory"
+          ],
+          "staff": [
+            "multiple_staff_accounts", "user_permissions", "clock_in_clock_out",
+            "staff_sales_performance"
+          ],
+          "reporting": [
+            "sales_reports", "product_reports", "profit_reports", "staff_reports",
+            "customer_reports", "tax_reports", "end_of_day_reports"
+          ],
+          "customer": [
+            "customer_database", "customer_purchase_history", "loyalty_programme"
+          ],
+          "business": [
+            "cloud_based", "multi_store_support", "remote_access", "secure_backup",
+            "role_permissions"
+          ],
+          "hospitality_only": [
+            "table_management", "table_reservations", "kitchen_display_system",
+            "kitchen_printer_support", "table_transfers", "split_bills",
+            "tips_management", "eat_in_orders", "takeaway_orders", "delivery_orders",
+            "qr_ordering", "online_ordering", "menu_management", "course_ordering",
+            "floor_plan_management"
+          ]
+        },
+        "shift4_epos": {
+          "payments": ["integrated_card_machine"],
+          "business_management": [
+            "real_time_analytics", "staff_management", "inventory_control",
+            "labour_cost_analysis", "sales_forecasting", "fraud_prevention"
+          ],
+          "cloud": ["cloud_back_office", "mobile_app", "api_access", "multi_site_management"],
+          "reporting": [
+            "sales_reports", "performance_reports", "labour_reports", "inventory_reports"
+          ],
+          "inventory": ["stock_management", "low_stock_alerts", "supplier_management"],
+          "support": ["24_7_priority_support", "lifetime_warranty"]
+        },
+        "sumup_pos": {
+          "features": [
+            "integrated_card_machine", "retail_pos_solution", "barcode_scanning",
+            "stock_management", "sales_reporting", "customer_management",
+            "staff_accounts", "cloud_based"
+          ]
+        },
+        "epos_now": {
+          "features": [
+            "cloud_based_epos", "real_time_reporting", "inventory_management",
+            "customer_management", "staff_management", "multi_store_support",
+            "reporting_dashboard", "integrated_card_machine_included"
+          ]
+        }
+      },
+      "error_handling": {
+        "no_package_available": "Please contact us for a personalised EPOS quotation."
+      }
+    },
+    "finance": {
+      "name": "Business Finance Recommendation Engine",
+      "description": "Recommends finance products based on business requirements (NOT lenders)",
+      "exclude_current_provider": false,
+      "important_notice": "Plemmo Services Ltd is an introducer only. We do not provide loans, make lending decisions, or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting.",
+      "hero": {
+        "headline": "Business Funding Made Simple",
+        "subheading": "Looking for business finance? Tell us about your requirements and we'll introduce you to one of our trusted funding partners.",
+        "buttons": ["find_suitable_funding", "request_a_callback"]
+      },
+      "qualification_form": {
+        "funding_amount": [
+          "10000_to_25000", "25000_to_50000", "50000_to_100000",
+          "100000_to_250000", "above_250000"
+        ],
+        "funding_purpose": [
+          "working_capital", "business_expansion", "equipment_purchase",
+          "stock_purchase", "cash_flow", "commercial_property",
+          "vehicle_purchase", "tax_funding", "vat_funding",
+          "business_acquisition", "debt_consolidation", "other"
+        ],
+        "business_type": ["sole_trader", "partnership", "limited_company", "llp"],
+        "business_sector": [
+          "retail", "hospitality", "construction", "healthcare",
+          "manufacturing", "professional_services", "transport",
+          "property", "wholesale", "other"
+        ],
+        "annual_turnover": [
+          "under_100k", "100k_to_250k", "250k_to_500k",
+          "500k_to_1m", "above_1m"
+        ],
+        "time_trading": [
+          "under_12_months", "1_to_2_years", "2_to_5_years", "above_5_years"
+        ]
+      },
+      "products": [
+        {
+          "name": "business_loan",
+          "suitable_for": ["working_capital", "business_expansion", "stock_purchase"],
+          "typical_range": "£10,000 - £250,000+",
+          "repayment_term": "1-5 years",
+          "description": "A flexible business loan for growth and working capital.",
+          "display_order": 1
+        },
+        {
+          "name": "working_capital_loan",
+          "suitable_for": ["working_capital", "cash_flow"],
+          "typical_range": "£10,000 - £100,000",
+          "repayment_term": "1-3 years",
+          "description": "Short-term funding to manage day-to-day business expenses.",
+          "display_order": 2
+        },
+        {
+          "name": "asset_finance",
+          "suitable_for": ["equipment_purchase", "vehicle_purchase"],
+          "typical_range": "£10,000 - £250,000+",
+          "repayment_term": "1-5 years",
+          "description": "Finance for purchasing business equipment, machinery, or vehicles.",
+          "display_order": 3
+        },
+        {
+          "name": "vehicle_finance",
+          "suitable_for": ["vehicle_purchase"],
+          "typical_range": "£10,000 - £100,000",
+          "repayment_term": "1-5 years",
+          "description": "Funding for commercial vehicles, vans, or fleet expansion.",
+          "display_order": 4
+        },
+        {
+          "name": "commercial_mortgage",
+          "suitable_for": ["commercial_property"],
+          "typical_range": "£100,000 - £1,000,000+",
+          "repayment_term": "5-25 years",
+          "description": "Property finance for business premises or investment.",
+          "display_order": 5
+        },
+        {
+          "name": "bridging_finance",
+          "suitable_for": ["commercial_property", "business_expansion"],
+          "typical_range": "£25,000 - £500,000",
+          "repayment_term": "3-18 months",
+          "description": "Short-term finance to bridge gaps in funding or property purchases.",
+          "display_order": 6
+        },
+        {
+          "name": "invoice_finance",
+          "suitable_for": ["cash_flow", "working_capital"],
+          "typical_range": "£10,000 - £250,000+",
+          "repayment_term": "Ongoing",
+          "description": "Release cash from unpaid invoices to improve cash flow.",
+          "display_order": 7
+        },
+        {
+          "name": "merchant_cash_advance",
+          "suitable_for": ["working_capital", "stock_purchase"],
+          "typical_range": "£10,000 - £100,000",
+          "repayment_term": "Based on card sales",
+          "description": "Funding repaid as a percentage of future card sales.",
+          "display_order": 8
+        },
+        {
+          "name": "vat_loan",
+          "suitable_for": ["vat_funding", "tax_funding"],
+          "typical_range": "£10,000 - £100,000",
+          "repayment_term": "1-12 months",
+          "description": "Short-term funding to cover VAT payments to HMRC.",
+          "display_order": 9
+        },
+        {
+          "name": "tax_loan",
+          "suitable_for": ["tax_funding"],
+          "typical_range": "£10,000 - £100,000",
+          "repayment_term": "1-12 months",
+          "description": "Funding to cover corporation tax, income tax, or other tax liabilities.",
+          "display_order": 10
+        },
+        {
+          "name": "revolving_credit_facility",
+          "suitable_for": ["working_capital", "cash_flow"],
+          "typical_range": "£10,000 - £100,000",
+          "repayment_term": "Ongoing",
+          "description": "Flexible credit facility that can be drawn down and repaid as needed.",
+          "display_order": 11
+        }
+      ],
+      "restrictions": {
+        "do_not_display": ["lender_names", "interest_rates", "aprs"],
+        "do_not_calculate": ["repayments", "approval", "loan_decision"]
+      },
+      "eligibility_filters": {
+        "time_trading": {
+          "under_12_months": ["working_capital_loan", "merchant_cash_advance"],
+          "1_to_2_years": ["business_loan", "asset_finance", "vehicle_finance"],
+          "2_to_5_years": ["all"],
+          "above_5_years": ["all", "commercial_mortgage"]
+        },
+        "turnover": {
+          "under_100k": ["working_capital_loan", "merchant_cash_advance"],
+          "100k_to_250k": ["business_loan", "asset_finance"],
+          "250k_to_500k": ["all"],
+          "500k_to_1m": ["all", "invoice_finance"],
+          "above_1m": ["all", "commercial_mortgage"]
+        },
+        "business_type": {
+          "sole_trader": ["business_loan", "asset_finance", "vehicle_finance"],
+          "partnership": ["all"],
+          "limited_company": ["all"],
+          "llp": ["all"]
+        }
+      },
+      "lead_form_fields": [
+        "business_name", "contact_name", "telephone", "email",
+        "funding_amount", "funding_purpose", "annual_turnover",
+        "time_trading", "additional_notes"
+      ]
+    },
+    "energy": {
+      "name": "Business Energy Comparison",
+      "description": "Energy comparison and recommendation for businesses",
+      "exclude_current_provider": false,
+      "hero": {
+        "headline": "Business Energy Made Simple",
+        "subheading": "Compare electricity and gas prices from trusted UK suppliers and reduce your business energy costs in minutes.",
+        "buttons": ["compare_energy_prices", "request_a_callback"]
+      },
+      "calculator": {
+        "business_type": [
+          "retail", "restaurant_cafe", "office", "warehouse",
+          "industrial", "hotel", "healthcare", "education", "other"
+        ],
+        "energy_required": {
+          "type": "checkbox",
+          "options": ["electricity", "gas", "electricity_and_gas"]
+        },
+        "current_supplier": [
+          "british_gas", "edf", "eon_next", "scottish_power",
+          "sse", "octopus_energy", "total_energies", "yu_energy",
+          "utility_warehouse", "other"
+        ],
+        "contract_status": [
+          "in_contract", "out_of_contract", "contract_ending_soon", "not_sure"
+        ],
+        "annual_energy_spend": [
+          "under_2000", "2000_to_5000", "5000_to_10000",
+          "10000_to_20000", "20000_to_50000", "above_50000"
+        ],
+        "number_of_locations": ["1", "2_to_5", "6_to_20", "above_20"],
+        "current_meter_type": [
+          "smart_meter", "standard_meter", "half_hourly_meter", "not_sure"
+        ],
+        "current_tariff_type": ["fixed", "variable", "not_sure"]
+      },
+      "results": {
+        "fixed_contract": {
+          "suitable_for": ["restaurant_cafe", "retail", "office"],
+          "benefits": [
+            "budget_certainty",
+            "fixed_unit_rates",
+            "protection_from_market_increases"
+          ]
+        },
+        "flexible_contract": {
+          "suitable_for": ["large_businesses", "multi_site_businesses", "high_energy_users"],
+          "benefits": [
+            "market_flexibility",
+            "potential_cost_savings",
+            "responsive_to_market_changes"
+          ]
+        }
+      },
+      "services": [
+        "business_electricity",
+        "business_gas",
+        "dual_fuel",
+        "smart_meters",
+        "meter_installations",
+        "multi_site_energy",
+        "renewable_energy",
+        "contract_renewals"
+      ],
+      "why_choose": [
+        "compare_multiple_uk_suppliers",
+        "free_quotation",
+        "no_obligation",
+        "business_energy_specialists",
+        "support_from_application_to_contract_completion",
+        "multi_site_solutions",
+        "dedicated_account_manager"
+      ],
+      "required_documents": [
+        "latest_energy_bill",
+        "business_name",
+        "business_address",
+        "contact_details"
+      ],
+      "ctas": {
+        "heading": "Ready to reduce your business energy costs?",
+        "buttons": ["upload_my_bill", "get_free_quote", "speak_to_an_expert"]
+      },
+      "faqs": [
+        {
+          "question": "Can I switch before my contract ends?",
+          "answer": "You may be able to switch before your contract ends, but early exit fees may apply. Check your contract terms or contact us for advice."
+        },
+        {
+          "question": "How long does switching take?",
+          "answer": "Business energy switching typically takes 4-6 weeks, depending on your current supplier and the new contract terms."
+        },
+        {
+          "question": "Will my supply be interrupted?",
+          "answer": "No, your energy supply will not be interrupted during the switching process."
+        },
+        {
+          "question": "Can you help with multiple sites?",
+          "answer": "Yes, we can manage multi-site energy contracts for businesses with multiple locations."
+        },
+        {
+          "question": "Can you arrange smart meters?",
+          "answer": "Yes, we can arrange smart meter installations for eligible business premises."
+        },
+        {
+          "question": "How much could I save?",
+          "answer": "Savings vary depending on your current contract, usage, and business type. Contact us for a free quotation."
+        }
+      ]
+    },
+    "digital_signage": {
+      "name": "Digital Signage & Menu Design",
+      "description": "Digital signage solutions and professional menu/content design",
+      "exclude_current_provider": false,
+      "hero": {
+        "heading": "Digital Signage & Menu Boards for Modern Businesses",
+        "subheading": "Promote your products, menus and offers with professionally designed digital displays. Suitable for restaurants, cafés, retail stores, salons, supermarkets and more.",
+        "buttons": ["request_a_quote", "design_my_menu"]
+      },
+      "business_types": [
+        "restaurant", "cafe", "coffee_shop", "fast_food", "takeaway",
+        "bakery", "dessert_shop", "supermarket", "convenience_store",
+        "retail_shop", "salon", "barbershop", "pharmacy", "hotel",
+        "reception_area", "office", "other"
+      ],
+      "services_available": [
+        "digital_menu_board",
+        "promotional_digital_screen",
+        "window_display_screen",
+        "advertising_display",
+        "professional_menu_design",
+        "promotional_poster_design",
+        "social_media_design",
+        "existing_menu_update",
+        "screen_and_design_package"
+      ],
+      "service_filtering": {
+        "restaurant": ["digital_menu_board", "professional_menu_design", "screen_and_design_package"],
+        "cafe": ["digital_menu_board", "professional_menu_design", "screen_and_design_package"],
+        "coffee_shop": ["digital_menu_board", "professional_menu_design", "screen_and_design_package"],
+        "fast_food": ["digital_menu_board", "professional_menu_design", "screen_and_design_package"],
+        "takeaway": ["digital_menu_board", "professional_menu_design", "screen_and_design_package"],
+        "bakery": ["digital_menu_board", "professional_menu_design", "screen_and_design_package"],
+        "dessert_shop": ["digital_menu_board", "professional_menu_design", "screen_and_design_package"],
+        "supermarket": ["promotional_digital_screen", "advertising_display", "window_display_screen"],
+        "convenience_store": ["promotional_digital_screen", "advertising_display", "window_display_screen"],
+        "retail_shop": ["promotional_digital_screen", "window_display_screen", "advertising_display"],
+        "salon": ["promotional_digital_screen", "window_display_screen"],
+        "barbershop": ["promotional_digital_screen", "window_display_screen"],
+        "pharmacy": ["promotional_digital_screen", "window_display_screen"],
+        "hotel": ["digital_menu_board", "promotional_digital_screen", "window_display_screen"],
+        "reception_area": ["promotional_digital_screen", "advertising_display"],
+        "office": ["promotional_digital_screen", "advertising_display"],
+        "other": ["all_services"]
+      },
+      "screen_sizes": {
+        "32_inch": {
+          "price": 350,
+          "includes": ["digital_display", "professional_menu_design"],
+          "available": true
+        },
+        "40_inch": {
+          "price": 400,
+          "includes": ["digital_display", "professional_menu_design"],
+          "available": true
+        }
+      },
+      "screen_selection_rule": {
+        "if_32_inch_selected": {
+          "show_only": ["32_inch"],
+          "hide": ["40_inch"],
+          "strict_enforcement": true
+        },
+        "if_40_inch_selected": {
+          "show_only": ["40_inch"],
+          "hide": ["32_inch"],
+          "strict_enforcement": true
+        },
+        "if_not_sure_selected": {
+          "show": ["32_inch", "40_inch"],
+          "recommend_default": "32_inch"
+        },
+        "if_other_selected": {
+          "show": ["32_inch", "40_inch"],
+          "message": "Please contact us for custom sizes",
+          "recommend_default": "40_inch"
+        }
+      },
+      "design_services": {
+        "menu_design": {
+          "suitable_for": ["restaurant", "cafe", "takeaway", "bakery", "dessert_shop"],
+          "description": "Professional menu design for digital and print"
+        },
+        "promotional_screen_design": {
+          "suitable_for": ["retail_shop", "salon", "pharmacy", "supermarket"],
+          "description": "Eye-catching promotional content for digital displays"
+        },
+        "window_advertising_design": {
+          "suitable_for": ["retail_shop", "salon", "supermarket"],
+          "description": "Window displays for offers, promotions, and seasonal campaigns"
+        },
+        "social_media_design": {
+          "suitable_for": ["all"],
+          "description": "Social media content for promotions, products, and business branding"
+        }
+      },
+      "features": [
+        "professional_design",
+        "modern_layouts",
+        "high_resolution_graphics",
+        "brand_colour_matching",
+        "easy_to_read_menus",
+        "fast_turnaround",
+        "digital_ready_files",
+        "print_ready_files_if_required"
+      ],
+      "why_choose": [
+        "professional_commercial_displays",
+        "high_quality_menu_designs",
+        "business_branding",
+        "fast_turnaround",
+        "competitive_pricing",
+        "support_after_installation"
+      ],
+      "faqs": [
+        {
+          "question": "Which screen size should I choose?",
+          "answer": "The 32-inch screen is ideal for most countertop and wall-mounted installations, while the 40-inch screen is better for larger spaces and high-visibility locations."
+        },
+        {
+          "question": "Can you update my menu later?",
+          "answer": "Yes, we can provide content updates and menu changes as required. Contact us for ongoing content management options."
+        },
+        {
+          "question": "Can I use my own branding?",
+          "answer": "Yes, we design all content to match your brand colours, logo, and style guidelines."
+        },
+        {
+          "question": "Do you design promotional adverts?",
+          "answer": "Yes, we design promotional content for digital screens, window displays, and social media."
+        },
+        {
+          "question": "Can I order multiple screens?",
+          "answer": "Yes, we can supply and install multiple screens for businesses with multiple locations or large premises."
+        },
+        {
+          "question": "Can you redesign my existing menu?",
+          "answer": "Yes, we can take your existing menu and redesign it for digital displays or professional print."
+        }
+      ],
+      "lead_form_fields": [
+        "business_name", "contact_name", "mobile_number", "email_address",
+        "business_type", "service_required", "screen_size",
+        "number_of_screens_required", "additional_requirements"
+      ],
+      "focus": "lead_generation",
+      "allow_purchases": false
+    }
+  },
+  "global_rules": {
+    "admin_editable": true,
+    "max_recommendations": 3,
+    "only_show_active_providers": true,
+    "no_page_refresh": true,
+    "instant_results": true,
+    "exclude_current_provider": {
+      "enabled": true,
+      "apply_to_modules": ["card_machine"],
+      "exclude_from_modules": ["epos", "finance", "energy", "digital_signage"]
+    }
+  },
+  "disclaimers": {
+    "global": {
+      "provider_logos": "Provider names and logos remain the property of their respective owners and are displayed solely to indicate products or services that may be introduced.",
+      "no_financial_advice": "Recommendations are generated from the information you provide and do not constitute financial advice."
+    },
+    "card_machine": {
+      "rates_indicative": "Rates shown are indicative only and subject to business type, turnover, card mix, provider approval and contract terms.",
+      "additional_charges": "The following additional charges may apply: PCI Compliance Fee, PCI Non-Compliance Charges, Faster Settlement / Faster Payment Charges, Monthly Account Fees (where applicable), Gateway or Virtual Terminal Fees (where applicable), Additional provider-specific fees and charges."
+    },
+    "finance": {
+      "introducer_only": "Plemmo Services Ltd is an introducer only. We do not provide loans, make lending decisions, or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting."
+    }
+  },
+  "error_handling": {
+    "no_matches_found": {
+      "message": "Please contact us for a personalised quote.",
+      "allow_lead_submission": true,
+      "notify_admin": true
+    },
+    "validation": {
+      "required_fields": true,
+      "turnover_range_check": true,
+      "current_provider_exclusion": true,
+      "atv_pricing_correct": true,
+      "active_provider_check": true,
+      "screen_size_check": true,
+      "service_availability_check": true,
+      "category_mapping_check": true,
+      "sub_category_mapping_check": true
+    },
+    "specific_scenarios": {
+      "screen_size_mismatch": {
+        "message": "Only the selected screen size will be shown.",
+        "action": "filter_results"
+      },
+      "service_unavailable": {
+        "message": "This service is not available for your business type.",
+        "action": "hide_service"
+      },
+      "provider_excluded": {
+        "message": "Your current provider has been excluded from recommendations.",
+        "action": "skip_provider"
+      },
+      "charity_no_rental": {
+        "message": "Based on your requirements, only no-rental providers are shown.",
+        "action": "filter_results"
+      },
+      "moto_selected": {
+        "message": "Based on your payment method, only MOTO-compatible providers are shown.",
+        "action": "filter_results"
+      }
+    }
+  },
+  "audit_logging": {
+    "log_changes_to": [
+      "provider_pricing",
+      "recommendation_rules",
+      "business_categories",
+      "promotions",
+      "admin_actions"
+    ],
+    "allow_reversal": true,
+    "track_admin_user": true
+  },
+  "future_expansion": {
+    "modules_planned": [
+      "epos_system_recommendations",
+      "business_loans",
+      "utility_comparison",
+      "business_insurance",
+      "broadband_services",
+      "digital_signage",
+      "cash_registers"
+    ],
+    "design_principle": "modules_share_consistent_ux_but_operate_independently",
+    "code_structure": "minimal_development_effort_for_new_additions"
+  },
+  "performance_requirements": {
+    "instant_results": true,
+    "no_page_refresh": true,
+    "responsive": true,
+    "cross_device_compatible": true
+  },
+  "implementation_checklist": {
+    "card_machine_fixes": [
+      "MOTO rule strictly enforced - turnover ignored",
+      "Charity no-rental rule strictly enforced - all rental providers excluded",
+      "Current provider exclusion applied only to this module",
+      "ATV classification correctly applies to pricing tables"
+    ],
+    "epos_fixes": [
+      "Strict recommendation order enforced for Retail",
+      "Strict recommendation order enforced for Hospitality",
+      "Plemmo always appears first and cannot be excluded",
+      "No current provider exclusion applied"
+    ],
+    "digital_signage_fixes": [
+      "If 32\" selected, ONLY 32\" shown",
+      "If 40\" selected, ONLY 40\" shown",
+      "If Not Sure, both shown with default recommendation"
+    ],
+    "finance_fixes": [
+      "No lender names shown",
+      "No APRs or interest rates shown",
+      "No repayment calculations shown",
+      "Clear introducer disclaimer displayed"
+    ],
+    "energy_fixes": [
+      "All fields required for quote",
+      "Results show contract type based on business type",
+      "Clear call-to-actions for quote submission"
+    ]
+  },
+  "testing_scenarios": {
+    "card_machine": [
+      {
+        "scenario": "Charity + No Rental",
+        "expected": "Only Shift4 and SumUp shown",
+        "excluded": ["Teya", "Clover", "Elavon", "Worldpay"]
+      },
+      {
+        "scenario": "Food & Beverage + MOTO",
+        "expected": "Only Elavon and Worldpay shown",
+        "ignored": ["Turnover"]
+      },
+      {
+        "scenario": "Food & Beverage + Pay by Link + £12,000 turnover",
+        "expected": "Teya, Worldpay, SumUp",
+        "based_on": "Turnover"
+      },
+      {
+        "scenario": "Retail + £25,000 turnover",
+        "expected": "All providers based on ATV classification",
+        "uses": "ATV"
+      }
+    ],
+    "epos": [
+      {
+        "scenario": "Retail Business",
+        "expected_order": ["Plemmo Retail EPOS", "Epos Now Countertop Duo", "SumUp Retail POS Kit"]
+      },
+      {
+        "scenario": "Hospitality Business",
+        "expected_order": ["Plemmo Hospitality EPOS", "Shift4 Hospitality POS", "Epos Now Countertop", "Epos Now Countertop Duo"]
+      }
+    ],
+    "digital_signage": [
+      {
+        "scenario": "32\" Selected",
+        "expected": "Only 32\" screen shown",
+        "hidden": ["40\""]
+      },
+      {
+        "scenario": "40\" Selected",
+        "expected": "Only 40\" screen shown",
+        "hidden": ["32\""]
+      },
+      {
+        "scenario": "Not Sure Selected",
+        "expected": "Both 32\" and 40\" shown",
+        "default_recommendation": "32\""
+      }
+    ]
+  }
+}

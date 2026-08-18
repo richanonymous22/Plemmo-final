@@ -217,7 +217,7 @@
               rateText:'Blended rate confirmed after review — see contract options'},
             clover:{name:'Clover',type:'split',img:'../images/clover-card-machine.webp',rental:'£24/month (£1/month promo for first 6 months, then £24/month)',contract:'Rolling',device:'Clover Flex · Clover Mini',features:['Clover Flex','Clover Mini','£1/month rental — first 6 months','Split-rate pricing'],
               promo:true,
-              low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'}],
+              low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'},{min:250000,max:Infinity,debit:'Custom Quote',credit:'Custom Quote',auth:'2p'}],
               high:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.70%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:150000,max:Infinity,debit:'0.28%',credit:'0.58%',auth:'2p'}]},
             elavon:{name:'Elavon',type:'split',img:'../images/elavon-card-machine.webp',rental:'£19.99/month',contract:'Provider terms',device:'Countertop terminal',features:['Split-rate pricing','Everyday payout available','Suited to higher turnover businesses'],
               low:[{min:20000,max:40000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:40000,max:50000,debit:'0.32%',credit:'0.60%',auth:'2p'},{min:50000,max:100000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:100000,max:Infinity,debit:'0.29%',credit:'0.55%',auth:'2p'}],
@@ -227,7 +227,7 @@
               high:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}]}
           },
           generalBands: [
-            {max:5000, priority:['shift4']},
+            {max:5000, priority:['shift4'], fallback:['sumup']},
             {max:10000, priority:['sumup','shift4']},
             {max:15000, priority:['teya','worldpay','sumup']},
             {max:20000, priority:['teya','worldpay','sumup']},
@@ -347,8 +347,43 @@
             vat:           {name:'VAT Loan', suitableFor:'Covering a quarterly VAT bill', range:'Typically matched to VAT liability', term:'Usually repaid over one VAT quarter (~3 months)', desc:'Short-term funding to spread the cost of a VAT bill instead of paying it as one lump sum.'},
             tax:           {name:'Tax Loan', suitableFor:'Covering Corporation Tax or other tax liabilities', range:'Typically matched to tax liability', term:'3 – 12 months (typical)', desc:'Short-term funding to spread the cost of a tax bill over manageable instalments.'},
             revolving:     {name:'Revolving Credit Facility', suitableFor:'Ongoing, flexible access to funds for cash flow', range:'£5,000 – £250,000 (typical)', term:'Ongoing facility — draw down & repay as needed', desc:'A pre-agreed credit limit you can draw from, repay and reuse as needed, similar to a business overdraft.'}
+          },
+          mapping: {
+            'Working Capital':     ['workingCapital','revolving','invoice'],
+            'Business Expansion':  ['loan','workingCapital'],
+            'Equipment Purchase':  ['asset','vehicle'],
+            'Stock Purchase':      ['loan','mca'],
+            'Cash Flow':           ['workingCapital','mca','revolving'],
+            'Commercial Property': ['mortgage','bridging'],
+            'Vehicle Purchase':    ['vehicle','asset'],
+            'Tax Funding':         ['tax'],
+            'VAT Funding':         ['vat'],
+            'Business Acquisition':['loan','mortgage'],
+            'Debt Consolidation':  ['loan'],
+            'Other':               ['loan','workingCapital']
+          },
+          eligibility: {
+            trading: {
+              'Under 12 Months': ['workingCapital','mca'],
+              '1–2 Years':       ['loan','asset','vehicle'],
+              '2–5 Years':       '',
+              '5+ Years':        ''
+            },
+            turnover: {
+              'Under £100k':    ['workingCapital','mca'],
+              '£100k–£250k':    ['loan','asset'],
+              '£250k–£500k':    '',
+              '£500k–£1m':      '',
+              '£1m+':           ''
+            },
+            bizType: {
+              'Sole Trader':     ['loan','asset','vehicle'],
+              'Partnership':     '',
+              'Limited Company': '',
+              'LLP':             ''
+            }
           }
-        }, note:'Icons and the product→detail-modal wiring live in the page script and are left out of this editor. Compliance reminder: no lender names, no APR/interest rates, no promised approval — keep new copy consistent with that.'}
+        }, note:'Product keys (loan, workingCapital, asset…) here must match the keys used in "mapping" and "eligibility" above — renaming a product key in one place without updating the others will silently drop it from recommendations. An empty string in eligibility means "no restriction" (equivalent to core-rules.json\'s "all"). Icons and the product→detail-modal wiring live in the page script and are left out of this editor. Compliance reminder: no lender names, no APR/interest rates, no promised approval — keep new copy consistent with that.'}
       ]
     },
 
@@ -412,7 +447,25 @@
         }},
         {varName:'SIGNAGE_PRICING (not a real page variable — see note above)', data:{
           '32inchScreen':'£350', '40inchScreen':'£400'
-        }}
+        }},
+        {varName:'SERVICE_FILTER', data:{
+          'Restaurant':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+          'Café':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+          'Coffee Shop':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+          'Fast Food':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+          'Takeaway':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+          'Bakery':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+          'Dessert Shop':['Digital Menu Board','Professional Menu Design','Screen & Design Package'],
+          'Supermarket':['Promotional Digital Screen','Advertising Display','Window Display Screen'],
+          'Convenience Store':['Promotional Digital Screen','Advertising Display','Window Display Screen'],
+          'Retail Shop':['Promotional Digital Screen','Window Display Screen','Advertising Display'],
+          'Salon':['Promotional Digital Screen','Window Display Screen'],
+          'Barbershop':['Promotional Digital Screen','Window Display Screen'],
+          'Pharmacy':['Promotional Digital Screen','Window Display Screen'],
+          'Hotel':['Digital Menu Board','Promotional Digital Screen','Window Display Screen'],
+          'Reception Area':['Promotional Digital Screen','Advertising Display'],
+          'Office':['Promotional Digital Screen','Advertising Display']
+        }, note:'Controls which services appear as options once a business type is picked in the on-page wizard (step 2). Any business type NOT listed here (currently just "Other") shows every service. Service names here must exactly match the "v" values in SIGNAGE_CONFIG.services above.'}
       ]
     }
   };

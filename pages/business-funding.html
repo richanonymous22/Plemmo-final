@@ -458,13 +458,8 @@
       revolving:     {name:'Revolving Credit Facility',     icon:'ph:arrows-clockwise-duotone',suitableFor:'Ongoing, flexible access to funds for cash flow', range:'£5,000 – £250,000 (typical)', term:'Ongoing facility — draw down & repay as needed', desc:'A pre-agreed credit limit you can draw from, repay and reuse as needed, similar to a business overdraft.'}
     },
 
-    /* Purpose → suggested product(s). Kept intentionally simple and purpose-driven —
-       this mirrors the owner's own worked examples exactly (all of which key on
-       purpose alone), rather than inventing a more elaborate scoring model. Amount,
-       turnover, trading length, business type and sector are still captured above
-       and shown in the results recap / passed into the enquiry form for the human
-       reviewer, but do not change which products are suggested. Admin can extend
-       this to branch on amount/sector later if the business wants that. */
+    /* Purpose → suggested product(s). This is the primary filter, driven by the
+       owner's own worked examples (all of which key on purpose alone). */
     mapping: {
       'Working Capital':     ['workingCapital','revolving','invoice'],
       'Business Expansion':  ['loan','workingCapital'],
@@ -478,8 +473,46 @@
       'Business Acquisition':['loan','mortgage'],
       'Debt Consolidation':  ['loan'],
       'Other':               ['loan','workingCapital']
+    },
+
+    /* Eligibility filters (core-rules.json) — layered on top of the purpose mapping
+       above. Each answer maps to an explicit allow-list of product keys, or null for
+       "no restriction from this dimension". A product must survive the purpose match
+       AND every one of these three dimensions to be shown. Sector and amount are
+       still captured and shown in the recap / passed to the enquiry form, but (per
+       the owner's rulebook) don't filter which products are suggested. */
+    eligibility: {
+      trading: {
+        'Under 12 Months': ['workingCapital','mca'],
+        '1–2 Years':       ['loan','asset','vehicle'],
+        '2–5 Years':       null,
+        '5+ Years':        null
+      },
+      turnover: {
+        'Under £100k':    ['workingCapital','mca'],
+        '£100k–£250k':    ['loan','asset'],
+        '£250k–£500k':    null,
+        '£500k–£1m':      null,
+        '£1m+':           null
+      },
+      bizType: {
+        'Sole Trader':     ['loan','asset','vehicle'],
+        'Partnership':     null,
+        'Limited Company': null,
+        'LLP':             null
+      }
     }
   };
+  /* Purpose match, narrowed by every eligibility dimension that applies to the
+     merchant's answers — matches core-rules.json's finance module exactly. */
+  function eligibleKeys(a){
+    var keys=(FUNDING_CONFIG.mapping[a.purpose]||FUNDING_CONFIG.mapping.Other).slice();
+    ['trading','turnover','bizType'].forEach(function(dim){
+      var table=FUNDING_CONFIG.eligibility[dim],allow=table&&table[a[dim]];
+      if(allow)keys=keys.filter(function(k){return allow.indexOf(k)>-1});
+    });
+    return keys;
+  }
 
   /* ── Funding checker (qualification quiz) — 6 steps, one per qualification
      question in the owner spec. No score/percentage is ever calculated; the
@@ -514,12 +547,23 @@
 
   function result(){
     done=true;bar.style.width='100%';stepEl.textContent='Your recommended funding';back.disabled=false;
-    var keys=FUNDING_CONFIG.mapping[ans.purpose]||FUNDING_CONFIG.mapping.Other;
+    var keys=eligibleKeys(ans);
     var chip=function(l,v){return v?'<span class="fchip">'+l+' <b>'+v+'</b></span>':''};
     var h='<div class="fres">';
     h+='<div class="frecap"><div class="fl">Based on your answers</div><div class="fchips">'
       +chip('Amount',ans.amount)+chip('Purpose',ans.purpose)+chip('Turnover',ans.turnover)+chip('Trading',ans.trading)
       +'</div></div>';
+    if(!keys.length){
+      h+='<div class="frec-grid" style="grid-template-columns:1fr"><div class="frec"><div class="fi"><iconify-icon icon="ph:chats-circle-duotone"></iconify-icon></div><div>'
+        +'<h4>No exact match</h4><p class="fdesc">Please contact us for a personalised quote — we couldn\'t automatically match a product to your answers. Send your details and a funding specialist will review your enquiry manually.</p>'
+        +'<a href="#" class="btn btn-primary fq" data-prod="Personalised funding quote — no automatic match" style="width:100%;justify-content:center">Enquire Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>'
+        +'</div></div></div>';
+      h+='<div class="fres-btns"><a href="#" class="btn btn-ghost" id="fcRestart">Start over</a></div></div>';
+      body.innerHTML=h;
+      body.querySelectorAll('.fq').forEach(function(b){b.onclick=function(e){e.preventDefault();openQuote(b.dataset.prod)}});
+      document.getElementById('fcRestart').onclick=function(e){e.preventDefault();ans={};save();cur=0;render()};
+      return;
+    }
     h+='<div class="frec-grid">'+keys.map(function(k){
       var p=FUNDING_CONFIG.products[k];if(!p)return'';
       return '<div class="frec"><div class="fi"><iconify-icon icon="'+p.icon+'"></iconify-icon></div><div>'
