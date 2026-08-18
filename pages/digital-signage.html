@@ -562,6 +562,17 @@
     outdoor:{title:'For all-weather visibility',match:'Outdoor Digital Advertising Display',price:'From £2,960',unit:'starting price',text:'Outdoor screens help businesses advertise in high-impact locations, day and night.',checks:['Weather-resistant options','High visibility','Built for outdoor environments']},
     kiosk:{title:'For interactive experiences',match:'Android Touch Screen Kiosk',price:'From £2,290',unit:'starting price',text:'Touch kiosks help customers browse, order, check in or interact with your business independently.',checks:['Interactive experience','Self-service options','Ideal for hospitality & retail']}
   };
+  var SVC_PRICES={
+    'Digital Menu Board':{'32"':350,'40"':400,fallback:350},
+    'Promotional Digital Screen':{'32"':499,'40"':715,fallback:499},
+    'Window Display Screen':{'43"':1770,'55"':2220,fallback:1770},
+    'Advertising Display':{'32"':650,'43"':890,fallback:650},
+    'Professional Menu Design':{flat:150},
+    'Promotional Poster Design':{flat:100},
+    'Social Media Design':{flat:80},
+    'Existing Menu Update':{flat:75},
+    'Screen & Design Package':{'32"':450,'40"':500,fallback:450}
+  };
 
   /* ── build the lead-form Business Type / Screen Size dropdowns from config ── */
   function fillSelect(id,items){
@@ -660,8 +671,7 @@
     if(s.sub){var sub=document.createElement('span');sub.textContent=s.sub;q.appendChild(sub);}
     q.appendChild(document.createTextNode(s.q));
     body.appendChild(q);
-    var items=(s.k==='services')?servicesFor(wizState.biz):s.items;
-    if(s.k==='services'&&!items.length)items=s.items; /* safety net — never render an empty step */
+    var items=(s.k==='services')?SIGNAGE_CONFIG.services:s.items;
     var grid=document.createElement('div');grid.className='wiz-tiles'+(items.length>6?' compact':'');
     items.forEach(function(it){
       var val=it.v,isSel=(s.mode==='multi')?(wizState[s.k].indexOf(val)>-1):(wizState[s.k]===val);
@@ -710,36 +720,64 @@
     return null; /* design-only (or nothing) selected — no screen hardware to recommend */
   }
 
+  function svcPrice(svcName,size){
+    var p=SVC_PRICES[svcName];if(!p)return null;
+    if(p.flat)return{amount:p.flat,label:'£'+p.flat};
+    var amt=p[size]||p.fallback||null;
+    return amt?{amount:amt,label:'£'+amt.toLocaleString()}:null;
+  }
+
   function computeResult(){
     document.getElementById('sigTitle').textContent=wizState.biz?('For '+wizState.biz):'Your recommendation';
+    var selected=wizState.services;
+    if(!selected.length){
+      document.getElementById('sigMatch').textContent='No services selected';
+      document.getElementById('sigText').textContent='Go back and select at least one service to see your recommendation.';
+      document.getElementById('sigPrice').textContent='—';
+      document.getElementById('sigUnit').textContent='';
+      document.getElementById('sigChecks').innerHTML='';
+      renderChips();syncModalFields();return;
+    }
+    var lines=[],total=0,hasQuoteOnly=false;
+    selected.forEach(function(svc){
+      var pr=svcPrice(svc,wizState.size);
+      if(pr){lines.push({name:svc,price:pr.label,amount:pr.amount});total+=pr.amount;}
+      else{lines.push({name:svc,price:'Quote',amount:0});hasQuoteOnly=true;}
+    });
     var key=pickSigKey();
-    if(key){
-      var d=SIG[key],price=d.price,unit=d.unit,match=d.match,checks=d.checks.slice();
-      if(key==='menu'){
-        if(wizState.size==='32"'){price='£350';unit='per screen';}
-        else if(wizState.size==='40"'){price='£400';unit='per screen';}
-        else{
-          /* "Other / Not Sure" — show both sizes rather than silently defaulting,
-             and invite a custom-size enquiry (core-rules.json screen_selection_rule). */
-          match=match+' (32" or 40")';
-          price='£350 – £400';unit="per screen — we'll help you pick the right size";
-          checks.push('Not sure on size? We\'ll recommend 32" or 40" for your space — or a fully custom size on request');
-        }
+    if(key==='menu'){
+      var menuIdx=-1;
+      for(var i=0;i<lines.length;i++){if(lines[i].name==='Digital Menu Board'||lines[i].name==='Screen & Design Package'){menuIdx=i;break;}}
+      if(menuIdx>-1){
+        if(wizState.size==='32"'){lines[menuIdx].name=(lines[menuIdx].name==='Screen & Design Package'?'Screen & Design Package (32")':'32" Digital Menu Board Package');}
+        else if(wizState.size==='40"'){lines[menuIdx].name=(lines[menuIdx].name==='Screen & Design Package'?'Screen & Design Package (40")':'40" Digital Menu Board Package');}
       }
-      document.getElementById('sigMatch').textContent=match;
-      document.getElementById('sigText').textContent=d.text;
-      document.getElementById('sigPrice').textContent=price;
-      document.getElementById('sigUnit').textContent=unit;
+    }
+    if(selected.length===1){
+      var d=key?SIG[key]:null;
+      var ln=lines[0];
+      document.getElementById('sigMatch').textContent=ln.name;
+      document.getElementById('sigText').textContent=d?d.text:'We\'ll put together pricing for '+ln.name+' based on your requirements.';
+      document.getElementById('sigPrice').textContent=ln.price;
+      document.getElementById('sigUnit').textContent=ln.amount?'estimated price':'quoted individually';
+      var checks=d?d.checks:['Professional quality','Fast turnaround'];
       document.getElementById('sigChecks').innerHTML=checks.map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
-      document.getElementById('sigCta').setAttribute('data-product',match);
+      document.getElementById('sigCta').setAttribute('data-product',ln.name);
     }else{
-      var svcList=wizState.services.length?wizState.services.join(', '):'your signage and design needs';
-      document.getElementById('sigMatch').textContent='Design Service Quote';
-      document.getElementById('sigText').textContent='Based on '+svcList+", we'll put together design-only pricing for your business — no screen hardware required.";
-      document.getElementById('sigPrice').textContent='Quote';
-      document.getElementById('sigUnit').textContent='quoted individually';
-      document.getElementById('sigChecks').innerHTML=['Professional design team','Fast turnaround','Digital & print-ready files'].map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
-      document.getElementById('sigCta').setAttribute('data-product','Design Service Quote');
+      var bundleHtml='<div style="margin-top:8px">';
+      lines.forEach(function(ln){
+        bundleHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line-l,#eee)"><span style="font-weight:600;font-size:14px">'+ln.name+'</span><span style="font-weight:700;font-size:14px;color:var(--ink)">'+ln.price+'</span></div>';
+      });
+      if(total>0){
+        bundleHtml+='<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 4px;border-top:2px solid var(--ink,#222);margin-top:4px"><span style="font-weight:700;font-size:15px">Estimated total</span><span style="font-weight:800;font-size:18px;color:var(--ink)">£'+total.toLocaleString()+(hasQuoteOnly?' + quoted items':'')+'</span></div>';
+      }
+      bundleHtml+='</div>';
+      document.getElementById('sigMatch').textContent='Your bundled quote ('+selected.length+' services)';
+      document.getElementById('sigText').innerHTML='Based on your selections, here\'s your estimated package:'+bundleHtml;
+      document.getElementById('sigPrice').textContent=total>0?('£'+total.toLocaleString()):'Quote';
+      document.getElementById('sigUnit').textContent=total>0?(hasQuoteOnly?'estimated + quoted items':'estimated bundle price'):'quoted individually';
+      document.getElementById('sigChecks').innerHTML=['All services in one quote','Bundled for convenience','Contact us for a custom quote'].map(function(c){return '<li><iconify-icon icon="ph:check-bold"></iconify-icon> '+c+'</li>'}).join('');
+      document.getElementById('sigCta').setAttribute('data-product','Bundle: '+selected.join(', '));
     }
     renderChips();syncModalFields();
   }

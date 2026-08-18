@@ -793,14 +793,15 @@ html{overflow-x:hidden}
     </div>
     <div class="center rv" style="margin-top:34px"><a href="#finder" class="btn btn-dark">Compare All Providers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
     <p class="lead center" style="font-size:11.5px;margin-top:26px;max-width:760px;margin-left:auto;margin-right:auto;color:#9aa48d">Provider names and logos remain the property of their respective owners and are displayed solely to indicate products or services that may be introduced. Plemmo is an introducer — not a payment processor, acquiring bank or lender. Ratings, rates, payouts and approval are subject to provider terms and eligibility.</p>
-    <div class="rv" style="max-width:640px;margin:20px auto 0;padding:16px 20px;border:1px solid var(--line);border-radius:12px;background:var(--s-light,rgba(255,255,255,.02))">
-      <p style="font-size:11.5px;color:#9aa48d;margin:0 0 8px">The pricing displayed throughout the comparison engine is indicative only and subject to underwriting and provider approval. The following additional charges may apply and are not included in the displayed rates:</p>
-      <ul style="font-size:11.5px;color:#9aa48d;margin:0;padding-left:18px;line-height:1.7;columns:2;column-gap:24px">
+    <div class="rv" style="max-width:640px;margin:20px auto 0;padding:20px 24px;border-radius:14px;background:#111;color:#ccc">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><iconify-icon icon="ph:warning-circle-duotone" style="font-size:18px;color:#aabe13;flex-shrink:0"></iconify-icon><span style="font-size:13px;font-weight:700;color:#fff">Pricing Disclaimer</span></div>
+      <p style="font-size:12px;color:#bbb;margin:0 0 10px;line-height:1.6">The pricing displayed is indicative only and subject to underwriting and provider approval. Additional charges may apply and are not included in the displayed rates:</p>
+      <ul style="font-size:11.5px;color:#999;margin:0;padding-left:16px;line-height:1.8;columns:2;column-gap:20px">
         <li>PCI Compliance Fee</li>
         <li>PCI Non-Compliance Charges</li>
-        <li>Faster Settlement / Faster Payment Charges</li>
-        <li>Monthly Account Fees (where applicable)</li>
-        <li>Gateway or Virtual Terminal Fees (where applicable)</li>
+        <li>Faster Settlement / Payment Charges</li>
+        <li>Monthly Account Fees</li>
+        <li>Gateway / Virtual Terminal Fees</li>
         <li>Chargeback Fees</li>
         <li>Additional Terminal Charges</li>
         <li>Other provider-specific fees and charges</li>
@@ -1241,8 +1242,8 @@ html{overflow-x:hidden}
     generalBands: [
       {max:5000, priority:['shift4'], fallback:['sumup']},
       {max:10000, priority:['sumup','shift4']},
-      {max:15000, priority:['teya','worldpay','sumup']},
-      {max:20000, priority:['teya','worldpay','sumup']},
+      {max:15000, priority:['teya','sumup']},
+      {max:20000, priority:['teya','sumup']},
       {max:30000, priority:['teya','elavon','clover']},
       {max:35000, priority:['elavon','clover','teya']},
       {max:Infinity, priority:['elavon','clover','teya']}
@@ -1297,12 +1298,13 @@ html{overflow-x:hidden}
       var b=bandFor(a.turnover);priority=b.priority.slice();fallbackPriority=b.fallback;reason='Turnover-based';
     }
     var list=priority.filter(function(k){return k!==currentKey});
-    /* If the current-provider exclusion empties out a band's priority list (e.g. the
-       below-£5,000 band is Shift4-only), fall back to that band's declared fallback
-       provider(s) instead of showing "no match" — matches core-rules.json's per-band
-       "fallback" field. */
     if(list.length===0 && fallbackPriority && fallbackPriority.length){
       list=fallbackPriority.filter(function(k){return k!==currentKey});
+    }
+    if(a.ratepref && a.ratepref!=='Both'){
+      var wantType=a.ratepref==='Split Rate'?'split':'blended';
+      var filtered=list.filter(function(k){return CM.providers[k].type===wantType});
+      if(filtered.length)list=filtered;
     }
     var atv=classifyATV(a.category,a.type);
     return {list:list,atv:atv,reason:reason,fallback:list.length===0};
@@ -1311,6 +1313,7 @@ html{overflow-x:hidden}
   /* ── QUIZ (dynamic step list — Food & Beverage / Charity insert an extra question) ── */
   var MOTO_OPTS=['Over the Phone (MOTO)','Pay by Link','Neither'];
   var NORENT_OPTS=['Yes','No'];
+  var RATEPREF_OPTS=['Split Rate','Blended Rate','Both'];
   function buildSteps(a){
     var s=[{k:'category',q:'What type of business do you operate?',mode:'tiles',o:Object.keys(CM.categories).map(function(c){return {l:c,i:CM.catIcon[c]}})}];
     if(a.category){
@@ -1320,6 +1323,7 @@ html{overflow-x:hidden}
     s.push({k:'current',q:'Current card machine provider?',mode:'list',o:CM.currentProviders.map(function(t){return {l:t}})});
     if(a.category==='Food & Beverage'){s.push({k:'moto',q:'How do you take payments?',mode:'list',o:MOTO_OPTS.map(function(t){return {l:t}})});}
     if(a.category==='Charity / Non-Profit'){s.push({k:'norental',q:'Do you require a card machine with no monthly rental?',mode:'list',o:NORENT_OPTS.map(function(t){return {l:t}})});}
+    s.push({k:'ratepref',q:'What pricing model do you prefer?',mode:'list',o:RATEPREF_OPTS.map(function(t){return {l:t}})});
     return s;
   }
   var SKEY='plemmo_cm_finder';
@@ -1334,7 +1338,7 @@ html{overflow-x:hidden}
     h+='</div>';body.innerHTML=h;
     body.querySelectorAll('.qtile').forEach(function(el){el.onclick=function(){
       ans[s.k]=el.dataset.v;
-      if(s.k==='category'){delete ans.type;delete ans.moto;delete ans.norental;}
+      if(s.k==='category'){delete ans.type;delete ans.moto;delete ans.norental;delete ans.ratepref;}
       saveAns();
       var next=buildSteps(ans);
       if(cur<next.length-1){cur++;render()}else{result()}
@@ -1356,7 +1360,10 @@ html{overflow-x:hidden}
   function providerResultCard(k,a,atv,isTop){
     var p=CM.providers[k];
     var rateLine;
-    if(p.type==='blended'){rateLine=p.rateText||'Blended — see pricing table';}
+    if(p.type==='blended'){
+      if(k==='teya'&&p.table){var teyaRow=pickRow(p.table,a.turnover);rateLine=teyaRow?('Blended '+teyaRow.rate):(p.rateText||'Blended — contact us for rate');}
+      else{rateLine=p.rateText||'Blended — see pricing table';}
+    }
     else{var row=pickRow(p[atv],a.turnover);rateLine=row?(row.debit==='Custom Quote'?'Custom Quote — please contact us for pricing at this turnover':'Debit '+row.debit+' / Credit '+row.credit+' · Auth fee '+row.auth):'Custom quote — please contact us';}
     return '<div class="qres-card qpc'+(isTop?' best':'')+'">'
       +(isTop?'<div class="btag">Top recommendation</div>':'')

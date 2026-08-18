@@ -51,12 +51,12 @@
               "max_recommendations": 2
             },
             "10000_to_15000": {
-              "priority": ["teya", "worldpay", "sumup"],
-              "max_recommendations": 3
+              "priority": ["teya", "sumup"],
+              "max_recommendations": 2
             },
             "15000_to_20000": {
-              "priority": ["teya", "worldpay", "sumup"],
-              "max_recommendations": 3
+              "priority": ["teya", "sumup"],
+              "max_recommendations": 2
             },
             "20000_to_30000": {
               "priority": ["teya", "elavon", "clover"],
