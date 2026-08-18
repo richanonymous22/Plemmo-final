@@ -129,7 +129,7 @@
      GATE — soft deterrent only, see warning copy above. Change
      this string to set your own passphrase.
      ============================================================ */
-  var ADMIN_PASSPHRASE = 'plemmo-admin';
+  var ADMIN_PASSPHRASE = 'PLEMMO';
   var gate=document.getElementById('gate'), app=document.getElementById('app');
   function unlock(){gate.style.display='none';app.style.display='block';sessionStorage.setItem('plemmoAdminUnlocked','1');}
   if(sessionStorage.getItem('plemmoAdminUnlocked')==='1')unlock();
