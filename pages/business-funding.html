@@ -124,6 +124,9 @@
 
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.whygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:24px}
+.whyitem{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;background:var(--cream);border:1px solid var(--line-l);border-radius:14px}
+.whyitem iconify-icon{color:#5f9000;font-size:19px;flex-shrink:0;margin-top:1px}
 .step{padding:26px;border-radius:var(--r-lg);position:relative}
 .step .n{font-family:'Space Grotesk';font-weight:700;font-size:34px;color:var(--lime);line-height:1;margin-bottom:12px}
 .step h4{font-size:16px;color:#fff;margin-bottom:6px}.s-light .step h4{color:var(--ink)}
@@ -272,6 +275,20 @@
       <div class="card step rv"><div class="n">02</div><h4>We shortlist suitable products</h4><p>We match your requirements to the funding products most likely to suit your needs.</p></div>
       <div class="card step rv"><div class="n">03</div><h4>We introduce you to a partner</h4><p>A suitable finance partner from our network reviews your enquiry — no obligation.</p></div>
       <div class="card step rv"><div class="n">04</div><h4>Funds arranged</h4><p>If approved, funds are arranged directly between you and the finance partner.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE PLEMMO -->
+<section class="section">
+  <div class="container">
+    <div class="head"><span class="eyebrow" style="color:#5f9000"><iconify-icon icon="ph:seal-check-duotone"></iconify-icon> Why Plemmo</span><h2 class="h2" style="text-align:left">Why choose Plemmo for business funding?</h2></div>
+    <div class="whygrid">
+      <div class="whyitem rv"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon><span>Access to trusted finance partners</span></div>
+      <div class="whyitem rv"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon><span>One simple enquiry</span></div>
+      <div class="whyitem rv"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon><span>Multiple funding solutions</span></div>
+      <div class="whyitem rv"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon><span>Support throughout the introduction process</span></div>
+      <div class="whyitem rv"><iconify-icon icon="ph:check-circle-duotone"></iconify-icon><span>Suitable for businesses across a wide range of industries</span></div>
     </div>
   </div>
 </section>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Plemmo — Config Editor (internal)</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt-d);font-family:'Inter',ui-sans-serif,system-ui,sans-serif;line-height:1.5}
+  a{color:var(--lime)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* ---------- gate ---------- */
+  #gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .gate-card{max-width:460px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:32px}
+  .gate-card h1{font-family:'Space Grotesk',sans-serif;font-size:22px;margin:0 0 10px;color:#fff}
+  .gate-card p{color:var(--muted);font-size:13.5px;margin:0 0 18px}
+  .gate-card .warn{background:rgba(255,180,0,.08);border:1px solid rgba(255,180,0,.25);border-radius:10px;padding:12px 14px;font-size:12.5px;color:#e8c26a;margin-bottom:18px}
+  .gate-card input{width:100%;background:var(--bg2);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;color:#fff;font-size:15px;margin-bottom:12px}
+  .gate-card button{width:100%;background:var(--lime);color:#0b0e08;border:none;border-radius:10px;padding:13px;font-weight:700;font-size:14px;cursor:pointer}
+  .gate-err{color:#ff8a7a;font-size:12.5px;margin:-4px 0 12px;display:none}
+
+  /* ---------- app shell ---------- */
+  #app{display:none}
+  header.top{border-bottom:1px solid var(--line);padding:22px 0}
+  header.top .row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  header.top h1{font-family:'Space Grotesk',sans-serif;font-size:20px;margin:0;color:#fff}
+  header.top .sub{color:var(--muted);font-size:12.5px;margin-top:4px}
+  .lockbtn{background:transparent;border:1px solid var(--line2);color:var(--muted);border-radius:8px;padding:8px 12px;font-size:12.5px;cursor:pointer}
+
+  .banner{background:rgba(255,180,0,.06);border-bottom:1px solid rgba(255,180,0,.18);padding:10px 0;font-size:12.5px;color:#e8c26a}
+  .banner .wrap{display:flex;align-items:center;gap:8px}
+
+  .tabbar{display:flex;gap:6px;padding:18px 0 0;flex-wrap:wrap}
+  .tabbtn{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:10px 10px 0 0;padding:11px 18px;font-size:13.5px;font-weight:600;cursor:pointer}
+  .tabbtn.on{background:var(--panel2);color:var(--lime);border-color:var(--line2);border-bottom-color:var(--panel2)}
+  .tabpanel{display:none;border-top:1px solid var(--line2);padding-top:26px;padding-bottom:80px}
+  .tabpanel.on{display:block}
+  .tabpanel > .desc{color:var(--muted);font-size:13px;max-width:760px;margin:0 0 22px}
+  .tabpanel > .desc code{background:var(--bg2);padding:1px 6px;border-radius:4px;font-size:.92em;color:var(--lime)}
+
+  /* ---------- blocks ---------- */
+  .block{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:18px;overflow:hidden}
+  .block-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;cursor:pointer;user-select:none}
+  .block-head h3{margin:0;font-size:15px;color:#fff;font-family:'Space Grotesk',sans-serif}
+  .block-head .vn{font-size:11.5px;color:var(--muted);font-family:monospace;margin-top:2px}
+  .block-head .chev{color:var(--muted);transition:transform .15s}
+  .block.open .chev{transform:rotate(90deg)}
+  .block-body{display:none;padding:4px 20px 20px;border-top:1px solid var(--line)}
+  .block.open .block-body{display:block}
+  .block-actions{display:flex;gap:8px;padding:0 20px 18px}
+
+  /* ---------- generic editor ---------- */
+  .field{margin:12px 0}
+  .field > label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px;font-weight:600}
+  .field input[type=text],.field textarea{width:100%;background:var(--bg2);border:1px solid var(--line2);border-radius:8px;padding:9px 11px;color:#fff;font-size:13.5px;font-family:inherit}
+  .field textarea{min-height:56px;resize:vertical}
+  .field input:focus,.field textarea:focus{outline:2px solid var(--lime);outline-offset:1px}
+  .obj-box{border:1px dashed var(--line2);border-radius:10px;padding:12px 14px;margin:8px 0}
+  .obj-box > .k{font-size:11px;color:var(--lime);font-family:monospace;margin-bottom:8px;text-transform:none}
+  .arr-item{position:relative;border:1px solid var(--line);border-radius:10px;padding:14px 34px 6px 14px;margin:8px 0;background:var(--bg2)}
+  .arr-item .rm{position:absolute;top:8px;right:8px;background:none;border:none;color:#ff8a7a;font-size:16px;cursor:pointer;line-height:1;padding:4px}
+  .chiplist{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--line2);border-radius:100px;padding:5px 8px 5px 12px;font-size:12.5px}
+  .chip button{background:none;border:none;color:#ff8a7a;cursor:pointer;font-size:14px;line-height:1;padding:2px}
+  .chipadd{display:flex;gap:6px}
+  .chipadd input{flex:1}
+  .addbtn,.smallbtn{background:transparent;border:1px solid var(--line2);color:var(--lime);border-radius:8px;padding:7px 12px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .addbtn:hover,.smallbtn:hover{border-color:var(--lime)}
+  .dangerbtn{background:transparent;border:1px solid rgba(255,138,122,.4);color:#ff8a7a;border-radius:8px;padding:7px 12px;font-size:12.5px;cursor:pointer}
+  .primarybtn{background:var(--lime);color:#0b0e08;border:none;border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer}
+
+  .keyrow{display:flex;align-items:center;gap:8px;margin-top:14px}
+  .keyrow input{flex:1}
+
+  pre.code{background:#050704;border:1px solid var(--line2);border-radius:10px;padding:16px;font-size:12px;line-height:1.6;overflow-x:auto;max-height:420px;overflow-y:auto;color:#c9d6bd;font-family:'IBM Plex Mono',monospace}
+  .codewrap{display:none;margin-top:14px}
+  .codewrap.on{display:block}
+  .codehead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;color:var(--muted)}
+
+  footer.foot{border-top:1px solid var(--line);padding:26px 0 60px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <h1>Plemmo Config Editor</h1>
+    <p>Internal tool for editing Card Machine, EPOS, Finance, Energy and Signage pricing/content. Enter the passphrase to continue.</p>
+    <div class="warn"><b>Not a real login.</b> This page has no server, database or authentication — the passphrase check runs entirely in your browser and is visible to anyone who views this page's source. It only keeps this page off casual view; it does not secure it. Don't link to it from the public site, and treat the URL like an internal shared document, not a locked door.</div>
+    <input type="password" id="gatePass" placeholder="Passphrase" autocomplete="off">
+    <p class="gate-err" id="gateErr">Incorrect passphrase — try again.</p>
+    <button id="gateBtn">Unlock editor</button>
+  </div>
+</div>
+
+<div id="app">
+  <div class="banner"><div class="wrap"><iconify-icon icon="ph:info"></iconify-icon> Edits here live only in this browser (localStorage) until you copy the generated code back into the matching page and commit it. Nothing is saved to a server.</div></div>
+  <header class="top">
+    <div class="wrap row">
+      <div>
+        <h1>Config Editor</h1>
+        <div class="sub">Card Machines · EPOS · Finance · Energy · Digital Signage — pricing, providers, categories &amp; content</div>
+      </div>
+      <button class="lockbtn" id="lockBtn">Lock editor</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="tabbar" id="tabbar"></div>
+    <div id="panels"></div>
+  </div>
+
+  <footer class="foot">
+    <div class="wrap">
+      How this works: each section below shows the site's real current data as editable fields. Edit anything, then open <b>Generated code</b> at the bottom of that section and copy it — it replaces the matching <code style="color:var(--lime)">var NAME = &#123; … &#125;;</code> block inside that page's own &lt;script&gt; tag. Paste it in, save, and commit as normal; nothing changes on the live site until you do. To change the passphrase, edit the <code style="color:var(--lime)">ADMIN_PASSPHRASE</code> constant near the top of this file's script.
+    </div>
+  </footer>
+</div>
+
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ============================================================
+     GATE — soft deterrent only, see warning copy above. Change
+     this string to set your own passphrase.
+     ============================================================ */
+  var ADMIN_PASSPHRASE = 'plemmo-admin';
+  var gate=document.getElementById('gate'), app=document.getElementById('app');
+  function unlock(){gate.style.display='none';app.style.display='block';sessionStorage.setItem('plemmoAdminUnlocked','1');}
+  if(sessionStorage.getItem('plemmoAdminUnlocked')==='1')unlock();
+  document.getElementById('gateBtn').addEventListener('click',tryUnlock);
+  document.getElementById('gatePass').addEventListener('keydown',function(e){if(e.key==='Enter')tryUnlock();});
+  function tryUnlock(){
+    var v=document.getElementById('gatePass').value;
+    if(v===ADMIN_PASSPHRASE){unlock();}
+    else{document.getElementById('gateErr').style.display='block';}
+  }
+  document.getElementById('lockBtn').addEventListener('click',function(){
+    sessionStorage.removeItem('plemmoAdminUnlocked');
+    app.style.display='none';gate.style.display='flex';
+    document.getElementById('gatePass').value='';
+  });
+
+  /* ============================================================
+     A tiny JS-object stringifier (not JSON.stringify) so we can
+     emit readable, unquoted-key-where-possible, Infinity-aware
+     source that pastes straight back into the page's own script.
+     ============================================================ */
+  function isPlainObj(v){return v!==null&&typeof v==='object'&&!Array.isArray(v);}
+  function jsKey(k){return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(k)?k:"'"+String(k).replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"'";}
+  function jsStr(s){return "'"+String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"'";}
+  function toJS(v,ind){
+    ind=ind||0;var pad='  '.repeat(ind),pad2='  '.repeat(ind+1);
+    if(v===null||v===undefined)return 'null';
+    if(v===Infinity)return 'Infinity';
+    if(v===-Infinity)return '-Infinity';
+    if(typeof v==='number')return String(v);
+    if(typeof v==='boolean')return String(v);
+    if(typeof v==='string'){
+      if(v==='Infinity')return 'Infinity';
+      return jsStr(v);
+    }
+    if(Array.isArray(v)){
+      if(!v.length)return '[]';
+      return '[\n'+v.map(function(item){return pad2+toJS(item,ind+1)}).join(',\n')+'\n'+pad+']';
+    }
+    if(isPlainObj(v)){
+      var keys=Object.keys(v);
+      if(!keys.length)return '{}';
+      return '{\n'+keys.map(function(k){return pad2+jsKey(k)+': '+toJS(v[k],ind+1)}).join(',\n')+'\n'+pad+'}';
+    }
+    return 'null';
+  }
+
+  /* localStorage-safe (de)serialisation — JSON can't hold Infinity,
+     so we round-trip it through a sentinel string. */
+  function saveKey(key,v){try{localStorage.setItem(key,JSON.stringify(v,function(k,val){return val===Infinity?'__Infinity__':(val===-Infinity?'__-Infinity__':val)}))}catch(e){}}
+  function loadKey(key){try{var raw=localStorage.getItem(key);if(!raw)return null;return JSON.parse(raw,function(k,val){return val==='__Infinity__'?Infinity:(val==='__-Infinity__'?-Infinity:val)})}catch(e){return null}}
+
+  /* ============================================================
+     Baseline data — pulled directly from the live pages at the
+     time this tool was built. If the site has changed since, treat
+     this as a starting point and double-check against the live
+     page before publishing an edit.
+     ============================================================ */
+  var BASELINE = {
+
+    cardmachines: {
+      label:'Card Machines', file:'pages/card-machines.html',
+      desc:'Recommendation engine data used by pages/card-machines.html. Six providers (Teya, Shift4, SumUp = blended · Clover, Elavon, Worldpay = split), business categories, turnover bands and recommendation priority.',
+      blocks:[
+        {varName:'CM', data:{
+          categories:{
+            'Food & Beverage': ['Bakery','Café','Restaurant','Fast Food','Fine Dining','Bar / Pub','Food Truck','Catering','Butchers','Fishmongers','Fruit & Vegetable Shop'],
+            'Health, Beauty & Wellness': ['Barber','Hair Salon','Beauty Salon','Cosmetic Store','Pharmacy','Dentist','Gym','Spa','Wellness Centre'],
+            'Leisure & Entertainment': ['Hotel','Hostel','Accommodation','Event Company','Festival','Shooting Club','Experiences','Activities','Cinema','Entertainment Venue','Travel Agency'],
+            'Retail': ['Grocery Store','Convenience Store','Off Licence','Clothing Store','Electronics Store','Furniture Store','Hardware Store','Automotive Store','Jewellery Store','Bookshop','Florist','Pet Shop','Vape Shop','Market Stall','Other Retail'],
+            'Services': ['Accountant','Bookkeeper','Solicitor','Lawyer','Consultant','Estate Agent','Property Management','Tradesperson','Contractor','Education','Garage','MOT Centre','Taxi','Chauffeur','Vehicle Hire','Cleaning Company','Photographer','Videographer','Courier','Logistics','Marketing Agency','IT Services','Digital Agency','Other Services'],
+            'Charity / Non-Profit': ['Registered Charity','Community Organisation','Religious Organisation','Non-Profit Organisation']
+          },
+          catIcon:{'Food & Beverage':'ph:coffee-duotone','Health, Beauty & Wellness':'ph:scissors-duotone','Leisure & Entertainment':'ph:ticket-duotone','Retail':'ph:storefront-duotone','Services':'ph:briefcase-duotone','Charity / Non-Profit':'ph:heart-duotone'},
+          highATVRetail: ['Electronics Store','Automotive Store','Jewellery Store','Bookshop','Florist'],
+          turnoverBands: ['Below £5,000','£5,000–£10,000','£10,000–£15,000','£15,000–£20,000','£20,000–£30,000','£30,000–£35,000','£35,000–£50,000','£50,000–£100,000','Above £100,000'],
+          turnoverMid: {'Below £5,000':2500,'£5,000–£10,000':7500,'£10,000–£15,000':12500,'£15,000–£20,000':17500,'£20,000–£30,000':25000,'£30,000–£35,000':32500,'£35,000–£50,000':42500,'£50,000–£100,000':75000,'Above £100,000':150000},
+          currentProviders: ['None','Teya','Shift4','SumUp','Clover','Elavon','Worldpay','Other'],
+          providers: {
+            teya:{name:'Teya',type:'blended',img:'../images/teya-card-machine.webp',rental:'£15.00/month (or £139 + VAT terminal buyout)',contract:'12 Month Contract or No Contract',device:'PAX A920 Pro · Sunmi',features:['Tap to Pay','Instant Payout (Teya Business Account)','Everyday Payout','Next Working Day Payout','0.5% Cashback on eligible spend','Blended Pricing'],
+              table:[{min:10000,max:15000,rate:'1.20%'},{min:15000,max:20000,rate:'1.00%'},{min:20000,max:25000,rate:'0.90%'},{min:25000,max:30000,rate:'0.82%'},{min:30000,max:35000,rate:'0.82%'},{min:40000,max:45000,rate:'0.80%'},{min:45000,max:50000,rate:'0.77%'},{min:50000,max:60000,rate:'0.75%'},{min:70000,max:80000,rate:'0.72%'},{min:80000,max:90000,rate:'0.70%'},{min:90000,max:110000,rate:'0.67%'},{min:110000,max:150000,rate:'0.65%'},{min:150000,max:Infinity,rate:'0.60%'}]},
+            shift4:{name:'Shift4',type:'blended',img:'../images/Card machine no bg.webp',rental:'No monthly rental for one terminal',contract:'No contract',device:'One terminal included',features:['No Monthly Rental','One Terminal Included','Pay by Link','Virtual Terminal','Next Day Settlement','Blended Pricing'],
+              rateText:'1.25% below £10,000/month · 0.70% at £10,000+ (plus 25p next-day settlement fee per payout)'},
+            sumup:{name:'SumUp',type:'blended',img:'../images/sumup-card-machine.webp',rental:'None',contract:'Pay As You Go, 12 Month or 24 Month Contract',device:'Up to 1 / 2 / 3 Terminals',features:['Blended Pricing','Pay As You Go Available','12 Month Contract Available','24 Month Contract Available','Integrated Payment Solution','Suitable for Small Businesses','Suitable for Growing Businesses'],
+              rateText:'Blended rate confirmed after review — see contract options'},
+            clover:{name:'Clover',type:'split',img:'../images/clover-card-machine.webp',rental:'£24/month (£1/month promo for first 6 months, then £24/month)',contract:'Rolling',device:'Clover Flex · Clover Mini',features:['Clover Flex','Clover Mini','£1/month rental — first 6 months','Split-rate pricing'],
+              promo:true,
+              low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'}],
+              high:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.70%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:150000,max:Infinity,debit:'0.28%',credit:'0.58%',auth:'2p'}]},
+            elavon:{name:'Elavon',type:'split',img:'../images/elavon-card-machine.webp',rental:'£19.99/month',contract:'Provider terms',device:'Countertop terminal',features:['Split-rate pricing','Everyday payout available','Suited to higher turnover businesses'],
+              low:[{min:20000,max:40000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:40000,max:50000,debit:'0.32%',credit:'0.60%',auth:'2p'},{min:50000,max:100000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:100000,max:Infinity,debit:'0.29%',credit:'0.55%',auth:'2p'}],
+              high:[{min:20000,max:40000,debit:'0.55%',credit:'0.75%',auth:'3p'},{min:40000,max:50000,debit:'0.40%',credit:'0.70%',auth:'3p'},{min:50000,max:100000,debit:'0.35%',credit:'0.55%',auth:'2p'},{min:100000,max:Infinity,debit:'0.32%',credit:'0.55%',auth:'2p'}]},
+            worldpay:{name:'Worldpay',type:'split',img:'../images/worldpay-card-machine.webp',rental:'Configurable — may vary by merchant agreement',contract:'Provider terms',device:'Countertop / portable terminal',features:['Split-rate pricing','Configurable rental','Suited to MOTO / phone payments'],
+              low:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}],
+              high:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}]}
+          },
+          generalBands: [
+            {max:5000, priority:['shift4']},
+            {max:10000, priority:['sumup','shift4']},
+            {max:15000, priority:['teya','worldpay','sumup']},
+            {max:20000, priority:['teya','worldpay','sumup']},
+            {max:30000, priority:['teya','elavon','clover']},
+            {max:35000, priority:['elavon','clover','teya']},
+            {max:Infinity, priority:['elavon','clover','teya']}
+          ],
+          charityNoRental: ['shift4','sumup'],
+          foodMoto: ['elavon','worldpay']
+        }}
+      ]
+    },
+
+    epos: {
+      label:'EPOS Systems', file:'pages/epos-systems.html',
+      desc:'Recommendation data used by pages/epos-systems.html. Order is fixed per category (Plemmo always first) and driven only by business category/type — never turnover.',
+      blocks:[
+        {varName:'EPOS_PLEMMO_GROUPS', data:{
+          'Sales':['Fast Checkout','Barcode Scanning','Multiple Payment Methods','Split Payments','Refund Management','Discounts & Promotions','Gift Cards','Product Variations'],
+          'Inventory':['Real-Time Stock Management','Low Stock Alerts','Supplier Management','Purchase Orders','Stock Transfers','Stock Adjustments','Barcode Inventory'],
+          'Staff Management':['Multiple Staff Accounts','User Permissions','Clock In / Clock Out','Staff Sales Performance'],
+          'Reporting':['Sales Reports','Product Reports','Profit Reports','Staff Reports','Customer Reports','Tax Reports','End of Day Reports'],
+          'Customer Management':['Customer Database','Customer Purchase History','Loyalty Programme'],
+          'Business Management':['Cloud Based','Multi-store Support','Remote Access','Secure Backup','Role Permissions'],
+          'Hardware Integration':['Card Machines','Barcode Scanners','Receipt Printers','Cash Drawers','Customer Facing Displays']
+        }},
+        {varName:'EPOS_PLEMMO_HOSPITALITY_EXTRA', data:{
+          'Hospitality Features':['Table Management','Table Reservations','Kitchen Display System (KDS)','Kitchen Printer Support','Table Transfers','Split Bills','Tips Management','Eat-In Orders','Takeaway Orders','Delivery Orders','QR Ordering','Online Ordering','Menu Management','Course Ordering','Floor Plan Management']
+        }},
+        {varName:'EPOS_CONFIG', data:{
+          categoryOrder: ['Hospitality','Retail'],
+          catIcon: {Hospitality:'ph:wine-duotone',Retail:'ph:shopping-bag-duotone'},
+          categories: {
+            Hospitality: ['Restaurant','Café','Coffee Shop','Bar','Pub','Hotel','Food Truck','Fine Dining','Takeaway','Dessert Shop','Bakery'],
+            Retail: ['Grocery Store','Convenience Store','Off Licence','Clothing Store','Electronics Store','Jewellery Store','Pharmacy','Vape Shop','Pet Shop','Furniture Store','Florist','Hardware Store','Gift Shop','Other Retail Businesses']
+          },
+          providers: {
+            plemmo:{name:'Plemmo EPOS',initials:'PL'},
+            shift4:{name:'Shift4 EPOS',initials:'S4'},
+            sumup:{name:'SumUp POS',initials:'SU'},
+            eposnow:{name:'Epos Now',initials:'EN'}
+          },
+          cardStatus: {
+            plemmo:'Integrated card machine available. Additional charges may apply. Please contact us for more information and a personalised quotation.',
+            shift4:'Integrated Card Machine Included',
+            sumup:'Integrated Card Machine Included',
+            eposnow:'Integrated Card Machine Included'
+          },
+          packages: {
+            plemmo_retail: {
+              packageName:'Plemmo Retail EPOS', providerKey:'plemmo',
+              hardwarePrice:'£900', hardwarePriceNote:'one-off', monthly:'£10/month',
+              hardwareIncluded:['Single Screen Touchscreen EPOS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
+              optionalUpgrade:{name:'Customer Facing Display',price:'£200'},
+              suitableFor:['Grocery Stores','Convenience Stores','Clothing Stores','Electronics Stores','Jewellery Stores','Pharmacies','Vape Shops','Pet Shops','Furniture Stores','Florists','Hardware Stores','Gift Shops','Other Retail Businesses']
+            },
+            plemmo_hospitality: {
+              packageName:'Plemmo Hospitality EPOS', providerKey:'plemmo',
+              hardwarePrice:'£500', hardwarePriceNote:'one-off', monthly:'£20/month',
+              hardwareIncluded:['Single Screen Touchscreen EPOS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
+              suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways','Dessert Shops']
+            },
+            shift4_hospitality: {
+              packageName:'Shift4 Hospitality POS', providerKey:'shift4',
+              hardwarePrice:'£0', hardwarePriceNote:'upfront', monthly:'£39/month',
+              hardwareIncluded:['Integrated Card Machine','EPOS Terminal','Receipt Printer','Cash Drawer'],
+              suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways']
+            },
+            sumup_retail: {
+              packageName:'SumUp Retail POS Kit', providerKey:'sumup',
+              hardwarePrice:'£649', hardwarePriceNote:'one-off', monthly:'£29/month',
+              hardwareIncluded:['POS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
+              features:['Integrated Card Machine','Retail POS Solution','Barcode Scanning','Stock Management','Sales Reporting','Customer Management','Staff Accounts','Cloud Based'],
+              promotions:['30% Discount Available','6 Monthly Instalments Available (on request)']
+            },
+            eposnow_countertop: {
+              packageName:'Epos Now Countertop', providerKey:'eposnow',
+              hardwarePrice:'£199', hardwarePriceNote:'one-off', monthly:'£39/month',
+              hardwareIncluded:['Single Screen EPOS Terminal','Built-in Receipt Printer','Cash Drawer','Integrated Card Machine'],
+              features:['Cloud-Based EPOS','Inventory Management','Sales Reporting','Staff Management','Customer Management','Hospitality Features','Integrated Card Machine Included']
+            },
+            eposnow_countertop_duo: {
+              packageName:'Epos Now Countertop Duo', providerKey:'eposnow',
+              hardwarePrice:'£249', hardwarePriceNote:'one-off', monthly:'£39/month',
+              hardwareIncluded:['All-in-One Dual Screen Point of Sale System','15.6-inch Full HD Staff Touchscreen','10.1-inch HD Customer-Facing Display','Built-in 80mm Thermal Receipt Printer','Cash Drawer','Integrated Card Machine'],
+              features:['Cloud-Based EPOS','Real-Time Reporting','Inventory Management','Customer Management','Staff Management','Multi-store Support','Retail Features','Hospitality Features','Reporting Dashboard','Integrated Card Machine Included']
+            }
+          },
+          order: {
+            Retail: ['plemmo_retail','eposnow_countertop_duo','sumup_retail'],
+            Hospitality: ['plemmo_hospitality','shift4_hospitality','eposnow_countertop','eposnow_countertop_duo']
+          }
+        }, note:'plemmo_retail and plemmo_hospitality pull their feature list from EPOS_PLEMMO_GROUPS / EPOS_PLEMMO_HOSPITALITY_EXTRA above (edit the wording there) — that\'s deliberately excluded from this block so it isn\'t duplicated.'}
+      ]
+    },
+
+    finance: {
+      label:'Finance', file:'pages/business-funding.html',
+      desc:'Question options and the 11 finance products shown on pages/business-funding.html. Plemmo is an introducer only — do not add lender names, APRs, interest rates or approval promises anywhere here.',
+      blocks:[
+        {varName:'FUNDING_CONFIG', data:{
+          amounts: ['£10,000–£25,000','£25,000–£50,000','£50,000–£100,000','£100,000–£250,000','£250,000+'],
+          purposes: ['Working Capital','Business Expansion','Equipment Purchase','Stock Purchase','Cash Flow','Commercial Property','Vehicle Purchase','Tax Funding','VAT Funding','Business Acquisition','Debt Consolidation','Other'],
+          bizTypes: ['Sole Trader','Partnership','Limited Company','LLP'],
+          sectors: ['Retail','Hospitality','Construction','Healthcare','Manufacturing','Professional Services','Transport','Property','Wholesale','Other'],
+          turnoverBands: ['Under £100k','£100k–£250k','£250k–£500k','£500k–£1m','£1m+'],
+          tradingBands: ['Under 12 Months','1–2 Years','2–5 Years','5+ Years'],
+          products: {
+            loan:          {name:'Business Loan', suitableFor:'General business use — expansion, stock, cash flow or acquisitions', range:'£10,000 – £500,000 (typical)', term:'6 months – 5 years (typical)', desc:'A lump sum of funding repaid in fixed instalments over an agreed term — a flexible option for a wide range of business purposes.'},
+            workingCapital:{name:'Working Capital Loan', suitableFor:'Day-to-day running costs, seasonal gaps and short-term cash flow needs', range:'£10,000 – £250,000 (typical)', term:'3 months – 3 years (typical)', desc:'Short to medium-term funding designed to support everyday operating costs and smooth out cash flow.'},
+            asset:         {name:'Asset Finance', suitableFor:'Purchasing equipment, machinery or tools', range:'£10,000 – £250,000+ (typical)', term:'1 – 5 years (typical)', desc:'Funding secured against the equipment or machinery being purchased, spreading the cost over its useful life.'},
+            vehicle:       {name:'Vehicle Finance', suitableFor:'Purchasing commercial vehicles, vans or a small fleet', range:'£10,000 – £250,000+ (typical)', term:'1 – 5 years (typical)', desc:'Funding to acquire commercial vehicles, typically secured against the vehicle itself.'},
+            mortgage:      {name:'Commercial Mortgage', suitableFor:'Buying or refinancing commercial premises', range:'£50,000 – £2,000,000+ (typical)', term:'5 – 25 years (typical)', desc:'Longer-term funding secured against commercial property, for purchase or refinance.'},
+            bridging:      {name:'Bridging Finance', suitableFor:'Short-term, time-sensitive property funding needs', range:'£25,000 – £2,000,000+ (typical)', term:'1 – 18 months (typical)', desc:'Fast, short-term funding to bridge a gap — typically secured against property with a clear exit route.'},
+            invoice:       {name:'Invoice Finance', suitableFor:'Businesses waiting on unpaid customer invoices', range:'A percentage of outstanding invoice value (typical)', term:'Ongoing / revolving facility', desc:'Releases cash tied up in unpaid invoices, improving cash flow while you wait for customers to pay.'},
+            mca:           {name:'Merchant Cash Advance', suitableFor:'Businesses taking regular card payments', range:'£5,000 – £300,000 (typical)', term:'Repaid via card sales, typically 4 – 12 months', desc:'An advance repaid automatically as a percentage of future card takings, so repayments flex with turnover.'},
+            vat:           {name:'VAT Loan', suitableFor:'Covering a quarterly VAT bill', range:'Typically matched to VAT liability', term:'Usually repaid over one VAT quarter (~3 months)', desc:'Short-term funding to spread the cost of a VAT bill instead of paying it as one lump sum.'},
+            tax:           {name:'Tax Loan', suitableFor:'Covering Corporation Tax or other tax liabilities', range:'Typically matched to tax liability', term:'3 – 12 months (typical)', desc:'Short-term funding to spread the cost of a tax bill over manageable instalments.'},
+            revolving:     {name:'Revolving Credit Facility', suitableFor:'Ongoing, flexible access to funds for cash flow', range:'£5,000 – £250,000 (typical)', term:'Ongoing facility — draw down & repay as needed', desc:'A pre-agreed credit limit you can draw from, repay and reuse as needed, similar to a business overdraft.'}
+          }
+        }, note:'Icons and the product→detail-modal wiring live in the page script and are left out of this editor. Compliance reminder: no lender names, no APR/interest rates, no promised approval — keep new copy consistent with that.'}
+      ]
+    },
+
+    energy: {
+      label:'Energy', file:'pages/utilities-broadband.html',
+      desc:'Comparison-quiz options and the Fixed/Flexible recommendation copy used by pages/utilities-broadband.html. The recommend() function (which of the two gets suggested) is logic, not data, so it stays in the page script — edit the thresholds there if the trigger conditions need to change.',
+      blocks:[
+        {varName:'ENERGY_CONFIG', data:{
+          businessTypes:['Retail','Restaurant / Café','Office','Warehouse','Industrial','Hotel','Healthcare','Education','Other'],
+          energyRequired:['Electricity','Gas','Electricity & Gas'],
+          currentSuppliers:['British Gas','EDF','E.ON Next','ScottishPower','SSE','Octopus Energy','TotalEnergies','Yu Energy','Utility Warehouse','Other'],
+          contractStatus:['In Contract','Out of Contract','Contract Ending Soon','Not Sure'],
+          spendBands:['Under £2,000','£2,000–£5,000','£5,000–£10,000','£10,000–£20,000','£20,000–£50,000','£50,000+'],
+          locationCounts:['1','2–5','6–20','20+'],
+          meterTypes:['Smart Meter','Standard Meter','Half-Hourly Meter','Not Sure'],
+          tariffTypes:['Fixed','Variable','Not Sure'],
+          solutions:{
+            fixed:{
+              name:'Fixed Energy Contract',
+              suitableFor:['Restaurants','Retail','Offices'],
+              benefits:['Budget certainty','Fixed unit rates','Protection from market increases'],
+              blurb:'A fixed contract locks your unit rate for the length of your term, so your energy costs stay predictable no matter what happens in the wholesale market.'
+            },
+            flexible:{
+              name:'Flexible Energy Contract',
+              suitableFor:['Large businesses','Multi-site businesses','High energy users'],
+              benefits:['Tailored to complex or variable usage','Built for multi-site operations','Terms that can flex with consumption'],
+              blurb:'A flexible contract suits larger or multi-site operations with more complex or variable usage, offering terms tailored beyond a single fixed-rate deal.'
+            }
+          }
+        }, note:'Per-option icons live in ENERGY_CONFIG.icons in the page script (cosmetic only) and are left out of this editor to keep it focused on content that affects meaning.'}
+      ]
+    },
+
+    signage: {
+      label:'Digital Signage', file:'pages/digital-signage.html',
+      desc:'Business types, service options, screen sizes and FAQs used by pages/digital-signage.html. Screen pricing (32"=£350 / 40"=£400) is written directly into that page\'s package cards rather than a config object — edit the two figures below and copy them into the matching £ figures in the page\'s "32\" Digital Signage" / "40\" Digital Signage" cards.',
+      blocks:[
+        {varName:'SIGNAGE_CONFIG', data:{
+          businessTypes: ['Restaurant','Café','Coffee Shop','Fast Food','Takeaway','Bakery','Dessert Shop','Supermarket','Convenience Store','Retail Shop','Salon','Barbershop','Pharmacy','Hotel','Reception Area','Office','Other'],
+          services: [
+            {v:'Digital Menu Board',kind:'hardware'},
+            {v:'Promotional Digital Screen',kind:'hardware'},
+            {v:'Window Display Screen',kind:'hardware'},
+            {v:'Advertising Display',kind:'hardware'},
+            {v:'Professional Menu Design',kind:'design'},
+            {v:'Promotional Poster Design',kind:'design'},
+            {v:'Social Media Design',kind:'design'},
+            {v:'Existing Menu Update',kind:'design'},
+            {v:'Screen & Design Package',kind:'bundle'}
+          ],
+          screenSizes: ['32"','40"','Other / Not Sure'],
+          faqs: [
+            {q:'Which screen size should I choose?',a:'32" suits most single-till or counter setups, and 40" gives more visibility for busier locations or bigger menus. Not sure? Choose "Other / Not Sure" in the quote form and we’ll help you decide.'},
+            {q:'Can you update my menu later?',a:'Yes — menu board packages include free design changes within 3 months, and an Existing Menu Update service is available any time after that if your menu changes.'},
+            {q:'Can I use my own branding?',a:'Yes — every screen and design is built around your logo, brand colours and fonts so it looks like a natural extension of your business.'},
+            {q:'Do you design promotional adverts?',a:'Yes — we design promotional posters, offers, seasonal campaigns and social media adverts, either alongside a screen or as a standalone design service.'},
+            {q:'Can I order multiple screens?',a:'Yes — just tell us how many screens you need (and where) in the quote form and we’ll put together multi-screen pricing.'},
+            {q:'Can you redesign my existing menu?',a:'Yes — if you already have a menu we can refresh or fully redesign it as part of the Existing Menu Update service, with or without a new screen.'}
+          ]
+        }},
+        {varName:'SIGNAGE_PRICING (not a real page variable — see note above)', data:{
+          '32inchScreen':'£350', '40inchScreen':'£400'
+        }}
+      ]
+    }
+  };
+
+  /* ============================================================
+     Load per-block live state (localStorage override, else baseline)
+     ============================================================ */
+  var TABS = Object.keys(BASELINE);
+  var STATE = {}; // tabId -> array of block data objects (live, mutable)
+  TABS.forEach(function(tabId){
+    STATE[tabId]=BASELINE[tabId].blocks.map(function(b,i){
+      var lsKey='plemmoAdmin:'+tabId+':'+i;
+      var saved=loadKey(lsKey);
+      return {varName:b.varName, note:b.note||'', lsKey:lsKey, data: saved!==null?saved:JSON.parse(JSON.stringify(b.data===undefined?{}:b.data,function(k,v){return v===Infinity?'__Infinity__':v}),function(k,v){return v==='__Infinity__'?Infinity:v})};
+    });
+  });
+
+  /* ============================================================
+     Generic recursive editor
+     ============================================================ */
+  function humanize(k){return String(k).replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,function(c){return c.toUpperCase()})}
+
+  function renderField(container,label,holder,key,onDirty){
+    var v=holder[key];
+    var field=document.createElement('div');field.className='field';
+    if(label){var l=document.createElement('label');l.textContent=label;field.appendChild(l);}
+
+    if(typeof v==='string'||typeof v==='number'||v===Infinity){
+      var isLong=typeof v==='string'&&v.length>70;
+      var input=document.createElement(isLong?'textarea':'input');
+      if(!isLong)input.type='text';
+      input.value=(v===Infinity)?'Infinity':String(v);
+      input.addEventListener('input',function(){
+        var raw=input.value;
+        if(typeof holder[key]==='number'||holder[key]===Infinity){
+          holder[key]= raw.trim().toLowerCase()==='infinity' ? Infinity : (raw.trim()===''?0:(isNaN(parseFloat(raw))?raw:parseFloat(raw)));
+        } else {
+          holder[key]=raw;
+        }
+        onDirty();
+      });
+      field.appendChild(input);
+    } else if(typeof v==='boolean'){
+      var wrap=document.createElement('label');wrap.style.display='flex';wrap.style.alignItems='center';wrap.style.gap='8px';wrap.style.fontSize='13px';wrap.style.color='#fff';
+      var cb=document.createElement('input');cb.type='checkbox';cb.checked=v;
+      cb.addEventListener('change',function(){holder[key]=cb.checked;onDirty();});
+      wrap.appendChild(cb);wrap.appendChild(document.createTextNode(label||humanize(key)));
+      field.innerHTML='';field.appendChild(wrap);
+    } else if(Array.isArray(v)){
+      renderArray(field,v,onDirty,function(){holder[key]=v;});
+    } else if(isPlainObj(v)){
+      renderObject(field,v,onDirty);
+    }
+    container.appendChild(field);
+  }
+
+  function renderArray(container,arr,onDirty,onStructChange){
+    var allPrimitive=arr.every(function(x){return typeof x==='string'||typeof x==='number'});
+    if(allPrimitive){
+      var box=document.createElement('div');
+      var chips=document.createElement('div');chips.className='chiplist';
+      function redraw(){
+        chips.innerHTML='';
+        arr.forEach(function(item,i){
+          var chip=document.createElement('span');chip.className='chip';
+          chip.appendChild(document.createTextNode(item));
+          var rm=document.createElement('button');rm.type='button';rm.textContent='×';
+          rm.addEventListener('click',function(){arr.splice(i,1);redraw();onDirty();});
+          chip.appendChild(rm);chips.appendChild(chip);
+        });
+      }
+      redraw();
+      var addrow=document.createElement('div');addrow.className='chipadd';
+      var ni=document.createElement('input');ni.type='text';ni.placeholder='Add value…';
+      var ab=document.createElement('button');ab.type='button';ab.className='addbtn';ab.textContent='+ Add';
+      function add(){if(ni.value.trim()){arr.push(ni.value.trim());ni.value='';redraw();onDirty();}}
+      ab.addEventListener('click',add);
+      ni.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();add();}});
+      addrow.appendChild(ni);addrow.appendChild(ab);
+      box.appendChild(chips);box.appendChild(addrow);
+      container.appendChild(box);
+    } else {
+      var list=document.createElement('div');
+      function redrawList(){
+        list.innerHTML='';
+        arr.forEach(function(item,i){
+          var card=document.createElement('div');card.className='arr-item';
+          var rm=document.createElement('button');rm.className='rm';rm.type='button';rm.textContent='×';rm.title='Remove';
+          rm.addEventListener('click',function(){arr.splice(i,1);redrawList();onDirty();});
+          card.appendChild(rm);
+          if(isPlainObj(item)){renderObject(card,item,onDirty);}
+          else{(function(i){var holder={v:item};renderField(card,'Value',holder,'v',function(){arr[i]=holder.v;onDirty();});})(i);}
+          list.appendChild(card);
+        });
+      }
+      redrawList();
+      var addbtn=document.createElement('button');addbtn.type='button';addbtn.className='addbtn';addbtn.style.marginTop='8px';addbtn.textContent='+ Add item';
+      addbtn.addEventListener('click',function(){
+        var tmpl=arr.length?JSON.parse(JSON.stringify(arr[arr.length-1],function(k,v){return v===Infinity?'__Infinity__':v}),function(k,v){return v==='__Infinity__'?Infinity:v}):{};
+        if(isPlainObj(tmpl)){Object.keys(tmpl).forEach(function(k){if(typeof tmpl[k]==='string')tmpl[k]='';});}
+        arr.push(tmpl);redrawList();onDirty();
+      });
+      container.appendChild(list);container.appendChild(addbtn);
+    }
+  }
+
+  function renderObject(container,obj,onDirty){
+    var box=document.createElement('div');box.className='obj-box';
+    var keys=Object.keys(obj);
+    keys.forEach(function(k){
+      var row=document.createElement('div');row.className='k';row.textContent=humanize(k);box.appendChild(row);
+      renderField(box,null,obj,k,onDirty);
+    });
+    var keyrow=document.createElement('div');keyrow.className='keyrow';
+    var ki=document.createElement('input');ki.type='text';ki.placeholder='New entry name (e.g. a provider or category key)…';
+    var kb=document.createElement('button');kb.type='button';kb.className='smallbtn';kb.textContent='+ Add entry';
+    kb.addEventListener('click',function(){
+      var name=ki.value.trim();if(!name||obj.hasOwnProperty(name))return;
+      obj[name]='';ki.value='';
+      box.innerHTML='';renderObject(container,obj,onDirty);onDirty();
+    });
+    keyrow.appendChild(ki);keyrow.appendChild(kb);box.appendChild(keyrow);
+    container.appendChild(box);
+  }
+
+  /* ============================================================
+     Tabs + blocks chrome
+     ============================================================ */
+  var tabbar=document.getElementById('tabbar'), panels=document.getElementById('panels');
+
+  TABS.forEach(function(tabId,idx){
+    var meta=BASELINE[tabId];
+    var btn=document.createElement('button');btn.className='tabbtn'+(idx===0?' on':'');btn.textContent=meta.label;
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.tabbtn').forEach(function(b){b.classList.remove('on')});
+      document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.remove('on')});
+      btn.classList.add('on');document.getElementById('panel-'+tabId).classList.add('on');
+    });
+    tabbar.appendChild(btn);
+
+    var panel=document.createElement('div');panel.className='tabpanel'+(idx===0?' on':'');panel.id='panel-'+tabId;
+    var desc=document.createElement('p');desc.className='desc';desc.innerHTML=meta.desc+' <br>Target file: <code>'+meta.file+'</code>';
+    panel.appendChild(desc);
+
+    STATE[tabId].forEach(function(blockState,bi){
+      var block=document.createElement('div');block.className='block'+(bi===0?' open':'');
+      var head=document.createElement('div');head.className='block-head';
+      head.innerHTML='<div><h3>'+humanize(blockState.varName.split(' ')[0])+'</h3><div class="vn">var '+blockState.varName+' = { … }</div></div><iconify-icon class="chev" icon="ph:caret-right-bold"></iconify-icon>';
+      head.addEventListener('click',function(){block.classList.toggle('open')});
+      block.appendChild(head);
+
+      var body=document.createElement('div');body.className='block-body';
+      if(blockState.note){var note=document.createElement('p');note.style.cssText='font-size:12px;color:var(--muted);margin:10px 0 4px';note.textContent=blockState.note;body.appendChild(note);}
+
+      function markDirty(){
+        saveKey(blockState.lsKey,blockState.data);
+        codePre.textContent='var '+blockState.varName.split(' ')[0]+' = '+toJS(blockState.data,0)+';';
+      }
+
+      renderObject(body,blockState.data,markDirty);
+      block.appendChild(body);
+
+      var actions=document.createElement('div');actions.className='block-actions';
+      var codeBtn=document.createElement('button');codeBtn.className='smallbtn';codeBtn.type='button';codeBtn.textContent='Generated code ▾';
+      var resetBtn=document.createElement('button');resetBtn.className='dangerbtn';resetBtn.type='button';resetBtn.textContent='Reset this section';
+      resetBtn.addEventListener('click',function(){
+        if(!confirm('Discard your edits to this section and reload the original values?'))return;
+        localStorage.removeItem(blockState.lsKey);location.reload();
+      });
+      actions.appendChild(codeBtn);actions.appendChild(resetBtn);
+      block.appendChild(actions);
+
+      var codewrap=document.createElement('div');codewrap.className='codewrap';
+      var codehead=document.createElement('div');codehead.className='codehead';
+      var copyBtn=document.createElement('button');copyBtn.className='primarybtn';copyBtn.type='button';copyBtn.textContent='Copy to clipboard';
+      codehead.innerHTML='<span>Paste this over the existing <code style="color:var(--lime)">var '+blockState.varName.split(' ')[0]+' = …;</code> block in <code style="color:var(--lime)">'+meta.file+'</code></span>';
+      codehead.appendChild(copyBtn);
+      var codePre=document.createElement('pre');codePre.className='code';
+      codePre.textContent='var '+blockState.varName.split(' ')[0]+' = '+toJS(blockState.data,0)+';';
+      copyBtn.addEventListener('click',function(){
+        navigator.clipboard.writeText(codePre.textContent).then(function(){copyBtn.textContent='Copied!';setTimeout(function(){copyBtn.textContent='Copy to clipboard'},1500);});
+      });
+      codewrap.appendChild(codehead);codewrap.appendChild(codePre);
+      codeBtn.addEventListener('click',function(){codewrap.classList.toggle('on');codeBtn.textContent=codewrap.classList.contains('on')?'Generated code ▴':'Generated code ▾';});
+      block.appendChild(codewrap);
+
+      panel.appendChild(block);
+    });
+
+    panels.appendChild(panel);
+  });
+
+})();
+</script>
+</body>
+</html>

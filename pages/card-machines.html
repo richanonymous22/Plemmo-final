@@ -793,6 +793,19 @@ html{overflow-x:hidden}
     </div>
     <div class="center rv" style="margin-top:34px"><a href="#finder" class="btn btn-dark">Compare All Providers <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div>
     <p class="lead center" style="font-size:11.5px;margin-top:26px;max-width:760px;margin-left:auto;margin-right:auto;color:#9aa48d">Provider names and logos remain the property of their respective owners and are displayed solely to indicate products or services that may be introduced. Plemmo is an introducer — not a payment processor, acquiring bank or lender. Ratings, rates, payouts and approval are subject to provider terms and eligibility.</p>
+    <div class="rv" style="max-width:640px;margin:20px auto 0;padding:16px 20px;border:1px solid var(--line);border-radius:12px;background:var(--s-light,rgba(255,255,255,.02))">
+      <p style="font-size:11.5px;color:#9aa48d;margin:0 0 8px">The pricing displayed throughout the comparison engine is indicative only and subject to underwriting and provider approval. The following additional charges may apply and are not included in the displayed rates:</p>
+      <ul style="font-size:11.5px;color:#9aa48d;margin:0;padding-left:18px;line-height:1.7;columns:2;column-gap:24px">
+        <li>PCI Compliance Fee</li>
+        <li>PCI Non-Compliance Charges</li>
+        <li>Faster Settlement / Faster Payment Charges</li>
+        <li>Monthly Account Fees (where applicable)</li>
+        <li>Gateway or Virtual Terminal Fees (where applicable)</li>
+        <li>Chargeback Fees</li>
+        <li>Additional Terminal Charges</li>
+        <li>Other provider-specific fees and charges</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -801,7 +814,7 @@ html{overflow-x:hidden}
   <div class="container">
     <div class="types">
       <div class="type tilt rv">
-        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-smart.webp" alt="Countertop card machine on a fixed stand"></div>
+        <div class="type-media"><span class="type-ic"><iconify-icon icon="ph:storefront-duotone"></iconify-icon></span><img loading="lazy" decoding="async" src="../images/card-type-countertop.webp" alt="Countertop card machine on a fixed stand"></div>
         <div class="type-body"><h3>Countertop</h3><p>Perfect for fixed locations and high transaction volumes.</p><button class="ln" data-detail="countertop">Learn more <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button></div>
       </div>
       <div class="type tilt rv">
@@ -887,7 +900,7 @@ html{overflow-x:hidden}
         <div class="calc-ticks"><span>£3k</span><span>£50k</span><span>£100k</span><span>£200k+</span></div>
         <div class="calc-out">
           <div class="calc-tile hi"><div class="tl">Suggested rate</div><div class="tv" id="calcRate">0.35%</div><div class="ts">0.30% if you add utility services</div></div>
-          <div class="calc-tile"><div class="tl">Est. monthly cost</div><div class="tv" id="calcCost">£150</div><div class="ts">on card processing</div></div>
+          <div class="calc-tile"><div class="tl">Estimated monthly cost</div><div class="tv" id="calcCost">£150</div><div class="ts">on card processing</div></div>
           <div class="calc-tile"><div class="tl">Suggested fit</div><div class="tv" id="calcFit" style="font-size:22px">Teya</div><div class="ts" id="calcFitNote">strong all‑rounder</div></div>
         </div>
         <div class="calc-opts" id="calcOpts"></div>
@@ -1195,9 +1208,9 @@ html{overflow-x:hidden}
       'Leisure & Entertainment': ['Hotel','Hostel','Accommodation','Event Company','Festival','Shooting Club','Experiences','Activities','Cinema','Entertainment Venue','Travel Agency'],
       'Retail': ['Grocery Store','Convenience Store','Off Licence','Clothing Store','Electronics Store','Furniture Store','Hardware Store','Automotive Store','Jewellery Store','Bookshop','Florist','Pet Shop','Vape Shop','Market Stall','Other Retail'],
       'Services': ['Accountant','Bookkeeper','Solicitor','Lawyer','Consultant','Estate Agent','Property Management','Tradesperson','Contractor','Education','Garage','MOT Centre','Taxi','Chauffeur','Vehicle Hire','Cleaning Company','Photographer','Videographer','Courier','Logistics','Marketing Agency','IT Services','Digital Agency','Other Services'],
-      'Charity': ['Registered Charity','Community Organisation','Religious Organisation','Non-Profit Organisation']
+      'Charity / Non-Profit': ['Registered Charity','Community Organisation','Religious Organisation','Non-Profit Organisation']
     },
-    catIcon:{'Food & Beverage':'ph:coffee-duotone','Health, Beauty & Wellness':'ph:scissors-duotone','Leisure & Entertainment':'ph:ticket-duotone','Retail':'ph:storefront-duotone','Services':'ph:briefcase-duotone','Charity':'ph:heart-duotone'},
+    catIcon:{'Food & Beverage':'ph:coffee-duotone','Health, Beauty & Wellness':'ph:scissors-duotone','Leisure & Entertainment':'ph:ticket-duotone','Retail':'ph:storefront-duotone','Services':'ph:briefcase-duotone','Charity / Non-Profit':'ph:heart-duotone'},
     /* High ATV businesses use the High ATV split-rate table (Elavon/Clover); everything else is Low ATV. */
     highATVRetail: ['Electronics Store','Automotive Store','Jewellery Store','Bookshop','Florist'],
     turnoverBands: ['Below £5,000','£5,000–£10,000','£10,000–£15,000','£15,000–£20,000','£20,000–£30,000','£30,000–£35,000','£35,000–£50,000','£50,000–£100,000','Above £100,000'],
@@ -1254,13 +1267,30 @@ html{overflow-x:hidden}
     return null;
   }
   /* Rule 1/2 — never recommend the merchant's current provider; the next provider in
-     priority order moves up automatically because we simply filter it out. */
+     priority order moves up automatically because we simply filter it out.
+
+     Rule 3 — recommendation priority, in order:
+       1. Merchant suitability   — a category-specific qualifying question (Charity's
+          "no monthly rental?", Food & Beverage's MOTO/phone-payments question) overrides
+          everything else below when it applies, because it reflects a hard requirement
+          the merchant just told us about.
+       2. Monthly turnover       — bandFor()/generalBands drives the priority list whenever
+          no suitability override applies (this covers every category except Charity-with-
+          no-rental and F&B-MOTO, including turnover-band pricing table selection via
+          classifyATV()/pickRow()).
+       3. Business category      — baked into which band table is used (F&B has its own
+          spec-defined bands; every other category currently shares generalBands, which the
+          admin config can split out per-category later without changing this function).
+       4. Features required      — NOT modelled as a standalone filter today. The only
+          "feature" style questions collected are the two suitability overrides above; there
+          is no generic multi-select of required features per category, so this tier is a
+          no-op until such questions are defined and added to buildSteps()/answers. */
   function recommend(a){
     var currentKey=(a.current&&a.current!=='None'&&a.current!=='Other')?a.current.toLowerCase():null;
     var priority,reason;
-    if(a.category==='Charity'){
-      if(a.norental==='Yes'){priority=CM.charityNoRental.slice();reason='Charity — no monthly rental requested';}
-      else{priority=bandFor(a.turnover);reason='Charity — turnover-based';}
+    if(a.category==='Charity / Non-Profit'){
+      if(a.norental==='Yes'){priority=CM.charityNoRental.slice();reason='Charity / Non-Profit — no monthly rental requested';}
+      else{priority=bandFor(a.turnover);reason='Charity / Non-Profit — turnover-based';}
     } else if(a.category==='Food & Beverage' && a.moto==='Over the Phone (MOTO)'){
       priority=CM.foodMoto.slice();reason='Food & Beverage — MOTO/phone payments';
     } else {
@@ -1282,7 +1312,7 @@ html{overflow-x:hidden}
     s.push({k:'turnover',q:'What is your monthly card turnover?',mode:'list',o:CM.turnoverBands.map(function(t){return {l:t}})});
     s.push({k:'current',q:'Current card machine provider?',mode:'list',o:CM.currentProviders.map(function(t){return {l:t}})});
     if(a.category==='Food & Beverage'){s.push({k:'moto',q:'How do you take payments?',mode:'list',o:MOTO_OPTS.map(function(t){return {l:t}})});}
-    if(a.category==='Charity'){s.push({k:'norental',q:'Do you require a card machine with no monthly rental?',mode:'list',o:NORENT_OPTS.map(function(t){return {l:t}})});}
+    if(a.category==='Charity / Non-Profit'){s.push({k:'norental',q:'Do you require a card machine with no monthly rental?',mode:'list',o:NORENT_OPTS.map(function(t){return {l:t}})});}
     return s;
   }
   var SKEY='plemmo_cm_finder';
@@ -1310,7 +1340,7 @@ html{overflow-x:hidden}
       return;
     }
     var cards=r.list.map(function(k,i){return providerResultCard(k,ans,r.atv,i===0)}).join('');
-    body.innerHTML='<div class="qres"><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Recommended in priority order for your answers. Your current provider is never recommended.</p><div class="qres-list">'+cards+'</div></div>';
+    body.innerHTML='<div class="qres"><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Recommended in priority order for your answers. Your current provider is never recommended.</p><div class="qres-list">'+cards+'</div><p style="font-size:11.5px;color:var(--muted);margin-top:16px">Recommendations are generated from the information you provide and do not constitute financial advice.</p></div>';
     body.querySelectorAll('[data-qapply]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qapply;openModal({intent:'apply',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
     body.querySelectorAll('[data-qcallback]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qcallback;openModal({intent:'callback',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
     body.querySelectorAll('[data-qdetail]').forEach(function(b){b.onclick=function(e){e.preventDefault();openDetail(b.dataset.qdetail)}});
@@ -1370,7 +1400,7 @@ html{overflow-x:hidden}
       tableTitle:'Worldpay split rate by monthly turnover',
       table:[['£15,000–£20,000','Debit 0.35% / Credit 0.75% / Auth 2p'],['Above £20,000','Debit 0.30% / Credit 0.75% / Auth 2p']],
       note:'The pricing shown is indicative only and subject to underwriting and provider approval. Additional charges may include PCI compliance fees, chargeback fees, additional terminal charges and other provider-specific fees.'},
-    countertop:{type:1,badge:'Machine type',name:'Countertop',img:'../images/card-type-smart.webp',intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
+    countertop:{type:1,badge:'Machine type',name:'Countertop',img:'../images/card-type-countertop.webp',intro:'A fixed terminal that sits by your till and connects to broadband or a phone line — built for speed at a busy counter.',
       facts:[['Best for','Shops & counters'],['Connection','Broadband / phone'],['Printer','Built-in receipts'],['Volume','High throughput']],
       pros:['Fast chip, PIN & contactless','Built-in receipt printer','Reliable for high transaction volumes','Always powered at the till'],
       note:'Specific models and features vary by provider.'},

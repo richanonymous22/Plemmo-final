@@ -857,7 +857,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     <h2 class="h2" style="margin-top:14px">Ready to reduce your business energy costs?</h2>
     <p class="lead" style="margin:12px auto 0;max-width:520px">Free, no-obligation comparison. Send us your bill or a few details, and a specialist will confirm your real options.</p>
     <div class="uhero-btns" style="justify-content:center;margin-top:28px">
-      <a href="#" class="btn btn-primary btn-lg" data-quote data-service="Business Energy — Upload My Bill" data-note="I'd like to send over my latest energy bill for review.">Upload My Bill <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
+      <a href="#" class="btn btn-primary btn-lg" data-quote data-focus-file data-service="Business Energy — Upload My Bill" data-note="I'd like to send over my latest energy bill for review.">Upload My Bill <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
       <a href="#" class="btn btn-ghost btn-lg" data-quote data-service="Business Energy — Free Quote">Get Free Quote</a>
       <a href="tel:03330411161" class="btn btn-ghost btn-lg"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Speak to an Expert</a>
     </div>
@@ -950,6 +950,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
           <div><label>Email <span class="req-star">*</span></label><input type="email" name="email" class="input" required placeholder="jane@business.co.uk"></div>
         </div>
         <div class="frow"><label>Service interested in</label><select name="service_type" class="select"><option>Business Electricity</option><option>Business Gas</option><option>Dual Fuel (Gas &amp; Electricity)</option><option>Smart Meters</option><option>Meter Installations</option><option>Multi-Site Energy</option><option>Contract Renewals</option><option>Business Broadband</option><option>Water &amp; Waste</option><option>Everything — full review</option></select></div>
+        <div class="frow"><label>Attach your latest bill (optional)</label><input type="file" name="energy_bill" id="mfile" class="input" accept=".pdf,.jpg,.jpeg,.png,.heic"><span id="mfileHint" style="display:block;font-size:11.5px;color:var(--muted);margin-top:6px">PDF, JPG or PNG · up to 5MB</span></div>
         <div class="frow"><label>Message (optional)</label><textarea name="message" id="mmessage" class="textarea" placeholder="e.g. current supplier, contract end date, number of sites..."></textarea></div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;border:none;font-family:'Inter';font-size:16px;" id="msubmit">Send Enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>
         <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px">No obligation · We'll never share your details · Subject to supplier terms</p>
@@ -1104,12 +1105,13 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       var s=STEPS[cur];
       stepLbl.textContent='Question '+(cur+1)+' of '+STEPS.length;
       bar.style.width=(cur/STEPS.length*100)+'%';
-      var h='<div class="enq-body"><p class="enq-q">'+esc(s.q)+'</p><div class="seg">';
+      var h='<div class="enq-body"><p class="enq-q" id="enqQ'+cur+'">'+esc(s.q)+'</p><div class="seg" role="radiogroup" aria-required="true" aria-labelledby="enqQ'+cur+'">';
       s.o.forEach(function(opt){
         var ic=(s.icons&&s.icons[opt])?('<iconify-icon icon="'+s.icons[opt]+'"></iconify-icon>'):'';
-        h+='<button type="button" class="'+(ans[s.k]===opt?'on':'')+'" data-v="'+esc(opt)+'">'+ic+'<span>'+esc(opt)+'</span></button>';
+        var sel=ans[s.k]===opt;
+        h+='<button type="button" role="radio" aria-checked="'+sel+'" class="'+(sel?'on':'')+'" data-v="'+esc(opt)+'">'+ic+'<span>'+esc(opt)+'</span></button>';
       });
-      h+='</div></div><div class="enq-nav"><button type="button" class="btn btn-ghost" id="enqBack"'+(cur===0?' disabled':'')+'><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span class="enq-hint">Select an option to continue</span></div>';
+      h+='</div></div><div class="enq-nav"><button type="button" class="btn btn-ghost" id="enqBack"'+(cur===0?' disabled':'')+'><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span class="enq-hint">Select an option to continue — required to generate your recommendation</span></div>';
       content.innerHTML=h;
       content.querySelectorAll('.seg button').forEach(function(b){
         b.addEventListener('click',function(){
@@ -1203,16 +1205,17 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
      (e.g. the "Get my recommendation" button rendered inside the energy quiz
      result) work without needing to be re-wired on every render. */
   var modal=document.getElementById('modal');
-  function openModal(service,note){
+  function openModal(service,note,focusFile){
     var sv=document.getElementById('mservice-val');if(sv)sv.value=service||'';
     var ec=document.getElementById('menq-val');if(ec)ec.value=(window.__energyContext?window.__energyContext():'');
     var msg=document.getElementById('mmessage');if(msg&&note&&!msg.value)msg.value=note;
     modal.classList.add('open');document.body.style.overflow='hidden';
+    if(focusFile){var fi=document.getElementById('mfile');if(fi)setTimeout(function(){fi.focus()},80);}
   }
   function closeModal(){modal.classList.remove('open');document.body.style.overflow=''}
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-quote]');
-    if(b){e.preventDefault();openModal(b.dataset.service||'',b.dataset.note||'');return}
+    if(b){e.preventDefault();openModal(b.dataset.service||'',b.dataset.note||'',b.hasAttribute('data-focus-file'));return}
     if(e.target.closest('[data-close]')){closeModal();}
   });
   addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
@@ -1221,6 +1224,11 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
   var form=document.getElementById('quoteForm');
   if(form){form.addEventListener('submit',function(e){
     e.preventDefault();
+    var fileInput=document.getElementById('mfile');
+    if(fileInput&&fileInput.files&&fileInput.files[0]&&fileInput.files[0].size>5*1024*1024){
+      alert('That file is larger than 5MB — please attach a smaller copy of your bill, or send it separately after your enquiry.');
+      return;
+    }
     var btn=document.getElementById('msubmit');
     if(btn){btn.disabled=true;btn.textContent='Sending…'}
     var fd=new FormData(form);fd.append('_template','table');fd.append('_captcha','false');
