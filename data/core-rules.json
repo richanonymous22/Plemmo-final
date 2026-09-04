@@ -29,10 +29,15 @@
           "options": ["over_the_phone_moto", "pay_by_link", "neither"],
           "rules": {
             "over_the_phone_moto": {
-              "recommendations": ["elavon", "worldpay"],
-              "ignore_turnover": true,
+              "ignore_turnover_bands": true,
+              "turnover_tiered": true,
+              "allowed_providers": ["shift4", "worldpay", "elavon", "clover"],
               "exclude_all_other_providers": true,
-              "max_recommendations": 2
+              "moto_turnover_based": {
+                "below_10000": {"priority": ["shift4", "worldpay"], "max_recommendations": 2},
+                "10000_to_15000": {"priority": ["worldpay", "shift4"], "max_recommendations": 2},
+                "above_15000": {"priority": ["elavon", "clover"], "max_recommendations": 2}
+              }
             },
             "pay_by_link": {
               "use_turnover": true
@@ -43,9 +48,8 @@
           },
           "turnover_based": {
             "below_5000": {
-              "priority": ["shift4"],
-              "fallback": ["sumup"],
-              "max_recommendations": 1
+              "priority": ["shift4", "worldpay"],
+              "max_recommendations": 2
             },
             "5000_to_10000": {
               "priority": ["sumup", "shift4"],
@@ -77,7 +81,8 @@
           "sub_categories": [
             "grocery_store", "convenience_store", "off_licence", "clothing_store",
             "electronics_store", "furniture_store", "hardware_store", "automotive_store",
-            "jewellery_store", "bookshop", "florist", "pet_shop", "vape_shop",
+            "jewellery_store", "watches_store", "gift_shop", "bookshop", "stationery_shop",
+            "newsagents", "florist", "garden_centre", "pet_shop", "vape_shop",
             "market_stall", "other_retail"
           ]
         },
@@ -99,8 +104,9 @@
             "accountant", "bookkeeper", "solicitor", "lawyer", "consultant",
             "estate_agent", "property_management", "tradesperson", "contractor",
             "education", "garage", "mot_centre", "taxi", "chauffeur", "vehicle_hire",
-            "cleaning_company", "photographer", "videographer", "courier", "logistics",
-            "marketing_agency", "it_services", "digital_agency", "other_services"
+            "equipment_hire", "cleaning_company", "photographer", "videographer",
+            "courier", "logistics", "marketing_agency", "it_services", "digital_agency",
+            "digital_services", "other_services"
           ]
         },
         "charity": {
@@ -133,17 +139,20 @@
             "entertainment_venue", "travel_agency"
           ],
           "retail": [
-            "electronics_store", "automotive_store", "jewellery_store",
-            "bookshop", "florist"
+            "electronics_store", "automotive_store", "jewellery_store", "watches_store",
+            "gift_shop", "bookshop", "stationery_shop", "newsagents", "florist",
+            "garden_centre"
           ],
           "services": [
             "accountant", "bookkeeper", "solicitor", "lawyer", "consultant",
             "estate_agent", "property_management", "tradesperson", "contractor",
             "education", "garage", "mot_centre", "taxi", "chauffeur", "vehicle_hire",
-            "cleaning_company", "photographer", "videographer", "courier", "logistics",
-            "marketing_agency", "it_services", "digital_agency", "other_services"
+            "equipment_hire", "cleaning_company", "photographer", "videographer",
+            "courier", "logistics", "marketing_agency", "it_services", "digital_agency",
+            "digital_services", "other_services"
           ]
         },
+        "low_atv_note": "Informational only — not used by the classification logic. The engine is fallback-based: any business type not listed under high_atv above is automatically Low ATV. This list documents which categories that currently resolves to, for reference.",
         "low_atv": {
           "food_and_beverage": [
             "restaurant", "cafe", "fast_food", "bakery", "bar_pub", "food_truck",
@@ -897,25 +906,48 @@
           "price": 400,
           "includes": ["digital_display", "professional_menu_design"],
           "available": true
+        },
+        "50_inch": {
+          "price": null,
+          "pricing_note": "No fixed price supplied yet — always routed to a custom quote.",
+          "available": true,
+          "quote_only": true
+        },
+        "60_inch": {
+          "price": null,
+          "pricing_note": "No fixed price supplied yet — always routed to a custom quote.",
+          "available": true,
+          "quote_only": true
+        },
+        "70_inch": {
+          "price": null,
+          "pricing_note": "No fixed price supplied yet — always routed to a custom quote.",
+          "available": true,
+          "quote_only": true
         }
       },
       "screen_selection_rule": {
         "if_32_inch_selected": {
           "show_only": ["32_inch"],
-          "hide": ["40_inch"],
+          "hide": ["40_inch", "50_inch", "60_inch", "70_inch"],
           "strict_enforcement": true
         },
         "if_40_inch_selected": {
           "show_only": ["40_inch"],
-          "hide": ["32_inch"],
+          "hide": ["32_inch", "50_inch", "60_inch", "70_inch"],
           "strict_enforcement": true
+        },
+        "if_50_60_70_inch_selected": {
+          "show_only": ["selected_size"],
+          "message": "Quoted individually — no fixed price yet.",
+          "action": "route_to_custom_quote"
         },
         "if_not_sure_selected": {
           "show": ["32_inch", "40_inch"],
           "recommend_default": "32_inch"
         },
         "if_other_selected": {
-          "show": ["32_inch", "40_inch"],
+          "show": ["32_inch", "40_inch", "50_inch", "60_inch", "70_inch"],
           "message": "Please contact us for custom sizes",
           "recommend_default": "40_inch"
         }
@@ -1124,9 +1156,19 @@
         "excluded": ["Teya", "Clover", "Elavon", "Worldpay"]
       },
       {
-        "scenario": "Food & Beverage + MOTO",
-        "expected": "Only Elavon and Worldpay shown",
-        "ignored": ["Turnover"]
+        "scenario": "Food & Beverage + MOTO + below £10,000 turnover",
+        "expected": "Shift4, Worldpay",
+        "based_on": "Turnover-tiered MOTO rule (general bands ignored)"
+      },
+      {
+        "scenario": "Food & Beverage + MOTO + £10,000-£15,000 turnover",
+        "expected": "Worldpay, Shift4",
+        "based_on": "Turnover-tiered MOTO rule (general bands ignored)"
+      },
+      {
+        "scenario": "Food & Beverage + MOTO + above £15,000 turnover",
+        "expected": "Elavon, Clover",
+        "based_on": "Turnover-tiered MOTO rule (general bands ignored)"
       },
       {
         "scenario": "Food & Beverage + Pay by Link + £12,000 turnover",

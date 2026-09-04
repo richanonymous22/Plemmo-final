@@ -537,10 +537,13 @@
     screenSizes: [
       {v:'32"'},
       {v:'40"'},
-      {v:'Other / Not Sure'}
+      {v:'50"'},
+      {v:'60"'},
+      {v:'70"'},
+      {v:'Other / Custom / Not Sure'}
     ],
     faqs: [
-      {q:'Which screen size should I choose?',a:'32" suits most single-till or counter setups, and 40" gives more visibility for busier locations or bigger menus. Not sure? Choose "Other / Not Sure" in the quote form and we’ll help you decide.'},
+      {q:'Which screen size should I choose?',a:'32" suits most single-till or counter setups, and 40" gives more visibility for busier locations or bigger menus. Larger commercial sizes — 50", 60" and 70" — are available and quoted individually. Not sure? Choose "Other / Custom / Not Sure" in the quote form and we’ll help you decide.'},
       {q:'Can you update my menu later?',a:'Yes — menu board packages include free design changes within 3 months, and an Existing Menu Update service is available any time after that if your menu changes.'},
       {q:'Can I use my own branding?',a:'Yes — every screen and design is built around your logo, brand colours and fonts so it looks like a natural extension of your business.'},
       {q:'Do you design promotional adverts?',a:'Yes — we design promotional posters, offers, seasonal campaigns and social media adverts, either alongside a screen or as a standalone design service.'},
@@ -721,9 +724,13 @@
     return null; /* design-only (or nothing) selected — no screen hardware to recommend */
   }
 
+  /* Larger commercial sizes with no fixed price yet — always route to a custom quote
+     rather than silently reusing the 32"/40" fallback price. */
+  var CUSTOM_QUOTE_SIZES=['50"','60"','70"'];
   function svcPrice(svcName,size){
     var p=SVC_PRICES[svcName];if(!p)return null;
     if(p.flat)return{amount:p.flat,label:'£'+p.flat};
+    if(CUSTOM_QUOTE_SIZES.indexOf(size)>-1)return null;
     var amt=p[size]||p.fallback||null;
     return amt?{amount:amt,label:'£'+amt.toLocaleString()}:null;
   }
@@ -750,8 +757,10 @@
       var menuIdx=-1;
       for(var i=0;i<lines.length;i++){if(lines[i].name==='Digital Menu Board'||lines[i].name==='Screen & Design Package'){menuIdx=i;break;}}
       if(menuIdx>-1){
-        if(wizState.size==='32"'){lines[menuIdx].name=(lines[menuIdx].name==='Screen & Design Package'?'Screen & Design Package (32")':'32" Digital Menu Board Package');}
-        else if(wizState.size==='40"'){lines[menuIdx].name=(lines[menuIdx].name==='Screen & Design Package'?'Screen & Design Package (40")':'40" Digital Menu Board Package');}
+        var isBundle=lines[menuIdx].name==='Screen & Design Package';
+        if(wizState.size==='32"'){lines[menuIdx].name=isBundle?'Screen & Design Package (32")':'32" Digital Menu Board Package';}
+        else if(wizState.size==='40"'){lines[menuIdx].name=isBundle?'Screen & Design Package (40")':'40" Digital Menu Board Package';}
+        else if(CUSTOM_QUOTE_SIZES.indexOf(wizState.size)>-1){lines[menuIdx].name=(isBundle?'Screen & Design Package (':'Digital Menu Board Package (')+wizState.size+' — Custom Quote)';}
       }
     }
     if(selected.length===1){

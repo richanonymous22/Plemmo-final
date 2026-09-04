@@ -1065,6 +1065,12 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     // ---- Recommendation logic (admin: edit thresholds to change when Flexible
     // is recommended instead of Fixed). This is a simple, defensible triage —
     // NOT a live pricing/eligibility engine, and it never outputs a £ figure. ----
+    // TODO (awaiting owner confirmation): the spec asks for two more outcomes —
+    // "Multi-Site Energy Tariff" and "Commercial Broadband Bundle" — alongside
+    // Fixed/Flexible. This quiz only asks energy questions (no broadband question
+    // exists), so a Broadband Bundle outcome has nowhere to hook in without adding
+    // a new first question ("Energy or Broadband?"). Left as two outcomes
+    // (Fixed/Flexible) pending the owner's decision on how to structure that.
     recommend:function(a){
       var manyLocations = (a.locations === '6–20' || a.locations === '20+');
       var highSpend      = (a.spend === '£50,000+');

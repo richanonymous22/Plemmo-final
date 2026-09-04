@@ -199,12 +199,12 @@
             'Food & Beverage': ['Bakery','Café','Restaurant','Fast Food','Fine Dining','Bar / Pub','Food Truck','Catering','Butchers','Fishmongers','Fruit & Vegetable Shop'],
             'Health, Beauty & Wellness': ['Barber','Hair Salon','Beauty Salon','Cosmetic Store','Pharmacy','Dentist','Gym','Spa','Wellness Centre'],
             'Leisure & Entertainment': ['Hotel','Hostel','Accommodation','Event Company','Festival','Shooting Club','Experiences','Activities','Cinema','Entertainment Venue','Travel Agency'],
-            'Retail': ['Grocery Store','Convenience Store','Off Licence','Clothing Store','Electronics Store','Furniture Store','Hardware Store','Automotive Store','Jewellery Store','Bookshop','Florist','Pet Shop','Vape Shop','Market Stall','Other Retail'],
-            'Services': ['Accountant','Bookkeeper','Solicitor','Lawyer','Consultant','Estate Agent','Property Management','Tradesperson','Contractor','Education','Garage','MOT Centre','Taxi','Chauffeur','Vehicle Hire','Cleaning Company','Photographer','Videographer','Courier','Logistics','Marketing Agency','IT Services','Digital Agency','Other Services'],
+            'Retail': ['Grocery Store','Convenience Store','Off Licence','Clothing Store','Electronics Store','Furniture Store','Hardware Store','Automotive Store','Jewellery Store','Watches Store','Gift Shop','Bookshop','Stationery Shop','Newsagents','Florist','Garden Centre','Pet Shop','Vape Shop','Market Stall','Other Retail'],
+            'Services': ['Accountant','Bookkeeper','Solicitor','Lawyer','Consultant','Estate Agent','Property Management','Tradesperson','Contractor','Education','Garage','MOT Centre','Taxi','Chauffeur','Vehicle Hire','Equipment Hire','Cleaning Company','Photographer','Videographer','Courier','Logistics','Marketing Agency','IT Services','Digital Agency','Digital Services','Other Services'],
             'Charity / Non-Profit': ['Registered Charity','Community Organisation','Religious Organisation','Non-Profit Organisation']
           },
           catIcon:{'Food & Beverage':'ph:coffee-duotone','Health, Beauty & Wellness':'ph:scissors-duotone','Leisure & Entertainment':'ph:ticket-duotone','Retail':'ph:storefront-duotone','Services':'ph:briefcase-duotone','Charity / Non-Profit':'ph:heart-duotone'},
-          highATVRetail: ['Electronics Store','Automotive Store','Jewellery Store','Bookshop','Florist'],
+          highATVRetail: ['Electronics Store','Automotive Store','Jewellery Store','Watches Store','Gift Shop','Bookshop','Stationery Shop','Newsagents','Florist','Garden Centre'],
           turnoverBands: ['Below £5,000','£5,000–£10,000','£10,000–£15,000','£15,000–£20,000','£20,000–£30,000','£30,000–£35,000','£35,000–£50,000','£50,000–£100,000','Above £100,000'],
           turnoverMid: {'Below £5,000':2500,'£5,000–£10,000':7500,'£10,000–£15,000':12500,'£15,000–£20,000':17500,'£20,000–£30,000':25000,'£30,000–£35,000':32500,'£35,000–£50,000':42500,'£50,000–£100,000':75000,'Above £100,000':150000},
           currentProviders: ['None','Teya','Shift4','SumUp','Clover','Elavon','Worldpay','Other'],
@@ -227,7 +227,7 @@
               high:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}]}
           },
           generalBands: [
-            {max:5000, priority:['shift4'], fallback:['sumup']},
+            {max:5000, priority:['shift4','worldpay']},
             {max:10000, priority:['sumup','shift4']},
             {max:15000, priority:['teya','worldpay','sumup']},
             {max:20000, priority:['teya','worldpay','sumup']},
@@ -236,7 +236,15 @@
             {max:Infinity, priority:['elavon','clover','teya']}
           ],
           charityNoRental: ['shift4','sumup'],
-          foodMoto: ['elavon','worldpay']
+          motoBands: [
+            {max:10000, priority:['shift4','worldpay']},
+            {max:15000, priority:['worldpay','shift4']},
+            {max:Infinity, priority:['elavon','clover']}
+          ]
+          /* NOTE: the provider entries above (shift4/sumup/clover/elavon/worldpay wording,
+             Clover's "Rolling" contract, etc.) are a stale snapshot pre-dating this session's
+             provider rewrites in card-machines.html — not resynced here as it was outside
+             today's 9-item scope. Flagged for a follow-up pass. */
         }}
       ]
     },
