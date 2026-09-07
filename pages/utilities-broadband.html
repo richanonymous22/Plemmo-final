@@ -721,7 +721,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     <div class="rv" style="margin-top:52px">
       <h3 style="color:var(--ink);font-size:clamp(20px,2.6vw,26px);text-align:center;margin-bottom:8px">More business energy services</h3>
       <p class="lead center" style="max-width:520px;margin:0 auto 30px">A few more ways we help businesses stay on top of their energy contracts.</p>
-      <div class="ugrid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="ugrid">
         <div class="ucard" style="background:var(--cream);border-color:var(--line-l)">
           <div class="ui" style="background:rgba(198,255,0,.18)"><iconify-icon icon="ph:plugs-duotone"></iconify-icon></div>
           <h3 style="color:var(--ink)">Dual Fuel</h3>
@@ -912,8 +912,8 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       </div>
       <div class="fcol"><h4>Solutions</h4><a href="card-machines.html">Card Machines</a><a href="business-funding.html">Business Funding</a><a href="epos-systems.html">EPOS Systems</a><a href="digital-signage.html">Digital Signage</a><a href="utilities-broadband.html">Utilities &amp; Broadband</a></div>
       <div class="fcol"><h4>Company</h4><a href="about-us.html">About Us</a><a href="contact-us.html">Contact Us</a><a href="refer-and-earn.html">Refer &amp; Earn</a><a href="guides.html">Guides</a></div>
-      <div class="fcol"><h4>Resources</h4><a href="#">Get a Quote</a><a href="card-machines.html">Compare Card Machines</a><a href="refer-and-earn.html">Refer &amp; Earn</a></div>
-      <div class="fcol"><h4>Contact</h4><a href="tel:03330411161">0333 041 1161</a><span style="display:block;color:var(--muted);font-size:13px;padding:6px 0;line-height:1.4">133 Soho Hill, Hockley, Birmingham B19 1AT, United Kingdom</span><a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a><a href="#">Get a Free Quote</a><a href="contact-us.html">Send an Enquiry</a></div>
+      <div class="fcol"><h4>Resources</h4><a href="#" data-quote data-service="Utilities &amp; Broadband">Get a Quote</a><a href="card-machines.html">Compare Card Machines</a><a href="refer-and-earn.html">Refer &amp; Earn</a></div>
+      <div class="fcol"><h4>Contact</h4><a href="tel:03330411161">0333 041 1161</a><span style="display:block;color:var(--muted);font-size:13px;padding:6px 0;line-height:1.4">133 Soho Hill, Hockley, Birmingham B19 1AT, United Kingdom</span><a href="mailto:hello@plemmo.co.uk">hello@plemmo.co.uk</a><a href="#" data-quote data-service="Utilities &amp; Broadband">Get a Free Quote</a><a href="contact-us.html">Send an Enquiry</a></div>
     </div>
     <div class="fdisc">
       <p>Plemmo acts as an introducer for utility and broadband services and may receive commission from utility partners. Products, pricing and availability are subject to provider terms, eligibility, and your specific location and usage. Any potential savings are indicative and cannot be guaranteed until a formal quote is finalised using your actual usage data. Energy quotes are subject to supplier availability, business usage, contract status, credit checks and acceptance. Depending on the service requested, products may be supplied directly or through selected third-party providers.</p>
@@ -1154,7 +1154,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
         var sel=ans[s.k]===opt;
         h+='<button type="button" role="radio" aria-checked="'+sel+'" class="'+(sel?'on':'')+'" data-v="'+esc(opt)+'">'+ic+'<span>'+esc(opt)+'</span></button>';
       });
-      h+='</div></div><div class="enq-nav"><button type="button" class="btn btn-ghost" id="enqBack"'+(cur===0?' disabled':'')+'><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span class="enq-hint">Select an option to continue — required to generate your recommendation</span></div>';
+      h+='</div></div><div class="enq-nav">'+(cur===0?'<span></span>':'<button type="button" class="btn btn-ghost" id="enqBack"><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button>')+'<span class="enq-hint">Select an option to continue — required to generate your recommendation</span></div>';
       content.innerHTML=h;
       content.querySelectorAll('.seg button').forEach(function(b){
         b.addEventListener('click',function(){

@@ -231,6 +231,8 @@ section{scroll-margin-top:88px}
 .qfoot{display:flex;align-items:center;justify-content:space-between;margin-top:26px;position:relative;z-index:1}
 .qback{background:none;border:none;color:var(--muted);font-family:'Inter';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:color .2s}
 .qback[disabled]{opacity:0;pointer-events:none}.qback:hover{color:#fff}
+.qres-restart{background:none;border:none;color:var(--muted);font-family:'Inter';font-size:12.5px;cursor:pointer;text-decoration:underline;margin-top:18px;padding:0;display:block}
+.qres-restart:hover{color:var(--lime)}
 /* result */
 .qres{animation:fadeIn .5s both;position:relative;z-index:1}
 .qres-card{display:grid;grid-template-columns:160px 1fr;gap:26px;align-items:center;background:linear-gradient(150deg,rgba(198,255,0,.09),rgba(198,255,0,.015));border:1px solid rgba(198,255,0,.26);border-radius:20px;padding:28px}
@@ -1318,7 +1320,8 @@ html{overflow-x:hidden}
   function loadAns(){try{return JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){return {}}}
   function saveAns(){try{localStorage.setItem(SKEY,JSON.stringify(ans))}catch(e){}}
   var ans=loadAns(),cur=0,done=false,body=document.getElementById('qbody'),bar=document.getElementById('qbar'),stepEl=document.getElementById('qstep'),back=document.getElementById('qback'),stepsEl=document.getElementById('qsteps');
-  function stepper(steps){stepsEl.innerHTML=steps.map(function(s,i){var c=(done||i<cur)?'done':(i===cur?'active':'');var n=(done||i<cur)?'<iconify-icon icon="ph:check-bold"></iconify-icon>':(i+1);return '<span class="qstep-pill '+c+'"><span class="qn">'+n+'</span>'+(s.k.charAt(0).toUpperCase()+s.k.slice(1))+'</span>'}).join('')}
+  var STEP_LABELS={category:'Category',type:'Type',turnover:'Turnover',current:'Current',moto:'Payment',norental:'Rental',ratepref:'Rate'};
+  function stepper(steps){stepsEl.innerHTML=steps.map(function(s,i){var c=(done||i<cur)?'done':(i===cur?'active':'');var n=(done||i<cur)?'<iconify-icon icon="ph:check-bold"></iconify-icon>':(i+1);return '<span class="qstep-pill '+c+'"><span class="qn">'+n+'</span>'+(STEP_LABELS[s.k]||(s.k.charAt(0).toUpperCase()+s.k.slice(1)))+'</span>'}).join('')}
   function render(){var steps=buildSteps(ans);if(cur>=steps.length)cur=steps.length-1;var s=steps[cur];done=false;
     bar.style.width=((cur+1)/steps.length*100)+'%';stepEl.textContent='Step '+(cur+1)+' of '+steps.length;back.disabled=cur===0;stepper(steps);
     var h='<div class="qq">'+s.q+'</div><div class="qtiles'+(s.mode==='list'?' compact':'')+'">';
@@ -1333,13 +1336,16 @@ html{overflow-x:hidden}
     }});}
   function result(){var steps=buildSteps(ans);done=true;bar.style.width='100%';stepEl.textContent='Your suggested providers';back.disabled=false;stepper(steps);
     var r=recommend(ans);
+    function restart(){ans={};saveAns();cur=0;render()}
     if(r.fallback){
-      body.innerHTML='<div class="qres"><div class="qres-card" style="grid-template-columns:1fr"><div class="qres-body"><div class="rl">No exact match</div><div class="rn" style="font-size:24px">Please contact us for a personalised quote</div><p>We could not automatically match a provider to your answers (often because your current provider is also the only listed option). Send your details and our team will review manually.</p><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Request a personalised quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div></div></div></div>';
+      body.innerHTML='<div class="qres"><div class="qres-card" style="grid-template-columns:1fr"><div class="qres-body"><div class="rl">No exact match</div><div class="rn" style="font-size:24px">Please contact us for a personalised quote</div><p>We could not automatically match a provider to your answers (often because your current provider is also the only listed option). Send your details and our team will review manually.</p><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Request a personalised quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div><button type="button" class="qres-restart" id="qRestart">Start over</button></div></div></div>';
       document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:'Personalised quote — no automatic match'})};
+      document.getElementById('qRestart').onclick=restart;
       return;
     }
     var cards=r.list.map(function(k,i){return providerResultCard(k,ans,r.atv,i===0)}).join('');
-    body.innerHTML='<div class="qres"><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Suggested in priority order for your answers. Your current provider is never suggested.</p><div class="qres-list">'+cards+'</div><p style="font-size:11.5px;color:var(--muted);margin-top:16px">Recommendations are generated from the information you provide and do not constitute financial advice.</p></div>';
+    body.innerHTML='<div class="qres"><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Suggested in priority order for your answers. Your current provider is never suggested.</p><div class="qres-list">'+cards+'</div><p style="font-size:11.5px;color:var(--muted);margin-top:16px">Recommendations are generated from the information you provide and do not constitute financial advice.</p><button type="button" class="qres-restart" id="qRestart">Start over</button></div>';
+    document.getElementById('qRestart').onclick=restart;
     body.querySelectorAll('[data-qapply]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qapply;openModal({intent:'apply',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
     body.querySelectorAll('[data-qcallback]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qcallback;openModal({intent:'callback',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
   }
@@ -1455,10 +1461,31 @@ html{overflow-x:hidden}
       if(outWrap)outWrap.querySelectorAll('.calc-tile').forEach(function(x){x.classList.remove('hi')});
       elR.parentElement.classList.add('hi');
       var band=turnoverLabelFor(t),priority=bandFor(band).priority,topKey=priority[0],top=CM.providers[topKey];
-      var rateText=top.type==='blended'?(top.rateText||'Blended — see pricing table'):'Split rate — see pricing table';
-      elR.textContent='0.35%'; elC.textContent=gbp(t*0.0035);
+      /* This slider only asks turnover (no business category/type), so ATV can't
+         be classified the way the full finder does — 'low' is used as the
+         representative rate table, same as most businesses fall under. The rate
+         and cost below are real lookups from CM.providers, never a fixed number. */
+      var rateNum=null, rateLine, custom=false;
+      if(top.type==='blended'){
+        if(topKey==='teya'&&top.table){
+          var teyaRow=pickRow(top.table,band);
+          if(teyaRow){rateNum=parseFloat(teyaRow.rate);rateLine='Blended '+teyaRow.rate;}
+          else{rateLine=top.rateText||'Blended — see pricing table';}
+        } else {
+          rateLine=top.rateText||'Blended — see pricing table';
+          var m=/([\d.]+)%/.exec(rateLine);if(m)rateNum=parseFloat(m[1]);
+        }
+      } else {
+        var row=pickRow(top.low,band);
+        if(row){
+          if(row.debit==='Custom Quote'){custom=true;rateLine='Custom Quote — contact us for pricing';}
+          else{rateNum=parseFloat(row.debit);rateLine='Debit '+row.debit+' / Credit '+row.credit+' · Auth fee '+row.auth;}
+        } else {rateLine='Custom quote — please contact us';custom=true;}
+      }
+      elR.textContent = custom ? 'Custom' : (rateNum!==null ? rateNum+'%' : '—');
+      elC.textContent = (!custom && rateNum!==null) ? gbp(t*(rateNum/100)) : 'Contact us';
       elF.textContent=top.name; elFN.textContent='suggested fit for '+band+' turnover';
-      elO.innerHTML=opt('rec','Suggested Provider',top.name,rateText,'See rates');
+      elO.innerHTML=opt('rec','Suggested Provider',top.name,rateLine,'See rates');
     }
     range.addEventListener('input',upd); upd();
   })();

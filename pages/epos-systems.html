@@ -91,11 +91,15 @@
 .epc-resnote p b{color:var(--ink)}
 .epc-reset{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#5f9000;background:none;border:none;cursor:pointer;padding:6px 4px}
 .epc-reset:hover{text-decoration:underline}
-.epc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:start}
-.epc-card{position:relative;padding:26px;display:flex;flex-direction:column}
-.epc-rank{position:absolute;top:-12px;left:24px;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:5px 14px;border-radius:var(--pill);white-space:nowrap;box-shadow:0 6px 18px rgba(198,255,0,.3)}
+.epc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:stretch;margin-top:8px}
+.epc-card{position:relative;padding:26px;display:flex;flex-direction:column;height:100%}
+.epc-card.epc-featured{border-color:rgba(198,255,0,.5);box-shadow:0 0 0 1px rgba(198,255,0,.35),0 24px 60px rgba(17,20,15,.12)}
+.epc-rank{position:absolute;top:-13px;left:24px;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:5px 14px;border-radius:var(--pill);white-space:nowrap;box-shadow:0 6px 18px rgba(198,255,0,.3);display:inline-flex;align-items:center;gap:5px}
 .epc-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.epc-logo{width:52px;height:52px;border-radius:14px;background:linear-gradient(145deg,var(--lime),#9bcc00);color:#0a0c08;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:800;font-size:16px;flex-shrink:0;box-shadow:0 10px 22px rgba(198,255,0,.22)}
+.epc-logo{width:56px;height:56px;border-radius:14px;background:var(--white);border:1px solid var(--line-l);display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:9px;box-shadow:0 6px 16px rgba(17,20,15,.06)}
+.epc-logo img{width:100%;height:100%;object-fit:contain}
+.epc-logo.epc-logo-fallback{background:linear-gradient(145deg,var(--lime),#9bcc00);border:none;color:#0a0c08;font-family:'Space Grotesk';font-weight:800;font-size:16px;box-shadow:0 10px 22px rgba(198,255,0,.22);padding:0}
+.epc-logo.epc-logo-dark{background:var(--ink);border-color:var(--ink)}
 .epc-provider{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#5f9000}
 .epc-pkgname{font-family:'Space Grotesk';font-size:17px;font-weight:700;color:var(--ink)}
 .epc-prices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
@@ -465,10 +469,13 @@
     /* Provider identity — "logo" is a simple lime initials badge since no
        third-party provider logo artwork is bundled with this site; swap
        in an <img> here later if real logo assets are added. */
+    /* logo: real provider artwork where we have it on file; providers with no
+       logo asset available fall back to a clean initials badge (never a
+       fabricated or hotlinked logo). */
     providers: {
-      plemmo:{name:'Plemmo EPOS',initials:'PL'},
-      shift4:{name:'Shift4 EPOS',initials:'S4'},
-      sumup:{name:'SumUp POS',initials:'SU'},
+      plemmo:{name:'Plemmo EPOS',initials:'PL',logo:'../images/logo.png',logoDark:true},
+      shift4:{name:'Shift4 EPOS',initials:'S4',logo:'../images/logo-shift4.svg'},
+      sumup:{name:'SumUp POS',initials:'SU',logo:'../images/logo-sumup.svg'},
       eposnow:{name:'Epos Now',initials:'EN'}
     },
     /* Integrated card machine status — shown verbatim on every card of that provider */
@@ -580,9 +587,12 @@
     var upgradeHTML=pkg.optionalUpgrade?('<div class="epc-upgrade"><iconify-icon icon="ph:plus-circle-duotone"></iconify-icon> Optional upgrade (not included by default): '+pkg.optionalUpgrade.name+' — '+pkg.optionalUpgrade.price+'</div>'):'';
     var promoHTML=pkg.promotions?('<div class="epc-promos">'+pkg.promotions.map(function(p){return '<span class="epc-promo"><iconify-icon icon="ph:tag-duotone"></iconify-icon>'+p+'</span>'}).join('')+'</div>'):'';
     var suitHTML=pkg.suitableFor?('<p class="epc-suit"><b>Suitable for:</b> '+pkg.suitableFor.join(', ')+'</p>'):'';
-    return '<div class="card epc-card">'
-      +(rank===1?'<span class="epc-rank">Recommended #1</span>':'')
-      +'<div class="epc-top"><span class="epc-logo">'+prov.initials+'</span><div><div class="epc-provider">'+prov.name+'</div><div class="epc-pkgname">'+pkg.packageName+'</div></div></div>'
+    var logoHTML=prov.logo
+      ?'<span class="epc-logo'+(prov.logoDark?' epc-logo-dark':'')+'"><img src="'+prov.logo+'" alt="'+prov.name+' logo"></span>'
+      :'<span class="epc-logo epc-logo-fallback">'+prov.initials+'</span>';
+    return '<div class="card epc-card'+(rank===1?' epc-featured':'')+'">'
+      +(rank===1?'<span class="epc-rank"><iconify-icon icon="ph:star-fill"></iconify-icon>Recommended #1</span>':'')
+      +'<div class="epc-top">'+logoHTML+'<div><div class="epc-provider">'+prov.name+'</div><div class="epc-pkgname">'+pkg.packageName+'</div></div></div>'
       +'<div class="epc-prices"><div class="epc-price"><span class="l">Hardware</span><span class="v">'+pkg.hardwarePrice+'</span><span class="n">'+pkg.hardwarePriceNote+'</span></div><div class="epc-price"><span class="l">Software</span><span class="v">'+pkg.monthly+'</span></div></div>'
       +hwHTML+upgradeHTML+epFeatureHTML(pkg)+promoHTML+suitHTML
       +'<div class="epc-status"><iconify-icon icon="ph:credit-card-duotone"></iconify-icon>'+status+'</div>'

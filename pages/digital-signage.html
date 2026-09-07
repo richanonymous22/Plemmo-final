@@ -244,7 +244,7 @@
 
     <div class="rec rv" id="sigPanel" style="display:none;margin-top:26px">
       <div><div class="rt" id="sigTitle">For cafés &amp; takeaways</div><h3 id="sigMatch">32" Digital Menu Board Package</h3><p id="sigText"></p><ul id="sigChecks"></ul><div class="sel-chips" id="sigChips"></div></div>
-      <div class="rec-price"><div class="rl">Best match</div><div class="ramt" id="sigPrice">£350</div><div class="runit" id="sigUnit">per screen</div><a href="#" class="btn btn-primary" id="sigCta" data-quote data-service="Digital Signage">Get a Signage Quote</a></div>
+      <div class="rec-price"><div class="rl">Best match</div><div class="ramt" id="sigPrice">£350</div><div class="runit" id="sigUnit">per screen</div><a href="#" class="btn btn-primary" id="sigCta" data-quote data-service="Digital Signage">Get a Signage Quote</a><button type="button" class="wiz-back" id="sigRestart" style="opacity:1;margin-top:12px;justify-content:center;width:100%">Start over</button></div>
     </div>
   </div>
 </section>
@@ -808,6 +808,13 @@
   document.getElementById('wizBack').onclick=function(){
     if(wizDone){wizDone=false;wizCur=WIZ_STEPS.length-1;renderWiz();return;}
     wizCur=Math.max(0,wizCur-1);renderWiz();
+  };
+  var sigRestart=document.getElementById('sigRestart');
+  if(sigRestart)sigRestart.onclick=function(){
+    wizState={biz:'',services:[],size:''};wizCur=0;wizDone=false;
+    document.getElementById('sigPanel').style.display='none';
+    renderWiz();
+    document.getElementById('wizPills').scrollIntoView({behavior:'smooth',block:'start'});
   };
   renderWiz();
 
