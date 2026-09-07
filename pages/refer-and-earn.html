@@ -163,7 +163,7 @@ var tf=document.getElementById('teamForm');
 if(tf)tf.addEventListener('submit',function(e){e.preventDefault();
   var btn=tf.querySelector('button[type=submit]'),label=btn?btn.innerHTML:'';if(btn){btn.disabled=true;btn.textContent='Sending…';}
   var fd=new FormData(tf);fd.append('_template','table');fd.append('_captcha','false');
-  fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+  fetch('https://formsubmit.co/ajax/'+['plemmouk','gmail.com'].join('@'),{method:'POST',headers:{'Accept':'application/json'},body:fd})
     .then(function(res){if(!res.ok)throw new Error('fail');tf.style.display='none';document.getElementById('teamOk').style.display='block';})
     .catch(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}alert('Sorry — something went wrong. Please call us on 0333 041 1161.');});
 });
@@ -171,7 +171,7 @@ var pf=document.getElementById('partnerForm');
 if(pf)pf.addEventListener('submit',function(e){e.preventDefault();
   var btn=pf.querySelector('button[type=submit]'),label=btn?btn.innerHTML:'';if(btn){btn.disabled=true;btn.textContent='Sending…';}
   var fd=new FormData(pf);fd.append('_template','table');fd.append('_captcha','false');
-  fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+  fetch('https://formsubmit.co/ajax/'+['plemmouk','gmail.com'].join('@'),{method:'POST',headers:{'Accept':'application/json'},body:fd})
     .then(function(res){if(!res.ok)throw new Error('fail');pf.style.display='none';document.getElementById('partnerOk').style.display='block';})
     .catch(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}alert('Sorry — something went wrong. Please call us on 0333 041 1161.');});
 });
@@ -182,7 +182,7 @@ rf.addEventListener('submit',function(e){e.preventDefault();
   var btn=rf.querySelector('button[type=submit]'),label=btn?btn.innerHTML:'';if(btn){btn.disabled=true;btn.textContent='Sending…';}
   var fd=new FormData(rf);fd.append('_template','table');fd.append('_captcha','false');
   if(rf.referrer_email&&rf.referrer_email.value)fd.append('_replyto',rf.referrer_email.value);
-  fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+  fetch('https://formsubmit.co/ajax/'+['plemmouk','gmail.com'].join('@'),{method:'POST',headers:{'Accept':'application/json'},body:fd})
     .then(function(res){if(!res.ok)throw new Error('Submission failed');rf.style.display='none';document.getElementById('referOk').style.display='block';document.getElementById('referOk').scrollIntoView({behavior:'smooth',block:'center'});})
     .catch(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}alert('Sorry — something went wrong sending your referral. Please try again or call us on 0333 041 1161.');});
 });

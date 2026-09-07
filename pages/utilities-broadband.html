@@ -1287,7 +1287,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     var btn=document.getElementById('msubmit');
     if(btn){btn.disabled=true;btn.textContent='Sending…'}
     var fd=new FormData(form);fd.append('_template','table');fd.append('_captcha','false');
-    fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+    fetch('https://formsubmit.co/ajax/'+['plemmouk','gmail.com'].join('@'),{method:'POST',headers:{'Accept':'application/json'},body:fd})
       .then(function(r){if(!r.ok)throw new Error();document.getElementById('mform').style.display='none';document.getElementById('msuccess').style.display='block'})
       .catch(function(){if(btn){btn.disabled=false;btn.innerHTML='Send Enquiry <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon>'}alert('Sorry — something went wrong. Please call us on 0333 041 1161.')});
   });}

@@ -792,7 +792,7 @@
       var fd = new FormData(form);
       fd.append('_template','table');
       fd.append('_captcha','false');
-      fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{
+      fetch('https://formsubmit.co/ajax/'+['plemmouk','gmail.com'].join('@'),{
         method:'POST',
         headers:{'Accept':'application/json'},
         body: fd
