@@ -242,6 +242,7 @@ img,svg{max-width:100%}
 .legal a.inl{color:#5f9000;font-weight:600;text-decoration:underline}
 .legal strong{color:var(--ink)}
 .legal table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:14px}
+@media(max-width:600px){.legal table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}}
 .legal th,.legal td{border:1px solid var(--line-l);padding:10px 12px;text-align:left;color:var(--ink-soft);vertical-align:top}
 .legal th{background:var(--paper);color:var(--ink);font-family:'Space Grotesk';font-weight:700}
 .legal .callout{background:var(--lime-soft);border:1px solid rgba(95,144,0,.25);border-radius:var(--r);padding:16px 18px;margin:0 0 22px;font-size:14px;color:var(--ink-soft)}

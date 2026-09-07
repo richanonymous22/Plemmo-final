@@ -158,7 +158,7 @@ html, body {
   }
   
   h1, h2, h3, h4 {
-    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .hero-title {
