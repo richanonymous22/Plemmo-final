@@ -24,11 +24,7 @@
 <meta name="robots" content="index,follow">
 
 <link rel="preconnect" href="https://code.iconify.design" crossorigin>
-<link rel="preconnect" href="https://unpkg.com" crossorigin>
-<link rel="dns-prefetch" href="https://a.basemaps.cartocdn.com">
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-<link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
-<script src="../vendor/leaflet/leaflet.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -475,38 +471,30 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .uk-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--line-l);border-radius:100px;padding:8px 14px;box-shadow:var(--shadow-l)}
 .uk-tag iconify-icon{color:#5f9000;font-size:16px}
 .uk-map{position:relative;isolation:isolate;z-index:0;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);background:#0a1014;box-shadow:var(--shadow)}
-/* keep Leaflet's panes/controls contained so they never overlap the navbar */
-.uk-map .leaflet-pane,.uk-map .leaflet-top,.uk-map .leaflet-bottom{z-index:400}
-.uk-leaflet{position:absolute;inset:0}
-.uk-map .leaflet-container{background:#0a1014;font-family:'Inter',system-ui,sans-serif;outline:none}
-.uk-map .leaflet-tile-pane{filter:saturate(.92) brightness(.96)}
-/* zoom controls */
-.uk-map .leaflet-bar{border:none;box-shadow:0 8px 22px rgba(0,0,0,.45);border-radius:12px;overflow:hidden;margin:12px}
-.uk-map .leaflet-bar a{background:rgba(12,16,9,.85);color:#fff;border-bottom:1px solid var(--line);width:32px;height:32px;line-height:32px;font-size:18px;font-weight:700;backdrop-filter:blur(8px);transition:.2s}
-.uk-map .leaflet-bar a:hover{background:var(--lime);color:#0a0c08}
-.uk-map .leaflet-bar a:last-child{border-bottom:none}
-/* attribution + scale */
-.uk-map .leaflet-control-attribution{background:rgba(10,13,7,.55);color:rgba(255,255,255,.5);font-size:9px;padding:2px 6px;border-radius:8px 0 0 0;backdrop-filter:blur(6px)}
-.uk-map .leaflet-control-attribution a{color:rgba(198,255,0,.78)}
-.uk-map .leaflet-control-scale-line{background:rgba(10,13,7,.55);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.45);font-size:9px;font-weight:700;backdrop-filter:blur(6px)}
+/* self-contained UK outline — no external map-tile service, so it never depends on a
+   third-party CDN being reachable (those are commonly blocked by ad-blockers/privacy
+   extensions/corporate proxies, which previously left this section blank for some visitors) */
+.uk-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.uk-land{fill:#141d0c;stroke:rgba(198,255,0,.38);stroke-width:1.4;vector-effect:non-scaling-stroke}
 /* custom markers */
-.uk-mk{position:relative;width:14px;height:14px}
+.uk-markers{position:absolute;inset:0}
+.uk-mk-btn{position:absolute;transform:translate(-50%,-50%);background:none;border:none;padding:9px;margin:-9px;cursor:pointer;line-height:0;-webkit-tap-highlight-color:transparent}
+.uk-mk{position:relative;width:14px;height:14px;display:block}
 .uk-mk i{position:absolute;inset:0;border-radius:50%;background:var(--lime);border:2px solid #0a1014;box-shadow:0 0 0 2px rgba(198,255,0,.45),0 0 10px rgba(198,255,0,.6);z-index:2}
 .uk-mk::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--lime);animation:mkpulse 2.8s infinite;z-index:1}
 .uk-mk.cap{width:18px;height:18px}
 @keyframes mkpulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(2.6);opacity:0}100%{transform:scale(2.6);opacity:0}}
-/* popups */
-.uk-map .leaflet-popup-content-wrapper{background:rgba(12,16,9,.95);backdrop-filter:blur(12px);color:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
-.uk-map .leaflet-popup-tip{background:rgba(12,16,9,.95);border:1px solid var(--line2)}
-.uk-map .leaflet-popup-content{margin:12px 15px 13px;font-size:13px;line-height:1.4}
-.uk-map .leaflet-popup-close-button{color:var(--muted);padding:8px 8px 0 0}
-.uk-map .leaflet-popup-close-button:hover{color:#fff}
+/* tooltip (replaces Leaflet's popup) */
+.uk-tooltip{position:absolute;min-width:150px;background:rgba(12,16,9,.95);backdrop-filter:blur(12px);color:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.55);padding:12px 15px 13px;opacity:0;pointer-events:none;transition:opacity .16s;white-space:nowrap;z-index:20}
+.uk-tooltip.show{opacity:1}
+.uk-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(12,16,9,.95)}
+.uk-tooltip.below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:rgba(12,16,9,.95)}
 .mkpop b{display:block;font-family:'Space Grotesk';font-size:14px;color:#fff;margin-bottom:4px}
 .mkpop .t{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--lime);font-weight:600}
 .mkpop .t iconify-icon{font-size:14px}
 .mkpop .r{display:block;font-size:11px;color:var(--muted);margin-top:5px}
 /* overlay badge */
-.uk-live{position:absolute;left:14px;top:12px;z-index:1000;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px;pointer-events:none}
+.uk-live{position:absolute;left:14px;top:12px;z-index:5;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px;pointer-events:none}
 .uk-live i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
 @media(prefers-reduced-motion:reduce){.uk-live i,.uk-mk::before{animation:none}}
 
@@ -889,7 +877,12 @@ html{overflow-x:hidden}
       </div>
     </div>
     <div class="uk-map">
-      <div class="uk-leaflet" id="ukMap" role="application" aria-label="Map of UK towns and cities Plemmo serves"></div>
+      <svg class="uk-svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+        <path class="uk-land" d="M 195.5,296.5 L 195.5,296.5 L 200.0,266.3 L 179.6,234.2 L 179.2,233.5 L 142.3,224.3 L 135.0,210.2 L 146.1,186.9 L 136.1,172.5 L 119.7,197.2 L 117.9,147.0 L 102.6,120.4 L 113.6,66.5 L 137.2,24.3 L 161.5,28.4 L 198.2,24.0 L 165.7,80.4 L 196.7,73.2 L 230.0,73.5 L 222.1,116.0 L 194.7,162.7 L 226.2,166.0 L 228.6,171.5 L 255.7,232.9 L 276.5,241.3 L 295.2,300.7 L 303.8,321.3 L 340.7,331.2 L 337.0,364.5 L 321.5,379.8 L 333.6,406.7 L 306.3,434.0 L 265.6,433.5 L 213.8,447.9 L 199.7,437.6 L 179.6,462.0 L 151.4,456.1 L 130.1,476.0 L 113.9,465.6 L 158.5,410.9 L 185.7,399.6 L 185.5,399.6 L 138.0,390.9 L 129.4,370.2 L 161.2,354.0 L 144.5,325.9 L 150.3,291.8 L 195.5,296.5 Z"></path>
+        <path class="uk-land" d="M 101.1,272.4 L 78.1,261.7 L 59.3,262.4 L 65.6,234.5 L 59.3,206.5 L 84.8,204.4 L 117.4,236.6 L 101.1,272.4 Z"></path>
+      </svg>
+      <div class="uk-markers" id="ukMap" aria-label="Map of UK towns and cities Plemmo serves"></div>
+      <div class="uk-tooltip" id="ukTip"></div>
       <div class="uk-live"><i></i> Live coverage · UK-wide</div>
     </div>
   </div>
@@ -1139,7 +1132,7 @@ html{overflow-x:hidden}
            not a fabricated new rate, just closing a coverage gap. */
         table:[{min:10000,max:15000,rate:'1.20%'},{min:15000,max:20000,rate:'1.00%'},{min:20000,max:25000,rate:'0.90%'},{min:25000,max:30000,rate:'0.82%'},{min:30000,max:35000,rate:'0.82%'},{min:35000,max:40000,rate:'0.80%'},{min:40000,max:45000,rate:'0.80%'},{min:45000,max:50000,rate:'0.77%'},{min:50000,max:60000,rate:'0.75%'},{min:60000,max:70000,rate:'0.72%'},{min:70000,max:80000,rate:'0.72%'},{min:80000,max:90000,rate:'0.70%'},{min:90000,max:110000,rate:'0.67%'},{min:110000,max:150000,rate:'0.65%'},{min:150000,max:Infinity,rate:'0.60%'}]},
       shift4:{name:'Shift4',type:'blended',img:'../images/Card machine no bg.webp',logo:'../images/partners/shift4-black.svg',rental:'No upfront cost · no monthly fees',contract:'18-Month Contract',device:'One terminal free · second chargeable',features:['No Upfront Cost','No Monthly Fees','One Terminal Free (Second Chargeable)','Next Working Day Payout/Settlement','No PCI Compliance Fees','No Hidden Fees','Blended & Split Rate Options Available'],
-        rateText:'1.25% below £10,000/month · 0.70% at £10,000+ (plus 25p next-day settlement fee per payout)'},
+        rateText:'1.25% below £10k · 0.70% at £10k+'},
       sumup:{name:'SumUp',type:'blended',img:'../images/sumup-card-machine.webp',logo:'../images/partners/sumup.svg',rental:'£162 one-off (£105 w/ 35% discount)',contract:'PAYG, 12 or 24-Month',device:'SumUp card reader (1–3 terminals)',features:['Business Account','Instant Payout','Third-Party Bank Account Accepted','No Monthly Rental After Buying','No PCI','No Hidden Fees','One Flat Rate','Tap to Phone','Pay by Link','Same-Day Delivery (Midlands)'],
         rateText:'One flat blended rate — confirmed after review'},
       clover:{name:'Clover',type:'split',img:'../images/clover-card-machine.webp',rental:'£1/month for 6 months, then £24',contract:'24-Month Contract',device:'Clover Flex / Mini · Wi-Fi/4G',features:['Next Working Day Payout','Real-Time Sales Reports (Cash & Card)','Wi-Fi / LTE / 4G — Built-in SIM','Chip & PIN, Contactless & Mobile Wallet Payments','Cloud-Based Reporting','Sales & Inventory Management','Staff Management','Customer Management'],
@@ -1324,7 +1317,7 @@ html{overflow-x:hidden}
       pros:['Tap to Pay','Instant Payout (requires Teya Business Account)','Everyday Payout','Next Working Day Payout','0.5% Cashback on eligible business spending','Blended Pricing'],
       note:"All fees, charges and terms are subject to the provider's current terms and conditions. Additional, third-party or applicable charges, including PCI-related fees, may apply."},
     shift4:{badge:'Blended rate',name:'Shift4',img:'../images/Card machine no bg.webp',intro:'Shift4 has no upfront cost and no monthly fees, with one terminal free and a second terminal available at an additional charge. Blended and split rate pricing options are available. The pricing shown is indicative only and subject to underwriting and approval.',
-      facts:[['Pricing model','Blended'],['Blended rate','1.25% below £10,000 · 0.70% at £10,000+'],['Monthly fees','None'],['Contract','18-Month Contract']],
+      facts:[['Pricing model','Blended'],['Blended rate','1.25% below £10,000 · 0.70% at £10,000+'],['Settlement fee','25p per next-day payout'],['Monthly fees','None'],['Contract','18-Month Contract']],
       pros:['No Upfront Cost','No Monthly Fees','One Terminal Free (Second Chargeable)','Next Working Day Payout/Settlement','No PCI Compliance Fees','No Hidden Fees','Blended & Split Rate Options Available'],
       note:"All fees, charges and terms are subject to the provider's current terms and conditions. Additional, third-party or applicable charges, including PCI-related fees, may apply."},
     sumup:{badge:'Blended rate',name:'SumUp',img:IMGP.sumup,intro:'SumUp is a one-off purchase card reader with a business account, instant payout and one flat blended rate. A 35% discount is currently available. The pricing shown is indicative only and subject to underwriting and approval.',
@@ -1408,54 +1401,63 @@ html{overflow-x:hidden}
   sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
   summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 
-  /* ── UK coverage map: real, zoomable Leaflet map (dark themed) ── */
+  /* ── UK coverage map: self-contained SVG outline + markers (no external map-tile
+     service) ── previously used Leaflet + a live CartoDB tile layer, which left this
+     section blank whenever that third-party CDN was blocked (ad-blockers, privacy
+     extensions, corporate proxies) or unreachable. Coordinates below are pre-projected
+     (equirectangular, latitude-corrected) into the same 0–100% space as the .uk-svg
+     viewBox="0 0 400 500", so markers always line up with the coastline regardless of
+     the container's actual rendered size. */
   (function(){
-    var el=document.getElementById('ukMap');
-    if(!el||!window.L)return;
+    var wrap=document.getElementById('ukMap'), tip=document.getElementById('ukTip');
+    if(!wrap||!tip)return;
     var CITIES=[
-      ['London',51.5074,-0.1278,'Every trade',1],
-      ['Birmingham',52.4862,-1.8904,'Takeaways & shops',1],
-      ['Manchester',53.4808,-2.2426,'Hospitality & retail',1],
-      ['Leeds',53.8008,-1.5491,'Retail & services',0],
-      ['Liverpool',53.4084,-2.9916,'Cafés & venues',0],
-      ['Sheffield',53.3811,-1.4701,'Retail & services',0],
-      ['Newcastle',54.9783,-1.6178,'Bars & venues',0],
-      ['Glasgow',55.8642,-4.2518,'Cafés & takeaways',1],
-      ['Edinburgh',55.9533,-3.1883,'Retail & hospitality',0],
-      ['Aberdeen',57.1497,-2.0943,'Retail & trades',0],
-      ['Inverness',57.4778,-4.2247,'Local independents',0],
-      ['Cardiff',51.4816,-3.1791,'Cafés & salons',1],
-      ['Swansea',51.6214,-3.9436,'Independent retail',0],
-      ['Bristol',51.4545,-2.5879,'Independent retail',0],
-      ['Nottingham',52.9548,-1.1581,'Hospitality & retail',0],
-      ['Leicester',52.6369,-1.1398,'Retail & takeaways',0],
-      ['Belfast',54.5973,-5.9301,'Salons & retail',1],
-      ['Brighton',50.8225,-0.1372,'Cafés & retail',0],
-      ['Southampton',50.9097,-1.4044,'Retail & services',0],
-      ['Plymouth',50.3755,-4.1427,'Local independents',0]
+      ['London',71.4,79.1,'Every trade',1],
+      ['Birmingham',58.0,68.9,'Takeaways & shops',1],
+      ['Manchester',55.3,58.5,'Hospitality & retail',1],
+      ['Leeds',60.6,55.2,'Retail & services',0],
+      ['Liverpool',49.6,59.3,'Cafés & venues',0],
+      ['Sheffield',61.2,59.5,'Retail & services',0],
+      ['Newcastle',60.1,42.9,'Bars & venues',0],
+      ['Glasgow',40.1,33.7,'Cafés & takeaways',1],
+      ['Edinburgh',48.2,32.7,'Retail & hospitality',0],
+      ['Aberdeen',56.5,20.3,'Retail & trades',0],
+      ['Inverness',40.3,16.9,'Local independents',0],
+      ['Cardiff',48.2,79.3,'Cafés & salons',1],
+      ['Swansea',42.4,77.9,'Independent retail',0],
+      ['Bristol',52.7,79.6,'Independent retail',0],
+      ['Nottingham',63.6,64.0,'Hospitality & retail',0],
+      ['Leicester',63.7,67.3,'Retail & takeaways',0],
+      ['Belfast',27.3,46.9,'Salons & retail',1],
+      ['Brighton',71.3,86.2,'Cafés & retail',0],
+      ['Southampton',61.7,85.3,'Retail & services',0],
+      ['Plymouth',40.9,90.9,'Local independents',0]
     ];
-    var map=L.map(el,{
-      zoomControl:true, scrollWheelZoom:false, attributionControl:true,
-      minZoom:5, maxZoom:11, zoomSnap:.5,
-      maxBounds:[[49,-9.5],[61,2.8]], maxBoundsViscosity:1
-    }).setView([54.6,-3.0],5.4);
-    map.zoomControl.setPosition('topright');
-    L.control.scale({position:'bottomleft',imperial:true,metric:false,maxWidth:90}).addTo(map);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
-      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains:'abcd', maxZoom:19
-    }).addTo(map);
+    function hide(){tip.classList.remove('show')}
     CITIES.forEach(function(c){
-      var cap=c[4]?' cap':'', sz=c[4]?18:14, a=c[4]?9:7;
-      var icon=L.divIcon({className:'',html:'<span class="uk-mk'+cap+'"><i></i></span>',iconSize:[sz,sz],iconAnchor:[a,a]});
-      var m=L.marker([c[1],c[2]],{icon:icon,title:c[0],riseOnHover:true}).addTo(map);
-      m.bindPopup('<div class="mkpop"><b>'+c[0]+'</b><span class="t"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> '+c[3]+'</span><span class="r">Plemmo coverage · compare &amp; switch</span></div>',{closeButton:true});
-      m.on('mouseover',function(){this.openPopup()});
+      var name=c[0],xp=c[1],yp=c[2],trade=c[3],cap=c[4];
+      var btn=document.createElement('button');
+      btn.type='button'; btn.className='uk-mk-btn';
+      btn.style.left=xp+'%'; btn.style.top=yp+'%';
+      btn.setAttribute('aria-label',name+' — '+trade);
+      btn.innerHTML='<span class="uk-mk'+(cap?' cap':'')+'"><i></i></span>';
+      function show(){
+        var below=yp<22;
+        tip.innerHTML='<div class="mkpop"><b>'+name+'</b><span class="t"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> '+trade+'</span><span class="r">Plemmo coverage · compare &amp; switch</span></div>';
+        tip.style.left=xp+'%'; tip.style.top=yp+'%';
+        var tx=xp<28?'-8%':xp>70?'-92%':'-50%', ty=below?'14px':'calc(-100% - 14px)';
+        tip.style.transform='translate('+tx+','+ty+')';
+        tip.classList.toggle('below',below);
+        tip.classList.add('show');
+      }
+      btn.addEventListener('mouseenter',show);
+      btn.addEventListener('focus',show);
+      btn.addEventListener('mouseleave',hide);
+      btn.addEventListener('blur',hide);
+      btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();show()});
+      wrap.appendChild(btn);
     });
-    function fix(){map.invalidateSize(false);}
-    setTimeout(fix,60); window.addEventListener('resize',fix);
-    if('ResizeObserver' in window){try{new ResizeObserver(fix).observe(el);}catch(e){}}
-    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)fix();});}).observe(el);}
+    document.addEventListener('click',function(e){if(!wrap.contains(e.target))hide()});
   })();
 })();
 </script>
