@@ -569,7 +569,11 @@
   var SVC_PRICES={
     'Digital Menu Board':{'32"':350,'40"':400},
     'Promotional Digital Screen':{'32"':499,'40"':715},
-    'Window Display Screen':{'43"':1770,'55"':2220},
+    /* Window Display Screen is priced at 43"/55" only, neither of which is a
+       selectable size in this wizard (32/40/50/60/70/Custom) — rather than
+       add sizes solely to reach a price never otherwise offered, this is a
+       Custom Quote product for every size. */
+    'Window Display Screen':{},
     'Advertising Display':{'32"':650,'43"':890},
     'Professional Menu Design':{flat:150},
     'Promotional Poster Design':{flat:100},
