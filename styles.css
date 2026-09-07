@@ -163,7 +163,7 @@ h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.
 .shadow-heavy { box-shadow: var(--shadow-float); }
 
 .hero-visual { position: relative; width: 100%; max-width: 500px; margin: 0 auto; }
-.main-portrait { width: 100%; border-radius: var(--radius-xl); object-fit: cover; aspect-ratio: 4/5; transform: translateZ(0); }
+.main-portrait { width: 100%; height: auto; border-radius: var(--radius-xl); object-fit: cover; aspect-ratio: 4/5; transform: translateZ(0); }
 
 .float-card { position: absolute; background: rgba(20, 30, 40, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-md); padding: 20px; color: #fff; box-shadow: var(--shadow-float); display: flex; align-items: center; gap: 16px; transform: translateZ(50px); }
 .float-icon { font-size: 28px; color: #000; background: var(--accent); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
