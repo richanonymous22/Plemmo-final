@@ -467,38 +467,6 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .s-light .reassure{color:var(--ink-soft)}
 .s-light .reassure iconify-icon{color:#5f9000}
 
-/* ── RATE CALCULATOR ── */
-.calc{max-width:900px;margin:0 auto;position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line2);
-  background:linear-gradient(180deg,#13180e,#0c0f08);box-shadow:0 44px 100px rgba(0,0,0,.55)}
-.calc-body{padding:38px}
-.calc-lab{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:8px}
-.calc-lab .l{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.calc-val{font-family:'Space Grotesk';font-weight:700;font-size:clamp(34px,5vw,52px);color:#fff;line-height:1}
-.calc-val small{font-size:.4em;color:var(--muted);font-weight:600;margin-left:6px}
-.calc-range{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:100px;outline:none;margin:18px 0 8px;
-  background:linear-gradient(90deg,var(--lime) var(--p,40%),rgba(255,255,255,.1) var(--p,40%))}
-.calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--lime);border:3px solid #0c0f08;box-shadow:0 6px 16px rgba(0,0,0,.45);cursor:pointer;transition:transform .15s var(--spring)}
-.calc-range::-webkit-slider-thumb:hover{transform:scale(1.12)}
-.calc-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--lime);border:3px solid #0c0f08;cursor:pointer}
-.calc-ticks{display:flex;justify-content:space-between;font-size:11px;color:#6b7560;margin-bottom:28px}
-.calc-out{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
-.calc-tile{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:20px;transition:border-color .3s,background .3s}
-.calc-tile.hi{border-color:rgba(198,255,0,.4);background:linear-gradient(160deg,rgba(198,255,0,.08),transparent)}
-.calc-tile .tl{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.calc-tile .tv{font-family:'Space Grotesk';font-weight:700;font-size:clamp(24px,3vw,32px);color:#fff;margin-top:6px;line-height:1.05}
-.calc-tile.hi .tv{color:var(--lime)}
-.calc-tile .ts{font-size:12px;color:var(--muted);margin-top:5px}
-.calc-opts{display:grid;gap:10px;margin:0 0 24px}
-.calc-opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.02)}
-.calc-opt.rec{border-color:rgba(198,255,0,.4);background:linear-gradient(160deg,rgba(198,255,0,.07),transparent)}
-.calc-opt .ol{display:flex;align-items:center;gap:11px;min-width:0}
-.calc-opt .obadge{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:100px;padding:4px 10px;white-space:nowrap;flex-shrink:0}
-.calc-opt.rec .obadge{color:#0a0c08;background:var(--lime);border-color:var(--lime)}
-.calc-opt .op{font-weight:600;color:#fff;font-size:14px;line-height:1.2}
-.calc-opt .op small{color:var(--muted);font-weight:500;display:block;font-size:11.5px;margin-top:2px}
-.calc-opt .ov{font-family:'Space Grotesk';font-weight:700;color:var(--lime);font-size:16px;white-space:nowrap;text-align:right;flex-shrink:0}
-.calc-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.calc-note{font-size:11px;color:#6b7560;margin-top:18px;line-height:1.5}
 
 /* ── UK / LOCAL MAP ── */
 .uk-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
@@ -543,7 +511,6 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 @media(prefers-reduced-motion:reduce){.uk-live i,.uk-mk::before{animation:none}}
 
 @media(max-width:860px){.uk-split{grid-template-columns:1fr;gap:34px}.uk-map{max-width:360px;margin:0 auto;width:100%}}
-@media(max-width:560px){.calc-out{grid-template-columns:1fr}.calc-body{padding:26px}}
 
 /* ── COMPARE: card toggle, floating bar, drawer ── */
 .pcompare{margin-top:10px;display:inline-flex;align-items:center;justify-content:center;gap:7px;width:100%;font-family:'Inter';font-size:12.5px;font-weight:700;color:var(--ink-soft);background:none;border:1px solid var(--line-l);border-radius:var(--pill);padding:9px 13px;cursor:pointer;transition:.2s}
@@ -622,7 +589,6 @@ html{overflow-x:hidden}
   .section{padding:58px 0}
   .h2{font-size:clamp(28px,7vw,40px)}
   .stage .cm-dash{width:min(200px,82%);padding:13px}.cm-dash .amt{font-size:23px}
-  .calc-out{grid-template-columns:1fr}
   .cmp-bar{left:16px;right:16px;transform:translateY(160%);bottom:16px}.cmp-bar.show{transform:none}
   .cmp-bar .ct{font-size:12px}
   .uk-split{gap:30px}
@@ -876,40 +842,6 @@ html{overflow-x:hidden}
           <div class="save-card"><div class="si"><iconify-icon icon="ph:piggy-bank-duotone"></iconify-icon></div><div><strong>Keep more</strong><span>Cut hidden fees and surprise charges that eat into your margin.</span></div></div>
           <div class="save-card"><div class="si"><iconify-icon icon="ph:hand-tap-duotone"></iconify-icon></div><div><strong>It's easy</strong><span>We handle the comparison and the switch. You keep the savings.</span></div></div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════ RATE CALCULATOR ════ -->
-<section class="section" id="calculator" style="padding-top:14px">
-  <div class="container">
-    <div class="center rv" style="max-width:600px;margin:0 auto 40px">
-      <span class="eyebrow"><iconify-icon icon="ph:calculator-duotone"></iconify-icon> Rate calculator</span>
-      <h2 class="h2" style="margin-top:14px">See your indicative rate</h2>
-      <p class="lead" style="margin-top:12px;color:var(--muted)">Slide to your monthly card turnover for an indicative rate and estimated cost. Rates are indicative only and depend on business type, turnover, card mix, provider approval, and contract terms.</p>
-    </div>
-    <div class="calc rv">
-      <div class="quiz-topbar">
-        <div class="quiz-dots"><i></i><i></i><i></i></div>
-        <span class="quiz-url"><iconify-icon icon="ph:lock-simple-fill"></iconify-icon> plemmo.co.uk/rate-calculator</span>
-        <span class="quiz-live"><span class="dl"></span> Live</span>
-      </div>
-      <div class="calc-body">
-        <div class="calc-lab"><span class="l">Your monthly card turnover</span><span class="calc-val" id="calcTurn">£15,000</span></div>
-        <input type="range" class="calc-range" id="calcRange" min="3000" max="200000" step="1000" value="15000" aria-label="Monthly card turnover">
-        <div class="calc-ticks"><span>£3k</span><span>£50k</span><span>£100k</span><span>£200k+</span></div>
-        <div class="calc-out">
-          <div class="calc-tile hi"><div class="tl">Suggested rate</div><div class="tv" id="calcRate">0.35%</div><div class="ts">0.30% if you add utility services</div></div>
-          <div class="calc-tile"><div class="tl">Suggested monthly cost</div><div class="tv" id="calcCost">£150</div><div class="ts">on card processing</div></div>
-          <div class="calc-tile"><div class="tl">Suggested fit</div><div class="tv" id="calcFit" style="font-size:22px">Teya</div><div class="ts" id="calcFitNote">strong all‑rounder</div></div>
-        </div>
-        <div class="calc-opts" id="calcOpts"></div>
-        <div class="calc-cta">
-          <a href="#" class="btn btn-primary" data-quote data-product="Card machine rate quote">Get my exact quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>
-          <span class="reassure"><iconify-icon icon="ph:shield-check-duotone"></iconify-icon> No obligation · Provider terms apply</span>
-        </div>
-        <p class="calc-note">Rates shown are indicative only and subject to business type, turnover, card mix, provider approval and contract terms.</p>
       </div>
     </div>
   </div>
@@ -1451,67 +1383,6 @@ html{overflow-x:hidden}
   /* seamless marquee */
   var mq=document.getElementById('mqTrack');if(mq){mq.innerHTML+=mq.innerHTML}
 
-  /* ── Rate calculator — driven by the same CM recommendation engine used by the finder ── */
-  (function(){
-    var range=document.getElementById('calcRange');if(!range)return;
-    var elT=document.getElementById('calcTurn'),elR=document.getElementById('calcRate'),elC=document.getElementById('calcCost'),
-        elF=document.getElementById('calcFit'),elFN=document.getElementById('calcFitNote'),elO=document.getElementById('calcOpts'),
-        outWrap=document.querySelector('.calc-out');
-    function gbp(n){return '£'+Math.round(n).toLocaleString('en-GB')}
-    /* Buckets a raw £ turnover value into the matching CM.turnoverBands label
-       using each band's real upper edge — NOT CM.turnoverMid (those are
-       representative midpoints for a different purpose: converting an
-       already-chosen label back into a number for bandFor()/pickRow()).
-       Comparing a raw value against a midpoint mis-buckets anything between
-       a band's midpoint and its real edge into the next band up — e.g. £3,000
-       ("Below £5,000") was being compared to that band's mid (2,500), failing,
-       and falling through to "£5,000–£10,000" instead. */
-    var TURNOVER_EDGES=[5000,10000,15000,20000,30000,35000,50000,100000,Infinity];
-    function turnoverLabelFor(t){
-      var bands=CM.turnoverBands;
-      for(var i=0;i<bands.length;i++){if(t<=TURNOVER_EDGES[i])return bands[i];}
-      return bands[bands.length-1];
-    }
-    function opt(cls,badge,prov,sub,val){
-      return '<div class="calc-opt'+(cls?' '+cls:'')+'"><div class="ol"><span class="obadge">'+badge+'</span>'
-        +'<span class="op">'+prov+(sub?'<small>'+sub+'</small>':'')+'</span></div><span class="ov">'+val+'</span></div>';
-    }
-    function upd(){
-      var t=+range.value, p=(t-range.min)/(range.max-range.min)*100;
-      range.style.setProperty('--p',p+'%');
-      elT.innerHTML=gbp(t)+(t>=200000?'<small>+</small>':'')+'<small>/mo</small>';
-      if(outWrap)outWrap.querySelectorAll('.calc-tile').forEach(function(x){x.classList.remove('hi')});
-      elR.parentElement.classList.add('hi');
-      var band=turnoverLabelFor(t),priority=bandFor(band).priority,topKey=priority[0],top=CM.providers[topKey];
-      /* This slider only asks turnover (no business category/type), so ATV can't
-         be classified the way the full finder does — 'low' is used as the
-         representative rate table, same as most businesses fall under. The rate
-         and cost below are real lookups from CM.providers, never a fixed number. */
-      var rateNum=null, rateLine, custom=false;
-      if(top.type==='blended'){
-        if(topKey==='teya'&&top.table){
-          var teyaRow=pickRow(top.table,band);
-          if(teyaRow){rateNum=parseFloat(teyaRow.rate);rateLine='Blended '+teyaRow.rate;}
-          else{rateLine=top.rateText||'Blended — see pricing table';}
-        } else {
-          rateLine=top.rateText||'Blended — see pricing table';
-          var m=/([\d.]+)%/.exec(rateLine);if(m)rateNum=parseFloat(m[1]);
-        }
-      } else {
-        var row=pickRow(top.low,band);
-        if(row){
-          if(row.debit==='Custom Quote'){custom=true;rateLine='Custom Quote — contact us for pricing';}
-          else{rateNum=parseFloat(row.debit);rateLine='Debit '+row.debit+' / Credit '+row.credit+' · Auth fee '+row.auth;}
-        } else {rateLine='Custom quote — please contact us';custom=true;}
-      }
-      elR.textContent = custom ? 'Custom' : (rateNum!==null ? rateNum+'%' : '—');
-      elC.textContent = (!custom && rateNum!==null) ? gbp(t*(rateNum/100)) : 'Contact us';
-      elF.textContent=top.name; elFN.textContent='suggested fit for '+band+' turnover';
-      elO.innerHTML=opt('rec','Suggested Provider',top.name,rateLine,'See rates');
-    }
-    range.addEventListener('input',upd); upd();
-  })();
-
   /* ── Sticky mini-summary (experiment) ── */
   var sBar=document.getElementById('summaryBar'),sText=document.getElementById('summaryText'),sCta=document.getElementById('summaryCta'),sX=document.getElementById('summaryX'),sDismiss=false;
   function summaryReady(){
@@ -1531,8 +1402,7 @@ html{overflow-x:hidden}
   function nearBottom(){return (innerHeight+scrollY)>(document.body.scrollHeight-720)}
   function updSummary(){
     if(sDismiss){sBar.classList.remove('show');return}
-    var calc=document.getElementById('calculator');var past=calc?scrollY>calc.offsetTop+200:scrollY>700;
-    sBar.classList.toggle('show',past&&!nearBottom());
+    sBar.classList.toggle('show',scrollY>700&&!nearBottom());
   }
   sX.onclick=function(){sDismiss=true;sBar.classList.remove('show')};
   sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
