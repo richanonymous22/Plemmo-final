@@ -535,7 +535,7 @@
           
           <div class="calc-slider-area">
             <div class="calc-val-header">
-              <label>Monthly Card Turnover</label>
+              <label for="turnover-slider">Monthly Card Turnover</label>
               <h3 id="turnover-display">£50,000</h3>
             </div>
             <div class="range-wrapper">
@@ -723,22 +723,22 @@
           <input type="hidden" name="goal" id="wiz-goal">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
             <div>
-              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Full Name *</label>
-              <input type="text" name="full_name" required placeholder="Jane Smith" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+              <label for="full_name" style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Full Name *</label>
+              <input id="full_name" type="text" name="full_name" required placeholder="Jane Smith" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
             </div>
             <div>
-              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Business Name</label>
-              <input type="text" name="business_name" placeholder="Acme Ltd" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+              <label for="business_name" style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Business Name</label>
+              <input id="business_name" type="text" name="business_name" placeholder="Acme Ltd" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
             </div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
             <div>
-              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Phone *</label>
-              <input type="tel" name="phone" required placeholder="07700 900000" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+              <label for="phone" style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Phone *</label>
+              <input id="phone" type="tel" name="phone" required placeholder="07700 900000" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
             </div>
             <div>
-              <label style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Email *</label>
-              <input type="email" name="email" required placeholder="jane@business.co.uk" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
+              <label for="email" style="font-size:13px;font-weight:600;color:var(--bg-dark);display:block;margin-bottom:6px;">Email *</label>
+              <input id="email" type="email" name="email" required placeholder="jane@business.co.uk" style="width:100%;padding:14px 16px;border:1.5px solid #e2e8f0;border-radius:var(--radius-md);font-size:15px;font-family:var(--font-body);box-sizing:border-box;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='#e2e8f0'">
             </div>
           </div>
           <button type="submit" id="wizSubmitBtn" class="btn-solid-dark btn-large" style="width:100%;justify-content:center;border:none;cursor:pointer;font-family:var(--font-body);font-size:17px;">Get My Free Quote <iconify-icon icon="solar:round-arrow-right-bold-duotone" style="vertical-align:middle;"></iconify-icon></button>
