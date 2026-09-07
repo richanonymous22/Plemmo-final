@@ -1445,9 +1445,18 @@ html{overflow-x:hidden}
         elF=document.getElementById('calcFit'),elFN=document.getElementById('calcFitNote'),elO=document.getElementById('calcOpts'),
         outWrap=document.querySelector('.calc-out');
     function gbp(n){return '£'+Math.round(n).toLocaleString('en-GB')}
+    /* Buckets a raw £ turnover value into the matching CM.turnoverBands label
+       using each band's real upper edge — NOT CM.turnoverMid (those are
+       representative midpoints for a different purpose: converting an
+       already-chosen label back into a number for bandFor()/pickRow()).
+       Comparing a raw value against a midpoint mis-buckets anything between
+       a band's midpoint and its real edge into the next band up — e.g. £3,000
+       ("Below £5,000") was being compared to that band's mid (2,500), failing,
+       and falling through to "£5,000–£10,000" instead. */
+    var TURNOVER_EDGES=[5000,10000,15000,20000,30000,35000,50000,100000,Infinity];
     function turnoverLabelFor(t){
-      var bands=CM.turnoverBands,mids=CM.turnoverMid;
-      for(var i=0;i<bands.length;i++){var mid=mids[bands[i]];if(t<=mid||i===bands.length-1)return bands[i];}
+      var bands=CM.turnoverBands;
+      for(var i=0;i<bands.length;i++){if(t<=TURNOVER_EDGES[i])return bands[i];}
       return bands[bands.length-1];
     }
     function opt(cls,badge,prov,sub,val){
