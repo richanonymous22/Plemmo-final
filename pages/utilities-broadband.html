@@ -558,7 +558,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 
     <div class="enqwrap rv" id="enqWrap">
       <div class="enq-top">
-        <span class="enq-step" id="enqStepLabel">Question 1 of 8</span>
+        <span class="enq-step" id="enqStepLabel">Question 1 of 9</span>
         <div class="enq-bar"><i id="enqBarFill"></i></div>
       </div>
       <div id="enqContent"><!-- question / result injected by JS from ENERGY_CONFIG --></div>
@@ -1026,6 +1026,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
      ══════════════════════════════════════════════════════════════════════════ */
   var ENERGY_CONFIG = {
     // ---- Comparison questions (admin: edit labels/order here) ----
+    need:['Business Energy (Electricity / Gas)','Business Broadband'],
     businessTypes:['Retail','Restaurant / Café','Office','Warehouse','Industrial','Hotel','Healthcare','Education','Other'],
     energyRequired:['Electricity','Gas','Electricity & Gas'],
     currentSuppliers:['British Gas','EDF','E.ON Next','ScottishPower','SSE','Octopus Energy','TotalEnergies','Yu Energy','Utility Warehouse','Other'],
@@ -1037,6 +1038,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 
     // ---- Optional icons per option (admin: purely cosmetic, safe to omit) ----
     icons:{
+      need:{'Business Energy (Electricity / Gas)':'ph:lightning-duotone','Business Broadband':'ph:wifi-high-duotone'},
       businessType:{'Retail':'ph:storefront-duotone','Restaurant / Café':'ph:coffee-duotone','Office':'ph:buildings-duotone','Warehouse':'ph:package-duotone','Industrial':'ph:factory-duotone','Hotel':'ph:bed-duotone','Healthcare':'ph:first-aid-kit-duotone','Education':'ph:graduation-cap-duotone','Other':'ph:dots-three-circle-duotone'},
       energyRequired:{'Electricity':'ph:lightning-duotone','Gas':'ph:thermometer-hot-duotone','Electricity & Gas':'ph:plugs-duotone'},
       contractStatus:{'In Contract':'ph:file-text-duotone','Out of Contract':'ph:clock-countdown-duotone','Contract Ending Soon':'ph:hourglass-duotone','Not Sure':'ph:question-duotone'},
@@ -1056,33 +1058,67 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       flexible:{
         name:'Flexible Energy Contract',
         icon:'ph:chart-line-up-duotone',
-        suitableFor:['Large businesses','Multi-site businesses','High energy users'],
-        benefits:['Tailored to complex or variable usage','Built for multi-site operations','Terms that can flex with consumption'],
-        blurb:'A flexible contract suits larger or multi-site operations with more complex or variable usage, offering terms tailored beyond a single fixed-rate deal.'
+        suitableFor:['Large businesses','High energy users','Dual fuel / half-hourly sites'],
+        benefits:['Tailored to complex or variable usage','Built for higher-consumption operations','Terms that can flex with consumption'],
+        blurb:'A flexible contract suits businesses with higher or more complex energy use, offering terms tailored beyond a single fixed-rate deal.'
+      },
+      multisite:{
+        name:'Multi-Site Energy Tariff',
+        icon:'ph:buildings-duotone',
+        suitableFor:['Businesses with multiple locations','Retail chains','Multi-site hospitality groups'],
+        benefits:['One point of contact across all sites','Consolidated billing where available','Terms structured around a multi-site estate'],
+        blurb:'With multiple business locations, a multi-site energy tariff brings your sites together under one coordinated contract and a single point of contact, rather than managing each site separately.'
+      },
+      broadbandBundle:{
+        name:'Commercial Broadband Bundle',
+        icon:'ph:wifi-high-duotone',
+        suitableFor:['EPOS & card machines','Multi-device offices','Businesses needing reliable uptime'],
+        benefits:['Fast, business-grade connectivity','Support built around trading hours','Bundled telecoms options available'],
+        blurb:'A commercial broadband bundle gives your tills, EPOS and back-office systems a stable, business-grade connection, with the option to bundle in telecoms where useful.'
       }
     },
 
-    // ---- Recommendation logic (admin: edit thresholds to change when Flexible
-    // is recommended instead of Fixed). This is a simple, defensible triage —
-    // NOT a live pricing/eligibility engine, and it never outputs a £ figure. ----
-    // TODO (awaiting owner confirmation): the spec asks for two more outcomes —
-    // "Multi-Site Energy Tariff" and "Commercial Broadband Bundle" — alongside
-    // Fixed/Flexible. This quiz only asks energy questions (no broadband question
-    // exists), so a Broadband Bundle outcome has nowhere to hook in without adding
-    // a new first question ("Energy or Broadband?"). Left as two outcomes
-    // (Fixed/Flexible) pending the owner's decision on how to structure that.
+    // ---- Recommendation logic (admin: edit thresholds/weights below to change
+    // when each outcome is recommended). This is a simple, defensible triage —
+    // NOT a live pricing/eligibility engine, and it never outputs a £ figure.
+    // Every question below has a real effect on the result: business type, energy
+    // required, spend, locations and meter type decide which of the three energy
+    // outcomes is shown; contract status, tariff type and current supplier decide
+    // which guidance notes appear alongside it. ----
     recommend:function(a){
+      if(a.need === 'Business Broadband'){
+        return {key:'broadbandBundle', solution:ENERGY_CONFIG.solutions.broadbandBundle};
+      }
       var manyLocations = (a.locations === '6–20' || a.locations === '20+');
-      var highSpend      = (a.spend === '£50,000+');
-      var heavyUseType   = (a.businessType === 'Industrial' || a.businessType === 'Warehouse');
-      var key = (manyLocations || highSpend || heavyUseType) ? 'flexible' : 'fixed';
+      var key;
+      if(manyLocations){
+        key = 'multisite';
+      } else {
+        var score = 0;
+        if(a.spend === '£50,000+') score += 2;
+        else if(a.spend === '£20,000–£50,000') score += 1;
+        if(a.businessType === 'Industrial' || a.businessType === 'Warehouse') score += 2;
+        if(a.energyRequired === 'Electricity & Gas') score += 1;
+        if(a.meterType === 'Half-Hourly Meter') score += 2;
+        key = score >= 2 ? 'flexible' : 'fixed';
+      }
       return {
         key:key,
         solution:ENERGY_CONFIG.solutions[key],
-        // If they're already in contract, we don't suggest switching now — just
-        // recommend the contract type and note a renewal can be arranged ahead
-        // of the end date.
-        renewalNote:(a.contractStatus === 'In Contract')
+        // Contract status: in-contract or ending-soon customers get a renewal
+        // note (we arrange ahead of the end date, no switch suggested now);
+        // out-of-contract customers get an urgency note (likely on the
+        // supplier's default rate); "not sure" gets an end-date check note.
+        renewalNote:(a.contractStatus === 'In Contract' || a.contractStatus === 'Contract Ending Soon'),
+        urgentNote:(a.contractStatus === 'Out of Contract'),
+        checkEndNote:(a.contractStatus === 'Not Sure'),
+        // Tariff type: flag a variable-rate exposure, or offer to confirm it.
+        variableNote:(a.tariffType === 'Variable'),
+        checkTariffNote:(a.tariffType === 'Not Sure'),
+        // Dual fuel requirement gets its own note regardless of which energy
+        // outcome it nudged the score toward.
+        dualFuelNote:(a.energyRequired === 'Electricity & Gas'),
+        currentSupplier:a.currentSupplier
       };
     }
   };
@@ -1094,6 +1130,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     var stepLbl=document.getElementById('enqStepLabel'),bar=document.getElementById('enqBarFill');
 
     var STEPS=[
+      {k:'need',           q:'What would you like a recommendation for?',    o:ENERGY_CONFIG.need,            icons:ENERGY_CONFIG.icons.need},
       {k:'businessType',   q:'What type of business do you operate?',        o:ENERGY_CONFIG.businessTypes,   icons:ENERGY_CONFIG.icons.businessType},
       {k:'energyRequired', q:'Which energy do you need to compare?',         o:ENERGY_CONFIG.energyRequired,  icons:ENERGY_CONFIG.icons.energyRequired},
       {k:'currentSupplier',q:'Who is your current supplier?',                o:ENERGY_CONFIG.currentSuppliers},
@@ -1122,6 +1159,9 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       content.querySelectorAll('.seg button').forEach(function(b){
         b.addEventListener('click',function(){
           ans[s.k]=b.dataset.v;
+          // Broadband needs none of the energy-specific questions — jump straight
+          // to its own outcome rather than asking about meters, tariffs, etc.
+          if(s.k==='need' && b.dataset.v==='Business Broadband'){renderResult();return}
           if(cur<STEPS.length-1){cur++;renderQ()}else{renderResult()}
         });
       });
@@ -1133,6 +1173,14 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
       stepLbl.textContent='Your recommended solution';
       bar.style.width='100%';
       var r=ENERGY_CONFIG.recommend(ans),sol=r.solution;
+      var notes=[];
+      if(r.renewalNote)notes.push({ic:'ph:calendar-check-duotone',t:'You told us you\'re currently in contract (or ending soon) — we won\'t suggest switching now. Instead, we can arrange your renewal ahead of your contract end date so you move onto your next deal without a gap in cover.'});
+      if(r.urgentNote)notes.push({ic:'ph:warning-duotone',t:'You told us you\'re out of contract — that usually means you\'ve rolled onto the supplier\'s standard variable rate, typically the most expensive option. The sooner this is reviewed, the sooner it can be fixed.'});
+      if(r.checkEndNote)notes.push({ic:'ph:question-duotone',t:'Not sure of your contract status — we\'ll confirm your exact end date from your bill before arranging anything, so you\'re never switched early or left exposed on a lapsed rate.'});
+      if(r.variableNote)notes.push({ic:'ph:trend-up-duotone',t:'You\'re currently on a variable tariff, which can move with the wholesale market — locking a fixed rate could add cost certainty.'});
+      if(r.checkTariffNote)notes.push({ic:'ph:question-duotone',t:'Not sure of your current tariff type — we\'ll confirm this from your bill before comparing options.'});
+      if(r.dualFuelNote)notes.push({ic:'ph:plugs-duotone',t:'You need both electricity and gas — we\'ll look at dual fuel options that can simplify billing onto a single contract.'});
+      if(r.currentSupplier && r.currentSupplier!=='Other')notes.push({ic:'ph:arrows-clockwise-duotone',t:'We\'ll compare this against your current deal with '+esc(r.currentSupplier)+' to make sure any move is genuinely worth it.'});
       var h='<div class="enq-result"><div class="res-card">'
         +'<span class="res-tag"><iconify-icon icon="ph:sparkle-fill"></iconify-icon> Recommended Solution</span>'
         +'<h3 class="res-name"><iconify-icon icon="'+sol.icon+'"></iconify-icon>'+esc(sol.name)+'</h3>'
@@ -1141,7 +1189,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
           +'<div class="res-col"><h5>Well suited to</h5><ul>'+sol.suitableFor.map(function(x){return '<li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>'+esc(x)+'</li>'}).join('')+'</ul></div>'
           +'<div class="res-col"><h5>Benefits</h5><ul>'+sol.benefits.map(function(x){return '<li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>'+esc(x)+'</li>'}).join('')+'</ul></div>'
         +'</div>'
-        +(r.renewalNote?'<div class="res-note"><iconify-icon icon="ph:calendar-check-duotone"></iconify-icon><span>You told us you\'re currently in contract — we won\'t suggest switching now. Instead, we can arrange your renewal ahead of your contract end date so you move onto your next deal without a gap in cover.</span></div>':'')
+        +notes.map(function(n){return '<div class="res-note"><iconify-icon icon="'+n.ic+'"></iconify-icon><span>'+n.t+'</span></div>'}).join('')
         +'<div class="res-cta"><a href="#" class="btn btn-primary" data-quote data-service="Business Energy — '+esc(sol.name)+'">Get my recommendation <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Speak to an Expert</a></div>'
         +'<button type="button" class="res-restart" id="enqRestart">Start again</button>'
         +'</div></div>';
@@ -1157,9 +1205,10 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
     window.__energyContext=function(){
       var parts=[];
       STEPS.forEach(function(s){if(ans[s.k])parts.push(s.q.replace(/\?$/,'')+': '+ans[s.k])});
-      if(parts.length===STEPS.length){
+      var isComplete = ans.need==='Business Broadband' || parts.length===STEPS.length;
+      if(isComplete){
         var r=ENERGY_CONFIG.recommend(ans);
-        parts.push('Recommended solution: '+r.solution.name+(r.renewalNote?' (renewal ahead of contract end date — customer is in contract)':''));
+        parts.push('Recommended solution: '+r.solution.name+(r.renewalNote?' (renewal ahead of contract end date)':''));
       }
       return parts.length?parts.join(' | '):'Energy comparison questions — not completed';
     };
