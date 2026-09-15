@@ -1,3 +1,127 @@
+// Three.js hero background — pulled out to a standalone function so it can be
+// called once the (lazily-loaded) Three.js library is actually ready, instead
+// of being tied to the page's main DOMContentLoaded setup. Safe to call more
+// than once or before THREE exists — it no-ops in either case.
+function initWebGLHero() {
+  const webglContainer = document.getElementById('webgl-container');
+  if (!webglContainer || !window.THREE || webglContainer.dataset.inited) return;
+  webglContainer.dataset.inited = '1';
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+  const heroNode = document.querySelector('.hero-section');
+  renderer.setSize(window.innerWidth, heroNode.offsetHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  webglContainer.appendChild(renderer.domElement);
+
+  const vertexShader = `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = vec4(position, 1.0);
+    }
+  `;
+
+  const fragmentShader = `
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    varying vec2 vUv;
+
+    // Simplex 2D noise
+    vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+    float snoise(vec2 v){
+      const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+               -0.577350269189626, 0.024390243902439);
+      vec2 i  = floor(v + dot(v, C.yy) );
+      vec2 x0 = v -   i + dot(i, C.xx);
+      vec2 i1;
+      i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz;
+      x12.xy -= i1;
+      i = mod(i, 289.0);
+      vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+      + i.x + vec3(0.0, i1.x, 1.0 ));
+      vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+        dot(x12.zw,x12.zw)), 0.0);
+      m = m*m ;
+      m = m*m ;
+      vec3 x = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x) - 0.5;
+      vec3 ox = floor(x + 0.5);
+      vec3 a0 = x - ox;
+      m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+      vec3 g;
+      g.x  = a0.x  * x0.x  + h.x  * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+
+    void main() {
+      vec2 st = gl_FragCoord.xy/u_resolution.xy;
+      st.x *= u_resolution.x/u_resolution.y;
+
+      vec3 color = vec3(0.0);
+
+      vec2 pos = vec2(st*2.0);
+      float n = snoise(pos - u_time * 0.1);
+
+      // Core Plemmo Deep Navy/Black Background
+      vec3 bg = vec3(0.04, 0.05, 0.08);
+
+      // Plemmo Accent Green / Cyan Mix
+      vec3 col1 = vec3(0.77, 1.0, 0.0); // #c6ff00
+      vec3 col2 = vec3(0.0, 0.8, 1.0); // Electric Cyan
+      vec3 col3 = vec3(0.0, 0.1, 0.3); // Deep space blue
+
+      // Intense swirling
+      float q = snoise(st + u_time * 0.15 + n * 2.0);
+      float pattern = smoothstep(0.1, 1.0, q);
+
+      // Final composite
+      color = mix(bg, col3, pattern * 0.5);
+      color = mix(color, col2, smoothstep(0.4, 0.9, q) * 0.6);
+      color = mix(color, col1, smoothstep(0.6, 1.0, q) * 0.8);
+
+      // Vignette
+      float dist = distance(st, vec2(0.5, 0.5));
+      color *= smoothstep(1.2, 0.2, dist);
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `;
+
+  const uniforms = {
+    u_time: { value: 0.0 },
+    u_resolution: { value: new THREE.Vector2(window.innerWidth, heroNode.offsetHeight) }
+  };
+
+  const material = new THREE.ShaderMaterial({
+    vertexShader,
+    fragmentShader,
+    uniforms,
+    transparent: true
+  });
+
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+  scene.add(mesh);
+
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    uniforms.u_time.value = clock.getElapsedTime();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, heroNode.offsetHeight);
+    uniforms.u_resolution.value.set(window.innerWidth, heroNode.offsetHeight);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // Sync GSAP (Lenis removed)
@@ -397,123 +521,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // 11. Three.js WebGL Cinematic Background
-  const webglContainer = document.getElementById('webgl-container');
-  if (webglContainer && window.THREE) {
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    
-    const heroNode = document.querySelector('.hero-section');
-    renderer.setSize(window.innerWidth, heroNode.offsetHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    webglContainer.appendChild(renderer.domElement);
-
-    const vertexShader = `
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = vec4(position, 1.0);
-      }
-    `;
-
-    const fragmentShader = `
-      uniform float u_time;
-      uniform vec2 u_resolution;
-      varying vec2 vUv;
-
-      // Simplex 2D noise
-      vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
-      float snoise(vec2 v){
-        const vec4 C = vec4(0.211324865405187, 0.366025403784439,
-                 -0.577350269189626, 0.024390243902439);
-        vec2 i  = floor(v + dot(v, C.yy) );
-        vec2 x0 = v -   i + dot(i, C.xx);
-        vec2 i1;
-        i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-        vec4 x12 = x0.xyxy + C.xxzz;
-        x12.xy -= i1;
-        i = mod(i, 289.0);
-        vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
-        + i.x + vec3(0.0, i1.x, 1.0 ));
-        vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
-          dot(x12.zw,x12.zw)), 0.0);
-        m = m*m ;
-        m = m*m ;
-        vec3 x = 2.0 * fract(p * C.www) - 1.0;
-        vec3 h = abs(x) - 0.5;
-        vec3 ox = floor(x + 0.5);
-        vec3 a0 = x - ox;
-        m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
-        vec3 g;
-        g.x  = a0.x  * x0.x  + h.x  * x0.y;
-        g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-        return 130.0 * dot(m, g);
-      }
-
-      void main() {
-        vec2 st = gl_FragCoord.xy/u_resolution.xy;
-        st.x *= u_resolution.x/u_resolution.y;
-
-        vec3 color = vec3(0.0);
-
-        vec2 pos = vec2(st*2.0);
-        float n = snoise(pos - u_time * 0.1);
-
-        // Core Plemmo Deep Navy/Black Background
-        vec3 bg = vec3(0.04, 0.05, 0.08);
-
-        // Plemmo Accent Green / Cyan Mix
-        vec3 col1 = vec3(0.77, 1.0, 0.0); // #c6ff00
-        vec3 col2 = vec3(0.0, 0.8, 1.0); // Electric Cyan
-        vec3 col3 = vec3(0.0, 0.1, 0.3); // Deep space blue
-
-        // Intense swirling
-        float q = snoise(st + u_time * 0.15 + n * 2.0);
-        float pattern = smoothstep(0.1, 1.0, q);
-        
-        // Final composite
-        color = mix(bg, col3, pattern * 0.5);
-        color = mix(color, col2, smoothstep(0.4, 0.9, q) * 0.6);
-        color = mix(color, col1, smoothstep(0.6, 1.0, q) * 0.8);
-
-        // Vignette
-        float dist = distance(st, vec2(0.5, 0.5));
-        color *= smoothstep(1.2, 0.2, dist);
-
-        gl_FragColor = vec4(color, 1.0);
-      }
-    `;
-
-    const uniforms = {
-      u_time: { value: 0.0 },
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, heroNode.offsetHeight) }
-    };
-
-    const material = new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      uniforms,
-      transparent: true
-    });
-
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
-    scene.add(mesh);
-
-    const clock = new THREE.Clock();
-
-    function animate() {
-      requestAnimationFrame(animate);
-      uniforms.u_time.value = clock.getElapsedTime();
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      renderer.setSize(window.innerWidth, heroNode.offsetHeight);
-      uniforms.u_resolution.value.set(window.innerWidth, heroNode.offsetHeight);
-    });
-  }
+  // 11. Three.js WebGL Cinematic Background — lazy-loaded (see initWebGLHero
+  // below and the loader at the bottom of index.html) so the ~600KB Three.js
+  // library and this setup work never block first paint or DOMContentLoaded.
+  initWebGLHero();
 
   // 12. Glowing Metrics Counter
   const counters = document.querySelectorAll('.counter');

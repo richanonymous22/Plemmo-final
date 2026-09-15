@@ -169,7 +169,7 @@ section{scroll-margin-top:88px}
 .marquee{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
 .mq-track{display:flex;align-items:center;gap:30px;width:max-content;animation:scrollx 40s linear infinite}
 .marquee:hover .mq-track{animation-play-state:paused}
-@keyframes scrollx{to{transform:translateX(-50%)}}
+@keyframes scrollx{to{transform:translateX(calc(-100% / var(--mq-n, 2)))}}
 .plogo{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:124px;height:56px;transition:transform .35s var(--spring)}
 .plogo:hover{transform:translateY(-2px)}
 .plogo img{max-height:25px;max-width:108px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.72;transition:opacity .35s}
@@ -1369,12 +1369,34 @@ html{overflow-x:hidden}
   detail.querySelector('.modal-bd').onclick=closeDetail;
   addEventListener('keydown',function(e){if(e.key==='Escape'&&detail.classList.contains('open'))closeDetail()});
 
-  /* seamless marquee */
-  var mq=document.getElementById('mqTrack');if(mq){mq.innerHTML+=mq.innerHTML}
+  /* seamless marquee — repeats the logo set enough times that the track is
+     always comfortably wider than the viewport (a fixed single-doubling
+     left visible gaps once the marquee only had 5 logos: on wide screens
+     the doubled track was barely wider than the container, so most of the
+     loop showed empty space instead of a continuous stream of logos). The
+     keyframe travels exactly one set-width (-100%/n) regardless of n, so
+     the loop stays seamless and the same speed no matter how many repeats
+     are needed. */
+  var mq=document.getElementById('mqTrack');
+  if(mq){
+    var setHTML=mq.innerHTML, setWidth=mq.scrollWidth, wrapWidth=(mq.closest('.marquee')||mq).getBoundingClientRect().width;
+    var n=Math.max(2,Math.ceil((wrapWidth*2.5)/Math.max(setWidth,1)));
+    mq.innerHTML=new Array(n).fill(setHTML).join('');
+    mq.style.setProperty('--mq-n',n);
+  }
 
   /* ── Sticky mini-summary (experiment) ── */
   var sBar=document.getElementById('summaryBar'),sText=document.getElementById('summaryText'),sCta=document.getElementById('summaryCta'),sX=document.getElementById('summaryX'),sDismiss=false;
   function summaryReady(){
+    /* Guard against being called before sBar/sText/sCta are assigned below —
+       the "resume saved progress" logic further up can call result(), which
+       calls this, synchronously during initial script execution (when a
+       returning visitor already has a complete saved answer set), which is
+       before this var statement has run. Without this guard that throws and
+       aborts whatever called it partway through — including restart(),
+       which calls summaryReady() before render(), so "Start over" would
+       silently fail to ever reach render() and the UI would appear frozen. */
+    if(!sBar||!sText||!sCta)return;
     /* Only ever claims a specific "Your match: X" if the finder was
        actually completed during THIS page view — never from a stale
        localStorage answer left over from a previous visit, which could

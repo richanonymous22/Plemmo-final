@@ -1176,19 +1176,58 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
        so we now go straight to getting a specialist their details. The full set
        of answers (plus the internally-computed suggestion, for the team's own
        reference) still travels with the enquiry via window.__energyContext(). */
+    /* Ends the quiz with an inline lead-capture form (name/phone/email) right there
+       in the widget — not a separate modal popup — then an inline "thanks, you'll be
+       contacted shortly" confirmation on submit. Replaced showing one of only two
+       canned "recommended solution" outcomes, which wasn't a useful differentiator
+       for the visitor. The full set of answers (plus the internally-computed
+       suggestion, for the team's own reference) still travels with the enquiry. */
     function finishQuiz(){
       stepLbl.textContent='Almost there';
       bar.style.width='100%';
-      content.innerHTML='<div class="enq-result"><div class="res-card" style="text-align:center">'
-        +'<iconify-icon icon="ph:check-circle-fill" style="font-size:40px;color:var(--lime)"></iconify-icon>'
-        +'<h3 class="res-name" style="margin-top:14px">Thanks — we\'ve got what we need</h3>'
-        +'<p class="res-blurb">Pop your details in and a Plemmo energy specialist will review your answers and be in touch shortly with your recommendation — no obligation.</p>'
-        +'<div class="res-cta" style="justify-content:center"><a href="#" class="btn btn-primary" data-quote data-service="Business Energy — comparison enquiry">Get my recommendation <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Speak to an Expert</a></div>'
+      content.innerHTML='<div class="enq-result"><div class="res-card">'
+        +'<h3 class="res-name">Almost done — where should we send your recommendation?</h3>'
+        +'<p class="res-blurb">Pop your details in and a Plemmo energy specialist will review your answers and be in touch shortly — no obligation.</p>'
+        +'<form id="enqLeadForm" novalidate>'
+          +'<div class="frow two"><div><label for="enqName">Full Name <span class="req-star">*</span></label><input id="enqName" type="text" class="input" required placeholder="Jane Smith"></div>'
+          +'<div><label for="enqPhone">Phone <span class="req-star">*</span></label><input id="enqPhone" type="tel" class="input" required placeholder="07700 900000"></div></div>'
+          +'<div class="frow"><label for="enqEmail">Email <span class="req-star">*</span></label><input id="enqEmail" type="email" class="input" required placeholder="jane@business.co.uk"></div>'
+          +'<button type="submit" class="btn btn-primary" id="enqSubmit" style="width:100%;justify-content:center;border:none">Get my recommendation <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></button>'
+          +'<p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px">No obligation · We\'ll never share your details</p>'
+        +'</form>'
+        +'<div class="res-cta" style="justify-content:center;margin-top:4px"><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Or speak to an expert now</a></div>'
         +'<button type="button" class="res-restart" id="enqRestart">Start again</button>'
         +'</div></div>';
       var rb=document.getElementById('enqRestart');
       if(rb)rb.addEventListener('click',function(){ans={};cur=0;renderQ()});
-      // newly-injected data-quote CTA needs wiring — handled by delegated listener below
+      var lf=document.getElementById('enqLeadForm');
+      lf.addEventListener('submit',function(e){
+        e.preventDefault();
+        var name=document.getElementById('enqName').value.trim(),
+            phone=document.getElementById('enqPhone').value.trim(),
+            email=document.getElementById('enqEmail').value.trim();
+        if(!name||!phone||!email){alert('Please fill in your name, phone and email so we can get in touch.');return}
+        var btn=document.getElementById('enqSubmit');
+        btn.disabled=true;btn.textContent='Sending…';
+        var fd=new FormData();
+        fd.append('_subject','Utilities & Broadband Enquiry — Plemmo');
+        fd.append('_template','table');fd.append('_captcha','false');
+        fd.append('full_name',name);fd.append('phone',phone);fd.append('email',email);
+        fd.append('service','Business Energy — comparison enquiry');
+        fd.append('energy_comparison_answers',window.__energyContext?window.__energyContext():'');
+        fetch('https://formsubmit.co/ajax/'+['plemmouk','gmail.com'].join('@'),{method:'POST',headers:{'Accept':'application/json'},body:fd})
+          .then(function(r){if(!r.ok)throw new Error();
+            content.innerHTML='<div class="enq-result"><div class="res-card" style="text-align:center">'
+              +'<iconify-icon icon="ph:check-circle-fill" style="font-size:40px;color:var(--lime)"></iconify-icon>'
+              +'<h3 class="res-name" style="margin-top:14px">Thanks, '+name.split(' ')[0]+'!</h3>'
+              +'<p class="res-blurb">You\'ll be contacted shortly for your quote — a Plemmo energy specialist will be in touch within one business day.</p>'
+              +'<button type="button" class="res-restart" id="enqRestart2">Start again</button>'
+              +'</div></div>';
+            var rb2=document.getElementById('enqRestart2');
+            if(rb2)rb2.addEventListener('click',function(){ans={};cur=0;renderQ()});
+          })
+          .catch(function(){btn.disabled=false;btn.innerHTML='Get my recommendation <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon>';alert('Sorry — something went wrong. Please try again or call us on 0333 041 1161.')});
+      });
     }
 
     // expose the collected answers (+ recommendation, if complete) for the modal —
