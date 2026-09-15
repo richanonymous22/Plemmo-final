@@ -544,18 +544,6 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .cmp-col .btn{width:100%;justify-content:center;margin-top:14px}
 .cmp-empty{color:var(--muted);text-align:center;padding:30px;max-width:1100px;margin:0 auto}
 
-/* ── STICKY MINI-SUMMARY (desktop, experiment) ── */
-.summary-bar{position:fixed;left:24px;bottom:calc(24px + var(--cc-bar-h,0px));z-index:150;display:none;align-items:center;gap:14px;
-  background:rgba(16,20,12,.92);backdrop-filter:blur(14px);border:1px solid var(--line2);border-radius:18px;padding:14px 14px 14px 16px;
-  box-shadow:0 18px 44px rgba(0,0,0,.45);transform:translateY(160%);transition:transform .4s var(--ease),bottom .3s var(--ease);max-width:360px}
-.summary-bar.show{transform:none}
-.summary-bar .si{width:34px;height:34px;border-radius:50%;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.summary-bar .si iconify-icon{color:var(--lime);font-size:18px}
-.summary-bar .st{font-size:12.5px;color:#cfd6c5;line-height:1.4;min-width:0}
-.summary-bar .st b{color:#fff;display:block;font-size:13.5px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.summary-bar .sx{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 4px}
-.summary-bar .sx:hover{color:#fff}
-@media(min-width:921px){.summary-bar.ready{display:flex}}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1180px){.nav-links{display:none}.nav-ghost{display:none}.burger{display:block}}
@@ -985,14 +973,6 @@ html{overflow-x:hidden}
   <div class="detail-card" id="detailCard"></div>
 </div>
 
-<!-- sticky mini-summary (experiment) -->
-<div class="summary-bar" id="summaryBar">
-  <span class="si"><iconify-icon icon="ph:target-duotone"></iconify-icon></span>
-  <span class="st" id="summaryText"><b>Your match</b>Take the 60s finder</span>
-  <a href="#" class="btn btn-primary" id="summaryCta" style="border-radius:100px;padding:9px 16px;font-size:13px">Get quote</a>
-  <button class="sx" id="summaryX" aria-label="Dismiss">&times;</button>
-</div>
-
 <!-- sticky mobile cta -->
 <div class="sticky" id="sticky">
   <a href="tel:03330411161" class="btn btn-ghost call" aria-label="Call"><iconify-icon icon="ph:phone-call-duotone"></iconify-icon></a>
@@ -1264,19 +1244,17 @@ html{overflow-x:hidden}
     }});}
   function result(){var steps=buildSteps(ans);done=true;bar.style.width='100%';stepEl.textContent='Your suggested providers';back.disabled=false;stepper(steps);
     var r=recommend(ans);
-    function restart(){ans={};saveAns();cur=0;window.__cmQuizCompletedThisView=false;if(typeof summaryReady==='function')summaryReady();render()}
+    function restart(){ans={};saveAns();cur=0;window.__cmQuizCompletedThisView=false;render()}
     window.__cmQuizCompletedThisView=true;
     if(r.fallback){
       body.innerHTML='<div class="qres"><div class="qres-card" style="grid-template-columns:1fr"><div class="qres-body"><div class="rl">No exact match</div><div class="rn" style="font-size:24px">Please contact us for a personalised quote</div><p>We could not automatically match a provider to your answers (often because your current provider is also the only listed option). Leave your details and our team will review manually — or call us directly, whichever\'s easier.</p><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Request a personalised quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Call 0333 041 1161</a></div><button type="button" class="qres-restart" id="qRestart">Start over</button></div></div></div>';
       document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:'Personalised quote — no automatic match'})};
       document.getElementById('qRestart').onclick=restart;
-      if(typeof summaryReady==='function')summaryReady();
       return;
     }
     var cards=r.list.map(function(k,i){return providerResultCard(k,ans,r.atv,i===0)}).join('');
     body.innerHTML='<div class="qres"><p style="font-size:12.5px;color:var(--muted);margin-bottom:14px">Suggested in priority order for your answers. Your current provider is never suggested.</p><div class="qres-list">'+cards+'</div><p style="font-size:11.5px;color:var(--muted);margin-top:16px">Recommendations are generated from the information you provide and do not constitute financial advice.</p><button type="button" class="qres-restart" id="qRestart">Start over</button></div>';
     document.getElementById('qRestart').onclick=restart;
-    if(typeof summaryReady==='function')summaryReady();
     body.querySelectorAll('[data-qapply]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qapply;openModal({intent:'apply',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
     body.querySelectorAll('[data-qcallback]').forEach(function(b){b.onclick=function(e){e.preventDefault();var k=b.dataset.qcallback;openModal({intent:'callback',category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:CM.providers[k].name})}});
   }
@@ -1384,40 +1362,6 @@ html{overflow-x:hidden}
     mq.innerHTML=new Array(n).fill(setHTML).join('');
     mq.style.setProperty('--mq-n',n);
   }
-
-  /* ── Sticky mini-summary (experiment) ── */
-  var sBar=document.getElementById('summaryBar'),sText=document.getElementById('summaryText'),sCta=document.getElementById('summaryCta'),sX=document.getElementById('summaryX'),sDismiss=false;
-  function summaryReady(){
-    /* Guard against being called before sBar/sText/sCta are assigned below —
-       the "resume saved progress" logic further up can call result(), which
-       calls this, synchronously during initial script execution (when a
-       returning visitor already has a complete saved answer set), which is
-       before this var statement has run. Without this guard that throws and
-       aborts whatever called it partway through — including restart(),
-       which calls summaryReady() before render(), so "Start over" would
-       silently fail to ever reach render() and the UI would appear frozen. */
-    if(!sBar||!sText||!sCta)return;
-    /* Only ever claims a specific "Your match: X" if the finder was
-       actually completed during THIS page view — never from a stale
-       localStorage answer left over from a previous visit, which could
-       show a provider that no longer matches (or matches nothing the
-       visitor did just now). */
-    var sv=loadAns();
-    if(window.__cmQuizCompletedThisView&&sv&&sv.category&&sv.turnover&&sv.current){var r=recommend(sv);
-      if(!r.fallback&&r.list.length){var top=CM.providers[r.list[0]].name;sText.innerHTML='<b>Your match: '+top+'</b>Indicative — get a quote';sBar.dataset.match=top;sCta.textContent='Get quote';}
-      else{sText.innerHTML='<b>Talk to us</b>No automatic match — get a personalised quote';sBar.removeAttribute('data-match');sCta.textContent='Contact us';}
-    }
-    else{sText.innerHTML='<b>Find your match</b>Take the 60‑second finder';sBar.removeAttribute('data-match');sCta.textContent='Start'}
-    sBar.classList.add('ready');
-  }
-  function nearBottom(){return (innerHeight+scrollY)>(document.body.scrollHeight-720)}
-  function updSummary(){
-    if(sDismiss){sBar.classList.remove('show');return}
-    sBar.classList.toggle('show',scrollY>700&&!nearBottom());
-  }
-  sX.onclick=function(){sDismiss=true;sBar.classList.remove('show')};
-  sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
-  summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 
   /* ── UK coverage map: real, zoomable Leaflet map (dark themed) ── tiles are
      self-hosted under vendor/tiles/ for the fixed UK bounds/zoom range this map

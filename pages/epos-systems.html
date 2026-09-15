@@ -630,6 +630,18 @@
       +'<div class="epc-btns"><a href="#" class="btn btn-primary" data-ep-apply="'+pkg.key+'">Apply Now</a><a href="#" class="btn btn-ghost" data-ep-contact="'+pkg.key+'">Contact Us</a></div>'
       +'</div>';
   }
+  /* scrollIntoView({block:'start'}) aligns the target's top edge with the
+     viewport's top edge — but the fixed 74px nav bar then sits directly over
+     that top edge, hiding the section heading/first row of options right
+     after the scroll finishes. Scroll to a position offset by the nav's
+     actual height instead, so the section lands fully visible below it. */
+  function epScrollTo(el){
+    if(!el)return;
+    var nav=document.getElementById('nav');
+    var navH=nav?nav.getBoundingClientRect().height:0;
+    var y=el.getBoundingClientRect().top+window.scrollY-navH-16;
+    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+  }
   function epRenderCatTabs(){
     epCatTabs.innerHTML=EPOS_CONFIG.categoryOrder.map(function(c){
       return '<button type="button" class="epc-cat'+(epState.category===c?' active':'')+'" data-epcat="'+c+'"><iconify-icon icon="'+EPOS_CONFIG.catIcon[c]+'"></iconify-icon><b>'+c+'</b><span>'+EPOS_CONFIG.categories[c].slice(0,3).join(', ')+'…</span></button>';
@@ -649,7 +661,7 @@
     epState.category=cat;epState.type=null;
     epRenderCatTabs();epRenderTypeTabs();
     epTypeWrap.style.display='';epResults.style.display='none';
-    epTypeWrap.scrollIntoView({behavior:'smooth',block:'start'});
+    epScrollTo(epTypeWrap);
   }
   function epSelectType(t){
     epState.type=t;epRenderTypeTabs();epRenderResults();
@@ -663,7 +675,7 @@
       epCards.innerHTML=list.map(function(p,i){return epPkgCardHTML(p,i+1)}).join('');
     }
     epNote.innerHTML='Recommended for <b>'+epState.type+'</b> ('+epState.category+') — shown in Plemmo\'s fixed recommendation order.';
-    epResults.scrollIntoView({behavior:'smooth',block:'start'});
+    epScrollTo(epResults);
     epInitSlideshows();
   }
   /* Package card image slideshows — auto-rotates, pauses on hover/focus, and
@@ -710,7 +722,7 @@
       m.innerHTML=open?'View all features <iconify-icon icon="ph:caret-down-bold"></iconify-icon>':'Hide features <iconify-icon icon="ph:caret-up-bold"></iconify-icon>';
       return}
   });
-  epReset.onclick=function(){epState={category:null,type:null};epRenderCatTabs();epTypeWrap.style.display='none';epResults.style.display='none';document.getElementById('epCatTabs').scrollIntoView({behavior:'smooth',block:'start'})};
+  epReset.onclick=function(){epState={category:null,type:null};epRenderCatTabs();epTypeWrap.style.display='none';epResults.style.display='none';epScrollTo(document.getElementById('epCatTabs'))};
   epRenderCatTabs();
   /* demo form (placeholder submit) */
   var df=document.getElementById('demoForm');
