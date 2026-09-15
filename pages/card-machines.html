@@ -25,6 +25,8 @@
 
 <link rel="preconnect" href="https://code.iconify.design" crossorigin>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
+<script src="../vendor/leaflet/leaflet.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -445,7 +447,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 .dt-note{font-size:11px;color:#6b7560;margin-top:16px;line-height:1.5}
 
 /* ── STICKY MOBILE CTA ── */
-.sticky{position:fixed;left:16px;right:16px;bottom:16px;z-index:150;display:none;gap:10px;transform:translateY(140%);transition:transform .4s var(--ease)}
+.sticky{position:fixed;left:16px;right:16px;bottom:calc(16px + var(--cc-bar-h,0px));z-index:150;display:none;gap:10px;transform:translateY(140%);transition:transform .4s var(--ease),bottom .3s var(--ease)}
 .sticky.show{transform:none}
 .sticky .btn{flex:1;justify-content:center}
 .sticky .call{flex:0 0 54px;padding:0}
@@ -471,30 +473,38 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .uk-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);background:var(--white);border:1px solid var(--line-l);border-radius:100px;padding:8px 14px;box-shadow:var(--shadow-l)}
 .uk-tag iconify-icon{color:#5f9000;font-size:16px}
 .uk-map{position:relative;isolation:isolate;z-index:0;aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2);background:#0a1014;box-shadow:var(--shadow)}
-/* self-contained UK outline — no external map-tile service, so it never depends on a
-   third-party CDN being reachable (those are commonly blocked by ad-blockers/privacy
-   extensions/corporate proxies, which previously left this section blank for some visitors) */
-.uk-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.uk-land{fill:#141d0c;stroke:rgba(198,255,0,.38);stroke-width:1.4;vector-effect:non-scaling-stroke}
+/* real interactive Leaflet map — tiles are self-hosted (vendor/tiles/) for the fixed
+   UK view/zoom range this component uses, instead of a live third-party tile server,
+   so it never depends on an external CDN being reachable */
+.uk-map .leaflet-pane,.uk-map .leaflet-top,.uk-map .leaflet-bottom{z-index:400}
+.uk-leaflet{position:absolute;inset:0}
+.uk-map .leaflet-container{background:#0a1014;font-family:'Inter',system-ui,sans-serif;outline:none}
+.uk-map .leaflet-tile-pane{filter:saturate(.92) brightness(.96)}
+.uk-map .leaflet-bar{border:none;box-shadow:0 8px 22px rgba(0,0,0,.45);border-radius:12px;overflow:hidden;margin:12px}
+.uk-map .leaflet-bar a{background:rgba(12,16,9,.85);color:#fff;border-bottom:1px solid var(--line);width:32px;height:32px;line-height:32px;font-size:18px;font-weight:700;backdrop-filter:blur(8px);transition:.2s}
+.uk-map .leaflet-bar a:hover{background:var(--lime);color:#0a0c08}
+.uk-map .leaflet-bar a:last-child{border-bottom:none}
+.uk-map .leaflet-control-attribution{background:rgba(10,13,7,.55);color:rgba(255,255,255,.5);font-size:9px;padding:2px 6px;border-radius:8px 0 0 0;backdrop-filter:blur(6px)}
+.uk-map .leaflet-control-attribution a{color:rgba(198,255,0,.78)}
+.uk-map .leaflet-control-scale-line{background:rgba(10,13,7,.55);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.45);font-size:9px;font-weight:700;backdrop-filter:blur(6px)}
 /* custom markers */
-.uk-markers{position:absolute;inset:0}
-.uk-mk-btn{position:absolute;transform:translate(-50%,-50%);background:none;border:none;padding:9px;margin:-9px;cursor:pointer;line-height:0;-webkit-tap-highlight-color:transparent}
-.uk-mk{position:relative;width:14px;height:14px;display:block}
+.uk-mk{position:relative;width:14px;height:14px}
 .uk-mk i{position:absolute;inset:0;border-radius:50%;background:var(--lime);border:2px solid #0a1014;box-shadow:0 0 0 2px rgba(198,255,0,.45),0 0 10px rgba(198,255,0,.6);z-index:2}
 .uk-mk::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--lime);animation:mkpulse 2.8s infinite;z-index:1}
 .uk-mk.cap{width:18px;height:18px}
 @keyframes mkpulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(2.6);opacity:0}100%{transform:scale(2.6);opacity:0}}
-/* tooltip (replaces Leaflet's popup) */
-.uk-tooltip{position:absolute;min-width:150px;background:rgba(12,16,9,.95);backdrop-filter:blur(12px);color:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.55);padding:12px 15px 13px;opacity:0;pointer-events:none;transition:opacity .16s;white-space:nowrap;z-index:20}
-.uk-tooltip.show{opacity:1}
-.uk-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(12,16,9,.95)}
-.uk-tooltip.below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:rgba(12,16,9,.95)}
+/* popups */
+.uk-map .leaflet-popup-content-wrapper{background:rgba(12,16,9,.95);backdrop-filter:blur(12px);color:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.uk-map .leaflet-popup-tip{background:rgba(12,16,9,.95);border:1px solid var(--line2)}
+.uk-map .leaflet-popup-content{margin:12px 15px 13px;font-size:13px;line-height:1.4}
+.uk-map .leaflet-popup-close-button{color:var(--muted);padding:8px 8px 0 0}
+.uk-map .leaflet-popup-close-button:hover{color:#fff}
 .mkpop b{display:block;font-family:'Space Grotesk';font-size:14px;color:#fff;margin-bottom:4px}
 .mkpop .t{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--lime);font-weight:600}
 .mkpop .t iconify-icon{font-size:14px}
 .mkpop .r{display:block;font-size:11px;color:var(--muted);margin-top:5px}
 /* overlay badge */
-.uk-live{position:absolute;left:14px;top:12px;z-index:5;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px;pointer-events:none}
+.uk-live{position:absolute;left:14px;top:12px;z-index:1000;display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(10,13,7,.6);backdrop-filter:blur(10px);border:1px solid var(--line2);border-radius:100px;padding:6px 11px;pointer-events:none}
 .uk-live i{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
 @media(prefers-reduced-motion:reduce){.uk-live i,.uk-mk::before{animation:none}}
 
@@ -505,8 +515,8 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .pcompare:hover{border-color:var(--ink);color:var(--ink)}
 .pcompare iconify-icon{font-size:16px}
 .pcompare.on{background:rgba(198,255,0,.16);border-color:var(--lime);color:#3c4a00}
-.cmp-bar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(160%);z-index:170;display:flex;align-items:center;gap:14px;
-  background:rgba(16,20,12,.92);backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:var(--pill);padding:9px 11px 9px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5);transition:transform .4s var(--ease)}
+.cmp-bar{position:fixed;left:50%;bottom:calc(22px + var(--cc-bar-h,0px));transform:translateX(-50%) translateY(160%);z-index:170;display:flex;align-items:center;gap:14px;
+  background:rgba(16,20,12,.92);backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:var(--pill);padding:9px 11px 9px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5);transition:transform .4s var(--ease),bottom .3s var(--ease)}
 .cmp-bar.show{transform:translateX(-50%)}
 .cmp-bar .ct{font-size:13.5px;font-weight:600;color:#fff;white-space:nowrap}
 .cmp-bar .ct b{color:var(--lime)}
@@ -535,9 +545,9 @@ body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
 .cmp-empty{color:var(--muted);text-align:center;padding:30px;max-width:1100px;margin:0 auto}
 
 /* ── STICKY MINI-SUMMARY (desktop, experiment) ── */
-.summary-bar{position:fixed;left:24px;bottom:24px;z-index:150;display:none;align-items:center;gap:14px;
+.summary-bar{position:fixed;left:24px;bottom:calc(24px + var(--cc-bar-h,0px));z-index:150;display:none;align-items:center;gap:14px;
   background:rgba(16,20,12,.92);backdrop-filter:blur(14px);border:1px solid var(--line2);border-radius:18px;padding:14px 14px 14px 16px;
-  box-shadow:0 18px 44px rgba(0,0,0,.45);transform:translateY(160%);transition:transform .4s var(--ease);max-width:360px}
+  box-shadow:0 18px 44px rgba(0,0,0,.45);transform:translateY(160%);transition:transform .4s var(--ease),bottom .3s var(--ease);max-width:360px}
 .summary-bar.show{transform:none}
 .summary-bar .si{width:34px;height:34px;border-radius:50%;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .summary-bar .si iconify-icon{color:var(--lime);font-size:18px}
@@ -669,10 +679,8 @@ html{overflow-x:hidden}
       <span class="plogo"><span class="word">Teya</span></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4" width="240" height="50"></span>
       <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp" width="444" height="128"></span>
-      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay" width="1408" height="321"></span>
+      <span class="plogo"><span class="word">Worldpay</span></span>
       <span class="plogo"><span class="word">Elavon</span></span>
-      <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/evo.svg" alt="EVO Payments" width="191" height="113"></span>
-      <span class="plogo lg"><img loading="lazy" decoding="async" src="../images/partners/mypos.svg" alt="myPOS" width="40" height="50"></span>
     </div>
   </div>
 </section>
@@ -727,7 +735,7 @@ html{overflow-x:hidden}
         <button class="pview" data-detail="shift4">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/worldpay.png" alt="Worldpay" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'" width="1408" height="321"><span class="wordmark" style="display:none;font-style:italic;color:#c8102e">worldpay</span></div>
+        <div class="plogo-c"><span class="wordmark" style="font-style:italic;color:#c8102e">worldpay</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/worldpay-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="Worldpay card machine" width="950" height="950"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> £1/month promotional rental — first year</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Split rate — separate debit &amp; credit</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Suited to MOTO / phone payments</li></ul>
         <button class="pview" data-detail="worldpay">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -854,7 +862,7 @@ html{overflow-x:hidden}
         <div class="faq"><div class="faq-q">Are there any monthly fees? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>It depends on the provider. Shift4 and SumUp have no monthly rental, Teya is £15/month (or a one-off terminal buyout), and Clover, Elavon and Worldpay charge a monthly device fee. We'll always confirm the exact cost before you apply.</p></div></div>
         <div class="faq"><div class="faq-q">Can I keep my existing merchant account? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>It depends on your current setup and the provider you choose — our finder will never recommend the provider you're already with, so it's built around finding you something genuinely different. Speak to us to check what's possible.</p></div></div>
         <div class="faq"><div class="faq-q">What are the typical transaction fees? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>Transaction fees vary by provider, card type and turnover. Our suggested rate starts from 0.35% blended — or 0.30% if you also add utility services with Plemmo — subject to business profile, turnover and provider approval.</p></div></div>
-        <div class="faq"><div class="faq-q">What happens if I want to cancel? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>It depends on your provider and contract. Shift4 and SumUp Pay As You Go have no fixed contract, while others — such as Teya's 12-month option or SumUp's discounted 12/24-month plans — do. We'll always confirm the terms before you apply.</p></div></div>
+        <div class="faq"><div class="faq-q">What happens if I want to cancel? <iconify-icon icon="ph:plus-bold"></iconify-icon></div><div class="faq-a"><p>It depends on your provider and contract. SumUp Pay As You Go has no fixed contract, while others — such as Teya's 12-month option, Shift4's 18-month contract, or SumUp's discounted 12/24-month plans — run for a set term. We'll always confirm the terms before you apply.</p></div></div>
       </div>
       <a href="contact-us.html" class="faq-more">View all FAQs <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></a>
     </div>
@@ -877,12 +885,7 @@ html{overflow-x:hidden}
       </div>
     </div>
     <div class="uk-map">
-      <svg class="uk-svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-        <path class="uk-land" d="M 195.5,296.5 L 195.5,296.5 L 200.0,266.3 L 179.6,234.2 L 179.2,233.5 L 142.3,224.3 L 135.0,210.2 L 146.1,186.9 L 136.1,172.5 L 119.7,197.2 L 117.9,147.0 L 102.6,120.4 L 113.6,66.5 L 137.2,24.3 L 161.5,28.4 L 198.2,24.0 L 165.7,80.4 L 196.7,73.2 L 230.0,73.5 L 222.1,116.0 L 194.7,162.7 L 226.2,166.0 L 228.6,171.5 L 255.7,232.9 L 276.5,241.3 L 295.2,300.7 L 303.8,321.3 L 340.7,331.2 L 337.0,364.5 L 321.5,379.8 L 333.6,406.7 L 306.3,434.0 L 265.6,433.5 L 213.8,447.9 L 199.7,437.6 L 179.6,462.0 L 151.4,456.1 L 130.1,476.0 L 113.9,465.6 L 158.5,410.9 L 185.7,399.6 L 185.5,399.6 L 138.0,390.9 L 129.4,370.2 L 161.2,354.0 L 144.5,325.9 L 150.3,291.8 L 195.5,296.5 Z"></path>
-        <path class="uk-land" d="M 101.1,272.4 L 78.1,261.7 L 59.3,262.4 L 65.6,234.5 L 59.3,206.5 L 84.8,204.4 L 117.4,236.6 L 101.1,272.4 Z"></path>
-      </svg>
-      <div class="uk-markers" id="ukMap" aria-label="Map of UK towns and cities Plemmo serves"></div>
-      <div class="uk-tooltip" id="ukTip"></div>
+      <div class="uk-leaflet" id="ukMap" role="application" aria-label="Map of UK towns and cities Plemmo serves"></div>
       <div class="uk-live"><i></i> Live coverage · UK-wide</div>
     </div>
   </div>
@@ -1126,7 +1129,7 @@ html{overflow-x:hidden}
     turnoverMid: {'Below £5,000':2500,'£5,000–£10,000':7500,'£10,000–£15,000':12500,'£15,000–£20,000':17500,'£20,000–£30,000':25000,'£30,000–£35,000':32500,'£35,000–£50,000':42500,'£50,000–£100,000':75000,'Above £100,000':150000},
     currentProviders: ['None','Teya','Shift4','SumUp','Clover','Elavon','Worldpay','Other'],
     providers: {
-      teya:{name:'Teya',type:'blended',img:'../images/teya-card-machine.webp',logo:'../images/partners/teya.svg',logoDark:true,rental:'£15/month or £139 buyout',contract:'12-Month or No Contract',device:'PAX A920 Pro · Sunmi',features:['Tap to Pay','Instant Payout (Teya Business Account)','Everyday Payout','Next Working Day Payout','0.5% Cashback on eligible spend','Blended Pricing'],
+      teya:{name:'Teya',type:'blended',img:'../images/teya-card-machine.webp',rental:'£15/month or £139 buyout',contract:'12-Month or No Contract',device:'PAX A920 Pro · Sunmi',features:['Tap to Pay','Instant Payout (Teya Business Account)','Everyday Payout','Next Working Day Payout','0.5% Cashback on eligible spend','Blended Pricing'],
         /* £35k–£40k and £60k–£70k filled with the nearest neighbouring band's
            rate (the tier immediately above each gap) per owner instruction —
            not a fabricated new rate, just closing a coverage gap. */
@@ -1139,10 +1142,10 @@ html{overflow-x:hidden}
         promo:true,
         low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'},{min:250000,max:Infinity,debit:'Custom Quote',credit:'Custom Quote',auth:'2p'}],
         high:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.70%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:150000,max:Infinity,debit:'0.28%',credit:'0.58%',auth:'2p'}]},
-      elavon:{name:'Elavon',type:'split',img:'../images/elavon-card-machine.webp',logo:'../images/partners/elavon.svg',rental:'£19.99/month',contract:'Provider terms',device:'Integrated SIM/4G · countertop optional',features:['Payment Over the Phone (MOTO)','Pay by Link','Everyday Payout','Integrated SIM / 4G Connectivity','Card Machine Integration Available'],
+      elavon:{name:'Elavon',type:'split',img:'../images/elavon-card-machine.webp',rental:'£19.99/month',contract:'Provider terms',device:'Integrated SIM/4G · countertop optional',features:['Payment Over the Phone (MOTO)','Pay by Link','Everyday Payout','Integrated SIM / 4G Connectivity','Card Machine Integration Available'],
         low:[{min:20000,max:40000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:40000,max:50000,debit:'0.32%',credit:'0.60%',auth:'2p'},{min:50000,max:100000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:100000,max:Infinity,debit:'0.29%',credit:'0.55%',auth:'2p'}],
         high:[{min:20000,max:40000,debit:'0.55%',credit:'0.75%',auth:'3p'},{min:40000,max:50000,debit:'0.40%',credit:'0.70%',auth:'3p'},{min:50000,max:100000,debit:'0.35%',credit:'0.55%',auth:'2p'},{min:100000,max:Infinity,debit:'0.32%',credit:'0.55%',auth:'2p'}]},
-      worldpay:{name:'Worldpay',type:'split',img:'../images/worldpay-card-machine.webp',logo:'../images/partners/worldpay.png',rental:'£1/month for the first year',contract:'Provider terms',device:'Countertop / portable terminal',features:['Split-rate pricing','£1/month promotional rental — first year','Configurable rental after promotional period','Suited to MOTO / phone payments'],promo:true,
+      worldpay:{name:'Worldpay',type:'split',img:'../images/worldpay-card-machine.webp',rental:'£1/month for the first year',contract:'Provider terms',device:'Countertop / portable terminal',features:['Split-rate pricing','£1/month promotional rental — first year','Configurable rental after promotional period','Suited to MOTO / phone payments'],promo:true,
         low:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}],
         high:[{min:15000,max:20000,debit:'0.35%',credit:'0.75%',auth:'2p'},{min:20000,max:Infinity,debit:'0.30%',credit:'0.75%',auth:'2p'}]}
     },
@@ -1159,7 +1162,6 @@ html{overflow-x:hidden}
       {max:35000, priority:['elavon','clover','teya']},
       {max:Infinity, priority:['elavon','clover','teya']}
     ],
-    charityNoRental: ['shift4','sumup'],
     /* MOTO / phone-payments rule — turnover-tiered, ignores the general bands above.
        Allowed MOTO providers are exactly shift4/worldpay/elavon/clover. */
     motoBands: [
@@ -1193,14 +1195,13 @@ html{overflow-x:hidden}
      priority order moves up automatically because we simply filter it out.
 
      Rule 3 — recommendation priority, in order:
-       1. Merchant suitability   — a category-specific qualifying question (Charity's
-          "no monthly rental?", Food & Beverage's MOTO/phone-payments question) overrides
-          everything else below when it applies, because it reflects a hard requirement
-          the merchant just told us about.
+       1. Merchant suitability   — a category-specific qualifying question (Food &
+          Beverage's MOTO/phone-payments question) overrides everything else below
+          when it applies, because it reflects a hard requirement the merchant just
+          told us about.
        2. Monthly turnover       — bandFor()/generalBands drives the priority list whenever
-          no suitability override applies (this covers every category except Charity-with-
-          no-rental and F&B-MOTO, including turnover-band pricing table selection via
-          classifyATV()/pickRow()).
+          no suitability override applies (this covers every category except F&B-MOTO,
+          including turnover-band pricing table selection via classifyATV()/pickRow()).
        3. Business category      — baked into which band table is used (F&B has its own
           spec-defined bands; every other category currently shares generalBands, which the
           admin config can split out per-category later without changing this function).
@@ -1211,10 +1212,7 @@ html{overflow-x:hidden}
   function recommend(a){
     var currentKey=(a.current&&a.current!=='None'&&a.current!=='Other')?a.current.toLowerCase():null;
     var priority,reason;
-    if(a.category==='Charity / Non-Profit'){
-      if(a.norental==='Yes'){priority=CM.charityNoRental.slice();reason='Charity / Non-Profit — no monthly rental requested';}
-      else{priority=bandFor(a.turnover).priority.slice();reason='Charity / Non-Profit — turnover-based';}
-    } else if(a.category==='Food & Beverage' && a.moto==='Over the Phone (MOTO)'){
+    if(a.category==='Food & Beverage' && a.moto==='Over the Phone (MOTO)'){
       priority=motoBandFor(a.turnover).priority.slice();reason='Food & Beverage — MOTO/phone payments (turnover-tiered)';
     } else {
       priority=bandFor(a.turnover).priority.slice();reason='Turnover-based';
@@ -1234,7 +1232,6 @@ html{overflow-x:hidden}
 
   /* ── QUIZ (dynamic step list — Food & Beverage / Charity insert an extra question) ── */
   var MOTO_OPTS=['Over the Phone (MOTO)','Pay by Link','Neither'];
-  var NORENT_OPTS=['Yes','No'];
   var RATEPREF_OPTS=['Split Rate','Blended Rate','Both'];
   function buildSteps(a){
     var s=[{k:'category',q:'What type of business do you operate?',mode:'tiles',o:Object.keys(CM.categories).map(function(c){return {l:c,i:CM.catIcon[c]}})}];
@@ -1244,7 +1241,6 @@ html{overflow-x:hidden}
     s.push({k:'turnover',q:'What is your monthly card turnover?',mode:'list',o:CM.turnoverBands.map(function(t){return {l:t}})});
     s.push({k:'current',q:'Current card machine provider?',mode:'list',o:CM.currentProviders.map(function(t){return {l:t}})});
     if(a.category==='Food & Beverage'){s.push({k:'moto',q:'How do you take payments?',mode:'list',o:MOTO_OPTS.map(function(t){return {l:t}})});}
-    if(a.category==='Charity / Non-Profit'){s.push({k:'norental',q:'Do you require a card machine with no monthly rental?',mode:'list',o:NORENT_OPTS.map(function(t){return {l:t}})});}
     s.push({k:'ratepref',q:'What pricing model do you prefer?',mode:'list',o:RATEPREF_OPTS.map(function(t){return {l:t}})});
     return s;
   }
@@ -1252,7 +1248,7 @@ html{overflow-x:hidden}
   function loadAns(){try{return JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){return {}}}
   function saveAns(){try{localStorage.setItem(SKEY,JSON.stringify(ans))}catch(e){}}
   var ans=loadAns(),cur=0,done=false,body=document.getElementById('qbody'),bar=document.getElementById('qbar'),stepEl=document.getElementById('qstep'),back=document.getElementById('qback'),stepsEl=document.getElementById('qsteps');
-  var STEP_LABELS={category:'Category',type:'Type',turnover:'Turnover',current:'Current',moto:'Payment',norental:'Rental',ratepref:'Rate'};
+  var STEP_LABELS={category:'Category',type:'Type',turnover:'Turnover',current:'Current',moto:'Payment',ratepref:'Rate'};
   function stepper(steps){stepsEl.innerHTML=steps.map(function(s,i){var c=(done||i<cur)?'done':(i===cur?'active':'');var n=(done||i<cur)?'<iconify-icon icon="ph:check-bold"></iconify-icon>':(i+1);return '<span class="qstep-pill '+c+'"><span class="qn">'+n+'</span>'+(STEP_LABELS[s.k]||(s.k.charAt(0).toUpperCase()+s.k.slice(1)))+'</span>'}).join('')}
   function render(){var steps=buildSteps(ans);if(cur>=steps.length)cur=steps.length-1;var s=steps[cur];done=false;
     bar.style.width=((cur+1)/steps.length*100)+'%';stepEl.textContent='Step '+(cur+1)+' of '+steps.length;back.disabled=cur===0;stepper(steps);
@@ -1261,7 +1257,7 @@ html{overflow-x:hidden}
     h+='</div>';body.innerHTML=h;
     body.querySelectorAll('.qtile').forEach(function(el){el.onclick=function(){
       ans[s.k]=el.dataset.v;
-      if(s.k==='category'){delete ans.type;delete ans.moto;delete ans.norental;delete ans.ratepref;}
+      if(s.k==='category'){delete ans.type;delete ans.moto;delete ans.ratepref;}
       saveAns();
       var next=buildSteps(ans);
       if(cur<next.length-1){cur++;render()}else{result()}
@@ -1271,7 +1267,7 @@ html{overflow-x:hidden}
     function restart(){ans={};saveAns();cur=0;window.__cmQuizCompletedThisView=false;if(typeof summaryReady==='function')summaryReady();render()}
     window.__cmQuizCompletedThisView=true;
     if(r.fallback){
-      body.innerHTML='<div class="qres"><div class="qres-card" style="grid-template-columns:1fr"><div class="qres-body"><div class="rl">No exact match</div><div class="rn" style="font-size:24px">Please contact us for a personalised quote</div><p>We could not automatically match a provider to your answers (often because your current provider is also the only listed option). Send your details and our team will review manually.</p><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Request a personalised quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a></div><button type="button" class="qres-restart" id="qRestart">Start over</button></div></div></div>';
+      body.innerHTML='<div class="qres"><div class="qres-card" style="grid-template-columns:1fr"><div class="qres-body"><div class="rl">No exact match</div><div class="rn" style="font-size:24px">Please contact us for a personalised quote</div><p>We could not automatically match a provider to your answers (often because your current provider is also the only listed option). Leave your details and our team will review manually — or call us directly, whichever\'s easier.</p><div class="rb"><a href="#" class="btn btn-primary" id="qgq">Request a personalised quote <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Call 0333 041 1161</a></div><button type="button" class="qres-restart" id="qRestart">Start over</button></div></div></div>';
       document.getElementById('qgq').onclick=function(e){e.preventDefault();openModal({category:ans.category,type:ans.type,turnover:ans.turnover,current:ans.current,product:'Personalised quote — no automatic match'})};
       document.getElementById('qRestart').onclick=restart;
       if(typeof summaryReady==='function')summaryReady();
@@ -1401,63 +1397,58 @@ html{overflow-x:hidden}
   sCta.onclick=function(e){e.preventDefault();var m=sBar.getAttribute('data-match');if(m){openModal({product:m})}else{document.getElementById('finder').scrollIntoView({behavior:'smooth'})}};
   summaryReady();addEventListener('scroll',updSummary,{passive:true});updSummary();
 
-  /* ── UK coverage map: self-contained SVG outline + markers (no external map-tile
-     service) ── previously used Leaflet + a live CartoDB tile layer, which left this
-     section blank whenever that third-party CDN was blocked (ad-blockers, privacy
-     extensions, corporate proxies) or unreachable. Coordinates below are pre-projected
-     (equirectangular, latitude-corrected) into the same 0–100% space as the .uk-svg
-     viewBox="0 0 400 500", so markers always line up with the coastline regardless of
-     the container's actual rendered size. */
+  /* ── UK coverage map: real, zoomable Leaflet map (dark themed) ── tiles are
+     self-hosted under vendor/tiles/ for the fixed UK bounds/zoom range this map
+     uses (zoom 5–7), instead of a live third-party tile server — that CDN
+     dependency previously left this section blank whenever it was unreachable
+     (ad-blockers, privacy extensions, corporate proxies). */
   (function(){
-    var wrap=document.getElementById('ukMap'), tip=document.getElementById('ukTip');
-    if(!wrap||!tip)return;
+    var el=document.getElementById('ukMap');
+    if(!el||!window.L)return;
     var CITIES=[
-      ['London',71.4,79.1,'Every trade',1],
-      ['Birmingham',58.0,68.9,'Takeaways & shops',1],
-      ['Manchester',55.3,58.5,'Hospitality & retail',1],
-      ['Leeds',60.6,55.2,'Retail & services',0],
-      ['Liverpool',49.6,59.3,'Cafés & venues',0],
-      ['Sheffield',61.2,59.5,'Retail & services',0],
-      ['Newcastle',60.1,42.9,'Bars & venues',0],
-      ['Glasgow',40.1,33.7,'Cafés & takeaways',1],
-      ['Edinburgh',48.2,32.7,'Retail & hospitality',0],
-      ['Aberdeen',56.5,20.3,'Retail & trades',0],
-      ['Inverness',40.3,16.9,'Local independents',0],
-      ['Cardiff',48.2,79.3,'Cafés & salons',1],
-      ['Swansea',42.4,77.9,'Independent retail',0],
-      ['Bristol',52.7,79.6,'Independent retail',0],
-      ['Nottingham',63.6,64.0,'Hospitality & retail',0],
-      ['Leicester',63.7,67.3,'Retail & takeaways',0],
-      ['Belfast',27.3,46.9,'Salons & retail',1],
-      ['Brighton',71.3,86.2,'Cafés & retail',0],
-      ['Southampton',61.7,85.3,'Retail & services',0],
-      ['Plymouth',40.9,90.9,'Local independents',0]
+      ['London',51.5074,-0.1278,'Every trade',1],
+      ['Birmingham',52.4862,-1.8904,'Takeaways & shops',1],
+      ['Manchester',53.4808,-2.2426,'Hospitality & retail',1],
+      ['Leeds',53.8008,-1.5491,'Retail & services',0],
+      ['Liverpool',53.4084,-2.9916,'Cafés & venues',0],
+      ['Sheffield',53.3811,-1.4701,'Retail & services',0],
+      ['Newcastle',54.9783,-1.6178,'Bars & venues',0],
+      ['Glasgow',55.8642,-4.2518,'Cafés & takeaways',1],
+      ['Edinburgh',55.9533,-3.1883,'Retail & hospitality',0],
+      ['Aberdeen',57.1497,-2.0943,'Retail & trades',0],
+      ['Inverness',57.4778,-4.2247,'Local independents',0],
+      ['Cardiff',51.4816,-3.1791,'Cafés & salons',1],
+      ['Swansea',51.6214,-3.9436,'Independent retail',0],
+      ['Bristol',51.4545,-2.5879,'Independent retail',0],
+      ['Nottingham',52.9548,-1.1581,'Hospitality & retail',0],
+      ['Leicester',52.6369,-1.1398,'Retail & takeaways',0],
+      ['Belfast',54.5973,-5.9301,'Salons & retail',1],
+      ['Brighton',50.8225,-0.1372,'Cafés & retail',0],
+      ['Southampton',50.9097,-1.4044,'Retail & services',0],
+      ['Plymouth',50.3755,-4.1427,'Local independents',0]
     ];
-    function hide(){tip.classList.remove('show')}
+    var map=L.map(el,{
+      zoomControl:true, scrollWheelZoom:false, attributionControl:true,
+      minZoom:5, maxZoom:7, zoomSnap:.5,
+      maxBounds:[[49,-9.5],[61,2.8]], maxBoundsViscosity:1
+    }).setView([54.6,-3.0],5.4);
+    map.zoomControl.setPosition('topright');
+    L.control.scale({position:'bottomleft',imperial:true,metric:false,maxWidth:90}).addTo(map);
+    L.tileLayer('../vendor/tiles/dark_gray/{z}/{x}/{y}.jpg',{
+      attribution:'&copy; <a href="https://www.esri.com">Esri</a>',
+      minZoom:5, maxZoom:7
+    }).addTo(map);
     CITIES.forEach(function(c){
-      var name=c[0],xp=c[1],yp=c[2],trade=c[3],cap=c[4];
-      var btn=document.createElement('button');
-      btn.type='button'; btn.className='uk-mk-btn';
-      btn.style.left=xp+'%'; btn.style.top=yp+'%';
-      btn.setAttribute('aria-label',name+' — '+trade);
-      btn.innerHTML='<span class="uk-mk'+(cap?' cap':'')+'"><i></i></span>';
-      function show(){
-        var below=yp<22;
-        tip.innerHTML='<div class="mkpop"><b>'+name+'</b><span class="t"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> '+trade+'</span><span class="r">Plemmo coverage · compare &amp; switch</span></div>';
-        tip.style.left=xp+'%'; tip.style.top=yp+'%';
-        var tx=xp<28?'-8%':xp>70?'-92%':'-50%', ty=below?'14px':'calc(-100% - 14px)';
-        tip.style.transform='translate('+tx+','+ty+')';
-        tip.classList.toggle('below',below);
-        tip.classList.add('show');
-      }
-      btn.addEventListener('mouseenter',show);
-      btn.addEventListener('focus',show);
-      btn.addEventListener('mouseleave',hide);
-      btn.addEventListener('blur',hide);
-      btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();show()});
-      wrap.appendChild(btn);
+      var cap=c[4]?' cap':'', sz=c[4]?18:14, a=c[4]?9:7;
+      var icon=L.divIcon({className:'',html:'<span class="uk-mk'+cap+'"><i></i></span>',iconSize:[sz,sz],iconAnchor:[a,a]});
+      var m=L.marker([c[1],c[2]],{icon:icon,title:c[0],riseOnHover:true}).addTo(map);
+      m.bindPopup('<div class="mkpop"><b>'+c[0]+'</b><span class="t"><iconify-icon icon="ph:storefront-duotone"></iconify-icon> '+c[3]+'</span><span class="r">Plemmo coverage · compare &amp; switch</span></div>',{closeButton:true});
+      m.on('mouseover',function(){this.openPopup()});
     });
-    document.addEventListener('click',function(e){if(!wrap.contains(e.target))hide()});
+    function fix(){map.invalidateSize(false);}
+    setTimeout(fix,60); window.addEventListener('resize',fix);
+    if('ResizeObserver' in window){try{new ResizeObserver(fix).observe(el);}catch(e){}}
+    if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)fix();});}).observe(el);}
   })();
 })();
 </script>

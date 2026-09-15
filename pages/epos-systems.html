@@ -95,6 +95,18 @@
 .epc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;align-items:stretch;margin-top:8px}
 .epc-card{position:relative;padding:26px;display:flex;flex-direction:column;height:100%}
 .epc-card.epc-featured{border-color:rgba(198,255,0,.5);box-shadow:0 0 0 1px rgba(198,255,0,.35),0 24px 60px rgba(17,20,15,.12)}
+.epc-slides{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#eef0e8;margin:-26px -26px 18px}
+.epc-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease}
+.epc-slides img.on{opacity:1}
+.epc-slide-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px;z-index:2}
+.epc-slide-dots button{width:6px;height:6px;border-radius:50%;border:none;background:rgba(255,255,255,.55);padding:0;cursor:pointer;transition:transform .2s,background .2s}
+.epc-slide-dots button.on{background:#fff;transform:scale(1.35)}
+.epc-slide-nav{position:absolute;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:none;background:rgba(10,13,7,.45);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .2s,background .2s;z-index:2;font-size:14px}
+.epc-slides:hover .epc-slide-nav{opacity:1}
+.epc-slide-nav:hover{background:rgba(10,13,7,.7)}
+.epc-slide-nav.prev{left:8px}
+.epc-slide-nav.next{right:8px}
+@media(prefers-reduced-motion:reduce){.epc-slides img{transition:none}}
 .epc-rank{position:absolute;top:-13px;left:24px;background:var(--lime);color:#0a0c08;font-size:11px;font-weight:800;padding:5px 14px;border-radius:var(--pill);white-space:nowrap;box-shadow:0 6px 18px rgba(198,255,0,.3);display:inline-flex;align-items:center;gap:5px}
 .epc-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .epc-logo{width:56px;height:56px;border-radius:14px;background:var(--white);border:1px solid var(--line-l);display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:9px;box-shadow:0 6px 16px rgba(17,20,15,.06)}
@@ -500,14 +512,16 @@
         hardwareIncluded:['Single Screen Touchscreen EPOS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
         optionalUpgrade:{name:'Customer Facing Display',price:'£200'},
         featureGroups: groupList(['Sales','Inventory','Staff Management','Reporting','Customer Management','Business Management','Hardware Integration']),
-        suitableFor:['Grocery Stores','Convenience Stores','Clothing Stores','Electronics Stores','Jewellery Stores','Pharmacies','Vape Shops','Pet Shops','Furniture Stores','Florists','Hardware Stores','Gift Shops','Other Retail Businesses']
+        suitableFor:['Grocery Stores','Convenience Stores','Clothing Stores','Electronics Stores','Jewellery Stores','Pharmacies','Vape Shops','Pet Shops','Furniture Stores','Florists','Hardware Stores','Gift Shops','Other Retail Businesses'],
+        slides:['../images/epos-smart-terminal.webp','../images/epos-industry-retail.webp']
       },
       plemmo_hospitality: {
         key:'plemmo_hospitality', providerKey:'plemmo', packageName:'Plemmo Hospitality EPOS',
         hardwarePrice:'£500', hardwarePriceNote:'one-off', monthly:'£20/month',
         hardwareIncluded:['Single Screen Touchscreen EPOS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
         featureGroups: groupList(['Sales','Inventory','Staff Management','Reporting','Customer Management','Business Management','Hospitality Features','Hardware Integration']),
-        suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways','Dessert Shops']
+        suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways','Dessert Shops'],
+        slides:['../images/epos-touch-pro.webp','../images/epos-industry-hospitality.webp']
       },
       shift4_hospitality: {
         key:'shift4_hospitality', providerKey:'shift4', packageName:'Shift4 Hospitality POS',
@@ -521,26 +535,30 @@
           ['Inventory',['Stock Management','Low Stock Alerts','Supplier Management']],
           ['Support',['24/7 Priority Support','Lifetime Warranty']]
         ],
-        suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways']
+        suitableFor:['Restaurants','Cafés','Coffee Shops','Bars','Pubs','Hotels','Food Trucks','Fine Dining','Takeaways'],
+        slides:['../images/epos-touch-pro.webp','../images/epos-industry-cafe.webp']
       },
       sumup_retail: {
         key:'sumup_retail', providerKey:'sumup', packageName:'SumUp Retail POS Kit',
         hardwarePrice:'£649', hardwarePriceNote:'one-off', monthly:'£29/month',
         hardwareIncluded:['POS Terminal','Receipt Printer','Cash Drawer','Barcode Scanner'],
         features:['Integrated Card Machine','Retail POS Solution','Barcode Scanning','Stock Management','Sales Reporting','Customer Management','Staff Accounts','Cloud Based'],
-        promotions:['30% Discount Available','6 Monthly Instalments Available (on request)']
+        promotions:['30% Discount Available','6 Monthly Instalments Available (on request)'],
+        slides:['../images/epos-mobile-pos.webp','../images/epos-industry-retail.webp']
       },
       eposnow_countertop: {
         key:'eposnow_countertop', providerKey:'eposnow', packageName:'Epos Now Countertop',
         hardwarePrice:'£199', hardwarePriceNote:'one-off', monthly:'£39/month',
         hardwareIncluded:['Single Screen EPOS Terminal','Built-in Receipt Printer','Cash Drawer','Integrated Card Machine'],
-        features:['Cloud-Based EPOS','Inventory Management','Sales Reporting','Staff Management','Customer Management','Hospitality Features','Integrated Card Machine Included']
+        features:['Cloud-Based EPOS','Inventory Management','Sales Reporting','Staff Management','Customer Management','Hospitality Features','Integrated Card Machine Included'],
+        slides:['../images/epos-smart-terminal.webp','../images/epos-industry-hospitality.webp']
       },
       eposnow_countertop_duo: {
         key:'eposnow_countertop_duo', providerKey:'eposnow', packageName:'Epos Now Countertop Duo',
         hardwarePrice:'£249', hardwarePriceNote:'one-off', monthly:'£39/month',
         hardwareIncluded:['All-in-One Dual Screen Point of Sale System','15.6-inch Full HD Staff Touchscreen','10.1-inch HD Customer-Facing Display','Built-in 80mm Thermal Receipt Printer','Cash Drawer','Integrated Card Machine'],
-        features:['Cloud-Based EPOS','Real-Time Reporting','Inventory Management','Customer Management','Staff Management','Multi-store Support','Retail Features','Hospitality Features','Reporting Dashboard','Integrated Card Machine Included']
+        features:['Cloud-Based EPOS','Real-Time Reporting','Inventory Management','Customer Management','Staff Management','Multi-store Support','Retail Features','Hospitality Features','Reporting Dashboard','Integrated Card Machine Included'],
+        slides:['../images/epos-touch-pro.webp','../images/epos-industry-retail.webp']
       }
     },
     /* Fixed recommendation order per category — exactly as specified by the
@@ -591,8 +609,20 @@
     var logoHTML=prov.logo
       ?'<span class="epc-logo'+(prov.logoDark?' epc-logo-dark':'')+'"><img src="'+prov.logo+'" alt="'+prov.name+' logo"></span>'
       :'<span class="epc-logo epc-logo-fallback">'+prov.initials+'</span>';
+    var slidesHTML='';
+    if(pkg.slides&&pkg.slides.length){
+      slidesHTML='<div class="epc-slides" data-ep-slides>'
+        +pkg.slides.map(function(src,i){return '<img src="'+src+'" alt="'+pkg.packageName+' — illustrative image '+(i+1)+'" loading="lazy" decoding="async" class="'+(i===0?'on':'')+'">'}).join('')
+        +(pkg.slides.length>1
+          ?'<button type="button" class="epc-slide-nav prev" aria-label="Previous image"><iconify-icon icon="ph:caret-left-bold"></iconify-icon></button>'
+          +'<button type="button" class="epc-slide-nav next" aria-label="Next image"><iconify-icon icon="ph:caret-right-bold"></iconify-icon></button>'
+          +'<div class="epc-slide-dots">'+pkg.slides.map(function(_,i){return '<button type="button" aria-label="Image '+(i+1)+'" class="'+(i===0?'on':'')+'"></button>'}).join('')+'</div>'
+          :'')
+        +'</div>';
+    }
     return '<div class="card epc-card'+(rank===1?' epc-featured':'')+'">'
       +(rank===1?'<span class="epc-rank"><iconify-icon icon="ph:star-fill"></iconify-icon>Recommended #1</span>':'')
+      +slidesHTML
       +'<div class="epc-top">'+logoHTML+'<div><div class="epc-provider">'+prov.name+'</div><div class="epc-pkgname">'+pkg.packageName+'</div></div></div>'
       +'<div class="epc-prices"><div class="epc-price"><span class="l">Hardware</span><span class="v">'+pkg.hardwarePrice+'</span><span class="n">'+pkg.hardwarePriceNote+'</span></div><div class="epc-price"><span class="l">Software</span><span class="v">'+pkg.monthly+'</span></div></div>'
       +hwHTML+upgradeHTML+epFeatureHTML(pkg)+promoHTML+suitHTML
@@ -628,12 +658,38 @@
     var list=epGetRecommendations(epState.category);
     epResults.style.display='';
     if(!list.length){
-      epCards.innerHTML='<div class="card epc-card epc-empty"><p>Please contact us for a personalised EPOS quotation.</p><a href="#" class="btn btn-primary" data-ep-contact="none">Contact Us</a></div>';
+      epCards.innerHTML='<div class="card epc-card epc-empty"><p>Please contact us for a personalised EPOS quotation — leave your details and we\'ll review manually, or call us directly.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="#" class="btn btn-primary" data-ep-contact="none">Contact Us</a><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Call 0333 041 1161</a></div></div>';
     } else {
       epCards.innerHTML=list.map(function(p,i){return epPkgCardHTML(p,i+1)}).join('');
     }
     epNote.innerHTML='Recommended for <b>'+epState.type+'</b> ('+epState.category+') — shown in Plemmo\'s fixed recommendation order.';
     epResults.scrollIntoView({behavior:'smooth',block:'start'});
+    epInitSlideshows();
+  }
+  /* Package card image slideshows — auto-rotates, pauses on hover/focus, and
+     supports manual prev/next + dot navigation. Re-run after every render since
+     epCards.innerHTML is fully replaced each time. */
+  function epInitSlideshows(){
+    epCards.querySelectorAll('[data-ep-slides]').forEach(function(wrap){
+      var imgs=wrap.querySelectorAll('img'),dots=wrap.querySelectorAll('.epc-slide-dots button');
+      if(imgs.length<2)return;
+      var i=0,timer=null;
+      function show(n){
+        i=(n+imgs.length)%imgs.length;
+        imgs.forEach(function(im,x){im.classList.toggle('on',x===i)});
+        dots.forEach(function(d,x){d.classList.toggle('on',x===i)});
+      }
+      function next(){show(i+1)}
+      function start(){timer=setInterval(next,4500)}
+      function stop(){clearInterval(timer)}
+      var prevBtn=wrap.querySelector('.epc-slide-nav.prev'),nextBtn=wrap.querySelector('.epc-slide-nav.next');
+      if(prevBtn)prevBtn.addEventListener('click',function(e){e.preventDefault();stop();show(i-1);start()});
+      if(nextBtn)nextBtn.addEventListener('click',function(e){e.preventDefault();stop();next();start()});
+      dots.forEach(function(d,x){d.addEventListener('click',function(){stop();show(x);start()})});
+      wrap.addEventListener('mouseenter',stop);
+      wrap.addEventListener('mouseleave',start);
+      start();
+    });
   }
   function epOpenModal(pkgKey){
     var pkg=(pkgKey&&pkgKey!=='none')?EPOS_CONFIG.packages[pkgKey]:null;

@@ -352,7 +352,7 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
 .msuccess .big iconify-icon{font-size:40px;color:#0a0c08}
 .msuccess h3{font-size:24px;color:#fff;margin-bottom:10px}
 .msuccess p{color:var(--muted);margin-bottom:22px}
-.sticky{position:fixed;left:16px;right:16px;bottom:16px;z-index:150;display:none;gap:10px;transform:translateY(140%);transition:transform .4s var(--ease)}
+.sticky{position:fixed;left:16px;right:16px;bottom:calc(16px + var(--cc-bar-h,0px));z-index:150;display:none;gap:10px;transform:translateY(140%);transition:transform .4s var(--ease),bottom .3s var(--ease)}
 .sticky.show{transform:none}
 .sticky .btn{flex:1;justify-content:center}
 .sticky .call{flex:0 0 54px;padding:0}
@@ -1161,40 +1161,31 @@ footer{background:var(--bg2);border-top:1px solid var(--line);padding:64px 0 30p
         b.addEventListener('click',function(){
           ans[s.k]=b.dataset.v;
           // Broadband needs none of the energy-specific questions — jump straight
-          // to its own outcome rather than asking about meters, tariffs, etc.
-          if(s.k==='need' && b.dataset.v==='Business Broadband'){renderResult();return}
-          if(cur<STEPS.length-1){cur++;renderQ()}else{renderResult()}
+          // to lead capture rather than asking about meters, tariffs, etc.
+          if(s.k==='need' && b.dataset.v==='Business Broadband'){finishQuiz();return}
+          if(cur<STEPS.length-1){cur++;renderQ()}else{finishQuiz()}
         });
       });
       var back=document.getElementById('enqBack');
       if(back)back.addEventListener('click',function(){if(cur>0){cur--;renderQ()}});
     }
 
-    function renderResult(){
-      stepLbl.textContent='Your recommended solution';
+    /* Ends the quiz by handing straight to lead capture instead of showing one of
+       only two canned "recommended solution" outcomes — with only two possible
+       results the recommendation wasn't a useful differentiator for the visitor,
+       so we now go straight to getting a specialist their details. The full set
+       of answers (plus the internally-computed suggestion, for the team's own
+       reference) still travels with the enquiry via window.__energyContext(). */
+    function finishQuiz(){
+      stepLbl.textContent='Almost there';
       bar.style.width='100%';
-      var r=ENERGY_CONFIG.recommend(ans),sol=r.solution;
-      var notes=[];
-      if(r.renewalNote)notes.push({ic:'ph:calendar-check-duotone',t:'You told us you\'re currently in contract (or ending soon) — we won\'t suggest switching now. Instead, we can arrange your renewal ahead of your contract end date so you move onto your next deal without a gap in cover.'});
-      if(r.urgentNote)notes.push({ic:'ph:warning-duotone',t:'You told us you\'re out of contract — that usually means you\'ve rolled onto the supplier\'s standard variable rate, typically the most expensive option. The sooner this is reviewed, the sooner it can be fixed.'});
-      if(r.checkEndNote)notes.push({ic:'ph:question-duotone',t:'Not sure of your contract status — we\'ll confirm your exact end date from your bill before arranging anything, so you\'re never switched early or left exposed on a lapsed rate.'});
-      if(r.variableNote)notes.push({ic:'ph:trend-up-duotone',t:'You\'re currently on a variable tariff, which can move with the wholesale market — locking a fixed rate could add cost certainty.'});
-      if(r.checkTariffNote)notes.push({ic:'ph:question-duotone',t:'Not sure of your current tariff type — we\'ll confirm this from your bill before comparing options.'});
-      if(r.dualFuelNote)notes.push({ic:'ph:plugs-duotone',t:'You need both electricity and gas — we\'ll look at dual fuel options that can simplify billing onto a single contract.'});
-      if(r.currentSupplier && r.currentSupplier!=='Other')notes.push({ic:'ph:arrows-clockwise-duotone',t:'We\'ll compare this against your current deal with '+esc(r.currentSupplier)+' to make sure any move is genuinely worth it.'});
-      var h='<div class="enq-result"><div class="res-card">'
-        +'<span class="res-tag"><iconify-icon icon="ph:sparkle-fill"></iconify-icon> Recommended Solution</span>'
-        +'<h3 class="res-name"><iconify-icon icon="'+sol.icon+'"></iconify-icon>'+esc(sol.name)+'</h3>'
-        +'<p class="res-blurb">'+esc(sol.blurb)+'</p>'
-        +'<div class="res-cols">'
-          +'<div class="res-col"><h5>Well suited to</h5><ul>'+sol.suitableFor.map(function(x){return '<li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>'+esc(x)+'</li>'}).join('')+'</ul></div>'
-          +'<div class="res-col"><h5>Benefits</h5><ul>'+sol.benefits.map(function(x){return '<li><iconify-icon icon="ph:check-circle-duotone"></iconify-icon>'+esc(x)+'</li>'}).join('')+'</ul></div>'
-        +'</div>'
-        +notes.map(function(n){return '<div class="res-note"><iconify-icon icon="'+n.ic+'"></iconify-icon><span>'+n.t+'</span></div>'}).join('')
-        +'<div class="res-cta"><a href="#" class="btn btn-primary" data-quote data-service="Business Energy — '+esc(sol.name)+'">Get my recommendation <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Speak to an Expert</a></div>'
+      content.innerHTML='<div class="enq-result"><div class="res-card" style="text-align:center">'
+        +'<iconify-icon icon="ph:check-circle-fill" style="font-size:40px;color:var(--lime)"></iconify-icon>'
+        +'<h3 class="res-name" style="margin-top:14px">Thanks — we\'ve got what we need</h3>'
+        +'<p class="res-blurb">Pop your details in and a Plemmo energy specialist will review your answers and be in touch shortly with your recommendation — no obligation.</p>'
+        +'<div class="res-cta" style="justify-content:center"><a href="#" class="btn btn-primary" data-quote data-service="Business Energy — comparison enquiry">Get my recommendation <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="tel:03330411161" class="btn btn-ghost"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Speak to an Expert</a></div>'
         +'<button type="button" class="res-restart" id="enqRestart">Start again</button>'
         +'</div></div>';
-      content.innerHTML=h;
       var rb=document.getElementById('enqRestart');
       if(rb)rb.addEventListener('click',function(){ans={};cur=0;renderQ()});
       // newly-injected data-quote CTA needs wiring — handled by delegated listener below

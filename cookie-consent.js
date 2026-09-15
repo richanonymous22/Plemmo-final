@@ -48,12 +48,19 @@
         '<button type="button" data-c="all" style="flex:1;min-width:140px;cursor:pointer;font-family:Inter,sans-serif;font-weight:700;font-size:14px;padding:12px 18px;border-radius:12px;border:none;background:#c6ff00;color:#0a0c08">Accept all</button>' +
       '</div>';
     document.body.appendChild(b);
-    requestAnimationFrame(function () { requestAnimationFrame(function () { b.style.transform = 'none'; }); });
+    // Expose the banner's rendered height as a CSS var so other fixed bottom
+    // elements (e.g. the card-machines sticky match bar) can shift up out of
+    // its way instead of being hidden underneath it.
+    function setVar() { document.documentElement.style.setProperty('--cc-bar-h', (b.offsetHeight + 16) + 'px'); }
+    requestAnimationFrame(function () { requestAnimationFrame(function () { b.style.transform = 'none'; setVar(); }); });
+    window.addEventListener('resize', setVar);
     b.addEventListener('click', function (e) {
       var t = e.target.closest('[data-c]');
       if (!t) return;
       write(t.getAttribute('data-c'));
       b.style.transform = 'translateY(170%)';
+      document.documentElement.style.setProperty('--cc-bar-h', '0px');
+      window.removeEventListener('resize', setVar);
       setTimeout(function () { if (b.parentNode) b.parentNode.removeChild(b); }, 520);
     });
   }

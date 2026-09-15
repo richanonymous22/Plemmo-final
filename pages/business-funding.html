@@ -207,7 +207,7 @@
 <!-- INTRODUCER-ONLY NOTICE -->
 <section class="section tight" style="padding-top:26px;padding-bottom:0">
   <div class="container">
-    <div class="fnotice rv"><iconify-icon icon="ph:info-duotone"></iconify-icon><p><b>Plemmo Services Ltd is an introducer only.</b> We do not provide loans, make lending decisions, or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting.</p></div>
+    <div class="fnotice rv"><iconify-icon icon="ph:info-duotone"></iconify-icon><p><b>Plemmo is an introducer only.</b> We do not provide loans, make lending decisions, or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting.</p></div>
   </div>
 </section>
 
@@ -233,7 +233,7 @@
         <div class="fc-foot"><button class="fc-back" id="fcBack" disabled><iconify-icon icon="ph:arrow-left-bold"></iconify-icon> Back</button><span style="font-size:12px;color:var(--muted)">Introducer · not a lender</span></div>
       </div>
     </div>
-    <p class="disc center" style="margin:26px auto 0">Plemmo Services Ltd is an introducer only and does not provide loans, make lending decisions or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting. Plemmo may receive commission from funding partners.</p>
+    <p class="disc center" style="margin:26px auto 0">Plemmo is an introducer only and does not provide loans, make lending decisions or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting. Plemmo may receive commission from funding partners.</p>
   </div>
 </section>
 
@@ -571,8 +571,8 @@
       +'</div></div>';
     if(!keys.length){
       h+='<div class="frec-grid" style="grid-template-columns:1fr"><div class="frec"><div class="fi"><iconify-icon icon="ph:chats-circle-duotone"></iconify-icon></div><div>'
-        +'<h4>No exact match</h4><p class="fdesc">Please contact us for a personalised quote — we couldn\'t automatically match a product to your answers. Send your details and a funding specialist will review your enquiry manually.</p>'
-        +'<a href="#" class="btn btn-primary fq" data-prod="Personalised funding quote — no automatic match" style="width:100%;justify-content:center">Enquire Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a>'
+        +'<h4>No exact match</h4><p class="fdesc">Please contact us for a personalised quote — we couldn\'t automatically match a product to your answers. Leave your details and a funding specialist will review your enquiry manually, or call us directly.</p>'
+        +'<div style="display:flex;gap:10px;flex-wrap:wrap"><a href="#" class="btn btn-primary fq" data-prod="Personalised funding quote — no automatic match" style="flex:1;min-width:200px;justify-content:center">Enquire Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="tel:03330411161" class="btn btn-ghost" style="justify-content:center"><iconify-icon icon="ph:phone-duotone"></iconify-icon> Call 0333 041 1161</a></div>'
         +'</div></div></div>';
       h+='<div class="fres-btns"><a href="#" class="btn btn-ghost" id="fcRestart">Start over</a></div></div>';
       body.innerHTML=h;
@@ -631,7 +631,7 @@
         +'<div style="background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:14px 16px"><div style="font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px">Typical repayment term</div><div style="font-size:13.5px;color:#e7ebe0;font-weight:700">'+p.term+'</div></div>'
       +'</div>'
       +'<div style="display:flex;gap:10px;flex-wrap:wrap"><a href="#" class="btn btn-primary" data-dquote="'+esc(p.name)+'" style="flex:1;justify-content:center;min-width:150px">Enquire Now <iconify-icon class="ar" icon="ph:arrow-right-bold"></iconify-icon></a><a href="#" class="btn btn-ghost" data-dclose style="flex:1;justify-content:center;min-width:120px">Close</a></div>'
-      +'<p style="font-size:11px;color:#6b7560;margin-top:16px;line-height:1.5">Plemmo Services Ltd is an introducer only and does not provide loans, make lending decisions or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting.</p>';
+      +'<p style="font-size:11px;color:#6b7560;margin-top:16px;line-height:1.5">Plemmo is an introducer only and does not provide loans, make lending decisions or offer financial advice. All funding applications are assessed and approved by our finance partners, subject to their eligibility criteria and underwriting.</p>';
     detail.classList.add('open');document.body.style.overflow='hidden';dcard.scrollTop=0;
     dcard.querySelectorAll('[data-dclose]').forEach(function(b){b.onclick=function(e){e.preventDefault();closeDetail()}});
     var q=dcard.querySelector('[data-dquote]');if(q)q.onclick=function(e){e.preventDefault();closeDetail();openQuote(q.dataset.dquote)};
