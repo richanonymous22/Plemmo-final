@@ -80,7 +80,7 @@
       e.preventDefault();
       var btn=form.querySelector('button[type=submit]'),label=btn?btn.innerHTML:'';if(btn){btn.disabled=true;btn.textContent='Sending…';}
       var fd=new FormData(form);fd.append('_template','table');fd.append('_captcha','false');
-      fetch('https://formsubmit.co/ajax/plemmouk@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd})
+      fetch('https://formsubmit.co/ajax/'+['plemmouk','gmail.com'].join('@'),{method:'POST',headers:{'Accept':'application/json'},body:fd})
         .then(function(res){if(!res.ok)throw new Error('Submission failed');if(fw)fw.style.display='none';if(sw)sw.style.display='block';})
         .catch(function(){if(btn){btn.disabled=false;btn.innerHTML=label;}alert('Sorry — something went wrong sending your enquiry. Please try again or call us on 0333 041 1161.');});
     });
