@@ -241,7 +241,7 @@ section{scroll-margin-top:88px}
 .qres .rh{display:flex;align-items:center;gap:15px;margin-bottom:16px}
 .qres .rav{width:56px;height:56px;border-radius:16px;background:var(--white);border:1px solid var(--line-l);color:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:9px;box-shadow:0 6px 16px rgba(17,20,15,.12)}
 .qres .rav img{width:100%;height:100%;object-fit:contain}
-.qres .rav.rav-fallback{background:linear-gradient(145deg,var(--lime),#9bcc00);border:none;color:#0a0c08;font-family:'Space Grotesk';font-weight:700;font-size:28px;box-shadow:0 12px 24px rgba(198,255,0,.22);padding:0}
+.qres .rav.rav-fallback{background:linear-gradient(145deg,var(--lime),#9bcc00);border:none;color:#0a0c08;font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.02em;box-shadow:0 12px 24px rgba(198,255,0,.22);padding:0}
 .qres .rav.rav-dark{background:var(--ink);border-color:var(--ink)}
 @media(max-width:560px){.qres-card{grid-template-columns:1fr;text-align:center}.qres-media{max-width:200px;margin:0 auto;aspect-ratio:16/10}.qres .rh{justify-content:center}.qres-chips{justify-content:center}.qres .rb{flex-direction:column}}
 .qres .rl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--lime);font-weight:700}
@@ -665,8 +665,8 @@ html{overflow-x:hidden}
   <div class="marquee rv">
     <div class="mq-track" id="mqTrack">
       <span class="plogo"><span class="word">Teya</span></span>
-      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4" width="240" height="50"></span>
-      <span class="plogo"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp" width="444" height="128"></span>
+      <span class="plogo"><span class="word">Shift4</span></span>
+      <span class="plogo"><span class="word">SumUp</span></span>
       <span class="plogo"><span class="word">Worldpay</span></span>
       <span class="plogo"><span class="word">Elavon</span></span>
     </div>
@@ -711,13 +711,13 @@ html{overflow-x:hidden}
         <button class="pview" data-detail="teya">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/sumup.svg" alt="SumUp" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'" width="444" height="128"><span class="wordmark" style="display:none">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
+        <div class="plogo-c"><span class="wordmark">sum<span style="color:#1a73e8">up</span><small>·</small></span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/sumup-card-machine.webp" onerror="this.onerror=null;this.src='../images/Card machine no bg.webp'" alt="SumUp card machine" width="800" height="800"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> £162 (35% discount available — £105)</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No monthly rental after buying</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Business account with instant payout</li></ul>
         <button class="pview" data-detail="sumup">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/shift4-black.svg" alt="Shift4" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'" width="240" height="50"><span class="wordmark" style="display:none">Shift4</span></div>
+        <div class="plogo-c"><span class="wordmark">Shift4</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/Card machine no bg.webp" alt="Shift4 card machine" width="1100" height="700"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> No upfront cost, no monthly fees</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> One terminal free — second terminal chargeable</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Next working day payout/settlement</li></ul>
         <button class="pview" data-detail="shift4">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -735,7 +735,7 @@ html{overflow-x:hidden}
         <button class="pview" data-detail="elavon">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
       </div>
       <div class="pcard tilt rv">
-        <div class="plogo-c"><img loading="lazy" decoding="async" src="../images/partners/clover.svg" alt="Clover" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'" width="1000" height="245"><span class="wordmark" style="display:none">Clover</span></div>
+        <div class="plogo-c"><span class="wordmark" style="color:#001a72">Clover</span></div>
         <div class="pmedia"><img loading="lazy" decoding="async" src="../images/clover-card-machine.webp" alt="Clover card machine" width="1270" height="720"></div>
         <ul><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Next working day payout</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> Real-time sales reports · Wi-Fi/LTE/4G</li><li><iconify-icon icon="ph:check-circle-fill"></iconify-icon> £1/month rental — first 6 months</li></ul>
         <button class="pview" data-detail="clover">View Details <iconify-icon icon="ph:arrow-right-bold"></iconify-icon></button>
@@ -1108,17 +1108,20 @@ html{overflow-x:hidden}
     turnoverBands: ['Below £5,000','£5,000–£10,000','£10,000–£15,000','£15,000–£20,000','£20,000–£30,000','£30,000–£35,000','£35,000–£50,000','£50,000–£100,000','Above £100,000'],
     turnoverMid: {'Below £5,000':2500,'£5,000–£10,000':7500,'£10,000–£15,000':12500,'£15,000–£20,000':17500,'£20,000–£30,000':25000,'£30,000–£35,000':32500,'£35,000–£50,000':42500,'£50,000–£100,000':75000,'Above £100,000':150000},
     currentProviders: ['None','Teya','Shift4','SumUp','Clover','Elavon','Worldpay','Other'],
+    /* Short badge codes for the plain-text provider treatment (see providerResultCard) —
+       single initials would collide (Shift4/SumUp both start with S). */
+    SHORT_CODE: {teya:'TE',shift4:'S4',sumup:'SU',clover:'CL',elavon:'EL',worldpay:'WP'},
     providers: {
       teya:{name:'Teya',type:'blended',img:'../images/teya-card-machine.webp',rental:'£15/month or £139 buyout',contract:'12-Month or No Contract',device:'PAX A920 Pro · Sunmi',features:['Tap to Pay','Instant Payout (Teya Business Account)','Everyday Payout','Next Working Day Payout','0.5% Cashback on eligible spend','Blended Pricing'],
         /* £35k–£40k and £60k–£70k filled with the nearest neighbouring band's
            rate (the tier immediately above each gap) per owner instruction —
            not a fabricated new rate, just closing a coverage gap. */
         table:[{min:10000,max:15000,rate:'1.20%'},{min:15000,max:20000,rate:'1.00%'},{min:20000,max:25000,rate:'0.90%'},{min:25000,max:30000,rate:'0.82%'},{min:30000,max:35000,rate:'0.82%'},{min:35000,max:40000,rate:'0.80%'},{min:40000,max:45000,rate:'0.80%'},{min:45000,max:50000,rate:'0.77%'},{min:50000,max:60000,rate:'0.75%'},{min:60000,max:70000,rate:'0.72%'},{min:70000,max:80000,rate:'0.72%'},{min:80000,max:90000,rate:'0.70%'},{min:90000,max:110000,rate:'0.67%'},{min:110000,max:150000,rate:'0.65%'},{min:150000,max:Infinity,rate:'0.60%'}]},
-      shift4:{name:'Shift4',type:'blended',img:'../images/Card machine no bg.webp',logo:'../images/partners/shift4-black.svg',rental:'No upfront cost · no monthly fees',contract:'18-Month Contract',device:'One terminal free · second chargeable',features:['No Upfront Cost','No Monthly Fees','One Terminal Free (Second Chargeable)','Next Working Day Payout/Settlement','No PCI Compliance Fees','No Hidden Fees','Blended & Split Rate Options Available'],
+      shift4:{name:'Shift4',type:'blended',img:'../images/Card machine no bg.webp',rental:'No upfront cost · no monthly fees',contract:'18-Month Contract',device:'One terminal free · second chargeable',features:['No Upfront Cost','No Monthly Fees','One Terminal Free (Second Chargeable)','Next Working Day Payout/Settlement','No PCI Compliance Fees','No Hidden Fees','Blended & Split Rate Options Available'],
         rateText:'1.25% below £10k · 0.70% at £10k+'},
-      sumup:{name:'SumUp',type:'blended',img:'../images/sumup-card-machine.webp',logo:'../images/partners/sumup.svg',rental:'£162 one-off (£105 w/ 35% discount)',contract:'PAYG, 12 or 24-Month',device:'SumUp card reader (1–3 terminals)',features:['Business Account','Instant Payout','Third-Party Bank Account Accepted','No Monthly Rental After Buying','No PCI','No Hidden Fees','One Flat Rate','Tap to Phone','Pay by Link','Same-Day Delivery (Midlands)'],
+      sumup:{name:'SumUp',type:'blended',img:'../images/sumup-card-machine.webp',rental:'£162 one-off (£105 w/ 35% discount)',contract:'PAYG, 12 or 24-Month',device:'SumUp card reader (1–3 terminals)',features:['Business Account','Instant Payout','Third-Party Bank Account Accepted','No Monthly Rental After Buying','No PCI','No Hidden Fees','One Flat Rate','Tap to Phone','Pay by Link','Same-Day Delivery (Midlands)'],
         rateText:'One flat blended rate — confirmed after review'},
-      clover:{name:'Clover',type:'split',img:'../images/clover-card-machine.webp',logo:'../images/partners/clover.svg',rental:'£1/month for 6 months, then £24',contract:'24-Month Contract',device:'Clover Flex / Mini · Wi-Fi/4G',features:['Next Working Day Payout','Real-Time Sales Reports (Cash & Card)','Wi-Fi / LTE / 4G — Built-in SIM','Chip & PIN, Contactless & Mobile Wallet Payments','Cloud-Based Reporting','Sales & Inventory Management','Staff Management','Customer Management'],
+      clover:{name:'Clover',type:'split',img:'../images/clover-card-machine.webp',rental:'£1/month for 6 months, then £24',contract:'24-Month Contract',device:'Clover Flex / Mini · Wi-Fi/4G',features:['Next Working Day Payout','Real-Time Sales Reports (Cash & Card)','Wi-Fi / LTE / 4G — Built-in SIM','Chip & PIN, Contactless & Mobile Wallet Payments','Cloud-Based Reporting','Sales & Inventory Management','Staff Management','Customer Management'],
         promo:true,
         low:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.72%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.68%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.65%',auth:'2p'},{min:150000,max:250000,debit:'0.28%',credit:'0.65%',auth:'2p'},{min:250000,max:Infinity,debit:'Custom Quote',credit:'Custom Quote',auth:'2p'}],
         high:[{min:20000,max:40000,debit:'0.45%',credit:'0.75%',auth:'2p'},{min:40000,max:60000,debit:'0.40%',credit:'0.70%',auth:'2p'},{min:60000,max:100000,debit:'0.35%',credit:'0.65%',auth:'2p'},{min:100000,max:150000,debit:'0.30%',credit:'0.60%',auth:'2p'},{min:150000,max:Infinity,debit:'0.28%',credit:'0.58%',auth:'2p'}]},
@@ -1266,9 +1269,11 @@ html{overflow-x:hidden}
       else{rateLine=p.rateText||'Blended — see pricing table';}
     }
     else{var row=pickRow(p[atv],a.turnover);rateLine=row?(row.debit==='Custom Quote'?'Custom Quote — please contact us for pricing at this turnover':'Debit '+row.debit+' / Credit '+row.credit+' · Auth fee '+row.auth):'Custom quote — please contact us';}
-    var ravHTML=p.logo
-      ?'<span class="rav'+(p.logoDark?' rav-dark':'')+'"><img src="'+p.logo+'" alt="'+p.name+' logo"></span>'
-      :'<span class="rav rav-fallback">'+p.name.charAt(0)+'</span>';
+    /* Provider logos are shown as plain text sitewide for now, pending
+       usage-rights confirmation from each provider — see SHORT_CODE below
+       for the badge shown instead. Single initials collide (Shift4/SumUp
+       both start with S), hence 2-letter codes. */
+    var ravHTML='<span class="rav rav-fallback">'+(CM.SHORT_CODE[k]||p.name.charAt(0))+'</span>';
     return '<div class="qres-card qpc'+(isTop?' best':'')+'">'
       +(isTop?'<div class="btag">Top suggestion</div>':'')
       +'<div class="qres-media"><img loading="lazy" decoding="async" src="'+p.img+'" onerror="this.onerror=null;this.src=\'../images/Card machine no bg.webp\'" alt="'+p.name+'"></div>'
