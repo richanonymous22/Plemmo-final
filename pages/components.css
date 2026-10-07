@@ -28,6 +28,7 @@ section{scroll-margin-top:88px}
 .reassure{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;color:var(--muted);font-weight:500}
 .reassure iconify-icon{color:var(--lime);font-size:16px}
 .s-light .reassure,.s-cream .reassure{color:var(--ink-soft)}
+.s-light .reassure iconify-icon,.s-cream .reassure iconify-icon{color:#5f9000}
 
 /* ── grain ── */
 body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
@@ -241,6 +242,7 @@ img,svg{max-width:100%}
 .legal a.inl{color:#5f9000;font-weight:600;text-decoration:underline}
 .legal strong{color:var(--ink)}
 .legal table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:14px}
+@media(max-width:600px){.legal table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}}
 .legal th,.legal td{border:1px solid var(--line-l);padding:10px 12px;text-align:left;color:var(--ink-soft);vertical-align:top}
 .legal th{background:var(--paper);color:var(--ink);font-family:'Space Grotesk';font-weight:700}
 .legal .callout{background:var(--lime-soft);border:1px solid rgba(95,144,0,.25);border-radius:var(--r);padding:16px 18px;margin:0 0 22px;font-size:14px;color:var(--ink-soft)}
